@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "subtitle": "Una escapada a cualquier lugar"
+  },
+  "header": {
+    "ofertas": "Ofertas",
+    "duvidas": "Dudas",
+    "intercambio": "Intercambio",
+    "conecte-se": "Acceso",
+    "aereo": "Vuelos",
+    "onibus": "Autobús",
+    "seguro": "Seguro de Viaje",
+    "cruseiros": "Cruceros",
+    "contato": "Contacto"
+  },
+  "banner": {
+    "privacidade": "Política de Privacidad",
+    "termos": "Términos y Condiciones",
+    "viageiros": "Comunidad de Viajeros",
+    "duvidas": "Preguntas más Frecuentes",
+    "quem-somos": "Quienes Somos",
+    "title": "Las mejores playas <br/> para este verano",
+    "button": "Explorar playas"
+  },
+  "explorer-voos": {
+    "title": "Cubrimos vuelos en todo el mundo",
+    "voos-disponíveis": "vuelo disponible para hoy | vuelos disponibles para hoy",
+    "button": "Explorar todo"
+  },
+  "hero-hotéis": {
+    "title": "De hoteles a casas vacacionales",
+    "subtitle": "Todas las variedades para encontrar tu rincón favorito",
+    "button": "Explorar alojamiento"
+  },
+  "explorer-cruzeiros": {
+    "title": "Disfruta de tus vacaciones en el mar",
+    "cruzeiros-disponíveis": "crucero disponible para hoy | cruceros disponibles para hoy",
+    "button": "Explora Cruceros"
+  },
+  "hero-taxi": {
+    "title": "Vamos en Taxi Ejecutivo",
+    "subtitle": "Servicio de traslado VIP de bajo costo",
+    "button": "Presupuesto ahora"
+  },
+  "seguro-viagem": {
+    "title": " Seguro de<br>Viaje",
+    "subtitle": "Descubre tu seguro de viaje. Somos<br>responsables con cada uno de nuestros<br> clientes",
+    "button": "Explora más"
+  },
+  "banner-ingresos": {
+    "title": "Genera boletos con nosotros",
+    "button": "Presione ahora"
+  }
+}

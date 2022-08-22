@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "subtitle": "An escape to anywhere"
+  },
+  "header": {
+    "ofertas": "Offers",
+    "duvidas": "Doubts",
+    "intercambio": "Exchange",
+    "conecte-se": "Login",
+    "aereo": "Flights",
+    "carro": "Car",
+    "onibus": "Bus",
+    "seguro": "Travel Insurance",
+    "cruseiros": "Cruises",
+    "contato": "Contact"
+  },
+  "banner": {
+    "privacidade": "Privacy Policy",
+    "termos": "Terms and Conditions",
+    "viageiros": "Travelers Community",
+    "duvidas": "FAQ",
+    "quem-somos": "Who we are",
+    "title": "The best beaches <br/> for this summer",
+    "button": "Explore beaches"
+  },
+  "explorer-voos": {
+    "title": "We cover flights worldwide",
+    "voos-disponíveis": "flight available for today | flights available for today",
+    "button": "Explore all"
+  },
+  "hero-hotéis": {
+    "title": "From hotels to vacation homes",
+    "subtitle": "All varieties to find your favorite corner",
+    "button": "Explore accommodations"
+  },
+  "explorer-cruzeiros": {
+    "title": "Enjoy your vacation at sea",
+    "cruzeiros-disponíveis": "cruise available for today | cruises available for today",
+    "button": "Explore Cruises"
+  },
+  "hero-taxi": {
+    "title": "Let's go by Executive Taxi",
+    "subtitle": "Low cost VIP transfer service",
+    "button": "Quote now"
+  },
+  "seguro-viagem": {
+    "title": " Travel<br>Insurance",
+    "subtitle": "Discover your travel insurance. Are<br>responsible with each of our<br>customers",
+    "button": "Explore more"
+  },
+  "banner-ingresos": {
+    "title": "Generate tickets with us",
+    "button": "Press Now"
+  }
+}
