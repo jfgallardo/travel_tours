@@ -33,7 +33,7 @@
 
                         <TextInput nameValue="cpfNumber" rulesValue="required|cpfNumber" class="col-span-2"
                             label="CPF Nº" maska="###.###.###-##" />
-                        <TextInput nameValue="rneNumber" rulesValue="required" class="col-span-2" label="RG/RNM" />
+                        <TextInput nameValue="rneNumber" class="col-span-2" label="RG/RNM" />
 
                         <TextInput nameValue="phoneNumber" rulesValue="required|phone" class="col-span-2"
                             label="TELEFONE" maska="(##) #####-####" />
@@ -126,7 +126,7 @@ import { Form } from "vee-validate";
 import TextInput from "@/components/FormUI/TextInput.vue";
 import Select from "@/components/FormUI/TheSelect.vue";
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfCreator from "@/service/debit-generator-pdf";
+import pdfCreator from "@/utils/debit-generator-pdf";
 import { reactive, ref } from "vue";
 
 const options = [
