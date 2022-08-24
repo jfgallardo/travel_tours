@@ -1,13 +1,7 @@
 <template>
-  <div>
-    MANY CITIES
-  </div>
+  <div>MANY CITIES</div>
 </template>
 
-<script setup>
+<script setup></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

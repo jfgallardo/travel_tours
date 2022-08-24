@@ -2,12 +2,21 @@
   <div>
     <div class="relative">
       <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
-          label
+        label
       }}</span>
-      <Field :name="nameValue" :rules="rulesValue" :class="inputClassList" :placeholder="placeholder"
-        :type="typeValue" v-maska="maska" />
+      <Field
+        :name="nameValue"
+        :rules="rulesValue"
+        :class="inputClassList"
+        :placeholder="placeholder"
+        :type="typeValue"
+        v-maska="maska"
+      />
       <Transition>
-        <ErrorMessage :name="nameValue" class="text-red-500 text-sm absolute -bottom-6 left-0" />
+        <ErrorMessage
+          :name="nameValue"
+          class="text-red-500 text-sm absolute -bottom-6 left-0"
+        />
       </Transition>
     </div>
   </div>
