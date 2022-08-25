@@ -141,7 +141,7 @@ const table = (data) => {
         [
           { text: `CPF Nº:  ${data.cpfNumber}`, colSpan: 2 },
           {},
-          { text: `RG Nº:  ${data.rneNumber}`, colSpan: 2 },
+          { text: `RG Nº:  ${data.rneNumber ? data.rneNumber : ''}`, colSpan: 2 },
           {},
         ],
         [{ text: `TELEFONE:  ${data.phoneNumber}`, colSpan: 4 }, {}, {}, {}],
