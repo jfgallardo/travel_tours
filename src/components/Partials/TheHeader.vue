@@ -108,8 +108,8 @@
         </div>
       </div>
       <div>
-        <MainSubheading />
-        <!-- <AppSubHeaderAereo v-if="$route.path === '/aereo'" /> -->
+          <MainSubheading v-if="!($route.path === '/aereo/query')" />
+          <QuerySubHeader v-if="$route.path === '/aereo/query'" />
       </div>
     </div>
   </div>
@@ -121,10 +121,9 @@ import MainSubheading from "@/components/Partials/TheMainSubheading.vue";
 import Dropdowni18 from "@/components/Partials/TheDropdowni18.vue";
 import Transaction from "@/components/Icons/Transaction.vue";
 import UserCircle from "@/components/Icons/UserCircle.vue";
+import QuerySubHeader from "@/components/Partials/TheQuerySubheading.vue";
 import { useI18n } from "vue-i18n";
 
-/* const AppSubHeaderAereo = defineAsyncComponent(() => import("@/components/shared/AppSubHeaderAereo.vue"))
- */
 const { t } = useI18n();
 </script>
 

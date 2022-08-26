@@ -23,12 +23,9 @@
             </span>
           </div>
           <div>
-            <input
-              :value="modelValue"
-              class="w-6 text-center"
-              type="text"
-              readonly
-            />
+            <div class="mx-2 text-gray-800">
+              {{ modelValue }}
+            </div>
           </div>
           <div>
             <span @click="$emit('addUp')" class="cursor-pointer">

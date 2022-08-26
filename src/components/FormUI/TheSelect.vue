@@ -12,6 +12,7 @@
           >
             <span class="flex items-center space-x-3">
               <img
+                v-if="selected.src"
                 :src="selected.src"
                 class="flex-shrink-0 h-6 w-6 rounded-full"
               />
