@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative border border-t-0 border-b-0 border-gray-300">
+    <div class="relative border border-t-0 border-b-0 border-gray-300" ref="dropdownP">
       <button
         type="button"
         class="relative bg-white pr-10 py-2 text-left focus:outline-none sm:text-sm h-full w-full"
@@ -25,6 +25,7 @@
           role="listbox"
           aria-labelledby="listbox-label"
           aria-activedescendant="listbox-option-3"
+          v-click-outside
         >
           <li
             v-for="op in options"
@@ -54,6 +55,8 @@ import ChevronDown from "@/components/Icons/ChevronDown.vue";
 const hiddenDropdown = ref(false);
 const selected = ref(props.options[0]);
 const emit = defineEmits(["selectValue"]);
+const dropdownP = ref(null);
+
 
 const props = defineProps({
   options: {
@@ -67,6 +70,27 @@ const props = defineProps({
 });
 
 const selectOption = (value) => {
+  selected.value = value;
+  emit("selectValue", value);
+  hiddenDropdown.value = false;
+};
+
+const vClickOutside = {
+  mounted: () => {
+    document.addEventListener("click", clickOutListener);
+  },
+  unmounted: () => {
+    document.removeEventListener("click", clickOutListener);
+  },
+};
+
+const clickOutListener = (evt) => {
+  if (!dropdownP.value.contains(evt.target)) {
+    hide(selected.value);
+  }
+};
+
+const hide = (value) => {
   selected.value = value;
   emit("selectValue", value);
   hiddenDropdown.value = false;

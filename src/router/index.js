@@ -4,6 +4,9 @@ import Landing from "@/views/LandingPage.vue";
 import Aereo from "@/views/AereoPage.vue";
 import DebitAuthorization from "@/views/DebitAuthorizationPage.vue";
 import FlightQuery from "@/views/FlightQuery.vue";
+import NotFound from "@/views/NotFound.vue"
+import { useMoblixStore } from "@/stores/moblix";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +21,16 @@ const router = createRouter({
           name: "Aereo",
           component: Aereo,
           children: [
-            { path: "query", name: "FlightQuery", component: FlightQuery },
+            {
+              path: "query", name: "FlightQuery", component: FlightQuery, beforeEnter(to, from) {
+                const store = useMoblixStore()
+                if (!store.outboundFlights.length && !store.returnFlights.length) {
+                  return {
+                    name: 'Aereo'
+                  }
+                }
+              }
+            },
           ],
         },
         {
@@ -28,6 +40,7 @@ const router = createRouter({
         },
       ],
     },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ],
 });
 

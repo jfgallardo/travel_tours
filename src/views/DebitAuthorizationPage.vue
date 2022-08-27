@@ -243,7 +243,7 @@ const options = [
     src: "https://thumbs.dreamstime.com/b/credit-card-blue-round-flat-design-vector-icon-isolated-white-background-bank-finance-illustration-eps-179946186.jpg",
   },
   {
-    name: "OTROS",
+    name: "OUTROS",
     value: "O",
     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54I_iKsD4Ub9mTPoUK3JrDefB6FAavrfZ-Q&usqp=CAU",
   },

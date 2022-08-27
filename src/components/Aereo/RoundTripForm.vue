@@ -2,94 +2,52 @@
   <div>
     <div class="mt-5 flex flex-col space-y-2">
       <div class="px-4">
-        <AutoComplete
-          label="De"
-          :value="origem.string"
-          @input="
-            (e) => {
-              origem.string = e;
-            }
-          "
-          @select="
-            (s) => {
-              origem.iata = s;
-            }
-          "
-        />
+        <AutoComplete label="De" :value="origem.string" @input="
+          (e) => {
+            origem.string = e;
+          }
+        " @select="
+  (s) => {
+    origem.iata = s;
+  }
+" />
       </div>
       <div class="flex justify-center px-4">
-        <div
-          class="flex items-center justify-center cursor-pointer w-10"
-          @click="changeDestinations"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-gray-700 -mr-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
+        <div class="flex items-center justify-center cursor-pointer w-10" @click="changeDestinations">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-700 -mr-1" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-gray-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-700" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
           </svg>
         </div>
       </div>
 
       <div class="px-4">
-        <AutoComplete
-          label="Para"
-          :value="destino.string"
-          @input="
-            (e) => {
-              destino.string = e;
-            }
-          "
-          @select="
-            (s) => {
-              destino.iata = s;
-            }
-          "
-        />
+        <AutoComplete label="Para" :value="destino.string" @input="
+          (e) => {
+            destino.string = e;
+          }
+        " @select="
+  (s) => {
+    destino.iata = s;
+  }
+" />
       </div>
 
       <div class="grid grid-cols-2 grid-rows-1 pt-4 px-4">
         <DateInput v-model="flightDates.departureDate" label="Ida" />
-        <DateInput
-          v-model="flightDates.returnDate"
-          label="Vuelta"
-          :dateMin="notBeforeDate()"
-        />
+        <DateInput v-model="flightDates.returnDate" label="Vuelta" :dateMin="notBeforeDate()" />
       </div>
 
       <div class="px-4">
-        <Select
-          class="pt-4"
-          label="Clases de cabina"
-          :options="options"
-          @selectValue="
-            (e) => {
-              cabine = e.value;
-            }
-          "
-        />
+        <Select class="pt-4" label="Clases de cabina" :options="options" @selectValue="
+          (e) => {
+            cabine = e.value;
+          }
+        " />
       </div>
 
       <div class="px-4">
@@ -103,12 +61,12 @@
       </div>
 
       <div>
-        <button
-          class="bg-blue-700 relative w-full py-3 text-white"
-          @click="consultar()"
-        >
-          Buscar pasaje
-          <ArrowRight fillColor="white" class="absolute right-5 top-3" />
+        <button class="bg-blue-700 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait" :disabled="loading"
+          @click="consultar()">
+          <span>Buscar pasaje</span>
+          <div v-if="loading"
+            class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"></div>
+          <ArrowRight v-else fillColor="white" class="absolute right-10" />
         </button>
       </div>
     </div>
@@ -123,9 +81,11 @@ import Select from "@/components/FormUI/TheSelect.vue";
 import Check from "@/components/FormUI/CheckInput.vue";
 import Passengers from "@/components/FormUI/ThePassengers.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
+import { useRouter } from 'vue-router'
 import { useMoblixStore } from "@/stores/moblix";
 
 const moblixStore = useMoblixStore();
+const router = useRouter();
 
 const origem = reactive({
   string: "",
@@ -143,6 +103,7 @@ const flightDates = reactive({
 });
 
 const cabine = ref("");
+const loading = ref(false)
 
 const numberAdults = ref("1");
 const numberChilds = ref("");
@@ -198,6 +159,7 @@ const options = [
 ];
 
 const consultar = () => {
+  loading.value = true
   const payload = {
     Origem: origem.iata,
     Destino: destino.iata,
@@ -209,7 +171,14 @@ const consultar = () => {
     Companhia: 1,
   };
 
-  moblixStore.consultaAereo(payload);
+  moblixStore.consultaAereo(payload).then(() => {
+    loading.value = false
+     router.push({
+        name: 'FlightQuery'
+      })
+    
+  });
 };
 </script>
-<style scoped></style>
+<style scoped>
+</style>

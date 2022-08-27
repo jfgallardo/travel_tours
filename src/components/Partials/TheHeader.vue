@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="grid grid-cols-1 grid-rows-2 fixed top-0 right-0 left-0 z-30 bg-white shadow-lg"
+      class="grid grid-cols-1 grid-rows-2 fixed top-0 right-0 left-0 z-30 bg-white"
     >
       <div>
         <div

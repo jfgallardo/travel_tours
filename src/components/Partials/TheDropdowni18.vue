@@ -10,7 +10,7 @@
         <ChevronDown class="ml-2 h-4 w-4" />
       </button>
       <div
-        class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute"
+        class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute z-20"
         :class="{ hidden: state.hiddenDropdown }"
         style="width: 110px"
       >

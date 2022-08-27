@@ -4,47 +4,24 @@
       <div class="container" ref="dropdownP">
         <div class="relative mt-5">
           <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
-            label
+              label
           }}</span>
-          <button
-            @click="show()"
-            class="flex pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
-          >
+          <button @click="show()"
+            class="flex pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm">
             <span class="flex items-center space-x-3">
               {{ numberAdults }} Adultos - {{ numberChilds }} Criancas -
               {{ numberBebes }} Bebes
             </span>
-            <ChevronDown
-              class="ml-3 absolute right-0 pr-2 pointer-events-none"
-            />
+            <ChevronDown class="ml-3 absolute right-0 pr-2 pointer-events-none" />
           </button>
           <Transition name="fade">
-            <div
-              class="bg-white absolute mt-4 z-30"
-              v-if="hiddenDropdown"
-              v-click-outside
-            >
-              <PassengersInput
-                age="+16 anos"
-                @takeOff="takeOffAdults()"
-                @addUp="addUpfAdults()"
-                label="Adultos"
-                v-model="numberAdults"
-              />
-              <PassengersInput
-                age="4-15 anos"
-                @takeOff="takeOffChilds()"
-                @addUp="addUpfChilds()"
-                label="Adolescentes"
-                v-model="numberChilds"
-              />
-              <PassengersInput
-                age="1-3 anos"
-                @takeOff="takeOffBebes()"
-                @addUp="addUpfBebes()"
-                label="Ninos"
-                v-model="numberBebes"
-              />
+            <div class="bg-white absolute mt-4 z-30" v-if="hiddenDropdown" v-click-outside>
+              <PassengersInput age="+16 anos" @takeOff="takeOffAdults()" @addUp="addUpfAdults()" label="Adultos"
+                v-model="numberAdults" />
+              <PassengersInput age="4-15 anos" @takeOff="takeOffChilds()" @addUp="addUpfChilds()" label="Adolescentes"
+                v-model="numberChilds" />
+              <PassengersInput age="1-3 anos" @takeOff="takeOffBebes()" @addUp="addUpfBebes()" label="Ninos"
+                v-model="numberBebes" />
               <div class="divide-x"></div>
             </div>
           </Transition>
