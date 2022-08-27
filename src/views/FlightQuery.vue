@@ -7,7 +7,7 @@
         <RenderFlights v-if="moblixStore.outboundFlights.length" :flights="moblixStore.outboundFlights" />
         <RenderFlights v-if="moblixStore.returnFlights.length" :flights="moblixStore.returnFlights" />
       </div>
-      <FlightDetalhes />
+      <FlightDetalhes/>
     </div>
   </div>
 </template>

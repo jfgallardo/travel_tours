@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="flex items-center justify-start space-x-7 border p-2">
-      <div>
-        <div class="h-full border-r">
-          <input type="checkbox" class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0" />
-        </div>
-      </div>
       <FlightNumber />
       <FlightInformation weekday="Friday" :iata="Origem" :flightTime="Saida" :output="true" />
       <FlightTime duration="" :directFlight="true" />
