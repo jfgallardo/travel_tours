@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class="font-semibold border p-4">{{ flights.length }} vuelos - {{ flights[0].Saida }}</div>
-
-    <div v-for="fligth in flights" :key="fligth.Token" class="flex items-center">
-      <div class="h-full border-r">
-        <input ref="inputCheck" type="checkbox" class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0" @click="selectFligth($event, fligth)" />
+    <div v-for="fligth in flights" :key="fligth.Token" class="flex items-center border-b border-gray-300">
+      <div class="p-4">
+        <input ref="inputCheck" type="checkbox" class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0"
+          @click="selectFligth($event, fligth)" />
       </div>
       <Flight v-bind="fligth" />
     </div>
@@ -14,13 +13,14 @@
 
 <script setup>
 import { defineAsyncComponent, ref } from 'vue'
-
 const Flight = defineAsyncComponent(() => import('@/components/FlightQuery/FlightComponent.vue'))
+
+const emit = defineEmits(['selectVoo'])
 
 const inputCheck = ref([])
 const clearCheck = (ev) => {
   inputCheck.value.forEach(element => {
-    if(element != ev ) {
+    if (element != ev) {
       element.checked = false
     }
   });
@@ -28,7 +28,11 @@ const clearCheck = (ev) => {
 
 const selectFligth = (ev, fligth) => {
   clearCheck(ev.target)
-  console.log(fligth)
+  if (ev.target.checked) {
+    emit('selectVoo', fligth)
+  } else {
+    emit('selectVoo', null)
+  }
 }
 
 

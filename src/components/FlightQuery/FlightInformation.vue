@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-col space-y-2">
-      <p class="text-gray-700 font-medium">{{ filterWeekday }}</p>
+      <p class="text-gray-900 font-medium">{{ filterWeekday }}</p>
       <div class="flex items-center">
         <div v-if="!output" class="mr-2 -ml-4 rounded-full bg-blue-700 h-2 w-2"></div>
         <p class="text-2xl">
@@ -10,7 +10,7 @@
         </p>
         <div v-if="output" class="ml-2 rounded-full ring-2 ring-blue-700 h-1 w-1"></div>
       </div>
-      <p class="text-gray-700 font-medium">{{ iata }}</p>
+      <p class="text-gray-900 font-medium">{{ iata }}</p>
     </div>
   </div>
 </template>

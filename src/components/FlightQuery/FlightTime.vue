@@ -6,7 +6,7 @@
         <span class="font-medium">{{ duration }}</span>
       </p>
 
-      <div>
+      <div class="border-2 border-gray-400 rounded-full p-2">
         <svg
           width="24"
           height="24"

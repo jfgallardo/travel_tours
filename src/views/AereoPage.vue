@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 grid-rows-1 gap-7 px-4 py-8">
-      <div>
+    <div class="grid grid-cols-3 grid-rows-1 gap-7">
+      <div class="border-r border-gray-300 pt-8">
         <div class="grid grid-cols-3 grid-rows-1 px-4">
           <button
             ref="roundtrip"

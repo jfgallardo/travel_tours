@@ -61,10 +61,11 @@
       </div>
 
       <div>
-        <button class="bg-blue-700 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait" :disabled="loading"
-          @click="consultar()">
+        <button
+          class="bg-blue-700 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait"
+          :disabled="moblixStore.loading" @click="consultar()">
           <span>Buscar pasaje</span>
-          <div v-if="loading"
+          <div v-if="moblixStore.loading"
             class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"></div>
           <ArrowRight v-else fillColor="white" class="absolute right-10" />
         </button>
@@ -81,11 +82,14 @@ import Select from "@/components/FormUI/TheSelect.vue";
 import Check from "@/components/FormUI/CheckInput.vue";
 import Passengers from "@/components/FormUI/ThePassengers.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
-import { useRouter } from 'vue-router'
-import { useMoblixStore } from "@/stores/moblix";
+import { useRouter, useRoute } from 'vue-router'
+import { useMoblixStore } from "@/stores/moblix"
+
 
 const moblixStore = useMoblixStore();
 const router = useRouter();
+const route = useRoute();
+
 
 const origem = reactive({
   string: "",
@@ -103,11 +107,10 @@ const flightDates = reactive({
 });
 
 const cabine = ref("");
-const loading = ref(false)
 
-const numberAdults = ref("1");
-const numberChilds = ref("");
-const numberBebes = ref("");
+const numberAdults = ref(1);
+const numberChilds = ref(0);
+const numberBebes = ref(0);
 
 const setPassengers = (val) => {
   numberAdults.value = val.numberAdults;
@@ -134,50 +137,75 @@ const options = [
   {
     name: "Econômica",
     value: "Y",
-    src: "https://cdn1.iconfinder.com/data/icons/picons-social/57/social_visa_round-512.png",
   },
   {
     name: "Econômica Premium",
     value: "W",
-    src: "https://cdn1.iconfinder.com/data/icons/picons-social/57/social_visa_round-512.png",
   },
   {
     name: "Executiva",
     value: "C",
-    src: "https://cdn1.iconfinder.com/data/icons/picons-social/57/social_visa_round-512.png",
   },
   {
     name: "Primeira Classe",
     value: "F",
-    src: "https://cdn1.iconfinder.com/data/icons/picons-social/57/social_visa_round-512.png",
   },
   {
     name: "Econômica + Premium",
     value: "P",
-    src: "https://cdn1.iconfinder.com/data/icons/picons-social/57/social_visa_round-512.png",
   },
 ];
 
 const consultar = () => {
-  loading.value = true
-  const payload = {
-    Origem: origem.iata,
-    Destino: destino.iata,
-    Ida: flightDates.departureDate,
-    Volta: flightDates.returnDate,
-    Adultos: numberAdults.value,
-    Criancas: numberChilds.value,
-    Bebes: numberBebes.value,
-    Companhia: 1,
-  };
+  /* VALIDAR LOS CAMPOS DE LO CONTRARIO NO SE ENTRARA EN LA RUTA  */
 
-  moblixStore.consultaAereo(payload).then(() => {
-    loading.value = false
-     router.push({
-        name: 'FlightQuery'
-      })
-    
-  });
+  let payload = {
+    "Origem": origem.iata,
+    "Destino": destino.iata,
+    "Ida": flightDates.departureDate,
+    "Volta": flightDates.returnDate,
+    "Adultos": numberAdults.value,
+    "Criancas": numberChilds.value,
+    "Bebes": numberBebes.value,
+    "Companhia": 1
+  }
+  
+  if (route.name === "FlightQuery") {
+    router.push({
+      name: 'FlightQuery',
+      params: {
+        source: origem.iata,
+        destiny: destino.iata,
+        departure_date: flightDates.departureDate,
+        return_date: flightDates.returnDate,
+      },
+      query: {
+        adults: numberAdults.value,
+        childs: numberChilds.value,
+        bebes: numberBebes.value,
+        company: 1,
+      },
+    }).then(() => {
+      moblixStore.consultaAereo(payload)
+    })
+  } else {
+    router.push({
+      name: 'FlightQuery',
+      params: {
+        source: origem.iata,
+        destiny: destino.iata,
+        departure_date: flightDates.departureDate,
+        return_date: flightDates.returnDate,
+      },
+      query: {
+        adults: numberAdults.value,
+        childs: numberChilds.value,
+        bebes: numberBebes.value,
+        company: 1,
+      },
+    })
+  }
+
 };
 </script>
 <style scoped>

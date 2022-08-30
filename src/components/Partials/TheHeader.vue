@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="grid grid-cols-1 grid-rows-2 fixed top-0 right-0 left-0 z-30 bg-white"
+      class="grid grid-cols-1 grid-rows-2 fixed top-0 right-0 left-0 z-30 bg-white border-b border-gray-300"
     >
       <div>
         <div
@@ -108,8 +108,8 @@
         </div>
       </div>
       <div>
-          <MainSubheading v-if="!($route.path === '/aereo/query')" />
-          <QuerySubHeader v-if="$route.path === '/aereo/query'" />
+          <MainSubheading v-if="!($route.name === 'FlightQuery')" />
+          <QuerySubHeader v-if="$route.name === 'FlightQuery'" />
       </div>
     </div>
   </div>
@@ -129,6 +129,6 @@ const { t } = useI18n();
 
 <style scoped>
 .mrtecnologiaeservicos:hover {
-  fill: #abeb60;
+  fill: black;
 }
 </style>

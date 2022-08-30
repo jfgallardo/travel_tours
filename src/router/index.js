@@ -5,8 +5,6 @@ import Aereo from "@/views/AereoPage.vue";
 import DebitAuthorization from "@/views/DebitAuthorizationPage.vue";
 import FlightQuery from "@/views/FlightQuery.vue";
 import NotFound from "@/views/NotFound.vue"
-import { useMoblixStore } from "@/stores/moblix";
-
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,14 +20,16 @@ const router = createRouter({
           component: Aereo,
           children: [
             {
-              path: "query", name: "FlightQuery", component: FlightQuery, beforeEnter(to, from) {
-                const store = useMoblixStore()
-                if (!store.outboundFlights.length && !store.returnFlights.length) {
+              path: "query/:source/:destiny/:departure_date/:return_date",
+              name: "FlightQuery",
+              component: FlightQuery,
+              /* beforeEnter(to, from) {
+                if (!to.params.source || !to.params.destiny || !to.params.departure_date || !to.params.return_date) {
                   return {
                     name: 'Aereo'
                   }
                 }
-              }
+              } */
             },
           ],
         },

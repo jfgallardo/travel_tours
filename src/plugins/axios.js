@@ -6,14 +6,20 @@ axios.defaults.headers.common["Accept"] = "application/json";
 
 export default axios;
 https://polar-hollows-55151.herokuapp.com/api
-
+shy-snowflake-5917.fly.dev
+https://king-prawn-app-ecgju.ondigitalocean.app/
 
  */
 
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://polar-hollows-55151.herokuapp.com/api",
+  baseURL: "https://king-prawn-app-ecgju.ondigitalocean.app/api",
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
+  withCredentials: true,
 });
 
 /* 
