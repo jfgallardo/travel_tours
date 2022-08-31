@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="h-96 w-96 md:h-80 md:w-80 relative border-b pb-3"
+      class="h-96 w-48 md:w-56 lg:w-96 relative border-b pb-3"
       :class="{ 'border-black': black }"
     >
       <div class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-4xl">

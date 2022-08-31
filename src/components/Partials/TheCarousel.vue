@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="container mx-auto px-4 pb-20">
-      <div class="flex items-end justify-between mb-2">
-        <div class="font-semibold text-lg">
+      <div class="flex items-end justify-between mb-6">
+        <div class="font-medium text-xl">
           <!-- Destinos populares para aluguel de carros -->
           <slot name="title"></slot>
         </div>
-        <div class="flex space-x-3">
+        <div class="flex space-x-3 invisible md:visible">
           <div
             class="border border-blue-700 bg-transparent hover:bg-blue-700 hover:cursor-pointer rounded-full"
             @click="prev"

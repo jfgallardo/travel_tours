@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="relative border border-t-0 border-b-0 border-gray-300" ref="dropdownP">
+    <div class="relative border border-t-0 border-b-0 border-r-0 border-gray-300" ref="dropdownP">
       <button
         type="button"
-        class="relative bg-white pr-10 py-2 text-left focus:outline-none sm:text-sm h-full w-full"
+        class="relative bg-white pr-10 py-3 text-left focus:outline-none sm:text-sm h-full w-full"
         @click="hiddenDropdown = !hiddenDropdown"
         aria-haspopup="listbox"
         aria-expanded="true"

@@ -5,7 +5,9 @@ const dataDuty = (flights) => {
         'Origem':flight.Origem,
         'Destino':flight.Destino,
         'Saida': flight.Saida,
-        'Chegada': flight.Chegada
+        'Chegada': flight.Chegada,
+        'TempoTotal': flight.TempoTotalStr,
+        'FlightCode' : flight.FlightCode
     }    
    })
 

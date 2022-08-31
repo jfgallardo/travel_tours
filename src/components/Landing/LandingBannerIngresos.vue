@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
-    <div class="flex flex-col items-center justify-center h-full space-y-10">
-      <div class="text-white font-bold text-8xl md:text-7xl">
+    <div class="flex flex-col items-center justify-end md:justify-center h-full space-y-8 text-center pb-8">
+      <div class="text-white font-bold text-5xl md:text-7xl">
         {{ t("banner-ingresos.title") }}
       </div>
       <div>

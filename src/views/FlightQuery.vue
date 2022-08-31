@@ -12,14 +12,14 @@
     </div>
 
     <div>
-      <span class="font-bold">180 Resultados</span>
+      <span class="font-bold">{{ resultCount }} Resultados</span>
     </div>
 
     <div>
       <div class="flex flex-row mt-2 space-x-2">
         <div class="basis-9/12 border border-gray-300">
           <div class="border-b py-2">
-            <span class="px-4 font-medium">5 Vuelos de Ida</span>
+            <span class="px-4 font-medium">{{ moblixStore.outboundFlights.length }} Vuelos de Ida</span>
           </div>
 
           <div>
@@ -36,12 +36,12 @@
       <div class="flex flex-row space-x-2">
         <div class="basis-9/12 border border-t-0 border-gray-300">
           <div class="border-b py-2">
-            <span class="px-4 font-medium">5 Vuelos de Ida</span>
+            <span class="px-4 font-medium">{{ moblixStore.returnFlights.length }} Vuelos de Vuelta</span>
           </div>
 
           <div>
             <div>
-              <RenderFlights :flights="moblixStore.outboundFlights" />
+              <RenderFlights :flights="moblixStore.returnFlights" />
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@ import ButtonFilter from "@/components/FlightQuery/ButtonFilter.vue"
 import FlightDetalhes from "@/components/FlightQuery/FlightDetalhes.vue"
 import RenderFlights from "@/components/FlightQuery/RenderFlights.vue"
 import { useMoblixStore } from "@/stores/moblix"
-import { onUnmounted, onMounted, ref } from 'vue'
+import { onUnmounted, onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 
@@ -68,6 +68,10 @@ const route = useRoute();
 
 onMounted(() => {
   search();
+})
+
+const resultCount = computed(() => {
+  return moblixStore.outboundFlights.length + moblixStore.returnFlights.length
 })
 
 onUnmounted(() => moblixStore.clear())

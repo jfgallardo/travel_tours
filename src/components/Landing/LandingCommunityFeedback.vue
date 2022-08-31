@@ -1,12 +1,12 @@
 <template>
   <div class="bg-gray-200">
     <div class="container mx-auto px-4 space-y-10 pb-20">
-      <div class="text-center text-2xl font-medium">
+      <div class="text-center text-2xl font-medium px-12">
         Una comunidad con miles de intercambio de ideas
       </div>
-      <div class="grid grid-cols-3 grid-rows-2 justify-items-center">
+      <div class="grid grid-cols-1 grid-rows-5 justify-items-center md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2">
         <div
-          class="w-80 text-sm mb-16"
+          class="w-80 text-sm mb-16 bg-white md:bg-transparent p-4"
           v-for="feed in feedbacks"
           :key="feed.name"
         >
@@ -28,7 +28,7 @@
           </div>
 
           <div class="mt-3">
-            <div class="space-x-8">
+            <div class="flex space-x-5">
               <button
                 class="border border-black rounded-xl px-2"
                 v-for="(label, index) in feed.labels"
@@ -84,14 +84,6 @@ let feedbacks = [
   {
     avatar: Avatar2,
     name: "Peter Jeather",
-    date: "Agost 23",
-    feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
-    labels: ["Playas", "Caribe", "Taxi"],
-  },
-  {
-    avatar: Avatar1,
-    name: "Thalia Cante",
     date: "Agost 23",
     feedback:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
