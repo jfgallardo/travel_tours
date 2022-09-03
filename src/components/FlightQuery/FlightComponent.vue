@@ -27,7 +27,7 @@
         <div class="flex flex-col items-center space-y-2">
           <p class="text-gray-700">
             <span class="text-gray-400">Duration: </span>
-            <span class="font-medium">12h</span>
+            <span class="font-medium text-sm">{{TempoTotal}}</span>
           </p>
           <div class="border-2 border-gray-400 rounded-full p-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,6 +87,9 @@ const props = defineProps({
   Chegada: {
     type: String
   },
+  TempoTotal: {
+    type: String
+  }
 });
 
 const filterHours = computed(() => {

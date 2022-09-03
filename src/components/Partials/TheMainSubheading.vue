@@ -2,31 +2,45 @@
   <div class="flex items-center justify-evenly w-full h-full">
     <RouterLink :to="{ name: 'Aereo' }" class="flex items-center">
       <Airplane class="mr-1 h-5 w-5" />
-      {{ t("header.aereo") }}
+      <span class="hidden md:block">
+        {{ t("header.aereo") }}
+      </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Hotel class="mr-1 h-5 w-5" />
-      Hotel
+      <span class="hidden md:block">
+        Hotel
+      </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Driving class="mr-1 h-5 w-5" />
-      {{ t("header.carro") }}
+      <span class="hidden md:block">
+        {{ t("header.carro") }}
+      </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Bus class="mr-1 h-5 w-5" />
-      {{ t("header.onibus") }}
+      <span class="hidden md:block">
+        {{ t("header.onibus") }}
+      </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Ship class="mr-1 h-5 w-5" />
-      {{ t("header.cruseiros") }}
+      <span class="hidden md:block">
+        {{ t("header.cruseiros") }}
+      </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <WalletOpenTick class="mr-1 h-5 w-5" />
-      {{ t("header.seguro") }}
+      <span class="hidden md:block">
+        {{ t("header.seguro") }}
+      </span>
     </RouterLink>
     <RouterLink to="/debit/authorization" class="flex items-center">
       <WalletOpenTick class="mr-1 h-5 w-5" />
-      Autorização de débito
+      <span class="hidden md:block">
+        Autorização de débito
+      </span>
     </RouterLink>
   </div>
 </template>
