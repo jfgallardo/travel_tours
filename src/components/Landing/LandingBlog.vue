@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="container mx-auto px-4 relative">
+    <div class="container mx-auto px-4">
 
-      <div class="overflow-hidden md:flex md:items-center md:justify-around">
+      <div class="md:flex md:items-center md:justify-around">
         <div class="md:basis-2/5">
           <img src="@/assets/img/blog1.jpg" class="w-full object-cover blog-image" />
         </div>
         <div class="space-y-4 mt-3 md:basis-2/5">
-          <p class="text-justify pb-4">
+          <p class="text-justify">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Laboriosam nostrum quaerat odit corrupti iusto praesentium
             voluptatibus pariatur ad, libero commodi perferendis alias, nam
@@ -33,11 +33,11 @@
         </div>
       </div>
 
-      <div>
-        <p class="font-semibold text-center blog absolute right-3/2 top-1/3 lg:right-1/4 lg:top-1/4 -z-10">Blog</p>
+      <div class="flex items-center justify-start md:justify-center">
+        <p class="font-semibold blogfontsize font-blog md:-mt-40 -mt-16">Blog</p>
       </div>
 
-      <div class="mt-52 lg:mt-40 md:flex md:flex-row-reverse md:items-center md:justify-around">
+      <div class="md:flex md:flex-row-reverse md:items-center md:justify-around md:-mt-20 -mt-16">
         <div class="md:basis-2/5">
           <img src="@/assets/img/blog2.jpg" class="w-full object-cover blog-image" />
         </div>
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="mt-16 pb-10">
-      <p class="text-center font-bold text-5xl">
+      <p class="text-center font-bold text-4xl">
         Saiba mais sobre a cultura<br />para onde voce quer viajar
       </p>
       <div class="text-center mt-8">
@@ -85,11 +85,19 @@
 <script setup></script>
 
 <style scoped>
-.blog {
-  font-size: 18em;
+.font-blog {
+  font-size: 20rem;
+  z-index: -1;
 }
 
 .blog-image {
   height: 30rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .font-blog {
+    font-size: 12rem;
+    z-index: -1
+  }
 }
 </style>

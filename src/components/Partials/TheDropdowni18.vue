@@ -1,36 +1,26 @@
 <template>
   <div class="container">
     <div class="relative">
-      <button
-        @click="state.hiddenDropdown = !state.hiddenDropdown"
-        class="bg-white flex items-center"
-      >
+      <button @click="state.hiddenDropdown = !state.hiddenDropdown" class="bg-white flex items-center">
         <Globe class="mr-1 h-5 w-5" />
-        {{ state.lang }}
+        <span>
+          {{ state.lang }}
+        </span>
         <ChevronDown class="ml-2 h-4 w-4" />
       </button>
-      <div
-        class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute z-20"
-        :class="{ hidden: state.hiddenDropdown }"
-        style="width: 110px"
-      >
+      <div class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute z-20"
+        :class="{ hidden: state.hiddenDropdown }" style="width: 110px">
         <ul>
-          <li
-            @click="selectLang('br')"
-            class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
-          >
+          <li @click="selectLang('br')"
+            class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1">
             BR
           </li>
-          <li
-            @click="selectLang('en')"
-            class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
-          >
+          <li @click="selectLang('en')"
+            class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1">
             EN
           </li>
-          <li
-            @click="selectLang('es')"
-            class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
-          >
+          <li @click="selectLang('es')"
+            class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1">
             ES
           </li>
         </ul>
@@ -58,4 +48,5 @@ function selectLang(lang) {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

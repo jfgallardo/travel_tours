@@ -3,11 +3,11 @@
     <div class="container mx-auto px-4 py-20">
       <div class="space-y-10">
         <div class="flex items-center justify-center space-x-5">
-          <img src="@/assets/img/avatar1.jpg" class="h-16 w-16 object-cover rounded-full" />
+          <img src="@/assets/img/avatar1.jpg" class="h-16 w-16 object-cover rounded-full hidden md:block" />
           <img src="@/assets/img/avatar3.jpg" class="h-20 w-20 object-cover rounded-full" />
           <img src="@/assets/img/avatar2.jpg" class="h-28 w-28 object-cover rounded-full" />
           <img src="@/assets/img/avatar1.jpg" class="h-20 w-20 object-cover rounded-full" />
-          <img src="@/assets/img/avatar3.jpg" class="h-16 w-16 object-cover rounded-full" />
+          <img src="@/assets/img/avatar3.jpg" class="h-16 w-16 object-cover rounded-full hidden md:block" />
         </div>
         <div class="text-center font-bold text-7xl">
           Nosso objetivo é mantê-lo feliz e satisfeito
