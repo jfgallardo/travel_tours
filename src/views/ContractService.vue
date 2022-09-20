@@ -8,31 +8,42 @@
               Contrato de Prestação de Serviços
             </p>
             <div class="col-start-4">
-              <button class="bg-blue-700 hover:bg-blue-800 w-full text-white font-medium px-5 py-4 disabled:opacity-75"
-                type="submit" id="createD">
+              <button
+                class="bg-blue-700 hover:bg-blue-800 w-full text-white font-medium px-5 py-4 disabled:opacity-75"
+                type="submit"
+                id="createD"
+              >
                 Gerar documento
               </button>
             </div>
             <div>
-              <button @click="resetForm()"
-                class="bg-red-500 hover:bg-red-600 text-white w-full text-center cursor-pointer font-medium px-5 py-4">
+              <button
+                @click="resetForm()"
+                class="bg-red-500 hover:bg-red-600 text-white w-full text-center cursor-pointer font-medium px-5 py-4"
+              >
                 Limpeza de dados
               </button>
             </div>
           </div>
 
           <div class="border relative p-5 mb-4 mt-5">
-            <span class="absolute -top-3 left-2 bg-white px-1 font-light text-gray-400">Dados do cliente</span>
+            <span
+              class="absolute -top-3 left-2 bg-white px-1 font-light text-gray-400"
+              >Dados do cliente</span
+            >
             <div class="grid grid-cols-5 gap-7 center">
               <div>
                 <TextInput name="name_client" label="Nome cliente" />
               </div>
               <div>
-                <DateInput label="DATA DE VIAGEM" @selectDate="
-                  (e) => {
-                    travelDate = e;
-                  }
-                " />
+                <DateInput
+                  label="DATA DE VIAGEM"
+                  @selectDate="
+                    (e) => {
+                      travelDate = e;
+                    }
+                  "
+                />
               </div>
               <div>
                 <TextInput name="destino_reserva" label="DESTINO RESERVA" />
@@ -44,15 +55,23 @@
                 <TextInput name="occupation" label="Profissão" />
               </div>
               <div>
-                <Select label="Situação de imigração no Brasil" :selected="nationality" :options="typeNationality"
+                <Select
+                  label="Situação de imigração no Brasil"
+                  :selected="nationality"
+                  :options="typeNationality"
                   @selectValue="
                     (e) => {
                       nationality = e;
                     }
-                  " />
+                  "
+                />
               </div>
               <div>
-                <TextInput name="cpf_number" label="CPF Nº" maska="###.###.###-##" />
+                <TextInput
+                  name="cpf_number"
+                  label="CPF Nº"
+                  maska="###.###.###-##"
+                />
               </div>
               <div v-if="showPassport">
                 <TextInput name="passaporte" label="Passaporte" />
@@ -63,14 +82,23 @@
               </div>
 
               <div>
-                <TextInput name="phone_number" label="Telefone/Whatsapp" maska="(##) #####-####" />
+                <TextInput
+                  name="phone_number"
+                  label="Telefone/Whatsapp"
+                  maska="(##) #####-####"
+                />
               </div>
               <div>
                 <TextInput name="email" label="Email" />
               </div>
 
               <div>
-                <TextInput maska="#####-###" name="cep" label="CEP" @onBlur="searchByCep" />
+                <TextInput
+                  maska="#####-###"
+                  name="cep"
+                  label="CEP"
+                  @onBlur="searchByCep"
+                />
               </div>
               <div>
                 <TextInput name="street" label="Rua" />
@@ -79,8 +107,10 @@
                 <TextInput name="district" label="Bairro" />
               </div>
               <div class="p-4">
-                <span class="font-light text-gray-700 hover:text-gray-900 cursor-default">{{ searchByCepToString
-                }}</span>
+                <span
+                  class="font-light text-gray-700 hover:text-gray-900 cursor-default"
+                  >{{ searchByCepToString }}</span
+                >
               </div>
             </div>
           </div>
@@ -90,20 +120,31 @@
           <CreatePassengers class="col-span-2" />
           <CreateService class="col-span-2" />
           <div class="pt-5">
-
             <div class="flex space-x-5">
               <p class="font-light">Documentos para baixar</p>
               <Tooltip tooltipText="Limpar">
                 <span class="cursor-pointer" @click="resetContract">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
                   </svg>
                 </span>
               </Tooltip>
             </div>
-            <div id="listDocuments" class="flex flex-col items-center space-y-2"></div>
+            <div
+              id="listDocuments"
+              class="flex flex-col items-center space-y-2"
+            ></div>
           </div>
         </div>
       </div>
@@ -166,7 +207,7 @@ const searchByCep = (value) => {
           ufCl.value = "";
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }
 };
 
@@ -197,8 +238,8 @@ const searchByCepToString = computed(() => {
   return "";
 });
 
-const { handleSubmit, resetForm, setErrors, setFieldError } = useForm({
-  validationSchema: simpleSchemaContract
+const { handleSubmit, resetForm } = useForm({
+  validationSchema: simpleSchemaContract,
 });
 
 const passageiros = reactive([]);
@@ -276,10 +317,8 @@ const resetContract = () => {
   buttonSubmit.removeAttribute("disabled");
   while (targetElement.firstChild) {
     targetElement.removeChild(targetElement.firstChild);
-}
-}
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
