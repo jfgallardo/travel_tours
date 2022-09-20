@@ -107,7 +107,8 @@
 
 <script setup>
 import { onBeforeUpdate, ref, computed } from "vue";
-import * as _ from "lodash";
+import unionBy from 'lodash/unionBy';
+
 import endpoint from "@/utils/endPointIata";
 
 onBeforeUpdate(() => {
@@ -197,7 +198,7 @@ const search = (query) => {
   if (query.length === 3) {
     endpoint(query)
       .then(function (values) {
-        options.value = _.unionBy(
+        options.value = unionBy(
           values[0].data.cities,
           values[0].data.airportsByCities,
           "codeIataAirport"
