@@ -1,16 +1,20 @@
 <template>
   <div class="flex items-center justify-evenly w-full h-full">
-    <RouterLink :to="{ name: 'Aereo' }" class="flex items-center">
-      <Airplane class="mr-1 h-5 w-5" />
-      <span class="hidden md:block">
+    <RouterLink :to="{ path: '/aereo' }" class="flex items-center">
+      <Airplane
+        class="mr-1 h-5 w-5"
+        :color="$route.path === '/aereo' ? 'blue' : '#292D32'"
+      />
+      <span
+        class="hidden md:block"
+        :class="{ 'text-blue-700': $route.path === '/aereo' }"
+      >
         {{ t("header.aereo") }}
       </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Hotel class="mr-1 h-5 w-5" />
-      <span class="hidden md:block">
-        Hotel
-      </span>
+      <span class="hidden md:block"> Hotel </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Driving class="mr-1 h-5 w-5" />
@@ -36,9 +40,15 @@
         {{ t("header.seguro") }}
       </span>
     </RouterLink>
-    <RouterLink to="/debit/authorization" class="flex items-center">
-      <WalletOpenTick class="mr-1 h-5 w-5" />
-      <span class="hidden md:block">
+    <RouterLink to="/contract/service" class="flex items-center">
+      <WalletOpenTick
+        class="mr-1 h-5 w-5"
+        :color="$route.path === '/contract/service' ? 'blue' : '#292D32'"
+      />
+      <span
+        class="hidden md:block"
+        :class="{ 'text-blue-700': $route.path === '/contract/service' }"
+      >
         Autorização de débito
       </span>
     </RouterLink>

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="bg-white py-3 invisible md:visible">
-      <ul class="grid grid-cols-5 grid-rows-1 justify-items-center text-sm">
+      <ul class="grid grid-cols-6 grid-rows-1 justify-items-center text-sm">
+        <li>© 2022 Mr Travel & Tours, Inc.</li>
         <li>{{ t("banner.quem-somos") }}</li>
         <li>{{ t("banner.privacidade") }}</li>
         <li>{{ t("banner.termos") }}</li>

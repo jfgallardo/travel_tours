@@ -2,8 +2,7 @@
   <div>
     <div class="flex flex-col space-y-5 justify-center text-center h-96">
       <div class="font-bold md:text-8xl text-7xl">MR TRAVEL & TOURS</div>
-      <div class="text-4xl">{{  t("hero.subtitle")  }}</div>
-     
+      <div class="text-4xl">{{ t("hero.subtitle") }}</div>
     </div>
   </div>
 </template>

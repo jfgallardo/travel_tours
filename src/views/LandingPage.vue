@@ -81,5 +81,4 @@ const Greeting = defineAsyncComponent(() =>
 );
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

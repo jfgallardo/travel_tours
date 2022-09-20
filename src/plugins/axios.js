@@ -13,19 +13,24 @@ https://king-prawn-app-ecgju.ondigitalocean.app/
 
 import axios from "axios";
 
-const axiosClient = axios.create({
+export const axiosClientAPI = axios.create({
   baseURL: "https://king-prawn-app-ecgju.ondigitalocean.app/api",
   headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
+    "Content-Type": "application/json",
+    Accept: "application/json",
   },
   withCredentials: true,
 });
 
+export const axiosAviationAPI = axios.create({
+  baseURL: "https://aviation-edge.com/v2/public",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+});
 /* 
 axiosClient.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${store.state.auth.user.token}`;
   return config;
 }); */
-
-export default axiosClient;

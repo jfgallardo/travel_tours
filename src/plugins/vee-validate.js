@@ -1,9 +1,11 @@
 import { defineRule, configure } from "vee-validate";
-import { required, alpha_spaces } from "@vee-validate/rules";
+import { required, alpha_spaces, email, digits } from "@vee-validate/rules";
 import { localize } from "@vee-validate/i18n";
 
 defineRule("required", required);
 defineRule("alpha_spaces", alpha_spaces);
+defineRule("email", email);
+defineRule("digits", digits);
 
 defineRule("digitsCard", (value) => {
   let regexp = /^\d{4}[-]\d{4}[-]\d{4}[-]\d{4}$/;
@@ -85,6 +87,17 @@ defineRule("minValue", (value, [target], ctx) => {
   return true;
 });
 
+defineRule("cepValue", (value, [target], ctx) => {
+  if (!value || !value.length) {
+    return true;
+  }
+
+  if (value.length < ctx.form[target]) {
+    return false;
+  }
+  return true;
+});
+
 configure({
   generateMessage: localize({
     en: {
@@ -98,6 +111,7 @@ configure({
         invaliDate: "Invalid date",
         minValue:
           "The amount of the first installment cannot exceed the transaction amount",
+        cepValue: "ERROR",
       },
     },
     es: {

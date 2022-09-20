@@ -2,15 +2,30 @@
   <div class="bg-gray-200">
     <Carousel @next="nextSlide" @prev="prevSlide">
       <template v-slot:title> Próximos viajes de la comunidad </template>
-      <CarouselSlider v-for="slide in itemsToDisplay" :key="slide.city" :slide="slide" :black="true">
+      <CarouselSlider
+        v-for="slide in itemsToDisplay"
+        :key="slide.city"
+        :slide="slide"
+        :black="true"
+      >
         <template v-slot:image>
-          <img v-bind:src="slide.src" class="w-full h-64 object-cover" @mousedown="nextSlide" />
+          <img
+            v-bind:src="slide.src"
+            class="w-full h-64 object-cover"
+            @mousedown="nextSlide"
+          />
         </template>
         <template v-slot:footer>
           <div class="mt-2 flex">
-            <img v-for="avatar in slide.avatars" :key="avatar" :src="avatar"
-              class="rounded-full h-7 w-7 object-cover ring-1 ring-white -ml-1" />
-            <div class="border h-7 w-7 pt-1 ring-1 ring-white rounded-full text-xs text-white bg-gray-300 -ml-1">
+            <img
+              v-for="avatar in slide.avatars"
+              :key="avatar"
+              :src="avatar"
+              class="rounded-full h-7 w-7 object-cover ring-1 ring-white -ml-1"
+            />
+            <div
+              class="border h-7 w-7 pt-1 ring-1 ring-white rounded-full text-xs text-white bg-gray-300 -ml-1"
+            >
               +24
             </div>
           </div>
@@ -24,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 import Carousel from "@/components/Partials/TheCarousel.vue";
 import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
 import Avatar1 from "@/assets/img/avatar1.jpg";
@@ -35,11 +50,11 @@ import Tokio from "@/assets/img/tokio.jpg";
 import Copa from "@/assets/img/copa.jpg";
 
 onMounted(() => {
-  updateList()
-})
+  updateList();
+});
 
-const itemsToDisplay = ref([])
-const numberToRef = ref(0)
+const itemsToDisplay = ref([]);
+const numberToRef = ref(0);
 
 const sliders = [
   {
@@ -81,13 +96,12 @@ const sliders = [
 
 const updateList = () => {
   if (window.innerWidth <= 768) {
-    itemsToDisplay.value = chunkArray(sliders, 1)[0]
+    itemsToDisplay.value = chunkArray(sliders, 1)[0];
   } else {
-    itemsToDisplay.value = chunkArray(sliders, 3)[0]
-
+    itemsToDisplay.value = chunkArray(sliders, 3)[0];
   }
-  numberToRef.value = itemsToDisplay.value.length
-}
+  numberToRef.value = itemsToDisplay.value.length;
+};
 
 const chunkArray = (array, chunkSize) => {
   let chunckedArrays = [];
@@ -96,27 +110,26 @@ const chunkArray = (array, chunkSize) => {
     chunckedArrays.push(chunk);
   }
   return chunckedArrays;
-}
+};
 
 const nextSlide = () => {
-  itemsToDisplay.value.shift()
+  itemsToDisplay.value.shift();
   if (sliders[numberToRef.value]) {
-    itemsToDisplay.value.push(sliders[numberToRef.value])
-    numberToRef.value++
+    itemsToDisplay.value.push(sliders[numberToRef.value]);
+    numberToRef.value++;
   } else {
-    numberToRef.value = 1
-    itemsToDisplay.value.push(sliders[0])
+    numberToRef.value = 1;
+    itemsToDisplay.value.push(sliders[0]);
   }
 };
 const prevSlide = () => {
-  itemsToDisplay.value.pop()
+  itemsToDisplay.value.pop();
   if (numberToRef.value >= 0 && sliders[numberToRef.value + 1]) {
-    itemsToDisplay.value.unshift(sliders[numberToRef.value + 1])
-    numberToRef.value--
+    itemsToDisplay.value.unshift(sliders[numberToRef.value + 1]);
+    numberToRef.value--;
   } else {
-    numberToRef.value = 3
-    itemsToDisplay.value.unshift(sliders[0])
+    numberToRef.value = 3;
+    itemsToDisplay.value.unshift(sliders[0]);
   }
-
-}
+};
 </script>

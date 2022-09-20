@@ -1,27 +1,23 @@
 <template>
   <div class="banner">
     <div class="h-full flex items-center justify-center relative">
-
       <div class="w-full">
         <Footer />
       </div>
 
-      <div class="absolute bottom-5 text-center md:flex md:items-center md:space-x-10">
-        <p class="font-bold text-7xl md:text-6xl text-white pb-5" v-html="t('banner.title')"></p>
+      <div
+        class="absolute bottom-5 text-center md:flex md:items-center md:space-x-10"
+      >
+        <p
+          class="font-bold text-7xl md:text-6xl text-white pb-5"
+          v-html="t('banner.title')"
+        ></p>
 
         <button class="bg-white font-bold px-6 py-3 text-lg">
-          {{  t("banner.button")  }}
+          {{ t("banner.button") }}
         </button>
       </div>
-
-
-
-
     </div>
-
-
-
-
   </div>
 </template>
 
@@ -40,9 +36,6 @@ const { t } = useI18n();
 }
 </style>
 
-
-
-
 <!-- <div class="grid grid-cols-1 grid-rows-2 h-full">
       <Footer/>
       <div class="flex items-end justify-center h-full w-full sm:text-center">
@@ -59,6 +52,4 @@ const { t } = useI18n();
       </div>
     </div> -->
 
-
-
-    <!-- -->
+<!-- -->
