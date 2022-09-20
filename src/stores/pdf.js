@@ -47,6 +47,8 @@ export const usePdfStore = defineStore({
       this.services = [];
       this.reservations = [];
       (this.saveCreditCard = false), (this.notSaveCreditCard = true);
+      this.saveCreditCard = false;
+      this.notSaveCreditCard = true;
     },
   },
 });
