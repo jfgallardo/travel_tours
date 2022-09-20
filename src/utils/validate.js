@@ -4,7 +4,7 @@ export const simpleSchemaContract = object({
   name_client: string().required().label("Nome"),
   civil_status: string().required().label("Estado civil"),
   occupation: string().required().label("Profissão"),
-  passaporte: string().required().label("Passaporte"),
+  passaporte: string().nullable().label("Passaporte"),
   cpf_number: string()
     .matches(/^\d{3}[.]\d{3}[.]\d{3}[-]\d{2}$/, { message: "Invalid CPF" })
     .required("CPF is required field"),

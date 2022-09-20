@@ -7,7 +7,7 @@
       @focus="handleShow($event)"
       @blur="handleHide($event)"
     >
-    <slot></slot>
+      <slot></slot>
     </div>
     <div class="tooltipText" role="tooltip">
       {{ tooltipText }}
