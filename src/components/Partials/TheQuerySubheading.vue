@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
     <div class="px-3">
-      <ArrowLeft class="cursor-pointer" @click="$router.go(-1)"/>
+      <ArrowLeft class="cursor-pointer" @click="$router.go(-1)" />
     </div>
 
     <div class="grid grid-cols-8 grid-rows-1 h-full w-full">

@@ -1,56 +1,58 @@
 <template>
   <div>
+    <!-- 
+    -->
     <div class="relative">
       <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
         label
       }}</span>
-      <Field
-        :name="nameValue"
-        :rules="rulesValue"
+      <input
+        v-model="value"
+        type="text"
         :class="inputClassList"
-        :placeholder="placeholder"
-        :type="typeValue"
         v-maska="maska"
+        :placeholder="placeholder"
+        :disabled="disableField"
+        @blur="$emit('onBlur', $event.target.value)"
       />
-      <Transition>
-        <ErrorMessage
-          :name="nameValue"
-          class="text-red-500 text-sm absolute -bottom-6 left-0"
-        />
-      </Transition>
+      <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
+        errorMessage
+      }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { Field, ErrorMessage } from "vee-validate";
-import { computed } from "vue";
+import { useField } from "vee-validate";
+import { toRef, computed } from "vue";
 
 const props = defineProps({
-  nameValue: {
+  modelValue: {
     type: String,
     default: "",
   },
-  rulesValue: {
+  name: {
     type: String,
-    default: "",
-  },
-  placeholder: {
-    type: String,
-    default: "",
   },
   label: {
     type: String,
     default: "",
   },
-  typeValue: {
-    type: String,
-    default: "text",
-  },
   maska: {
     type: [String, Object],
   },
+  placeholder: {
+    type: String,
+    default: "",
+  },
+  disableField: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const nameRef = toRef(props, "name");
+const { errorMessage, value } = useField(nameRef, undefined);
 
 const inputClassList = computed(() => {
   return [
@@ -75,15 +77,3 @@ const getPaddingClass = computed(() => {
   return "h-10 pr-6 pl-4 pt-9 pb-4";
 });
 </script>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>

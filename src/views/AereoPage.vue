@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 grid-rows-1 gap-7">
+    <div class="grid grid-cols-3 grid-rows-1 gap-7 border-b border-gray-300">
       <div class="border-r border-gray-300 pt-8">
         <div class="grid grid-cols-3 grid-rows-1 px-4">
           <button
@@ -33,6 +33,7 @@
         <RouterView />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -48,6 +49,9 @@ const ManyCities = defineAsyncComponent(() =>
 );
 const OneWay = defineAsyncComponent(() =>
   import("@/components/Aereo/OneWayForm.vue")
+);
+const Footer = defineAsyncComponent(() =>
+  import("@/components/Partials/TheFooter.vue")
 );
 
 onMounted(() => {

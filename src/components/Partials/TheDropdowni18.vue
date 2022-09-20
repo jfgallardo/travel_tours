@@ -6,7 +6,9 @@
         class="bg-white flex items-center"
       >
         <Globe class="mr-1 h-5 w-5" />
-        {{ state.lang }}
+        <span>
+          {{ state.lang }}
+        </span>
         <ChevronDown class="ml-2 h-4 w-4" />
       </button>
       <div
