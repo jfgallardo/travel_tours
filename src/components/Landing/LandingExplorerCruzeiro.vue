@@ -8,7 +8,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="relative">
             <div class="absolute bottom-0 pl-4 pb-4 z-20">
-              <span class="text-7xl md:text-6xl lg:md:text-7xl text-white font-bold">Carnival</span>
+              <span
+                class="text-7xl md:text-6xl lg:md:text-7xl text-white font-bold"
+                >Carnival</span
+              >
               <p class="text-white text-xl mt-3">
                 5 {{ t("explorer-cruzeiros.cruzeiros-disponíveis", 5) }}
               </p>
@@ -20,7 +23,11 @@
           </div>
           <div class="relative">
             <div class="absolute bottom-0 pl-4 pb-4 z-20">
-              <span class="text-7xl md:text-6xl lg:md:text-7xl text-white font-bold"> Royal </span>
+              <span
+                class="text-7xl md:text-6xl lg:md:text-7xl text-white font-bold"
+              >
+                Royal
+              </span>
               <p class="text-white text-xl mt-3">
                 1 {{ t("explorer-cruzeiros.cruzeiros-disponíveis", 1) }}
               </p>

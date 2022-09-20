@@ -1,4 +1,8 @@
-const pdfCreator = (passageiros, destinasePagamento, data) => {
+import { usePdfStore } from "@/stores/pdf";
+
+const pdfCreatorDebit = (data) => {
+  const pdfStore = usePdfStore();
+
   const document = {
     content: [
       {
@@ -8,9 +12,15 @@ const pdfCreator = (passageiros, destinasePagamento, data) => {
       " ",
       {
         text: [
-          data.cartao === "V" ? "( x ) VISA  " : "(  ) VISA  ",
-          data.cartao === "M" ? "( x ) MASTERCARD  " : "(  ) MASTERCARD  ",
-          data.cartao === "A" ? "( x ) AMEX  " : "(  ) AMEX  ",
+          data.cartao === "VISA" ? "( x ) VISA  " : "(  ) VISA  ",
+          data.cartao === "MASTERCARD"
+            ? "( x ) MASTERCARD  "
+            : "(  ) MASTERCARD  ",
+          data.cartao === "AMEX" ? "( x ) AMEX  " : "(  ) AMEX  ",
+          data.cartao === "ELO" ? "( x ) ELO  " : "(  ) ELO  ",
+          data.cartao === "HIPERCARD"
+            ? "( x ) HIPERCARD  "
+            : "(  ) HIPERCARD  ",
           data.cartao === "O" ? "( x ) OUTROS" : "(  ) OUTROS",
         ],
         style: ["center", "text"],
@@ -22,7 +32,7 @@ const pdfCreator = (passageiros, destinasePagamento, data) => {
         text: "IMPORTANTE: Essa autorização destina-se ao pagamento de:  ",
         style: ["bold", "text"],
       },
-      createListDestinasePagamento(destinasePagamento),
+      createListDestinasePagamento(pdfStore.services, data.id),
       " ",
       {
         text: [
@@ -58,7 +68,7 @@ const pdfCreator = (passageiros, destinasePagamento, data) => {
         text: "Passageiros: ",
         style: ["text"],
       },
-      createListPasaggeiros(passageiros),
+      createListPasaggeiros(pdfStore.passengers, data.id),
       " ",
       {
         text: "CARO CLIENTE ",
@@ -67,8 +77,13 @@ const pdfCreator = (passageiros, destinasePagamento, data) => {
       "Para sua segurança não assinar autorizações em branco.",
       " ",
       " ",
-      "___________________________________                     _____________________________________________",
-      "       Assinatura do Titular do Cartão                                Carimbo e assinatura do Agente de Viagens",
+      " ",
+      " ",
+      " ",
+      " ",
+      " ",
+      "_________________________________                     _____________________________________________",
+      "Assinatura do Titular do Cartão                             Carimbo e assinatura do Agente de Viagens",
       " ",
       {
         text: "Declaro estar ciente e de acordo com os procedimentos e normas estabelecidas pela agência, bem como declaro ser o de minha inteira responsabilidade a devida compensação dos pagamentos referentes às passagens por mim solicitadas, mesmo sendo na modalidade cartão de crédito.",
@@ -108,19 +123,25 @@ const pdfCreator = (passageiros, destinasePagamento, data) => {
   return document;
 };
 
-const createListPasaggeiros = (passageirosList) => {
-  return passageirosList.map((val) => {
-    return {
-      text: `Nome: ${val.name}`,
-    };
+const createListPasaggeiros = (passageiros, idReserva) => {
+  return passageiros.map((val) => {
+    if (val.reservations === idReserva) {
+      return {
+        text: `Nome: ${val.passageiro}`,
+        style: ["text"],
+      };
+    }
   });
 };
 
-const createListDestinasePagamento = (destinasePagamentoList) => {
-  return destinasePagamentoList.map((val) => {
-    return {
-      text: val.value,
-    };
+const createListDestinasePagamento = (service, idReserva) => {
+  return service.map((val) => {
+    if (val.reservations === idReserva) {
+      return {
+        text: val.service,
+        style: ["text"],
+      };
+    }
   });
 };
 
@@ -132,47 +153,82 @@ const table = (data) => {
 
       body: [
         [
-          { text: `NÚMERO DO CARTÃO: ${data.numberCard}`, colSpan: 4 },
+          {
+            text: `NÚMERO DO CARTÃO: ${
+              data.paymentSelect === "C"
+                ? `${data.numberCard.split("-")[0]}-XXXX-XXXX-${
+                    data.numberCard.split("-")[3]
+                  }`
+                : ""
+            }`,
+            colSpan: 4,
+          },
           {},
           {},
           {},
         ],
-        [{ text: `NOME TITULAR:  ${data.nameCard}`, colSpan: 4 }, {}, {}, {}],
         [
-          { text: `CPF Nº:  ${data.cpfNumber}`, colSpan: 2 },
+          {
+            text: `NOME TITULAR:  ${
+              data.paymentSelect === "C" ? data.nameCard : data.name_client
+            }`,
+            colSpan: 4,
+          },
+          {},
+          {},
+          {},
+        ],
+        [
+          { text: `CPF Nº:  ${data.cpf_number}`, colSpan: 2 },
           {},
           {
-            text: `RG Nº:  ${data.rneNumber ? data.rneNumber : ""}`,
+            text: `RG Nº:  ${data.rne_number ? data.rne_number : ""}`,
             colSpan: 2,
           },
           {},
         ],
-        [{ text: `TELEFONE:  ${data.phoneNumber}`, colSpan: 4 }, {}, {}, {}],
-        [
-          { text: `VALIDADE DO CARTÃO:  ${data.validCardDate}`, colSpan: 2 },
-          {},
-          { text: `CÓDIGO:  ${data.codeCard}`, colSpan: 2 },
-          {},
-        ],
+        [{ text: `TELEFONE:  ${data.phone_number}`, colSpan: 4 }, {}, {}, {}],
         [
           {
-            text: `VALOR DA TRANSAÇÃO: R$  ${data.transactionValue}`,
+            text: `VALIDADE DO CARTÃO:  ${
+              data.paymentSelect === "C" ? data.validCardDate : ""
+            }`,
             colSpan: 2,
           },
           {},
-          { text: `DATA DA TRANSAÇÃO: ${data.dataTransacao}`, colSpan: 2 },
+          {},
           {},
         ],
         [
           {
-            text: `VALOR DE CADA PARCELA: 1x R$ ${
-              data.valorPrimeiraParcela
-            } + ${data.numberParcela - 1}x R$ ${data.restosParcelas}`,
+            text: `VALOR DA TRANSAÇÃO: R$  ${data.transaction_value}`,
+            colSpan: 2,
+          },
+          {},
+          { text: `DATA DA TRANSAÇÃO: ${data.dateTransaction}`, colSpan: 2 },
+          {},
+        ],
+        [
+          {
+            text: `VALOR DE CADA PARCELA: 1x R$${
+              data.paymentSelect === "C"
+                ? data.primeiraParcela +
+                  " + " +
+                  (data.numberParcels - 1) +
+                  "x R$" +
+                  data.restosParcelas
+                : data.transaction_value
+            }`,
             colSpan: 3,
           },
           {},
           {},
-          { text: `Nº DE PARCELAS: ${data.numberParcela}`, colSpan: 1 },
+          {
+            text: `Nº DE PARCELAS: ${
+              data.paymentSelect === "C" ? data.numberParcels : 0
+            }`,
+            colSpan: 1,
+          },
         ],
         [
           { text: "AGÊNCIA DE VIAGENS: MR Travel & Tours ", colSpan: 4 },
@@ -185,4 +241,4 @@ const table = (data) => {
   };
 };
 
-export default pdfCreator;
+export default pdfCreatorDebit;

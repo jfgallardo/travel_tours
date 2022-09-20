@@ -6,6 +6,7 @@ import i18n from "@/plugins/i18n";
 import "@/assets/main.css";
 import "@/plugins/vee-validate";
 import Maska from "maska";
+import "air-datepicker/air-datepicker.css";
 
 const app = createApp(App);
 

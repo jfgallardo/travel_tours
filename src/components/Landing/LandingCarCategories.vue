@@ -4,11 +4,13 @@
       <div class="lg:text-7xl text-4xl font-bold text-center">
         Atendemos empresas<br />nacionais e internacionais
       </div>
-      <div class="grid grid-cols-3 grid-rows-3 gap-4 justify-items-center lg:grid-cols-5 lg:grid-rows-2">
+      <div
+        class="grid grid-cols-3 grid-rows-3 gap-4 justify-items-center lg:grid-cols-5 lg:grid-rows-2"
+      >
         <div>
           <img
             src="@/assets/img/localiza-300x300.jpg"
-            class="rounded-full h-28 w-28 md:h-32 md:w-32  object-cover object-bottom"
+            class="rounded-full h-28 w-28 md:h-32 md:w-32 object-cover object-bottom"
           />
         </div>
         <div>

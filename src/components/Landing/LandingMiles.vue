@@ -4,7 +4,9 @@
       <div
         class="pb-8 bg-blue-500 lg:h-96 flex flex-col justify-center px-14 space-y-2 pt-16 text-center"
       >
-        <div class="text-white font-bold text-6xl md:text-8xl">Junte a<br />milhares</div>
+        <div class="text-white font-bold text-6xl md:text-8xl">
+          Junte a<br />milhares
+        </div>
         <div class="text-white font-light text-lg">
           Junte a milhares de viajantes e planeje sua viaje conosco agora
         </div>

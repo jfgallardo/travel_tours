@@ -4,7 +4,9 @@
       <div class="text-center text-2xl font-medium px-12">
         Una comunidad con miles de intercambio de ideas
       </div>
-      <div class="grid grid-cols-1 grid-rows-5 justify-items-center md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2">
+      <div
+        class="grid grid-cols-1 grid-rows-5 justify-items-center md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2"
+      >
         <div
           class="w-80 text-sm mb-16 bg-white md:bg-transparent p-4"
           v-for="feed in feedbacks"

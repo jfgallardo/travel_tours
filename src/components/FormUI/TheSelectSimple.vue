@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="relative border border-t-0 border-b-0 border-r-0 border-gray-300" ref="dropdownP">
+    <div
+      class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
+      ref="dropdownP"
+    >
       <button
         type="button"
         class="relative bg-white pr-10 py-3 text-left focus:outline-none sm:text-sm h-full w-full"
@@ -56,7 +59,6 @@ const hiddenDropdown = ref(false);
 const selected = ref(props.options[0]);
 const emit = defineEmits(["selectValue"]);
 const dropdownP = ref(null);
-
 
 const props = defineProps({
   options: {
