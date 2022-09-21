@@ -196,7 +196,12 @@ const table = (data) => {
             colSpan: 2,
           },
           {},
-          {},
+          {
+            text: `CÓDIGO:  ${
+              data.cartao === "AMEX" ? "XXXX" : "XXX"
+            }`,
+            colSpan: 2,
+          },
           {},
         ],
         [

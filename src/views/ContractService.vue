@@ -286,8 +286,10 @@ const onSubmit = handleSubmit((values) => {
   );
 
   pdfStore.reservations.forEach((element, index) => {
-    const doc = pdfCreatorDebit({ ...values, ...element });
+    if (element.paymentSelect === "C") {
+      const doc = pdfCreatorDebit({ ...values, ...element });
     generateDocument(doc, `Autorização de Débito_${element.route}`);
+    }
   });
 });
 

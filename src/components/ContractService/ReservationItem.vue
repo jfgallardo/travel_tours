@@ -26,6 +26,15 @@
           "
         />
 
+        <DateInput
+          label="DATA DA TRANSAÇÃO"
+          @selectDate="
+            (e) => {
+              dateTransaction = e;
+            }
+          "
+        />
+
         <TextInput
           name="numberCard"
           label="NÚMERO DO CARTÃO"
@@ -47,14 +56,14 @@
           v-if="paymentSelect.value === 'C'"
         />
 
-        <DateInput
-          label="DATA DA TRANSAÇÃO"
-          @selectDate="
-            (e) => {
-              dateTransaction = e;
-            }
-          "
+        <TextInput
+          name="securityCode"
+          label="CÓDIGO DE SEGURANÇA"
+          maska="####"
+          v-if="paymentSelect.value === 'C'"
         />
+
+       
         <TextInput
           name="route"
           label="ITINERARIO"
@@ -62,6 +71,7 @@
           placeholder="Adicionar separado por bar. Exemplo: BSB/PTY/HAV"
         />
 
+       
         <TextInput
           name="transaction_value"
           label="VALOR DA TRANSAÇÃO"
@@ -108,6 +118,14 @@
           v-model="numberParcels"
         />
 
+        <button
+          type="submit"
+          @click="onSubmit"
+          class="col-start-3 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+        >
+          Criar reserva
+        </button>
+
         <h6
           v-if="paymentSelect.value === 'C'"
           class="text-sm font-medium leading-tight text-gray-800"
@@ -128,13 +146,7 @@
             >{{ restosParcelas }}</span
           >
         </h6>
-        <button
-          type="submit"
-          @click="onSubmit"
-          class="col-start-3 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-        >
-          Criar reserva
-        </button>
+       
       </form>
     </div>
     <Modal :modal="modal" @closeModal="modal = false">
