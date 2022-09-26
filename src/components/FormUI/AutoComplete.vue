@@ -210,30 +210,30 @@ const search = (query) => {
         console.log(error);
       });
   } else { */
-    endpoint(query)
-      .then(({ data }) => {
-        if (data.error) {
-          return;
-        } else {
-          options.value = [];
-          let airportsByCities = data.airportsByCities;
-          let cities = data.cities;
+  endpoint(query)
+    .then(({ data }) => {
+      if (data.error) {
+        return;
+      } else {
+        options.value = [];
+        let airportsByCities = data.airportsByCities;
+        let cities = data.cities;
 
-          cities.filter((city) => {
-            let airportsByCity = airportsByCities.filter((airport) => {
-              return isMyAirport(airport, city);
-            });
-            if (airportsByCity.length > 1) {
-              options.value.push(city);
-              options.value.push(...airportsByCity);
-            } else {
-              options.value.push(...airportsByCity);
-            }
+        cities.filter((city) => {
+          let airportsByCity = airportsByCities.filter((airport) => {
+            return isMyAirport(airport, city);
           });
-          highlightOptions();
-        }
-      })
-      .catch();
+          if (airportsByCity.length > 1) {
+            options.value.push(city);
+            options.value.push(...airportsByCity);
+          } else {
+            options.value.push(...airportsByCity);
+          }
+        });
+        highlightOptions();
+      }
+    })
+    .catch();
   /* } */
 };
 

@@ -1,51 +1,21 @@
 <template>
   <div>
     <div>
-      <div class="container" ref="dropdownP">
+      <div class="container" ref="fullContainer">
         <div class="relative mt-5">
           <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
-            label
+          label
           }}</span>
-          <button
-            @click="show()"
-            class="flex pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
-          >
+          <button ref="button" @click="toggle === false ? handleClick($event) : handleHide($event)" aria-expanded="false"
+            class="flex justify-center pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm">
             <span class="flex items-center space-x-3">
-              {{ numberAdults }} Adultos - {{ numberChilds }} Criancas -
-              {{ numberBebes }} Bebes
+             
             </span>
-            <ChevronDown
-              class="ml-3 absolute right-0 pr-2 pointer-events-none"
-            />
           </button>
           <Transition name="fade">
-            <div
-              class="bg-white absolute mt-4 z-30"
-              v-if="hiddenDropdown"
-              v-click-outside
-            >
-              <PassengersInput
-                age="+16 anos"
-                @takeOff="takeOffAdults()"
-                @addUp="addUpfAdults()"
-                label="Adultos"
-                v-model="numberAdults"
-              />
-              <PassengersInput
-                age="4-15 anos"
-                @takeOff="takeOffChilds()"
-                @addUp="addUpfChilds()"
-                label="Adolescentes"
-                v-model="numberChilds"
-              />
-              <PassengersInput
-                age="1-3 anos"
-                @takeOff="takeOffBebes()"
-                @addUp="addUpfBebes()"
-                label="Ninos"
-                v-model="numberBebes"
-              />
-              <div class="divide-x"></div>
+            <div class="dropdownMenu" ref="dropdown" v-click-outside>
+             
+              <div id="arrow" data-popper-arrow></div>
             </div>
           </Transition>
         </div>
@@ -55,33 +25,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-/** COMPONENTS */
+import { ref, computed } from "vue";
+import { createPopper } from "@popperjs/core";
 import ChevronDown from "@/components/Icons/ChevronDown.vue";
 import PassengersInput from "@/components/FormUI/PassengersInput.vue";
 
-/** EMITS */
-const emit = defineEmits(["passengers"]);
-
-/** VARIABLES */
-const hiddenDropdown = ref(false);
-
-const numberAdults = ref(1);
-const numberChilds = ref(0);
-const numberBebes = ref(0);
-
-const dropdownP = ref(null);
-
-/** PROPS */
-const props = defineProps({
-  label: {
-    type: String,
-    default: "",
-  },
-});
-
-/** DIRECTIVES */
 const vClickOutside = {
   mounted: () => {
     document.addEventListener("click", clickOutListener);
@@ -91,27 +39,69 @@ const vClickOutside = {
   },
 };
 
-/** METHODS */
+const props = defineProps({
+  label: {
+    type: String,
+    default: "",
+  },
+});
+const emit = defineEmits(["passengers"]);
 
-const clickOutListener = (evt) => {
-  if (!dropdownP.value.contains(evt.target)) {
-    hide();
-  }
+const button = ref(null);
+const dropdown = ref(null);
+const toggle = ref(false);
+const fullContainer = ref(null)
+
+const numberAdults = ref(1);
+const numberChilds = ref(0);
+const numberBebes = ref(0);
+
+const popperInstance = computed(() => {
+  return createPopper(button.value, dropdown.value, {
+    modifiers: [
+      {
+        name: 'preventOverflow',
+        options: {
+          padding: 4,
+        },
+      },
+      {
+        name: "flip",
+        options: {
+          padding: 4,
+        },
+      },
+      {
+        name: "offset",
+        options: {
+          offset: [0, 4],
+        },
+      },
+    ],
+  });
+});
+
+const handleClick = (e) => {
+  dropdown.value.setAttribute("data-show", "");
+  popperInstance.value.update();
+  toggle.value = true;
 };
 
-const show = () => {
-  hiddenDropdown.value = true;
-};
-
-const hide = () => {
+const handleHide = (e) => {
   let passengers = {
     numberAdults: numberAdults.value,
     numberChilds: numberChilds.value,
     numberBebes: numberBebes.value,
   };
-
   emit("passengers", passengers);
-  hiddenDropdown.value = false;
+  dropdown.value.removeAttribute("data-show");
+  toggle.value = false;
+};
+
+const clickOutListener = (evt) => {
+  if (!fullContainer.value.contains(evt.target)) {
+    handleHide(evt);
+  }
 };
 
 const takeOffAdults = () => {
@@ -149,13 +139,23 @@ const addUpfBebes = () => {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.dropdownMenu {
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: .25rem;
+  z-index: 1000;
+  min-width: 10rem;
+  padding: .5rem 0;
+  display: none;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.dropdownMenu[data-show] {
+  display: block;
 }
+
 </style>

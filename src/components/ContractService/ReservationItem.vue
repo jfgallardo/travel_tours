@@ -63,7 +63,6 @@
           v-if="paymentSelect.value === 'C'"
         />
 
-       
         <TextInput
           name="route"
           label="ITINERARIO"
@@ -71,7 +70,6 @@
           placeholder="Adicionar separado por bar. Exemplo: BSB/PTY/HAV"
         />
 
-       
         <TextInput
           name="transaction_value"
           label="VALOR DA TRANSAÇÃO"
@@ -146,7 +144,6 @@
             >{{ restosParcelas }}</span
           >
         </h6>
-       
       </form>
     </div>
     <Modal :modal="modal" @closeModal="modal = false">

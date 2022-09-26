@@ -19,7 +19,10 @@ export const usePdfStore = defineStore({
     fullTransactionValue(state) {
       return state.reservations
         .map((item) => parseFloat(item.transaction_value))
-        .reduce((prev, curr) => (parseFloat(prev) + parseFloat(curr)).toFixed(2), 0);
+        .reduce(
+          (prev, curr) => (parseFloat(prev) + parseFloat(curr)).toFixed(2),
+          0
+        );
     },
   },
   actions: {

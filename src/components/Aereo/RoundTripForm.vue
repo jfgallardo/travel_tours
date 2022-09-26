@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-5 flex flex-col space-y-2">
+    <div class="mt-5 flex flex-col space-y-1">
       <div class="px-4">
         <AutoComplete
           label="De"
@@ -79,7 +79,7 @@
         />
       </div>
 
-      <div class="px-4">
+      <div class="px-4 pb-4">
         <Select
           class="pt-4"
           label="Clases de cabina"
@@ -94,7 +94,27 @@
       </div>
 
       <div class="px-4">
-        <Passengers @passengers="setPassengers($event)" label="Pasajeros" />
+       <Dropddown label="Pasajeros">
+          <template v-slot:selected>
+            {{ numberAdults }} Adultos - {{ numberChilds }} Criancas -
+              {{ numberBebes }} Bebes
+          </template>
+          <template v-slot:dropdown>
+                <div class="flex items-center space-x-10 px-4">
+                  <ManageItems subtitle="+16 anos" v-model="numberAdults" @takeOff="takeOffAdults()" @addUp="addUpfAdults()"
+                label="Adultos" />
+
+              <ManageItems subtitle="4-15 anos" v-model="numberChilds" @takeOff="takeOffChilds()" @addUp="addUpfChilds()"
+                label="Adolescentes" />
+
+              <ManageItems subtitle="1-3 anos" v-model="numberBebes" @takeOff="takeOffBebes()" @addUp="addUpfBebes()"
+                label="Ninos" />
+                </div>
+               
+
+              <div class="divide-x"></div>
+          </template>
+        </Dropddown>
       </div>
 
       <div class="px-4">
@@ -127,8 +147,10 @@ import TextInput from "@/components/FormUI/TextInput.vue";
 import DateInput from "@/components/FormUI/DateInput.vue";
 import Select from "@/components/FormUI/TheSelect.vue";
 import Check from "@/components/FormUI/CheckInput.vue";
-import Passengers from "@/components/FormUI/ThePassengers.vue";
+import ManageItems from "@/components/FormUI/ManageItems.vue";
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
+import Dropddown from "@/components/FormUI/TheDropddown.vue";
+
 import { useRouter, useRoute } from "vue-router";
 
 import { useMoblixStore } from "@/stores/moblix";
@@ -158,10 +180,37 @@ const numberAdults = ref(1);
 const numberChilds = ref(0);
 const numberBebes = ref(0);
 
-const setPassengers = (val) => {
-  numberAdults.value = val.numberAdults;
-  numberChilds.value = val.numberChilds;
-  numberBebes.value = val.numberBebes;
+const takeOffAdults = () => {
+  if (numberAdults.value > 1) {
+    numberAdults.value--;
+  }
+};
+const addUpfAdults = () => {
+  if (numberAdults.value < 8) {
+    numberAdults.value++;
+  }
+};
+
+const takeOffChilds = () => {
+  if (numberChilds.value > 0) {
+    numberChilds.value--;
+  }
+};
+const addUpfChilds = () => {
+  if (numberChilds.value < 8) {
+    numberChilds.value++;
+  }
+};
+
+const takeOffBebes = () => {
+  if (numberBebes.value > 0) {
+    numberBebes.value--;
+  }
+};
+const addUpfBebes = () => {
+  if (numberBebes.value < 8) {
+    numberBebes.value++;
+  }
 };
 
 const changeDestinations = () => {

@@ -6,7 +6,7 @@
       <div class="flex items-center justify-around border-b border-gray-300">
         <div class="flex items-center h-full">
           <div class="border-r border-gray-300 h-full py-2">
-            <RouterLink :to="{ name: 'Landing' }">
+            <RouterLink :to="{ name: 'LandingPage' }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 106.76 60.04"
@@ -56,7 +56,7 @@
             </a>
           </div>
           <div>
-            <RouterLink :to="{ name: 'Landing' }">
+            <RouterLink :to="{ name: 'LandingPage' }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 177.48 94.68"
@@ -79,7 +79,7 @@
         <div
           class="items-center justify-around w-full h-full hidden md:flex border-r border-gray-300"
         >
-          <RouterLink :to="{ name: 'Landing' }"> Home </RouterLink>
+          <RouterLink :to="{ name: 'LandingPage' }"> Home </RouterLink>
           <RouterLink to="/">{{ t("header.ofertas") }}</RouterLink>
           <RouterLink to="/">{{ t("header.duvidas") }}</RouterLink>
           <RouterLink to="/">{{ t("header.contato") }}</RouterLink>
@@ -154,7 +154,7 @@
         <div class="space-y-1 pt-2 pb-3 text-right px-5">
           <RouterLink
             class="text-gray-900 hover:bg-gray-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            :to="{ name: 'Landing' }"
+            :to="{ name: 'LandingPage' }"
           >
             Home
           </RouterLink>
@@ -175,8 +175,8 @@
           >
         </div>
       </div>
-      <MainSubheading v-if="!($route.name === 'FlightQuery')" />
-      <QuerySubHeader v-if="$route.name === 'FlightQuery'" />
+      <MainSubheading v-if="!($route.name === 'AereoFlightQuery')" />
+      <QuerySubHeader v-if="$route.name === 'AereoFlightQuery'" />
     </nav>
   </div>
 </template>
