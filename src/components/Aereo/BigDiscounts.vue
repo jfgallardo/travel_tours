@@ -1,8 +1,8 @@
 <template>
-  <div class="py-5 relative">
-    <div class="container mx-auto px-4 absolute bg-gray-100 p-5 -z-10">
+  <div class="py-5">
+    <div class="container mx-auto px-4 bg-gray-100 p-5 -z-10">
       <p class="font-medium pb-10">Grandes descontos</p>
-      <div class="flex items-center justify-around">
+      <div class="flex flex-col md:flex-row items-center justify-around">
         <div class="bg-white p-5">
           <div class="flex flex-col items-center">
             <img src="" alt="interjet" />

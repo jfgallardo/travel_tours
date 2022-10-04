@@ -10,15 +10,8 @@
             @click="hiddenDropdown = !hiddenDropdown"
             class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
           >
-            <span class="flex items-center space-x-3">
-              <img
-                v-if="selected.src"
-                :src="selected.src"
-                class="flex-shrink-0 h-6 w-6 rounded-full"
-              />
-              <span> {{ selected.name }} </span>
-            </span>
-            <ChevronDown class="ml-3 absolute right-0 pr-2 cursor-pointer" />
+            <span class="mr-5"> {{ selected.name }} </span>
+            <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
           </div>
           <Transition>
             <div

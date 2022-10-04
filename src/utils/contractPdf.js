@@ -2,7 +2,7 @@ import { usePdfStore } from "@/stores/pdf";
 
 const pdfCreatorContract = (data) => {
   const pdfStore = usePdfStore();
-  const date = new Date()
+  const date = new Date();
 
   const document = {
     content: [
@@ -116,7 +116,15 @@ const pdfCreatorContract = (data) => {
           },
           ", paga em ",
           {
-            text: `${ ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()}`,
+            text: `${
+              (date.getMonth() > 8
+                ? date.getMonth() + 1
+                : "0" + (date.getMonth() + 1)) +
+              "/" +
+              (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+              "/" +
+              date.getFullYear()
+            }`,
             style: ["bold", "text"],
           },
         ],
@@ -701,7 +709,15 @@ const pdfCreatorContract = (data) => {
       " ",
       " ",
       {
-        text: `Fortaleza/CE, ${ ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()}`,
+        text: `Fortaleza/CE, ${
+          (date.getMonth() > 8
+            ? date.getMonth() + 1
+            : "0" + (date.getMonth() + 1)) +
+          "/" +
+          (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+          "/" +
+          date.getFullYear()
+        }`,
         style: ["text", "left"],
       },
       " ",

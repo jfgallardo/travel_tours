@@ -12,9 +12,17 @@
         {{ t("header.aereo") }}
       </span>
     </RouterLink>
-    <RouterLink to="/" class="flex items-center">
-      <Hotel class="mr-1 h-5 w-5" />
-      <span class="hidden md:block"> Hotel </span>
+    <RouterLink :to="{ path: '/hotel' }" class="flex items-center">
+      <Hotel
+        class="mr-1 h-5 w-5"
+        :color="$route.path === '/hotel' ? 'blue' : '#292D32'"
+      />
+      <span
+        class="hidden md:block"
+        :class="{ 'text-blue-700': $route.path === '/hotel' }"
+      >
+        Hotel
+      </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Driving class="mr-1 h-5 w-5" />
@@ -28,9 +36,15 @@
         {{ t("header.onibus") }}
       </span>
     </RouterLink>
-    <RouterLink to="/" class="flex items-center">
-      <Ship class="mr-1 h-5 w-5" />
-      <span class="hidden md:block">
+    <RouterLink :to="{ path: '/cruise' }" class="flex items-center">
+      <Ship
+        class="mr-1 h-5 w-5"
+        :color="$route.path === '/cruise' ? 'blue' : '#292D32'"
+      />
+      <span
+        class="hidden md:block"
+        :class="{ 'text-blue-700': $route.path === '/cruise' }"
+      >
         {{ t("header.cruseiros") }}
       </span>
     </RouterLink>
@@ -40,7 +54,7 @@
         {{ t("header.seguro") }}
       </span>
     </RouterLink>
-    <RouterLink to="/contract/service" class="flex items-center">
+    <RouterLink :to="{ name: 'ContractService' }" class="flex items-center">
       <WalletOpenTick
         class="mr-1 h-5 w-5"
         :color="$route.path === '/contract/service' ? 'blue' : '#292D32'"

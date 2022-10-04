@@ -1,9 +1,10 @@
 <template>
   <div>
     <div>
-      <div class="flex flex-col space-y-2 p-4 bg-white">
-        <label class="font-semibold text-black w-36">{{ label }}</label>
-        <div class="flex items-center justify-start">
+      <div class="flex flex-col items-center bg-white">
+        <label class="font-semibold text-black text-center">{{ label }}</label>
+        <p v-if="subtitle" class="text-sm font-extralight">{{ subtitle }}</p>
+        <div class="flex items-center justify-start mt-2">
           <div>
             <span @click="$emit('takeOff')" class="cursor-pointer">
               <svg
@@ -45,9 +46,6 @@
               </svg>
             </span>
           </div>
-          <div>
-            <p class="font-light text-sm ml-3">{{ age }}</p>
-          </div>
         </div>
       </div>
     </div>
@@ -64,8 +62,9 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  age: {
+  subtitle: {
     type: String,
+    default: "",
   },
 });
 </script>

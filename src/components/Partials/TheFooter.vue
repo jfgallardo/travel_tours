@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <div class="bg-white py-3 invisible md:visible">
+  <div class="relative">
+    <div
+      class="bg-white py-3 invisible md:visible fixed bottom-0 right-0 left-0 z-30"
+    >
       <ul class="grid grid-cols-6 grid-rows-1 justify-items-center text-sm">
         <li>© 2022 Mr Travel & Tours, Inc.</li>
         <li>{{ t("banner.quem-somos") }}</li>

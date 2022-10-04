@@ -41,9 +41,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
+import { ref, onMounted } from "vue";
 import ChevronDown from "@/components/Icons/ChevronDown.vue";
+
+onMounted(() => {
+  selected.value = props.initOption;
+});
 
 const hiddenDropdown = ref(false);
 const selected = ref(null);
@@ -58,6 +61,10 @@ const props = defineProps({
   label: {
     type: String,
     default: "",
+  },
+  initOption: {
+    type: Object,
+    default: null,
   },
 });
 
