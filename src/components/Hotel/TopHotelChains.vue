@@ -8,9 +8,7 @@
             <p class="text-center font-medium text-red-600 text-lg">Hilton</p>
           </div>
           <div class="border p-2 border-gray-800">
-            <p class="text-center font-medium text-red-600 text-lg">
-              Milenium
-            </p>
+            <p class="text-center font-medium text-red-600 text-lg">Milenium</p>
           </div>
           <div class="border p-2 border-gray-800">
             <p class="text-center font-medium text-red-600 text-lg">IHG</p>

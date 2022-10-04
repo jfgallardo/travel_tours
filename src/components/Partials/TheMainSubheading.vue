@@ -37,8 +37,14 @@
       </span>
     </RouterLink>
     <RouterLink :to="{ path: '/cruise' }" class="flex items-center">
-      <Ship class="mr-1 h-5 w-5" :color="$route.path === '/cruise' ? 'blue' : '#292D32'" />
-      <span class="hidden md:block"  :class="{ 'text-blue-700': $route.path === '/cruise' }">
+      <Ship
+        class="mr-1 h-5 w-5"
+        :color="$route.path === '/cruise' ? 'blue' : '#292D32'"
+      />
+      <span
+        class="hidden md:block"
+        :class="{ 'text-blue-700': $route.path === '/cruise' }"
+      >
         {{ t("header.cruseiros") }}
       </span>
     </RouterLink>

@@ -36,6 +36,16 @@ export const usePdfStore = defineStore({
       this.reservations.push(payload);
     },
 
+    async editPassenger(index, payload) {
+      this.passengers[index] = payload;
+    },
+    async editService(index, payload) {
+      this.services[index] = payload;
+    },
+    async editReservation(index, payload) {
+      this.reservations[index] = payload;
+    },
+
     async deletePassenger(payload) {
       this.passengers.splice(payload, 1);
     },

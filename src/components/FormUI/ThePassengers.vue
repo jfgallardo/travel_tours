@@ -4,17 +4,18 @@
       <div class="container" ref="fullContainer">
         <div class="relative mt-5">
           <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
-          label
+            label
           }}</span>
-          <button ref="button" @click="toggle === false ? handleClick($event) : handleHide($event)" aria-expanded="false"
-            class="flex justify-center pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm">
-            <span class="flex items-center space-x-3">
-             
-            </span>
+          <button
+            ref="button"
+            @click="toggle === false ? handleClick($event) : handleHide($event)"
+            aria-expanded="false"
+            class="flex justify-center pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
+          >
+            <span class="flex items-center space-x-3"> </span>
           </button>
           <Transition name="fade">
             <div class="dropdownMenu" ref="dropdown" v-click-outside>
-             
               <div id="arrow" data-popper-arrow></div>
             </div>
           </Transition>
@@ -50,7 +51,7 @@ const emit = defineEmits(["passengers"]);
 const button = ref(null);
 const dropdown = ref(null);
 const toggle = ref(false);
-const fullContainer = ref(null)
+const fullContainer = ref(null);
 
 const numberAdults = ref(1);
 const numberChilds = ref(0);
@@ -60,7 +61,7 @@ const popperInstance = computed(() => {
   return createPopper(button.value, dropdown.value, {
     modifiers: [
       {
-        name: 'preventOverflow',
+        name: "preventOverflow",
         options: {
           padding: 4,
         },
@@ -146,16 +147,15 @@ const addUpfBebes = () => {
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: .25rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
   z-index: 1000;
   min-width: 10rem;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   display: none;
 }
 
 .dropdownMenu[data-show] {
   display: block;
 }
-
 </style>

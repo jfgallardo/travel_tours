@@ -20,20 +20,63 @@
       <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
         label
       }}</span>
-      <input ref="input" type="text" :class="inputClassList" readonly />
+      <input
+        v-model="value"
+        ref="input"
+        type="text"
+        :class="inputClassList"
+        readonly
+      />
+      <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
+        errorMessage
+      }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, toRef } from "vue";
 import AirDatepicker from "air-datepicker";
 import localeEn from "air-datepicker/locale/en";
+import { useField } from "vee-validate";
+import { createPopper } from "@popperjs/core";
 
-const emit = defineEmits(["selectDate"]);
+const emit = defineEmits(["update:modelValue"]);
 
 onMounted(() => {
   new AirDatepicker(input.value, {
+    container: "#scroll-container",
+    position({ $datepicker, $target, $pointer, done }) {
+      let popper = createPopper($target, $datepicker, {
+        placement: "top",
+        modifiers: [
+          {
+            name: "flip",
+            options: {
+              padding: {
+                top: 64,
+              },
+            },
+          },
+          {
+            name: "offset",
+            options: {
+              offset: [0, 20],
+            },
+          },
+          {
+            name: "arrow",
+            options: {
+              element: $pointer,
+            },
+          },
+        ],
+      });
+      return function completeHide() {
+        popper.destroy();
+        done();
+      };
+    },
     locale: localeEn,
     autoClose: true,
     navTitles: {
@@ -41,12 +84,16 @@ onMounted(() => {
     },
     minDate: new Date(),
     onSelect({ date, formattedDate, datepicker }) {
-      emit("selectDate", formattedDate);
+      emit("update:modelValue", formattedDate);
     },
   });
 });
 
 const props = defineProps({
+  modelValue: {
+    type: String,
+    default: "",
+  },
   label: {
     type: String,
     default: "",
@@ -57,6 +104,8 @@ const props = defineProps({
 });
 
 const input = ref(null);
+const nameRef = toRef(props, "name");
+const { errorMessage, value } = useField(nameRef, undefined);
 
 const inputClassList = computed(() => {
   return [

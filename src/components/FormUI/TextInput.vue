@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- 
-    -->
     <div class="relative">
       <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
         label
@@ -28,7 +26,7 @@ import { toRef, computed } from "vue";
 
 const props = defineProps({
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: "",
   },
   name: {

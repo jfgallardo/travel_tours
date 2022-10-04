@@ -1,12 +1,12 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
 import App from "@/App.vue";
-import router from "@/router";
-import i18n from "@/plugins/i18n";
 import "@/assets/main.css";
+import i18n from "@/plugins/i18n";
 import "@/plugins/vee-validate";
-import Maska from "maska";
+import router from "@/router";
 import "air-datepicker/air-datepicker.css";
+import Maska from "maska";
+import { createPinia } from "pinia";
+import { createApp } from "vue";
 
 const app = createApp(App);
 
