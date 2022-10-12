@@ -35,23 +35,23 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, toRef } from "vue";
-import AirDatepicker from "air-datepicker";
-import localeEn from "air-datepicker/locale/en";
-import { useField } from "vee-validate";
-import { createPopper } from "@popperjs/core";
+import { computed, ref, onMounted, toRef, watch } from 'vue';
+import AirDatepicker from 'air-datepicker';
+import localeEn from 'air-datepicker/locale/en';
+import { useField } from 'vee-validate';
+import { createPopper } from '@popperjs/core';
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 onMounted(() => {
-  new AirDatepicker(input.value, {
-    container: "#scroll-container",
+  minDate.value = new AirDatepicker(input.value, {
+    container: '#scroll-container',
     position({ $datepicker, $target, $pointer, done }) {
       let popper = createPopper($target, $datepicker, {
-        placement: "top",
+        placement: 'top',
         modifiers: [
           {
-            name: "flip",
+            name: 'flip',
             options: {
               padding: {
                 top: 64,
@@ -59,13 +59,13 @@ onMounted(() => {
             },
           },
           {
-            name: "offset",
+            name: 'offset',
             options: {
               offset: [0, 20],
             },
           },
           {
-            name: "arrow",
+            name: 'arrow',
             options: {
               element: $pointer,
             },
@@ -80,36 +80,49 @@ onMounted(() => {
     locale: localeEn,
     autoClose: true,
     navTitles: {
-      days: "<strong>yyyy</strong> <i>MMMM</i>",
+      days: '<strong>yyyy</strong><i>MMMM</i>',
     },
-    minDate: new Date(),
+    minDate: props.minDateShow || '',
     onSelect({ date, formattedDate, datepicker }) {
-      emit("update:modelValue", formattedDate);
+      emit('update:modelValue', formattedDate);
     },
   });
 });
 
+watch(
+  () => props.minDateShow,
+  (newV, oldV) => {
+    minDate.value.update({
+      minDate: newV,
+    });
+  }
+);
+
 const props = defineProps({
   modelValue: {
     type: String,
-    default: "",
+    default: '',
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   name: {
     type: String,
   },
+  minDateShow: {
+    type: [Date, String, Number],
+  },
 });
 
 const input = ref(null);
-const nameRef = toRef(props, "name");
+const nameRef = toRef(props, 'name');
+let minDate = ref(null);
 const { errorMessage, value } = useField(nameRef, undefined);
 
 const inputClassList = computed(() => {
   return [
-    "appearance-none w-full block transition duration-150 ease-in-out",
+    'appearance-none w-full block transition duration-150 ease-in-out',
     getTextSizeClass.value,
     getTextColorClass.value,
     getBorderColorClass.value,
@@ -118,15 +131,15 @@ const inputClassList = computed(() => {
 });
 
 const getTextSizeClass = computed(() => {
-  return "text-sm leading-5";
+  return 'text-sm leading-5';
 });
 const getTextColorClass = computed(() => {
-  return "text-gray-800 placeholder-gray-400";
+  return 'text-gray-800 placeholder-gray-400';
 });
 const getBorderColorClass = computed(() => {
-  return "focus:outline-none border border-gray-400 focus:border-blue-400";
+  return 'focus:outline-none border border-gray-400 focus:border-blue-400';
 });
 const getPaddingClass = computed(() => {
-  return "h-10 pr-6 pl-4 pt-9 pb-4";
+  return 'h-10 pr-6 pl-4 pt-9 pb-4';
 });
 </script>

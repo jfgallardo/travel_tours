@@ -43,22 +43,22 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref, markRaw, onMounted } from "vue";
-import { RouterView } from "vue-router";
+import { defineAsyncComponent, ref, markRaw, onMounted } from 'vue';
+import { RouterView } from 'vue-router';
 
 const RoundTrip = defineAsyncComponent(() =>
-  import("@/components/Aereo/RoundTripForm.vue")
+  import('@/components/Aereo/RoundTripForm.vue')
 );
 const ManyCities = defineAsyncComponent(() =>
-  import("@/components/Aereo/ManyCitiesForm.vue")
+  import('@/components/Aereo/ManyCitiesForm.vue')
 );
 const OneWay = defineAsyncComponent(() =>
-  import("@/components/Aereo/OneWayForm.vue")
+  import('@/components/Aereo/OneWayForm.vue')
 );
 
 onMounted(() => {
   selectedComponent.value = markRaw(RoundTrip);
-  roundtrip.value.classList.add("active");
+  roundtrip.value.classList.add('active');
 });
 
 let selectedComponent = ref(null);
@@ -68,14 +68,14 @@ const go = ref(null);
 const manycities = ref(null);
 
 const cleanRefs = () => {
-  roundtrip.value.classList.remove("active");
-  go.value.classList.remove("active");
-  manycities.value.classList.remove("active");
+  roundtrip.value.classList.remove('active');
+  go.value.classList.remove('active');
+  manycities.value.classList.remove('active');
 };
 
 const changeTab = (newTab, ref) => {
   cleanRefs();
-  ref.classList.add("active");
+  ref.classList.add('active');
   selectedComponent.value = markRaw(newTab);
 };
 </script>

@@ -71,11 +71,15 @@
       </div>
 
       <div class="grid grid-cols-2 grid-rows-1 pt-4 px-4">
-        <DateInput v-model="flightDates.departureDate" label="Ida" />
         <DateInput
-          v-model="flightDates.returnDate"
+          v-model="departureDate"
+          label="Ida"
+          :minDateShow="new Date()"
+        />
+        <DateInput
+          v-model="returnDate"
           label="Vuelta"
-          :dateMin="notBeforeDate()"
+          :minDateShow="notBeforeDate"
         />
       </div>
 
@@ -160,38 +164,35 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useMoblixStore } from "@/stores/moblix";
-import AutoComplete from "@/components/FormUI/AutoComplete.vue";
-import TextInput from "@/components/FormUI/TextInput.vue";
-import DateInput from "@/components/FormUI/DateInput.vue";
-import Select from "@/components/FormUI/TheSelect.vue";
-import Check from "@/components/FormUI/CheckInput.vue";
-import ManageItems from "@/components/FormUI/ManageItems.vue";
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
-import Dropddown from "@/components/FormUI/TheDropddown.vue";
+import { reactive, ref, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
+import { useMoblixStore } from '@/stores/moblix';
+import AutoComplete from '@/components/FormUI/AutoComplete.vue';
+import DateInput from '@/components/FormUI/DateInput.vue';
+import Select from '@/components/FormUI/TheSelect.vue';
+import Check from '@/components/FormUI/CheckInput.vue';
+import ManageItems from '@/components/FormUI/ManageItems.vue';
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
+import Dropddown from '@/components/FormUI/TheDropddown.vue';
 
 const moblixStore = useMoblixStore();
 const router = useRouter();
 const route = useRoute();
 
 const origem = reactive({
-  string: "",
-  iata: "",
+  string: '',
+  iata: '',
 });
 
 const destino = reactive({
-  string: "",
-  iata: "",
+  string: '',
+  iata: '',
 });
 
-const flightDates = reactive({
-  departureDate: "",
-  returnDate: "",
-});
+const departureDate = ref('');
+const returnDate = ref('');
 
-const cabine = ref({ name: "Econômica", value: "Y" });
+const cabine = ref({ name: 'Econômica', value: 'Y' });
 
 const numberAdults = ref(1);
 const numberChilds = ref(0);
@@ -241,16 +242,20 @@ const changeDestinations = () => {
   destino.iata = temporaryIata;
 };
 
-const notBeforeDate = () => {
-  return flightDates.departureDate;
-};
+const notBeforeDate = computed(() => {
+  if (departureDate.value) {
+    return new Date(departureDate.value);
+  } else {
+    return new Date();
+  }
+});
 
 const options = [
-  { name: "Econômica", value: "Y" },
-  { name: "Econômica Premium", value: "W" },
-  { name: "Executiva", value: "C" },
-  { name: "Primeira Classe", value: "F" },
-  { name: "Econômica + Premium", value: "P" },
+  { name: 'Econômica', value: 'Y' },
+  { name: 'Econômica Premium', value: 'W' },
+  { name: 'Executiva', value: 'C' },
+  { name: 'Primeira Classe', value: 'F' },
+  { name: 'Econômica + Premium', value: 'P' },
 ];
 
 const search = (query) => {};
@@ -261,23 +266,23 @@ const consultar = () => {
   let payload = {
     Origem: origem.iata,
     Destino: destino.iata,
-    Ida: flightDates.departureDate,
-    Volta: flightDates.returnDate,
+    Ida: departureDate.value,
+    Volta: returnDate.value,
     Adultos: numberAdults.value,
     Criancas: numberChilds.value,
     Bebes: numberBebes.value,
     Companhia: 1,
   };
 
-  if (route.name === "FlightQuery") {
+  if (route.name === 'AereoFlightQuery') {
     router
       .push({
-        name: "FlightQuery",
+        name: 'AereoFlightQuery',
         params: {
           source: origem.iata,
           destiny: destino.iata,
-          departure_date: flightDates.departureDate,
-          return_date: flightDates.returnDate,
+          departure_date: departureDate.value,
+          return_date: returnDate.value,
         },
         query: {
           adults: numberAdults.value,
@@ -291,12 +296,12 @@ const consultar = () => {
       });
   } else {
     router.push({
-      name: "FlightQuery",
+      name: 'AereoFlightQuery',
       params: {
         source: origem.iata,
         destiny: destino.iata,
-        departure_date: flightDates.departureDate,
-        return_date: flightDates.returnDate,
+        departure_date: departureDate.value,
+        return_date: returnDate.value,
       },
       query: {
         adults: numberAdults.value,

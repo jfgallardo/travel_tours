@@ -1,13 +1,13 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 export const usePdfStore = defineStore({
-  id: "pdf",
+  id: 'pdf',
   state: () => ({
     passengers: [],
     services: [],
     reservations: [],
     creditCard: {
-      cartao: { name: "VISA", value: "VISA" },
+      cartao: { name: 'VISA', value: 'VISA' },
       numberCard: null,
       nameCard: null,
       validCardDate: null,

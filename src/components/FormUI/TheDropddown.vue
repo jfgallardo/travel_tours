@@ -29,22 +29,22 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from "vue";
-import { createPopper } from "@popperjs/core";
+import { ref, computed, watch } from 'vue';
+import { createPopper } from '@popperjs/core';
 
 const vClickOutside = {
   mounted: () => {
-    document.addEventListener("click", clickOutListener);
+    document.addEventListener('click', clickOutListener);
   },
   unmounted: () => {
-    document.removeEventListener("click", clickOutListener);
+    document.removeEventListener('click', clickOutListener);
   },
 };
 
 const props = defineProps({
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   toggleOut: {
     type: Boolean,
@@ -68,19 +68,19 @@ const popperInstance = computed(() => {
   return createPopper(button.value, dropdown.value, {
     modifiers: [
       {
-        name: "preventOverflow",
+        name: 'preventOverflow',
         options: {
           padding: 4,
         },
       },
       {
-        name: "flip",
+        name: 'flip',
         options: {
           padding: 4,
         },
       },
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, 4],
         },
@@ -90,13 +90,13 @@ const popperInstance = computed(() => {
 });
 
 const handleClick = () => {
-  dropdown.value.setAttribute("data-show", "");
+  dropdown.value.setAttribute('data-show', '');
   popperInstance.value.update();
   toggle.value = true;
 };
 
 const handleHide = () => {
-  dropdown.value.removeAttribute("data-show");
+  dropdown.value.removeAttribute('data-show');
   toggle.value = false;
 };
 

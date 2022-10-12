@@ -54,50 +54,50 @@
 </template>
 
 <script setup>
-import Avatar1 from "@/assets/img/avatar1.jpg";
-import Avatar2 from "@/assets/img/avatar2.jpg";
-import Avatar3 from "@/assets/img/avatar3.jpg";
+import Avatar1 from '@/assets/img/avatar1.jpg';
+import Avatar2 from '@/assets/img/avatar2.jpg';
+import Avatar3 from '@/assets/img/avatar3.jpg';
 
 let feedbacks = [
   {
     avatar: Avatar1,
-    name: "Marcos Fong",
-    date: "Agost 23",
+    name: 'Marcos Fong',
+    date: 'Agost 23',
     feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
-    labels: ["Playas", "Caribe", "Airbnb", "Taxi"],
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
+    labels: ['Playas', 'Caribe', 'Airbnb', 'Taxi'],
   },
   {
     avatar: Avatar2,
-    name: "Ana Paula",
-    date: "Septiem 12",
+    name: 'Ana Paula',
+    date: 'Septiem 12',
     feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
-    labels: ["Playas", "Airbnb", "Taxi"],
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
+    labels: ['Playas', 'Airbnb', 'Taxi'],
   },
   {
     avatar: Avatar3,
-    name: "Alicia McLean",
-    date: "Agost 23",
+    name: 'Alicia McLean',
+    date: 'Agost 23',
     feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
-    labels: ["Playas", "Caribe", "Taxi"],
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
+    labels: ['Playas', 'Caribe', 'Taxi'],
   },
   {
     avatar: Avatar2,
-    name: "Peter Jeather",
-    date: "Agost 23",
+    name: 'Peter Jeather',
+    date: 'Agost 23',
     feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
-    labels: ["Playas", "Caribe", "Taxi"],
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
+    labels: ['Playas', 'Caribe', 'Taxi'],
   },
   {
     avatar: Avatar1,
-    name: "Thalia Cante",
-    date: "Agost 23",
+    name: 'Thalia Cante',
+    date: 'Agost 23',
     feedback:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.",
-    labels: ["Playas", "Caribe", "Taxi"],
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
+    labels: ['Playas', 'Caribe', 'Taxi'],
   },
 ];
 </script>

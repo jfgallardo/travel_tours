@@ -55,12 +55,12 @@
 </template>
 
 <script setup>
-import ButtonFilter from "@/components/FlightQuery/ButtonFilter.vue";
-import FlightDetalhes from "@/components/FlightQuery/FlightDetalhes.vue";
-import RenderFlights from "@/components/FlightQuery/RenderFlights.vue";
-import { useMoblixStore } from "@/stores/moblix";
-import { onUnmounted, onMounted, ref, computed } from "vue";
-import { useRoute } from "vue-router";
+import ButtonFilter from '@/components/FlightQuery/ButtonFilter.vue';
+import FlightDetalhes from '@/components/FlightQuery/FlightDetalhes.vue';
+import RenderFlights from '@/components/FlightQuery/RenderFlights.vue';
+import { useMoblixStore } from '@/stores/moblix';
+import { onUnmounted, onMounted, ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 const moblixStore = useMoblixStore();
 const route = useRoute();

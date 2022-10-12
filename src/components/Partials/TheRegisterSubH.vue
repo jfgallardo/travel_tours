@@ -62,20 +62,20 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useUserStore } from "@/stores/user";
+import { computed } from 'vue';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 
 const title = computed(() => {
   if (userStore.currentStep === 0) {
-    return "Dados cadastrais";
+    return 'Dados cadastrais';
   } else if (userStore.currentStep === 1) {
-    return "Endereço";
+    return 'Endereço';
   } else if (userStore.currentStep === 2) {
-    return "Contato";
+    return 'Contato';
   }
-  return "Informações de acesso";
+  return 'Informações de acesso';
 });
 
 const circumference = computed(() => {

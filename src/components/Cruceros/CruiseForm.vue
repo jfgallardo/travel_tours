@@ -88,30 +88,30 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from "vue";
-import AutoComplete from "@/components/FormUI/AutoComplete.vue";
-import DateInput from "@/components/FormUI/DateInput.vue";
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
-import Dropddown from "@/components/FormUI/TheDropddown.vue";
-import ManageItems from "@/components/FormUI/ManageItems.vue";
-import { useRouter, useRoute } from "vue-router";
+import { reactive, ref } from 'vue';
+import AutoComplete from '@/components/FormUI/AutoComplete.vue';
+import DateInput from '@/components/FormUI/DateInput.vue';
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
+import Dropddown from '@/components/FormUI/TheDropddown.vue';
+import ManageItems from '@/components/FormUI/ManageItems.vue';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter();
 const route = useRoute();
 
 const origem = reactive({
-  string: "",
-  iata: "",
+  string: '',
+  iata: '',
 });
 
 const destino = reactive({
-  string: "",
-  iata: "",
+  string: '',
+  iata: '',
 });
 
 const flightDates = reactive({
-  departureDate: "",
-  returnDate: "",
+  departureDate: '',
+  returnDate: '',
 });
 
 const adults = ref(1);

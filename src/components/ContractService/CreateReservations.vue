@@ -114,9 +114,9 @@
                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
                       >
                         {{
-                          item.paymentSelect === "T"
-                            ? "Transferência bancária / bilhete"
-                            : "Cartão de crédito"
+                          item.paymentSelect === 'T'
+                            ? 'Transferência bancária / bilhete'
+                            : 'Cartão de crédito'
                         }}
                       </td>
 
@@ -231,11 +231,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Modal from "@/components/Partials/TheModal.vue";
-import EditReservation from "@/components/ContractService/EditReservation.vue";
-import Reservation from "@/components/ContractService/ReservationItem.vue";
-import { usePdfStore } from "@/stores/pdf";
+import { ref } from 'vue';
+import Modal from '@/components/Partials/TheModal.vue';
+import EditReservation from '@/components/ContractService/EditReservation.vue';
+import Reservation from '@/components/ContractService/ReservationItem.vue';
+import { usePdfStore } from '@/stores/pdf';
 
 const modal = ref(false);
 const pdfStore = usePdfStore();

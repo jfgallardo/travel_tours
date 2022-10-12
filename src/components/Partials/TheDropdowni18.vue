@@ -38,15 +38,15 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { setLocale } from "@vee-validate/i18n";
+import { reactive, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { setLocale } from '@vee-validate/i18n';
 
-import Globe from "@/components/Icons/Globe.vue";
-import ChevronDown from "@/components/Icons/ChevronDown.vue";
-import Dropddown from "@/components/FormUI/TheDropddown.vue";
+import Globe from '@/components/Icons/Globe.vue';
+import ChevronDown from '@/components/Icons/ChevronDown.vue';
+import Dropddown from '@/components/FormUI/TheDropddown.vue';
 
-let state = reactive({ lang: "EN" });
+let state = reactive({ lang: 'EN' });
 let hiddenDropdown = ref(false);
 const { locale } = useI18n();
 

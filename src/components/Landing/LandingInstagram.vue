@@ -67,5 +67,5 @@
   </div>
 </template>
 <script setup>
-import Instagram from "@/components/Icons/Instagram.vue";
+import Instagram from '@/components/Icons/Instagram.vue';
 </script>

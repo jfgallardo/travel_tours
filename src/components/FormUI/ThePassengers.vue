@@ -26,27 +26,27 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { createPopper } from "@popperjs/core";
-import ChevronDown from "@/components/Icons/ChevronDown.vue";
-import PassengersInput from "@/components/FormUI/PassengersInput.vue";
+import { ref, computed } from 'vue';
+import { createPopper } from '@popperjs/core';
+import ChevronDown from '@/components/Icons/ChevronDown.vue';
+import PassengersInput from '@/components/FormUI/PassengersInput.vue';
 
 const vClickOutside = {
   mounted: () => {
-    document.addEventListener("click", clickOutListener);
+    document.addEventListener('click', clickOutListener);
   },
   unmounted: () => {
-    document.removeEventListener("click", clickOutListener);
+    document.removeEventListener('click', clickOutListener);
   },
 };
 
 const props = defineProps({
   label: {
     type: String,
-    default: "",
+    default: '',
   },
 });
-const emit = defineEmits(["passengers"]);
+const emit = defineEmits(['passengers']);
 
 const button = ref(null);
 const dropdown = ref(null);
@@ -61,19 +61,19 @@ const popperInstance = computed(() => {
   return createPopper(button.value, dropdown.value, {
     modifiers: [
       {
-        name: "preventOverflow",
+        name: 'preventOverflow',
         options: {
           padding: 4,
         },
       },
       {
-        name: "flip",
+        name: 'flip',
         options: {
           padding: 4,
         },
       },
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, 4],
         },
@@ -83,7 +83,7 @@ const popperInstance = computed(() => {
 });
 
 const handleClick = (e) => {
-  dropdown.value.setAttribute("data-show", "");
+  dropdown.value.setAttribute('data-show', '');
   popperInstance.value.update();
   toggle.value = true;
 };
@@ -94,8 +94,8 @@ const handleHide = (e) => {
     numberChilds: numberChilds.value,
     numberBebes: numberBebes.value,
   };
-  emit("passengers", passengers);
-  dropdown.value.removeAttribute("data-show");
+  emit('passengers', passengers);
+  dropdown.value.removeAttribute('data-show');
   toggle.value = false;
 };
 

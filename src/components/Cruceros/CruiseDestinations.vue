@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mx-auto container py-4">
+    <div class="mx-auto container pt-8">
       <p class="text-center font-bold text-7xl">
         Explore nossos ótimos destinos
       </p>
@@ -19,25 +19,25 @@
 </template>
 
 <script setup>
-import Londres from "@/assets/img/londres.jpg";
-import Madrid from "@/assets/img/madrid.jpg";
-import Miami from "@/assets/img/miami.jpg";
-import Puntacana from "@/assets/img/viaje1.jpg";
-import SanJuan from "@/assets/img/viaje2.jpg";
-import Uruguay from "@/assets/img/viaje3.jpg";
+import Londres from '@/assets/img/londres.jpg';
+import Madrid from '@/assets/img/madrid.jpg';
+import Miami from '@/assets/img/miami.jpg';
+import Puntacana from '@/assets/img/viaje1.jpg';
+import SanJuan from '@/assets/img/viaje2.jpg';
+import Uruguay from '@/assets/img/viaje3.jpg';
 
 const items = [
-  { img: Londres, name: "Caribe" },
-  { img: Madrid, name: "Bahamas" },
-  { img: Miami, name: "Mexico" },
-  { img: Madrid, name: "Europe" },
-  { img: Londres, name: "Bermuda" },
-  { img: Puntacana, name: "Alaska" },
-  { img: SanJuan, name: "New England" },
-  { img: Uruguay, name: "Hawaii" },
-  { img: Miami, name: "Panama Canal" },
-  { img: Londres, name: "Transatlantic" },
-  { img: Madrid, name: "Australia" },
+  { img: Londres, name: 'Caribe' },
+  { img: Madrid, name: 'Bahamas' },
+  { img: Miami, name: 'Mexico' },
+  { img: Madrid, name: 'Europe' },
+  { img: Londres, name: 'Bermuda' },
+  { img: Puntacana, name: 'Alaska' },
+  { img: SanJuan, name: 'New England' },
+  { img: Uruguay, name: 'Hawaii' },
+  { img: Miami, name: 'Panama Canal' },
+  { img: Londres, name: 'Transatlantic' },
+  { img: Madrid, name: 'Australia' },
 ];
 </script>
 

@@ -30,12 +30,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { useForm } from "vee-validate";
-import { usePdfStore } from "@/stores/pdf";
-import TextInput from "@/components/FormUI/TextInput.vue";
-import { simpleSchemaService } from "@/utils/validate";
-import SelectReservations from "@/components/ContractService/SelectReservations.vue";
+import { ref, computed } from 'vue';
+import { useForm } from 'vee-validate';
+import { usePdfStore } from '@/stores/pdf';
+import TextInput from '@/components/FormUI/TextInput.vue';
+import { simpleSchemaService } from '@/utils/validate';
+import SelectReservations from '@/components/ContractService/SelectReservations.vue';
 
 const props = defineProps({
   itemEdit: {
@@ -48,7 +48,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["editS"]);
+const emit = defineEmits(['editS']);
 
 const pdfStore = usePdfStore();
 const service = ref(null);
@@ -56,7 +56,7 @@ const formValues = {
   service: props.itemEdit.service,
 };
 
-const reservation = ref("");
+const reservation = ref('');
 
 const { handleSubmit } = useForm({
   validationSchema: simpleSchemaService,
@@ -70,7 +70,7 @@ const onSubmit = handleSubmit((values) => {
       : props.itemEdit.reservations,
   });
   pdfStore.editService(props.itemIndex, values);
-  emit("editS");
+  emit('editS');
 });
 
 const findS = computed(() => {

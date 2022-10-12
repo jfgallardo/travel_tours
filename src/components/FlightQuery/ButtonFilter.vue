@@ -111,10 +111,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref } from 'vue';
 
 onMounted(() => {
-  cheap.value.classList.add("active");
+  cheap.value.classList.add('active');
 });
 
 const cheap = ref(null);
@@ -122,14 +122,14 @@ const fast = ref(null);
 const premium = ref(null);
 
 const cleanRefs = () => {
-  cheap.value.classList.remove("active");
-  fast.value.classList.remove("active");
-  premium.value.classList.remove("active");
+  cheap.value.classList.remove('active');
+  fast.value.classList.remove('active');
+  premium.value.classList.remove('active');
 };
 
 const filter = (ref) => {
   cleanRefs();
-  ref.classList.add("active");
+  ref.classList.add('active');
 };
 </script>
 
@@ -143,7 +143,7 @@ const filter = (ref) => {
   fill: white;
 }
 
-.active svg:is([fill="none"]) {
+.active svg:is([fill='none']) {
   stroke: white;
 }
 </style>

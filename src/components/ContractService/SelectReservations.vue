@@ -41,8 +41,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import ChevronDown from "@/components/Icons/ChevronDown.vue";
+import { ref, onMounted } from 'vue';
+import ChevronDown from '@/components/Icons/ChevronDown.vue';
 
 onMounted(() => {
   selected.value = props.initOption;
@@ -50,7 +50,7 @@ onMounted(() => {
 
 const hiddenDropdown = ref(false);
 const selected = ref(null);
-const emit = defineEmits(["selectValue"]);
+const emit = defineEmits(['selectValue']);
 const dropdownP = ref(null);
 
 const props = defineProps({
@@ -60,7 +60,7 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   initOption: {
     type: Object,
@@ -70,16 +70,16 @@ const props = defineProps({
 
 const selectOption = (value) => {
   selected.value = value;
-  emit("selectValue", value.id);
+  emit('selectValue', value.id);
   hiddenDropdown.value = false;
 };
 
 const vClickOutside = {
   mounted: () => {
-    document.addEventListener("click", clickOutListener);
+    document.addEventListener('click', clickOutListener);
   },
   unmounted: () => {
-    document.removeEventListener("click", clickOutListener);
+    document.removeEventListener('click', clickOutListener);
   },
 };
 
@@ -91,7 +91,7 @@ const clickOutListener = (evt) => {
 
 const hide = (value) => {
   selected.value = value;
-  emit("selectValue", value.id);
+  emit('selectValue', value.id);
   hiddenDropdown.value = false;
 };
 </script>

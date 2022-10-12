@@ -51,13 +51,13 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
-import ChevronDown from "@/components/Icons/ChevronDown.vue";
+import ChevronDown from '@/components/Icons/ChevronDown.vue';
 
 const hiddenDropdown = ref(false);
 const selected = ref(props.options[0]);
-const emit = defineEmits(["selectValue"]);
+const emit = defineEmits(['selectValue']);
 const dropdownP = ref(null);
 
 const props = defineProps({
@@ -67,22 +67,22 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
 const selectOption = (value) => {
   selected.value = value;
-  emit("selectValue", value);
+  emit('selectValue', value);
   hiddenDropdown.value = false;
 };
 
 const vClickOutside = {
   mounted: () => {
-    document.addEventListener("click", clickOutListener);
+    document.addEventListener('click', clickOutListener);
   },
   unmounted: () => {
-    document.removeEventListener("click", clickOutListener);
+    document.removeEventListener('click', clickOutListener);
   },
 };
 
@@ -94,7 +94,7 @@ const clickOutListener = (evt) => {
 
 const hide = (value) => {
   selected.value = value;
-  emit("selectValue", value);
+  emit('selectValue', value);
   hiddenDropdown.value = false;
 };
 </script>

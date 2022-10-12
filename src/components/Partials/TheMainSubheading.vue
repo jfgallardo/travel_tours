@@ -9,7 +9,7 @@
         class="hidden md:block"
         :class="{ 'text-blue-700': $route.path === '/aereo' }"
       >
-        {{ t("header.aereo") }}
+        {{ t('header.aereo') }}
       </span>
     </RouterLink>
     <RouterLink :to="{ path: '/hotel' }" class="flex items-center">
@@ -27,13 +27,13 @@
     <RouterLink to="/" class="flex items-center">
       <Driving class="mr-1 h-5 w-5" />
       <span class="hidden md:block">
-        {{ t("header.carro") }}
+        {{ t('header.carro') }}
       </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <Bus class="mr-1 h-5 w-5" />
       <span class="hidden md:block">
-        {{ t("header.onibus") }}
+        {{ t('header.onibus') }}
       </span>
     </RouterLink>
     <RouterLink :to="{ path: '/cruise' }" class="flex items-center">
@@ -45,13 +45,13 @@
         class="hidden md:block"
         :class="{ 'text-blue-700': $route.path === '/cruise' }"
       >
-        {{ t("header.cruseiros") }}
+        {{ t('header.cruseiros') }}
       </span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center">
       <WalletOpenTick class="mr-1 h-5 w-5" />
       <span class="hidden md:block">
-        {{ t("header.seguro") }}
+        {{ t('header.seguro') }}
       </span>
     </RouterLink>
     <RouterLink :to="{ name: 'ContractService' }" class="flex items-center">
@@ -70,14 +70,14 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
-import { useI18n } from "vue-i18n";
-import Airplane from "@/components/Icons/Airplane.vue";
-import Hotel from "@/components/Icons/Hotel.vue";
-import Driving from "@/components/Icons/Driving.vue";
-import Bus from "@/components/Icons/Bus.vue";
-import Ship from "@/components/Icons/Ship.vue";
-import WalletOpenTick from "@/components/Icons/WalletOpenTick.vue";
+import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import Airplane from '@/components/Icons/Airplane.vue';
+import Hotel from '@/components/Icons/Hotel.vue';
+import Driving from '@/components/Icons/Driving.vue';
+import Bus from '@/components/Icons/Bus.vue';
+import Ship from '@/components/Icons/Ship.vue';
+import WalletOpenTick from '@/components/Icons/WalletOpenTick.vue';
 
 const { t } = useI18n();
 </script>

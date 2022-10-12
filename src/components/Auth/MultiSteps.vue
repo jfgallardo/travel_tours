@@ -6,15 +6,26 @@
       </KeepAlive>
     </div>
     <div class="flex items-center justify-center space-x-6 mt-10">
-      <button type="button" v-if="userStore.currentStep > 0" class="bg-gray-200 hover:bg-gray-300 py-2 px-10"
-        @click="backStep">
+      <button
+        type="button"
+        v-if="userStore.currentStep > 0"
+        class="bg-gray-200 hover:bg-gray-300 py-2 px-10"
+        @click="backStep"
+      >
         Retornar
       </button>
-      <button type="submit" v-if="userStore.currentStep != 3"
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10" @click="nextStep">
+      <button
+        type="submit"
+        v-if="userStore.currentStep != 3"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
+        @click="nextStep"
+      >
         Proximo
       </button>
-      <button v-if="userStore.currentStep === 3" class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10">
+      <button
+        v-if="userStore.currentStep === 3"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
+      >
         Cadastro Agora
       </button>
     </div>
@@ -22,14 +33,14 @@
 </template>
 
 <script setup>
-import { ref, markRaw, onMounted } from "vue";
-import { simpleSchemaInformationUser } from "@/utils/validate";
-import { useForm } from "vee-validate";
-import InformationUser from "@/components/Auth/Steps/InformationUser.vue";
-import AddressUser from "@/components/Auth/Steps/AddressUser.vue";
-import ContactUser from "@/components/Auth/Steps/ContactUser.vue";
-import PasswordUser from "@/components/Auth/Steps/PasswordUser.vue";
-import { useUserStore } from "@/stores/user";
+import { ref, markRaw, onMounted } from 'vue';
+import { simpleSchemaInformationUser } from '@/utils/validate';
+import { useForm } from 'vee-validate';
+import InformationUser from '@/components/Auth/Steps/InformationUser.vue';
+import AddressUser from '@/components/Auth/Steps/AddressUser.vue';
+import ContactUser from '@/components/Auth/Steps/ContactUser.vue';
+import PasswordUser from '@/components/Auth/Steps/PasswordUser.vue';
+import { useUserStore } from '@/stores/user';
 
 onMounted(() => {
   selectedComponent.value = markRaw(InformationUser);
@@ -54,25 +65,25 @@ const nextStep = handleSubmit((values) => {
     userStore.currentStep++;
   } else if (userStore.currentStep === 1) {
     if (!values.cep) {
-      setFieldError("cep", "Required Field");
+      setFieldError('cep', 'Required Field');
     } else if (!values.bairro) {
-      setFieldError("bairro", "Required Field");
+      setFieldError('bairro', 'Required Field');
     } else if (!values.address) {
-      setFieldError("address", "Required Field");
+      setFieldError('address', 'Required Field');
     } else if (!values.estado) {
-      setFieldError("estado", "Required Field");
+      setFieldError('estado', 'Required Field');
     } else if (!values.number) {
-      setFieldError("number", "Required Field");
+      setFieldError('number', 'Required Field');
     } else if (!values.ciudade) {
-      setFieldError("ciudade", "Required Field");
+      setFieldError('ciudade', 'Required Field');
     } else if (!values.complemento) {
-      setFieldError("complemento", "Required Field");
+      setFieldError('complemento', 'Required Field');
     } else {
       userStore.currentStep++;
     }
   } else if (userStore.currentStep === 2) {
     if (!values.mainPhone) {
-      setFieldError("mainPhone", "Required Field");
+      setFieldError('mainPhone', 'Required Field');
     } else {
       userStore.currentStep++;
     }
@@ -91,6 +102,4 @@ const backStep = () => {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

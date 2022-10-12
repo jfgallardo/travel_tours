@@ -5,17 +5,35 @@
     >
       <ul class="grid grid-cols-6 grid-rows-1 justify-items-center text-sm">
         <li>© 2022 Mr Travel & Tours, Inc.</li>
-        <li>{{ t("banner.quem-somos") }}</li>
-        <li>{{ t("banner.privacidade") }}</li>
-        <li>{{ t("banner.termos") }}</li>
-        <li>{{ t("banner.viageiros") }}</li>
-        <li>{{ t("banner.duvidas") }}</li>
+        <li>
+          <RouterLink :to="{ name: 'WhoWeArePage' }">
+            {{ t('banner.quem-somos') }}
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink :to="{ path: '/privacy' }">
+            {{ t('banner.privacidade') }}
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink :to="{ name: 'TermsPage' }">
+            {{ t('banner.termos') }}
+          </RouterLink>
+        </li>
+        <li>{{ t('banner.viageiros') }}</li>
+        <li>
+          <RouterLink :to="{ name: 'MainQuestionsPage' }"
+            >{{ t('banner.duvidas') }}
+          </RouterLink>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
+import { RouterLink } from 'vue-router';
+
 const { t } = useI18n();
 </script>

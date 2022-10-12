@@ -45,5 +45,5 @@
 </template>
 
 <script setup>
-import RateHotel from "@/components/Hotel/RateHotel.vue";
+import RateHotel from '@/components/Hotel/RateHotel.vue';
 </script>

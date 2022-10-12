@@ -144,11 +144,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import Modal from "@/components/Partials/TheModal.vue";
-import PassengerItem from "@/components/ContractService/PassengerItem.vue";
-import EditPassenger from "@/components/ContractService/EditPassenger.vue";
-import { usePdfStore } from "@/stores/pdf";
+import { ref } from 'vue';
+import Modal from '@/components/Partials/TheModal.vue';
+import PassengerItem from '@/components/ContractService/PassengerItem.vue';
+import EditPassenger from '@/components/ContractService/EditPassenger.vue';
+import { usePdfStore } from '@/stores/pdf';
 
 const modal = ref(false);
 const edit = ref(false);

@@ -39,15 +39,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Carousel from "@/components/Partials/TheCarousel.vue";
-import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
-import Avatar1 from "@/assets/img/avatar1.jpg";
-import Avatar2 from "@/assets/img/avatar2.jpg";
-import Avatar3 from "@/assets/img/avatar3.jpg";
-import Varadero from "@/assets/img/varadero.jpg";
-import Tokio from "@/assets/img/tokio.jpg";
-import Copa from "@/assets/img/copa.jpg";
+import { ref, onMounted } from 'vue';
+import Carousel from '@/components/Partials/TheCarousel.vue';
+import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
+import Avatar1 from '@/assets/img/avatar1.jpg';
+import Avatar2 from '@/assets/img/avatar2.jpg';
+import Avatar3 from '@/assets/img/avatar3.jpg';
+import Varadero from '@/assets/img/varadero.jpg';
+import Tokio from '@/assets/img/tokio.jpg';
+import Copa from '@/assets/img/copa.jpg';
 
 onMounted(() => {
   updateList();
@@ -58,38 +58,38 @@ const numberToRef = ref(0);
 
 const sliders = [
   {
-    city: "California",
+    city: 'California',
     src: Varadero,
     avatars: [Avatar1, Avatar2, Avatar3],
-    date: "Septiembre 22",
+    date: 'Septiembre 22',
     total: 23,
   },
   {
-    city: "Punta Cana",
+    city: 'Punta Cana',
     src: Tokio,
     avatars: [Avatar2, Avatar1, Avatar3],
-    date: "Octubre 15",
+    date: 'Octubre 15',
     total: 10,
   },
   {
-    city: "Bahamas",
+    city: 'Bahamas',
     src: Copa,
     avatars: [Avatar1, Avatar3, Avatar2],
-    date: "Noviembre 22",
+    date: 'Noviembre 22',
     total: 12,
   },
   {
-    city: "Cuba",
+    city: 'Cuba',
     src: Tokio,
     avatars: [Avatar1, Avatar3, Avatar2],
-    date: "Enero 12",
+    date: 'Enero 12',
     total: 12,
   },
   {
-    city: "Asia",
+    city: 'Asia',
     src: Varadero,
     avatars: [Avatar1, Avatar3, Avatar2],
-    date: "Diciembre 22",
+    date: 'Diciembre 22',
     total: 12,
   },
 ];

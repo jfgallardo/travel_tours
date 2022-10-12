@@ -42,9 +42,9 @@ Condições de Uso da MaxMilhas."
 </template>
 
 <script setup>
-import TextInput from "@/components/FormUI/TextInput.vue";
-import CheckInput from "@/components/FormUI/CheckInput.vue";
-import { useUserStore } from "@/stores/user";
+import TextInput from '@/components/FormUI/TextInput.vue';
+import CheckInput from '@/components/FormUI/CheckInput.vue';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 </script>

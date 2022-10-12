@@ -79,11 +79,11 @@
 </template>
 
 <script setup>
-import FlightInformation from "@/components/FlightQuery/FlightInformation.vue";
-import FlightTime from "@/components/FlightQuery/FlightTime.vue";
-import FlightNumber from "@/components/FlightQuery/FlightNumber.vue";
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
+import FlightInformation from '@/components/FlightQuery/FlightInformation.vue';
+import FlightTime from '@/components/FlightQuery/FlightTime.vue';
+import FlightNumber from '@/components/FlightQuery/FlightNumber.vue';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 
@@ -108,14 +108,14 @@ const props = defineProps({
 const filterHours = computed(() => {
   const dateLocal = new Date(props.Saida);
   return dateLocal.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 });
 
 const filterWeekday = computed(() => {
   const dateLocal = new Date(props.Saida);
-  const options = { weekday: "long" };
+  const options = { weekday: 'long' };
 
   return dateLocal.toLocaleDateString(locale.value, options);
 });
@@ -123,20 +123,20 @@ const filterWeekday = computed(() => {
 const filterDayPeriod = computed(() => {
   const dateLocal = new Date(props.Saida);
   const hours = dateLocal.getHours();
-  return hours >= 12 ? "PM" : "AM";
+  return hours >= 12 ? 'PM' : 'AM';
 });
 
 const filterHoursChegada = computed(() => {
   const dateLocal = new Date(props.Chegada);
   return dateLocal.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 });
 
 const filterWeekdayChegada = computed(() => {
   const dateLocal = new Date(props.Chegada);
-  const options = { weekday: "long" };
+  const options = { weekday: 'long' };
 
   return dateLocal.toLocaleDateString(locale.value, options);
 });
@@ -144,7 +144,7 @@ const filterWeekdayChegada = computed(() => {
 const filterDayPeriodChegada = computed(() => {
   const dateLocal = new Date(props.Chegada);
   const hours = dateLocal.getHours();
-  return hours >= 12 ? "PM" : "AM";
+  return hours >= 12 ? 'PM' : 'AM';
 });
 </script>
 

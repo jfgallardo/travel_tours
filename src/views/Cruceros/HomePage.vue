@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
-import CruiseForm from "@/components/Cruceros/CruiseForm.vue";
+import { RouterView } from 'vue-router';
+import CruiseForm from '@/components/Cruceros/CruiseForm.vue';
 </script>
 
 <style scoped></style>

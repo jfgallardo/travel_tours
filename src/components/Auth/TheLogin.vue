@@ -1,26 +1,46 @@
 <template>
   <div>
+    <Transition name="loader" appear mode="out-in">
+      <Loader v-if="userStore.loading" />
+    </Transition>
+    <Badge></Badge>
     <div class="w-64">
       <div
         class="flex min-h-full items-center justify-center px-4 sm:px-6 lg:px-8"
       >
         <div class="w-full max-w-md space-y-8">
-          <div>
+          <div v-if="userStore.user_logged">
             <h2
               class="mt-6 text-center text-2xl font-bold tracking-tight text-gray-900"
             >
-              Faça login em sua conta
+              Welcome {{ userStore.user_logged.data.fullName }}
+            </h2>
+          </div>
+          <div v-else>
+            <h2
+              class="mt-6 text-center text-2xl font-bold tracking-tight text-gray-900"
+            >
+              {{ t('auth.title') }}
             </h2>
             <p class="mt-2 text-center text-sm text-gray-600">
-              Ou
-              <RouterLink
+             <!--  <RouterLink
                 :to="{ name: 'RegisterPage' }"
                 class="font-medium text-blue-600 hover:text-blue-500"
-                >cadastre sua conta</RouterLink
               >
+                {{ t('auth.subtitle') }}
+              </RouterLink> -->
+              <span class="font-medium text-blue-600 hover:text-blue-500">
+                {{ t('auth.subtitle') }}
+              </span>
             </p>
           </div>
-          <form class="mt-8 space-y-6" action="#" method="POST">
+          <div v-if="userStore.user_logged">
+            <ul>
+              <li>Configuraciones</li>
+              <li>Salir de la cuenta</li>
+            </ul>
+          </div>
+          <form v-else class="mt-8 space-y-6" @submit.prevent="login">
             <input type="hidden" name="remember" value="true" />
             <div class="-space-y-px rounded-md shadow-sm">
               <div>
@@ -29,10 +49,10 @@
                   id="email-address"
                   name="email"
                   type="email"
-                  autocomplete="email"
+                  v-model="email"
                   required
                   class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                  placeholder="Email address"
+                  :placeholder="t('auth.email')"
                 />
               </div>
               <div>
@@ -41,10 +61,10 @@
                   id="password"
                   name="password"
                   type="password"
-                  autocomplete="current-password"
+                  v-model="password"
                   required
-                  class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
-                  placeholder="Password"
+                  class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                  :placeholder="t('auth.placeholder-pwd')"
                 />
               </div>
             </div>
@@ -54,7 +74,7 @@
                 <a
                   href="#"
                   class="font-medium text-blue-600 hover:text-blue-500"
-                  >Forgot your password?</a
+                  >{{ t('auth.forgot') }}</a
                 >
               </div>
             </div>
@@ -79,7 +99,7 @@
                     />
                   </svg>
                 </span>
-                Login
+                {{ t('auth.button-login') }}
               </button>
             </div>
           </form>
@@ -90,7 +110,40 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+import Loader from '@/components/Partials/TheLoader.vue';
+import Badge from '@/components/Partials/TheBadge.vue';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
+const userStore = useUserStore();
+const email = ref('');
+const password = ref('');
+
+const login = () => {
+  const formData = {
+    email: email.value,
+    password: password.value,
+  };
+
+  userStore.login(formData);
+};
+/* userStore.loading */
 </script>
 
-<style scoped></style>
+<style scoped>
+.loader-enter-active {
+  transition: all 0.5ms ease;
+}
+
+.loader-leave-active {
+  transition: all 0.5s ease;
+}
+
+.loader-enter-from,
+.loader-leave-to {
+  opacity: 0;
+}
+</style>

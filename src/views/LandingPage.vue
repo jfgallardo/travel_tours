@@ -3,81 +3,81 @@
   <Banner />
   <ExplorerVoo />
   <ExplorerHotel />
-  <CaRentals />
+  <!--   <CaRentals /> -->
   <CarCategories />
   <ExecutiveTaxi />
   <ExplorerCruzeiro />
   <SeguroViage />
   <BannerIngresos />
   <Miles />
-  <PackTourist />
-  <Blog />
-  <CommunityHero />
+  <!--  <PackTourist /> -->
+  <!--  <Blog /> -->
+  <!-- <CommunityHero />
   <CommunityTrips />
   <CommunityTravelerPhotos />
   <CommunityFeedback />
-  <Instagram />
+  <Instagram /> -->
   <Greeting />
 </template>
 
 <script setup>
-import { defineAsyncComponent } from "vue";
+import { defineAsyncComponent } from 'vue';
 const Hero = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingHero.vue")
+  import('@/components/Landing/LandingHero.vue')
 );
 const Banner = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingBanner.vue")
+  import('@/components/Landing/LandingBanner.vue')
 );
 const ExplorerVoo = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingExplorerVoo.vue")
+  import('@/components/Landing/LandingExplorerVoo.vue')
 );
 const ExplorerHotel = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingExplorerHotel.vue")
+  import('@/components/Landing/LandingExplorerHotel.vue')
 );
-const CaRentals = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingCaRentals.vue")
-);
+/* const CaRentals = defineAsyncComponent(() =>
+  import('@/components/Landing/LandingCaRentals.vue')
+); */
 const CarCategories = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingCarCategories.vue")
+  import('@/components/Landing/LandingCarCategories.vue')
 );
 const ExecutiveTaxi = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingExecutiveTaxi.vue")
+  import('@/components/Landing/LandingExecutiveTaxi.vue')
 );
 const ExplorerCruzeiro = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingExplorerCruzeiro.vue")
+  import('@/components/Landing/LandingExplorerCruzeiro.vue')
 );
 const SeguroViage = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingSeguroViage.vue")
+  import('@/components/Landing/LandingSeguroViage.vue')
 );
 const BannerIngresos = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingBannerIngresos.vue")
+  import('@/components/Landing/LandingBannerIngresos.vue')
 );
 const Miles = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingMiles.vue")
+  import('@/components/Landing/LandingMiles.vue')
 );
-const PackTourist = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingPackTourist.vue")
-);
-const Blog = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingBlog.vue")
-);
-const CommunityHero = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingCommunityHero.vue")
+/* const PackTourist = defineAsyncComponent(() =>
+  import('@/components/Landing/LandingPackTourist.vue')
+); */
+/* const Blog = defineAsyncComponent(() =>
+  import('@/components/Landing/LandingBlog.vue')
+); */
+/* const CommunityHero = defineAsyncComponent(() =>
+  import('@/components/Landing/LandingCommunityHero.vue')
 );
 const CommunityTrips = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingCommunityTrips.vue")
+  import('@/components/Landing/LandingCommunityTrips.vue')
 );
 const CommunityTravelerPhotos = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingCommunityTravelerPhotos.vue")
+  import('@/components/Landing/LandingCommunityTravelerPhotos.vue')
 );
 const CommunityFeedback = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingCommunityFeedback.vue")
+  import('@/components/Landing/LandingCommunityFeedback.vue')
 );
 const Instagram = defineAsyncComponent(() =>
-  import("@/components/Landing/LandingInstagram.vue")
-);
+  import('@/components/Landing/LandingInstagram.vue')
+); */
 const Greeting = defineAsyncComponent(() =>
-  import("@/components/Landing/LandinGreeting.vue")
+  import('@/components/Landing/LandinGreeting.vue')
 );
 </script>
 

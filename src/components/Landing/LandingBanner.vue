@@ -10,7 +10,9 @@
         ></p>
 
         <button class="bg-white font-bold px-6 py-3 text-lg">
-          {{ t("banner.button") }}
+          <Badge>
+            {{ t('banner.button') }}
+          </Badge>
         </button>
       </div>
     </div>
@@ -18,13 +20,14 @@
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
+import Badge from '@/components/Partials/TheBadge.vue';
 const { t } = useI18n();
 </script>
 
 <style scoped>
 .banner {
-  background: url("@/assets/img/banner.jpg");
+  background: url('@/assets/img/banner.jpg');
   background-size: cover;
   background-position: center center;
   height: 650px;

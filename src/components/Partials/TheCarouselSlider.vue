@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-const props = defineProps(["slide", "black"]);
+const props = defineProps(['slide', 'black']);
 </script>
 
 <style scoped></style>

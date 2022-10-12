@@ -1,10 +1,9 @@
 <template>
   <div class="relative">
     <nav
-      :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']"
       class="fixed top-0 right-0 left-0 z-30 bg-white border-b border-gray-300 grid grid-cols-1"
     >
-      <div class="flex items-center justify-around border-b border-gray-300">
+      <div class="flex items-center justify-around">
         <div class="flex items-center h-full">
           <div class="border-r border-gray-300 h-full py-2">
             <RouterLink :to="{ name: 'LandingPage' }">
@@ -81,27 +80,39 @@
           class="items-center justify-around w-full h-full hidden md:flex border-r border-gray-300"
         >
           <RouterLink :to="{ name: 'LandingPage' }"> Home </RouterLink>
-          <RouterLink to="/">{{ t("header.ofertas") }}</RouterLink>
-          <RouterLink to="/">{{ t("header.duvidas") }}</RouterLink>
-          <RouterLink to="/">{{ t("header.contato") }}</RouterLink>
+          <!--  <RouterLink to="/">{{ t('header.ofertas') }}</RouterLink> -->
+          <RouterLink :to="{ name: 'MainQuestionsPage' }"
+            >{{ t('header.duvidas') }}
+          </RouterLink>
+          <RouterLink :to="{ name: 'ContactPage' }">{{
+            t('header.contato')
+          }}</RouterLink>
         </div>
 
         <div class="flex items-center justify-center pr-2 h-full">
-          <div class="border-r border-gray-300 h-full">
+          <!-- <div class="border-r border-gray-300 h-full">
             <div class="flex items-center p-2">
               <Transaction class="mr-1 h-5 w-5" />
               <span class="hidden md:block">
-                {{ t("header.intercambio") }}
+                {{ t('header.intercambio') }}
               </span>
             </div>
-          </div>
+          </div> -->
           <div class="border-r border-gray-300 h-full">
             <Dropddown>
               <template v-slot:selected>
-                <button class="flex items-center p-2">
+                <button
+                  v-if="userStore.user_logged"
+                  class="flex items-center p-2"
+                >
                   <UserCircle class="mr-1 h-5 w-5" />
-                  <span class="hidden md:block">
-                    {{ t("header.conecte-se") }}
+                  <span>Welcome</span>
+                </button>
+                <button v-else class="flex items-center p-2">
+                  <UserCircle class="mr-1 h-5 w-5" />
+                  <!-- <span class="hidden md:block"> -->
+                  <span>
+                    {{ t('header.conecte-se') }}
                   </span>
                 </button>
               </template>
@@ -158,65 +169,82 @@
         </div>
       </div>
 
-      <div class="absolute" v-if="hiddenOf">
-        <div class="space-y-1 pt-2 pb-3 text-right px-5">
+      <div class="absolute w-full z-30" v-if="hiddenOf">
+        <div class="pt-2 pb-3 text-center px-5 bg-white">
+          <div class="flex items-center justify-end">
+            <svg
+              class="fill-current h-6 w-6"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              @click="hiddenOf = false"
+            >
+              <title>Close</title>
+              <path
+                d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+              />
+            </svg>
+          </div>
+
           <RouterLink
-            class="text-gray-900 hover:bg-gray-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            @click="hiddenOf = false"
+            class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
             :to="{ name: 'LandingPage' }"
           >
             Home
           </RouterLink>
+          <!--  <RouterLink @click="hiddenOf = false" class="text-gray-900  block px-3 py-2 rounded-md text-base font-medium"
+            to="/">{{ t('header.ofertas') }}</RouterLink> -->
           <RouterLink
-            class="text-gray-900 hover:bg-gray-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            @click="hiddenOf = false"
+            class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
             to="/"
-            >{{ t("header.ofertas") }}</RouterLink
+            >{{ t('header.duvidas') }}</RouterLink
           >
           <RouterLink
-            class="text-gray-900 hover:bg-gray-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            to="/"
-            >{{ t("header.duvidas") }}</RouterLink
-          >
-          <RouterLink
-            class="text-gray-900 hover:bg-gray-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            to="/"
-            >{{ t("header.contato") }}</RouterLink
-          >
+            @click="hiddenOf = false"
+            :to="{ name: 'ContactPage' }"
+            class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+            >{{ t('header.contato') }}
+          </RouterLink>
         </div>
       </div>
-      <MainSubheading v-if="showMainSubheading" />
+      <!-- <MainSubheading v-if="showMainSubheading" />
       <QuerySubHeader v-if="showSubHeader" />
-      <RegisterSubH v-if="showRegisterSubH" />
+      <RegisterSubH v-if="showRegisterSubH" />  -->
     </nav>
   </div>
 </template>
 
 <script setup>
-import { RouterLink, useRoute } from "vue-router";
-import MainSubheading from "@/components/Partials/TheMainSubheading.vue";
-import Dropdowni18 from "@/components/Partials/TheDropdowni18.vue";
-import Transaction from "@/components/Icons/Transaction.vue";
-import UserCircle from "@/components/Icons/UserCircle.vue";
-import QuerySubHeader from "@/components/Partials/TheQuerySubheading.vue";
-import Dropddown from "@/components/FormUI/TheDropddown.vue";
-import Login from "@/components/Auth/TheLogin.vue";
-import RegisterSubH from "@/components/Partials/TheRegisterSubH.vue";
-import { useI18n } from "vue-i18n";
-import { ref, computed } from "vue";
+import { RouterLink, useRoute } from 'vue-router';
+import MainSubheading from '@/components/Partials/TheMainSubheading.vue';
+import Dropdowni18 from '@/components/Partials/TheDropdowni18.vue';
+import Transaction from '@/components/Icons/Transaction.vue';
+import UserCircle from '@/components/Icons/UserCircle.vue';
+import QuerySubHeader from '@/components/Partials/TheQuerySubheading.vue';
+import Dropddown from '@/components/FormUI/TheDropddown.vue';
+import Login from '@/components/Auth/TheLogin.vue';
+import RegisterSubH from '@/components/Partials/TheRegisterSubH.vue';
+import { useI18n } from 'vue-i18n';
+import { ref, computed } from 'vue';
+import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
 const { t } = useI18n();
+const userStore = useUserStore();
 
 const hiddenOf = ref(false);
 
-const showMainSubheading = computed(() => {
-  return !(route.name === "AereoFlightQuery") && route.name != "RegisterPage";
+/* const showMainSubheading = computed(() => {
+  return !(route.name === 'AereoFlightQuery') && route.name != 'RegisterPage';
 });
 const showSubHeader = computed(() => {
-  return route.name === "AereoFlightQuery";
+  return route.name === 'AereoFlightQuery';
 });
 const showRegisterSubH = computed(() => {
-  return route.name === "RegisterPage";
-});
+  return route.name === 'RegisterPage';
+}); */
 </script>
 
 <style scoped>
@@ -224,3 +252,4 @@ const showRegisterSubH = computed(() => {
   fill: black;
 }
 </style>
+<!--    <nav :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']" -->

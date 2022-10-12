@@ -2,8 +2,12 @@
   <div>
     <div class="flex items-center space-x-2 mb-2">
       <label class="flex items-center">
-        <input type="checkbox" :checked="modelValue" class="h-4 w-4 text-zinc-800 cursor-pointer focus:ring-0 mr-2"
-          @change="$emit('update:modelValue', $event.target.checked)" />
+        <input
+          type="checkbox"
+          :checked="modelValue"
+          class="h-4 w-4 text-zinc-800 cursor-pointer focus:ring-0 mr-2"
+          @change="$emit('update:modelValue', $event.target.checked)"
+        />
         <span class="text-sm text-justify">
           {{ label }}
         </span>
@@ -16,7 +20,7 @@
 const props = defineProps({
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   modelValue: {
     type: Boolean,
@@ -25,6 +29,4 @@ const props = defineProps({
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -17,13 +17,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import { createPopper } from "@popperjs/core";
+import { ref, computed } from 'vue';
+import { createPopper } from '@popperjs/core';
 
 const props = defineProps({
   tooltipText: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
@@ -37,16 +37,16 @@ const insertElement = (btn, tip) => {
 
 const popperInstance = computed(() => {
   return createPopper(container.value, tooltip.value, {
-    placement: "top",
+    placement: 'top',
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         options: {
           offset: [0, 10],
         },
       },
     ],
-    strategy: "absolute",
+    strategy: 'absolute',
   });
 });
 
@@ -54,20 +54,20 @@ const handleShow = (e) => {
   if (container.value === null && tooltip.value === null) {
     insertElement(
       e.target,
-      e.target.parentElement.querySelector(".tooltipText")
+      e.target.parentElement.querySelector('.tooltipText')
     );
   }
-  tooltip.value.setAttribute("data-show", "");
+  tooltip.value.setAttribute('data-show', '');
   popperInstance.value.update();
 };
 const handleHide = (e) => {
   if (container.value === null && tooltip.value === null) {
     insertElement(
       e.target,
-      e.target.parentElement.querySelector(".tooltipText")
+      e.target.parentElement.querySelector('.tooltipText')
     );
   }
-  tooltip.value.removeAttribute("data-show");
+  tooltip.value.removeAttribute('data-show');
 };
 </script>
 
@@ -100,23 +100,23 @@ const handleHide = (e) => {
 
 .tooltipArrow::before {
   visibility: visible;
-  content: "";
+  content: '';
   transform: rotate(45deg);
 }
 
-.tooltipText[data-popper-placement^="top"] > #arrow {
+.tooltipText[data-popper-placement^='top'] > #arrow {
   bottom: -4px;
 }
 
-.tooltipText[data-popper-placement^="bottom"] > #arrow {
+.tooltipText[data-popper-placement^='bottom'] > #arrow {
   top: -4px;
 }
 
-.tooltipText[data-popper-placement^="left"] > #arrow {
+.tooltipText[data-popper-placement^='left'] > #arrow {
   right: -4px;
 }
 
-.tooltipText[data-popper-placement^="right"] > #arrow {
+.tooltipText[data-popper-placement^='right'] > #arrow {
   left: -4px;
 }
 </style>

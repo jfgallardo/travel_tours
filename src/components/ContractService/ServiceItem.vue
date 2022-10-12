@@ -29,17 +29,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useForm } from "vee-validate";
-import { usePdfStore } from "@/stores/pdf";
-import TextInput from "@/components/FormUI/TextInput.vue";
-import { simpleSchemaService } from "@/utils/validate";
-import SelectReservations from "@/components/ContractService/SelectReservations.vue";
+import { ref } from 'vue';
+import { useForm } from 'vee-validate';
+import { usePdfStore } from '@/stores/pdf';
+import TextInput from '@/components/FormUI/TextInput.vue';
+import { simpleSchemaService } from '@/utils/validate';
+import SelectReservations from '@/components/ContractService/SelectReservations.vue';
 
-const emit = defineEmits(["createS"]);
+const emit = defineEmits(['createS']);
 const pdfStore = usePdfStore();
 
-const reservations = ref("");
+const reservations = ref('');
 
 const { handleSubmit } = useForm({
   validationSchema: simpleSchemaService,
@@ -50,7 +50,7 @@ const onSubmit = handleSubmit((values) => {
     reservations: reservations.value,
   });
   pdfStore.addService(values);
-  emit("createS");
+  emit('createS');
 });
 </script>
 

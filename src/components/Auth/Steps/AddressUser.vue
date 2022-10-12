@@ -61,9 +61,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import TextInput from "@/components/FormUI/TextInput.vue";
-import { useUserStore } from "@/stores/user";
+import { ref, onMounted } from 'vue';
+import TextInput from '@/components/FormUI/TextInput.vue';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 </script>

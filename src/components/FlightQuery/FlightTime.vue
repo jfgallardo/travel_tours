@@ -24,7 +24,7 @@
         </svg>
       </div>
 
-      <p class="text-gray-400">{{ directFlight ? "Directo" : "Escala" }}</p>
+      <p class="text-gray-400">{{ directFlight ? 'Directo' : 'Escala' }}</p>
     </div>
   </div>
 </template>

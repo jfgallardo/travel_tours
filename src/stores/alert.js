@@ -1,11 +1,11 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
 export const useAlertStore = defineStore({
-  id: "alert",
+  id: 'alert',
   state: () => ({
-    message: "",
-    backgrColor: "",
-    textColor: "",
+    message: '',
+    backgrColor: '',
+    textColor: '',
   }),
   getters: {},
   actions: {
@@ -15,9 +15,9 @@ export const useAlertStore = defineStore({
       this.textColor = payload.textColor;
     },
     async closeMsg() {
-      this.message = "";
-      this.backgrColor = "";
-      this.textColor = "";
+      this.message = '';
+      this.backgrColor = '';
+      this.textColor = '';
     },
   },
 });

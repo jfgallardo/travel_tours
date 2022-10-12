@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="container mx-auto px-4 pb-20 space-y-9">
-      <div class="lg:text-7xl text-4xl font-bold text-center">
-        Atendemos empresas<br />nacionais e internacionais
-      </div>
+      <div
+        v-html="t('landingCarCategories.title')"
+        class="lg:text-7xl text-4xl font-bold text-center"
+      ></div>
       <div
         class="grid grid-cols-3 grid-rows-3 gap-4 justify-items-center lg:grid-cols-5 lg:grid-rows-2"
       >
@@ -63,7 +64,9 @@
         </div>
       </div>
       <div class="flex items-center justify-center space-x-1">
-        <span> Saiba tudo sobre as categorias de carros</span>
+        <RouterLink :to="{ name: 'CarCategoriesPage' }">
+          {{ t('landingCarCategories.subtitle') }}</RouterLink
+        >
         <ArrowRight class="h-5 w-5 hover:cursor-pointer mr-2" />
       </div>
     </div>
@@ -71,5 +74,9 @@
 </template>
 
 <script setup>
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
+import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>

@@ -56,48 +56,25 @@
             }
           "
         >
-          <div v-if="opt.nameCity" class="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5 mr-1"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
-              />
-            </svg>
-
+          <div class="flex items-center justify-start">
             <span
               class="font-normal"
-              v-html="opt['nameCity_highligthed'] || opt['nameCity']"
+              v-html="opt['ciudade_highligthed'] || opt['ciudade']"
             />
-          </div>
 
-          <div v-else class="flex items-center pl-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5 mr-1"
+            &nbsp;
+            <span class="hidden md:block text-center">
+              - {{ opt['aeroporto'] }}</span
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-              />
-            </svg>
 
             <span
-              class="font-normal"
-              v-html="opt['nameAirport_highligthed'] || opt['nameAirport']"
-            />
+              >&nbsp;(
+              <span
+                class="font-normal"
+                v-html="opt['iata_highligthed'] || opt['iata']"
+              />
+              )
+            </span>
           </div>
         </li>
       </ul>
@@ -106,8 +83,8 @@
 </template>
 
 <script setup>
-import { onBeforeUpdate, ref, computed } from "vue";
-import endpoint from "@/utils/endPointIata";
+import { onBeforeUpdate, ref, computed } from 'vue';
+import { axiosLocalAPI } from '@/plugins/axios';
 
 onBeforeUpdate(() => {
   optionsList.value = [];
@@ -116,30 +93,30 @@ onBeforeUpdate(() => {
 const props = defineProps({
   placeholder: {
     type: String,
-    default: "",
+    default: '',
   },
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   value: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 
-const emit = defineEmits(["select", "input"]);
+const emit = defineEmits(['select', 'input']);
 
 const input = ref(null);
 const optionsList = ref([]);
 
 let options = ref([]);
-let keyword = ref("");
+let keyword = ref('');
 let arrowCounter = ref(0);
 
 const inputClassList = computed(() => {
   return [
-    "appearance-none w-full transition duration-150 ease-in-out",
+    'appearance-none w-full transition duration-150 ease-in-out',
     getTextSizeClass.value,
     getTextColorClass.value,
     getBorderColorClass.value,
@@ -148,39 +125,33 @@ const inputClassList = computed(() => {
 });
 
 const getTextSizeClass = computed(() => {
-  return "text-sm leading-5";
+  return 'text-sm leading-5';
 });
 const getTextColorClass = computed(() => {
-  return "text-gray-800 placeholder-gray-400";
+  return 'text-gray-800 placeholder-gray-400';
 });
 const getBorderColorClass = computed(() => {
-  return "focus:outline-none border border-gray-400 focus:border-blue-400";
+  return 'focus:outline-none border border-gray-400 focus:border-blue-400';
 });
 const getPaddingClass = computed(() => {
-  return "h-10 pr-6 pl-4 pt-9 pb-4";
+  return 'h-10 pr-6 pl-4 pt-9 pb-4';
 });
 
 const onInput = (value) => {
   keyword.value = value;
   emitInput(value);
-  if (value.length >= 3) {
-    search(value);
-  } else {
+  if (value.length === 0) {
     resetOptions();
   }
+  search(value);
 };
 
 const onSelect = () => {
   const selected = options.value[arrowCounter.value];
 
   if (selected) {
-    if (selected.nameCity) {
-      emit("select", selected.codeIataCity);
-      keyword.value = `${selected["nameCity"]} | ${selected["codeIataCity"]}`;
-    } else {
-      emit("select", selected.codeIataAirport);
-      keyword.value = `${selected["nameAirport"]} | ${selected["codeIataAirport"]}`;
-    }
+    emit('select', selected.iata);
+    keyword.value = `${selected['ciudade']} | ${selected['iata']}`;
     emitInput(keyword.value);
     resetOptions();
     resetArrowCounter();
@@ -188,68 +159,25 @@ const onSelect = () => {
 };
 
 const emitInput = (value) => {
-  emit("input", value);
+  emit('input', value);
 };
 
 const search = (query) => {
-  resetOptions();
-  /* if (query.length === 3) {
-    endpoint(query)
-      .then(function (values) {
-        options.value = unionBy(
-          values[0].data.cities,
-          values[0].data.airportsByCities,
-          "codeIataAirport"
-        );
-        if (!values[1].data.error) {
-          options.value.unshift(values[1].data[0]);
-        }
-        highlightOptions();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  } else { */
-  endpoint(query)
-    .then(({ data }) => {
-      if (data.error) {
-        return;
-      } else {
-        options.value = [];
-        let airportsByCities = data.airportsByCities;
-        let cities = data.cities;
-
-        cities.filter((city) => {
-          let airportsByCity = airportsByCities.filter((airport) => {
-            return isMyAirport(airport, city);
-          });
-          if (airportsByCity.length > 1) {
-            options.value.push(city);
-            options.value.push(...airportsByCity);
-          } else {
-            options.value.push(...airportsByCity);
-          }
-        });
-        highlightOptions();
-      }
-    })
-    .catch();
-  /* } */
-};
-
-const isMyAirport = (airport, city) => {
-  return city.codeIataCity === airport.codeIataCity;
+  axiosLocalAPI.get(`v1/search-keyword/${query}`).then(({ data }) => {
+    options.value = data;
+    highlightOptions();
+  });
 };
 
 const resetKeyword = () => {
-  keyword.value = "";
+  keyword.value = '';
 };
 
 const fixScrolling = () => {
   optionsList.value[arrowCounter.value].scrollIntoView({
-    behavior: "smooth",
-    block: "nearest",
-    inline: "start",
+    behavior: 'smooth',
+    block: 'nearest',
+    inline: 'start',
   });
 };
 
@@ -258,28 +186,26 @@ const resetOptions = () => {
 };
 
 const onClear = () => {
-  emit("select", "");
-  emitInput("");
+  emit('select', '');
+  emitInput('');
   resetKeyword();
   resetOptions();
 };
 
 const highlightOptions = () => {
   const search = keyword.value;
-  const query = new RegExp(search, "i");
+  const query = new RegExp(search, 'i');
 
   options.value.forEach((element) => {
-    if (element.nameCity) {
-      element["nameCity_highligthed"] = element["nameCity"].replace(
-        query,
-        '<span class="font-bold">$&</span>'
-      );
-    } else {
-      element["nameAirport_highligthed"] = element["nameAirport"].replace(
-        query,
-        '<span class="font-bold">$&</span>'
-      );
-    }
+    element['ciudade_highligthed'] = element['ciudade'].replace(
+      query,
+      '<span class="font-bold">$&</span>'
+    );
+
+    element['iata_highligthed'] = element['iata'].replace(
+      query,
+      '<span class="font-bold">$&</span>'
+    );
   });
 };
 
@@ -289,18 +215,18 @@ const onKeydown = (evt) => {
   }
 
   switch (evt.code) {
-    case "ArrowDown":
+    case 'ArrowDown':
       evt.preventDefault();
       onArrowDown();
       break;
-    case "ArrowUp":
+    case 'ArrowUp':
       evt.preventDefault();
       onArrowUp();
       break;
-    case "Enter":
+    case 'Enter':
       onSelect();
       break;
-    case "Escape":
+    case 'Escape':
       onEsc();
       break;
   }
@@ -335,7 +261,7 @@ const onEsc = () => {
 
 const onBlur = (evt) => {
   const tgt = evt.relatedTarget;
-  if (tgt && tgt.classList.contains("autocomplete-item")) {
+  if (tgt && tgt.classList.contains('autocomplete-item')) {
     return;
   }
   resetOptions();

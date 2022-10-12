@@ -56,7 +56,7 @@
 const props = defineProps({
   label: {
     type: String,
-    default: "",
+    default: '',
   },
   modelValue: {
     type: Number,
@@ -64,7 +64,7 @@ const props = defineProps({
   },
   subtitle: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 </script>

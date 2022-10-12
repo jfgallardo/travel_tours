@@ -58,13 +58,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useUserStore } from "@/stores/user";
-import TextInput from "@/components/FormUI/TextInput.vue";
-import DateInput from "@/components/FormUI/DateInput.vue";
+import { ref, onMounted } from 'vue';
+import { useUserStore } from '@/stores/user';
+import TextInput from '@/components/FormUI/TextInput.vue';
+import DateInput from '@/components/FormUI/DateInput.vue';
 
 onMounted(() => {
-  pessoaF.value.classList.add("active");
+  pessoaF.value.classList.add('active');
 });
 
 const pessoaF = ref(null);
@@ -72,13 +72,13 @@ const pessoaJ = ref(null);
 const userStore = useUserStore();
 
 const cleanRefs = () => {
-  pessoaF.value.classList.remove("active");
-  pessoaJ.value.classList.remove("active");
+  pessoaF.value.classList.remove('active');
+  pessoaJ.value.classList.remove('active');
 };
 
 const change = (ref) => {
   cleanRefs();
-  ref.classList.add("active");
+  ref.classList.add('active');
 };
 </script>
 

@@ -1,5 +1,5 @@
 export default {
-  LoginInvalidException: "Ops! Senha Invalida",
-  VerifyEmailTokenInvalidException: "",
-  UserHasBeenTakenException: "",
+  LoginInvalidException: 'Ops! Senha Invalida',
+  VerifyEmailTokenInvalidException: '',
+  UserHasBeenTakenException: '',
 };

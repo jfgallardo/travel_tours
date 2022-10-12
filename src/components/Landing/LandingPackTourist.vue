@@ -32,15 +32,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 
-import Carousel from "@/components/Partials/TheCarousel.vue";
-import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
+import Carousel from '@/components/Partials/TheCarousel.vue';
+import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
 
-import Tokio from "@/assets/img/tokio.jpg";
-import Varadero from "@/assets/img/varadero.jpg";
-import Copacabana from "@/assets/img/copa.jpg";
+import Tokio from '@/assets/img/tokio.jpg';
+import Varadero from '@/assets/img/varadero.jpg';
+import Copacabana from '@/assets/img/copa.jpg';
 
 onMounted(() => {
   updateList();
@@ -49,35 +49,35 @@ onMounted(() => {
 const sliders = [
   {
     src: Tokio,
-    city: "Tokio",
+    city: 'Tokio',
     people: 2,
     price: 1500,
     nights: 3,
   },
   {
     src: Varadero,
-    city: "Varadero",
+    city: 'Varadero',
     people: 3,
     price: 4700,
     nights: 5,
   },
   {
     src: Copacabana,
-    city: "Copacabana",
+    city: 'Copacabana',
     people: 1,
     price: 800,
     nights: 3,
   },
   {
     src: Copacabana,
-    city: "China",
+    city: 'China',
     people: 1,
     price: 800,
     nights: 3,
   },
   {
     src: Copacabana,
-    city: "Japon",
+    city: 'Japon',
     people: 1,
     price: 800,
     nights: 3,

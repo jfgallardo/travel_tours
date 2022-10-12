@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import { RouterView } from "vue-router";
-import HotelForm from "@/components/Hotel/HotelForm.vue";
+import { RouterView } from 'vue-router';
+import HotelForm from '@/components/Hotel/HotelForm.vue';
 </script>
 
 <style scoped></style>

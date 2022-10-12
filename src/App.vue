@@ -1,7 +1,7 @@
 <script setup>
-import { RouterView } from "vue-router";
-import Message from "@/components/Partials/TheMessage.vue";
-import { useAlertStore } from "@/stores/alert";
+import { RouterView } from 'vue-router';
+import Message from '@/components/Partials/TheMessage.vue';
+import { useAlertStore } from '@/stores/alert';
 
 const alertStore = useAlertStore();
 </script>

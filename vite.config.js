@@ -1,9 +1,9 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
-import { resolve, dirname } from "node:path";
-import { fileURLToPath } from "url";
-import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'url';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 
 export default defineConfig({
   plugins: [
@@ -11,13 +11,13 @@ export default defineConfig({
     VueI18nPlugin({
       include: resolve(
         dirname(fileURLToPath(import.meta.url)),
-        "./src/assets/locales/**"
+        './src/assets/locales/**'
       ),
     }),
   ],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 });

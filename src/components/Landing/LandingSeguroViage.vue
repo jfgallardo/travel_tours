@@ -13,9 +13,10 @@
           ></div>
           <div>
             <button
+              @click="cotarSeguro"
               class="bg-blue-700 hover:bg-blue-800 md:py-2 py-4 text-white md:px-6 px-8 font-medium text-2xl md:text-base"
             >
-              {{ t("seguro-viagem.button") }}
+              {{ t('seguro-viagem.button') }}
             </button>
           </div>
         </div>
@@ -48,6 +49,16 @@
 </template>
 
 <script setup>
-import { useI18n } from "vue-i18n";
+import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
+
+const cotarSeguro = () => {
+  const link = document.createElement('a');
+  const message = `https://api.whatsapp.com/send?phone=5585981708574&text=${t(
+    'seguro-viagem.wtsapp'
+  )}`;
+  link.setAttribute('href', message);
+  link.setAttribute('target', '_blank');
+  link.click();
+};
 </script>

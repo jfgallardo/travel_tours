@@ -147,13 +147,13 @@
 </template>
 
 <script setup>
-import { useForm } from "vee-validate";
-import { ref, watch } from "vue";
-import TextInput from "@/components/FormUI/TextInput.vue";
-import Select from "@/components/FormUI/TheSelect.vue";
-import DateInput from "@/components/FormUI/DateInput.vue";
-import { simpleSchemaReservation } from "@/utils/validate";
-import { usePdfStore } from "@/stores/pdf";
+import { useForm } from 'vee-validate';
+import { ref, watch } from 'vue';
+import TextInput from '@/components/FormUI/TextInput.vue';
+import Select from '@/components/FormUI/TheSelect.vue';
+import DateInput from '@/components/FormUI/DateInput.vue';
+import { simpleSchemaReservation } from '@/utils/validate';
+import { usePdfStore } from '@/stores/pdf';
 
 const props = defineProps({
   itemEdit: {
@@ -166,7 +166,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["editR"]);
+const emit = defineEmits(['editR']);
 const pdfStore = usePdfStore();
 
 const formValues = {
@@ -185,36 +185,36 @@ const formValues = {
 };
 
 const paymentTypes = [
-  { name: "Transferência bancária / bilhete", value: "T" },
-  { name: "Cartão de crédito", value: "C" },
+  { name: 'Transferência bancária / bilhete', value: 'T' },
+  { name: 'Cartão de crédito', value: 'C' },
 ];
 
 const typeCards = [
-  { name: "VISA", value: "VISA" },
-  { name: "MASTERCARD", value: "MASTERCARD" },
-  { name: "AMEX", value: "AMEX" },
-  { name: "HIPERCARD", value: "HIPERCARD" },
-  { name: "ELO", value: "ELO" },
-  { name: "OUTROS", value: "O" },
+  { name: 'VISA', value: 'VISA' },
+  { name: 'MASTERCARD', value: 'MASTERCARD' },
+  { name: 'AMEX', value: 'AMEX' },
+  { name: 'HIPERCARD', value: 'HIPERCARD' },
+  { name: 'ELO', value: 'ELO' },
+  { name: 'OUTROS', value: 'O' },
 ];
 
 const paymentSelect = ref(
-  props.itemEdit.paymentSelect === "T"
-    ? { name: "Transferência bancária / bilhete", value: "T" }
-    : { name: "Cartão de crédito", value: "C" }
+  props.itemEdit.paymentSelect === 'T'
+    ? { name: 'Transferência bancária / bilhete', value: 'T' }
+    : { name: 'Cartão de crédito', value: 'C' }
 );
-const cartao = ref("");
+const cartao = ref('');
 
-const numberParcels = ref("");
-const transactionValue = ref("");
-const rav = ref("");
-const rc = ref("");
-const tariff = ref("");
-const taxa_embarque = ref("");
-const dateTransaction = ref("");
+const numberParcels = ref('');
+const transactionValue = ref('');
+const rav = ref('');
+const rc = ref('');
+const tariff = ref('');
+const taxa_embarque = ref('');
+const dateTransaction = ref('');
 
-const primeiraParcela = ref("");
-const restosParcelas = ref("");
+const primeiraParcela = ref('');
+const restosParcelas = ref('');
 
 const { handleSubmit } = useForm({
   validationSchema: simpleSchemaReservation,
@@ -237,7 +237,7 @@ const onSubmit = handleSubmit((values) => {
   });
   values.route = values.route.toUpperCase();
   pdfStore.editReservation(props.itemIndex, values);
-  emit("editR");
+  emit('editR');
 });
 
 watch(numberParcels, async (number, oldQuestion) => {
@@ -272,8 +272,8 @@ watch(numberParcels, async (number, oldQuestion) => {
         1)
     ).toFixed(2);
   } else {
-    primeiraParcela.value = "0";
-    restosParcelas.value = "0";
+    primeiraParcela.value = '0';
+    restosParcelas.value = '0';
   }
 });
 </script>

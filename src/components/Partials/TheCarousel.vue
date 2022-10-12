@@ -43,13 +43,13 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["prev", "next"]);
+const emit = defineEmits(['prev', 'next']);
 
 let prev = () => {
-  emit("prev");
+  emit('prev');
 };
 let next = () => {
-  emit("next");
+  emit('next');
 };
 </script>
 

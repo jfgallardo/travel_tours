@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require('@tailwindcss/forms')],
 };

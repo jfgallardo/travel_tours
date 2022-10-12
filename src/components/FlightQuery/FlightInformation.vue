@@ -24,8 +24,8 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { useI18n } from "vue-i18n";
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 
@@ -38,14 +38,14 @@ const props = defineProps({
 const filterHours = computed(() => {
   const dateLocal = new Date(props.flightTime);
   return dateLocal.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
+    hour: '2-digit',
+    minute: '2-digit',
   });
 });
 
 const filterWeekday = computed(() => {
   const dateLocal = new Date(props.flightTime);
-  const options = { weekday: "long" };
+  const options = { weekday: 'long' };
 
   return dateLocal.toLocaleDateString(locale.value, options);
 });
@@ -53,7 +53,7 @@ const filterWeekday = computed(() => {
 const filterDayPeriod = computed(() => {
   const dateLocal = new Date(props.flightTime);
   const hours = dateLocal.getHours();
-  return hours >= 12 ? "PM" : "AM";
+  return hours >= 12 ? 'PM' : 'AM';
 });
 </script>
 

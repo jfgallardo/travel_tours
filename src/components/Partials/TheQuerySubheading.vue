@@ -18,29 +18,29 @@
 </template>
 
 <script setup>
-import ArrowLeft from "@/components/Icons/ArrowLeft.vue";
-import SelectSimple from "@/components/FormUI/TheSelectSimple.vue";
+import ArrowLeft from '@/components/Icons/ArrowLeft.vue';
+import SelectSimple from '@/components/FormUI/TheSelectSimple.vue';
 
 const conexões = [
   {
-    name: "Econômica",
-    value: "Y",
+    name: 'Econômica',
+    value: 'Y',
   },
   {
-    name: "Econômica Premium",
-    value: "W",
+    name: 'Econômica Premium',
+    value: 'W',
   },
   {
-    name: "Executiva",
-    value: "C",
+    name: 'Executiva',
+    value: 'C',
   },
   {
-    name: "Primeira Classe",
-    value: "F",
+    name: 'Primeira Classe',
+    value: 'F',
   },
   {
-    name: "Econômica + Premium",
-    value: "P",
+    name: 'Econômica + Premium',
+    value: 'P',
   },
 ];
 </script>

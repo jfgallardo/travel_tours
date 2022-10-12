@@ -23,8 +23,8 @@
 </template>
 
 <script setup>
-import TextInput from "@/components/FormUI/TextInput.vue";
-import { useUserStore } from "@/stores/user";
+import TextInput from '@/components/FormUI/TextInput.vue';
+import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore();
 </script>

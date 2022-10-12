@@ -19,12 +19,12 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref } from "vue";
+import { defineAsyncComponent, ref } from 'vue';
 const Flight = defineAsyncComponent(() =>
-  import("@/components/FlightQuery/FlightComponent.vue")
+  import('@/components/FlightQuery/FlightComponent.vue')
 );
 
-const emit = defineEmits(["selectVoo"]);
+const emit = defineEmits(['selectVoo']);
 
 const inputCheck = ref([]);
 const clearCheck = (ev) => {
@@ -38,9 +38,9 @@ const clearCheck = (ev) => {
 const selectFligth = (ev, fligth) => {
   clearCheck(ev.target);
   if (ev.target.checked) {
-    emit("selectVoo", fligth);
+    emit('selectVoo', fligth);
   } else {
-    emit("selectVoo", null);
+    emit('selectVoo', null);
   }
 };
 

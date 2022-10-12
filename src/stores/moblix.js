@@ -1,9 +1,9 @@
-import { defineStore } from "pinia";
-import { axiosClientAPI } from "@/plugins/axios";
-import dataDuty from "@/utils/data-duty-moblix";
+import { defineStore } from 'pinia';
+import { axiosClientAPI } from '@/plugins/axios';
+import dataDuty from '@/utils/data-duty-moblix';
 
 export const useMoblixStore = defineStore({
-  id: "moblix",
+  id: 'moblix',
   state: () => ({
     totalItems: 0,
     loading: false,
@@ -18,7 +18,7 @@ export const useMoblixStore = defineStore({
     async consultaAereo(payload) {
       this.loading = true;
       await axiosClientAPI
-        .post("/v1/moblix/query", payload)
+        .post('/v1/moblix/query', payload)
         .then((response) => {
           let { Aeroportos, Ida, Volta } = response.data.data[0];
           this.totalItems = response.data.totalItens;
@@ -28,7 +28,7 @@ export const useMoblixStore = defineStore({
           this.loading = false;
         })
         .catch((error) => {
-          console.log("error", error);
+          console.log('error', error);
         });
     },
     async clear() {

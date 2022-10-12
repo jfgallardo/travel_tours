@@ -33,15 +33,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Carousel from "@/components/Partials/TheCarousel.vue";
-import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
-import Puntacana from "@/assets/img/viaje1.jpg";
-import SanJuan from "@/assets/img/viaje2.jpg";
-import Uruguay from "@/assets/img/viaje3.jpg";
-import Avatar1 from "@/assets/img/avatar1.jpg";
-import Avatar2 from "@/assets/img/avatar2.jpg";
-import Avatar3 from "@/assets/img/avatar3.jpg";
+import { ref, onMounted } from 'vue';
+import Carousel from '@/components/Partials/TheCarousel.vue';
+import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
+import Puntacana from '@/assets/img/viaje1.jpg';
+import SanJuan from '@/assets/img/viaje2.jpg';
+import Uruguay from '@/assets/img/viaje3.jpg';
+import Avatar1 from '@/assets/img/avatar1.jpg';
+import Avatar2 from '@/assets/img/avatar2.jpg';
+import Avatar3 from '@/assets/img/avatar3.jpg';
 
 onMounted(() => {
   updateList();
@@ -52,39 +52,39 @@ const numberToRef = ref(0);
 
 const sliders = [
   {
-    city: "",
+    city: '',
     src: Puntacana,
     avatar: Avatar1,
-    travel: "Jessica Palmer",
-    place: "Puntacana",
+    travel: 'Jessica Palmer',
+    place: 'Puntacana',
   },
   {
-    city: "",
+    city: '',
     src: SanJuan,
     avatar: Avatar2,
-    travel: "Rudiguer Corinho",
-    place: "San Juan",
+    travel: 'Rudiguer Corinho',
+    place: 'San Juan',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Vivian Meldier",
-    place: "Uruguay",
+    travel: 'Vivian Meldier',
+    place: 'Uruguay',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Ernesto Meldier",
-    place: "Chile",
+    travel: 'Ernesto Meldier',
+    place: 'Chile',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Juan Placencia",
-    place: "Peru",
+    travel: 'Juan Placencia',
+    place: 'Peru',
   },
 ];
 const updateList = () => {

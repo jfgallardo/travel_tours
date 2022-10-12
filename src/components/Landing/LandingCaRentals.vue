@@ -31,24 +31,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Carousel from "@/components/Partials/TheCarousel.vue";
-import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
-import Londres from "@/assets/img/londres.jpg";
-import Madrid from "@/assets/img/madrid.jpg";
-import Miami from "@/assets/img/miami.jpg";
+import { ref, onMounted } from 'vue';
+import Carousel from '@/components/Partials/TheCarousel.vue';
+import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
+import Londres from '@/assets/img/londres.jpg';
+import Madrid from '@/assets/img/madrid.jpg';
+import Miami from '@/assets/img/miami.jpg';
 
 onMounted(() => {
   updateList();
 });
 
 const sliders = [
-  { url: Londres, city: "Londres", place: 75, price: 44.99 },
-  { url: Madrid, city: "Madrid", place: 23, price: 32.9 },
-  { url: Miami, city: "Miami", place: 12, price: 40 },
-  { url: Miami, city: "Espana", place: 42, price: 240 },
-  { url: Miami, city: "Cuba", place: 42, price: 240 },
+  { url: Londres, city: 'Londres', place: 75, price: 44.99 },
+  { url: Madrid, city: 'Madrid', place: 23, price: 32.9 },
+  { url: Miami, city: 'Miami', place: 12, price: 40 },
+  { url: Miami, city: 'Espana', place: 42, price: 240 },
+  { url: Miami, city: 'Cuba', place: 42, price: 240 },
 ];
 
 const itemsToDisplay = ref([]);

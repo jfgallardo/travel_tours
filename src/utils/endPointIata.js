@@ -1,4 +1,4 @@
-import { axiosAviationAPI } from "@/plugins/axios";
+import { axiosAviationAPI } from '@/plugins/axios';
 
 const endpoint = async (query) => {
   const endpointAuto = axiosAviationAPI.get(

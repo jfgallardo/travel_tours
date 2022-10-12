@@ -11,8 +11,8 @@
 </template>
 
 <script setup>
-import { useAlertStore } from "@/stores/alert";
-import { onMounted } from "vue";
+import { useAlertStore } from '@/stores/alert';
+import { onMounted } from 'vue';
 
 onMounted(() => {
   setTimeout(function () {
