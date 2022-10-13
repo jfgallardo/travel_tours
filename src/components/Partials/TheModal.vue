@@ -19,7 +19,7 @@
       ></div>
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div
-          class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+          class="flex min-h-full items-end justify-center p-8 text-center sm:items-center sm:p-0"
         >
           <Transition
             enter-active-class="ease-out duration-300"
@@ -52,12 +52,13 @@
               <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
                   <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3
+                   <!--  <h3
                       class="text-lg font-medium leading-6 text-gray-900"
                       id="modal-title"
                     >
                       {{ title }}
-                    </h3>
+                    </h3> -->
+                    <slot name="title"></slot>
                     <div class="mt-2">
                       <slot name="body"></slot>
                     </div>

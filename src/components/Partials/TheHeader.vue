@@ -198,7 +198,7 @@
           <RouterLink
             @click="hiddenOf = false"
             class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
-            to="/"
+            :to="{ name: 'MainQuestionsPage' }"
             >{{ t('header.duvidas') }}</RouterLink
           >
           <RouterLink

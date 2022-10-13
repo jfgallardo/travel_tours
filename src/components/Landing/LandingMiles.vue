@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="lg:container lg:mx-auto lg:px-40 lg:py-20 pb-20">
+    <div class="lg:container lg:mx-auto lg:px-40 lg:py-20">
+      <!-- pb-20 delete up -->
       <div
         class="pb-8 bg-blue-500 lg:h-96 flex flex-col justify-center px-14 space-y-3 pt-16 text-center"
       >

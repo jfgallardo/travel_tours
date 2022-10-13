@@ -9,7 +9,9 @@
         <div class="w-32 border"></div>
       </div>
 
-      <div class="flex items-center space-x-10">
+      <div
+        class="flex flex-col md:flex-row items-center md:space-x-10 md:space-y-0 space-y-5"
+      >
         <TariffMarket
           header="MOVIDA"
           color="bg-blue-800"
@@ -40,22 +42,27 @@
         </h1>
         <div class="w-32 border"></div>
       </div>
+      <div class="flex items-center space-x-5 justify-center">
+        <LocalizaCompany />
+        <MovidaCompany />
+        <UnidasCompany />
+      </div>
 
-      <div class="flex items-center justify-evenly">
-        <div
-          class="bg-gradient-to-r from-blue-700 to-cyan-400 h-80 w-80 flex justify-center items-center"
-        >
-          <p class="text-white text-3xl">
-            {{ t('pageCarCategories.national') }}
-          </p>
-        </div>
-        <div
-          class="bg-gradient-to-r from-cyan-400 to-blue-700 h-80 w-80 flex justify-center items-center"
-        >
-          <p class="text-white text-3xl">
-            {{ t('pageCarCategories.international') }}
-          </p>
-        </div>
+      <div class="flex items-center justify-center space-x-3">
+        <div class="w-32 border"></div>
+        <h1 class="text-blue-700 text-3xl font-light">
+          COMPANHIAS INTERNACIONAIS
+        </h1>
+        <div class="w-32 border"></div>
+      </div>
+      <div class="flex items-center space-x-5 justify-center">
+        <AvisCompany />
+        <DollarCompany />
+        <HertzCompany />
+      </div>
+      <div class="flex items-center space-x-5 justify-center">
+        <EuropCarCompany />
+        <AlamoCompany />
       </div>
     </div>
   </div>
@@ -63,7 +70,15 @@
 <script setup>
 import TariffMarket from '@/components/Static/TariffMarket.vue';
 import { useI18n } from 'vue-i18n';
+import LocalizaCompany from '@/components/Static/LocalizaCompany.vue';
+import MovidaCompany from '@/components/Static/MovidaCompany.vue';
+import UnidasCompany from '@/components/Static/UnidasCompany.vue';
+import AvisCompany from '@/components/Static/AvisCompany.vue';
+import DollarCompany from '@/components/Static/DollarCompany.vue';
+import EuropCarCompany from '@/components/Static/EuropCarCompany.vue';
+import AlamoCompany from '@/components/Static/AlamoCompany.vue';
+import HertzCompany from '@/components/Static/HertzCompany.vue';
 
 const { t } = useI18n();
 </script>
-<style></style>
+<style scoped></style>

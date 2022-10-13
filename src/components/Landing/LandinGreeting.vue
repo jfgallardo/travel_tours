@@ -4,19 +4,19 @@
       <div class="space-y-10">
         <div class="flex items-center justify-center space-x-5">
           <img
-            src="@/assets/img/avatar1.jpg"
-            class="h-16 w-16 object-cover rounded-full hidden md:block"
-          />
-          <img
-            src="@/assets/img/avatar3.jpg"
-            class="h-20 w-20 object-cover rounded-full"
+            src="@/assets/img/avatar-first.jpg"
+            class="h-16 w-16 object-cover object-left-top rounded-full hidden md:block"
           />
           <img
             src="@/assets/img/avatar2.jpg"
-            class="h-24 w-24 object-cover rounded-full"
+            class="h-20 w-20 object-cover rounded-full"
           />
           <img
-            src="@/assets/img/avatar1.jpg"
+            src="@/assets/img/avatar-center.jpg"
+            class="h-24 w-24 object-cover object-top rounded-full"
+          />
+          <img
+            src="@/assets/img/avatar-rigth.jpg"
             class="h-20 w-20 object-cover rounded-full"
           />
           <img
@@ -31,10 +31,12 @@
           <h2 class="px-8 text-center text-2xl font-medium pb-2">
             MR TRAVEL & TOURS
           </h2>
-          <div class="grid grid-cols-2 place-items-center">
+          <div class="grid grid-cols-2 gap-4 text-sm md:place-items-center">
             <div>
-              <p class="font-light"><b>CNPJ:</b> 30.876.256/0001-28</p>
-              <p class="font-light">
+              <p class="font-light text-center md:text-left">
+                <b>CNPJ:</b> 30.876.256/0001-28
+              </p>
+              <p class="font-light text-center md:text-left">
                 <b>Direção:</b> Rua Hélio Batelão, 439, A Mondubim, CE /
                 Fortaleza - 60766055
               </p>
