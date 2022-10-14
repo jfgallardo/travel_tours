@@ -69,6 +69,7 @@
 </template>
 <script setup>
 import TariffMarket from '@/components/Static/TariffMarket.vue';
+import { RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import LocalizaCompany from '@/components/Static/LocalizaCompany.vue';
 import MovidaCompany from '@/components/Static/MovidaCompany.vue';

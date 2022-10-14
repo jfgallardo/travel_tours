@@ -6,7 +6,7 @@
       <div class="flex items-center justify-around">
         <div class="flex items-center h-full">
           <div class="border-r border-gray-300 h-full py-2">
-            <RouterLink :to="{ name: 'LandingPage' }">
+            <RouterLink :to="{ name: 'LandingPage', hash: '#idCarCategories' }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 106.76 60.04"
