@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      class="md:border-b md:border-gray-300 md:grid md:grid-cols-3 md:grid-rows-1 md:gap-7"
-    >
+    <div class="md:grid md:grid-cols-3 md:grid-rows-1 md:gap-7"> <!-- md:border-b md:border-gray-300 -->
       <div class="md:relative">
         <div class="md:fixed md:w-2/6">
           <div class="border-r border-gray-300 pt-8">

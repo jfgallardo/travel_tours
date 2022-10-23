@@ -77,6 +77,7 @@ onMounted(() => {
         done();
       };
     },
+    dateFormat: 'dd/MM/yyyy',
     locale: localeEn,
     autoClose: true,
     navTitles: {

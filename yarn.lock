@@ -2103,7 +2103,9 @@ __metadata:
     pinia: ^2.0.17
     postcss: ^8.4.16
     prettier: ^2.7.1
+    qrcode.vue: ^3.3.3
     tailwindcss: ^3.1.8
+    toastify-js: ^1.12.0
     vee-validate: ^4.6.6
     vite: ^3.0.4
     vue: ^3.2.37
@@ -3357,6 +3359,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qrcode.vue@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "qrcode.vue@npm:3.3.3"
+  peerDependencies:
+    vue: ^3.0.0
+  checksum: 6f1fb0fbdfac972115b6d48937b42fbe6dff41297be77fcc461f1287e21e1d76a1d695eb50230cca1929619ab75423a4bbace73a6d05ef1f5c45d0966d2170c1
+  languageName: node
+  linkType: hard
+
 "queue-microtask@npm:^1.2.2":
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
@@ -3914,6 +3925,13 @@ __metadata:
   dependencies:
     is-number: ^7.0.0
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
+  languageName: node
+  linkType: hard
+
+"toastify-js@npm:^1.12.0":
+  version: 1.12.0
+  resolution: "toastify-js@npm:1.12.0"
+  checksum: effb5553f11aa86caa2aceee01c446daea9cb4894e9c57021cf2de483ddcb46f82615058a4871e02055ac9f01d5c0d7ec2a4a7b209388d078092b7c2f9a88090
   languageName: node
   linkType: hard
 

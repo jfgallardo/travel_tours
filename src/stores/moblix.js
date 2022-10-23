@@ -10,22 +10,26 @@ export const useMoblixStore = defineStore({
     outboundFlights: [],
     returnFlights: [],
     aeroportos: [],
+    qntdBebe: 0,
+    qntdCrianca: 0,
+    qntdAdulto: 0,
   }),
-  getters: {
-    getters: (state) => {},
-  },
   actions: {
     async consultaAereo(payload) {
       this.loading = true;
       await axiosClientAPI
         .post('/v1/moblix/query', payload)
         .then((response) => {
-          let { Aeroportos, Ida, Volta } = response.data.data[0];
+          let { Aeroportos, Ida, Volta, QntdAdulto, QntdCrianca, QntdBebe } =
+            response.data.data[0];
           this.totalItems = response.data.totalItens;
           this.outboundFlights = dataDuty(Ida);
           this.returnFlights = dataDuty(Volta);
           this.aeroportos = Aeroportos;
           this.loading = false;
+          this.qntdBebe = QntdBebe;
+          this.qntdCrianca = QntdCrianca;
+          this.qntdAdulto = QntdAdulto;
         })
         .catch((error) => {
           console.log('error', error);

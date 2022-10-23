@@ -1,12 +1,13 @@
 <template>
   <div class="relative">
     <nav
+      :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']"
       class="fixed top-0 right-0 left-0 z-30 bg-white border-b border-gray-300 grid grid-cols-1"
     >
-      <div class="flex items-center justify-around">
+      <div class="flex items-center justify-around border-b">
         <div class="flex items-center h-full">
           <div class="border-r border-gray-300 h-full py-2">
-            <RouterLink :to="{ name: 'LandingPage', hash: '#idCarCategories' }">
+            <RouterLink :to="{ name: 'LandingPage' }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 106.76 60.04"
@@ -209,9 +210,9 @@
           </RouterLink>
         </div>
       </div>
-      <!-- <MainSubheading v-if="showMainSubheading" />
+      <MainSubheading v-if="showMainSubheading" />
       <QuerySubHeader v-if="showSubHeader" />
-      <RegisterSubH v-if="showRegisterSubH" />  -->
+      <RegisterSubH v-if="showRegisterSubH" />
     </nav>
   </div>
 </template>
@@ -236,7 +237,7 @@ const userStore = useUserStore();
 
 const hiddenOf = ref(false);
 
-/* const showMainSubheading = computed(() => {
+const showMainSubheading = computed(() => {
   return !(route.name === 'AereoFlightQuery') && route.name != 'RegisterPage';
 });
 const showSubHeader = computed(() => {
@@ -244,7 +245,7 @@ const showSubHeader = computed(() => {
 });
 const showRegisterSubH = computed(() => {
   return route.name === 'RegisterPage';
-}); */
+});
 </script>
 
 <style scoped>
@@ -252,4 +253,3 @@ const showRegisterSubH = computed(() => {
   fill: black;
 }
 </style>
-<!--    <nav :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']" -->

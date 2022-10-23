@@ -213,18 +213,24 @@
         </div>
       </div>
     </div>
-    <Modal :modal="modal" title="Criar reserva" @closeModal="modal = false">
-      <template v-slot:body>
+    <Modal :modal="modal" @closeModal="modal = false">
+      <template #body>
         <Reservation @createR="createReservation" />
       </template>
+      <template #title>
+        <span>Criar reserva</span>
+      </template>
     </Modal>
-    <Modal :modal="edit" title="Editar reserva" @closeModal="edit = false">
+    <Modal :modal="edit" @closeModal="edit = false">
       <template #body>
         <EditReservation
           :itemEdit="itemEdit"
           :itemIndex="itemIndex"
           @editR="edit = false"
         />
+      </template>
+      <template #title>
+        <span>Editar reserva</span>
       </template>
     </Modal>
   </div>

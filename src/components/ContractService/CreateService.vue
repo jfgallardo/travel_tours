@@ -125,18 +125,24 @@
         </div>
       </div>
     </div>
-    <Modal :modal="modal" title="Criar servicio" @closeModal="modal = false">
-      <template v-slot:body>
+    <Modal :modal="modal" @closeModal="modal = false">
+      <template #body>
         <Service @createS="createService" />
       </template>
+      <template #title>
+        <span>Criar servicio</span>
+      </template>
     </Modal>
-    <Modal :modal="edit" title="Editar servicio" @closeModal="edit = false">
+    <Modal :modal="edit" @closeModal="edit = false">
       <template #body>
         <EditService
           :itemEdit="itemEdit"
           :itemIndex="itemIndex"
           @editS="edit = false"
         />
+      </template>
+      <template #title>
+        <span>Editar servicio</span>
       </template>
     </Modal>
   </div>

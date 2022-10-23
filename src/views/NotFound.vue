@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- component -->
     <main class="flex flex-col justify-center items-center">
       <h1 class="text-9xl font-extrabold text-black tracking-widest">404</h1>
       <div class="bg-blue-300 px-2 text-sm rounded rotate-12 absolute">
@@ -26,5 +25,5 @@
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router';
 </script>

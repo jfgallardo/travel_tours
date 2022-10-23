@@ -159,8 +159,8 @@ import CreatePassengers from '@/components/ContractService/CreatePassengers.vue'
 import pdfCreatorDebit from '@/utils/debitPdf';
 import pdfCreatorContract from '@/utils/contractPdf';
 import { usePdfStore } from '@/stores/pdf';
-import { useAlertStore } from '@/stores/alert';
 import DateInput from '@/components/FormUI/DateInput.vue';
+import Toastify from 'toastify-js';
 import Tooltip from '@/components/Partials/TheTooltip.vue';
 
 onUnmounted(() => {
@@ -181,7 +181,6 @@ const localidadeCl = ref('');
 const ufCl = ref('');
 const cartao = ref('V');
 const pdfStore = usePdfStore();
-const alertStore = useAlertStore();
 
 const pdfsDebit = ref([]);
 
@@ -248,7 +247,17 @@ const onSubmit = handleSubmit((values) => {
     !pdfStore.services.length ||
     !pdfStore.reservations.length
   ) {
-    alertStore.showMsg(mgsPayload);
+    Toastify({
+      text: 'Deve haver pelo menos um dado adicionado em cada tabela',
+      duration: 3000,
+      gravity: 'bottom',
+      position: 'center',
+      stopOnFocus: true,
+      style: {
+        background: 'linear-gradient(to right,  #ff0000, #ff6666)',
+      },
+      onClick: function () {},
+    }).showToast();
     return;
   }
 

@@ -1,9 +1,15 @@
 <template>
   <div>
     <Header />
-    <Transition mode="out-in">
-      <RouterView />
-    </Transition>
+
+    <router-view v-slot="{ Component }">
+      <transition mode="out-in">
+        <div>
+          <component :is="Component" />
+        </div>
+      </transition>
+    </router-view>
+
     <Footer />
   </div>
 </template>

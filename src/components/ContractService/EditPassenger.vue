@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, computed } from 'vue';
 import { usePdfStore } from '@/stores/pdf';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import SelectReservations from '@/components/ContractService/SelectReservations.vue';
@@ -51,7 +51,6 @@ const props = defineProps({
   },
 });
 
-const passageiro = ref(null);
 const reservation = ref('');
 const formValues = {
   passageiro: props.itemEdit.passageiro,

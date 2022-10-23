@@ -152,7 +152,7 @@
       </form>
     </div>
     <Modal :modal="modal" @closeModal="modal = false">
-      <template v-slot:body>
+      <template #body>
         <div class="bg-white px-4 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
             <div

@@ -126,18 +126,24 @@
         </div>
       </div>
     </div>
-    <Modal :modal="modal" title="Criar passageiro" @closeModal="modal = false">
-      <template v-slot:body>
+    <Modal :modal="modal" @closeModal="modal = false">
+      <template #body>
         <PassengerItem @createP="createPassageiro" />
       </template>
+      <template #title>
+        <span>Criar passageiro</span>
+      </template>
     </Modal>
-    <Modal :modal="edit" title="Editar passageiro" @closeModal="edit = false">
+    <Modal :modal="edit" @closeModal="edit = false">
       <template #body>
         <EditPassenger
           :itemEdit="itemEdit"
           :itemIndex="itemIndex"
           @editP="edit = false"
         />
+      </template>
+      <template #title>
+        <span>Editar passageiro</span>
       </template>
     </Modal>
   </div>

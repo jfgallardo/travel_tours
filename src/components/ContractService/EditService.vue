@@ -51,7 +51,6 @@ const props = defineProps({
 const emit = defineEmits(['editS']);
 
 const pdfStore = usePdfStore();
-const service = ref(null);
 const formValues = {
   service: props.itemEdit.service,
 };

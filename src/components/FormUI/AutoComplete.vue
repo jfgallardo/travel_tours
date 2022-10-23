@@ -84,7 +84,7 @@
 
 <script setup>
 import { onBeforeUpdate, ref, computed } from 'vue';
-import { axiosLocalAPI } from '@/plugins/axios';
+import { axiosClientAPI } from '@/plugins/axios';
 
 onBeforeUpdate(() => {
   optionsList.value = [];
@@ -163,7 +163,7 @@ const emitInput = (value) => {
 };
 
 const search = (query) => {
-  axiosLocalAPI.get(`v1/search-keyword/${query}`).then(({ data }) => {
+  axiosClientAPI.get(`api/v1/search-keyword/${query}`).then(({ data }) => {
     options.value = data;
     highlightOptions();
   });

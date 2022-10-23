@@ -7,6 +7,10 @@ const dataDuty = (flights) => {
       Chegada: flight.Chegada,
       TempoTotal: flight.TempoTotalStr,
       FlightCode: flight.FlightCode,
+      VooDirecto: flight.Voos.length === 1 ? true : false,
+      ValorTotalComTaxa: flight.ValorTotalComTaxa,
+      ValorTotalTaxas: flight.ValorTotalTaxas,
+      ValorTotal: flight.ValorTotal,
     };
   });
 

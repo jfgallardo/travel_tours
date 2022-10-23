@@ -30,7 +30,7 @@
             leave-to-class="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div
-              class="relative transform bg-white text-left transition-all sm:my-8 sm:w-full sm:max-w-3xl"
+              class="relative transform bg-white text-left transition-all sm:my-8 sm:w-full sm:max-w-7xl"
               v-if="modal"
             >
               <span
@@ -49,7 +49,7 @@
                   />
                 </svg>
               </span>
-              <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div class="bg-white px-4 pt-5">
                 <div class="sm:flex sm:items-start">
                   <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                    <!--  <h3

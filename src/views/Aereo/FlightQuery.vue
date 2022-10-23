@@ -1,6 +1,6 @@
 <template>
   <div v-if="moblixStore.loading">
-    <div>Loading........</div>
+    <Loader />
   </div>
 
   <div v-else class="pr-5">
@@ -23,12 +23,15 @@
 
           <div>
             <div>
-              <RenderFlights :flights="moblixStore.outboundFlights" />
+              <RenderFlights
+                :flights="moblixStore.outboundFlights"
+                @selectVoo="vooDetalhesOutboundFlights"
+              />
             </div>
           </div>
         </div>
         <div class="basis-3/12 border border-gray-300">
-          <FlightDetalhes />
+          <FlightDetalhes :vooDetalhes="vooDetalhesOutbound" />
         </div>
       </div>
 
@@ -42,12 +45,15 @@
 
           <div>
             <div>
-              <RenderFlights :flights="moblixStore.returnFlights" />
+              <RenderFlights
+                :flights="moblixStore.returnFlights"
+                @selectVoo="vooDetalhesReturnFlights"
+              />
             </div>
           </div>
         </div>
         <div class="basis-3/12 border border-gray-300">
-          <FlightDetalhes />
+          <FlightDetalhes :vooDetalhes="vooDetalhesReturn" />
         </div>
       </div>
     </div>
@@ -58,8 +64,9 @@
 import ButtonFilter from '@/components/FlightQuery/ButtonFilter.vue';
 import FlightDetalhes from '@/components/FlightQuery/FlightDetalhes.vue';
 import RenderFlights from '@/components/FlightQuery/RenderFlights.vue';
+import Loader from '@/components/Partials/TheLoader.vue';
 import { useMoblixStore } from '@/stores/moblix';
-import { onUnmounted, onMounted, ref, computed } from 'vue';
+import { onUnmounted, onMounted, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const moblixStore = useMoblixStore();
@@ -68,6 +75,9 @@ const route = useRoute();
 onMounted(() => {
   search();
 });
+
+let vooDetalhesReturn = ref(null);
+let vooDetalhesOutbound = ref(null);
 
 const resultCount = computed(() => {
   return moblixStore.outboundFlights.length + moblixStore.returnFlights.length;
@@ -88,26 +98,14 @@ const search = () => {
   };
   moblixStore.consultaAereo(payload);
 };
+
+const vooDetalhesReturnFlights = (fligth) => {
+  vooDetalhesReturn.value = fligth;
+};
+
+const vooDetalhesOutboundFlights = (fligth) => {
+  vooDetalhesOutbound.value = fligth;
+};
 </script>
 
 <style scoped></style>
-
-<!-- <div v-if="moblixStore.loading">
-    <div>
-      Loading........
-    </div>
-  </div>
-  <div v-else>
-    <ButtonFilter />
-    <br />
-    <div class="grid grid-cols-4 grid-rows-1 gap-4 border">
-      <div class="col-span-3">
-        <RenderFlights :flights="moblixStore.outboundFlights" />
-        <RenderFlights :flights="moblixStore.returnFlights"/>
-      </div>
-      <div class="flex flex-col space-y-6">
-        <FlightDetalhes v-if="selectOutboundFlights" />
-        <FlightDetalhes v-if="selectReturnFlights" />
-      </div>
-    </div>
-  </div> -->

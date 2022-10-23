@@ -19,18 +19,25 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref } from 'vue';
-const Flight = defineAsyncComponent(() =>
-  import('@/components/FlightQuery/FlightComponent.vue')
-);
+import { ref, onMounted } from 'vue';
+import Flight from '@/components/FlightQuery/FlightComponent.vue';
 
 const emit = defineEmits(['selectVoo']);
+
+onMounted(() => {
+  if (inputCheck.value.length > 0) {
+    inputCheck.value[0].checked = true;
+    emit('selectVoo', props.flights[0]);
+  }
+});
 
 const inputCheck = ref([]);
 const clearCheck = (ev) => {
   inputCheck.value.forEach((element) => {
     if (element != ev) {
       element.checked = false;
+    } else {
+      element.checked = true;
     }
   });
 };

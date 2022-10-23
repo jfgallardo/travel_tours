@@ -240,7 +240,7 @@ const onSubmit = handleSubmit((values) => {
   emit('editR');
 });
 
-watch(numberParcels, async (number, oldQuestion) => {
+watch(numberParcels, async (number) => {
   if (number > 0) {
     primeiraParcela.value = (
       parseFloat(tariff.value ? tariff.value : props.itemEdit.rate) /

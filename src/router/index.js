@@ -1,29 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import LayoutDefault from '@/layouts/LayoutDefault.vue';
-import LayoutAuth from '@/layouts/LayoutAuth.vue';
-import LandingPage from '@/views/LandingPage.vue';
+/* const UserDetails = () => import('./views/UserDetails.vue')
+ */
+const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
+const LayoutAuth = () => import('@/layouts/LayoutAuth.vue');
+const LandingPage = () => import('@/views/LandingPage.vue');
 
-import AereoHomePage from '@/views/Aereo/HomePage.vue';
-import AereoFlightQuery from '@/views/Aereo/FlightQuery.vue';
-import AereoLandingPage from '@/views/Aereo/LandingPage.vue';
+const AereoHomePage = () => import('@/views/Aereo/HomePage.vue');
+const AereoFlightQuery = () => import('@/views/Aereo/FlightQuery.vue');
+const AereoLandingPage = () => import('@/views/Aereo/LandingPage.vue');
 
-import HotelHomePage from '@/views/Hotel/HomePage.vue';
-import HotelLandingPage from '@/views/Hotel/LandingPage.vue';
+const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
+const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
 
-import CruiseHomePage from '@/views/Cruceros/HomePage.vue';
-import CruiseLandingPage from '@/views/Cruceros/LandingPage.vue';
+const CruiseHomePage = () => import('@/views/Cruceros/HomePage.vue');
+const CruiseLandingPage = () => import('@/views/Cruceros/LandingPage.vue');
 
-import ContractService from '@/views/ContractService.vue';
-import NotFound from '@/views/NotFound.vue';
+const ContractService = () => import('@/views/ContractService.vue');
+const NotFound = () => import('@/views/NotFound.vue');
 
-import RegisterPage from '@/views/Auth/RegisterPage.vue';
+const RegisterPage = () => import('@/views/Auth/RegisterPage.vue');
 
-import ContactPage from '@/views/Static/ContactPage.vue';
-import TermsPage from '@/views/Static/TermsPage.vue';
-import WhoWeArePage from '@/views/Static/WhoWeArePage.vue';
-import PrivacyPage from '@/views/Static/PrivacyPage.vue';
-import MainQuestionsPage from '@/views/Static/MainQuestionsPage.vue';
-import CarCategoriesPage from '@/views/Static/CarCategoriesPage.vue';
+const ContactPage = () => import('@/views/Static/ContactPage.vue');
+const TermsPage = () => import('@/views/Static/TermsPage.vue');
+const WhoWeArePage = () => import('@/views/Static/WhoWeArePage.vue');
+const PrivacyPage = () => import('@/views/Static/PrivacyPage.vue');
+const MainQuestionsPage = () => import('@/views/Static/MainQuestionsPage.vue');
+const CarCategoriesPage = () => import('@/views/Static/CarCategoriesPage.vue');
 
 const scrollBehavior = (to, from, savedPosition) => {
   if (to.name === from.name) {
@@ -42,13 +44,13 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior,
   routes: [
-    /* {
+    {
       path: '/signIn',
       component: LayoutAuth,
       children: [
         { path: 'register', name: 'RegisterPage', component: RegisterPage },
       ],
-    }, */
+    },
     {
       path: '/',
       component: LayoutDefault,
@@ -64,7 +66,7 @@ const router = createRouter({
             },
           },
         },
-        /* {
+        {
           path: '/aereo',
           name: 'AereoHomePage',
           component: AereoHomePage,
@@ -76,16 +78,16 @@ const router = createRouter({
               component: AereoFlightQuery,
             },
           ],
-        }, */
-        /* {
+        },
+        {
           path: '/hotel',
           name: 'HotelHomePage',
           component: HotelHomePage,
           children: [
             { path: '', name: 'HotelLandingPage', component: HotelLandingPage },
           ],
-        }, */
-        /* {
+        },
+        {
           path: '/cruise',
           name: 'CruiseHomePage',
           component: CruiseHomePage,
@@ -96,12 +98,12 @@ const router = createRouter({
               component: CruiseLandingPage,
             },
           ],
-        }, */
-        /* {
+        },
+        {
           path: 'contract/service',
           name: 'ContractService',
           component: ContractService,
-        }, */
+        },
         {
           path: 'contact',
           name: 'ContactPage',

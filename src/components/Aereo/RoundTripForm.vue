@@ -174,6 +174,7 @@ import Check from '@/components/FormUI/CheckInput.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
+import Toastify from 'toastify-js';
 
 const moblixStore = useMoblixStore();
 const router = useRouter();
@@ -192,7 +193,7 @@ const destino = reactive({
 const departureDate = ref('');
 const returnDate = ref('');
 
-const cabine = ref({ name: 'Econômica', value: 'Y' });
+const cabine = ref({ name: 'Todas', value: -1 });
 
 const numberAdults = ref(1);
 const numberChilds = ref(0);
@@ -244,35 +245,52 @@ const changeDestinations = () => {
 
 const notBeforeDate = computed(() => {
   if (departureDate.value) {
-    return new Date(departureDate.value);
+    let dateParts = departureDate.value.split('/');
+    let dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+    return dateObject;
   } else {
     return new Date();
   }
 });
 
+const formatterDateS = (date) => {
+  let dateParts = date.split('/');
+  return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+};
+
 const options = [
-  { name: 'Econômica', value: 'Y' },
-  { name: 'Econômica Premium', value: 'W' },
-  { name: 'Executiva', value: 'C' },
-  { name: 'Primeira Classe', value: 'F' },
-  { name: 'Econômica + Premium', value: 'P' },
+  { name: 'Econômica', value: 0 },
+  { name: 'Executiva', value: 2 },
+  { name: 'Primeira Classe', value: 1 },
+  { name: 'Todas', value: -1 },
 ];
 
-const search = (query) => {};
-
 const consultar = () => {
-  /* VALIDAR LOS CAMPOS DE LO CONTRARIO NO SE ENTRARA EN LA RUTA  */
-
   let payload = {
     Origem: origem.iata,
     Destino: destino.iata,
-    Ida: departureDate.value,
-    Volta: returnDate.value,
+    Ida: formatterDateS(departureDate.value),
+    Volta: formatterDateS(returnDate.value),
     Adultos: numberAdults.value,
     Criancas: numberChilds.value,
     Bebes: numberBebes.value,
-    Companhia: 1,
+    Companhia: 2,
+    Cabine: cabine.value.value,
   };
+
+  if (!payload.Origem || !payload.Destino || !payload.Ida || !payload.Volta) {
+    Toastify({
+      text: 'Por favor, verifique, existen campos vacios o incorrectos',
+      duration: 3000,
+      gravity: 'bottom',
+      position: 'center',
+      stopOnFocus: true,
+      style: {
+        background: 'linear-gradient(to right,  #ff0000, #ff6666)',
+      },
+    }).showToast();
+    return;
+  }
 
   if (route.name === 'AereoFlightQuery') {
     router
@@ -281,14 +299,14 @@ const consultar = () => {
         params: {
           source: origem.iata,
           destiny: destino.iata,
-          departure_date: departureDate.value,
-          return_date: returnDate.value,
+          departure_date: formatterDateS(departureDate.value),
+          return_date: formatterDateS(returnDate.value),
         },
         query: {
           adults: numberAdults.value,
           childs: numberChilds.value,
           bebes: numberBebes.value,
-          company: 1,
+          company: 2,
         },
       })
       .then(() => {
@@ -300,14 +318,14 @@ const consultar = () => {
       params: {
         source: origem.iata,
         destiny: destino.iata,
-        departure_date: departureDate.value,
-        return_date: returnDate.value,
+        departure_date: formatterDateS(departureDate.value),
+        return_date: formatterDateS(returnDate.value),
       },
       query: {
         adults: numberAdults.value,
         childs: numberChilds.value,
         bebes: numberBebes.value,
-        company: 1,
+        company: 2,
       },
     });
   }

@@ -4,6 +4,7 @@ import i18n from '@/plugins/i18n';
 import '@/plugins/vee-validate';
 import router from '@/router';
 import 'air-datepicker/air-datepicker.css';
+import 'toastify-js/src/toastify.css';
 import Maska from 'maska';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
