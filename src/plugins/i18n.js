@@ -5,8 +5,8 @@ import es from '@/assets/locales/es-ES.json';
 import en from '@/assets/locales/en-US.json';
 
 const i18n = createI18n({
-  locale: 'en',
-  fallbackLocale: 'en',
+  locale: 'br',
+  fallbackLocale: 'br',
   silentFallbackWarn: true,
   messages: {
     br,

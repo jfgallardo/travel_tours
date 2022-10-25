@@ -46,7 +46,7 @@ import Globe from '@/components/Icons/Globe.vue';
 import ChevronDown from '@/components/Icons/ChevronDown.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 
-let state = reactive({ lang: 'EN' });
+let state = reactive({ lang: 'BR' });
 let hiddenDropdown = ref(false);
 const { locale } = useI18n();
 
