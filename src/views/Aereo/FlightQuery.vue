@@ -1,7 +1,5 @@
 <template>
-  <div v-if="moblixStore.loading">
-    <Loader />
-  </div>
+  <Loader v-if="moblixStore.loading" />
 
   <div v-else class="pr-5">
     <div class="py-5">
@@ -64,7 +62,7 @@
 import ButtonFilter from '@/components/FlightQuery/ButtonFilter.vue';
 import FlightDetalhes from '@/components/FlightQuery/FlightDetalhes.vue';
 import RenderFlights from '@/components/FlightQuery/RenderFlights.vue';
-import Loader from '@/components/Partials/TheLoader.vue';
+import Loader from '@/components/Partials/LoaderSearch.vue';
 import { useMoblixStore } from '@/stores/moblix';
 import { onUnmounted, onMounted, computed, ref } from 'vue';
 import { useRoute } from 'vue-router';

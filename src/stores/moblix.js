@@ -18,7 +18,7 @@ export const useMoblixStore = defineStore({
     async consultaAereo(payload) {
       this.loading = true;
       await axiosClientAPI
-        .post('/v1/moblix/query', payload)
+        .post('api/v1/moblix/query', payload)
         .then((response) => {
           let { Aeroportos, Ida, Volta, QntdAdulto, QntdCrianca, QntdBebe } =
             response.data.data[0];

@@ -1,58 +1,47 @@
 <template>
-  <div>
-    <div class="md:grid md:grid-cols-3 md:grid-rows-1 md:gap-7"> <!-- md:border-b md:border-gray-300 -->
-      <div class="md:relative">
-        <div class="md:fixed md:w-2/6">
-          <div class="border-r border-gray-300 pt-8">
-            <div class="grid grid-cols-3 grid-rows-1 px-4">
-              <button
-                ref="roundtrip"
-                @click="changeTab(RoundTrip, roundtrip)"
-                class="py-3 border border-gray-400"
-              >
-                Ida y volta
-              </button>
-              <button
-                ref="go"
-                @click="changeTab(OneWay, go)"
-                class="py-3 border-y border-gray-400"
-              >
-                So Ida
-              </button>
-              <button
-                ref="manycities"
-                @click="changeTab(ManyCities, manycities)"
-                class="py-3 border border-gray-400"
-              >
-                Varias ciudades
-              </button>
-            </div>
-            <div>
-              <component :is="selectedComponent"></component>
-            </div>
-          </div>
+  <div class="flex">
+    <div class="w-1/3 h-screen fixed left-0">
+      <div class="border-r border-gray-300 pt-8">
+        <div class="grid grid-cols-3 grid-rows-1 px-4">
+          <button
+            ref="roundtrip"
+            @click="changeTab(RoundTrip, roundtrip)"
+            class="py-3 border border-gray-400"
+          >
+            Ida y volta
+          </button>
+          <button
+            ref="go"
+            @click="changeTab(OneWay, go)"
+            class="py-3 border-y border-gray-400"
+          >
+            So Ida
+          </button>
+          <button
+            ref="manycities"
+            @click="changeTab(ManyCities, manycities)"
+            class="py-3 border border-gray-400"
+          >
+            Varias ciudades
+          </button>
+        </div>
+        <div>
+          <component :is="selectedComponent"></component>
         </div>
       </div>
-      <div class="col-span-2">
-        <RouterView />
-      </div>
+    </div>
+    <div class="w-2/3 h-screen relative top-0 left-1/3">
+      <RouterView />
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref, markRaw, onMounted } from 'vue';
+import { ref, markRaw, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
-
-const RoundTrip = defineAsyncComponent(() =>
-  import('@/components/Aereo/RoundTripForm.vue')
-);
-const ManyCities = defineAsyncComponent(() =>
-  import('@/components/Aereo/ManyCitiesForm.vue')
-);
-const OneWay = defineAsyncComponent(() =>
-  import('@/components/Aereo/OneWayForm.vue')
-);
+import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
+import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
+import OneWay from '@/components/Aereo/OneWayForm.vue';
 
 onMounted(() => {
   selectedComponent.value = markRaw(RoundTrip);
@@ -84,3 +73,43 @@ const changeTab = (newTab, ref) => {
   color: white;
 }
 </style>
+
+<!-- 
+  <div>
+    <div class="md:flex md:space-x-5">
+      <div class="md:basis-3/12">
+        <div class="border-r border-gray-300 pt-8">
+          <div class="grid grid-cols-3 grid-rows-1 px-4">
+            <button
+              ref="roundtrip"
+              @click="changeTab(RoundTrip, roundtrip)"
+              class="py-3 border border-gray-400"
+            >
+              Ida y volta
+            </button>
+            <button
+              ref="go"
+              @click="changeTab(OneWay, go)"
+              class="py-3 border-y border-gray-400"
+            >
+              So Ida
+            </button>
+            <button
+              ref="manycities"
+              @click="changeTab(ManyCities, manycities)"
+              class="py-3 border border-gray-400"
+            >
+              Varias ciudades
+            </button>
+          </div>
+          <div>
+            <component :is="selectedComponent"></component>
+          </div>
+        </div>
+      </div>
+      <div class="md:basis-9/12">
+        <RouterView />
+      </div>
+    </div>
+  </div>
+ -->

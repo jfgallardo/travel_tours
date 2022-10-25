@@ -1,20 +1,29 @@
 <template>
   <div class="flex items-center justify-evenly w-full h-full">
-    <Badge>
-      <RouterLink to="#" class="flex items-center">
-        <!-- :to="{ path: '/aereo' }" -->
+    <RouterLink
+      :to="{ path: '/aereo' }"
+      class="flex flex-col items-center"
+      :class="$route.path === '/aereo' ? 'pt-2' : 'py-2'"
+    >
+      <!-- :to="{ path: '/aereo' }" -->
+      <div class="flex items-center">
         <Airplane
           class="mr-1 h-5 w-5"
           :color="$route.path === '/aereo' ? 'blue' : '#292D32'"
         />
         <span
           class="hidden md:block"
-          :class="{ 'text-blue-700': $route.path === '/aereo' }"
+          :class="{ 'text-blue-700 font-medium': $route.path === '/aereo' }"
         >
           {{ t('header.aereo') }}
         </span>
-      </RouterLink>
-    </Badge>
+      </div>
+
+      <div
+        v-if="$route.path === '/aereo'"
+        class="border-b-2 border-blue-600 w-24 p-1"
+      ></div>
+    </RouterLink>
 
     <Badge>
       <RouterLink to="#" class="flex items-center">
@@ -74,7 +83,8 @@
         </span>
       </RouterLink>
     </Badge>
-   <!--  <RouterLink :to="{ name: 'ContractService' }" class="flex items-center">
+
+    <RouterLink :to="{ name: 'ContractService' }" class="flex items-center">
       <WalletOpenTick
         class="mr-1 h-5 w-5"
         :color="$route.path === '/contract/service' ? 'blue' : '#292D32'"
@@ -85,7 +95,7 @@
       >
         Autorização de débito
       </span>
-    </RouterLink> -->
+    </RouterLink>
   </div>
 </template>
 

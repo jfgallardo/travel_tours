@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="container" ref="dropdownP">
+      <div ref="dropdownP">
         <div class="relative">
           <span class="absolute top-0 pl-3 mt-1 text-gray-400 text-sm">{{
             label
@@ -15,7 +15,7 @@
           </div>
           <Transition>
             <div
-              class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute z-30"
+              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-30"
               v-if="hiddenDropdown"
               v-click-outside
             >

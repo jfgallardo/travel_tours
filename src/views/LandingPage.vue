@@ -3,20 +3,20 @@
   <Banner />
   <ExplorerVoo />
   <ExplorerHotel />
-  <!-- <CaRentals /> -->
+  <CaRentals />
   <CarCategories />
   <ExecutiveTaxi />
   <ExplorerCruzeiro />
   <SeguroViage />
   <BannerIngresos />
   <Miles />
-  <!-- <PackTourist />
+  <PackTourist />
   <Blog />
   <CommunityHero />
   <CommunityTrips />
   <CommunityTravelerPhotos />
   <CommunityFeedback />
-  <Instagram /> -->
+  <Instagram />
   <Greeting />
 </template>
 

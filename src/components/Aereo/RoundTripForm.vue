@@ -146,9 +146,9 @@
         <Check label="Para estudiantes" />
       </div>
 
-      <div>
+      <div class="">
         <button
-          class="bg-blue-700 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait"
+          class="bg-blue-700 hover:bg-blue-800 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait"
           :disabled="moblixStore.loading"
           @click="consultar()"
         >
