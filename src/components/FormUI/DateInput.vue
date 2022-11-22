@@ -21,7 +21,7 @@
         label
       }}</span>
       <input
-        v-model="value"
+        :value="modelValue"
         ref="input"
         type="text"
         :class="inputClassList"

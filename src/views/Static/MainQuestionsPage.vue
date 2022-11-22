@@ -18,18 +18,6 @@
 
       <CollapseAccording>
         <template v-slot:header
-          >{{ t('mainQuestions.buyUsingMmilesHeader') }}
-        </template>
-        <template v-slot:body>
-          <p
-            class="text-sm text-gray-700"
-            v-html="t('mainQuestions.buyUsingMmilesBody')"
-          ></p>
-        </template>
-      </CollapseAccording>
-
-      <CollapseAccording>
-        <template v-slot:header
           >{{ t('mainQuestions.cancellationsHeader') }}
         </template>
         <template v-slot:body>

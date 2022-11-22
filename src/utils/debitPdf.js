@@ -26,7 +26,7 @@ const pdfCreatorDebit = (data) => {
         style: ['center', 'text'],
       },
       ' ',
-      table(data),
+      table(data, pdfStore.otherData),
       ' ',
       {
         text: 'IMPORTANTE: Essa autorização destina-se ao pagamento de:  ',
@@ -145,7 +145,7 @@ const createListDestinasePagamento = (service, idReserva) => {
   });
 };
 
-const table = (data) => {
+const table = (data, otherData) => {
   return {
     layout: 'lightHorizontalLines',
     table: {
@@ -179,15 +179,38 @@ const table = (data) => {
           {},
         ],
         [
-          { text: `CPF Nº:  ${data.cpf_number}`, colSpan: 2 },
+          {
+            text: `CPF Nº: ${
+              Object.entries(otherData).length != 0
+                ? otherData.cpf
+                : data.cpf_number
+            }`,
+            colSpan: 2,
+          },
           {},
           {
-            text: `RG Nº:  ${data.rne_number ? data.rne_number : ''}`,
+            text: `RG Nº:  ${
+              Object.entries(otherData).length != 0
+                ? otherData.rg
+                : data.rne_number
+            }`,
             colSpan: 2,
           },
           {},
         ],
-        [{ text: `TELEFONE:  ${data.phone_number}`, colSpan: 4 }, {}, {}, {}],
+        [
+          {
+            text: `TELEFONE:  ${
+              Object.entries(otherData).length != 0
+                ? otherData.phone
+                : data.phone_number
+            }`,
+            colSpan: 4,
+          },
+          {},
+          {},
+          {},
+        ],
         [
           {
             text: `VALIDADE DO CARTÃO:  ${

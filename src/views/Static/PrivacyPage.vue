@@ -3,7 +3,7 @@
     <div class="px-4 py-10 container mx-auto">
       <div class="flex space-x-10">
         <div class="flex flex-col space-y-5 basis-1/4">
-          <h1 class="text-4xl font-sans">Mr Travel & Tours, Inc</h1>
+          <h1 class="text-4xl font-sans">MR TRAVEL & TOURS</h1>
           <div>
             <a
               href="#"

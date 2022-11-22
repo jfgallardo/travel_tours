@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="hertz" title="Localiza" @closeModal="hertz = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="hertz" title="Localiza" @close="hertz = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/hertz-popup.jpg" />
         </div>
       </template>

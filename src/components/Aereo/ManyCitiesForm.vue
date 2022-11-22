@@ -2,99 +2,119 @@
   <div class="mt-5">
     <div class="flex flex-col space-y-5">
       <div class="flex items-center justify-between space-x-5 px-4">
-        <Select
-          class="w-1/2"
-          label="Clases de cabina"
-          :selected="cabine"
-          :options="options"
-          @selectValue="
-            (e) => {
-              cabine = e;
-            }
-          "
-        />
-        <Dropddown label="Pasajeros" class="w-1/2">
+        <Dropddown :label="t('roundTripForm.labelPassageiros')" class="w-1/2">
           <template v-slot:selected>
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{ numberAdults }} Adultos</span>
-              <span>{{ numberChilds }} Criancas</span>
-              <span>{{ numberBebes }} Bebes</span>
+              <span>{{ t('adults', searchOptionsVooStore.adults) }}</span>
+              <span>{{ t('children', searchOptionsVooStore.teenagers) }}</span>
+              <span>{{ t('babies', searchOptionsVooStore.babies) }}</span>
             </div>
           </template>
           <template v-slot:dropdown>
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
                 subtitle="+16 anos"
-                v-model="numberAdults"
-                @takeOff="takeOffAdults()"
-                @addUp="addUpfAdults()"
-                label="Adultos"
+                v-model="searchOptionsVooStore.adults"
+                @takeOff="takeOff"
+                @addUp="addUp"
+                :label="t('adults')"
               />
 
               <ManageItems
                 subtitle="4-15 anos"
-                v-model="numberChilds"
-                @takeOff="takeOffChilds()"
-                @addUp="addUpfChilds()"
-                label="Adolescentes"
+                v-model="searchOptionsVooStore.teenagers"
+                @takeOff="takeOff"
+                @addUp="addUp"
+                :label="t('children')"
               />
 
               <ManageItems
                 subtitle="1-3 anos"
-                v-model="numberBebes"
-                @takeOff="takeOffBebes()"
-                @addUp="addUpfBebes()"
-                label="Ninos"
+                v-model="searchOptionsVooStore.babies"
+                @takeOff="takeOff"
+                @addUp="addUp"
+                :label="t('babies')"
               />
             </div>
 
             <div class="divide-x"></div>
           </template>
         </Dropddown>
+
+        <Select
+          class="w-1/2"
+          :label="t('roundTripForm.labelClassecabine')"
+          :selected="searchOptionsVooStore.cabin"
+          :options="options"
+          @selectValue="
+            (e) => {
+              searchOptionsVooStore.cabin = e;
+            }
+          "
+        />
       </div>
 
       <div class="flex flex-col space-y-2 px-4">
-        <template v-for="(trecho, index) in multiplosTrechos" :key="index">
-          <div class="flex space-x-1">
-            <AutoComplete
-              label="De"
-              :value="trecho.origem.string"
-              @input="
-                (e) => {
-                  trecho.origem.string = e;
-                }
-              "
-              @select="
-                (s) => {
-                  trecho.origem.iata = s;
-                }
-              "
-            />
+        <TransitionGroup name="list">
+          <template v-for="(trecho, index) in multiplosTrechos" :key="index">
+            <div class="flex space-x-1 relative">
+              <AutoComplete
+                :label="t('roundTripForm.labelDesde')"
+                :value="trecho.origem.string"
+                @input="
+                  (e) => {
+                    trecho.origem.string = e;
+                  }
+                "
+                @select="
+                  (s) => {
+                    trecho.origem.iata = s;
+                  }
+                "
+              />
 
-            <AutoComplete
-              label="Para"
-              :value="trecho.destino.string"
-              @input="
-                (e) => {
-                  trecho.destino.string = e;
-                }
-              "
-              @select="
-                (s) => {
-                  trecho.destino.iata = s;
-                }
-              "
-            />
+              <AutoComplete
+                :label="t('roundTripForm.labelPara')"
+                :value="trecho.destino.string"
+                @input="
+                  (e) => {
+                    trecho.destino.string = e;
+                  }
+                "
+                @select="
+                  (s) => {
+                    trecho.destino.iata = s;
+                  }
+                "
+              />
 
-            <DateInput
-              v-model="trecho.departureDate"
-              label="Ida"
-              :minDateShow="new Date()"
-            />
-          </div>
-        </template>
+              <DateInput
+                v-model="trecho.departureDate"
+                :label="t('roundTripForm.labelIda')"
+                :minDateShow="new Date()"
+              />
+
+              <svg
+                v-if="trecho.close"
+                @click="deleteField(index)"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 absolute -top-2 -right-4 cursor-pointer text-gray-500"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+          </template>
+        </TransitionGroup>
       </div>
 
       <div class="flex space-x-2">
@@ -102,14 +122,14 @@
           class="bg-gray-400 hover:bg-gray-500 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400"
           @click="addV"
         >
-          <span>Adicionar otro vuelo</span>
+          <span>{{ t('manyCities.adicionarVoo') }}</span>
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-800 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait"
           :disabled="moblixStore.loading"
           @click="consultar()"
         >
-          <span>Buscar pasaje</span>
+          <span>{{ t('roundTripForm.pesquisarVoos') }}</span>
           <div
             v-if="moblixStore.loading"
             class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
@@ -130,11 +150,13 @@ import Select from '@/components/FormUI/TheSelect.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import { useMoblixStore } from '@/stores/moblix';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import Toastify from 'toastify-js';
+import { useI18n } from 'vue-i18n';
 
-
-const cabine = ref({ name: 'Todas', value: -1 });
 const moblixStore = useMoblixStore();
+const searchOptionsVooStore = useSearchOptionsVooStore();
+const { t } = useI18n();
 
 const multiplosTrechos = ref([
   {
@@ -162,52 +184,36 @@ const multiplosTrechos = ref([
 ]);
 
 const options = [
-  { name: 'Econômica', value: 0 },
-  { name: 'Executiva', value: 2 },
-  { name: 'Primeira Classe', value: 1 },
-  { name: 'Todas', value: -1 },
+  { label: 'Econômica', value: 0 },
+  { label: 'Executiva', value: 2 },
+  { label: 'Primeira Classe', value: 1 },
+  { label: 'Todas', value: -1 },
 ];
 
-const numberAdults = ref(1);
-const numberChilds = ref(0);
-const numberBebes = ref(0);
-
-const takeOffAdults = () => {
-  if (numberAdults.value > 1) {
-    numberAdults.value--;
-  }
-};
-const addUpfAdults = () => {
-  if (numberAdults.value < 8) {
-    numberAdults.value++;
+const addUp = (e) => {
+  if (e === t('adults') && searchOptionsVooStore.adults < 8) {
+    searchOptionsVooStore.adults++;
+  } else if (e === t('children') && searchOptionsVooStore.teenagers < 8) {
+    searchOptionsVooStore.teenagers++;
+  } else if (e === t('babies') && searchOptionsVooStore.babies < 8) {
+    searchOptionsVooStore.babies++;
   }
 };
 
-const takeOffChilds = () => {
-  if (numberChilds.value > 0) {
-    numberChilds.value--;
-  }
-};
-const addUpfChilds = () => {
-  if (numberChilds.value < 8) {
-    numberChilds.value++;
-  }
-};
-
-const takeOffBebes = () => {
-  if (numberBebes.value > 0) {
-    numberBebes.value--;
-  }
-};
-const addUpfBebes = () => {
-  if (numberBebes.value < 8) {
-    numberBebes.value++;
+const takeOff = (e) => {
+  if (e === t('adults') && searchOptionsVooStore.adults > 1) {
+    searchOptionsVooStore.adults--;
+  } else if (e === t('children') && searchOptionsVooStore.teenagers > 0) {
+    searchOptionsVooStore.teenagers--;
+  } else if (e === t('babies') && searchOptionsVooStore.babies > 0) {
+    searchOptionsVooStore.babies--;
   }
 };
 
 const addV = () => {
   if (multiplosTrechos.value.length < 5) {
     multiplosTrechos.value.push({
+      close: true,
       departureDate: '',
       destino: {
         string: '',
@@ -220,7 +226,7 @@ const addV = () => {
     });
   } else {
     Toastify({
-      text: 'Você só pode adicionar até 5 voos',
+      text: 'Você só pode adicionar até cinco (5) voos',
       duration: 3000,
       gravity: 'bottom',
       position: 'center',
@@ -232,6 +238,20 @@ const addV = () => {
     }).showToast();
   }
 };
+
+const deleteField = (i) => {
+  multiplosTrechos.value.splice(i, 1);
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>

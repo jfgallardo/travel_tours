@@ -117,7 +117,7 @@ const clickOutListener = (evt) => {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  z-index: 1000;
+  z-index: 50;
   min-width: 10rem;
   padding: 0.5rem 0;
   display: none;

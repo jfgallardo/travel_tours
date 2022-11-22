@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="avis" title="Localiza" @closeModal="avis = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="avis" title="Localiza" @close="avis = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/avisbudget.jpg" />
         </div>
       </template>

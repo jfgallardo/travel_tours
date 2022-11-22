@@ -8,8 +8,14 @@
       >
         <div class="flex flex-col items-center font-medium">
           <p class="text-xl">Mais Barato</p>
-          <p>R$ 4.799</p>
-          <p>23h 43m (media)</p>
+          <div
+            class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
+            v-if="loading"
+          ></div>
+          <div v-else>
+            <p>R$ 4.799</p>
+            <p>23h 43m (media)</p>
+          </div>
         </div>
         <div class="absolute top-2 left-3">
           <svg
@@ -44,8 +50,14 @@
       >
         <div class="flex flex-col items-center font-medium">
           <p class="text-xl">Mais Rapido</p>
-          <p>R$ 7.319</p>
-          <p>8h 33m (media)</p>
+          <div
+            class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
+            v-if="loading"
+          ></div>
+          <div v-else>
+            <p>R$ 7.319</p>
+            <p>8h 33m (media)</p>
+          </div>
         </div>
         <div class="absolute top-2 left-3">
           <svg
@@ -73,8 +85,14 @@
       >
         <div class="flex flex-col items-center font-medium">
           <p class="text-xl">Premium</p>
-          <p>R$ 12.799</p>
-          <p>5h 43m (media)</p>
+          <div
+            class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
+            v-if="loading"
+          ></div>
+          <div v-else>
+            <p>R$ 12.799</p>
+            <p>5h 43m (media)</p>
+          </div>
         </div>
         <div class="absolute top-2 left-3">
           <svg
@@ -115,6 +133,13 @@ import { onMounted, ref } from 'vue';
 
 onMounted(() => {
   cheap.value.classList.add('active');
+});
+
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const cheap = ref(null);

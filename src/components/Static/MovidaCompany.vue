@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="movida" title="Localiza" @closeModal="movida = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="movida" title="Localiza" @close="movida = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/movida-popup.jpg" />
         </div>
       </template>

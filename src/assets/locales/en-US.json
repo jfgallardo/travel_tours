@@ -127,16 +127,14 @@
   "mainQuestions":{
     "airTicketPurchaseHeader":"Air ticket purchase",
     "airTicketPurchaseBody":"<b>Flight selection.</b><br/><br/>Our website will show you the best flight prices. Simply select the ones you prefer and the total value of the tickets will be displayed, including taxes.<br/><br/><b>Issuing the ticket.</b><br/><br/>Enter your order and the issuance of your tickets, the price of the flight may be changed by the airline without prior notice. If this happens, your ticket is canceled and the amount refunded. If you have chosen to pay by credit card, your card limit will be unlocked within a few days. If you have chosen to pay via bank transfer, the amount will also be refunded via bank transfer.",
-    "buyUsingMmilesHeader":"How to buy airline tickets using miles?",
-    "buyUsingMmilesBody":"<b>Find your flight.</b><br/><br/>Search by your destination and date. Then we'll show you the available flights. If the best option for you is the airline, we direct you to make the purchase on the company's website. If the most economical and advantageous option is with MR TRAVEL & TOURS, proceed to the next step.<br/><br/><b>Check the information.</b><br/><br/>When select your flight, we present your trip summary with the total amount of your purchase. Check and proceed. Then, we will direct you to a secure page, where you can make the payment.<br/><br/><b>Register.</b><br/><br/>If you have not yet registered on the site, it's time to register. It's quick, and you can still track your orders on our portal.<br/><br/><b>Choose your payment method.</b><br/><br/>You can pay your ticket via credit card in up to 10 installments, debit or bank transfer. If you choose the transfer, you will receive an email with our bank details to carry out the transaction online or at an ATM. With the payment confirmed and the order analyzed, your ticket will be issued by our team.<br/><br/><b>Receive your ticket by email.</b><br/><br/>You You will receive all updates about your order by email and, of course, your ticket as well. You can also verify your ticket by logging into your MR TRAVEL & TOURS account and clicking on 'my trips'. Check-in and seat selection are carried out directly on the airline's website, or at the airport, using your locator code. Good trip!",
     "cancellationsHeader":"Rebookings, Cancellations and Refunds",
-    "cancellationsBody":"<b>Important: For cancellations or any changes to your ticket, please contact us. Combined? It is not possible to make any changes directly with the airline &#128512;.</b><br/><br/><b>Which tickets can be canceled and/or rescheduled?</b><br/><br />We do not carry out rebooking of tickets. You can request cancellation (which is subject to a fine) and re-order or contact us to ask for the best option for your situation.<br/><br/><b>What are the fees for ticket cancellation?</b><br/><br/>Each airline has different conditions and fees in case of ticket cancellations, which can be easily located on the website of the company where you purchased your tickets. We remind you that the amount charged by us is a little higher than that charged by the company, to cover the costs of issuance, cancellation, taxes and fees. You can also contact us if you are unable to locate it.<br/><br/>MR TRAVEL & TOURS has the following cancellation fees, per segment and per passenger:<br/><br/> <b>Latam</b><br/>&#187;National cancellation fine: BRL 400<br/>&#187;International cancellation fine: BRL 900<br/><b>Gol</b><br/>&#187;National cancellation fine: BRL 400<br/>&#187;International cancellation fine: BRL 900<br/><b>Blue</b><br/> &#187;National cancellation fine: BRL 400<br/>&#187;International cancellation fine: BRL 900<br/><b>TAP</b><br/>&#187;Fine of Domestic cancellation: BRL 300<br/>&#187;International cancellation fine: BRL 1100<br/><b>Livelo</b><br/>&#187;National cancellation fine: BRL 300 <br/>&#187;International cancellation fine: BRL 800<br/>&#187;National cancellation fine: BRL 1000<br/>&#187;International cancellation fine: BRL 1000<br/><br/><b>How can I cancel my ticket?</b><br/><br/>You must send an email to falecom{'@'}mrtecn ologiaeservicos.com requesting the cancellation of your ticket and you will receive our guidelines.<br/><br/><b>Can I cancel my ticket free of charge?</b><br/><br/>You can cancel your ticket without airline costs within 24 hours after issuance, provided the flight purchased is for a date greater than 7 days. In this case, we charge a fee of R$40 reais per segment and passenger to cover the costs of issuance, cancellation, taxes and financial fees.<br/><br/><b>How is my canceled ticket refunded?</b><br/><br/>After the ticket cancellation is confirmed, the amount paid will be refunded by the same payment method in which the order was made, that is, credit card purchase reversal or transfer via TED . Refunds are made within 48 business hours. In the case of a credit card, you will see the chargeback on 1 or 2 invoices after the refund request.<br/><br/><b>I missed my flight, what should I do?</b><br/><br/>Check with us the fees for reimbursement in cases of non-boarding of the passenger. Please note that some companies do not issue refunds in case of no-show.",
+    "cancellationsBody":"<b>Important: for cancellations or any changes to your ticket, please contact us. Combined? It is not possible to make any changes directly with the airline &#128512;.</b><br/><br/><b>Which tickets can be canceled and/or rescheduled?</b><br/><br/>You can request cancellation and reschedule (which is subject to a fine) and re-order your order or contact us to request the best option for your situation.<br/><br/><b>What are the ticket cancellation fees?</b><br/><br/>Each airline has different conditions and fees in case of ticket cancellations, which can be easily located on the website of the company where you purchased your tickets.",
     "accumulateMilesHeader":"How can I earn miles?",
     "accumulateMilesBody":"Every time you pay a credit card bill, you earn points. These points can be redeemed for products, used for card annuity discounts or converted into miles for Latam's LatamPass, GOL's Smiles or AZUL's TudoAzul programs.",
     "sellMyMilesHeader":"How do I sell my miles?",
     "sellMyMilesBody":"Contact us through our system, we will make you an offer for your miles!",
     "registerOnSiteHeader":"Is it mandatory to register on the site to buy tickets and products?",
-    "registerOnSiteBody":"Not. Our system now has two sales formats: by registration or purchase without registration. To make your purchase quickly without registering at MR TRAVEL TECNOLOGIA E SERVICOS LTDA, just enter your e-mail address when paying for the order, so that your purchase data is sent. However, we recommend that you register on our website, because in addition to being free, it is also easier to view and organize your future purchases."
+    "registerOnSiteBody":"To some extent not. Our system lets you do surveys without having to be logged in. However, we recommend that you register on our website, because in addition to being free, it is also easier to view and organize your future purchases."
   },
   "landingCarCategories":{
     "title":"We serve national <br/>and international companies",
@@ -147,5 +145,29 @@
     "title2":"COMPANHIAS NACIONAIS",
     "national":"National",
     "international":"International"
-  }
+  },
+  "roundTripForm":{
+    "titleIdavolta":"Roundtrip",
+    "labelDesde":"From",
+    "labelPara":"To",
+    "labelIda":"Depart",
+    "labelVolta":"Return",
+    "labelClassecabine":"Cabin Class",
+    "labelPassageiros":"Travelers",
+    "aeroportosProximos":"Add nearby airports",
+    "voosDirectos":"Direct flights only",
+    "paraEstudantes":"For students",
+    "pesquisarVoos":"Search flights"
+  },
+  "manyCities":{
+    "adicionarVoo":"Add another flight"
+  },
+  "aereoHomePage":{
+    "titleRoundTrip":"@:roundTripForm.titleIdavolta",
+    "titleOneWay":"One way",
+    "titleManyCities":"Multi-city"
+  },
+  "adults":"{count} Adult | {count} Adults",
+  "children":"{count} Child | {count} Child | {count} Children",
+  "babies":"{count} Baby | {count} Baby | {count} Babies"
 }

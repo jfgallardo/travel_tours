@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="grid grid-flow-row auto-rows-max gap-3 content-start">
-      <div class="mt-5 px-2">
-        <div class="space-y-3 text-sm font-light">
+    <div class="grid grid-flow-row auto-rows-max gap-2 content-start">
+      <div class="mt-5 px-2 mb-3">
+        <div class="space-y-1 text-sm font-light">
           <p class="flex items-center justify-between">
             <span>1 Oferta</span
             ><span v-if="vooDetalhes">${{ ValorTotal }}</span>
@@ -27,15 +27,19 @@
           <p
             class="flex items-center justify-between border-b border-dashed pb-2 border-gray-300"
           >
-            <span>Total</span> <span class="text-3xl font-bold">$1131</span>
+            <span>Total</span> <span class="text-2xl font-bold">$1131</span>
           </p>
         </div>
       </div>
-      <div class="h-32 w-full flex items-center justify-center">
-        <qrcode-vue :value="value"></qrcode-vue>
+      <div class="flex justify-center">
+        <qrcode-vue :value="value" :size="80"></qrcode-vue>
       </div>
       <div>
-        <button class="bg-black text-white w-full py-2">Comprar</button>
+        <button
+          class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0"
+        >
+          Comprar
+        </button>
       </div>
     </div>
   </div>
@@ -47,11 +51,7 @@ import QrcodeVue from 'qrcode.vue';
 import { useMoblixStore } from '@/stores/moblix';
 
 onUpdated(() => {
-  value.value = `${window.location.protocol}//${
-    window.location.host
-  }/${Object.keys(props.vooDetalhes)
-    .map((key) => `${key}=${props.vooDetalhes[key]}`)
-    .join('&')}`;
+  value.value = `${window.location.protocol}//${window.location.host}/`;
 });
 
 const props = defineProps({

@@ -1,4 +1,4 @@
-const dataDuty = (flights) => {
+const unifyDataMoblix = (flights) => {
   const cleanData = flights.map(function (flight) {
     return {
       Origem: flight.Origem,
@@ -17,4 +17,4 @@ const dataDuty = (flights) => {
   return cleanData;
 };
 
-export default dataDuty;
+export default unifyDataMoblix;

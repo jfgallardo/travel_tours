@@ -127,16 +127,14 @@
   "mainQuestions":{
     "airTicketPurchaseHeader":"Compra de passagem aérea",
     "airTicketPurchaseBody":"<b>Seleção do voo.</b><br/><br/>Nosso site irá mostrar os melhores preços de voos. Basta selecionar os de sua preferência e o valor total das passagens será exibido, incluindo as taxas.<br/><br/><b>Emissão do bilhete.</b><br/><br/>Entre o seu pedido e a emissão das suas passagens, o valor do voo pode ser alterado pela companhia aérea sem aviso prévio. Caso isso aconteça, sua passagem é cancelada e o valor devolvido. Caso você tenha escolhido o pagamento com cartão de crédito, o limite do seu cartão será desbloqueado dentro de alguns dias. Se você tiver escolhido o pagamento via transferência bancária, o valor será devolvido também via transferência.",
-    "buyUsingMmilesHeader":"Como comprar passagens aéreas utilizando milhas?",
-    "buyUsingMmilesBody":"<b>Encontre o seu voo.</b><br/><br/>Busque pelo seu destino e data. Em seguida, mostraremos os voos disponíveis. Se a melhor opção para você for da companhia aérea, direcionamos você para fazer a compra no site da companhia. Se a opção mais econômica e vantajosa for na MR TRAVEL & TOURS, siga para o passo seguinte.<br/><br/><b>Confira as informações.</b><br/><br/>Ao selecionar seu voo, apresentamos o resumo da sua viagem com o valor total da sua compra. Confira e prossiga. Em seguida, direcionarmos você para uma página segura, onde poderá fazer o pagamento.<br/><br/><b>Faça seu cadastro.</b><br/><br/>Se você ainda não tem o cadastro no site, é hora de se cadastrar. É rapidinho, e você ainda poderá acompanhar os seus pedidos em nosso portal.<br/><br/><b>Escolha a forma de pagamento.</b><br/><br/>Você pode pagar sua passagem via cartão de crédito em até 10 vezes, boleto ou via transferência bancária. Se optar pela transferência, você recebe um e-mail com nossos dados bancários para realizar a operação online ou em um caixa eletrônico. Com o pagamento confirmado e pedido analisado, sua passagem segue para emissão realizada pela nossa equipe.<br/><br/><b>Receba sua passagem por e-mail.</b><br/><br/>Você receberá todas as atualizações sobre o seu pedido por e-mail e, claro, o bilhete da sua passagem também. Você também poderá verificar sua passagem entrando na sua conta na MR TRAVEL & TOURS e clicando em 'minhas viagens'. O checkin e a escolha de assentos são realizados direto no site da companhia aérea, ou no aeroporto, com seu código localizador. Boa viagem!",
     "cancellationsHeader":"Remarcações, cancelamentos e reembolsos",
-    "cancellationsBody":"<b>Importante: para cancelamentos ou qualquer alteração na sua passagem, entre em contato com a gente. Combinado? Não é possível fazer nenhuma mudança direto na companhia aérea &#128512;.</b><br/><br/><b>Quais passagens podem ser canceladas e/ou remarcadas?</b><br/><br/>Nós não realizamos remarcação de passagens. Você pode solicitar o cancelamento (que está sujeito à cobrança de multa) e refazer o seu pedido ou entrar em contato conosco, para solicitar a melhor opção para a situação.<br/><br/><b>Quais são as taxas de cancelamento de passagem?</b><br/><br/>Cada companhia aérea possui condições e taxas diferentes em caso de cancelamentos de passagens, que pode ser facilmente localizado no site da companhia onde você comprou as suas passagens. Lembramos que o valor cobrado por nós é um pouca acima do cobrado pela companhia, para cobrir os custos dos processos de emissão, cancelamento, impostos e tarifas. Você também pode entrar em contato conosco caso não esteja localizando.<br/><br/>A MR TRAVEL & TOURS tem como multa de cancelamento os seguintes valores, por trecho e por passageiro:<br/><br/><b>Latam</b><br/>&#187;Multa de cancelamento nacional: R$ 400<br/>&#187;Multa de cancelamento internacional: R$ 900<br/><b>Gol</b><br/>&#187;Multa de cancelamento nacional: R$ 400<br/>&#187;Multa de cancelamento internacional: R$ 900<br/><b>Azul</b><br/>&#187;Multa de cancelamento nacional: R$ 400<br/>&#187;Multa de cancelamento internacional: R$ 900<br/><b>TAP</b><br/>&#187;Multa de cancelamento nacional: R$ 300<br/>&#187;Multa de cancelamento internacional: R$ 1100<br/><b>Livelo</b><br/>&#187;Multa de cancelamento nacional: R$ 300<br/>&#187;Multa de cancelamento internacional: R$ 800<br/>&#187;Multa de cancelamento nacional: R$ 1000<br/>&#187;Multa de cancelamento internacional: R$ 1000<br/><br/><b>Como cancelar minha passagem?</b><br/><br/>Você deve enviar um e-mail para falecom{'@'}mrtecnologiaeservicos.com solicitando o cancelamento da sua passagem e receberá as nossas orientações.<br/><br/><b>Posso cancelar meu bilhete sem custo?</b><br/><br/>Você pode cancelar o seu bilhete sem os custos da companhia aérea em até 24 horas após a emissão, desde que o voo comprado seja para uma data maior que 7 dias. Neste caso, cobramos uma taxa de R$40 reais por trecho e passageiro para cobrir os custos de emissão, cancelamento, impostos e tarifas financeiras.<br/><br/><b>Como é feito o reembolso da minha passagem cancelada?</b><br/><br/>Depois da confirmação do cancelamento do bilhete, o valor pago será devolvido pelo mesmo meio de pagamento em que o pedido foi realizado, ou seja, estorno da compra no cartão de crédito ou transferência via TED. O reembolso é realizado em até 48 horas úteis. No caso do cartão de crédito, você verá o estorno em 1 ou 2 faturas após o pedido de reembolso.<br/><br/><b>Perdi o meu voo, o que devo fazer?</b><br/><br/>Verifique conosco as taxas para reembolso em casos de não embarque do passageiro. Ressaltamos que algumas companhias não fazem reembolso em caso de não comparecimento.",
+    "cancellationsBody":"<b>Importante: para cancelamentos ou qualquer alteração na sua passagem, entre em contato com a gente. Combinado? Não é possível fazer nenhuma mudança direto na companhia aérea &#128512;.</b><br/><br/><b>Quais passagens podem ser canceladas e/ou remarcadas?</b><br/><br/>Você pode solicitar o cancelamento e remarcação (que está sujeito à cobrança de multa) e refazer o seu pedido ou entrar em contato conosco, para solicitar a melhor opção para a situação.<br/><br/><b>Quais são as taxas de cancelamento de passagem?</b><br/><br/>Cada companhia aérea possui condições e taxas diferentes em caso de cancelamentos de passagens, que pode ser facilmente localizado no site da companhia onde você comprou as suas passagens.",
     "accumulateMilesHeader":"Como eu posso acumular milhas?",
     "accumulateMilesBody":"Toda vez que você paga uma fatura de cartão de crédito, você acumula pontos. Esses pontos podem ser trocados por produtos, utilizados para descontos da anuidade do cartão ou transformados em milhas dos programas LatamPass da Latam, Smiles da GOL ou TudoAzul da AZUL.",
     "sellMyMilesHeader":"Como vender minhas milhas?",
     "sellMyMilesBody":"Entre em contato conosco por meio do nosso sistema, iremos fazer uma oferta para suas milhas!",
     "registerOnSiteHeader":"É obrigatório se cadastrar no site para comprar passagens e produtos?",
-    "registerOnSiteBody":"Não. Nosso sistema possuí agora dois formatos de venda: por cadastro ou compra sem registro. Para efetuar sua compra de forma rápida sem se cadastrar na MR TRAVEL TECNOLOGIA E SERVICOS LTDA, basta inserir somente o seu e-mail ao efetuar o pagamento do pedido, para que sejam enviados os dados de sua compra. Porém recomendamos que você se cadastre em nosso site, pois além de ser gratuito também fica mais fácil de visualizar e organizar as suas compras futuras."
+    "registerOnSiteBody":"Até certo ponto não. Nosso sistema deixa você fazer pesquisas sem a necessidade de estar logado. Porém recomendamos que você se cadastre em nosso site, pois além de ser gratuito também fica mais fácil de visualizar e organizar as suas compras futuras."
   },
   "landingCarCategories":{
     "title":"Atendemos empresas<br/>nacionais e internacionais",
@@ -147,5 +145,29 @@
     "title2":"COMPANHIAS NACIONAIS",
     "national":"Nacional",
     "international":"Internacional"
-  }
+  },
+  "roundTripForm":{
+    "titleIdavolta":"Ida e volta",
+    "labelDesde":"Desde",
+    "labelPara":"Para",
+    "labelIda":"Ida",
+    "labelVolta":"Volta",
+    "labelClassecabine":"Classe de cabine",
+    "labelPassageiros":"Passageiros",
+    "aeroportosProximos":"Adicionar aeroportos próximos",
+    "voosDirectos":"Apenas voos directos",
+    "paraEstudantes":"Para estudantes",
+    "pesquisarVoos":"Pesquisar voos"
+  },
+  "manyCities":{
+    "adicionarVoo":"Adicionar outro voo"
+  },
+  "aereoHomePage":{
+    "titleRoundTrip":"@:roundTripForm.titleIdavolta",
+    "titleOneWay":"Só ida",
+    "titleManyCities":"Várias cidades"
+  },
+  "adults":"{count} Adulto | {count} Adultos",
+  "children":"{count} Criança | {count} Criança | {count} Crianças",
+  "babies":"{count} Bebê | {count} Bebê | {count} Bebês"
 }

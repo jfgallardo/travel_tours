@@ -185,23 +185,23 @@ const formValues = {
 };
 
 const paymentTypes = [
-  { name: 'Transferência bancária / bilhete', value: 'T' },
-  { name: 'Cartão de crédito', value: 'C' },
+  { label: 'Transferência bancária / bilhete', value: 'T' },
+  { label: 'Cartão de crédito', value: 'C' },
 ];
 
 const typeCards = [
-  { name: 'VISA', value: 'VISA' },
-  { name: 'MASTERCARD', value: 'MASTERCARD' },
-  { name: 'AMEX', value: 'AMEX' },
-  { name: 'HIPERCARD', value: 'HIPERCARD' },
-  { name: 'ELO', value: 'ELO' },
-  { name: 'OUTROS', value: 'O' },
+  { label: 'VISA', value: 'VISA' },
+  { label: 'MASTERCARD', value: 'MASTERCARD' },
+  { label: 'AMEX', value: 'AMEX' },
+  { label: 'HIPERCARD', value: 'HIPERCARD' },
+  { label: 'ELO', value: 'ELO' },
+  { label: 'OUTROS', value: 'O' },
 ];
 
 const paymentSelect = ref(
   props.itemEdit.paymentSelect === 'T'
-    ? { name: 'Transferência bancária / bilhete', value: 'T' }
-    : { name: 'Cartão de crédito', value: 'C' }
+    ? { label: 'Transferência bancária / bilhete', value: 'T' }
+    : { label: 'Cartão de crédito', value: 'C' }
 );
 const cartao = ref('');
 

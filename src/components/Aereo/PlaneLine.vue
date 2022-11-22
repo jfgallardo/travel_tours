@@ -1,40 +1,222 @@
 <template>
-  <div class="flex flex-col items-start">
+  <div class="flex flex-col text-sm">
     <div class="flex items-center space-x-3">
       <img
-        class="mb-2 h-8 w-8"
-        src="@/assets/ico/icons8-flight-on-time-with-a-tick-marks-sign-48.png"
+        class="h-8 w-8"
+        src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
       />
-      <p class="font-medium text-lg">
-        9:30 <span class="text-gray-500">AM</span>
-      </p>
+      <div class="flex items-center space-x-10">
+        <p class="font-medium text-lg">
+          {{ horaSaida }} <span class="text-gray-500">{{ dayPeriodIda }}</span>
+        </p>
+        <div>
+          <ul>
+            <li class="font-medium">{{ Origem.CodigoIata }}</li>
+            <li>{{ Origem.Descricao }}</li>
+            <li>{{ dateStringSaida }}</li>
+            <li>{{ CiaMandatoria.Descricao }} - {{ Numero }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div>
+    <div class="-mt-8 -mb-12">
       <svg>
         <line
           x1="18"
           y1="0"
           x2="18"
-          y2="150"
+          y2="130"
           stroke-width="2"
           stroke="#b3b3cc"
           stroke-dasharray="6,9"
         />
       </svg>
     </div>
+
     <div class="flex items-center space-x-3">
       <img
         class="h-8 w-8"
         src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
       />
-      <p class="font-medium text-lg">
-        6:55 <span class="text-gray-500">PM</span>
-      </p>
+      <div class="flex items-center space-x-10">
+        <p class="font-medium text-lg">
+          {{ horaChegada }}
+          <span class="text-gray-500">{{ dayPeriodVolta }}</span>
+        </p>
+        <div>
+          <ul>
+            <li class="font-medium">{{ Destino.CodigoIata }}</li>
+            <li>{{ Destino.Descricao }}</li>
+            <li>{{ dateStringChegada }}</li>
+            <li>{{ CiaMandatoria.Descricao }} - {{ Numero }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div v-if="Escalas" class="mt-4">
+      <h1
+        class="bg-blue-600 text-white text-center py-1 cursor-pointer"
+        @click="openEscala = !openEscala"
+      >
+        Este vuelo presenta
+        <span>{{
+          Escalas.length > 1 ? 'las sgtes escalas' : 'la sgte escala'
+        }}</span>
+      </h1>
+      <Transition>
+        <div v-if="openEscala">
+          <div
+            class="flex flex-col space-y-1 items-stretch mt-3 px-3 py-1 bg-gray-50 border-l-4 border-gray-300 font-light"
+            v-for="item in escalasFiltered"
+            :key="item.Id"
+          >
+            <p>
+              <span class="font-medium">Areopuerto: </span>{{ item.Descricao }}
+            </p>
+            <p>
+              <span class="font-medium">Fecha de Llegada: </span>
+              {{ item.DataChegada }}
+            </p>
+            <p>
+              <span class="font-medium">Fecha de Salida: </span>
+              {{ item.DataSaida }}
+            </p>
+            <p>
+              <span class="font-medium">Duracion: </span> {{ item.Duracao }}
+            </p>
+            <p>
+              <span class="font-medium">Hora de Llegada: </span>
+              {{ item.HoraChegada }}
+            </p>
+            <p>
+              <span class="font-medium">Hora de Salida: </span>
+              {{ item.HoraSaida }}
+            </p>
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
-<script setup></script>
-<style></style>
+<script setup>
+import { computed, ref } from 'vue';
+import moment from 'moment/min/moment-with-locales';
+import { useI18n } from 'vue-i18n';
 
-<!--  -->
+const { locale } = useI18n();
+const openEscala = ref(false);
+
+const props = defineProps({
+  DataSaida: {
+    type: String,
+    default: '',
+  },
+  DataChegada: {
+    type: String,
+    default: '',
+  },
+  Origem: {
+    type: Object,
+    default: () => {},
+  },
+  Destino: {
+    type: Object,
+    default: () => {},
+  },
+  Numero: {
+    type: [Number, String],
+  },
+  CiaMandatoria: {
+    type: Object,
+    default: () => {},
+  },
+  Escalas: {
+    type: Array,
+    default: () => [],
+  },
+});
+
+const dayPeriodIda = computed(() => {
+  return filterDayPeriod(props.DataSaida);
+});
+
+const dayPeriodVolta = computed(() => {
+  return filterDayPeriod(props.DataChegada);
+});
+
+const horaSaida = computed(() => {
+  return filterHours(props.DataSaida);
+});
+const horaChegada = computed(() => {
+  return filterHours(props.DataChegada);
+});
+
+const dateStringSaida = computed(() => {
+  return formatDate(props.DataSaida);
+});
+
+const dateStringChegada = computed(() => {
+  return formatDate(props.DataChegada);
+});
+
+const escalasFiltered = computed(() => {
+  if (props.Escalas.length === 0) return [];
+
+  return props.Escalas.map((escala) => {
+    return {
+      Descricao: escala.Aeroporto.Descricao,
+      DataChegada: formatDate(escala.DataChegada),
+      DataSaida: formatDate(escala.DataSaida),
+      Duracao: escala.Duracao,
+      HoraChegada: formatHour(escala.HoraChegada),
+      HoraSaida: formatHour(escala.HoraSaida),
+    };
+  });
+});
+
+const filterHours = (date) => {
+  const dateLocal = new Date(moment(date));
+  return dateLocal.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
+const filterDayPeriod = (date) => {
+  const dateLocal = new Date(moment(date));
+  const hours = dateLocal.getHours();
+  return hours >= 12 ? 'PM' : 'AM';
+};
+
+const formatDate = (date) => {
+  if (locale.value === 'br') {
+    moment.locale('pt-br');
+  } else {
+    moment.locale(locale.value);
+  }
+  return upperC(moment(date).format('dddd D MMM YYYY'));
+};
+
+const upperC = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+const formatHour = (item) => {
+  const hour = item.slice(0, 2);
+  const min = item.slice(2);
+
+  return `${hour}h : ${min}min `;
+};
+</script>
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

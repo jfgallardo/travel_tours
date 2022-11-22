@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { axiosClientAPI } from '@/plugins/axios';
-import dataDuty from '@/utils/data-duty-moblix';
+import unifyDataMoblix from '@/utils/unifyDataMoblix';
 
 export const useMoblixStore = defineStore({
   id: 'moblix',
@@ -21,10 +21,10 @@ export const useMoblixStore = defineStore({
         .post('api/v1/moblix/query', payload)
         .then((response) => {
           let { Aeroportos, Ida, Volta, QntdAdulto, QntdCrianca, QntdBebe } =
-            response.data.data[0];
+            response.data.data;
           this.totalItems = response.data.totalItens;
-          this.outboundFlights = dataDuty(Ida);
-          this.returnFlights = dataDuty(Volta);
+          this.outboundFlights = unifyDataMoblix(Ida);
+          this.returnFlights = unifyDataMoblix(Volta);
           this.aeroportos = Aeroportos;
           this.loading = false;
           this.qntdBebe = QntdBebe;

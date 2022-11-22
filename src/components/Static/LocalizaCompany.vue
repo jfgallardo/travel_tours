@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="localiza" title="Localiza" @closeModal="localiza = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="localiza" title="Localiza" @close="localiza = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/localiza-popup.jpg" />
         </div>
       </template>

@@ -213,15 +213,16 @@
         </div>
       </div>
     </div>
-    <Modal :modal="modal" @closeModal="modal = false">
+
+    <Modal v-if="modal" @close="modal = false">
       <template #body>
         <Reservation @createR="createReservation" />
       </template>
-      <template #title>
+      <template #header>
         <span>Criar reserva</span>
       </template>
     </Modal>
-    <Modal :modal="edit" @closeModal="edit = false">
+    <Modal v-if="edit" @close="edit = false">
       <template #body>
         <EditReservation
           :itemEdit="itemEdit"
@@ -229,7 +230,7 @@
           @editR="edit = false"
         />
       </template>
-      <template #title>
+      <template #header>
         <span>Editar reserva</span>
       </template>
     </Modal>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="p-5">
       <form class="grid grid-cols-3 gap-6">
         <Select
           label="PAYMENT TYPES"
@@ -114,12 +114,50 @@
           v-model="numberParcels"
         />
 
-        <CheckInput
-          class="place-self-end"
-          v-model="proportionalValue"
-          label="Gerar parcelas proporcionais"
-          v-if="paymentSelect.value === 'C'"
-        />
+        <div>
+          <CheckInput
+            v-model="proportionalValue"
+            label="Gerar parcelas proporcionais"
+            v-if="paymentSelect.value === 'C'"
+          />
+          <div class="flex space-x-2">
+            <button
+              type="button"
+              class="bg-blue-400 py-1 text-xs w-full px-2 text-white"
+              @click="notUseSameData = true"
+              v-if="paymentSelect.value === 'C'"
+            >
+              Usar dados diferentes dos do contrato
+            </button>
+            <Tooltip
+              tooltipText="Eliminar datos"
+              v-if="
+                paymentSelect.value === 'C' &&
+                Object.entries(pdfStore.otherData).length != 0
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 cursor-pointer"
+                @click="deleteOtherData(index)"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                v-if="
+                  paymentSelect.value === 'C' &&
+                  Object.entries(pdfStore.otherData).length != 0
+                "
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                />
+              </svg>
+            </Tooltip>
+          </div>
+        </div>
 
         <button
           type="submit"
@@ -151,7 +189,7 @@
         </h6>
       </form>
     </div>
-    <Modal :modal="modal" @closeModal="modal = false">
+    <Modal v-if="modal" @close="modal = false">
       <template #body>
         <div class="bg-white px-4 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
@@ -207,6 +245,49 @@
         </div>
       </template>
     </Modal>
+
+    <Modal v-if="notUseSameData" @close="notUseSameData = false">
+      <template #body>
+        <form>
+          <div class="flex flex-col space-y-8">
+            <TextInput
+              label="CPF Nº"
+              name="cpf_number"
+              maska="###.###.###-##"
+              v-model="pdfStore.otherData.cpf"
+            />
+            <TextInput
+              label="Telefone/Whatsapp"
+              maska="(##) #####-####"
+              name="phone"
+              v-model="pdfStore.otherData.phone"
+            />
+            <TextInput
+              label="RG/RNM"
+              v-model="pdfStore.otherData.rg"
+              name="rg"
+            />
+          </div>
+        </form>
+      </template>
+      <template #header> <span>Autorização de debito | Dados</span> </template>
+      <template #footer>
+        <div class="flex items-center space-x-4">
+          <button
+            class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 w-full"
+            @click="saveData"
+          >
+            Salvar
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 w-full"
+            @click="notUseSameData = false"
+          >
+            Cerrar
+          </button>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -220,11 +301,14 @@ import { simpleSchemaReservation } from '@/utils/validate';
 import { usePdfStore } from '@/stores/pdf';
 import Modal from '@/components/Partials/TheModal.vue';
 import CheckInput from '@/components/FormUI/CheckInput.vue';
+import Toastify from 'toastify-js';
+import Tooltip from '@/components/Partials/TheTooltip.vue';
 
 const emit = defineEmits(['createR']);
 const pdfStore = usePdfStore();
 const modal = ref(false);
 const proportionalValue = ref(false);
+const notUseSameData = ref(false);
 
 const formValues = {
   numberCard: pdfStore.creditCard.numberCard,
@@ -233,24 +317,24 @@ const formValues = {
 };
 
 const paymentTypes = [
-  { name: 'Transferência bancária / bilhete', value: 'T' },
-  { name: 'Cartão de crédito', value: 'C' },
+  { label: 'Transferência bancária / bilhete', value: 'T' },
+  { label: 'Cartão de crédito', value: 'C' },
 ];
 
 const typeCards = [
-  { name: 'VISA', value: 'VISA' },
-  { name: 'MASTERCARD', value: 'MASTERCARD' },
-  { name: 'AMEX', value: 'AMEX' },
-  { name: 'HIPERCARD', value: 'HIPERCARD' },
-  { name: 'ELO', value: 'ELO' },
-  { name: 'OUTROS', value: 'O' },
+  { label: 'VISA', value: 'VISA' },
+  { label: 'MASTERCARD', value: 'MASTERCARD' },
+  { label: 'AMEX', value: 'AMEX' },
+  { label: 'HIPERCARD', value: 'HIPERCARD' },
+  { label: 'ELO', value: 'ELO' },
+  { label: 'OUTROS', value: 'O' },
 ];
 
 const paymentSelect = ref({
-  name: 'Transferência bancária / bilhete',
+  label: 'Transferência bancária / bilhete',
   value: 'T',
 });
-const cartao = ref({ name: 'VISA', value: 'VISA' });
+const cartao = ref({ label: 'VISA', value: 'VISA' });
 
 const numberParcels = ref('');
 const transactionValue = ref('');
@@ -290,6 +374,53 @@ const onSubmit = handleSubmit((values) => {
   }
 });
 
+const deleteOtherData = () => {
+  pdfStore.otherData = {};
+  Toastify({
+    text: 'Datos eliminados correctamente',
+    duration: 3000,
+    gravity: 'bottom',
+    position: 'center',
+    stopOnFocus: true,
+    style: {
+      background: 'linear-gradient(to right,  #0564fc, #5b92eb)',
+    },
+    onClick: function () {},
+  }).showToast();
+};
+
+const saveData = () => {
+  let toast = {
+    text: '',
+    style: {
+      background: '',
+    },
+  };
+
+  if (
+    !pdfStore.otherData.cpf ||
+    !pdfStore.otherData.phone ||
+    !pdfStore.otherData.rg
+  ) {
+    toast.text = 'Campos vacios, por favor verifique';
+    toast.style.background = 'linear-gradient(to right,  #ff0000, #ff6666)';
+  } else {
+    /* otherData.value */
+    toast.text = 'Datos guardados correctamente';
+    toast.style.background = 'linear-gradient(to right,  #0564fc, #5b92eb)';
+    notUseSameData.value = false;
+  }
+  Toastify({
+    text: toast.text,
+    duration: 3000,
+    gravity: 'bottom',
+    position: 'center',
+    stopOnFocus: true,
+    style: toast.style,
+    onClick: function () {},
+  }).showToast();
+};
+
 const randomId = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -309,7 +440,7 @@ const saveCC = () => {
 
 const notSaveCC = () => {
   pdfStore.creditCard = {};
-  pdfStore.creditCard.cartao = { name: 'VISA', value: 'VISA' };
+  pdfStore.creditCard.cartao = { label: 'VISA', value: 'VISA' };
   pdfStore.notSaveCreditCard = false;
   modal.value = false;
 };

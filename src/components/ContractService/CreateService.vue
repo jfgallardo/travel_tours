@@ -125,15 +125,15 @@
         </div>
       </div>
     </div>
-    <Modal :modal="modal" @closeModal="modal = false">
+    <Modal v-if="modal" @close="modal = false">
       <template #body>
         <Service @createS="createService" />
       </template>
-      <template #title>
+      <template #header>
         <span>Criar servicio</span>
       </template>
     </Modal>
-    <Modal :modal="edit" @closeModal="edit = false">
+    <Modal v-if="edit" @close="edit = false">
       <template #body>
         <EditService
           :itemEdit="itemEdit"
@@ -141,7 +141,7 @@
           @editS="edit = false"
         />
       </template>
-      <template #title>
+      <template #header>
         <span>Editar servicio</span>
       </template>
     </Modal>

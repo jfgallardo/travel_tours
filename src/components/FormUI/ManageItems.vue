@@ -6,7 +6,7 @@
         <p v-if="subtitle" class="text-sm font-extralight">{{ subtitle }}</p>
         <div class="flex items-center justify-start mt-2">
           <div>
-            <span @click="$emit('takeOff')" class="cursor-pointer">
+            <span @click="$emit('takeOff', label)" class="cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-7 w-7 text-blue-600"
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div>
-            <span @click="$emit('addUp')" class="cursor-pointer">
+            <span @click="$emit('addUp', label)" class="cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-7 w-7 text-blue-600"

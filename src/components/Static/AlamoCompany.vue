@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="alamo" title="Localiza" @closeModal="alamo = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="alamo" title="Localiza" @close="alamo = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/alamo-popup.jpg" />
         </div>
       </template>

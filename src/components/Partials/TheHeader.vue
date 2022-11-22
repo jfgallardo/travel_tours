@@ -221,7 +221,6 @@
 import { RouterLink, useRoute } from 'vue-router';
 import MainSubheading from '@/components/Partials/TheMainSubheading.vue';
 import Dropdowni18 from '@/components/Partials/TheDropdowni18.vue';
-import Transaction from '@/components/Icons/Transaction.vue';
 import UserCircle from '@/components/Icons/UserCircle.vue';
 import QuerySubHeader from '@/components/Partials/TheQuerySubheading.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
@@ -238,10 +237,10 @@ const userStore = useUserStore();
 const hiddenOf = ref(false);
 
 const showMainSubheading = computed(() => {
-  return !(route.name === 'AereoFlightQuery') && route.name != 'RegisterPage';
+  return !(route.name === 'VoosIdaVolta') && route.name != 'RegisterPage';
 });
 const showSubHeader = computed(() => {
-  return route.name === 'AereoFlightQuery';
+  return route.name === 'VoosIdaVolta';
 });
 const showRegisterSubH = computed(() => {
   return route.name === 'RegisterPage';

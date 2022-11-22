@@ -3,16 +3,16 @@
     <div class="mt-5 flex flex-col space-y-1">
       <div class="px-4">
         <AutoComplete
-          label="De"
-          :value="origem.string"
+          :label="t('roundTripForm.labelDesde')"
+          :value="searchOptionsVooStore.origin.label"
           @input="
             (e) => {
-              origem.string = e;
+              searchOptionsVooStore.origin.label = e;
             }
           "
           @select="
             (s) => {
-              origem.iata = s;
+              searchOptionsVooStore.origin.iata = s;
             }
           "
         />
@@ -55,16 +55,16 @@
 
       <div class="px-4">
         <AutoComplete
-          label="Para"
-          :value="destino.string"
+          :label="t('roundTripForm.labelPara')"
+          :value="searchOptionsVooStore.destiny.label"
           @input="
             (e) => {
-              destino.string = e;
+              searchOptionsVooStore.destiny.label = e;
             }
           "
           @select="
             (s) => {
-              destino.iata = s;
+              searchOptionsVooStore.destiny.iata = s;
             }
           "
         />
@@ -72,8 +72,8 @@
 
       <div class="grid pt-4 px-4">
         <DateInput
-          v-model="departureDate"
-          label="Ida"
+          v-model="searchOptionsVooStore.dateOfDeparture"
+          :label="t('roundTripForm.labelIda')"
           :minDateShow="new Date()"
         />
       </div>
@@ -81,52 +81,52 @@
       <div class="px-4 pb-4">
         <Select
           class="pt-4"
-          label="Clases de cabina"
-          :selected="cabine"
+          :label="t('roundTripForm.labelClassecabine')"
+          :selected="searchOptionsVooStore.cabin"
           :options="options"
           @selectValue="
             (e) => {
-              cabine = e;
+              searchOptionsVooStore.cabin = e;
             }
           "
         />
       </div>
 
       <div class="px-4">
-        <Dropddown label="Pasajeros">
+        <Dropddown :label="t('roundTripForm.labelPassageiros')">
           <template v-slot:selected>
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{ numberAdults }} Adultos</span>
-              <span>{{ numberChilds }} Criancas</span>
-              <span>{{ numberBebes }} Bebes</span>
+              <span>{{ t('adults', searchOptionsVooStore.adults) }}</span>
+              <span>{{ t('children', searchOptionsVooStore.teenagers) }}</span>
+              <span>{{ t('babies', searchOptionsVooStore.babies) }}</span>
             </div>
           </template>
           <template v-slot:dropdown>
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
                 subtitle="+16 anos"
-                v-model="numberAdults"
-                @takeOff="takeOffAdults()"
-                @addUp="addUpfAdults()"
-                label="Adultos"
+                v-model="searchOptionsVooStore.adults"
+                @takeOff="takeOff"
+                @addUp="addUp"
+                :label="t('adults')"
               />
 
               <ManageItems
                 subtitle="4-15 anos"
-                v-model="numberChilds"
-                @takeOff="takeOffChilds()"
-                @addUp="addUpfChilds()"
-                label="Adolescentes"
+                v-model="searchOptionsVooStore.teenagers"
+                @takeOff="takeOff"
+                @addUp="addUp"
+                :label="t('children')"
               />
 
               <ManageItems
                 subtitle="1-3 anos"
-                v-model="numberBebes"
-                @takeOff="takeOffBebes()"
-                @addUp="addUpfBebes()"
-                label="Ninos"
+                v-model="searchOptionsVooStore.babies"
+                @takeOff="takeOff"
+                @addUp="addUp"
+                :label="t('babies')"
               />
             </div>
 
@@ -136,9 +136,9 @@
       </div>
 
       <div class="px-4">
-        <Check class="pt-4" label="Adicionar areopuertos cercanos" />
-        <Check label="Apenas vuelos directos" />
-        <Check label="Para estudiantes" />
+        <Check class="pt-4" :label="t('roundTripForm.aeroportosProximos')" />
+        <Check :label="t('roundTripForm.voosDirectos')" />
+        <Check :label="t('roundTripForm.paraEstudantes')" />
       </div>
 
       <div>
@@ -147,7 +147,7 @@
           :disabled="moblixStore.loading"
           @click="consultar()"
         >
-          <span>Buscar pasaje</span>
+          <span>{{ t('roundTripForm.pesquisarVoos') }}</span>
           <div
             v-if="moblixStore.loading"
             class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
@@ -159,9 +159,9 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useMoblixStore } from '@/stores/moblix';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import Select from '@/components/FormUI/TheSelect.vue';
@@ -170,78 +170,50 @@ import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import Toastify from 'toastify-js';
+import { useI18n } from 'vue-i18n';
 
 const moblixStore = useMoblixStore();
+const searchOptionsVooStore = useSearchOptionsVooStore();
 const router = useRouter();
 const route = useRoute();
+const { t } = useI18n();
 
-const origem = reactive({
-  string: '',
-  iata: '',
-});
-
-const destino = reactive({
-  string: '',
-  iata: '',
-});
-
-const departureDate = ref('');
-
-const cabine = ref({ name: 'Todas', value: -1 });
-
-const numberAdults = ref(1);
-const numberChilds = ref(0);
-const numberBebes = ref(0);
-
-const takeOffAdults = () => {
-  if (numberAdults.value > 1) {
-    numberAdults.value--;
-  }
-};
-const addUpfAdults = () => {
-  if (numberAdults.value < 8) {
-    numberAdults.value++;
+const addUp = (e) => {
+  if (e === t('adults') && searchOptionsVooStore.adults < 8) {
+    searchOptionsVooStore.adults++;
+  } else if (e === t('children') && searchOptionsVooStore.teenagers < 8) {
+    searchOptionsVooStore.teenagers++;
+  } else if (e === t('babies') && searchOptionsVooStore.babies < 8) {
+    searchOptionsVooStore.babies++;
   }
 };
 
-const takeOffChilds = () => {
-  if (numberChilds.value > 0) {
-    numberChilds.value--;
-  }
-};
-const addUpfChilds = () => {
-  if (numberChilds.value < 8) {
-    numberChilds.value++;
-  }
-};
-
-const takeOffBebes = () => {
-  if (numberBebes.value > 0) {
-    numberBebes.value--;
-  }
-};
-const addUpfBebes = () => {
-  if (numberBebes.value < 8) {
-    numberBebes.value++;
+const takeOff = (e) => {
+  if (e === t('adults') && searchOptionsVooStore.adults > 1) {
+    searchOptionsVooStore.adults--;
+  } else if (e === t('children') && searchOptionsVooStore.teenagers > 0) {
+    searchOptionsVooStore.teenagers--;
+  } else if (e === t('babies') && searchOptionsVooStore.babies > 0) {
+    searchOptionsVooStore.babies--;
   }
 };
 
 const changeDestinations = () => {
-  let temporaryString = origem.string;
-  let temporaryIata = origem.iata;
+  let temporaryString = searchOptionsVooStore.origin.label;
+  let temporaryIata = searchOptionsVooStore.origin.iata;
 
-  origem.string = destino.string;
-  origem.iata = destino.iata;
+  searchOptionsVooStore.origin.label = searchOptionsVooStore.destiny.label;
+  searchOptionsVooStore.origin.iata = searchOptionsVooStore.destiny.iata;
 
-  destino.string = temporaryString;
-  destino.iata = temporaryIata;
+  searchOptionsVooStore.destiny.label = temporaryString;
+  searchOptionsVooStore.destiny.iata = temporaryIata;
 };
 
 const options = [
-  { name: 'Econômica', value: 0 },
-  { name: 'Executiva', value: 2 },
-  { name: 'Primeira Classe', value: 1 },
-  { name: 'Todas', value: -1 },
+  { label: 'Econômica', value: 0 },
+  { label: 'Executiva', value: 2 },
+  { label: 'Primeira Classe', value: 1 },
+  { label: 'Todas', value: -1 },
 ];
 
 const formatterDateS = (date) => {
@@ -251,15 +223,15 @@ const formatterDateS = (date) => {
 
 const consultar = () => {
   let payload = {
-    Origem: origem.iata,
-    Destino: destino.iata,
-    Ida: formatterDateS(departureDate.value),
+    Origem: searchOptionsVooStore.origin.iata,
+    Destino: searchOptionsVooStore.destiny.iata,
+    Ida: formatterDateS(searchOptionsVooStore.dateOfDeparture),
     Volta: '0001-01-01',
-    Adultos: numberAdults.value,
-    Criancas: numberChilds.value,
-    Bebes: numberBebes.value,
+    Adultos: searchOptionsVooStore.adults,
+    Criancas: searchOptionsVooStore.teenagers,
+    Bebes: searchOptionsVooStore.babies,
     Companhia: 1,
-    Cabine: cabine.value.value,
+    Cabine: searchOptionsVooStore.cabine,
   };
 
   if (!payload.Origem || !payload.Destino || !payload.Ida) {
@@ -281,15 +253,15 @@ const consultar = () => {
       .push({
         name: 'AereoFlightQuery',
         params: {
-          source: origem.iata,
-          destiny: destino.iata,
-          departure_date: formatterDateS(departureDate.value),
+          source: payload.Origem,
+          destiny: payload.Destino,
+          departure_date: payload.Ida,
           return_date: '0001-01-01',
         },
         query: {
-          adults: numberAdults.value,
-          childs: numberChilds.value,
-          bebes: numberBebes.value,
+          adults: payload.Adultos,
+          childs: payload.Criancas,
+          bebes: payload.Bebes,
           company: 1,
         },
       })
@@ -300,15 +272,15 @@ const consultar = () => {
     router.push({
       name: 'AereoFlightQuery',
       params: {
-        source: origem.iata,
-        destiny: destino.iata,
-        departure_date: formatterDateS(departureDate.value),
+        source: payload.Origem,
+        destiny: payload.Destino,
+        departure_date: payload.Ida,
         return_date: '0001-01-01',
       },
       query: {
-        adults: numberAdults.value,
-        childs: numberChilds.value,
-        bebes: numberBebes.value,
+        adults: payload.Adultos,
+        childs: payload.Criancas,
+        bebes: payload.Bebes,
         company: 1,
       },
     });

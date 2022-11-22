@@ -10,7 +10,7 @@
             @click="hiddenDropdown = !hiddenDropdown"
             class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
           >
-            <span class="mr-5"> {{ selected.name }} </span>
+            <span class="mr-5"> {{ selected.label }} </span>
             <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
           </div>
           <Transition>
@@ -26,7 +26,7 @@
                   class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
                   @click="selectOption(op)"
                 >
-                  {{ op.name }}
+                  {{ op.label }}
                 </li>
               </ul>
             </div>

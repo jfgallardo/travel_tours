@@ -7,11 +7,12 @@ export const usePdfStore = defineStore({
     services: [],
     reservations: [],
     creditCard: {
-      cartao: { name: 'VISA', value: 'VISA' },
+      cartao: { label: 'VISA', value: 'VISA' },
       numberCard: null,
       nameCard: null,
       validCardDate: null,
     },
+    otherData: {},
     saveCreditCard: false,
     notSaveCreditCard: true,
   }),

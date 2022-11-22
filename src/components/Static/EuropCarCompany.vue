@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="europCar" title="Localiza" @closeModal="europCar = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="europCar" title="Localiza" @close="europCar = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/europcar-popup.jpg" />
         </div>
       </template>

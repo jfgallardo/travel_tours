@@ -146,7 +146,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, onUnmounted } from 'vue';
+import { ref, computed, onUnmounted } from 'vue';
 import { useForm } from 'vee-validate';
 import pdfMake from 'pdfmake/build/pdfmake';
 import axios from 'axios';
@@ -168,21 +168,18 @@ onUnmounted(() => {
 });
 
 const typeNationality = [
-  { name: 'Brasileiro(a)', value: 'Brasileiro(a)' },
-  { name: 'Naturalizado(a)', value: 'Brasileiro(a) naturalizado(a)' },
-  { name: 'Refugiado', value: 'Refugiado' },
-  { name: 'Residente', value: 'Residente' },
-  { name: 'Pessoa não imigrante', value: 'Pessoa não imigrante' },
-  { name: 'Imigrante', value: 'Imigrante' },
+  { label: 'Brasileiro(a)', value: 'Brasileiro(a)' },
+  { label: 'Naturalizado(a)', value: 'Brasileiro(a) naturalizado(a)' },
+  { label: 'Refugiado', value: 'Refugiado' },
+  { label: 'Residente', value: 'Residente' },
+  { label: 'Pessoa não imigrante', value: 'Pessoa não imigrante' },
+  { label: 'Imigrante', value: 'Imigrante' },
 ];
 
-const nationality = ref({ name: 'Brasileiro(a)', value: 'Brasileiro(a)' });
+const nationality = ref({ label: 'Brasileiro(a)', value: 'Brasileiro(a)' });
 const localidadeCl = ref('');
 const ufCl = ref('');
-const cartao = ref('V');
 const pdfStore = usePdfStore();
-
-const pdfsDebit = ref([]);
 
 const searchByCep = (value) => {
   if (value.length === 9) {
@@ -233,15 +230,7 @@ const { handleSubmit, resetForm } = useForm({
   validationSchema: simpleSchemaContract,
 });
 
-const passageiros = reactive([]);
-const destinasePagamento = reactive([]);
-
 const onSubmit = handleSubmit((values) => {
-  const mgsPayload = {
-    message: 'Deve haver pelo menos um dado adicionado em cada tabela',
-    backgrColor: 'bg-red-100',
-    textColor: 'text-red-700',
-  };
   if (
     !pdfStore.passengers.length ||
     !pdfStore.services.length ||
@@ -285,7 +274,7 @@ const onSubmit = handleSubmit((values) => {
     `Contrato de Serviços de Turismo_${values.name_client}`
   );
 
-  pdfStore.reservations.forEach((element, index) => {
+  pdfStore.reservations.forEach((element) => {
     if (element.paymentSelect === 'C') {
       const doc = pdfCreatorDebit({ ...values, ...element });
       generateDocument(doc, `Autorização de Débito_${element.route}`);
@@ -295,7 +284,7 @@ const onSubmit = handleSubmit((values) => {
 
 const generateDocument = (doc, name) => {
   const pdfDocGenerator = pdfMake.createPdf(doc);
-  pdfDocGenerator.getDataUrl((dataUrl) => {
+  pdfDocGenerator.getDataUrl(() => {
     const targetElement = document.getElementById('listDocuments');
     const buttonSubmit = document.getElementById('createD');
     const link = document.createElement('a');

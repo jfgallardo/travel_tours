@@ -124,18 +124,16 @@
     "contact": "<b>11) Contacto</b><br/><br/> Dirija sus dudas y solicitudes a: ola{'@'}mrtravelandtours.com – Rua Hélio Batelão 439 A, CEP: 60766-055, Planalto Ayrton Senna –Fortaleza/CE."
   },
   "mainQuestions":{
-    "airTicketPurchaseHeader":"compra de boleto aereo",
+    "airTicketPurchaseHeader":"Compra de boleto aereo",
     "airTicketPurchaseBody":"<b>Selección de vuelos.</b><br/><br/>Nuestro sitio web le mostrará los mejores precios de vuelos. Simplemente selecciona los que prefieras y se mostrará el valor total de los billetes, impuestos incluidos.<br/><br/><b>Emisión del billete.</b><br/><br/>Introduce tu pedido y la emisión de sus boletos, el precio del vuelo puede ser modificado por la aerolínea sin previo aviso. Si esto sucede, su boleto es cancelado y el monto reembolsado. Si ha elegido pagar con tarjeta de crédito, el límite de su tarjeta se desbloqueará en unos días. Si ha elegido pagar mediante transferencia bancaria, el importe también se reembolsará mediante transferencia bancaria.",
-    "buyUsingMmilesHeader":"¿Cómo comprar boletos de avión usando millas?",
-    "buyUsingMmilesBody":"<b>Encuentra tu vuelo.</b><br/><br/>Busca por destino y fecha. Luego te mostraremos los vuelos disponibles. Si la mejor opción para usted es la aerolínea, le indicamos que realice la compra en el sitio web de la compañía. Si la opción más económica y ventajosa es con MR TRAVEL & TOURS, continúe con el siguiente paso.<br/><br/><b>Consulte la información.</b><br/><br/>Cuando selecciona tu vuelo, te presentamos el resumen de tu viaje con el monto total de tu compra. Verifique y proceda. Luego te dirigiremos a una página segura, donde podrás realizar el pago.<br/><br/><b>Realiza tu registro.</b><br/><br/>Si aún no te has registrado en el sitio, es hora de registrarse. Es rápido y aún puede rastrear sus pedidos en nuestro portal.<br/><br/><b>Elija su método de pago.</b><br/><br/>Puede pagar su boleto con tarjeta de crédito hasta en 10 cuotas, débito o transferencia bancaria. Si elige la transferencia, recibirá un correo electrónico con nuestros datos bancarios para realizar la transacción en línea o en un cajero automático. Con el pago confirmado y el pedido analizado, su ticket será emitido por nuestro equipo.<br/><br/><b>Reciba su ticket por correo electrónico.</b><br/><br/>Usted reciba todas las actualizaciones sobre su pedido por correo electrónico y, por supuesto, también su boleto. También puede verificar su boleto iniciando sesión en su cuenta de MR TRAVEL & TOURS y haciendo clic en 'mis viajes'. El check-in y la selección de asiento se realizan directamente en la web de la aerolínea, o en el aeropuerto, utilizando tu código localizador. ¡Buen viaje!",
     "cancellationsHeader":"Cambios de reserva, cancelaciones y reembolsos",
-    "cancellationsBody":"<b>Importante: Para cancelaciones o cualquier cambio en su boleto, contáctenos. ¿Conjunto? No es posible realizar ningún cambio directamente con la aerolínea &#128512;.</b><br/><br/><b>¿Qué billetes se pueden cancelar y/o reprogramar?</b><br/> <br />No realizamos cambios de reserva de billetes. Puede solicitar la cancelación (que está sujeta a una multa) y volver a realizar un pedido o contactarnos para solicitar la mejor opción para su situación.<br/><br/><b>¿Cuáles son las tarifas por cancelación de boletos?</b><br/><br/>Cada aerolínea tiene diferentes condiciones y tarifas en caso de cancelación de boletos, las cuales se pueden ubicar fácilmente en el sitio web de la compañía donde compró sus boletos. Te recordamos que el importe cobrado por nosotros es un poco superior al cobrado por la empresa, para cubrir los gastos de emisión, cancelación, impuestos y tasas. También puede comunicarse con nosotros si no puede localizarlo.<br/><br/>MR TRAVEL & TOURS tiene las siguientes tarifas de cancelación, por segmento y por pasajero:<br/><br/> <b> Latam</b><br/>&#187;Multa de cancelación nacional: BRL 400<br/>&#187;Multa de cancelación internacional: BRL 900<br/><b>Gol</b><br/>&#187;Multa de cancelación nacional: 400 BRL<br/>&#187;Multa de cancelación internacional: 900 BRL<br/><b>Azul</b><br/> &#187;Multa de cancelación nacional: 400 BRL<br/>&#187;Multa de cancelación internacional: 900 BRL<br/><b>TAP</b><br/>&#187;Multa de cancelación nacional: 300 BRL<br/>&#187;Cancelación internacional multa: 1100 BRL<br/><b>Livelo</b><br/>&#187;Multa de cancelación nacional: 300 BRL <br/>&#187;Multa de cancelación internacional: 800 BRL<br/>&#187;Multa de cancelación nacional: 1000 BRL<br/>&#187;Multa de cancelación internacional: 1000 BRL<br /><br/><b>¿Cómo puedo cancelar mi billete?</b><br/><br />Debe enviar un correo electrónico a falecom{'@'}mrtecn ologiaeservicos.com solicitando la cancelación de tu billete y recibirás nuestra orientación.<br/><br/><b>¿Puedo cancelar mi billete sin coste alguno?</b><br/><br/>Puedes cancela tu tiquete sin costos de aerolínea dentro de las 24 horas posteriores a su emisión, siempre y cuando el vuelo adquirido sea para una fecha mayor a 7 días. En este caso, cobramos una tarifa de R$ 40 reales por segmento y pasajero para cubrir los costos de emisión, cancelación, impuestos y cargos financieros.<br/><br/><b>¿Cómo se reembolsa mi billete cancelado?</b><br/><br/>Después de confirmar la cancelación del billete, se devolverá el importe pagado por el mismo método de pago en el que se realizó el pedido, es decir, devolución de la compra en la tarjeta de crédito o transferencia a través de TED. Los reembolsos se realizan dentro de las 48 horas hábiles. En el caso de una tarjeta de crédito, verá el contracargo en 1 o 2 facturas después de la solicitud de reembolso.<br/><br/><b>Perdí mi vuelo, ¿qué debo hacer?</b><br / ><br/>Consulte con nosotros las tasas por reembolso en los casos de no embarque del pasajero. Tenga en cuenta que algunas empresas no emiten reembolsos en caso de no presentarse.",
+    "cancellationsBody":"<b>Importante: para cancelaciones o cualquier cambio en su boleto, contáctenos. ¿Conjunto? No es posible realizar ningún cambio directamente con la aerolínea. &#128512;.</b><br/><br/><b>Qué boletos se pueden cancelar y/o reprogramar?</b><br/><br/>Puede solicitar cancelación y reprogramación (que está sujeto a una multa) y volver a ordenar su pedido o contactarnos para solicitar la mejor opción para su situación.<br/><br/><b>¿Cuáles son las tarifas de cancelación de boletos?</b><br/><br/>Cada aerolínea tiene diferentes condiciones y tarifas en caso de cancelación de boletos, las cuales se pueden ubicar fácilmente en el sitio web de la compañía donde compró sus boletos.",
     "accumulateMilesHeader":"¿Cómo puedo acumular millas?",
     "accumulateMilesBody":"Cada vez que paga una factura de tarjeta de crédito, gana puntos. Estos puntos pueden ser canjeados por productos, utilizados para descuentos en anualidades de tarjetas o convertidos en millas para los programas LatamPass de Latam, Smiles de GOL o TudoAzul de AZUL.",
     "sellMyMilesHeader":"¿Cómo vendo mis millas?",
     "sellMyMilesBody":"Contáctanos a través de nuestro sistema, ¡te haremos una oferta por tus millas!",
     "registerOnSiteHeader":"¿Es obligatorio registrarse en el sitio para comprar boletos y productos?",
-    "registerOnSiteBody":"No. Nuestro sistema ahora tiene dos formatos de venta: por registro o compra sin registro. Para realizar su compra rápidamente sin registrarse en MR TRAVEL TECNOLOGIA E SERVICOS LTDA, solo ingrese su dirección de correo electrónico al pagar el pedido, para que se le envíen los datos de su compra. No obstante, te recomendamos que te registres en nuestra web, porque además de ser gratuito, también es más fácil consultar y organizar tus futuras compras."
+    "registerOnSiteBody":"Hasta cierto punto no. Nuestro sistema te permite realizar encuestas sin necesidad de estar registrado. No obstante, te recomendamos que te registres en nuestra web, porque además de ser gratuito, también es más fácil visualizar y organizar tus futuras compras."
   },
   "landingCarCategories":{
     "title":"Atendemos empresas<br/> nacionales e internacionales",
@@ -146,5 +144,29 @@
     "title2":"COMPANHIAS NACIONAIS",
     "national":"Nacional",
     "international":"Internacional"
-  }
+  },
+  "roundTripForm":{
+    "titleIdavolta":"Ida y vuelta",
+    "labelDesde":"Desde",
+    "labelPara":"A",
+    "labelIda":"Salida",
+    "labelVolta":"Regreso",
+    "labelClassecabine":"Clase de cabina",
+    "labelPassageiros":"Viajeros",
+    "aeroportosProximos":"Añade aeropuertos cercanos",
+    "voosDirectos":"Solo vuelos directos",
+    "paraEstudantes":"Para estudiantes",
+    "pesquisarVoos":"Buscar vuelos"
+  },
+  "manyCities":{
+    "adicionarVoo":"Adicionar otro vuelo"
+  },
+  "aereoHomePage":{
+    "titleRoundTrip":"@:roundTripForm.titleIdavolta",
+    "titleOneWay":"Sólo ida",
+    "titleManyCities":"Múltiples destinos"
+  },
+  "adults":"{count} Adulto | {count} Adultos",
+  "children":"{count} Adolescente | {count} Adolescente | {count} adolescentes",
+  "babies":"{count} Bebé | {count} Bebé | {count} Bebés"
 }

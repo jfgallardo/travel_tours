@@ -3,24 +3,25 @@
   <Banner />
   <ExplorerVoo />
   <ExplorerHotel />
-<!--   <CaRentals /> -->
+  <CaRentals />
   <CarCategories />
   <ExecutiveTaxi />
   <ExplorerCruzeiro />
   <SeguroViage />
   <BannerIngresos />
   <Miles />
-<!--   <PackTourist />
+  <PackTourist />
   <Blog />
   <CommunityHero />
   <CommunityTrips />
   <CommunityTravelerPhotos />
   <CommunityFeedback />
-  <Instagram /> -->
+  <Instagram />
   <Greeting />
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import Hero from '@/components/Landing/LandingHero.vue';
 import Banner from '@/components/Landing/LandingBanner.vue';
 import ExplorerVoo from '@/components/Landing/LandingExplorerVoo.vue';
@@ -40,6 +41,13 @@ import CommunityTravelerPhotos from '@/components/Landing/LandingCommunityTravel
 import CommunityFeedback from '@/components/Landing/LandingCommunityFeedback.vue';
 import Instagram from '@/components/Landing/LandingInstagram.vue';
 import Greeting from '@/components/Landing/LandinGreeting.vue';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+
+const searchOptionsVooStore = useSearchOptionsVooStore();
+
+onMounted(() => {
+  searchOptionsVooStore.resetState();
+});
 </script>
 
 <style scoped></style>

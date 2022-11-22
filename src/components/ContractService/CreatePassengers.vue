@@ -126,15 +126,15 @@
         </div>
       </div>
     </div>
-    <Modal :modal="modal" @closeModal="modal = false">
+    <Modal v-if="modal" @close="modal = false">
       <template #body>
         <PassengerItem @createP="createPassageiro" />
       </template>
-      <template #title>
+      <template #header>
         <span>Criar passageiro</span>
       </template>
     </Modal>
-    <Modal :modal="edit" @closeModal="edit = false">
+    <Modal v-if="edit" @close="edit = false">
       <template #body>
         <EditPassenger
           :itemEdit="itemEdit"
@@ -142,7 +142,7 @@
           @editP="edit = false"
         />
       </template>
-      <template #title>
+      <template #header>
         <span>Editar passageiro</span>
       </template>
     </Modal>

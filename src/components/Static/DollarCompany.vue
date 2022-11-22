@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="dollar" title="Localiza" @closeModal="dollar = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="dollar" title="Localiza" @close="dollar = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/dollarthrifty-popup.jpg" />
         </div>
       </template>

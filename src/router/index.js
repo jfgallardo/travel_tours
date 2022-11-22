@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
-/* const UserDetails = () => import('./views/UserDetails.vue')
- */
+
 const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
 const LayoutAuth = () => import('@/layouts/LayoutAuth.vue');
 const LandingPage = () => import('@/views/LandingPage.vue');
 
 const AereoHomePage = () => import('@/views/Aereo/HomePage.vue');
-const AereoFlightQuery = () => import('@/views/Aereo/FlightQuery.vue');
+//const AereoFlightQuery = () => import('@/views/Aereo/FlightQuery.vue');
 const AereoLandingPage = () => import('@/views/Aereo/LandingPage.vue');
+const VoosIdaVolta = () => import('@/views/Aereo/VoosIdaVolta.vue');
 
 const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
@@ -73,9 +73,9 @@ const router = createRouter({
           children: [
             { path: '', name: 'AereoLandingPage', component: AereoLandingPage },
             {
-              path: 'query/:source/:destiny/:departure_date/:return_date',
-              name: 'AereoFlightQuery',
-              component: AereoFlightQuery,
+              path: 'check/round-trip',
+              name: 'VoosIdaVolta',
+              component: VoosIdaVolta,
             },
           ],
         },

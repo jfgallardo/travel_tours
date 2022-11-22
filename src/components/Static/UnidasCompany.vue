@@ -8,9 +8,9 @@
       />
     </div>
 
-    <Modal :modal="unidas" title="Localiza" @closeModal="unidas = false">
-      <template #title>
-        <div class="flex items-center justify-center">
+    <Modal v-if="unidas" title="Localiza" @close="unidas = false">
+      <template #header>
+        <div class="flex items-center justify-center w-full">
           <img src="@/assets/img/unidas-popup.jpg" />
         </div>
       </template>
@@ -34,7 +34,7 @@
               neutralizando os gases de efeito estufa gerados pela sua reserva
               com apenas R$1,99/diária.
             </li>
-           <b class="text-lg"> E mais: </b>
+            <b class="text-lg"> E mais: </b>
             <li>Localiza fast (cliente não passa no balcão);</li>
             <li>
               Conect Car (Pedágio) - não fatura esse item mesmo em faturamento
