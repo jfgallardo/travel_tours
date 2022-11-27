@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="min-h-[200px] min-w-[500px] hover:scale-110">
     <div
-      class="md:w-56 lg:w-96 w-96 relative border-b pb-3"
+      class="relative border-b pb-3"
       :class="{ 'border-black': black }"
     >
       <div class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-4xl">
@@ -21,7 +21,18 @@
 </template>
 
 <script setup>
-const props = defineProps(['slide', 'black']);
+const props = defineProps({
+  slide: {
+    type: Object,
+    default: () => {},
+  },
+  black: {
+    type: Boolean,
+    default: false,
+  },
+})
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

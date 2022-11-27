@@ -1,5 +1,6 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { axiosLocalAPI } from '@/plugins/axios';
+import { useStorage } from '@vueuse/core';
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -24,6 +25,7 @@ export const useUserStore = defineStore({
     currentStep: 0,
     user_logged: null,
     loading: false,
+    vooSelected: useStorage('vooSelected', {}),
   }),
   getters: {},
   actions: {
@@ -51,3 +53,7 @@ export const useUserStore = defineStore({
     },
   },
 });
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
+}

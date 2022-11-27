@@ -36,6 +36,7 @@
       </div>
       <div>
         <button
+          @click="goToPre"
           class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0"
         >
           Comprar
@@ -49,6 +50,8 @@
 import { ref, onUpdated, computed } from 'vue';
 import QrcodeVue from 'qrcode.vue';
 import { useMoblixStore } from '@/stores/moblix';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 
 onUpdated(() => {
   value.value = `${window.location.protocol}//${window.location.host}/`;
@@ -60,6 +63,8 @@ const props = defineProps({
     default: () => {},
   },
 });
+const router = useRouter();
+const userStore = useUserStore();
 
 const value = ref('');
 const moblixStore = useMoblixStore();
@@ -78,6 +83,10 @@ const TotalPassageiros = computed(() => {
     moblixStore.qntdBebe + moblixStore.qntdCrianca + moblixStore.qntdAdulto
   );
 });
+const goToPre = () => {
+  userStore.vooSelected = props.vooDetalhes;
+  router.push({ name: 'PreCheckoutPage' });
+};
 </script>
 
 <style scoped></style>

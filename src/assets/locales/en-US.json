@@ -1,4 +1,9 @@
 {
+  "i18T": {
+    "portugues": "Portuguese",
+    "ingles": "English",
+    "espanol": "Spanish"
+  },
   "hero": {
     "subtitle": "An escape to anywhere"
   },
@@ -169,5 +174,8 @@
   },
   "adults":"{count} Adult | {count} Adults",
   "children":"{count} Child | {count} Child | {count} Children",
-  "babies":"{count} Baby | {count} Baby | {count} Babies"
+  "babies":"{count} Baby | {count} Baby | {count} Babies",
+  "portugues": "Portugues",
+  "ingles": "Ingles",
+  "espanol": "Espanol"
 }

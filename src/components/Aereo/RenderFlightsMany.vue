@@ -4,7 +4,7 @@
       <div class="w-full border-l py-5">
         <div class="flex flex-row items-center justify-between px-10">
           <div class="flex flex-col items-center space-y-3 w-32">
-            <img :src="initVoo.Icone" />
+            <img :src="initVoo.Icone" alt="Icone" />
             <p class="text-sm text-center">{{ FlightCodeString }}</p>
           </div>
 

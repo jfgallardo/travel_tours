@@ -6,7 +6,6 @@
         <span>
           {{ state.lang }}
         </span>
-        <ChevronDown class="ml-1 h-4 w-4" />
       </button>
     </template>
     <template #dropdown>
@@ -16,21 +15,21 @@
           class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1 flex items-center space-x-3"
         >
           <img src="@/assets/ico/brasil.png" class="w-4 h-4" />
-          <p>Portugues</p>
+          <p>{{ t('i18T.portugues') }}</p>
         </li>
         <li
           @click="selectLang('en')"
           class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1 flex items-center space-x-3"
         >
           <img src="@/assets/ico/united-states.png" class="w-4 h-4" />
-          <p>Ingles</p>
+          <p>{{ t('i18T.ingles') }}</p>
         </li>
         <li
           @click="selectLang('es')"
           class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1 flex items-center space-x-3"
         >
           <img src="@/assets/ico/spain.png" class="w-4 h-4" />
-          <p>Espanol</p>
+          <p>{{ t('i18T.espanol') }}</p>
         </li>
       </ul>
     </template>
@@ -43,12 +42,11 @@ import { useI18n } from 'vue-i18n';
 import { setLocale } from '@vee-validate/i18n';
 
 import Globe from '@/components/Icons/Globe.vue';
-import ChevronDown from '@/components/Icons/ChevronDown.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 
 let state = reactive({ lang: 'BR' });
 let hiddenDropdown = ref(false);
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 function selectLang(lang) {
   locale.value = lang;
