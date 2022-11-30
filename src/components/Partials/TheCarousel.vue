@@ -6,7 +6,10 @@
           <slot name="title"></slot>
         </div>
       </div>
-      <div ref="carrousel_items" class="flex space-x-10 overflow-x-hidden overflow-y-hidden p-2">
+      <div
+        ref="carrousel_items"
+        class="flex space-x-10 overflow-x-hidden overflow-y-hidden p-2"
+      >
         <slot></slot>
       </div>
     </div>
@@ -28,7 +31,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   stop();
-})
+});
 
 const carrousel_items = ref(null);
 
@@ -39,9 +42,10 @@ let maxScrollLeft = computed(() => {
 });
 
 const start = () => {
-  interval.value = setInterval(function (){
-    carrousel_items.value.scrollLeft = carrousel_items.value.scrollLeft + step.value;
-    if (carrousel_items.value.scrollLeft === maxScrollLeft.value){
+  interval.value = setInterval(function () {
+    carrousel_items.value.scrollLeft =
+      carrousel_items.value.scrollLeft + step.value;
+    if (carrousel_items.value.scrollLeft === maxScrollLeft.value) {
       step.value = -1;
     } else if (carrousel_items.value.scrollLeft === 0) {
       step.value = 1;

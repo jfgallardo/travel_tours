@@ -11,9 +11,9 @@
           <slot name="header"> This is the default title! </slot>
           <button
             class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-white bg-gray-300 hover:bg-gray-400 transition duration-150 ease-in-out rounded-full border p-1"
-            @click="close"
             aria-label="close modal"
             role="button"
+            @click="close"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

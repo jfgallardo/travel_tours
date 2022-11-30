@@ -5,16 +5,16 @@
     >
       <div class="w-4/12">
         <TextInput
-          label="Telefone principal *"
           v-model="userStore.user.mainPhone"
+          label="Telefone principal *"
           name="mainPhone"
         />
       </div>
 
       <div class="w-4/12">
         <TextInput
-          label="Telefone alternativo"
           v-model="userStore.user.alternativePhone"
+          label="Telefone alternativo"
           name="alternativePhone"
         />
       </div>

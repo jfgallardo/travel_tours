@@ -6,9 +6,9 @@
       }}</span>
       <input
         v-model="value"
+        v-maska="maska"
         type="text"
         :class="inputClassList"
-        v-maska="maska"
         :placeholder="placeholder"
         :disabled="disableField"
         @blur="$emit('onBlur', $event.target.value)"

@@ -5,22 +5,22 @@
         <div class="grid grid-cols-3 grid-rows-1 px-4">
           <button
             ref="roundtrip"
-            @click="changeTab(RoundTrip, roundtrip)"
             class="py-3 border border-gray-400"
+            @click="changeTab(RoundTrip, roundtrip)"
           >
             {{ t('aereoHomePage.titleRoundTrip') }}
           </button>
           <button
             ref="go"
-            @click="changeTab(OneWay, go)"
             class="py-3 border-y border-gray-400"
+            @click="changeTab(OneWay, go)"
           >
             {{ t('aereoHomePage.titleOneWay') }}
           </button>
           <button
             ref="manycities"
-            @click="changeTab(ManyCities, manycities)"
             class="py-3 border border-gray-400"
+            @click="changeTab(ManyCities, manycities)"
           >
             {{ t('aereoHomePage.titleManyCities') }}
           </button>

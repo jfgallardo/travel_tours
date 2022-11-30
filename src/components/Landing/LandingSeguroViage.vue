@@ -13,8 +13,8 @@
           ></div>
           <div>
             <button
-              @click="cotarSeguro"
               class="bg-blue-700 hover:bg-blue-800 md:py-2 py-4 text-white md:px-6 px-8 font-medium text-2xl md:text-base"
+              @click="cotarSeguro"
             >
               {{ t('seguro-viagem.button') }}
             </button>

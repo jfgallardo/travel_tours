@@ -74,7 +74,7 @@
         <DateInput
           v-model="searchOptionsVooStore.dateOfDeparture"
           :label="t('roundTripForm.labelIda')"
-          :minDateShow="new Date()"
+          :min-date-show="new Date()"
         />
       </div>
 
@@ -94,7 +94,7 @@
 
       <div class="px-4">
         <Dropddown :label="t('roundTripForm.labelPassageiros')">
-          <template v-slot:selected>
+          <template #selected>
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
@@ -103,30 +103,30 @@
               <span>{{ t('babies', searchOptionsVooStore.babies) }}</span>
             </div>
           </template>
-          <template v-slot:dropdown>
+          <template #dropdown>
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
-                subtitle="+16 anos"
                 v-model="searchOptionsVooStore.adults"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                subtitle="+16 anos"
                 :label="t('adults')"
+                @takeOff="takeOff"
+                @addUp="addUp"
               />
 
               <ManageItems
-                subtitle="4-15 anos"
                 v-model="searchOptionsVooStore.teenagers"
+                subtitle="4-15 anos"
+                :label="t('children')"
                 @takeOff="takeOff"
                 @addUp="addUp"
-                :label="t('children')"
               />
 
               <ManageItems
-                subtitle="1-3 anos"
                 v-model="searchOptionsVooStore.babies"
+                subtitle="1-3 anos"
+                :label="t('babies')"
                 @takeOff="takeOff"
                 @addUp="addUp"
-                :label="t('babies')"
               />
             </div>
 
@@ -152,7 +152,7 @@
             v-if="moblixStore.loading"
             class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
           ></div>
-          <ArrowRight v-else fillColor="white" class="absolute right-10" />
+          <ArrowRight v-else fill-color="white" class="absolute right-10" />
         </button>
       </div>
     </div>

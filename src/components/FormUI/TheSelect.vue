@@ -7,17 +7,17 @@
             label
           }}</span>
           <div
-            @click="hiddenDropdown = !hiddenDropdown"
             class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
+            @click="hiddenDropdown = !hiddenDropdown"
           >
             <span class="mr-5"> {{ selected.label }} </span>
             <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
           </div>
           <Transition>
             <div
-              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-30"
               v-if="hiddenDropdown"
               v-click-outside
+              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-30"
             >
               <ul>
                 <li

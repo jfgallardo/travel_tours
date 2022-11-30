@@ -8,7 +8,7 @@
         <div>
           <RenderFlights
             :flights="viagem.VoosIda"
-            @selectVoo="vooDetalhesOutboundFlights"
+            @select-voo="vooDetalhesOutboundFlights"
           />
         </div>
         <div class="border-b py-2">
@@ -17,13 +17,13 @@
         <div>
           <RenderFlights
             :flights="viagem.VoosVolta"
-            @selectVoo="vooDetalhesReturnFlights"
+            @select-voo="vooDetalhesReturnFlights"
           />
         </div>
       </div>
 
       <div class="w-1/5 border border-gray-300 relative">
-        <FlightDetalhes :vooDetalhes="viagem" />
+        <FlightDetalhes :voo-detalhes="viagem" />
       </div>
     </div>
   </div>

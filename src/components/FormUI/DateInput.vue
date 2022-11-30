@@ -21,8 +21,8 @@
         label
       }}</span>
       <input
-        :value="modelValue"
         ref="input"
+        :value="modelValue"
         type="text"
         :class="inputClassList"
         readonly

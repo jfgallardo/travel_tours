@@ -6,16 +6,16 @@
       <div>
         <div class="grid grid-cols-2">
           <button
-            type="button"
             ref="pessoaF"
+            type="button"
             class="py-3 border border-gray-400 px-12"
             @click="change(pessoaF)"
           >
             Pessoa Fisica
           </button>
           <button
-            type="button"
             ref="pessoaJ"
+            type="button"
             class="py-3 border-y border-r border-gray-400 px-12"
             @click="change(pessoaJ)"
           >
@@ -31,25 +31,25 @@
 
       <div class="w-4/12">
         <TextInput
-          label="Nome completo *"
           v-model="userStore.user.fullName"
+          label="Nome completo *"
           name="fullName"
         />
       </div>
 
       <div class="w-4/12">
         <TextInput
+          v-model="userStore.user.cpf"
           label="CPF *"
           maska="###.###.###-##"
-          v-model="userStore.user.cpf"
           name="cpf"
         />
       </div>
 
       <div class="w-4/12">
         <DateInput
-          label="Data de Nascimento *"
           v-model="userStore.user.birthday"
+          label="Data de Nascimento *"
           name="birthday"
         />
       </div>

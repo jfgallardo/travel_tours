@@ -1,6 +1,7 @@
 <template>
   <div class="tooltip">
     <div
+        class="w-fit"
       aria-describedby="tooltip"
       @mouseenter="handleShow($event)"
       @mouseleave="handleHide($event)"
@@ -20,7 +21,7 @@
 import { ref, computed } from 'vue';
 import { createPopper } from '@popperjs/core';
 
-const props = defineProps({
+defineProps({
   tooltipText: {
     type: String,
     default: '',

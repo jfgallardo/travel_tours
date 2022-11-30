@@ -3,7 +3,7 @@
     <div class="flex flex-col space-y-5">
       <div class="flex items-center justify-between space-x-5 px-4">
         <Dropddown :label="t('roundTripForm.labelPassageiros')" class="w-1/2">
-          <template v-slot:selected>
+          <template #selected>
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
@@ -12,30 +12,30 @@
               <span>{{ t('babies', searchOptionsVooStore.babies) }}</span>
             </div>
           </template>
-          <template v-slot:dropdown>
+          <template #dropdown>
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
-                subtitle="+16 anos"
                 v-model="searchOptionsVooStore.adults"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                subtitle="+16 anos"
                 :label="t('adults')"
+                @take-off="takeOff"
+                @add-up="addUp"
               />
 
               <ManageItems
-                subtitle="4-15 anos"
                 v-model="searchOptionsVooStore.teenagers"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                subtitle="4-15 anos"
                 :label="t('children')"
+                @take-off="takeOff"
+                @add-up="addUp"
               />
 
               <ManageItems
-                subtitle="1-3 anos"
                 v-model="searchOptionsVooStore.babies"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                subtitle="1-3 anos"
                 :label="t('babies')"
+                @take-off="takeOff"
+                @add-up="addUp"
               />
             </div>
 
@@ -48,7 +48,7 @@
           :label="t('roundTripForm.labelClassecabine')"
           :selected="searchOptionsVooStore.cabin"
           :options="options"
-          @selectValue="
+          @select-value="
             (e) => {
               searchOptionsVooStore.cabin = e;
             }
@@ -93,18 +93,18 @@
               <DateInput
                 v-model="trecho.departureDate"
                 :label="t('roundTripForm.labelIda')"
-                :minDateShow="new Date()"
+                :min-date-show="new Date()"
               />
 
               <svg
                 v-if="trecho.close"
-                @click="deleteField(index)"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
                 class="w-6 h-6 absolute -top-2 -right-4 cursor-pointer text-gray-500"
+                @click="deleteField(index)"
               >
                 <path
                   stroke-linecap="round"
@@ -134,7 +134,7 @@
             v-if="moblixStore.loading"
             class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
           ></div>
-          <ArrowRight v-else fillColor="white" class="absolute right-10" />
+          <ArrowRight v-else fill-color="white" class="absolute right-10" />
         </button>
       </div>
     </div>

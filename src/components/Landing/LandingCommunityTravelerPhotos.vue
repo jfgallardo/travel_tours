@@ -1,20 +1,17 @@
 <template>
   <div class="bg-gray-200">
     <Carousel>
-      <template v-slot:title> Fotos de los viajeros destacados </template>
+      <template #title> Fotos de los viajeros destacados </template>
       <CarouselSlider
         v-for="slide in sliders"
         :key="slide.city"
         :slide="slide"
         :black="true"
       >
-        <template v-slot:image>
-          <img
-            v-bind:src="slide.src"
-            class="w-full h-64 object-cover"
-          />
+        <template #image>
+          <img :src="slide.src" class="w-full h-64 object-cover" />
         </template>
-        <template v-slot:footer>
+        <template #footer>
           <div class="mt-2 flex space-x-2 items-center">
             <img
               :src="slide.avatar"

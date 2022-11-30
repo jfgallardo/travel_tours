@@ -75,8 +75,8 @@
 
           <div>
             <button
-              @click="detalhes = true"
               class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
+              @click="detalhes = true"
             >
               Detalhes
             </button>

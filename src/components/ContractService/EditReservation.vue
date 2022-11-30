@@ -15,9 +15,9 @@
         />
 
         <Select
+          v-if="paymentSelect.value === 'C'"
           label="CARTÃO DE CRÉDITO"
           :selected="pdfStore.creditCard.cartao"
-          v-if="paymentSelect.value === 'C'"
           :options="typeCards"
           @selectValue="
             (e) => {
@@ -27,37 +27,37 @@
         />
 
         <DateInput
+          v-model="dateTransaction"
           label="DATA DA TRANSAÇÃO"
           name="dateTransaction"
-          v-model="dateTransaction"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="numberCard"
           label="NÚMERO DO CARTÃO"
           maska="####-####-####-####"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="nameCard"
           label="NOME TITULAR"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="validCardDate"
           label="VALIDADE DO CARTÃO"
           placeholder="MM/AA"
           maska="##/##"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="securityCode"
           label="CÓDIGO DE SEGURANÇA"
           maska="####"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
@@ -68,55 +68,55 @@
         />
 
         <TextInput
+          v-model="transactionValue"
           name="transaction_value"
           label="VALOR DA TRANSAÇÃO"
           maska="#*.##"
-          v-model="transactionValue"
         />
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="tariff"
           name="rate"
           label="TARIFA"
           maska="#*.##"
-          v-model="tariff"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="rav"
           name="rav"
           maska="#*.##"
           label="RAV/DU"
-          v-model="rav"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="rc"
           name="rc"
           label="RC"
           maska="#*.##"
-          v-model="rc"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="taxa_embarque"
           name="taxa_embarque"
           maska="#*.##"
           label="TAXA DE EMBARQUE"
-          v-model="taxa_embarque"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="numberParcels"
           name="number_plots"
           maska="##"
           label="Nº DE PARCELAS"
-          v-model="numberParcels"
         />
 
         <button
           type="submit"
-          @click="onSubmit"
           class="col-start-3 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          @click="onSubmit"
         >
           Editar reserva
         </button>

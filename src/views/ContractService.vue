@@ -9,17 +9,17 @@
             </p>
             <div class="col-start-4">
               <button
+                id="createD"
                 class="bg-blue-700 hover:bg-blue-800 w-full text-white font-medium px-5 py-4 disabled:opacity-75"
                 type="submit"
-                id="createD"
               >
                 Gerar documento
               </button>
             </div>
             <div>
               <button
-                @click="resetForm()"
                 class="bg-red-500 hover:bg-red-600 text-white w-full text-center cursor-pointer font-medium px-5 py-4"
+                @click="resetForm()"
               >
                 Limpeza de dados
               </button>
@@ -115,7 +115,7 @@
           <div class="pt-5">
             <div class="flex space-x-5">
               <p class="font-light">Documentos para baixar</p>
-              <Tooltip tooltipText="Limpar">
+              <Tooltip tooltip-text="Limpar">
                 <span class="cursor-pointer" @click="resetContract">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

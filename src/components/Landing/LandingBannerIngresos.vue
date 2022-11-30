@@ -8,8 +8,8 @@
       </div>
       <div>
         <button
-          @click="cotarIngresos"
           class="font-semibold bg-white px-4 py-2 hover:bg-gray-200"
+          @click="cotarIngresos"
         >
           {{ t('banner-ingresos.button') }}
         </button>

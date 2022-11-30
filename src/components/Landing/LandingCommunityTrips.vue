@@ -1,20 +1,17 @@
 <template>
   <div class="bg-gray-200">
     <Carousel>
-      <template v-slot:title> Próximos viajes de la comunidad </template>
+      <template #title> Próximos viajes de la comunidad </template>
       <CarouselSlider
         v-for="slide in sliders"
         :key="slide.city"
         :slide="slide"
         :black="true"
       >
-        <template v-slot:image>
-          <img
-            v-bind:src="slide.src"
-            class="w-full h-64 object-cover"
-          />
+        <template #image>
+          <img :src="slide.src" class="w-full h-64 object-cover" />
         </template>
-        <template v-slot:footer>
+        <template #footer>
           <div class="mt-2 flex">
             <img
               v-for="avatar in slide.avatars"
@@ -29,7 +26,7 @@
             </div>
           </div>
         </template>
-        <template v-slot:footer-right>
+        <template #footer-right>
           <div class="text-sm">{{ slide.date }}</div>
         </template>
       </CarouselSlider>
@@ -98,5 +95,4 @@ const sliders = [
     total: 12,
   },
 ];
-
 </script>

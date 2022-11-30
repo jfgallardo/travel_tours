@@ -2,8 +2,8 @@
   <div>
     <div class="container mx-auto px-4 pb-20 space-y-9">
       <div
-        v-html="t('landingCarCategories.title')"
         class="lg:text-7xl text-4xl font-bold text-center"
+        v-html="t('landingCarCategories.title')"
       ></div>
       <div
         class="grid grid-cols-3 grid-rows-3 gap-4 justify-items-center lg:grid-cols-5 lg:grid-rows-2"

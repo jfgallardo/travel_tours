@@ -101,7 +101,7 @@
           </div> -->
           <div class="border-r border-gray-300 h-full">
             <Dropddown>
-              <template v-slot:selected>
+              <template #selected>
                 <button
                   v-if="userStore.user_logged"
                   class="flex items-center p-2"
@@ -117,7 +117,7 @@
                   </span>
                 </button>
               </template>
-              <template v-slot:dropdown>
+              <template #dropdown>
                 <Login />
               </template>
             </Dropddown>
@@ -130,10 +130,10 @@
         <div class="md:hidden">
           <button
             type="button"
-            @click="hiddenOf = !hiddenOf"
             class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu"
             aria-expanded="false"
+            @click="hiddenOf = !hiddenOf"
           >
             <span class="sr-only">Open main menu</span>
             <svg
@@ -170,7 +170,7 @@
         </div>
       </div>
 
-      <div class="absolute w-full z-30" v-if="hiddenOf">
+      <div v-if="hiddenOf" class="absolute w-full z-30">
         <div class="pt-2 pb-3 text-center px-5 bg-white">
           <div class="flex items-center justify-end">
             <svg
@@ -188,24 +188,24 @@
           </div>
 
           <RouterLink
-            @click="hiddenOf = false"
             class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
             :to="{ name: 'LandingPage' }"
+            @click="hiddenOf = false"
           >
             Home
           </RouterLink>
           <!--  <RouterLink @click="hiddenOf = false" class="text-gray-900  block px-3 py-2 rounded-md text-base font-medium"
             to="/">{{ t('header.ofertas') }}</RouterLink> -->
           <RouterLink
-            @click="hiddenOf = false"
             class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
             :to="{ name: 'MainQuestionsPage' }"
+            @click="hiddenOf = false"
             >{{ t('header.duvidas') }}</RouterLink
           >
           <RouterLink
-            @click="hiddenOf = false"
             :to="{ name: 'ContactPage' }"
             class="text-gray-900 block px-3 py-2 rounded-md text-base font-medium"
+            @click="hiddenOf = false"
             >{{ t('header.contato') }}
           </RouterLink>
         </div>

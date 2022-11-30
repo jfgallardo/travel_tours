@@ -3,7 +3,7 @@
     <div class="mt-5 flex flex-col space-y-1">
       <div class="px-4 mb-3">
         <Dropddown label="Hóspedes">
-          <template v-slot:selected>
+          <template #selected>
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
@@ -11,17 +11,17 @@
               <span> {{ adults }} Adultos</span>
             </div>
           </template>
-          <template v-slot:dropdown>
+          <template #dropdown>
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
-                label="Hospede"
                 v-model="lodging"
+                label="Hospede"
                 @takeOff="takeLodging"
                 @addUp="addLodging"
               />
               <ManageItems
-                label="Adultos"
                 v-model="adults"
+                label="Adultos"
                 @takeOff="takeAdult"
                 @addUp="addAdult"
               />
@@ -54,7 +54,7 @@
         />
         <DateInput
           v-model="flightDates.returnDate"
-          :dateMin="notBeforeDate()"
+          :date-min="notBeforeDate()"
         />
       </div>
 
@@ -81,7 +81,7 @@
           @click="consultar()"
         >
           <span>Buscar Cruzeiros</span>
-          <ArrowRight fillColor="white" class="absolute right-10" />
+          <ArrowRight fill-color="white" class="absolute right-10" />
         </button>
       </div>
     </div>

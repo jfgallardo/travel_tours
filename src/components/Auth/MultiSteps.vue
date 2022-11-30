@@ -7,16 +7,16 @@
     </div>
     <div class="flex items-center justify-center space-x-6 mt-10">
       <button
-        type="button"
         v-if="userStore.currentStep > 0"
+        type="button"
         class="bg-gray-200 hover:bg-gray-300 py-2 px-10"
         @click="backStep"
       >
         Retornar
       </button>
       <button
-        type="submit"
         v-if="userStore.currentStep != 3"
+        type="submit"
         class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
         @click="nextStep"
       >

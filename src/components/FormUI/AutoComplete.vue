@@ -5,14 +5,14 @@
         label
       }}</span>
       <input
-        type="text"
         ref="input"
+        type="text"
         :value="value"
         :class="inputClassList"
+        :placeholder="placeholder"
         @input="onInput($event.target.value)"
         @keydown="onKeydown"
         @blur="onBlur"
-        :placeholder="placeholder"
       />
 
       <button
@@ -45,16 +45,16 @@
         <li
           v-for="(opt, index) in options"
           :key="index"
-          tabindex="0"
-          @click="onSelect()"
-          @mouseover="setArrowCounter(index)"
-          class="autocomplete-item px-4 py-2 text-sm text-gray-700 cursor-pointer"
-          :class="{ 'bg-gray-200': arrowCounter === index }"
           :ref="
             (el) => {
               optionsList[index] = el;
             }
           "
+          tabindex="0"
+          class="autocomplete-item px-4 py-2 text-sm text-gray-700 cursor-pointer"
+          :class="{ 'bg-gray-200': arrowCounter === index }"
+          @click="onSelect()"
+          @mouseover="setArrowCounter(index)"
         >
           <div class="flex">
             <p>

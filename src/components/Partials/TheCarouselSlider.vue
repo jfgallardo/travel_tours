@@ -1,9 +1,6 @@
 <template>
   <div class="min-h-[200px] min-w-[500px] hover:scale-110">
-    <div
-      class="relative border-b pb-3"
-      :class="{ 'border-black': black }"
-    >
+    <div class="relative border-b pb-3" :class="{ 'border-black': black }">
       <div class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-4xl">
         {{ slide.city }}
       </div>
@@ -30,9 +27,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-})
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -8,51 +8,51 @@
           >Não sei meu CEP</a
         >
         <TextInput
-          label="CEP *"
           v-model="userStore.user.cep"
+          label="CEP *"
           name="cep"
           maska="#####-###"
         />
       </div>
       <div>
         <TextInput
-          label="Bairro *"
           v-model="userStore.user.bairro"
+          label="Bairro *"
           name="bairro"
         />
       </div>
       <div>
         <TextInput
-          label="Endereço *"
           v-model="userStore.user.address"
+          label="Endereço *"
           name="address"
         />
       </div>
       <div>
         <TextInput
-          label="Estado *"
           v-model="userStore.user.estado"
+          label="Estado *"
           name="estado"
         />
       </div>
       <div>
         <TextInput
-          label="Número *"
           v-model="userStore.user.number"
+          label="Número *"
           name="number"
         />
       </div>
       <div>
         <TextInput
-          label="Cidade *"
           v-model="userStore.user.ciudade"
+          label="Cidade *"
           name="ciudade"
         />
       </div>
       <div>
         <TextInput
-          label="Complemento *"
           v-model="userStore.user.complemento"
+          label="Complemento *"
           name="complemento"
         />
       </div>

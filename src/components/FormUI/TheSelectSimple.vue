@@ -1,16 +1,16 @@
 <template>
   <div>
     <div
-      class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
       ref="dropdownP"
+      class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
     >
       <button
         type="button"
         class="relative bg-white pr-10 py-3 text-left focus:outline-none sm:text-sm h-full w-full"
-        @click="hiddenDropdown = !hiddenDropdown"
         aria-haspopup="listbox"
         aria-expanded="true"
         aria-labelledby="listbox-label"
+        @click="hiddenDropdown = !hiddenDropdown"
       >
         <span class="ml-3 block truncate"> {{ selected.name }} </span>
         <span
@@ -22,19 +22,19 @@
 
       <Transition>
         <ul
-          class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
           v-if="hiddenDropdown"
+          v-click-outside
+          class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
           tabindex="-1"
           role="listbox"
           aria-labelledby="listbox-label"
           aria-activedescendant="listbox-option-3"
-          v-click-outside
         >
           <li
             v-for="op in options"
+            id="listbox-option-0"
             :key="op.value"
             class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-200"
-            id="listbox-option-0"
             role="option"
             @click="selectOption(op)"
           >

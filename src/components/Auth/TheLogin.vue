@@ -43,9 +43,9 @@
                 <label for="email-address" class="sr-only">Email address</label>
                 <input
                   id="email-address"
+                  v-model="email"
                   name="email"
                   type="email"
-                  v-model="email"
                   required
                   class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                   :placeholder="t('auth.email')"
@@ -55,9 +55,9 @@
                 <label for="password" class="sr-only">Password</label>
                 <input
                   id="password"
+                  v-model="password"
                   name="password"
                   type="password"
-                  v-model="password"
                   required
                   class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
                   :placeholder="t('auth.placeholder-pwd')"

@@ -1,14 +1,14 @@
 <template>
   <div>
     <div>
-      <div class="container" ref="dropdownP">
+      <div ref="dropdownP" class="container">
         <div class="relative">
           <span class="absolute top-0 pl-3 mt-1 text-gray-400 text-sm">{{
             label
           }}</span>
           <div
-            @click="hiddenDropdown = !hiddenDropdown"
             class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
+            @click="hiddenDropdown = !hiddenDropdown"
           >
             <span class="flex items-center space-x-3">
               <span v-if="!selected">Selecionar reserva</span>
@@ -18,9 +18,9 @@
           </div>
           <Transition>
             <div
-              class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute z-30"
               v-if="hiddenDropdown"
               v-click-outside
+              class="bg-white border border-gray-300 py-1 shadow-md rounded-md absolute z-30"
             >
               <ul>
                 <li

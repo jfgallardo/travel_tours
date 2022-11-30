@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia';
 import { axiosClientAPI } from '@/plugins/axios';
 import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+
+const searchOptionsVoo = useSearchOptionsVooStore();
 
 export const useWoobaStore = defineStore({
   id: 'wooba',
@@ -17,17 +20,24 @@ export const useWoobaStore = defineStore({
     dataVolta: '',
   }),
   actions: {
-    async consultaOrigemDestino(payload) {
+    async consultaOrigemDestino() {
       const body = {
-        DataIda: `/Date(${new Date(payload.Ida).getTime()})/`,
-        DataVolta: `/Date(${new Date(payload.Volta).getTime()})/`,
-        Destino: payload.Destino,
+        DataIda: `/Date(${new Date(
+          searchOptionsVoo.getDateIdaFormatter
+        ).getTime()})/`,
+        DataVolta: `/Date(${new Date(
+          searchOptionsVoo.getDateVoltaFormatter
+        ).getTime()})/`,
+        Destino: searchOptionsVoo.destiny.iata,
         Flex: true,
-        Origem: payload.Origem,
-        QuantidadeAdultos: payload.Adultos,
-        QuantidadeBebes: payload.Bebes,
-        QuantidadeCriancas: payload.Criancas,
+        Origem: searchOptionsVoo.origin.iata,
+        QuantidadeAdultos: searchOptionsVoo.adults,
+        QuantidadeBebes: searchOptionsVoo.babies,
+        QuantidadeCriancas: searchOptionsVoo.teenagers,
         Recomendacao: true,
+        ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
+        QuantidadeDeVoos: 15,
+        ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
       };
       this.loading = true;
       await axiosClientAPI
@@ -80,6 +90,62 @@ export const useWoobaStore = defineStore({
       this.outboundFlights = [];
       this.returnFlights = [];
       this.loading = false;
+    },
+    async displayMoreResults() {
+      const body = {
+        DataIda: `/Date(${new Date(
+          searchOptionsVoo.getDateIdaFormatter
+        ).getTime()})/`,
+        DataVolta: `/Date(${new Date(
+          searchOptionsVoo.getDateVoltaFormatter
+        ).getTime()})/`,
+        Destino: searchOptionsVoo.destiny.iata,
+        Flex: true,
+        Origem: searchOptionsVoo.origin.iata,
+        QuantidadeAdultos: searchOptionsVoo.adults,
+        QuantidadeBebes: searchOptionsVoo.babies,
+        QuantidadeCriancas: searchOptionsVoo.teenagers,
+        Recomendacao: true,
+        ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
+        QuantidadeDeVoos: searchOptionsVoo.quantidadeDeVoos,
+        ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
+      };
+
+      await axiosClientAPI
+        .post('api/v1/wooba/query', body)
+        .then(({ data }) => {
+          let { ViagensTrecho1, ViagensTrecho2, OfertasDesde } = data.data;
+
+          let newViagensTrecho1 = ViagensTrecho1.slice(
+            ViagensTrecho1.length - this.outboundFlights.length
+          );
+
+          if (!ViagensTrecho2) {
+            woobaData(newViagensTrecho1, OfertasDesde.trechoOneOferta).forEach(
+              (e) => {
+                this.outboundFlights.push(e);
+              }
+            );
+            this.returnFlights = null;
+          } else {
+            let newViagensTrecho2 = ViagensTrecho2.slice(
+              ViagensTrecho2.length - 15
+            );
+            woobaDataMultiple(
+              newViagensTrecho1,
+              OfertasDesde.trechoOneOferta
+            ).forEach((e) => {
+              this.outboundFlights.push(e);
+            });
+            woobaDataMultiple(
+              newViagensTrecho2,
+              OfertasDesde.trechoTwoOferta
+            ).forEach((e) => {
+              this.returnFlights.push(e);
+            });
+          }
+        })
+        .finally(() => {});
     },
   },
 });

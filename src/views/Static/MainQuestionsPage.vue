@@ -5,10 +5,10 @@
         <h1 class="text-xl text-blue-900 mb-3">Principais Dúvidas</h1>
       </div>
       <CollapseAccording>
-        <template v-slot:header
+        <template #header
           >{{ t('mainQuestions.airTicketPurchaseHeader') }}
         </template>
-        <template v-slot:body>
+        <template #body>
           <p
             class="text-sm text-gray-700"
             v-html="t('mainQuestions.airTicketPurchaseBody')"
@@ -17,10 +17,10 @@
       </CollapseAccording>
 
       <CollapseAccording>
-        <template v-slot:header
+        <template #header
           >{{ t('mainQuestions.cancellationsHeader') }}
         </template>
-        <template v-slot:body>
+        <template #body>
           <p
             class="text-sm text-gray-700"
             v-html="t('mainQuestions.cancellationsBody')"
@@ -29,10 +29,10 @@
       </CollapseAccording>
 
       <CollapseAccording>
-        <template v-slot:header
+        <template #header
           >{{ t('mainQuestions.accumulateMilesHeader') }}
         </template>
-        <template v-slot:body>
+        <template #body>
           <p
             class="text-sm text-gray-700"
             v-html="t('mainQuestions.accumulateMilesBody')"
@@ -41,10 +41,8 @@
       </CollapseAccording>
 
       <CollapseAccording>
-        <template v-slot:header
-          >{{ t('mainQuestions.sellMyMilesHeader') }}
-        </template>
-        <template v-slot:body>
+        <template #header>{{ t('mainQuestions.sellMyMilesHeader') }} </template>
+        <template #body>
           <p
             class="text-sm text-gray-700"
             v-html="t('mainQuestions.sellMyMilesBody')"
@@ -53,10 +51,10 @@
       </CollapseAccording>
 
       <CollapseAccording>
-        <template v-slot:header
+        <template #header
           >{{ t('mainQuestions.registerOnSiteHeader') }}
         </template>
-        <template v-slot:body>
+        <template #body>
           <p
             class="text-sm text-gray-700"
             v-html="t('mainQuestions.registerOnSiteBody')"

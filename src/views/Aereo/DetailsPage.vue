@@ -50,14 +50,14 @@
               </p>
             </div>
             <div
-              class="text-lg font-light"
               v-for="item in flights"
               :key="item.Id"
+              class="text-lg font-light"
             >
               <h1 class="font-medium text-gray-700">
                 {{ item.Origem.CodigoIata }} - {{ item.Destino.CodigoIata }}
               </h1>
-              <p class="flex items-center space-x-2" v-if="item.BagagemInclusa">
+              <p v-if="item.BagagemInclusa" class="flex items-center space-x-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

@@ -8,14 +8,14 @@
         class="grid grid-cols-1 grid-rows-5 justify-items-center md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2"
       >
         <div
-          class="w-80 text-sm mb-16 bg-white md:bg-transparent p-4"
           v-for="feed in feedbacks"
           :key="feed.name"
+          class="w-80 text-sm mb-16 bg-white md:bg-transparent p-4"
         >
           <div class="flex items-center space-x-5">
             <div>
               <img
-                v-bind:src="feed.avatar"
+                :src="feed.avatar"
                 class="h-14 w-14 object-cover rounded-full"
               />
             </div>
@@ -32,9 +32,9 @@
           <div class="mt-3">
             <div class="flex space-x-5">
               <button
-                class="border border-black rounded-xl px-2"
                 v-for="(label, index) in feed.labels"
                 :key="index"
+                class="border border-black rounded-xl px-2"
               >
                 {{ label }}
               </button>

@@ -1,19 +1,12 @@
 <template>
   <div>
     <Carousel>
-      <template v-slot:title> Aproveite nossos pacotes </template>
-      <CarouselSlider
-        v-for="slide in sliders"
-        :key="slide.city"
-        :slide="slide"
-      >
-        <template v-slot:image>
-          <img
-            v-bind:src="slide.src"
-            class="w-full h-72 object-cover"
-          />
+      <template #title> Aproveite nossos pacotes </template>
+      <CarouselSlider v-for="slide in sliders" :key="slide.city" :slide="slide">
+        <template #image>
+          <img :src="slide.src" class="w-full h-72 object-cover" />
         </template>
-        <template v-slot:footer>
+        <template #footer>
           <span class="text-xs text-gray-600"
             >Viaje + Alojamiento + Carro + Tours Guide</span
           ><br />
@@ -22,7 +15,7 @@
             {{ slide.nights }} Noites</span
           >
         </template>
-        <template v-slot:footer-right>
+        <template #footer-right>
           <ArrowRight class="h-5 w-5 hover:cursor-pointer mr-2" />
         </template>
       </CarouselSlider>

@@ -5,8 +5,8 @@
     >
       <div class="w-4/12">
         <TextInput
-          label="E-mail *"
           v-model="userStore.user.email"
+          label="E-mail *"
           name="email"
         />
       </div>
@@ -17,8 +17,8 @@
 
       <div class="w-4/12">
         <TextInput
-          label="Senha de acesso *"
           v-model="userStore.user.password"
+          label="Senha de acesso *"
           name="password"
         />
       </div>

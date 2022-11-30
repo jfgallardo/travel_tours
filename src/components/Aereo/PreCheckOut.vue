@@ -6,7 +6,7 @@
           <div class="flex item-center space-x-3">
             <div class="border border-gray-400 h-fit p-1 rounded-full">
               <img
-                  class="h-7 w-7"
+                class="h-7 w-7"
                 src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
               />
             </div>
@@ -14,7 +14,7 @@
             <div
               class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
             >
-              Viernes, 9 Sept, 2022
+              {{ dateIda }}
             </div>
           </div>
           <template v-for="item in viagem.VoosIda" :key="item.Numero">
@@ -33,7 +33,7 @@
             <div
               class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
             >
-              Viernes, 9 Sept, 2022
+              {{ dateVolta }}
             </div>
           </div>
           <template v-for="item in viagem.VoosVolta" :key="item.Numero">
@@ -47,154 +47,36 @@
 <script setup>
 import { computed } from 'vue';
 import PlaneLine from '@/components/Aereo/PlaneLine.vue';
-import moment from 'moment';
+import moment from 'moment/min/moment-with-locales';
+import { useI18n } from 'vue-i18n';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 
-const props = defineProps({
+defineProps({
   viagem: {
     type: Object,
     default: () => {},
   },
 });
+const { locale } = useI18n();
+const searchOptions = useSearchOptionsVooStore();
 
-const vooIdaI = computed(() => {
-  return initVoo(props.viagem.VoosIda);
+const dateIda = computed(() => {
+  return formatDate(searchOptions.getDateIdaFormatter);
 });
-const vooVoltaI = computed(() => {
-  return initVoo(props.viagem.VoosVolta);
-});
-const vooIdaE = computed(() => {
-  return endVoo(props.viagem.VoosIda);
-});
-const vooVoltaE = computed(() => {
-  return endVoo(props.viagem.VoosVolta);
+const dateVolta = computed(() => {
+  return formatDate(searchOptions.getDateVoltaFormatter);
 });
 
-const dayPeriodIda = computed(() => {
-  return filterDayPeriod(vooIdaI.value.DataSaida);
-});
-const dayPeriodVolta = computed(() => {
-  return filterDayPeriod(vooIdaE.value.DataChegada);
-});
-const horaSaida = computed(() => {
-  return filterHours(vooIdaI.value.DataSaida);
-});
-const horaChegada = computed(() => {
-  return filterHours(vooIdaE.value.DataChegada);
-});
-const paradas = computed(() => {
-  const cantVoo = props.viagem.VoosIda.length - 1;
-  let escalas = 0;
-
-  props.viagem.VoosIda.map((item) => {
-    if (item.Escalas) {
-      escalas += item.Escalas.length;
-    }
-  });
-
-  return `${cantVoo + escalas} Paradas`;
-});
-
-const dayPeriodIdaE = computed(() => {
-  return filterDayPeriod(vooVoltaI.value.DataSaida);
-});
-const dayPeriodVoltaE = computed(() => {
-  return filterDayPeriod(vooVoltaE.value.DataChegada);
-});
-const horaSaidaE = computed(() => {
-  return filterHours(vooVoltaI.value.DataSaida);
-});
-const horaChegadaE = computed(() => {
-  return filterHours(vooVoltaE.value.DataChegada);
-});
-const paradasE = computed(() => {
-  const cantVoo = props.viagem.VoosVolta.length - 1;
-  let escalas = 0;
-
-  props.viagem.VoosVolta.map((item) => {
-    if (item.Escalas) {
-      escalas += item.Escalas.length;
-    }
-  });
-  return `${cantVoo + escalas} Paradas`;
-});
-
-const initVoo = (vooArray) => {
-  return vooArray[0];
-};
-const endVoo = (vooArray) => {
-  let longitude = vooArray.length;
-  return vooArray[longitude - 1];
-};
-
-/*const offersCompany = computed(() => {
-  let companies = ofertasDesde.filter((item) => {
-    if (item.company === ciaMandatoria.CodigoIata) {
-      return item;
-    }
-  });
-  let offers = companies[0].offers;
-  if (companies.length === 1) {
-    return offers;
+const formatDate = (date) => {
+  if (locale.value === 'br') {
+    moment.locale('pt-br');
   } else {
-    companies.forEach((e) => {
-      if (e.offers < offers) {
-        offers = e.offers;
-      }
-    });
+    moment.locale(locale.value);
   }
-
-  return offers;
-});*/
-
-const filterHours = (date) => {
-  const dateLocal = new Date(moment(date));
-  return dateLocal.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  return upperC(moment(date).format('dddd D MMM YYYY'));
 };
 
-const filterDayPeriod = (date) => {
-  const dateLocal = new Date(moment(date));
-  const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
+const upperC = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
-
-const duracao = computed(() => {
-  let minutes_flag = 0;
-  let hours_flag = 0;
-  props.viagem.VoosVolta.forEach((element) => {
-    hours_flag += parseInt(element.Duracao.split(':')[0]);
-    minutes_flag += parseInt(element.Duracao.split(':')[1]);
-  });
-
-  let hours = Math.floor(minutes_flag / 60);
-  let minutes = minutes_flag % 60;
-
-  return `${hours_flag + hours}h : ${minutes}min`;
-});
-
-const tipoTarifa = computed(() => {
-  let tarifa = [];
-  props.viagem.forEach((element) => {
-    if (!tarifa.find((o) => o === element.Familia)) {
-      tarifa.push(element.Familia);
-    }
-  });
-  return tarifa.join(', ');
-});
-
-/*const paradas = computed(() => {
-  const cantVoo = flights.length - 1;
-  let escalas = 0;
-
-  props.viagem.VoosVolta.map((item) => {
-    if (item.Escalas) {
-      escalas += item.Escalas.length;
-    }
-  });
-
-  return `${cantVoo + escalas} Paradas`;
-});*/
 </script>
-<style scoped></style>

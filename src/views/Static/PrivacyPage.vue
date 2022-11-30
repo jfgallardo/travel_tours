@@ -15,8 +15,8 @@
           <div>
             <a
               href="#"
-              @click="changeTab(UseCookies)"
               class="hover:text-blue-700 text-cyan-600"
+              @click="changeTab(UseCookies)"
               >{{ t('privacy.useCookies') }}</a
             >
           </div>

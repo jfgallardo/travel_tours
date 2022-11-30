@@ -11,8 +11,20 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
     adults: useStorage('adults', 1),
     teenagers: useStorage('teenagers', 0),
     babies: useStorage('babies', 0),
+    onlyBaggage: useStorage('onlyBaggage', false),
+    quantidadeDeVoos: useStorage('quantidadeDeVoos', 10),
+    apenasVoosDiretos: useStorage('apenasVoosDiretos', false),
   }),
-  getters: {},
+  getters: {
+    getDateIdaFormatter: (state) => {
+      const splitDate = state.dateOfDeparture.split('/');
+      return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`;
+    },
+    getDateVoltaFormatter: (state) => {
+      const splitDate = state.dateOfReturn.split('/');
+      return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`;
+    },
+  },
   actions: {
     resetState() {
       this.dateOfDeparture = null;
@@ -23,6 +35,9 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
       this.adults = 1;
       this.teenagers = 0;
       this.babies = 0;
+      this.onlyBaggage = false;
+      this.quantidadeDeVoos = 10;
+      this.apenasVoosDiretos = false;
     },
   },
 });

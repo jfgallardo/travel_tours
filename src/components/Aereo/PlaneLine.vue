@@ -2,6 +2,12 @@
   <div class="flex flex-col text-sm">
     <div class="flex items-center space-x-3">
       <img
+        v-if="Conexao"
+        class="h-8 w-8"
+        src="@/assets/ico/icons8-the-scheduling-a-flight-of-the-planned-route-48.png"
+      />
+      <img
+        v-else
         class="h-8 w-8"
         src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
       />
@@ -24,7 +30,7 @@
       <svg>
         <line
           x1="18"
-          y1="0"
+          y1="10"
           x2="18"
           y2="130"
           stroke-width="2"
@@ -67,9 +73,9 @@
       <Transition>
         <div v-if="openEscala">
           <div
-            class="flex flex-col space-y-1 items-stretch mt-3 px-3 py-1 bg-gray-50 border-l-4 border-gray-300 font-light"
             v-for="item in escalasFiltered"
             :key="item.Id"
+            class="flex flex-col space-y-1 items-stretch mt-3 px-3 py-1 bg-gray-50 border-l-4 border-gray-300 font-light"
           >
             <p>
               <span class="font-medium">Areopuerto: </span>{{ item.Descricao }}
@@ -135,6 +141,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  Conexao: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const dayPeriodIda = computed(() => {
@@ -161,7 +171,7 @@ const dateStringChegada = computed(() => {
 });
 
 const escalasFiltered = computed(() => {
-  if (props.Escalas.length === 0) return [];
+  if (!props.Escalas) return [];
 
   return props.Escalas.map((escala) => {
     return {

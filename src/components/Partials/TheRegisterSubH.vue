@@ -3,12 +3,12 @@
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        @click="$router.go(-1)"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
         class="w-7 h-7 bg-gray-200 rounded-full p-1 cursor-pointer"
+        @click="$router.go(-1)"
       >
         <path
           stroke-linecap="round"

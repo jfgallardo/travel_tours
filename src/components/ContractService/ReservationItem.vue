@@ -15,9 +15,9 @@
         />
 
         <Select
+          v-if="paymentSelect.value === 'C'"
           label="CARTÃO DE CRÉDITO"
           :selected="pdfStore.creditCard.cartao"
-          v-if="paymentSelect.value === 'C'"
           :options="typeCards"
           @selectValue="
             (e) => {
@@ -27,44 +27,44 @@
         />
 
         <DateInput
+          v-model="dateTransaction"
           label="DATA DA TRANSAÇÃO"
           name="dateTransaction"
-          v-model="dateTransaction"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="numberCard"
           label="NÚMERO DO CARTÃO"
           maska="####-####-####-####"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="nameCard"
           label="NOME TITULAR"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="validCardDate"
           label="VALIDADE DO CARTÃO"
           placeholder="MM/AA"
           maska="##/##"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-if="paymentSelect.value === 'C'"
           name="securityCode"
           label="CÓDIGO DE SEGURANÇA"
           :maska="cartao.value === 'AMEX' ? '####' : '###'"
-          v-if="paymentSelect.value === 'C'"
         />
 
         <TextInput
+          v-model="transactionValue"
           name="transaction_value"
           label="VALOR DA TRANSAÇÃO"
           maska="#*.##"
-          v-model="transactionValue"
         />
 
         <TextInput
@@ -76,78 +76,78 @@
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="tariff"
           name="rate"
           label="TARIFA"
           maska="#*.##"
-          v-model="tariff"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="rav"
           name="rav"
           maska="#*.##"
           label="RAV/DU"
-          v-model="rav"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="rc"
           name="rc"
           label="RC"
           maska="#*.##"
-          v-model="rc"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="taxa_embarque"
           name="taxa_embarque"
           maska="#*.##"
           label="TAXA DE EMBARQUE"
-          v-model="taxa_embarque"
         />
 
         <TextInput
           v-if="paymentSelect.value === 'C'"
+          v-model="numberParcels"
           name="number_plots"
           maska="##"
           label="Nº DE PARCELAS"
-          v-model="numberParcels"
         />
 
         <div>
           <CheckInput
+            v-if="paymentSelect.value === 'C'"
             v-model="proportionalValue"
             label="Gerar parcelas proporcionais"
-            v-if="paymentSelect.value === 'C'"
           />
           <div class="flex space-x-2">
             <button
+              v-if="paymentSelect.value === 'C'"
               type="button"
               class="bg-blue-400 py-1 text-xs w-full px-2 text-white"
               @click="notUseSameData = true"
-              v-if="paymentSelect.value === 'C'"
             >
               Usar dados diferentes dos do contrato
             </button>
             <Tooltip
-              tooltipText="Eliminar datos"
               v-if="
                 paymentSelect.value === 'C' &&
                 Object.entries(pdfStore.otherData).length != 0
               "
+              tooltip-text="Eliminar datos"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 cursor-pointer"
-                @click="deleteOtherData(index)"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
                 v-if="
                   paymentSelect.value === 'C' &&
                   Object.entries(pdfStore.otherData).length != 0
                 "
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                @click="deleteOtherData(index)"
               >
                 <path
                   stroke-linecap="round"
@@ -161,8 +161,8 @@
 
         <button
           type="submit"
-          @click="onSubmit"
           class="col-start-3 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          @click="onSubmit"
         >
           Criar reserva
         </button>
@@ -213,8 +213,8 @@
             </div>
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3
-                class="text-lg font-medium leading-6 text-gray-900"
                 id="modal-title"
+                class="text-lg font-medium leading-6 text-gray-900"
               >
                 Cartão de crédito
               </h3>
@@ -229,15 +229,15 @@
           <div class="float-right">
             <button
               type="button"
-              @click="saveCC"
               class="inline-flex w-full justify-center border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+              @click="saveCC"
             >
               Salve
             </button>
             <button
               type="button"
-              @click="notSaveCC"
               class="mt-3 inline-flex w-full justify-center border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              @click="notSaveCC"
             >
               Cancelar
             </button>
@@ -251,20 +251,20 @@
         <form>
           <div class="flex flex-col space-y-8">
             <TextInput
+              v-model="pdfStore.otherData.cpf"
               label="CPF Nº"
               name="cpf_number"
               maska="###.###.###-##"
-              v-model="pdfStore.otherData.cpf"
             />
             <TextInput
+              v-model="pdfStore.otherData.phone"
               label="Telefone/Whatsapp"
               maska="(##) #####-####"
               name="phone"
-              v-model="pdfStore.otherData.phone"
             />
             <TextInput
-              label="RG/RNM"
               v-model="pdfStore.otherData.rg"
+              label="RG/RNM"
               name="rg"
             />
           </div>

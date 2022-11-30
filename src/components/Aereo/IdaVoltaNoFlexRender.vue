@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="w-1/5 border border-gray-300 relative">
-        <FlightDetalhes :vooDetalhes="selectVooIda" />
+        <FlightDetalhes :voo-detalhes="selectVooIda" />
       </div>
     </div>
 
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="w-1/5 border border-gray-300 relative">
-        <FlightDetalhes :vooDetalhes="selectVooVolta" />
+        <FlightDetalhes :voo-detalhes="selectVooVolta" />
       </div>
     </div>
   </div>

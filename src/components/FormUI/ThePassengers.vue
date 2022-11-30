@@ -1,21 +1,21 @@
 <template>
   <div>
     <div>
-      <div class="container" ref="fullContainer">
+      <div ref="fullContainer" class="container">
         <div class="relative mt-5">
           <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
             label
           }}</span>
           <button
             ref="button"
-            @click="toggle === false ? handleClick($event) : handleHide($event)"
             aria-expanded="false"
             class="flex justify-center pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
+            @click="toggle === false ? handleClick($event) : handleHide($event)"
           >
             <span class="flex items-center space-x-3"> </span>
           </button>
           <Transition name="fade">
-            <div class="dropdownMenu" ref="dropdown" v-click-outside>
+            <div ref="dropdown" v-click-outside class="dropdownMenu">
               <div id="arrow" data-popper-arrow></div>
             </div>
           </Transition>

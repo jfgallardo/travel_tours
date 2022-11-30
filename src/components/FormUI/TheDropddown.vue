@@ -10,14 +10,14 @@
           >
           <button
             ref="button"
-            @click="toggle === false ? handleClick() : handleHide()"
             aria-expanded="false"
             class="w-full"
+            @click="toggle === false ? handleClick() : handleHide()"
           >
             <slot name="selected"></slot>
           </button>
           <Transition name="fade">
-            <div class="dropdownMenu" ref="dropdown" v-click-outside>
+            <div ref="dropdown" v-click-outside class="dropdownMenu">
               <slot name="dropdown"></slot>
               <div class="divide-x"></div>
             </div>

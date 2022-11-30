@@ -1,16 +1,16 @@
 <template>
   <div>
     <HeroImage>
-      <template v-slot:image>
+      <template #image>
         <img src="@/assets/img/car.jpg" class="h-full w-full object-cover" />
       </template>
-      <template v-slot:title>
+      <template #title>
         {{ t('hero-taxi.title') }}
       </template>
-      <template v-slot:subtitle>
+      <template #subtitle>
         {{ t('hero-taxi.subtitle') }}
       </template>
-      <template v-slot:button>
+      <template #button>
         <button
           class="bg-blue-700 text-white py-2 px-6 hover:bg-blue-800"
           @click="cotarTaxi"

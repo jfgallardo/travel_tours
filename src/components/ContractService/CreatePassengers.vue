@@ -4,8 +4,8 @@
       <div>
         <button
           type="button"
-          @click="modal = true"
           class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          @click="modal = true"
         >
           Criar passageiro
         </button>
@@ -59,9 +59,9 @@
                   </thead>
                   <tbody v-if="pdfStore.passengers.length">
                     <tr
-                      class="border-b"
                       v-for="(item, index) in pdfStore.passengers"
                       :key="index"
+                      class="border-b"
                     >
                       <td
                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
@@ -82,9 +82,9 @@
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke-width="1.5"
-                          @click="editPassenger(index)"
                           stroke="currentColor"
                           class="w-5 h-5 cursor-pointer"
+                          @click="editPassenger(index)"
                         >
                           <path
                             stroke-linecap="round"
@@ -96,11 +96,11 @@
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           class="h-5 w-5 cursor-pointer"
-                          @click="deletePassenger(index)"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
                           stroke-width="2"
+                          @click="deletePassenger(index)"
                         >
                           <path
                             stroke-linecap="round"
@@ -137,8 +137,8 @@
     <Modal v-if="edit" @close="edit = false">
       <template #body>
         <EditPassenger
-          :itemEdit="itemEdit"
-          :itemIndex="itemIndex"
+          :item-edit="itemEdit"
+          :item-index="itemIndex"
           @editP="edit = false"
         />
       </template>

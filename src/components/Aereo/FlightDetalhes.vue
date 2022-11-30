@@ -36,8 +36,8 @@
       </div>
       <div>
         <button
-          @click="goToPre"
           class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0"
+          @click="goToPre"
         >
           Comprar
         </button>

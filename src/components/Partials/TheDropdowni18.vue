@@ -1,5 +1,5 @@
 <template>
-  <Dropddown :toggleOut="hiddenDropdown">
+  <Dropddown :toggle-out="hiddenDropdown">
     <template #selected>
       <button class="bg-white flex items-center p-2">
         <Globe class="mr-1 h-5 w-5" />
@@ -11,22 +11,22 @@
     <template #dropdown>
       <ul>
         <li
-          @click="selectLang('br')"
           class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1 flex items-center space-x-3"
+          @click="selectLang('br')"
         >
           <img src="@/assets/ico/brasil.png" class="w-4 h-4" />
           <p>{{ t('i18T.portugues') }}</p>
         </li>
         <li
-          @click="selectLang('en')"
           class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1 flex items-center space-x-3"
+          @click="selectLang('en')"
         >
           <img src="@/assets/ico/united-states.png" class="w-4 h-4" />
           <p>{{ t('i18T.ingles') }}</p>
         </li>
         <li
-          @click="selectLang('es')"
           class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1 flex items-center space-x-3"
+          @click="selectLang('es')"
         >
           <img src="@/assets/ico/spain.png" class="w-4 h-4" />
           <p>{{ t('i18T.espanol') }}</p>

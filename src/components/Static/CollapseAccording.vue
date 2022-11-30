@@ -1,8 +1,8 @@
 <template>
   <div>
     <div
-      @click="reportsOpen = !reportsOpen"
       class="flex items-center text-gray-600 w-full border-b overflow-hidden mt-5 md:mt-0 mb-5 mx-auto"
+      @click="reportsOpen = !reportsOpen"
     >
       <div
         class="w-10 border-r px-2 transform transition duration-300 ease-in-out"
@@ -34,8 +34,8 @@
 
     <Transition>
       <div
-        class="flex p-5 md:p-2 w-full transform transition duration-300 ease-in-out border-b pb-10"
         v-show="reportsOpen"
+        class="flex p-5 md:p-2 w-full transform transition duration-300 ease-in-out border-b pb-10"
       >
         <slot name="body"></slot>
       </div>
