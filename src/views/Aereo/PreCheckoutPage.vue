@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mx-auto px-4 pb-20">
+    <div class="mx-auto px-4 pb-10">
       <div class="flex">
         <div class="basis-4/6 flex flex-col">
           <PreCheckOut :viagem="userStore.vooSelected" />
@@ -62,14 +62,42 @@
               </div>
             </div>
           </div>
-          <div class="flex justify-center">
+          <div class="flex">
             <button class="bg-blue-700 hover:bg-blue-800 text-white mt-5 py-2 w-1/2">Comprar agora</button>
           </div>
         </div>
       </div>
       <div class="flex">
-        <div class="basis-4/6">3</div>
-        <div class="basis-4/12">4</div>
+        <div class="basis-4/6 mt-5">
+          <Carousel>
+            <template #title> Aluguel de carros em Miami </template>
+            <CarouselSlider
+                v-for="slide in sliders"
+                :key="slide.city"
+                :slide="slide"
+            >
+              <template #image>
+                <img :src="slide.src" class="w-72 h-52 object-cover"  :alt="slide.src"/>
+              </template>
+              <template #footer>
+                <div class="mt-2 flex space-x-2 items-center">
+                  <div class="text-xs">
+                    <p class="font-bold">{{ slide.travel }}</p>
+                    <p>{{ slide.place }}</p>
+                  </div>
+                </div>
+              </template>
+            </CarouselSlider>
+          </Carousel>
+        </div>
+        <div class="basis-4/12">
+          <GroupsBoundFor more-people="12"/>
+          <GroupsBoundFor date="Sep 18" more-people="21"/>
+          <div class="flex items-center justify-around">
+            <span> Explore mais grupos com este destino </span>
+            <ArrowRight class="h-5 w-5 hover:cursor-pointer mr-2" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -80,6 +108,16 @@ import { useUserStore } from '@/stores/user';
 import PreCheckOut from '@/components/Aereo/PreCheckOut.vue';
 import TheTooltip from "@/components/Partials/TheTooltip.vue";
 import {computed} from "vue";
+import Carousel from "@/components/Partials/TheCarousel.vue";
+import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
+import Puntacana from "@/assets/img/viaje1.jpg";
+import Avatar1 from "@/assets/img/avatar1.jpg";
+import SanJuan from "@/assets/img/viaje2.jpg";
+import Avatar2 from "@/assets/img/avatar2.jpg";
+import Uruguay from "@/assets/img/viaje3.jpg";
+import Avatar3 from "@/assets/img/avatar3.jpg";
+import GroupsBoundFor from "@/components/Aereo/GroupsBoundFor.vue";
+import ArrowRight from "@/components/Icons/ArrowRight.vue";
 
 const userStore = useUserStore();
 
@@ -98,6 +136,72 @@ const currencyFormatter = ({ currency, value}) => {
   })
   return formatter.format(value)
 }
+
+const sliders = [
+  {
+    city: '',
+    src: Puntacana,
+    avatar: Avatar1,
+    travel: 'Jessica Palmer',
+    place: 'Puntacana',
+  },
+  {
+    city: '',
+    src: SanJuan,
+    avatar: Avatar2,
+    travel: 'Rudiguer Corinho',
+    place: 'San Juan',
+  },
+  {
+    city: '',
+    src: Uruguay,
+    avatar: Avatar3,
+    travel: 'Vivian Meldier',
+    place: 'Uruguay',
+  },
+  {
+    city: '',
+    src: Uruguay,
+    avatar: Avatar3,
+    travel: 'Ernesto Meldier',
+    place: 'Chile',
+  },
+  {
+    city: '',
+    src: Uruguay,
+    avatar: Avatar3,
+    travel: 'Juan Placencia',
+    place: 'Peru',
+  },
+  {
+    city: '',
+    src: SanJuan,
+    avatar: Avatar2,
+    travel: 'Rudiguer Corinho',
+    place: 'San Juan',
+  },
+  {
+    city: '',
+    src: Uruguay,
+    avatar: Avatar3,
+    travel: 'Vivian Meldier',
+    place: 'Uruguay',
+  },
+  {
+    city: '',
+    src: Uruguay,
+    avatar: Avatar3,
+    travel: 'Ernesto Meldier',
+    place: 'Chile',
+  },
+  {
+    city: '',
+    src: Uruguay,
+    avatar: Avatar3,
+    travel: 'Juan Placencia',
+    place: 'Peru',
+  },
+];
 </script>
 
 <style scoped></style>

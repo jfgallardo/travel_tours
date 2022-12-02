@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-[200px] min-w-[500px] hover:scale-110">
+  <div class="min-w-fit hover:scale-110">
     <div class="relative border-b pb-3" :class="{ 'border-black': black }">
       <div class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-4xl">
         {{ slide.city }}
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   slide: {
     type: Object,
     default: () => {},
