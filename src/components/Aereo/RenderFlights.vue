@@ -195,7 +195,11 @@ const Parada = computed(() => {
       paradas.push(element.Origem.CodigoIata);
     }
   });
-  return paradas.length > 0 ? `Parada: ${paradas.join(', ')}` : ' - ';
+  if (paradas.length === 0) {
+    const long = props.flights.length;
+    paradas.push(props.flights[long - 1].Origem.CodigoIata);
+  }
+  return `Parada: ${paradas.join(', ')}`;
 });
 </script>
 

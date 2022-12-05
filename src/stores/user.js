@@ -27,7 +27,22 @@ export const useUserStore = defineStore({
     loading: false,
     vooSelected: useStorage('vooSelected', {}),
   }),
-  getters: {},
+  getters: {
+    outboundFlightOrigin(state){
+     return state.vooSelected.VoosIda[0]
+    },
+    outboundFlightDestination(state){
+      const cant_voos = state.vooSelected.VoosIda.length
+      return state.vooSelected.VoosIda[cant_voos - 1]
+    },
+    returnFlightOrigin(state){
+      return state.vooSelected.VoosVolta[0]
+    },
+    returnFlightDestination(state){
+      const cant_voos = state.vooSelected.VoosVolta.length
+      return state.vooSelected.VoosVolta[cant_voos - 1]
+    }
+  },
   actions: {
     async login(payload) {
       this.loading = true;

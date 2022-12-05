@@ -214,6 +214,7 @@
       <QuerySubHeader v-if="showSubHeader" />
       <RegisterSubH v-if="showRegisterSubH" />
       <PreCheckOutSubheading v-if="showPreCheckOutSubheading" />
+      <CheckOutSubheading v-if="showCheckOutSubheading" />
     </nav>
   </div>
 </template>
@@ -231,6 +232,7 @@ import { useI18n } from 'vue-i18n';
 import { ref, computed } from 'vue';
 import { useUserStore } from '@/stores/user';
 import PreCheckOutSubheading from '@/components/Partials/PreCheckOutSubheading.vue';
+import CheckOutSubheading from "@/components/Partials/CheckOutSubheading.vue";
 
 const route = useRoute();
 const { t } = useI18n();
@@ -242,7 +244,8 @@ const showMainSubheading = computed(() => {
   return (
     !(route.name === 'VoosIdaVolta') &&
     route.name !== 'RegisterPage' &&
-    !(route.name === 'PreCheckoutPage')
+    !(route.name === 'PreCheckoutPage') &&
+    !(route.name === 'CheckoutPage')
   );
 });
 const showSubHeader = computed(() => {
@@ -254,6 +257,9 @@ const showRegisterSubH = computed(() => {
 const showPreCheckOutSubheading = computed(() => {
   return route.name === 'PreCheckoutPage';
 });
+const showCheckOutSubheading = computed(() => {
+  return route.name === 'CheckoutPage'
+})
 </script>
 
 <style scoped>

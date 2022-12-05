@@ -7,7 +7,8 @@ const LandingPage = () => import('@/views/LandingPage.vue');
 const AereoHomePage = () => import('@/views/Aereo/HomePage.vue');
 const AereoLandingPage = () => import('@/views/Aereo/LandingPage.vue');
 const VoosIdaVolta = () => import('@/views/Aereo/VoosIdaVolta.vue');
-const PreCheckoutPage = () => import('@/views/Aereo/PreCheckoutPage.vue');
+const PreCheckoutPage = () => import('@/views/Purchase/PreCheckoutPage.vue');
+const CheckoutPage = () => import('@/views/Purchase/CheckoutPage.vue')
 
 const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
@@ -83,6 +84,11 @@ const router = createRouter({
           path: 'precheckout',
           name: 'PreCheckoutPage',
           component: PreCheckoutPage,
+        },
+        {
+          path: 'checkout',
+          name: 'CheckoutPage',
+          component: CheckoutPage
         },
         {
           path: '/hotel',

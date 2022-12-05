@@ -1,7 +1,7 @@
 <template>
   <div class="tooltip">
     <div
-        class="w-fit"
+      class="w-fit"
       aria-describedby="tooltip"
       @mouseenter="handleShow($event)"
       @mouseleave="handleHide($event)"
