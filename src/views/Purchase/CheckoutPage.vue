@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mx-auto px-4 pt-10 pb-20 flex space-x-4">
-        <div class="xl:basis-1/5 basis-2/5">
+        <div class="w-1/4 h-5/6 overflow-y-auto fixed left-4 pb-10">
           <table class="table-fixed border-2 border-gray-200 w-full border-spacing-2 border-separate">
             <tbody>
             <tr>
@@ -240,7 +240,7 @@
             </tbody>
           </table>
         </div>
-        <div class="xl:basis-4/5 basis-3/5">
+        <div class="w-3/4 relative top-0 left-1/4 px-8">
           <PurchaseForm />
         </div>
     </div>
@@ -342,4 +342,8 @@ const upperC = (str) => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

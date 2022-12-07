@@ -146,7 +146,6 @@
           v-model="searchOptionsVoo.apenasVoosDiretos"
           :label="t('roundTripForm.voosDirectos')"
         />
-        <Check :label="t('roundTripForm.paraEstudantes')" />
         <Check
           v-model="searchOptionsVoo.onlyBaggage"
           label="Apenas com bagagem"

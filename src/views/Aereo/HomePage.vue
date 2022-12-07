@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div class="w-1/4 h-screen fixed left-0">
+    <div class="w-1/4 h-5/6 overflow-y-auto fixed left-0 pb-10">
       <div class="border-r border-gray-300 pt-8">
         <div class="grid grid-cols-3 grid-rows-1 px-4">
           <button
@@ -73,5 +73,9 @@ const changeTab = (newTab, ref) => {
 .active {
   background-color: black;
   color: white;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 </style>
