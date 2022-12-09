@@ -93,27 +93,6 @@
         <span>NO BAGAGEM</span>
       </div>
     </div>
-    <div class="border border-t-0 border-slate-300">
-      <div class="grid grid-cols-3 grid-rows-1 h-full">
-        <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-          <span class="text-3xl">Tarifa</span>
-          <span>{{tarifa}}</span>
-        </div>
-        <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-          <span class="text-2xl">Taxas e encargos</span>
-          <span>{{ valorTotalTaxas }}</span>
-        </div>
-        <div class="flex flex-col items-center justify-center">
-          <span class="text-3xl">Total</span>
-          <span>{{ valorTotal }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
-      <div class="flex items-center justify-center h-full p-5">
-        <button class="bg-blue-700 hover:bg-blue-800 text-white py-2.5 px-16">Comprar Agora</button>
-      </div>
-    </div>
   </div>
 </div>
 </template>
@@ -172,25 +151,6 @@ const duration = computed(() => {
   const llegada = moment(endFlight.value.DataChegada)
   return `${moment.duration(llegada.diff(saida)).get('hours')}hrs ${moment.duration(llegada.diff(saida)).get('minutes')}min`
 });
-const valorTotal = computed(() => {
-  return currencyFormatter({
-    currency: 'BRL',
-    value: props.vooSelected.ValorTotal,
-  });
-});
-const valorTotalTaxas = computed(() => {
-  return currencyFormatter({
-    currency: 'BRL',
-    value: props.vooSelected.ValorTotalTaxas,
-  });
-});
-const tarifa = computed(() => {
-  const t = props.vooSelected.ValorTotal - props.vooSelected.ValorTotalTaxas
-  return currencyFormatter({
-    currency: 'BRL',
-    value: t,
-  });
-});
 
 const formatDate = (date) => {
   if (locale.value === 'br') {
@@ -214,14 +174,6 @@ const filterDayPeriod = (date) => {
   const dateLocal = new Date(moment(date));
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
-};
-const currencyFormatter = ({ currency, value }) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    minimumFractionDigits: 2,
-    currency,
-  });
-  return formatter.format(value);
 };
 </script>
 

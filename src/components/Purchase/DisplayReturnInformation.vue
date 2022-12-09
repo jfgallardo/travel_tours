@@ -102,7 +102,7 @@
       </div>
       <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center justify-center h-full p-5">
-          <button class="bg-blue-700 hover:bg-blue-800 text-white py-2.5 px-16">Comprar Agora</button>
+          <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white py-3 px-28" :to="{name: 'CheckoutPage'}">Comprar agora</RouterLink>
         </div>
       </div>
     </div>
@@ -115,6 +115,8 @@ import moment from 'moment/min/moment-with-locales';
 import { useI18n } from 'vue-i18n';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import PlaneLine from "@/components/Aereo/PlaneLine.vue";
+import { RouterLink } from 'vue-router'
+
 
 const { locale } = useI18n();
 const searchOptions = useSearchOptionsVooStore();
