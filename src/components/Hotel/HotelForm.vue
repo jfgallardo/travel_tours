@@ -4,15 +4,15 @@
       <div class="px-4">
         <AutoComplete
           label="Para onde você vai?"
-          :value="origem.string"
+          :value="searchOptionsHotel.destiny.label"
           @input="
             (e) => {
-              origem.string = e;
+              searchOptionsHotel.destiny.label = e;
             }
           "
           @select="
             (s) => {
-              origem.iata = s;
+              searchOptionsHotel.destiny.iata = s;
             }
           "
         />
@@ -20,12 +20,13 @@
 
       <div class="grid grid-cols-2 grid-rows-1 py-4 px-4">
         <DateInput
-          v-model="flightDates.departureDate"
+          v-model="searchOptionsHotel.entryDate"
           label="Para onde você vai?"
+          :min-date-show="new Date()"
         />
         <DateInput
-          v-model="flightDates.returnDate"
-          :date-min="notBeforeDate()"
+          v-model="searchOptionsHotel.departureDate"
+          :min-date-show="notBeforeDate"
         />
       </div>
 
@@ -35,20 +36,20 @@
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{ rooms }} Quarto</span>
-              <span>{{ guests }} Hospede</span>
+              <span>{{ searchOptionsHotel.rooms }} Quarto</span>
+              <span>{{ searchOptionsHotel.numberOfGuests }} Hospede</span>
             </div>
           </template>
           <template #dropdown>
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
-                v-model="rooms"
+                v-model="searchOptionsHotel.rooms"
                 label="Quarto"
                 @takeOff="takeRoom"
                 @addUp="addRoom"
               />
               <ManageItems
-                v-model="guests"
+                v-model="searchOptionsHotel.numberOfGuests"
                 label="Hospede"
                 @takeOff="takeGuest"
                 @addUp="addGuest"
@@ -71,53 +72,42 @@
   </div>
 </template>
 <script setup>
-import { reactive, ref } from 'vue';
+import {computed} from 'vue';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
+import {useSearchOptionsHotelStore} from "@/stores/searchOptionsHotel";
 
-import { useRouter, useRoute } from 'vue-router';
-
-const router = useRouter();
-const route = useRoute();
-
-const origem = reactive({
-  string: '',
-  iata: '',
-});
-
-const destino = reactive({
-  string: '',
-  iata: '',
-});
-
-const flightDates = reactive({
-  departureDate: '',
-  returnDate: '',
-});
-
-const rooms = ref(1);
-const guests = ref(1);
+const searchOptionsHotel = useSearchOptionsHotelStore()
 
 const addRoom = () => {
-  rooms.value++;
+  searchOptionsHotel.rooms++;
 };
 const addGuest = () => {
-  guests.value++;
+  searchOptionsHotel.numberOfGuests++;
 };
 
 const takeRoom = () => {
-  rooms.value--;
+  if (searchOptionsHotel.rooms > 1){
+    searchOptionsHotel.rooms--;
+  }
 };
 const takeGuest = () => {
-  guests.value--;
+  if (searchOptionsHotel.numberOfGuests > 1){
+    searchOptionsHotel.numberOfGuests--;
+  }
 };
 
-const notBeforeDate = () => {
-  return flightDates.departureDate;
-};
+const notBeforeDate = computed(() => {
+  if (searchOptionsHotel.entryDate) {
+    let dateParts = searchOptionsHotel.entryDate.split('/');
+    return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+  } else {
+    return new Date();
+  }
+});
 
 const consultar = () => {};
 </script>
