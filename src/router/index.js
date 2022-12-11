@@ -9,6 +9,7 @@ const AereoLandingPage = () => import('@/views/Aereo/LandingPage.vue');
 const VoosIdaVolta = () => import('@/views/Aereo/VoosIdaVolta.vue');
 const PreCheckoutPage = () => import('@/views/Purchase/PreCheckoutPage.vue');
 const CheckoutPage = () => import('@/views/Purchase/CheckoutPage.vue')
+const CheckPage = () => import('@/views/Check/CheckPage.vue')
 
 const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
@@ -89,6 +90,11 @@ const router = createRouter({
           path: 'checkout',
           name: 'CheckoutPage',
           component: CheckoutPage
+        },
+        {
+          path: 'finish-payment',
+          name: 'CheckPage',
+          component: CheckPage
         },
         {
           path: '/hotel',

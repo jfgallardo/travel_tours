@@ -10,6 +10,7 @@
         />
         <span class="text-sm text-justify">
           {{ label }}
+          <slot name="label"></slot>
         </span>
       </label>
     </div>

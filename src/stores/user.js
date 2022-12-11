@@ -23,6 +23,7 @@ export const useUserStore = defineStore({
       password: null,
     },
     currentStep: 0,
+    currentStepPayment: 0,
     user_logged: null,
     loading: false,
     vooSelected: useStorage('vooSelected', {}),

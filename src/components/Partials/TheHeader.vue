@@ -220,6 +220,7 @@
       <MainSubheading v-if="showMainSubheading"/>
       <QuerySubHeader v-if="showSubHeader"/>
       <RegisterSubH v-if="showRegisterSubH"/>
+      <PaymentHeader v-if="showPaymentHeader"/>
       <PreCheckOutSubheading v-if="showPreCheckOutSubheading"/>
       <CheckOutSubheading v-if="showCheckOutSubheading"/>
     </nav>
@@ -241,6 +242,7 @@ import {useUserStore} from '@/stores/user';
 import PreCheckOutSubheading from '@/components/Partials/PreCheckOutSubheading.vue';
 import CheckOutSubheading from "@/components/Partials/CheckOutSubheading.vue";
 import Badge from "@/components/Partials/TheBadge.vue";
+import PaymentHeader from "@/components/Partials/ThePaymentHeader.vue";
 
 const route = useRoute();
 const {t} = useI18n();
@@ -253,7 +255,8 @@ const showMainSubheading = computed(() => {
       !(route.name === 'VoosIdaVolta') &&
       route.name !== 'RegisterPage' &&
       !(route.name === 'PreCheckoutPage') &&
-      !(route.name === 'CheckoutPage')
+      !(route.name === 'CheckoutPage') &&
+      !(route.name === 'CheckPage')
   );
 });
 const showSubHeader = computed(() => {
@@ -267,6 +270,9 @@ const showPreCheckOutSubheading = computed(() => {
 });
 const showCheckOutSubheading = computed(() => {
   return route.name === 'CheckoutPage'
+});
+const showPaymentHeader = computed(() => {
+  return route.name === 'CheckPage';
 })
 </script>
 

@@ -58,7 +58,7 @@
           </template>
         </div>
         <div class="flex items-center justify-center">
-          <button class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2">Finalizar Compra</button>
+          <RouterLink :to="{name: 'CheckPage'}" class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2">Finalizar Compra</RouterLink>
         </div>
       </td>
     </tr>
@@ -75,6 +75,7 @@ import TextInput from "@/components/FormUI/TextInput.vue";
 import DateInput from "@/components/FormUI/DateInput.vue";
 import {useSearchOptionsVooStore} from "@/stores/searchOptionsVoo";
 import { useI18n } from 'vue-i18n';
+import { RouterLink } from 'vue-router'
 
 onMounted(() => {
   getArrayData();
