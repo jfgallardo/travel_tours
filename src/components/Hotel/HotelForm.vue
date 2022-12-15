@@ -2,17 +2,17 @@
   <div>
     <div class="mt-5 flex flex-col space-y-1">
       <div class="px-4">
-        <AutoComplete
+        <AutoCompleteHotel
           label="Para onde você vai?"
-          :value="searchOptionsHotel.destiny.label"
+          :value="searchOptionsHotel.destinyHotel.label"
           @input="
             (e) => {
-              searchOptionsHotel.destiny.label = e;
+              searchOptionsHotel.destinyHotel.label = e;
             }
           "
           @select="
             (s) => {
-              searchOptionsHotel.destiny.iata = s;
+              searchOptionsHotel.destinyHotel.DetailsMbx = s;
             }
           "
         />
@@ -21,12 +21,13 @@
       <div class="grid grid-cols-2 grid-rows-1 py-4 px-4">
         <DateInput
           v-model="searchOptionsHotel.entryDate"
-          label="Para onde você vai?"
+          label="Check in"
           :min-date-show="new Date()"
         />
         <DateInput
           v-model="searchOptionsHotel.departureDate"
           :min-date-show="notBeforeDate"
+          label="Check out"
         />
       </div>
 
@@ -65,7 +66,11 @@
           @click="consultar()"
         >
           <span>Buscar Hoteis</span>
-          <ArrowRight fill-color="white" class="absolute right-10" />
+          <div
+              v-if="moblix.loading"
+              class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
+          ></div>
+          <ArrowRight v-else fill-color="white" class="absolute right-10" />
         </button>
       </div>
     </div>
@@ -73,14 +78,20 @@
 </template>
 <script setup>
 import {computed} from 'vue';
-import AutoComplete from '@/components/FormUI/AutoComplete.vue';
+import AutoCompleteHotel from '@/components/FormUI/AutoCompleteHotel.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import {useSearchOptionsHotelStore} from "@/stores/searchOptionsHotel";
+import {useMoblixStore} from "@/stores/moblix";
+import { useRoute, useRouter } from 'vue-router';
 
-const searchOptionsHotel = useSearchOptionsHotelStore()
+
+const searchOptionsHotel = useSearchOptionsHotelStore();
+const moblix = useMoblixStore();
+const router = useRouter();
+const route = useRoute();
 
 const addRoom = () => {
   searchOptionsHotel.rooms++;
@@ -109,6 +120,14 @@ const notBeforeDate = computed(() => {
   }
 });
 
-const consultar = () => {};
+const consultar = () => {
+  if (route.name === 'HotelsResults') {
+    router.push({ name: 'HotelsResults' }).then(() => {
+      moblix.consultarHotel();
+    });
+  } else {
+    router.push({ name: 'HotelsResults' });
+  }
+};
 </script>
 <style scoped></style>

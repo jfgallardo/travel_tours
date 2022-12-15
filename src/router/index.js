@@ -13,6 +13,7 @@ const CheckPage = () => import('@/views/Check/CheckPage.vue')
 
 const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
+const HotelsResults = () => import('@/views/Hotel/HotelsResults.vue')
 
 const CruiseHomePage = () => import('@/views/Cruceros/HomePage.vue');
 const CruiseLandingPage = () => import('@/views/Cruceros/LandingPage.vue');
@@ -102,6 +103,7 @@ const router = createRouter({
           component: HotelHomePage,
           children: [
             { path: '', name: 'HotelLandingPage', component: HotelLandingPage },
+            { path: 'search', name: 'HotelsResults', component: HotelsResults}
           ],
         },
         {

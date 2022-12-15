@@ -2,13 +2,13 @@
   <div>
     <span class="flex">
       <svg
-        v-for="i in rate"
+        v-for="i in calculateRate"
         :key="i"
         xmlns="http://www.w3.org/2000/svg"
         fill="blue"
         viewBox="0 0 24 24"
         stroke-width="1.5"
-        stroke="blue"
+        stroke="#1f70f2"
         class="w-4 h-4"
       >
         <path
@@ -19,7 +19,7 @@
       </svg>
       <div class="flex">
         <svg
-          v-for="i in 5 - rate"
+          v-for="i in 5 - calculateRate"
           :key="i"
           xmlns="http://www.w3.org/2000/svg"
           fill="gray"
@@ -40,12 +40,25 @@
 </template>
 
 <script setup>
+import {computed} from "vue";
+
 const props = defineProps({
   rate: {
     type: Number,
     default: 3,
   },
+  typeRate: {
+    type: [Number, String],
+    default: 5
+  }
 });
+
+const calculateRate = computed(() => {
+  if (props.typeRate === 10) {
+    return Math.trunc((props.rate * 5) / 10);
+  }
+  return props.rate;
+})
 </script>
 
 <style scoped></style>

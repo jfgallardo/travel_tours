@@ -70,17 +70,45 @@
             @click="onSelect()"
             @mouseover="setArrowCounter(index)"
         >
-          <div class="flex">
-            <p>
+          <div class="flex items-end justify-between">
+            <div class="flex items-center justify-start space-x-3.5">
+               <span v-if="opt.DetailsMbx.NsidNs === 100">
+                <svg
+                    class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                  </svg>
+              </span>
+              <span v-if="opt.DetailsMbx.NsidNs === 500">
+               <svg
+                   class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                   viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                   <path
+                       d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                       stroke-linecap="round"
+                       stroke-linejoin="round"/>
+                 </svg>
+              </span>
+              <span v-if="opt.DetailsMbx.NsidNs === 200">
+              <svg
+                  class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path
+                      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+                </svg>
+              </span>
               <span
                   class="font-normal"
-                  v-html="opt['nome_highligthed'] || opt.Nome"
+                  v-html="opt['nome_highligthed'] || opt.Label"
               />
-              (<span
-                class="font-normal"
-                v-html="opt['iata_highligthed'] || opt.Iata"
-            />)
-            </p>
+            </div>
+            <span class="text-xs font-light text-gray-400">{{opt.DetailsMbx.NsidNs === 100 ? 'Hotel' : opt.DetailsMbx.NsidNs === 200 ? 'Cidade' : 'Aeroporto'}}</span>
           </div>
         </li>
       </ul>
@@ -162,8 +190,8 @@ const onSelect = () => {
   const selected = options.value[arrowCounter.value];
 
   if (selected) {
-    emit('select', selected.Iata);
-    keyword.value = `${selected.Cidade} | ${selected.Iata}`;
+    emit('select', selected.DetailsMbx);
+    keyword.value = `${selected.Label}`;
     emitInput(keyword.value);
     resetOptions();
     resetArrowCounter();
@@ -175,9 +203,13 @@ const emitInput = (value) => {
 };
 
 const search = (query) => {
+  const body = {
+    Query: query,
+    IdProvider: 2
+  }
   loading.value = true;
-  axiosClientAPI.get(`api/v1/search-keyword/${query}`).then(({data}) => {
-    options.value = data.Data;
+  axiosClientAPI.post(`api/v1/moblix/search-hotel`, body).then(({data}) => {
+    options.value = data.data;
     highlightOptions();
   }).finally(() => {
     loading.value = false
@@ -213,12 +245,7 @@ const highlightOptions = () => {
   const query = new RegExp(search, 'i');
 
   options.value.forEach((element) => {
-    element['nome_highligthed'] = element.Nome.replace(
-        query,
-        '<span class="font-bold">$&</span>'
-    );
-
-    element['iata_highligthed'] = element.Iata.replace(
+    element['nome_highligthed'] = element.Label.replace(
         query,
         '<span class="font-bold">$&</span>'
     );

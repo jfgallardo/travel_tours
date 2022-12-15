@@ -42,11 +42,13 @@ import CommunityFeedback from '@/components/Landing/LandingCommunityFeedback.vue
 import Instagram from '@/components/Landing/LandingInstagram.vue';
 import Greeting from '@/components/Landing/LandinGreeting.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+import { useSearchOptionsHotelStore } from "@/stores/searchOptionsHotel";
 
 const searchOptionsVooStore = useSearchOptionsVooStore();
-
+const searchOptionsHotelStore = useSearchOptionsHotelStore();
 onMounted(() => {
   searchOptionsVooStore.resetState();
+  searchOptionsHotelStore.resetState();
 });
 </script>
 
