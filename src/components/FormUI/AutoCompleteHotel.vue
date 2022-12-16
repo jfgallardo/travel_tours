@@ -6,12 +6,12 @@
         }}</span>
       <input
           ref="input"
+          v-debounce:500ms="onInput"
           :class="inputClassList"
           :placeholder="placeholder"
           :value="value"
           type="text"
           @blur="onBlur"
-          @input="onInput($event.target.value)"
           @keydown="onKeydown"
       />
 
