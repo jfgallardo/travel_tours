@@ -14,7 +14,7 @@ export const useMoblixStore = defineStore({
         aeroportos: [],
         qntdBebe: 0,
         qntdCrianca: 0,
-        qntdAdulto: 0,
+        QntdAdulto: 0,
         dataHotels: []
     }),
     actions: {

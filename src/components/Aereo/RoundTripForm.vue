@@ -148,7 +148,7 @@
         />
         <Check
           v-model="searchOptionsVoo.onlyBaggage"
-          label="Apenas com bagagem"
+          label="Solo Bagagem"
         />
       </div>
 

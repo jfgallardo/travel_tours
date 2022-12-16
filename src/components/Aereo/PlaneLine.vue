@@ -17,7 +17,6 @@
         </p>
         <div>
           <ul>
-            <li class="font-medium">{{ Origem.CodigoIata }}</li>
             <li>{{ Origem.Descricao }}</li>
             <li>{{ dateStringSaida }}</li>
             <li>{{ CiaMandatoria.Descricao }} - {{ Numero }}</li>
@@ -52,7 +51,6 @@
         </p>
         <div>
           <ul>
-            <li class="font-medium">{{ Destino.CodigoIata }}</li>
             <li>{{ Destino.Descricao }}</li>
             <li>{{ dateStringChegada }}</li>
             <li>{{ CiaMandatoria.Descricao }} - {{ Numero }}</li>

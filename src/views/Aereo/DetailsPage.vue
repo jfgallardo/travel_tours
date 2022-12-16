@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <div class="row-span-6 border border-t-0 border-slate-300">
+      <div class="row-span-5 border border-t-0 border-slate-300">
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in flights" :key="item.Numero">
             <PlaneLine v-bind="item" />
@@ -31,13 +31,13 @@
       <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center justify-around h-full">
           <div>
-            <span>{{ initVoo.Origem.CodigoIata }}</span>
+            <span>{{ initVoo.Origem.CodigoIata }}&nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
           </div>
           <div>{{ paradas }}</div>
           <div>
             <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }}</span>
-            <span>{{ endVoo.Destino.CodigoIata }}</span>
+            <span>&nbsp;&nbsp;{{ endVoo.Destino.CodigoIata }}</span>
           </div>
         </div>
       </div>
@@ -47,12 +47,12 @@
           <span class="font-bold">{{ duration }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
+<!--      <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center h-full space-x-3.5 pl-14">
           <span>QTD. MILHAS</span>
           <span class="font-bold">7.000</span>
         </div>
-      </div>
+      </div>-->
       <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center h-full space-x-3.5 pl-14">
           <span>CLASE</span>
@@ -252,7 +252,7 @@ const paradas = computed(() => {
       escalas += item.Escalas.length;
     }
   });
-  return `${cantVoo + escalas} Paradas`;
+  return `${cantVoo + escalas} Parada(s)`;
 });
 
 const dateVoo = computed(() => {

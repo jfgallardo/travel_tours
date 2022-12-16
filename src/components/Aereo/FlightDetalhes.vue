@@ -49,9 +49,9 @@
 <script setup>
 import { ref, onUpdated, computed } from 'vue';
 import QrcodeVue from 'qrcode.vue';
-import { useMoblixStore } from '@/stores/moblix';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
+import { useSearchOptionsVooStore } from "@/stores/searchOptionsVoo";
 
 onUpdated(() => {
   value.value = `${window.location.protocol}//${window.location.host}/`;
@@ -67,7 +67,7 @@ const router = useRouter();
 const userStore = useUserStore();
 
 const value = ref('');
-const moblixStore = useMoblixStore();
+const searchOptionsVoo = useSearchOptionsVooStore();
 
 const ValorTotalTaxas = computed(() => {
   return Number(props.vooDetalhes.ValorTotalTaxas.toFixed(2));
@@ -80,7 +80,7 @@ const ValorTotal = computed(() => {
 });
 const TotalPassageiros = computed(() => {
   return (
-    moblixStore.qntdBebe + moblixStore.qntdCrianca + moblixStore.qntdAdulto
+    searchOptionsVoo.babies + searchOptionsVoo.teenagers + searchOptionsVoo.adults
   );
 });
 const goToPre = () => {

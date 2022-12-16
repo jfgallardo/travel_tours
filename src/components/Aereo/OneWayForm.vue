@@ -138,6 +138,10 @@
       <div class="px-4">
         <Check class="pt-4" :label="t('roundTripForm.aeroportosProximos')" />
         <Check :label="t('roundTripForm.voosDirectos')" />
+        <Check
+          v-model="searchOptionsVoo.onlyBaggage"
+          label="Solo Bagagem"
+        />
       </div>
 
       <div>
