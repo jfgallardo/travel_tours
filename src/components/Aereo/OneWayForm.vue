@@ -98,9 +98,9 @@
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{ t('adults', searchOptionsVooStore.adults) }}</span>
-              <span>{{ t('children', searchOptionsVooStore.teenagers) }}</span>
-              <span>{{ t('babies', searchOptionsVooStore.babies) }}</span>
+              <span>{{searchOptionsVooStore.adults}} {{ t('adults', searchOptionsVooStore.adults) }}</span>
+              <span>{{searchOptionsVooStore.teenagers}} {{ t('children', searchOptionsVooStore.teenagers) }}</span>
+              <span>{{searchOptionsVooStore.babies}} {{ t('babies', searchOptionsVooStore.babies) }}</span>
             </div>
           </template>
           <template #dropdown>
@@ -139,7 +139,7 @@
         <Check class="pt-4" :label="t('roundTripForm.aeroportosProximos')" />
         <Check :label="t('roundTripForm.voosDirectos')" />
         <Check
-          v-model="searchOptionsVoo.onlyBaggage"
+          v-model="searchOptionsVooStore.onlyBaggage"
           label="Solo Bagagem"
         />
       </div>

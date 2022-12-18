@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   label: {
     type: String,
     default: '',

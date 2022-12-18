@@ -172,7 +172,7 @@
     "titleOneWay": "Só ida",
     "titleManyCities": "Várias cidades"
   },
-  "adults": "{count} Adulto | {count} Adultos",
-  "children": "{count} Criança | {count} Criança | {count} Crianças",
-  "babies": "{count} Bebê | {count} Bebê | {count} Bebês"
+  "adults": "Adulto | Adultos",
+  "children": "Criança | Crianças",
+  "babies": "Bebê | Bebês"
 }

@@ -172,10 +172,7 @@
     "titleOneWay": "One way",
     "titleManyCities": "Multi-city"
   },
-  "adults": "{count} Adult | {count} Adults",
-  "children": "{count} Child | {count} Child | {count} Children",
-  "babies": "{count} Baby | {count} Baby | {count} Babies",
-  "portugues": "Portugues",
-  "ingles": "Ingles",
-  "espanol": "Espanol"
+  "adults": "Adult | Adults",
+  "children": "Child | Children",
+  "babies": "Baby | Babies"
 }

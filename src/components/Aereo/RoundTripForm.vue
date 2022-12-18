@@ -103,9 +103,9 @@
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{ t('adults', searchOptionsVoo.adults) }}</span>
-              <span>{{ t('children', searchOptionsVoo.teenagers) }}</span>
-              <span>{{ t('babies', searchOptionsVoo.babies) }}</span>
+              <span>{{searchOptionsVoo.adults}} {{ t('adults', searchOptionsVoo.adults) }}</span>
+              <span>{{searchOptionsVoo.teenagers}} {{ t('children', searchOptionsVoo.teenagers) }}</span>
+              <span>{{searchOptionsVoo.babies}} {{ t('babies', searchOptionsVoo.babies) }}</span>
             </div>
           </template>
           <template #dropdown>

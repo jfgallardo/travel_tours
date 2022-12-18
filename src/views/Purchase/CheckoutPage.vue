@@ -110,20 +110,20 @@
             <tr>
               <td class="flex items-center justify-between border-t-2 border-gray-200 p-2">
                 <div class="text-sm">
-                  <h3>FFL</h3>
-                  <h3 class="font-bold">9:30 AM</h3>
-                  <h3>9 Set</h3>
+                  <h3>{{user.returnFlightOrigin.Origem.CodigoIata}}</h3>
+                  <h3 class="font-bold">{{ departureTimeVolta }} {{ departureTimeDayPeriodVolta }}</h3>
+                  <h3>{{ dateStringIdaSaidaVolta }}</h3>
                 </div>
                 <div class="text-sm text-center">
                   <div class="bg-gray-100 px-9 py-1.5">
-                    <h3 class="font-bold">2 {{ ParadaVolta }}</h3>
+                    <h3 class="font-bold">{{ ParadaVolta }}</h3>
                     <h3>{{ duracaoVoosVolta }}</h3>
                   </div>
                 </div>
                 <div class="text-sm">
-                  <h3>FFL</h3>
-                  <h3 class="font-bold">9:30 AM</h3>
-                  <h3>9 Set</h3>
+                  <h3>{{user.returnFlightDestination.Destino.CodigoIata}}</h3>
+                  <h3 class="font-bold">{{ checkInVolta }} {{ checkInDayPeriodVolta }}</h3>
+                  <h3>{{ dateStringIdaChegadaVolta }}</h3>
                 </div>
               </td>
             </tr>
@@ -188,12 +188,16 @@
                   <h3 class="font-bold">Passantes</h3>
                 </div>
                 <div class="flex items-center justify-between">
-                  <h3>Adultos</h3>
-                  <h3 class="font-semibold">3</h3>
+                  <h3>{{ t('adults', searchOptionsVoo.adults) }}</h3>
+                  <h3 class="font-semibold">{{searchOptionsVoo.adults}}</h3>
                 </div>
                 <div class="flex items-center justify-between">
-                  <h3>Crianças</h3>
-                  <h3 class="font-semibold">1</h3>
+                  <h3>{{ t('children', searchOptionsVoo.teenagers) }}</h3>
+                  <h3 class="font-semibold">{{searchOptionsVoo.teenagers}}</h3>
+                </div>
+                <div class="flex items-center justify-between">
+                  <h3>{{ t('babies', searchOptionsVoo.babies) }}</h3>
+                  <h3 class="font-semibold">{{searchOptionsVoo.babies}}</h3>
                 </div>
               </td>
             </tr>
@@ -208,15 +212,15 @@
                 </div>
                 <div class="flex items-center justify-between">
                   <h3>Total para todos os passageiros</h3>
-                  <h3 class="font-semibold">1635.54</h3>
+                  <h3 class="font-semibold">{{ValorTotal}}</h3>
                 </div>
                 <div class="flex items-center justify-between">
                   <h3>Taxas e encargos</h3>
-                  <h3 class="font-semibold">256.54</h3>
+                  <h3 class="font-semibold">{{ValorTaxas}}</h3>
                 </div>
                 <div class="flex items-center justify-between">
                   <h3>Bagagem</h3>
-                  <h3 class="font-semibold">0</h3>
+                  <h3 class="font-semibold">{{valorBagagem}}</h3>
                 </div>
               </td>
             </tr>
@@ -233,7 +237,7 @@
               <td class="flex flex-col space-y-1.5 p-2">
                 <div class="flex items-center justify-between">
                   <h1 class="font-bold text-xl">Valor total</h1>
-                  <h1>1345.52</h1>
+                  <h1>{{ValorTotal}}</h1>
                 </div>
               </td>
             </tr>
@@ -255,14 +259,43 @@ import {computed} from "vue";
 import moment from 'moment/min/moment-with-locales';
 import momentDurationFormatSetup from 'moment-duration-format'
 import { useI18n } from 'vue-i18n';
+import { useSearchOptionsVooStore } from "@/stores/searchOptionsVoo";
+import { useCurrencyFormatter } from "@/composables/currencyFormatter";
 
 momentDurationFormatSetup(moment)
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
-const user = useUserStore()
+const user = useUserStore();
+const searchOptionsVoo = useSearchOptionsVooStore();
+
+const ValorTaxas = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: user.vooSelected.Preco.Taxa
+  });
+});
+const ValorTotal = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: user.vooSelected.Preco.Total
+  });
+});
+const valorBagagem = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: user.vooSelected.Preco.TotalTaxaBagagem
+  })
+})
 
 const departureTime = computed(() => {
   const dateLocal = new Date(moment(user.outboundFlightOrigin.DataSaida));
+  return dateLocal.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+});
+const departureTimeVolta = computed(() => {
+  const dateLocal = new Date(moment(user.returnFlightOrigin.DataSaida));
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -274,9 +307,21 @@ const departureTimeDayPeriod = computed(() => {
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
+const departureTimeDayPeriodVolta = computed(() => {
+  const dateLocal = new Date(moment(user.returnFlightOrigin.DataSaida));
+  const hours = dateLocal.getHours();
+  return hours >= 12 ? 'PM' : 'AM';
+});
 
 const checkIn = computed(() => {
   const dateLocal = new Date(moment(user.outboundFlightDestination.DataChegada));
+  return dateLocal.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+});
+const checkInVolta = computed(() => {
+  const dateLocal = new Date(moment(user.returnFlightDestination.DataChegada));
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -288,6 +333,11 @@ const checkInDayPeriod = computed(() => {
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
+const checkInDayPeriodVolta = computed(() => {
+  const dateLocal = new Date(moment(user.returnFlightDestination.DataChegada));
+  const hours = dateLocal.getHours();
+  return hours >= 12 ? 'PM' : 'AM';
+});
 
 const duracaoVoosIda = computed(() => {
   return duration(user.outboundFlightOrigin.DataSaida, user.outboundFlightDestination.DataChegada)
@@ -296,9 +346,10 @@ const duracaoVoosVolta = computed(() => {
   return duration(user.returnFlightOrigin.DataSaida, user.returnFlightDestination.DataChegada)
 });
 const duration = (dataSaida, dataLlegada) => {
-  const saida = moment(dataSaida)
-  const llegada = moment(dataLlegada)
-  return `${moment.duration(llegada.diff(saida)).get('hours')}hrs ${moment.duration(llegada.diff(saida)).get('minutes')}min`
+  const x = moment(dataSaida)
+  const y = moment(dataLlegada)
+  //${moment.duration(y.diff(x)).as('hours')} day(s) ${moment.duration(y.diff(x)).get('hours')}hrs ${moment.duration(y.diff(x)).get('minutes')}min`
+  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
 }
 
 const ParadaIda = computed(() => {
@@ -309,24 +360,36 @@ const ParadaVolta = computed(() => {
 })
 const getStops = (v) => {
   let stops = []
-  v.forEach((e) => {
-    if (e.Conexao) {
-      stops.push(e.Origem.CodigoIata)
-    }
-  })
-  if (stops.length === 0) {
-    let l = v.length
-    stops.push(v[l - 1]).Origem.CodigoIata
+  if (Array.isArray(v)){
+    v.forEach((e) => {
+      if (e.Conexao) {
+        stops.push(e.Origem.CodigoIata)
+      }
+    })
   }
-  return `Paradas: ${stops.join(', ')}`;
-}
+  if (stops.length === 0) {
+    if (Array.isArray(v)){
+      let l = v.length
+      stops.push(v[l - 1].Origem.CodigoIata)
+    } else {
+      stops.push(v.Origem.CodigoIata)
+    }
 
+  }
+  return `Parada(s): ${stops.join(', ')}`;
+}
 
 const dateStringIdaSaida = computed(() => {
   return formatDate(user.outboundFlightOrigin.DataSaida);
 });
 const dateStringIdaChegada = computed(() => {
   return formatDate(user.outboundFlightDestination.DataChegada);
+});
+const dateStringIdaSaidaVolta = computed(() => {
+  return formatDate(user.returnFlightOrigin.DataSaida);
+});
+const dateStringIdaChegadaVolta = computed(() => {
+  return formatDate(user.returnFlightDestination.DataChegada);
 });
 const formatDate = (date) => {
   if (locale.value === 'br') {

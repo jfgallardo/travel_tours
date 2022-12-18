@@ -76,7 +76,7 @@ let selectVooVolta = ref(woobaStore.returnFlights[0]);
 
 const clearCheckIda = (ev) => {
   inputCheckIda.value.forEach((element) => {
-    if (element != ev) {
+    if (element !== ev) {
       element.checked = false;
     } else {
       element.checked = true;
@@ -86,7 +86,7 @@ const clearCheckIda = (ev) => {
 
 const clearCheckVolta = (ev) => {
   inputCheckVolta.value.forEach((element) => {
-    if (element != ev) {
+    if (element !== ev) {
       element.checked = false;
     } else {
       element.checked = true;

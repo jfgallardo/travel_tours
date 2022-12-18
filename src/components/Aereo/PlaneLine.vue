@@ -106,9 +106,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 import moment from 'moment/min/moment-with-locales';
-import { useI18n } from 'vue-i18n';
+import { useDateFormatter } from "@/composables/dateFormatter";
 
-const { locale } = useI18n();
 const openEscala = ref(false);
 
 const props = defineProps({
@@ -161,11 +160,11 @@ const horaChegada = computed(() => {
 });
 
 const dateStringSaida = computed(() => {
-  return formatDate(props.DataSaida);
+  return useDateFormatter(props.DataSaida);
 });
 
 const dateStringChegada = computed(() => {
-  return formatDate(props.DataChegada);
+  return useDateFormatter(props.DataChegada);
 });
 
 const escalasFiltered = computed(() => {
@@ -174,8 +173,8 @@ const escalasFiltered = computed(() => {
   return props.Escalas.map((escala) => {
     return {
       Descricao: escala.Aeroporto.Descricao,
-      DataChegada: formatDate(escala.DataChegada),
-      DataSaida: formatDate(escala.DataSaida),
+      DataChegada: useDateFormatter(escala.DataChegada),
+      DataSaida: useDateFormatter(escala.DataSaida),
       Duracao: escala.Duracao,
       HoraChegada: formatHour(escala.HoraChegada),
       HoraSaida: formatHour(escala.HoraSaida),
@@ -195,19 +194,6 @@ const filterDayPeriod = (date) => {
   const dateLocal = new Date(moment(date));
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
-};
-
-const formatDate = (date) => {
-  if (locale.value === 'br') {
-    moment.locale('pt-br');
-  } else {
-    moment.locale(locale.value);
-  }
-  return upperC(moment(date).format('dddd D MMM YYYY'));
-};
-
-const upperC = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 const formatHour = (item) => {

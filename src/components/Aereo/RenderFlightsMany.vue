@@ -15,8 +15,8 @@
                 <p class="text-2xl">
                   <span class="font-semibold">{{ filterHours }}</span>
                   <span class="text-gray-400 font-medium ml-1">{{
-                    filterDayPeriod
-                  }}</span>
+                      filterDayPeriod
+                    }}</span>
                 </p>
                 <div
                   class="ml-2 rounded-full ring-2 ring-blue-700 h-1 w-1"
@@ -63,8 +63,8 @@
                 <p class="text-2xl">
                   <span class="font-semibold">{{ filterHoursChegada }}</span>
                   <span class="text-gray-400 font-medium ml-1">{{
-                    filterDayPeriodChegada
-                  }}</span>
+                      filterDayPeriodChegada
+                    }}</span>
                 </p>
               </div>
               <p class="text-gray-700 font-medium cursor-default">
@@ -97,11 +97,11 @@
 </template>
 
 <script setup>
-import { ref, computed, provide } from 'vue';
-import { useI18n } from 'vue-i18n';
-import Modal from '@/components/Partials/TheModal.vue';
-import DetailsPage from '@/views/Aereo/DetailsPage.vue';
-import moment from 'moment';
+import { computed, provide, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import Modal from "@/components/Partials/TheModal.vue";
+import DetailsPage from "@/views/Aereo/DetailsPage.vue";
+import moment from "moment";
 
 const { locale } = useI18n();
 const detalhes = ref(false);
@@ -109,33 +109,34 @@ const detalhes = ref(false);
 const props = defineProps({
   Voos: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   Destino: {
     type: String,
-    default: '',
+    default: ""
   },
   Origem: {
     type: String,
-    default: '',
+    default: ""
   },
   CiaMandatoria: {
     type: Object,
-    default: () => {},
+    default: () => {
+    }
   },
   OfertasDesde: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
   ValorTotalComTaxa: {
-    type: [Number, String],
-  },
+    type: [Number, String]
+  }
 });
 
-provide('flights', props.Voos);
-provide('ofertasDesde', props.OfertasDesde);
-provide('ciaMandatoria', props.CiaMandatoria);
-provide('valorTotalComTaxa', props.ValorTotalComTaxa);
+provide("flights", props.Voos);
+provide("ofertasDesde", props.OfertasDesde);
+provide("ciaMandatoria", props.CiaMandatoria);
+provide("valorTotalComTaxa", props.ValorTotalComTaxa);
 
 const initVoo = computed(() => {
   return props.Voos[0];
@@ -149,14 +150,14 @@ const endVoo = computed(() => {
 const filterHours = computed(() => {
   const dateLocal = new Date(moment(initVoo.value.DataSaida));
   return dateLocal.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
+    hour: "2-digit",
+    minute: "2-digit"
   });
 });
 
 const filterWeekday = computed(() => {
   const dateLocal = new Date(moment(initVoo.value.DataSaida));
-  const options = { weekday: 'long' };
+  const options = { weekday: "long" };
 
   return dateLocal.toLocaleDateString(locale.value, options);
 });
@@ -164,20 +165,20 @@ const filterWeekday = computed(() => {
 const filterDayPeriod = computed(() => {
   const dateLocal = new Date(moment(initVoo.value.DataSaida));
   const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
+  return hours >= 12 ? "PM" : "AM";
 });
 
 const filterHoursChegada = computed(() => {
   const dateLocal = new Date(moment(endVoo.value.DataChegada));
   return dateLocal.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
+    hour: "2-digit",
+    minute: "2-digit"
   });
 });
 
 const filterWeekdayChegada = computed(() => {
   const dateLocal = new Date(moment(endVoo.value.DataChegada));
-  const options = { weekday: 'long' };
+  const options = { weekday: "long" };
 
   return dateLocal.toLocaleDateString(locale.value, options);
 });
@@ -185,7 +186,7 @@ const filterWeekdayChegada = computed(() => {
 const filterDayPeriodChegada = computed(() => {
   const dateLocal = new Date(moment(endVoo.value.DataChegada));
   const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
+  return hours >= 12 ? "PM" : "AM";
 });
 
 const FlightCodeString = computed(() => {
@@ -196,8 +197,8 @@ const Duracao = computed(() => {
   let minutes_flag = 0;
   let hours_flag = 0;
   props.Voos.forEach((element) => {
-    hours_flag += parseInt(element.Duracao.split(':')[0]);
-    minutes_flag += parseInt(element.Duracao.split(':')[1]);
+    hours_flag += parseInt(element.Duracao.split(":")[0]);
+    minutes_flag += parseInt(element.Duracao.split(":")[1]);
   });
 
   let hours = Math.floor(minutes_flag / 60);
@@ -209,11 +210,11 @@ const Duracao = computed(() => {
 const Parada = computed(() => {
   let paradas = [];
   props.Voos.forEach((element) => {
-    if (element.Origem.CodigoIata != props.Origem) {
+    if (element.Origem.CodigoIata !== props.Origem) {
       paradas.push(element.Origem.CodigoIata);
     }
   });
-  return paradas.length > 0 ? `Parada: ${paradas.join(', ')}` : 'Direto';
+  return paradas.length > 0 ? `Parada: ${paradas.join(", ")}` : "Direto";
 });
 </script>
 

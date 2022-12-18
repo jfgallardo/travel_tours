@@ -34,7 +34,6 @@ import FlightDetalhes from '@/components/Aereo/FlightDetalhes.vue';
 import RenderFlights from '@/components/Aereo/RenderFlights.vue';
 import { ref, provide } from 'vue';
 
-// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   viagem: {
     type: Object,
@@ -44,7 +43,7 @@ const props = defineProps({
 
 provide('ofertasDesde', props.viagem.OfertasDesde);
 provide('ciaMandatoria', props.viagem.CiaMandatoria);
-provide('valorTotalComTaxa', props.viagem.ValorTotalComTaxa);
+provide('preco', props.viagem.Preco);
 
 let vooDetalhesReturn = ref(null);
 let vooDetalhesOutbound = ref(null);

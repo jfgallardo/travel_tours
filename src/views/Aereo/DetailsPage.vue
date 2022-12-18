@@ -47,12 +47,12 @@
           <span class="font-bold">{{ duration }}</span>
         </div>
       </div>
-<!--      <div class="border border-t-0 border-l-0 border-slate-300">
+      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center h-full space-x-3.5 pl-14">
           <span>QTD. MILHAS</span>
           <span class="font-bold">7.000</span>
         </div>
-      </div>-->
+      </div>
       <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center h-full space-x-3.5 pl-14">
           <span>CLASE</span>
@@ -130,6 +130,7 @@ import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import moment from 'moment/min/moment-with-locales';
 import {useI18n} from 'vue-i18n';
 import {useSearchOptionsVooStore} from "@/stores/searchOptionsVoo";
+import { useCurrencyFormatter } from "@/composables/currencyFormatter";
 
 onUpdated(() => {
   value.value = `${window.location.protocol}//${window.location.host}/`;
@@ -139,7 +140,7 @@ const value = ref('');
 const flights = inject('flights');
 const ofertasDesde = inject('ofertasDesde');
 const ciaMandatoria = inject('ciaMandatoria');
-const valorTotalComTaxa = inject('valorTotalComTaxa');
+const preco = inject('preco');
 const searchOptions = useSearchOptionsVooStore();
 const { locale } = useI18n();
 
@@ -183,27 +184,18 @@ const offersCompany = computed(() => {
       }
     });
   }
-  return currencyFormatter({
+  return useCurrencyFormatter({
     currency: 'BRL',
     value: offers,
   });
 });
 
 const valorTotal = computed(() => {
-  return currencyFormatter({
+  return useCurrencyFormatter({
     currency: 'BRL',
-    value: valorTotalComTaxa,
+    value: preco.Total,
   });
 });
-
-const currencyFormatter = ({ currency, value }) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    minimumFractionDigits: 2,
-    currency,
-  });
-  return formatter.format(value);
-};
 
 const filterHours = (date) => {
   const dateLocal = new Date(moment(date));

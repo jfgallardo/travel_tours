@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="row-span-6 border border-t-0 border-slate-300">
+      <div class="row-span-5 border border-t-0 border-slate-300">
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in vooSelected.VoosVolta" :key="item.Numero">
             <PlaneLine v-bind="item" />
@@ -26,12 +26,12 @@
       <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center justify-around h-full">
           <div>
-            <span>{{ vooSelected.Destino }}</span>
+            <span>{{ vooSelected.Destino }} &nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
           </div>
           <div>{{ paradas }}</div>
           <div>
-            <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }}</span>
+            <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }} &nbsp;&nbsp;</span>
             <span>{{ vooSelected.Origem }}</span>
           </div>
         </div>
@@ -42,7 +42,7 @@
           <span class="font-bold">{{ duration }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
+      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center h-full space-x-3.5 pl-14">
           <span>QTD. MILHAS</span>
           <span class="font-bold">7.000</span>
@@ -112,13 +112,13 @@
 <script setup>
 import {computed} from "vue";
 import moment from 'moment/min/moment-with-locales';
-import { useI18n } from 'vue-i18n';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import PlaneLine from "@/components/Aereo/PlaneLine.vue";
 import { RouterLink } from 'vue-router'
+import { useCurrencyFormatter } from "@/composables/currencyFormatter";
+import { useDateFormatter } from "@/composables/dateFormatter";
 
 
-const { locale } = useI18n();
 const searchOptions = useSearchOptionsVooStore();
 
 const props = defineProps({
@@ -148,7 +148,7 @@ const horaChegada = computed(() => {
   return filterHours(endFlight.value.DataChegada);
 });
 const dateVolta = computed(() => {
-  return formatDate(searchOptions.getDateIdaFormatter);
+  return useDateFormatter(searchOptions.getDateIdaFormatter);
 });
 const paradas = computed(() => {
   let escalas = props.vooSelected.VoosVolta.length - 1;
@@ -161,41 +161,29 @@ const paradas = computed(() => {
   return `${escalas} ${escalas > 1 ? 'Paradas' : 'Parada'}`;
 });
 const duration = computed(() => {
-  const saida = moment(initialFlight.value.DataSaida)
-  const llegada = moment(endFlight.value.DataChegada)
-  return `${moment.duration(llegada.diff(saida)).get('hours')}hrs ${moment.duration(llegada.diff(saida)).get('minutes')}min`
+  const x = moment(initialFlight.value.DataSaida)
+  const y = moment(endFlight.value.DataChegada)
+  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
 });
 const valorTotal = computed(() => {
-  return currencyFormatter({
+  return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooSelected.ValorTotal,
+    value: props.vooSelected.Preco.Total,
   });
 });
 const valorTotalTaxas = computed(() => {
-  return currencyFormatter({
+  return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooSelected.ValorTotalTaxas,
+    value: props.vooSelected.Preco.Taxa,
   });
 });
 const tarifa = computed(() => {
-  const t = props.vooSelected.ValorTotal - props.vooSelected.ValorTotalTaxas
-  return currencyFormatter({
+  return useCurrencyFormatter({
     currency: 'BRL',
-    value: t,
+    value: props.vooSelected.Preco.TotalTarifa,
   });
 });
 
-const formatDate = (date) => {
-  if (locale.value === 'br') {
-    moment.locale('pt-br');
-  } else {
-    moment.locale(locale.value);
-  }
-  return upperC(moment(date).format('dddd D MMM YYYY'));
-};
-const upperC = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
 const filterHours = (date) => {
   const dateLocal = new Date(moment(date));
   return dateLocal.toLocaleTimeString([], {
@@ -208,14 +196,7 @@ const filterDayPeriod = (date) => {
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 };
-const currencyFormatter = ({ currency, value }) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    minimumFractionDigits: 2,
-    currency,
-  });
-  return formatter.format(value);
-};
+
 </script>
 
 <style scoped>

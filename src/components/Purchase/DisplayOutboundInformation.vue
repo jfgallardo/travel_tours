@@ -15,17 +15,8 @@
           {{ dateIda }}
         </div>
       </div>
-      <div
-          class="p-2 bg-gray-200 rounded-full text-blue-700 px-2 text-xs font-medium h-8 flex items-center justify-between"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <h3>Oferta valida até</h3>
-        <span class="ml-4 font-bold">17:43</span>
-      </div>
     </div>
-    <div class="row-span-6 border border-t-0 border-slate-300">
+    <div class="row-span-5 border border-t-0 border-slate-300">
       <div class="flex flex-col space-y-4 items-center py-2">
         <template v-for="item in vooSelected.VoosIda" :key="item.Numero">
           <PlaneLine v-bind="item" />
@@ -35,12 +26,12 @@
     <div class="border border-t-0 border-l-0 border-slate-300">
       <div class="flex items-center justify-around h-full">
         <div>
-          <span>{{ vooSelected.Origem }}</span>
+          <span>{{ vooSelected.Origem }}&nbsp;&nbsp;</span>
           <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
         </div>
         <div>{{ paradas }}</div>
         <div>
-          <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }}</span>
+          <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }} &nbsp;&nbsp;</span>
           <span>{{ vooSelected.Destino }}</span>
         </div>
       </div>
@@ -51,7 +42,7 @@
         <span class="font-bold">{{ duration }}</span>
       </div>
     </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
+    <div v-if="false" class="border border-t-0 border-l-0 border-slate-300">
       <div class="flex items-center h-full space-x-3.5 pl-14">
         <span>QTD. MILHAS</span>
         <span class="font-bold">7.000</span>
@@ -102,7 +93,7 @@ import {useSearchOptionsVooStore} from '@/stores/searchOptionsVoo';
 import PlaneLine from "@/components/Aereo/PlaneLine.vue";
 import {computed} from "vue";
 import moment from 'moment/min/moment-with-locales';
-import {useI18n} from 'vue-i18n';
+import { useDateFormatter } from "@/composables/dateFormatter";
 
 const props = defineProps({
   vooSelected: {
@@ -112,7 +103,6 @@ const props = defineProps({
 })
 
 const searchOptions = useSearchOptionsVooStore();
-const { locale } = useI18n();
 
 const initialFlight = computed(() => {
   return  props.vooSelected.VoosIda[0]
@@ -134,7 +124,7 @@ const horaChegada = computed(() => {
   return filterHours(endFlight.value.DataChegada);
 });
 const dateIda = computed(() => {
-  return formatDate(searchOptions.getDateIdaFormatter);
+  return useDateFormatter(searchOptions.getDateIdaFormatter);
 });
 const paradas = computed(() => {
   let escalas = props.vooSelected.VoosIda.length - 1;
@@ -147,22 +137,11 @@ const paradas = computed(() => {
   return `${escalas} ${escalas > 1 ? 'Paradas' : 'Parada'}`;
 });
 const duration = computed(() => {
-  const saida = moment(initialFlight.value.DataSaida)
-  const llegada = moment(endFlight.value.DataChegada)
-  return `${moment.duration(llegada.diff(saida)).get('hours')}hrs ${moment.duration(llegada.diff(saida)).get('minutes')}min`
+  const x = moment(initialFlight.value.DataSaida)
+  const y = moment(endFlight.value.DataChegada)
+  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
 });
 
-const formatDate = (date) => {
-  if (locale.value === 'br') {
-    moment.locale('pt-br');
-  } else {
-    moment.locale(locale.value);
-  }
-  return upperC(moment(date).format('dddd D MMM YYYY'));
-};
-const upperC = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
 const filterHours = (date) => {
   const dateLocal = new Date(moment(date));
   return dateLocal.toLocaleTimeString([], {
