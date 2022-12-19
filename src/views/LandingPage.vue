@@ -46,6 +46,7 @@ import { useSearchOptionsHotelStore } from "@/stores/searchOptionsHotel";
 
 const searchOptionsVooStore = useSearchOptionsVooStore();
 const searchOptionsHotelStore = useSearchOptionsHotelStore();
+
 onMounted(() => {
   searchOptionsVooStore.resetState();
   searchOptionsHotelStore.resetState();

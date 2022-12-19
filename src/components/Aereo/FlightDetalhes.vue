@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <qrcode-vue :size="80" :value="value"></qrcode-vue>
+        <qrcode-vue :size="100" :value="value"></qrcode-vue>
       </div>
       <div>
         <button
@@ -46,15 +46,17 @@
 </template>
 
 <script setup>
-import { computed, onUpdated, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import QrcodeVue from "qrcode.vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { useI18n } from "vue-i18n";
 import { useCurrencyFormatter } from "@/composables/currencyFormatter";
 
-onUpdated(() => {
-  value.value = `${window.location.protocol}//${window.location.host}/`;
+onMounted(() => {
+  if (props.vooDetalhes) {
+    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${props.vooDetalhes.Id}`;
+  }
 });
 
 const props = defineProps({
@@ -94,7 +96,7 @@ const precoCrianca = computed(() => {
     return useCurrencyFormatter({
       currency: "BRL",
       value: props.vooDetalhes.Preco.PrecoCrianca.ValorTarifa
-    })
+    });
   }
   return null;
 });

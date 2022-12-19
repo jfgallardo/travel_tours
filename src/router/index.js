@@ -83,9 +83,10 @@ const router = createRouter({
           ],
         },
         {
-          path: 'precheckout',
+          path: 'precheckout/:id?',
           name: 'PreCheckoutPage',
           component: PreCheckoutPage,
+          props: true
         },
         {
           path: 'checkout',

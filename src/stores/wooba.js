@@ -4,7 +4,6 @@ import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 
 const searchOptionsVoo = useSearchOptionsVooStore();
-
 export const useWoobaStore = defineStore({
   id: 'wooba',
   state: () => ({
@@ -47,12 +46,6 @@ export const useWoobaStore = defineStore({
             Exception,
             ViagensTrecho1,
             ViagensTrecho2,
-            QntdAdulto,
-            QntdCrianca,
-            QntdBebe,
-            Recomendacoes,
-            DataIda,
-            DataVolta,
             OfertasDesde,
           } = data.data;
 
@@ -74,13 +67,6 @@ export const useWoobaStore = defineStore({
               OfertasDesde.trechoTwoOferta
             );
           }
-
-          this.qntdBebe = QntdBebe;
-          this.qntdCrianca = QntdCrianca;
-          this.qntdAdulto = QntdAdulto;
-          this.recomendacoes = Recomendacoes;
-          this.dataIda = DataIda;
-          this.dataVolta = DataVolta;
         })
         .finally(() => {
           this.loading = false;

@@ -252,9 +252,9 @@ const dateVoo = computed(() => {
 });
 
 const duration = computed(() => {
-  const saida = moment(initVoo.value.DataSaida)
-  const llegada = moment(endVoo.value.DataChegada)
-  return `${moment.duration(llegada.diff(saida)).get('hours')}hrs ${moment.duration(llegada.diff(saida)).get('minutes')}min`
+  const x = moment(initVoo.value.DataSaida)
+  const y = moment(endVoo.value.DataChegada)
+  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
 });
 
 const formatDate = (date) => {

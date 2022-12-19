@@ -1,6 +1,5 @@
 import {acceptHMRUpdate, defineStore} from "pinia";
 import {useStorage} from '@vueuse/core';
-import {useSearchOptionsVooStore} from "@/stores/searchOptionsVoo";
 
 export const useSearchOptionsHotelStore = defineStore('searchOptionsHotel', {
     state: () => ({
@@ -44,6 +43,6 @@ export const useSearchOptionsHotelStore = defineStore('searchOptionsHotel', {
 
 if (import.meta.hot) {
     import.meta.hot.accept(
-        acceptHMRUpdate(useSearchOptionsVooStore, import.meta.hot)
+        acceptHMRUpdate(useSearchOptionsHotelStore, import.meta.hot)
     );
 }

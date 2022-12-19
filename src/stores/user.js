@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { axiosLocalAPI } from '@/plugins/axios';
+import { axiosClientAPI, axiosLocalAPI } from "@/plugins/axios";
 import { useStorage } from '@vueuse/core';
 
 export const useUserStore = defineStore({
@@ -66,6 +66,9 @@ export const useUserStore = defineStore({
         .catch((error) => {
           console.error(error);
         });
+    },
+    resetState() {
+     this.vooSelected = { }
     },
   },
 });

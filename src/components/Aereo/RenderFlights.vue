@@ -174,7 +174,7 @@ const Conexao = computed(() => {
   return props.flights.length > 1;
 });
 
-const Duracao = computed(() => {
+/*const Duracao = computed(() => {
   let minutes_flag = 0;
   let hours_flag = 0;
   props.flights.forEach((element) => {
@@ -186,6 +186,12 @@ const Duracao = computed(() => {
   let minutes = minutes_flag % 60;
 
   return `${hours_flag + hours}h : ${minutes}min`;
+});*/
+
+const Duracao = computed(() => {
+  const x = moment(initVoo.value.DataSaida)
+  const y = moment(endVoo.value.DataChegada)
+  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
 });
 
 const Parada = computed(() => {
