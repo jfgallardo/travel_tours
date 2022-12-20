@@ -245,7 +245,7 @@
           </table>
         </div>
         <div class="w-3/4 relative top-0 left-1/4 px-8">
-          <PurchaseForm />
+          <RouterView />
         </div>
     </div>
   </div>
@@ -254,13 +254,13 @@
 <script setup>
 import {useUserStore} from "@/stores/user";
 import CouponButton from "@/components/Purchase/CouponButton.vue";
-import PurchaseForm from "@/components/Purchase/PurchaseForm.vue";
 import {computed} from "vue";
 import moment from 'moment/min/moment-with-locales';
 import momentDurationFormatSetup from 'moment-duration-format'
 import { useI18n } from 'vue-i18n';
 import { useSearchOptionsVooStore } from "@/stores/searchOptionsVoo";
 import { useCurrencyFormatter } from "@/composables/currencyFormatter";
+import { RouterView } from 'vue-router';
 
 momentDurationFormatSetup(moment)
 const { locale, t } = useI18n();
@@ -348,7 +348,6 @@ const duracaoVoosVolta = computed(() => {
 const duration = (dataSaida, dataLlegada) => {
   const x = moment(dataSaida)
   const y = moment(dataLlegada)
-  //${moment.duration(y.diff(x)).as('hours')} day(s) ${moment.duration(y.diff(x)).get('hours')}hrs ${moment.duration(y.diff(x)).get('minutes')}min`
   return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
 }
 

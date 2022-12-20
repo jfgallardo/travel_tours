@@ -84,17 +84,7 @@
       </div>
 
       <div class="px-4 pb-4">
-        <Select
-          class="pt-4"
-          :label="t('roundTripForm.labelClassecabine')"
-          :selected="searchOptionsVoo.cabin"
-          :options="options"
-          @selectValue="
-            (e) => {
-              searchOptionsVoo.cabin = e;
-            }
-          "
-        />
+       <CabineComponent />
       </div>
 
       <div class="px-4">
@@ -114,24 +104,24 @@
                 v-model="searchOptionsVoo.adults"
                 subtitle="+16 anos"
                 :label="t('adults')"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                @take-off="takeOff"
+                @add-up="addUp"
               />
 
               <ManageItems
                 v-model="searchOptionsVoo.teenagers"
                 subtitle="4-15 anos"
                 :label="t('children')"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                @take-off="takeOff"
+                @add-up="addUp"
               />
 
               <ManageItems
                 v-model="searchOptionsVoo.babies"
                 subtitle="1-3 anos"
                 :label="t('babies')"
-                @takeOff="takeOff"
-                @addUp="addUp"
+                @take-off="takeOff"
+                @add-up="addUp"
               />
             </div>
 
@@ -148,7 +138,7 @@
         />
         <Check
           v-model="searchOptionsVoo.onlyBaggage"
-          label="Solo Bagagem"
+          label="Apenas com babagem"
         />
       </div>
 
@@ -175,7 +165,6 @@ import { useRoute, useRouter } from 'vue-router';
 //import { useMoblixStore } from '@/stores/moblix';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
-import Select from '@/components/FormUI/TheSelect.vue';
 import Check from '@/components/FormUI/CheckInput.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
@@ -184,6 +173,7 @@ import { useWoobaStore } from '@/stores/wooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import Toastify from 'toastify-js';
 import { useI18n } from 'vue-i18n';
+import CabineComponent from "@/components/FormUI/CabineComponent.vue";
 
 //const moblixStore = useMoblixStore();
 const woobaStore = useWoobaStore();
@@ -236,13 +226,6 @@ const formatterDateS = (date) => {
   let dateParts = date.split('/');
   return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
 };
-
-const options = [
-  { label: 'Econômica', value: 0 },
-  { label: 'Executiva', value: 2 },
-  { label: 'Primeira Classe', value: 1 },
-  { label: 'Todas', value: -1 },
-];
 
 const consultar = () => {
   if (

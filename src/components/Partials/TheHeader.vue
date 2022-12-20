@@ -255,7 +255,7 @@ const showMainSubheading = computed(() => {
       !(route.name === 'VoosIdaVolta') &&
       route.name !== 'RegisterPage' &&
       !(route.name === 'PreCheckoutPage') &&
-      !(route.name === 'CheckoutPage') &&
+      !(route.path === '/checkout') &&
       !(route.name === 'CheckPage')
   );
 });
@@ -269,7 +269,7 @@ const showPreCheckOutSubheading = computed(() => {
   return route.name === 'PreCheckoutPage';
 });
 const showCheckOutSubheading = computed(() => {
-  return route.name === 'CheckoutPage'
+  return route.path === '/checkout'
 });
 const showPaymentHeader = computed(() => {
   return route.name === 'CheckPage';

@@ -7,7 +7,7 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
         dateOfReturn: useStorage('dateOfReturn', ''),
         origin: useStorage('origin', {label: '', iata: ''}),
         destiny: useStorage('destiny', {label: '', iata: ''}),
-        cabin: useStorage('cabin', {label: 'Todas', value: -1}),
+        cabin: useStorage('cabin', {label: 'Todas', value: null}),
         adults: useStorage('adults', 1),
         teenagers: useStorage('teenagers', 0),
         babies: useStorage('babies', 0),
@@ -31,7 +31,7 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
             this.dateOfReturn = null;
             this.origin = {label: '', iata: ''};
             this.destiny = {label: '', iata: ''};
-            this.cabin = {label: 'Todas', value: -1};
+            this.cabin = {label: 'Todas', value: null};
             this.adults = 1;
             this.teenagers = 0;
             this.babies = 0;

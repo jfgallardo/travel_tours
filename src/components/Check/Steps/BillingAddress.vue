@@ -38,7 +38,7 @@
       <div class="w-full">
         <TextInput
             v-model="userStore.user.birthday"
-            label="Vizinhança"
+            label="Bairro"
             name="birthday"
         />
       </div>

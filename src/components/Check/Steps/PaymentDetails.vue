@@ -14,7 +14,7 @@
       <div class="w-full">
         <TextInput
             v-model="userStore.user.birthday"
-            label="Suporte (Igual ao do cartão) *"
+            label="Nome Completo *"
             name="birthday"
         />
       </div>

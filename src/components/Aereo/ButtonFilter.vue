@@ -84,7 +84,7 @@
         @click="filter(premium)"
       >
         <div class="flex flex-col items-center font-medium">
-          <p class="text-xl">Premium</p>
+          <p class="text-xl">Horario de Partida</p>
           <div
             v-if="loading"
             class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"

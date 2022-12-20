@@ -44,6 +44,7 @@ const props = defineProps({
 provide('ofertasDesde', props.viagem.OfertasDesde);
 provide('ciaMandatoria', props.viagem.CiaMandatoria);
 provide('preco', props.viagem.Preco);
+provide('id', props.viagem.Id)
 
 let vooDetalhesReturn = ref(null);
 let vooDetalhesOutbound = ref(null);

@@ -51,7 +51,7 @@
     <div class="border border-t-0 border-l-0 border-slate-300">
       <div class="flex items-center h-full space-x-3.5 pl-14">
         <span>CLASE</span>
-        <span class="font-bold">{{ initialFlight.Cabine }}</span>
+        <span class="font-bold">{{ initialFlight.Cabine }} ({{initialFlight.BaseTarifaria[0].Classe}})</span>
       </div>
     </div>
     <div class="border border-t-0 border-l-0 border-slate-300">

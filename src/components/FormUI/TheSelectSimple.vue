@@ -5,45 +5,68 @@
       class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
     >
       <button
-        type="button"
-        class="relative bg-white pr-10 py-3 text-left focus:outline-none sm:text-sm h-full w-full"
-        aria-haspopup="listbox"
         aria-expanded="true"
+        aria-haspopup="listbox"
         aria-labelledby="listbox-label"
+        class="relative bg-white pr-10 py-3 text-left focus:outline-none sm:text-sm h-full w-full"
+        type="button"
         @click="hiddenDropdown = !hiddenDropdown"
       >
-        <span class="ml-3 block truncate"> {{ selected.name }} </span>
-        <span
-          class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
+        <span v-if="selected" class="ml-3 block truncate"> {{ selected.name }} </span>
+        <div v-else class="ml-3 block truncate flex items-center space-x-1.5">
+          <slot name="showSelected">
+            <img class="h-5 w-5" src="@/assets/ico/filter-search.svg">
+            <span class="text-gray-500">{{ placeholder }}</span>
+          </slot>
+        </div>
+
+        <button
+          v-if="selected"
+          class="text-gray-400 hover:text-gray-800 ml-3 absolute inset-y-0 right-0 right-2.5 flex items-center cursor-default"
+          type="button"
+          @click="clearFilter"
         >
-          <ChevronDown class="ml-3 absolute right-0 pr-2 cursor-pointer" />
-        </span>
+          <svg
+            class="h-2.5 w-2.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 8 8"
+          >
+            <path
+              d="M1 1l6 6m0-6L1 7"
+              stroke-linecap="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
       </button>
 
       <Transition>
         <ul
           v-if="hiddenDropdown"
           v-click-outside
-          class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-          tabindex="-1"
-          role="listbox"
-          aria-labelledby="listbox-label"
           aria-activedescendant="listbox-option-3"
+          aria-labelledby="listbox-label"
+          class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+          role="listbox"
+          tabindex="-1"
         >
-          <li
-            v-for="op in options"
-            id="listbox-option-0"
-            :key="op.value"
-            class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-200"
-            role="option"
-            @click="selectOption(op)"
-          >
-            <div class="flex items-center">
+          <slot>
+            <li
+              v-for="op in options"
+              id="listbox-option-0"
+              :key="op.value"
+              class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-200"
+              role="option"
+              @click="selectOption(op)"
+            >
+              <div class="flex items-center">
               <span class="font-normal ml-3 block truncate">
                 {{ op.name }}
               </span>
-            </div>
-          </li>
+              </div>
+            </li>
+          </slot>
         </ul>
       </Transition>
     </div>
@@ -51,39 +74,37 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-import ChevronDown from '@/components/Icons/ChevronDown.vue';
+import { ref } from "vue";
 
 const hiddenDropdown = ref(false);
-const selected = ref(props.options[0]);
-const emit = defineEmits(['selectValue']);
+const selected = ref(null);
+const emit = defineEmits(["selectValue"]);
 const dropdownP = ref(null);
 
-const props = defineProps({
+defineProps({
   options: {
     type: Array,
-    default: () => [],
+    default: () => []
   },
-  label: {
+  placeholder: {
     type: String,
-    default: '',
-  },
+    default: ""
+  }
 });
 
 const selectOption = (value) => {
   selected.value = value;
-  emit('selectValue', value);
+  emit("selectValue", value);
   hiddenDropdown.value = false;
 };
 
 const vClickOutside = {
   mounted: () => {
-    document.addEventListener('click', clickOutListener);
+    document.addEventListener("click", clickOutListener);
   },
   unmounted: () => {
-    document.removeEventListener('click', clickOutListener);
-  },
+    document.removeEventListener("click", clickOutListener);
+  }
 };
 
 const clickOutListener = (evt) => {
@@ -94,8 +115,11 @@ const clickOutListener = (evt) => {
 
 const hide = (value) => {
   selected.value = value;
-  emit('selectValue', value);
+  emit("selectValue", value);
   hiddenDropdown.value = false;
+};
+const clearFilter = () => {
+  selected.value = null;
 };
 </script>
 

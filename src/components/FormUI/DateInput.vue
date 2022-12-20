@@ -92,7 +92,7 @@ onMounted(() => {
 
 watch(
   () => props.minDateShow,
-  (newV, oldV) => {
+  (newV) => {
     minDate.value.update({
       minDate: newV,
     });

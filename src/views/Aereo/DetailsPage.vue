@@ -124,7 +124,7 @@
   </div>
 </template>
 <script setup>
-import { ref, onUpdated, inject, computed } from 'vue';
+import { ref, inject, computed, onMounted } from "vue";
 import QrcodeVue from 'qrcode.vue';
 import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import moment from 'moment/min/moment-with-locales';
@@ -132,8 +132,10 @@ import {useI18n} from 'vue-i18n';
 import {useSearchOptionsVooStore} from "@/stores/searchOptionsVoo";
 import { useCurrencyFormatter } from "@/composables/currencyFormatter";
 
-onUpdated(() => {
-  value.value = `${window.location.protocol}//${window.location.host}/`;
+onMounted(() => {
+  if (id) {
+    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${id}`;
+  }
 });
 
 const value = ref('');
@@ -141,6 +143,7 @@ const flights = inject('flights');
 const ofertasDesde = inject('ofertasDesde');
 const ciaMandatoria = inject('ciaMandatoria');
 const preco = inject('preco');
+const id = inject('id');
 const searchOptions = useSearchOptionsVooStore();
 const { locale } = useI18n();
 
@@ -226,13 +229,7 @@ const duracao = computed(() => {
 });
 
 const tipoTarifa = computed(() => {
-  let tarifa = [];
-  flights.forEach((element) => {
-    if (!tarifa.find((o) => o === element.Familia)) {
-      tarifa.push(element.Familia);
-    }
-  });
-  return tarifa.join(', ');
+  return `${ initVoo.value.BaseTarifaria[0].Familia } ( ${ initVoo.value.BaseTarifaria[0].Codigo } )`;
 });
 
 const paradas = computed(() => {

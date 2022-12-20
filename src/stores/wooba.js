@@ -38,6 +38,9 @@ export const useWoobaStore = defineStore({
         QuantidadeDeVoos: 15,
         ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
       };
+      if (searchOptionsVoo.cabin.value){
+        body.Cabine = searchOptionsVoo.cabin.value
+      }
       this.loading = true;
       await axiosClientAPI
         .post('api/v1/wooba/query', body)
