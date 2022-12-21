@@ -1,17 +1,16 @@
 <template>
   <div>
-    <div class="p-4 flex flex-col items-center space-y-4 ">
+    <div class="p-4 flex flex-col items-center space-y-4">
       <label class="font-semibold text-lg">Duración del viaje</label>
       <input
-:class="inputClassList" :max="max"
-             :min="min" :value="modelValue" type="range" @input="$emit('update:modelValue', $event.target.value)">
+        :max="max"
+        :min="min" :value="modelValue" type="range" @input="$emit('update:modelValue', $event.target.value)">
       <span>{{ min }}hrs - {{ modelValue }}hrs</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
 
 defineEmits(["update:modelValue"]);
 
@@ -29,27 +28,31 @@ defineProps({
     default: ""
   }
 });
-
-const inputClassList = computed(() => {
-  return [
-    "w-full transition duration-150 ease-in-out",
-    getTextSizeClass.value,
-    getTextColorClass.value,
-    getBorderColorClass.value
-  ];
-});
-
-const getTextSizeClass = computed(() => {
-  return "text-sm leading-5";
-});
-const getTextColorClass = computed(() => {
-  return "text-gray-800 placeholder-gray-400";
-});
-const getBorderColorClass = computed(() => {
-  return "focus:outline-none border border-gray-400 focus:border-blue-400";
-});
 </script>
 
 <style scoped>
-
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: all;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #C6C6C6;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb:hover {
+  background: #f7f7f7;
+}
+input[type=range]::-webkit-slider-thumb:active {
+  box-shadow: inset 0 0 3px rgba(16, 57, 208, 0.88), 0 0 9px rgba(16, 57, 208, 0.88);
+  -webkit-box-shadow: inset 0 0 3px rgba(16, 57, 208, 0.88), 0 0 9px rgba(16, 57, 208, 0.88);
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background-color: rgba(16, 57, 208, 0.99);
+  pointer-events: none;
+}
 </style>
