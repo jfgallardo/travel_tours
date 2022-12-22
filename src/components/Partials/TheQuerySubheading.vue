@@ -41,7 +41,7 @@
       <SelectSimple :options="classes" placeholder="Clase" />
 
       <SelectSimple :options="classes" placeholder="Areopuertos">
-        <FilterAirport />
+        <FilterAirport :airports="airports" :values="selectAirports" @set-airports="selectAirports = $event" />
       </SelectSimple>
 
       <SelectSimple :options="classes" placeholder="Precio">
@@ -65,6 +65,8 @@ const searchOptionsVoo = useSearchOptionsVooStore();
 const t_llegada = ref(null);
 const t_partida = ref(null);
 const duration = ref("");
+const airports = ref(["SAO", "BSB", "HAV", "GRU", "RIO"]);
+const selectAirports = ref(["SAO", "BSB", "HAV", "GRU", "RIO"]);
 
 const bags = computed(() => {
   if (searchOptionsVoo.onlyBaggage) {
