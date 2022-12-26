@@ -1,6 +1,8 @@
+import moment from 'moment';
+
 export const woobaData = (flights, ofertasDesde) => {
   if (flights) {
-    return flights.map(function(flight) {
+    return flights.map(function (flight) {
       return {
         Origem: flight.Origem.CodigoIata,
         Destino: flight.Destino.CodigoIata,
@@ -12,7 +14,7 @@ export const woobaData = (flights, ofertasDesde) => {
         Id: flight.Id,
         NumeroParadas: flight.NumeroParadas,
         OfertasDesde: ofertasDesde || null,
-        CiaMandatoria: flight.CiaMandatoria
+        CiaMandatoria: flight.CiaMandatoria,
       };
     });
   }
@@ -31,15 +33,15 @@ export const woobaDataRedis = (flight) => {
       Key: flight.IdentificacaoDaViagem,
       Id: flight.Id,
       NumeroParadas: flight.NumeroParadas,
-      CiaMandatoria: flight.CiaMandatoria
+      CiaMandatoria: flight.CiaMandatoria,
     };
   }
-  return null
+  return null;
 };
 
 export const woobaDataMultiple = (flights, ofertasDesde) => {
   if (flights) {
-    return flights.map(function(flight) {
+    return flights.map(function (flight) {
       return {
         Origem: flight.Origem.CodigoIata,
         Destino: flight.Destino.CodigoIata,
@@ -50,16 +52,34 @@ export const woobaDataMultiple = (flights, ofertasDesde) => {
         Key: flight.IdentificacaoDaViagem,
         NumeroParadas: flight.NumeroParadas,
         OfertasDesde: ofertasDesde || null,
-        CiaMandatoria: flight.CiaMandatoria
+        CiaMandatoria: flight.CiaMandatoria,
       };
     });
   }
   return null;
 };
 
+export const woobaTravelTime = (flightsA, flightsB) => {
+  if (flightsB === null) {
+    let arrayVoos = [];
+    flightsA.map((o) => {
+      arrayVoos.push(
+        timeFlights(o.VoosIda[0], o.VoosIda[o.VoosIda.length - 1])
+      );
+      arrayVoos.push(
+        timeFlights(o.VoosVolta[0], o.VoosVolta[o.VoosVolta.length - 1])
+      );
+    });
+    return {
+      lessTime: Math.min(...arrayVoos),
+      longerTime: Math.max(...arrayVoos),
+    };
+  }
+};
+
 function voosIda(params) {
   return params.filter((voo) => {
-    if (voo.Segmento === "I") {
+    if (voo.Segmento === 'I') {
       return voo;
     }
   });
@@ -67,8 +87,14 @@ function voosIda(params) {
 
 function voosVolta(params) {
   return params.filter((voo) => {
-    if (voo.Segmento === "V") {
+    if (voo.Segmento === 'V') {
       return voo;
     }
   });
+}
+
+function timeFlights(initial, end) {
+  const x = moment(initial.DataSaida);
+  const y = moment(end.DataChegada);
+  return Math.trunc(moment.duration(y.diff(x)).as('hours'));
 }

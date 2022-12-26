@@ -1,6 +1,10 @@
 import { defineStore } from 'pinia';
 import { axiosClientAPI } from '@/plugins/axios';
-import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
+import {
+  woobaData,
+  woobaDataMultiple,
+  woobaTravelTime,
+} from '@/utils/unifyDataWooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 
 const searchOptionsVoo = useSearchOptionsVooStore();
@@ -15,9 +19,14 @@ export const useWoobaStore = defineStore({
     qntdAdulto: 0,
     recomendacoes: [],
     exception: '',
-    dataIda: '',
-    dataVolta: '',
+    airportsFilter: [],
+    companies: [],
   }),
+  getters: {
+    travelTime(state) {
+      return woobaTravelTime(state.outboundFlights, state.returnFlights);
+    },
+  },
   actions: {
     async consultaOrigemDestino() {
       const body = {
@@ -38,8 +47,8 @@ export const useWoobaStore = defineStore({
         QuantidadeDeVoos: 15,
         ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
       };
-      if (searchOptionsVoo.cabin.value){
-        body.Cabine = searchOptionsVoo.cabin.value
+      if (searchOptionsVoo.cabin.value) {
+        body.Cabine = searchOptionsVoo.cabin.value;
       }
       this.loading = true;
       await axiosClientAPI
@@ -50,9 +59,14 @@ export const useWoobaStore = defineStore({
             ViagensTrecho1,
             ViagensTrecho2,
             OfertasDesde,
+            AirportsIataTrecho1,
+            AirportsIataTrecho2,
+            Cia,
           } = data.data;
 
           this.exception = Exception;
+          this.companies = Cia;
+          this.airportsFilter = AirportsIataTrecho1.concat(AirportsIataTrecho2);
 
           if (!ViagensTrecho2) {
             this.outboundFlights = woobaData(
@@ -103,7 +117,17 @@ export const useWoobaStore = defineStore({
       await axiosClientAPI
         .post('api/v1/wooba/query', body)
         .then(({ data }) => {
-          let { ViagensTrecho1, ViagensTrecho2, OfertasDesde } = data.data;
+          let {
+            ViagensTrecho1,
+            ViagensTrecho2,
+            OfertasDesde,
+            Cia,
+            AirportsIataTrecho1,
+            AirportsIataTrecho2,
+          } = data.data;
+
+          this.companies = Cia;
+          this.airportsFilter = AirportsIataTrecho1.concat(AirportsIataTrecho2);
 
           let newViagensTrecho1 = ViagensTrecho1.slice(
             ViagensTrecho1.length - this.outboundFlights.length

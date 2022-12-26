@@ -16,11 +16,11 @@ defineEmits(["update:modelValue"]);
 
 defineProps({
   min: {
-    type: String,
+    type: [String, Number],
     default: "2"
   },
   max: {
-    type: String,
+    type: [String, Number],
     default: "48"
   },
   modelValue: {

@@ -5,6 +5,7 @@
       class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
     >
       <button
+        :disabled="loading"
         aria-expanded="true"
         aria-haspopup="listbox"
         aria-labelledby="listbox-label"
@@ -15,7 +16,10 @@
         <span v-if="selected" class="ml-3 block truncate"> {{ selected.name }} </span>
         <div v-else class="ml-3 block truncate flex items-center space-x-1.5">
           <slot name="showSelected">
-            <img class="h-5 w-5" src="@/assets/ico/filter-search.svg">
+            <div
+              v-if="loading"
+              class="animate-spin h-6 w-6 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
+            <img v-else class="h-5 w-5" src="@/assets/ico/filter-search.svg">
             <span class="text-gray-500">{{ placeholder }}</span>
           </slot>
         </div>
@@ -89,6 +93,10 @@ defineProps({
   placeholder: {
     type: String,
     default: ""
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 });
 
