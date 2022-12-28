@@ -1,26 +1,57 @@
 <template>
   <div>
-    <div class="flex flex-col justify-center p-4 space-y-4">
+    <div class="flex flex-col justify-center space-y-8 p-4 mx-auto">
       <label class="font-semibold text-lg text-center">Range of Price</label>
-      <div class="relative">
-        <input id="fromSlider" type="range" value="10" min="0" max="100"/>
-        <input id="toSlider" type="range" value="40" min="0" max="100"/>
+      <div class="flex">
+        <input id="toSlider" step="10" type="range" :value="priceLocal" :min="minPrice" :max="maxPrice" @input="$emit('price', $event.target.value)"/>
       </div>
-      <span class="text-center">rango de precios</span>
+      <span class="text-center">{{minPriceFormatter}} - {{maxPriceFormatter}}</span>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed, onMounted, ref } from "vue";
+import { useCurrencyFormatter } from "@/composables/currencyFormatter";
+
+defineEmits(['price'])
+
+onMounted(() => {
+  priceLocal.value = props.maxPrice
+})
+
+const props = defineProps({
+  minPrice: {
+    type: [Number, String],
+    default: '100'
+  },
+  maxPrice: {
+    type: [Number, String],
+    default: '1000'
+  }
+});
+
+const priceLocal = ref('')
+
+
+const minPriceFormatter = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: props.minPrice
+  });
+})
+
+
+const maxPriceFormatter = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: props.maxPrice
+  });
+})
 
 </script>
 
 <style scoped>
-.sliders_control {
-  position: relative;
-  min-height: 50px;
-}
-
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   pointer-events: all;
@@ -56,15 +87,10 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   height: 2px;
-  width: 100%;
+  width: 80%;
   position: absolute;
   background-color: rgba(16, 57, 208, 0.99);
   pointer-events: none;
-}
-
-#fromSlider {
-  height: 0;
-  z-index: 1;
 }
 
 </style>

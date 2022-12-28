@@ -47,6 +47,15 @@
 
       <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Clase" />
 
+      <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
+        <template v-if="price" #showSelected>
+          <div class="flex items-center justify-around w-full">
+            <span> {{ minPriceFormatter }} - {{ maxPriceFormatter }} </span>
+          </div>
+        </template>
+        <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="price = $event"/>
+      </SelectSimple>
+
       <SelectSimple :loading="woobaStore.loading" placeholder="Areopuertos">
         <FilterAirport
           :airports="woobaStore.airportsFilter"
@@ -54,9 +63,7 @@
           @set-airports="selectAirports = $event" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
-        <FilterPrice />
-      </SelectSimple>
+
     </div>
   </div>
 </template>
@@ -72,16 +79,32 @@ import FilterDuration from "@/components/Filters/FilterDuration.vue";
 import FilterPrice from "@/components/Filters/FilterPrice.vue";
 import FilterAirport from "@/components/Filters/FilterAirport.vue";
 import FilterCompanies from "@/components/Filters/FilterCompanies.vue";
+import { useCurrencyFormatter } from "@/composables/currencyFormatter";
 
 const searchOptionsVoo = useSearchOptionsVooStore();
 const woobaStore = useWoobaStore();
 
 const t_llegada = ref(null);
 const t_partida = ref(null);
-const duration = ref("");
 //FILTERS
 const selectAirports = ref([]);
 const selectCompanies = ref([]);
+const price = ref('')
+const duration = ref("");
+
+
+const minPriceFormatter = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: woobaStore.priceGeral.minPrice
+  });
+})
+const maxPriceFormatter = computed(() => {
+  return useCurrencyFormatter({
+    currency: "BRL",
+    value: price.value
+  });
+})
 
 watch(
   () => woobaStore.companies,

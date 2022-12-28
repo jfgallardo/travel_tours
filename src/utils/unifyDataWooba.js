@@ -13,7 +13,7 @@ export const woobaData = (flights, ofertasDesde) => {
         Key: flight.IdentificacaoDaViagem,
         Id: flight.Id,
         NumeroParadas: flight.NumeroParadas,
-        OfertasDesde: ofertasDesde || null,
+        OfertasDesde: removeDuplicates(ofertasDesde, 'company') || null,
         CiaMandatoria: flight.CiaMandatoria,
       };
     });
@@ -51,7 +51,7 @@ export const woobaDataMultiple = (flights, ofertasDesde) => {
         Id: flight.Id,
         Key: flight.IdentificacaoDaViagem,
         NumeroParadas: flight.NumeroParadas,
-        OfertasDesde: ofertasDesde || null,
+        OfertasDesde: removeDuplicates(ofertasDesde, 'company') || null,
         CiaMandatoria: flight.CiaMandatoria,
       };
     });
@@ -77,6 +77,19 @@ export const woobaTravelTime = (flightsA, flightsB) => {
   }
 };
 
+export const woobaPrice = (flightsA, flightsB) => {
+  if (flightsB === null) {
+    let arrayPrice = [];
+    flightsA.map((o) => {
+      arrayPrice.push(o.Preco.TotalGeral);
+    });
+    return {
+      minPrice: Math.min(...arrayPrice),
+      maxPrice: Math.max(...arrayPrice),
+    };
+  }
+};
+
 function voosIda(params) {
   return params.filter((voo) => {
     if (voo.Segmento === 'I') {
@@ -97,4 +110,18 @@ function timeFlights(initial, end) {
   const x = moment(initial.DataSaida);
   const y = moment(end.DataChegada);
   return Math.trunc(moment.duration(y.diff(x)).as('hours'));
+}
+
+function removeDuplicates(originalArray, prop) {
+  let newArray = [];
+  let lookupObject = {};
+
+  for (let i in originalArray) {
+    lookupObject[originalArray[i][prop]] = originalArray[i];
+  }
+
+  for (let i in lookupObject) {
+    newArray.push(lookupObject[i]);
+  }
+  return newArray;
 }

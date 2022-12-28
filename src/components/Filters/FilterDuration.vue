@@ -5,7 +5,7 @@
       <input
         :max="max"
         :min="min" :value="modelValue" type="range" @input="$emit('update:modelValue', $event.target.value)">
-      <span>{{ min }}hrs - {{ modelValue }}hrs</span>
+      <span>{{ min }}hrs - {{ max }}hrs</span>
     </div>
   </div>
 </template>

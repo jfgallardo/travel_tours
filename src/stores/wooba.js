@@ -3,6 +3,7 @@ import { axiosClientAPI } from '@/plugins/axios';
 import {
   woobaData,
   woobaDataMultiple,
+  woobaPrice,
   woobaTravelTime,
 } from '@/utils/unifyDataWooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
@@ -25,6 +26,12 @@ export const useWoobaStore = defineStore({
   getters: {
     travelTime(state) {
       return woobaTravelTime(state.outboundFlights, state.returnFlights);
+    },
+    priceGeral(state) {
+      return woobaPrice(state.outboundFlights, state.returnFlights);
+    },
+    offers(state) {
+      return state.outboundFlights[0].OfertasDesde;
     },
   },
   actions: {
