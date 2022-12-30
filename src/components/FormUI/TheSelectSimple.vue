@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div ref="dropdownP">
     <div
-      ref="dropdownP"
       class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
     >
       <button
@@ -9,17 +8,17 @@
         aria-expanded="true"
         aria-haspopup="listbox"
         aria-labelledby="listbox-label"
-        class="relative bg-white pr-10 py-3 text-left focus:outline-none sm:text-sm h-full w-full"
+        class="relative bg-white py-3 text-left focus:outline-none text-sm xl:text-base h-full w-full"
         type="button"
         @click="hiddenDropdown = !hiddenDropdown"
       >
-        <span v-if="selected" class="ml-3 block truncate"> {{ selected.name }} </span>
-        <div v-else class="ml-3 block truncate flex items-center space-x-1.5">
+        <span v-if="selected" class="ml-3 block"> {{ selected.name }} </span>
+        <div v-else class="px-1 block flex items-center space-x-1.5">
           <slot name="showSelected">
             <div
               v-if="loading"
-              class="animate-spin h-6 w-6 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
-            <img v-else class="h-5 w-5" src="@/assets/ico/filter-search.svg">
+              class="animate-spin h-4 w-4 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
+            <img v-else class="h-4 w-4" src="@/assets/ico/filter-search.svg">
             <span class="text-gray-500">{{ placeholder }}</span>
           </slot>
         </div>
@@ -44,14 +43,15 @@
           </svg>
         </button>
       </button>
-
+    </div>
+    <div>
       <Transition>
         <ul
           v-if="hiddenDropdown"
           v-click-outside
           aria-activedescendant="listbox-option-3"
           aria-labelledby="listbox-label"
-          class="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+          class="absolute z-10 mt-1 w-fit bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
           role="listbox"
           tabindex="-1"
         >
@@ -65,7 +65,7 @@
               @click="selectOption(op)"
             >
               <div class="flex items-center">
-              <span class="font-normal ml-3 block truncate">
+              <span class="font-normal ml-3 block">
                 {{ op.name }}
               </span>
               </div>

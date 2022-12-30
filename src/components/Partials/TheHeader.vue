@@ -1,7 +1,8 @@
 <template>
   <div class="relative">
+<!--    -->
     <nav
-        :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']"
+      :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']"
         class="fixed top-0 right-0 left-0 z-30 bg-white border-b border-gray-300 grid grid-cols-1"
     >
       <div class="flex items-center justify-around border-b">

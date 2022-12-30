@@ -1,19 +1,23 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center justify-start">
     <div class="px-3">
       <ArrowLeft class="cursor-pointer" @click="$router.go(-1)" />
     </div>
 
-    <div class="grid grid-cols-9 grid-rows-1 h-full w-full">
-      <SelectSimple :loading="woobaStore.loading" :options="bags" placeholder="Filtro Bagagem" />
+    <div class="grid grid-cols-9 grid-flow-row w-full h-full">
+      <SelectSimple :loading="woobaStore.loading" :options="bags" placeholder="Bagagem" />
       <SelectSimple :loading="woobaStore.loading" placeholder="Compania">
         <FilterCompanies
           :companies="woobaStore.companies" :values="selectCompanies"
           @set-companies="selectCompanies = $event" />
       </SelectSimple>
-      <SelectSimple :loading="woobaStore.loading" :options="connection" placeholder="Paradas" />
-
-      <SelectSimple :loading="woobaStore.loading" placeholder="Horario de llegada">
+      <SelectSimple :loading="woobaStore.loading" placeholder="Areopuertos">
+        <FilterAirport
+          :airports="woobaStore.airportsFilter"
+          :values="selectAirports"
+          @set-airports="selectAirports = $event" />
+      </SelectSimple>
+      <SelectSimple :loading="woobaStore.loading" placeholder="Llegada">
         <template v-if="t_llegada" #showSelected>
           <div class="flex items-center justify-around w-full">
             <span v-if="t_llegada.initTime">Ida - {{ t_llegada.initTime }}</span>
@@ -23,7 +27,7 @@
         <FilterDepartureTime :times="t_llegada" @clear="t_llegada=null" @time="t_llegada=$event" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" placeholder="Horario de partida">
+      <SelectSimple :loading="woobaStore.loading" placeholder="Partida">
         <template v-if="t_partida" #showSelected>
           <div class="flex items-center justify-around w-full">
             <span v-if="t_partida.initTime">Ida - {{ t_partida.initTime }}</span>
@@ -32,6 +36,17 @@
         </template>
         <FilterDepartureTime :times="t_partida" @clear="t_partida=null" @time="t_partida=$event" />
       </SelectSimple>
+      <SelectSimple :loading="woobaStore.loading" :options="connection" placeholder="Paradas" />
+      <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
+        <template v-if="price" #showSelected>
+          <div class="flex items-center justify-around w-full">
+            <span> {{ minPriceFormatter }} - {{ maxPriceFormatter }} </span>
+          </div>
+        </template>
+        <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="price = $event"/>
+      </SelectSimple>
+
+
 
       <SelectSimple :loading="woobaStore.loading" placeholder="Duracion">
         <template v-if="duration" #showSelected>
@@ -47,21 +62,6 @@
 
       <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Clase" />
 
-      <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
-        <template v-if="price" #showSelected>
-          <div class="flex items-center justify-around w-full">
-            <span> {{ minPriceFormatter }} - {{ maxPriceFormatter }} </span>
-          </div>
-        </template>
-        <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="price = $event"/>
-      </SelectSimple>
-
-      <SelectSimple :loading="woobaStore.loading" placeholder="Areopuertos">
-        <FilterAirport
-          :airports="woobaStore.airportsFilter"
-          :values="selectAirports"
-          @set-airports="selectAirports = $event" />
-      </SelectSimple>
 
 
     </div>

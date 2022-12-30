@@ -181,7 +181,7 @@ const table = (data, otherData) => {
         [
           {
             text: `CPF Nº: ${
-              Object.entries(otherData).length != 0
+              Object.entries(otherData).length !== 0
                 ? otherData.cpf
                 : data.cpf_number
             }`,
@@ -190,7 +190,7 @@ const table = (data, otherData) => {
           {},
           {
             text: `RG Nº:  ${
-              Object.entries(otherData).length != 0
+              Object.entries(otherData).length !== 0
                 ? otherData.rg
                 : data.rne_number
             }`,
