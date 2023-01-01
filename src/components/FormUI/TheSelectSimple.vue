@@ -1,16 +1,17 @@
 <template>
-  <div ref="dropdownP">
+  <div ref="fullContainer">
     <div
       class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
     >
       <button
+        ref="button"
         :disabled="loading"
         aria-expanded="true"
         aria-haspopup="listbox"
         aria-labelledby="listbox-label"
         class="relative bg-white py-3 text-left focus:outline-none text-sm xl:text-base h-full w-full"
         type="button"
-        @click="hiddenDropdown = !hiddenDropdown"
+        @click="toggle === false ? handleClick($event) : handleHide($event)"
       >
         <span v-if="selected" class="ml-3 block"> {{ selected.name }} </span>
         <div v-else class="px-1 block flex items-center space-x-1.5">
@@ -46,15 +47,16 @@
     </div>
     <div>
       <Transition>
-        <ul
-          v-if="hiddenDropdown"
+        <div
+          ref="dropdown"
           v-click-outside
           aria-activedescendant="listbox-option-3"
           aria-labelledby="listbox-label"
-          class="absolute z-10 mt-1 w-fit bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+          class="absolute z-10 mt-1 bg-white shadow-lg rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm dropdownMenu"
           role="listbox"
           tabindex="-1"
         >
+          <div id="arrow" data-popper-arrow></div>
           <slot>
             <li
               v-for="op in options"
@@ -71,19 +73,24 @@
               </div>
             </li>
           </slot>
-        </ul>
+        </div>
       </Transition>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { createPopper } from "@popperjs/core";
 
 const hiddenDropdown = ref(false);
 const selected = ref(null);
 const emit = defineEmits(["selectValue"]);
-const dropdownP = ref(null);
+
+const button = ref(null);
+const dropdown = ref(null);
+const fullContainer = ref(null);
+const toggle = ref(false);
 
 defineProps({
   options: {
@@ -100,12 +107,6 @@ defineProps({
   }
 });
 
-const selectOption = (value) => {
-  selected.value = value;
-  emit("selectValue", value);
-  hiddenDropdown.value = false;
-};
-
 const vClickOutside = {
   mounted: () => {
     document.addEventListener("click", clickOutListener);
@@ -115,9 +116,17 @@ const vClickOutside = {
   }
 };
 
+
+const selectOption = (value) => {
+  selected.value = value;
+  emit("selectValue", value);
+  hiddenDropdown.value = false;
+};
+
+
 const clickOutListener = (evt) => {
-  if (!dropdownP.value.contains(evt.target)) {
-    hide(selected.value);
+  if (!fullContainer.value.contains(evt.target)) {
+    handleHide(evt);
   }
 };
 
@@ -128,6 +137,42 @@ const hide = (value) => {
 };
 const clearFilter = () => {
   selected.value = null;
+};
+
+const popperInstance = computed(() => {
+  return createPopper(button.value, dropdown.value, {
+    modifiers: [
+      {
+        name: 'preventOverflow',
+        options: {
+          padding: 4,
+        },
+      },
+      {
+        name: 'flip',
+        options: {
+          padding: 4,
+        },
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 4],
+        },
+      },
+    ],
+  });
+});
+
+const handleClick = (e) => {
+  dropdown.value.setAttribute('data-show', '');
+  popperInstance.value.update();
+  toggle.value = true;
+};
+
+const handleHide = (e) => {
+  dropdown.value.removeAttribute('data-show');
+  toggle.value = false;
 };
 </script>
 
@@ -140,5 +185,24 @@ const clearFilter = () => {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.dropdownMenu {
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  z-index: 1000;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  display: none;
+}
+
+.dropdownMenu[data-show] {
+  display: block;
 }
 </style>
