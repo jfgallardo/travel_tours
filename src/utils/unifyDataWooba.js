@@ -74,6 +74,11 @@ export const woobaTravelTime = (flightsA, flightsB) => {
       lessTime: Math.min(...arrayVoos),
       longerTime: Math.max(...arrayVoos),
     };
+  } else {
+    return {
+      lessTime: 0,
+      longerTime: 0,
+    };
   }
 };
 
@@ -86,6 +91,11 @@ export const woobaPrice = (flightsA, flightsB) => {
     return {
       minPrice: Math.min(...arrayPrice),
       maxPrice: Math.max(...arrayPrice),
+    };
+  } else {
+    return {
+      minPrice: 0,
+      maxPrice: 0,
     };
   }
 };

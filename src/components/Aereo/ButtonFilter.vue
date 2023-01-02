@@ -1,23 +1,23 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 grid-rows-1">
+    <div class="grid grid-cols-3 grid-rows-1 w-full">
       <button
         ref="cheap"
         class="py-3 border border-gray-400 relative"
         @click="filter(cheap)"
       >
         <div class="flex flex-col items-center font-medium">
-          <p class="text-xl">Mais Barato</p>
+          <p class="text-sm md:text-lg">Mais Barato</p>
           <div
             v-if="loading"
             class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
           ></div>
           <div v-else>
-            <p>R$ 4.799</p>
-            <p>23h 43m (media)</p>
+            <p class="text-sm md:text-lg">R$ 4.799</p>
+            <p class="text-sm md:text-lg">23h 43m (media)</p>
           </div>
         </div>
-        <div class="absolute top-2 left-3">
+        <div class="invisible md:visible absolute top-2 left-3">
           <svg
             width="24"
             height="24"
@@ -43,23 +43,25 @@
           </svg>
         </div>
       </button>
+
+
       <button
         ref="fast"
         class="py-3 border-y border-gray-400 relative"
         @click="filter(fast)"
       >
         <div class="flex flex-col items-center font-medium">
-          <p class="text-xl">Mais Rapido</p>
+          <p class="text-sm md:text-lg">Mais Rapido</p>
           <div
             v-if="loading"
             class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
           ></div>
           <div v-else>
-            <p>R$ 7.319</p>
-            <p>8h 33m (media)</p>
+            <p class="text-sm md:text-lg">R$ 7.319</p>
+            <p class="text-sm md:text-lg">8h 33m (media)</p>
           </div>
         </div>
-        <div class="absolute top-2 left-3">
+        <div class="invisible md:visible absolute top-2 left-3">
           <svg
             width="24"
             height="24"
@@ -78,23 +80,25 @@
           </svg>
         </div>
       </button>
+
+
       <button
         ref="premium"
         class="py-3 border border-gray-400 relative"
         @click="filter(premium)"
       >
         <div class="flex flex-col items-center font-medium">
-          <p class="text-xl">Salida más temprano</p>
+          <p class="text-sm md:text-lg">Mais temprano</p>
           <div
             v-if="loading"
             class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
           ></div>
           <div v-else>
-            <p>R$ 12.799</p>
-            <p>5h 43m (media)</p>
+            <p class="text-sm md:text-lg">R$ 12.799</p>
+            <p class="text-sm md:text-lg">5h 43m (media)</p>
           </div>
         </div>
-        <div class="absolute top-2 left-3">
+        <div class="invisible md:visible absolute top-2 left-3">
           <svg
             width="24"
             height="24"

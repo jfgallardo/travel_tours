@@ -1,9 +1,14 @@
 <template>
   <div>
-    <div class="flex items-center border-b border-gray-300">
-      <div class="w-full border-l py-5">
-        <div class="flex flex-row items-center justify-between px-10">
-          <div class="flex flex-col items-center space-y-3 w-32">
+      <div class="border-l-0 py-5 md:px-3">
+        <div class="flex justify-center items-center space-x-8 sm:space-x-20 lg:space-x-10 2xl:justify-around">
+          <teleport v-if="width < 768 && !suspense" :to="`#${keyId}Picture`">
+            <div class="flex items-center space-x-3 ">
+              <img :src="initVoo.Icone" />
+              <p class="text-sm text-center">{{ FlightCodeString }}</p>
+            </div>
+          </teleport>
+          <div v-else class="flex flex-col items-center space-y-3 w-32">
             <img :src="initVoo.Icone" />
             <p class="text-sm text-center">{{ FlightCodeString }}</p>
           </div>
@@ -12,7 +17,7 @@
             <div class="flex flex-col space-y-2">
               <p class="text-gray-700 font-medium">{{ filterWeekday }}</p>
               <div class="flex items-center relative">
-                <p class="text-2xl">
+                <p class="text-lg sm:text-xl">
                   <span class="font-semibold">{{ filterHours }}</span>
                   <span class="text-gray-400 font-medium ml-1">{{
                     filterDayPeriod
@@ -31,10 +36,10 @@
 
           <div>
             <div class="flex flex-col items-center space-y-2">
-              <p class="text-gray-700">
-                <span class="text-gray-400">Duration: </span>
-                <span class="font-medium text-sm">{{ Duracao }}</span>
-              </p>
+              <div class="text-gray-700 flex flex-col 2xl:flex-row 2xl:space-x-2.5 items-center">
+                <p class="text-gray-400">Duration: </p>
+                <p class="font-medium text-sm md:w-20">{{ Duracao }}</p>
+              </div>
               <div>
                 <img
                   v-if="initVoo.Segmento === 'I'"
@@ -60,7 +65,7 @@
               </p>
               <div class="flex items-center">
                 <div class="mr-2 -ml-4 rounded-full bg-blue-700 h-2 w-2"></div>
-                <p class="text-2xl">
+                <p class="text-lg sm:text-xl">
                   <span class="font-semibold">{{ filterHoursChegada }}</span>
                   <span class="text-gray-400 font-medium ml-1">{{
                     filterDayPeriodChegada
@@ -73,7 +78,15 @@
             </div>
           </div>
 
-          <div>
+          <teleport v-if="width < 768 && !suspense" :to="`#${keyId}`">
+            <button
+              class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
+              @click="detalhes = true"
+            >
+              Detalhes
+            </button>
+          </teleport>
+          <div  v-else>
             <button
               class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
               @click="detalhes = true"
@@ -92,25 +105,36 @@
           </template>
         </Modal>
       </div>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, provide } from 'vue';
+import { ref, computed, provide, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Modal from '@/components/Partials/TheModal.vue';
 import DetailsPage from '@/views/Aereo/DetailsPage.vue';
 import moment from 'moment';
+import { useWindowSize } from '@vueuse/core';
 
 const { locale } = useI18n();
+const { width } = useWindowSize()
 const detalhes = ref(false);
+const suspense = ref(true)
+
+
+onMounted(() => {
+  suspense.value = false
+})
+
 
 const props = defineProps({
   flights: {
     type: Array,
     default: () => [],
   },
+  keyId: {
+    type: String,
+  }
 });
 
 provide('flights', props.flights);
@@ -173,20 +197,6 @@ const FlightCodeString = computed(() => {
 const Conexao = computed(() => {
   return props.flights.length > 1;
 });
-
-/*const Duracao = computed(() => {
-  let minutes_flag = 0;
-  let hours_flag = 0;
-  props.flights.forEach((element) => {
-    hours_flag += parseInt(element.Duracao.split(':')[0]);
-    minutes_flag += parseInt(element.Duracao.split(':')[1]);
-  });
-
-  let hours = Math.floor(minutes_flag / 60);
-  let minutes = minutes_flag % 60;
-
-  return `${hours_flag + hours}h : ${minutes}min`;
-});*/
 
 const Duracao = computed(() => {
   const x = moment(initVoo.value.DataSaida)
