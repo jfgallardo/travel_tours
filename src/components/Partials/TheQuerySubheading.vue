@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center justify-start">
-    <div class="px-3">
-      <ArrowLeft class="cursor-pointer" @click="$router.go(-1)" />
+  <div class="flex items-center">
+    <div>
+      <ArrowLeft class="cursor-pointer mx-3" @click="$router.go(-1)" />
     </div>
-
-    <div class="grid grid-cols-9 grid-flow-row w-full h-full">
+<!--grid grid-cols-9 grid-flow-row w-full h-full-->
+    <div class="flex space-x-10 overflow-x-auto pr-10 xl:justify-between xl:w-full">
       <SelectSimple :loading="woobaStore.loading" :options="bags" placeholder="Bagagem" />
       <SelectSimple :loading="woobaStore.loading" placeholder="Compania">
         <FilterCompanies
@@ -166,3 +166,9 @@ const classes = [
 ];
 
 </script>
+
+<style scoped>
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

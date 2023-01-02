@@ -1,5 +1,5 @@
 <template>
-  <div ref="fullContainer">
+  <div ref="fullContainer" class="w-full">
     <div
       class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
     >
@@ -14,7 +14,7 @@
         @click="toggle === false ? handleClick($event) : handleHide($event)"
       >
         <span v-if="selected" class="ml-3 block"> {{ selected.name }} </span>
-        <div v-else class="px-1 block flex items-center space-x-1.5">
+        <div v-else class="px-1 block flex items-center xl:justify-center space-x-1.5">
           <slot name="showSelected">
             <div
               v-if="loading"
@@ -128,12 +128,6 @@ const clickOutListener = (evt) => {
   if (!fullContainer.value.contains(evt.target)) {
     handleHide(evt);
   }
-};
-
-const hide = (value) => {
-  selected.value = value;
-  emit("selectValue", value);
-  hiddenDropdown.value = false;
 };
 const clearFilter = () => {
   selected.value = null;
