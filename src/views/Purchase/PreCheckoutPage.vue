@@ -4,7 +4,7 @@
       ...cargando
     </div>
     <div v-else class="mx-auto pb-10">
-      <div class="flex">
+      <div class="flex flex-col lg:flex-row">
         <div class="basis-4/6 flex flex-col border border-slate-300">
           <PreCheckOut />
           <div
@@ -32,7 +32,7 @@
           <InterestingAccommodations />
         </div>
       </div>
-      <div class="flex">
+      <div class="flex flex-col lg:flex-row">
         <div class="basis-4/6 border border-t-0 border-slate-300">
           <Carousel class="mt-5">
             <template #title> Aluguel de carros em Miami</template>

@@ -1,35 +1,37 @@
 <template>
   <div>
-    <div class="grid grid-cols-2 grid-flow-row">
-      <div class="col-span-2 flex items-center justify-between border border-slate-300 p-3">
-        <div class="flex items-center space-x-5">
-          <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
-            <img
-                v-if="initVoo.Segmento === 'V'"
-                src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
-                alt="IconPlane"/>
-            <img
-                v-else
-                src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
-                alt="IconPlane"/>
-          </div>
-          <p class="p-1 font-semibold text-sm">{{ initVoo.Segmento === 'I' ? 'Vuelo de Ida' : 'Vuelo de Volta' }}</p>
+    <div class="flex flex-col lg:grid lg:grid-cols-2 lg:grid-flow-row">
+      <div class="flex items-center lg:col-span-2 justify-between border border-slate-300 p-3">
+        <div class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 items-center lg:space-x-5">
+         <div class="flex items-center space-x-2">
+           <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
+             <img
+               v-if="initVoo.Segmento === 'V'"
+               src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
+               alt="IconPlane"/>
+             <img
+               v-else
+               src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
+               alt="IconPlane"/>
+           </div>
+           <p class="p-1 font-semibold text-sm">{{ initVoo.Segmento === 'I' ? 'Vuelo de Ida' : 'Vuelo de Volta' }}</p>
+         </div>
           <div
-              class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
+              class="p-2 bg-gray-200 rounded-full text-xs font-medium h-8"
           >
             {{ dateVoo }}
           </div>
         </div>
       </div>
-      <div class="row-span-5 border border-t-0 border-slate-300">
+      <div class="border border-t-0 border-slate-300 lg:row-span-5">
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in flights" :key="item.Numero">
             <PlaneLine v-bind="item" />
           </template>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center justify-around h-full">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between space-x-3.5">
           <div>
             <span>{{ initVoo.Origem.CodigoIata }}&nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
@@ -41,32 +43,32 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>DURAÇAO TOTAL</span>
           <span class="font-bold">{{ duration }}</span>
         </div>
       </div>
-      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300">
+      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
         <div class="flex items-center h-full space-x-3.5 pl-14">
           <span>QTD. MILHAS</span>
           <span class="font-bold">7.000</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>CLASE</span>
           <span class="font-bold">{{ initVoo.Cabine }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>AEROLINEA</span>
           <span class="font-bold">{{ ciaMandatoria.Descricao }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div v-if="initVoo.BagagemInclusa" class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+        <div v-if="initVoo.BagagemInclusa" class="flex items-center justify-between">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -81,7 +83,7 @@
           </svg>
           <span> {{initVoo.BagagemQuantidade}} BAGAGEM DE MÃO </span>
         </div>
-        <div v-else class="flex items-center h-full space-x-3.5 pl-14">
+        <div v-else class="flex items-center justify-between">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
           </svg>
@@ -89,35 +91,43 @@
           <span>NO BAGAGEM</span>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300">
-        <div class="grid grid-cols-3 grid-rows-1 h-full">
-          <div class="border-r border-slate-300 flex flex-col items-center justify-center px-2">
-            <span class="text-2xl">1 Oferta Desde</span>
-            <span>{{ offersCompany }}</span>
-          </div>
-          <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-            <span class="text-2xl">Tipo de Tarifa</span>
-            <span>{{ tipoTarifa }}</span>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <span class="text-3xl">Total</span>
-            <span>{{ valorTotal }}</span>
-          </div>
+    </div>
+    <div class="lg:grid lg:grid-cols-5 lg:justify-items-start">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:px-2 lg:py-8">
+        <div class="flex items-center justify-between lg:flex-col lg:justify-center">
+          <p class="text-2xl text-center">1 Oferta Desde</p>
+          <p>{{ offersCompany }}</p>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="grid grid-cols-2 h-full p-5 place-items-center">
-          <div>
-            <qrcode-vue :value="value"></qrcode-vue>
-          </div>
-          <div class="">
-            <button
-                class="bg-blue-700 hover:bg-blue-800 text-white py-4 px-12 font-semibold"
-                @click="$emit('closeDetails')"
-            >
-              Fechar
-            </button>
-          </div>
+
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:px-2 lg:py-8">
+        <div class="flex items-center justify-between lg:flex-col lg:justify-center">
+          <span class="text-2xl">Tipo de Tarifa</span>
+          <span>{{ tipoTarifa }}</span>
+        </div>
+      </div>
+
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 lg:border-l lg:border-l-white h-full lg:pr-2 lg:pl-0.5 lg:py-8">
+        <div class="flex items-center justify-between lg:flex-col lg:justify-center">
+          <span class="text-2xl">Total</span>
+          <span>{{ valorTotal }}</span>
+        </div>
+      </div>
+
+      <div class="border border-y-0 border-l-0 border-slate-300 py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 lg:border-r-0 h-full lg:py-2">
+        <div class="flex items-center justify-center lg:flex-col lg:justify-center">
+          <qrcode-vue :size="110" :value="value"></qrcode-vue>
+        </div>
+      </div>
+
+      <div class="border border-t-0 border-l-0 border-slate-300 py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:place-self-center">
+        <div class="flex items-center justify-center lg:flex-col lg:justify-center lg:pt-8 lg:pr-4">
+          <button
+            class="bg-blue-700 hover:bg-blue-800 text-white py-4 px-36 lg:px-14 font-semibold"
+            @click="$emit('closeDetails')"
+          >
+            Fechar
+          </button>
         </div>
       </div>
     </div>
@@ -137,6 +147,8 @@ onMounted(() => {
     value.value = `${window.location.protocol}//${window.location.host}/precheckout/${id}`;
   }
 });
+
+defineEmits(['closeDetails'])
 
 const value = ref('');
 const flights = inject('flights');

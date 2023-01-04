@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div class="grid grid-cols-2 grid-flow-row">
-      <div class="col-span-2 flex items-center justify-between border border-slate-300 p-3">
-        <div class="flex items-center space-x-5">
-          <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
-            <img
+    <div class="flex flex-col lg:grid lg:grid-cols-2 lg:grid-flow-row">
+      <div class="flex items-center lg:col-span-2 justify-between border border-x-0 border-slate-300 p-3">
+        <div class="flex items-center justify-around w-full">
+          <div class="flex items-center space-x-3.5">
+            <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
+              <img
                 src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
                 alt="IconPlane"/>
+            </div>
+            <p class="p-1 font-semibold text-sm">Vuelo de Volta</p>
           </div>
-          <p class="p-1 font-semibold text-sm">Vuelo de Volta</p>
           <div
               class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
           >
@@ -16,52 +18,52 @@
           </div>
         </div>
       </div>
-      <div class="row-span-5 border border-t-0 border-slate-300">
+      <div class="border border-t-0 border-x-0 border-slate-300 lg:row-span-5">
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in vooSelected.VoosVolta" :key="item.Numero">
             <PlaneLine v-bind="item" />
           </template>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center justify-around h-full">
-          <div>
+      <div class="border border-t-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between space-x-3.5">
+          <div class="lg:flex lg:flex-col lg:items-center lg:text-center">
             <span>{{ vooSelected.Destino }} &nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
           </div>
           <div>{{ paradas }}</div>
-          <div>
+          <div class="lg:flex lg:flex-col lg:items-center lg:text-center">
             <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }} &nbsp;&nbsp;</span>
             <span>{{ vooSelected.Origem }}</span>
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>DURAÇAO TOTAL</span>
           <span class="font-bold">{{ duration }}</span>
         </div>
       </div>
-      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>QTD. MILHAS</span>
           <span class="font-bold">7.000</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>CLASE</span>
           <span class="font-bold">{{ initialFlight.Cabine }} ({{initialFlight.BaseTarifaria[0].Classe}})</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-slate-300 py-2 px-6">
+        <div class="flex items-center justify-between">
           <span>AEROLINEA</span>
           <span class="font-bold">{{ vooSelected.CiaMandatoria.Descricao }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
-        <div v-if="initialFlight.BagagemInclusa" class="flex items-center h-full space-x-3.5 pl-14">
+      <div class="border border-t-0 border-slate-300 py-2 px-6">
+        <div v-if="initialFlight.BagagemInclusa" class="flex items-center justify-between">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -76,7 +78,7 @@
           </svg>
           <span> {{initialFlight.BagagemQuantidade}} BAGAGEM DE MÃO </span>
         </div>
-        <div v-else class="flex items-center h-full space-x-3.5 pl-14">
+        <div v-else class="flex items-center justify-between">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
           </svg>
@@ -84,25 +86,26 @@
           <span>NO BAGAGEM</span>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300">
+
+      <div class="border border-t-0 lg:border-l-0 border-slate-300">
         <div class="grid grid-cols-3 grid-rows-1 h-full">
           <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-            <span class="text-3xl">Tarifa</span>
+            <span class="text-3xl lg:text-xl">Tarifa</span>
             <span>{{tarifa}}</span>
           </div>
           <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-            <span class="text-2xl">Taxas e encargos</span>
+            <span class="text-2xl lg:text-xl lg:text-center">Taxas e encargos</span>
             <span>{{ valorTotalTaxas }}</span>
           </div>
           <div class="flex flex-col items-center justify-center">
-            <span class="text-3xl">Total</span>
+            <span class="text-3xl lg:text-xl">Total</span>
             <span>{{ valorTotal }}</span>
           </div>
         </div>
       </div>
       <div class="border border-t-0 border-l-0 border-slate-300">
         <div class="flex items-center justify-center h-full p-5">
-          <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white py-3 px-28" :to="{path: 'checkout'}">Comprar agora</RouterLink>
+          <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white py-3 px-28 lg:px-10" :to="{path: 'checkout'}">Comprar agora</RouterLink>
         </div>
       </div>
     </div>
@@ -148,7 +151,7 @@ const horaChegada = computed(() => {
   return filterHours(endFlight.value.DataChegada);
 });
 const dateVolta = computed(() => {
-  return useDateFormatter(searchOptions.getDateIdaFormatter);
+  return useDateFormatter(searchOptions.getDateVoltaFormatter);
 });
 const paradas = computed(() => {
   let escalas = props.vooSelected.VoosVolta.length - 1;

@@ -1,14 +1,16 @@
 <template>
 <div>
-  <div class="grid grid-cols-2 grid-flow-row">
-    <div class="col-span-2 flex items-center justify-between border border-slate-300 p-3">
-      <div class="flex items-center space-x-5">
-        <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
-          <img
+  <div class="flex flex-col lg:grid lg:grid-cols-2 lg:grid-flow-row">
+    <div class="flex items-center lg:col-span-2 justify-between border border-x-0 border-slate-300 p-3">
+      <div class="flex items-center justify-around w-full">
+        <div class="flex items-center space-x-3.5">
+          <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
+            <img
               src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
               alt="IconPlane"/>
+          </div>
+          <p class="p-1 font-semibold text-sm">Vuelo de Ida</p>
         </div>
-        <p class="p-1 font-semibold text-sm">Vuelo de Ida</p>
         <div
             class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
         >
@@ -16,52 +18,52 @@
         </div>
       </div>
     </div>
-    <div class="row-span-5 border border-t-0 border-slate-300">
+    <div class="border border-t-0 border-x-0 border-slate-300 lg:row-span-5">
       <div class="flex flex-col space-y-4 items-center py-2">
         <template v-for="item in vooSelected.VoosIda" :key="item.Numero">
           <PlaneLine v-bind="item" />
         </template>
       </div>
     </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
-      <div class="flex items-center justify-around h-full">
-        <div>
+    <div class="border border-t-0 border-slate-300 py-2 px-6">
+      <div class="flex items-center justify-between space-x-3.5">
+        <div class="lg:flex lg:flex-col lg:items-center lg:text-center">
           <span>{{ vooSelected.Origem }}&nbsp;&nbsp;</span>
           <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
         </div>
         <div>{{ paradas }}</div>
-        <div>
+        <div class="lg:flex lg:flex-col lg:items-center lg:text-center">
           <span class="font-bold">{{ horaChegada }} {{ dayPeriodVolta }} &nbsp;&nbsp;</span>
           <span>{{ vooSelected.Destino }}</span>
         </div>
       </div>
     </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
-      <div class="flex items-center h-full space-x-3.5 pl-14">
+    <div class="border border-t-0 border-slate-300 py-2 px-6">
+      <div class="flex items-center justify-between">
         <span>DURAÇAO TOTAL</span>
         <span class="font-bold">{{ duration }}</span>
       </div>
     </div>
-    <div v-if="false" class="border border-t-0 border-l-0 border-slate-300">
-      <div class="flex items-center h-full space-x-3.5 pl-14">
+    <div v-if="false" class="border border-l-0 border-slate-300 py-2 px-6">
+      <div class="flex items-center justify-between">
         <span>QTD. MILHAS</span>
         <span class="font-bold">7.000</span>
       </div>
     </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
-      <div class="flex items-center h-full space-x-3.5 pl-14">
+    <div class="border border-t-0 border-slate-300 py-2 px-6">
+      <div class="flex items-center justify-between">
         <span>CLASE</span>
         <span class="font-bold">{{ initialFlight.Cabine }} ({{initialFlight.BaseTarifaria[0].Classe}})</span>
       </div>
     </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
-      <div class="flex items-center h-full space-x-3.5 pl-14">
+    <div class="border border-t-0 border-slate-300 py-2 px-6">
+      <div class="flex items-center justify-between">
         <span>AEROLINEA</span>
         <span class="font-bold">{{ vooSelected.CiaMandatoria.Descricao }}</span>
       </div>
     </div>
-    <div class="border border-t-0 border-l-0 border-slate-300">
-      <div v-if="initialFlight.BagagemInclusa" class="flex items-center h-full space-x-3.5 pl-14">
+    <div class="border border-t-0 border-slate-300 py-2 px-6">
+      <div v-if="initialFlight.BagagemInclusa" class="flex items-center justify-between">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -76,7 +78,7 @@
         </svg>
         <span> {{initialFlight.BagagemQuantidade}} BAGAGEM DE MÃO </span>
       </div>
-      <div v-else class="flex items-center h-full space-x-3.5 pl-14">
+      <div v-else class="flex items-center justify-between">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
         </svg>

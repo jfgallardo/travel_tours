@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto p-8 w-full">
+  <div class="mx-auto w-full">
     <ShowInfo />
   </div>
 </template>
