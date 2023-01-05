@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="px-3 lg:w-4/6 2xl:w-3/4 lg:h-screen lg:relative lg:top-0 lg:left-1/3 2xl:left-1/4 lg:pl-4">
+    <div class="px-3 mt-4 lg:w-4/6 2xl:w-3/4 lg:h-screen lg:relative lg:top-0 lg:left-1/3 2xl:left-1/4 lg:pl-4">
       <RouterView />
     </div>
   </div>

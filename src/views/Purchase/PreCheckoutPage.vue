@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="flex flex-col lg:flex-row">
-        <div class="basis-4/6 border border-t-0 border-slate-300">
+        <div class="basis-4/6 border border-t-0 md:border-x-0 border-slate-300">
           <Carousel class="mt-5">
             <template #title> Aluguel de carros em Miami</template>
             <CarouselSlider
@@ -59,7 +59,7 @@
             </CarouselSlider>
           </Carousel>
         </div>
-        <div class="basis-4/12 border border-slate-300 border-l-0">
+        <div class="basis-4/12 border border-slate-300 border-l-0 border-b-0 border-t-0 lg:border-t lg:border-r-0 lg:border-l">
           <GroupsBoundFor class="mt-4" more-people="12" />
           <GroupsBoundFor date="Sep 18" more-people="21" />
           <div class="flex items-center justify-around">

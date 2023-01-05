@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="mx-auto px-4 pt-10 pb-20 flex space-x-4">
-        <div class="w-1/4 h-5/6 overflow-y-auto fixed left-4 pb-10">
+<!-- mx-auto px-4 pt-10 pb-20 flex space-x-4   -->
+    <div class="container mx-auto pt-4 md:pt-0 lg:px-4 lg:pt-10 lg:pb-20 lg:flex lg:space-x-4">
+<!-- w-1/4 h-5/6 overflow-y-auto fixed left-4 pb-10     -->
+        <div class="lg:w-1/4 lg:h-5/6 lg:overflow-y-auto lg:fixed lg:left-4 pb-10">
           <table class="table-fixed border-2 border-gray-200 w-full border-spacing-2 border-separate">
             <tbody>
             <tr>
-              <td class="flex items-center justify-between">
-                <div class="flex space-x-2.5">
+              <td class="flex items-center justify-between lg:space-x-3.5">
+                <div class="flex items-center space-x-2.5 lg:text-center">
                   <img
                       class="h-6 w-6"
                       src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
@@ -14,15 +16,15 @@
                   <h3 class="font-semibold">Vuelo de Ida</h3>
                 </div>
                 <div>
-                  <h3 class="font-semibold">{{user.outboundFlightDestination.Destino.Descricao}}</h3>
+                  <h3 class="font-semibold lg:text-center">{{user.outboundFlightDestination.Destino.Descricao}}</h3>
                 </div>
               </td>
             </tr>
             <tr>
               <td class="flex items-center justify-between border-t-2 border-gray-200 p-2">
-                <div class="text-sm">
+                <div class="text-sm lg:flex lg:flex-col lg:items-start">
                   <h3>{{user.outboundFlightOrigin.Origem.CodigoIata}}</h3>
-                  <h3 class="font-bold">{{ departureTime }} {{ departureTimeDayPeriod }}</h3>
+                  <h3 class="font-bold lg:text-start">{{ departureTime }} {{ departureTimeDayPeriod }}</h3>
                   <h3>{{ dateStringIdaSaida }}</h3>
                 </div>
                 <div class="text-sm text-center">
@@ -31,9 +33,9 @@
                     <h3>{{ duracaoVoosIda }}</h3>
                   </div>
                 </div>
-                <div class="text-sm">
+                <div class="text-sm lg:flex lg:flex-col lg:items-end">
                   <h3>{{user.outboundFlightDestination.Destino.CodigoIata}}</h3>
-                  <h3 class="font-bold">{{ checkIn }} {{ checkInDayPeriod }}</h3>
+                  <h3 class="font-bold lg:text-end">{{ checkIn }} {{ checkInDayPeriod }}</h3>
                   <h3>{{ dateStringIdaChegada }}</h3>
                 </div>
               </td>
@@ -94,8 +96,8 @@
           <table class="table-fixed border-2 border-t-0 border-gray-200 w-full border-spacing-2 border-separate">
             <tbody>
             <tr>
-              <td class="flex items-center justify-between">
-                <div class="flex space-x-2.5">
+              <td class="flex items-center justify-between lg:space-x-3.5">
+                <div class="flex items-center space-x-2.5 lg:text-center">
                   <img
                       class="h-6 w-6"
                       src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
@@ -109,9 +111,9 @@
             </tr>
             <tr>
               <td class="flex items-center justify-between border-t-2 border-gray-200 p-2">
-                <div class="text-sm">
+                <div class="text-sm lg:flex lg:flex-col lg:items-start">
                   <h3>{{user.returnFlightOrigin.Origem.CodigoIata}}</h3>
-                  <h3 class="font-bold">{{ departureTimeVolta }} {{ departureTimeDayPeriodVolta }}</h3>
+                  <h3 class="font-bold lg:text-start">{{ departureTimeVolta }} {{ departureTimeDayPeriodVolta }}</h3>
                   <h3>{{ dateStringIdaSaidaVolta }}</h3>
                 </div>
                 <div class="text-sm text-center">
@@ -120,9 +122,9 @@
                     <h3>{{ duracaoVoosVolta }}</h3>
                   </div>
                 </div>
-                <div class="text-sm">
+                <div class="text-sm lg:flex lg:flex-col lg:items-end">
                   <h3>{{user.returnFlightDestination.Destino.CodigoIata}}</h3>
-                  <h3 class="font-bold">{{ checkInVolta }} {{ checkInDayPeriodVolta }}</h3>
+                  <h3 class="font-bold lg:text-end">{{ checkInVolta }} {{ checkInDayPeriodVolta }}</h3>
                   <h3>{{ dateStringIdaChegadaVolta }}</h3>
                 </div>
               </td>
@@ -231,7 +233,7 @@
             </tr>
             </tbody>
           </table>
-          <table class="table-fixed border-2 border-t-0 border-gray-200 w-full border-spacing-2 border-separate">
+          <table class="table-fixed border-2 border-y-0 lg:border-b border-gray-200 w-full border-spacing-2 border-separate">
             <tbody>
             <tr>
               <td class="flex flex-col space-y-1.5 p-2">
@@ -244,7 +246,8 @@
             </tbody>
           </table>
         </div>
-        <div class="w-3/4 relative top-0 left-1/4 px-8">
+<!--  w-3/4 relative top-0 left-1/4 px-8    -->
+        <div class="lg:w-3/4 lg:relative lg:top-0 lg:left-1/4 lg:px-8">
           <RouterView />
         </div>
     </div>

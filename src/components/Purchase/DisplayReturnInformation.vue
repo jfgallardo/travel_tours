@@ -25,8 +25,8 @@
           </template>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 py-2 px-6">
-        <div class="flex items-center justify-between space-x-3.5">
+      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
+        <div class="flex items-center justify-between space-x-3.5 h-full">
           <div class="lg:flex lg:flex-col lg:items-center lg:text-center">
             <span>{{ vooSelected.Destino }} &nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
@@ -38,32 +38,32 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 py-2 px-6">
-        <div class="flex items-center justify-between">
+      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
+        <div class="flex items-center justify-between h-full">
           <span>DURAÇAO TOTAL</span>
           <span class="font-bold">{{ duration }}</span>
         </div>
       </div>
-      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
-        <div class="flex items-center justify-between">
+      <div v-if="false" class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 border-r-0">
+        <div class="flex items-center justify-between h-full">
           <span>QTD. MILHAS</span>
           <span class="font-bold">7.000</span>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 py-2 px-6">
-        <div class="flex items-center justify-between">
+      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
+        <div class="flex items-center justify-between h-full">
           <span>CLASE</span>
           <span class="font-bold">{{ initialFlight.Cabine }} ({{initialFlight.BaseTarifaria[0].Classe}})</span>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 py-2 px-6">
-        <div class="flex items-center justify-between">
+      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0 ">
+        <div class="flex items-center justify-between h-full">
           <span>AEROLINEA</span>
           <span class="font-bold">{{ vooSelected.CiaMandatoria.Descricao }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 py-2 px-6">
-        <div v-if="initialFlight.BagagemInclusa" class="flex items-center justify-between">
+      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
+        <div v-if="initialFlight.BagagemInclusa" class="flex items-center justify-between h-full">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -78,7 +78,7 @@
           </svg>
           <span> {{initialFlight.BagagemQuantidade}} BAGAGEM DE MÃO </span>
         </div>
-        <div v-else class="flex items-center justify-between">
+        <div v-else class="flex items-center justify-between h-full">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
           </svg>
@@ -87,14 +87,14 @@
         </div>
       </div>
 
-      <div class="border border-t-0 lg:border-l-0 border-slate-300">
+      <div class="border border-t-0 lg:border-l-0 lg:border-r-0 border-slate-300">
         <div class="grid grid-cols-3 grid-rows-1 h-full">
           <div class="border-r border-slate-300 flex flex-col items-center justify-center">
             <span class="text-3xl lg:text-xl">Tarifa</span>
             <span>{{tarifa}}</span>
           </div>
           <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-            <span class="text-2xl lg:text-xl lg:text-center">Taxas e encargos</span>
+            <span class="text-2xl lg:text-xl text-center">Taxas e encargos</span>
             <span>{{ valorTotalTaxas }}</span>
           </div>
           <div class="flex flex-col items-center justify-center">
@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300">
+      <div class="border border-t-0 border-l-0 lg:border-l border-slate-300 border-r-0">
         <div class="flex items-center justify-center h-full p-5">
           <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white py-3 px-28 lg:px-10" :to="{path: 'checkout'}">Comprar agora</RouterLink>
         </div>
