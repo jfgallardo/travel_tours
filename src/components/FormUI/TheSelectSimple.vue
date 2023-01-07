@@ -1,35 +1,13 @@
 <template>
-  <div ref="fullContainer" class="w-full">
+  <div ref="fullContainer">
     <div
-      class="relative border border-t-0 border-b-0 border-r-0 border-gray-300"
+      class="relative border border-y-0 border-r-0 border-gray-300"
     >
-      <button
-        ref="button"
-        :disabled="loading"
-        aria-expanded="true"
-        aria-haspopup="listbox"
-        aria-labelledby="listbox-label"
-        class="relative bg-white py-3 text-left focus:outline-none text-sm xl:text-base h-full w-full"
-        type="button"
-        @click="toggle === false ? handleClick($event) : handleHide($event)"
-      >
-        <span v-if="selected" class="ml-3 block"> {{ selected.name }} </span>
-        <div v-else class="px-1 block flex items-center xl:justify-center space-x-1.5">
-          <slot name="showSelected">
-            <div
-              v-if="loading"
-              class="animate-spin h-4 w-4 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
-            <img v-else class="h-4 w-4" src="@/assets/ico/filter-search.svg">
-            <span class="text-gray-500">{{ placeholder }}</span>
-          </slot>
-        </div>
-
-        <button
-          v-if="selected"
-          class="text-gray-400 hover:text-gray-800 ml-3 absolute inset-y-0 right-0 right-2.5 flex items-center cursor-default"
-          type="button"
-          @click="clearFilter"
-        >
+       <span
+         v-if="selected"
+         class="text-gray-400 hover:text-gray-800 absolute top-2 right-1 cursor-default hidden md:block"
+         @click="clearFilter"
+       >
           <svg
             class="h-2.5 w-2.5"
             fill="none"
@@ -42,7 +20,36 @@
               stroke-width="1.5"
             />
           </svg>
-        </button>
+        </span>
+      <button
+        ref="button"
+        :disabled="loading"
+        aria-expanded="true"
+        aria-haspopup="listbox"
+        aria-labelledby="listbox-label"
+        class="relative bg-white py-3 flex items-center justify-center focus:outline-none text-sm xl:text-base px-4 mx-1"
+        type="button"
+        @click="toggle === false ? handleClick($event) : handleHide($event)"
+      >
+        <template v-if="selected" >
+        <span class="hidden md:block">
+          {{ selected.name }}
+        </span>
+        <span class="block md:hidden">
+            <slot name="iconResponsive"></slot>
+        </span>
+        </template>
+        <template v-else>
+          <div class="flex items-center justify-center space-x-1.5">
+            <slot name="showSelected">
+              <div
+                v-if="loading"
+                class="animate-spin h-4 w-4 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
+              <img v-else class="h-4 w-4" src="@/assets/ico/filter-search.svg" alt="search">
+              <span class="text-gray-500">{{ placeholder }}</span>
+            </slot>
+          </div>
+        </template>
       </button>
     </div>
     <div>

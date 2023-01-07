@@ -4,8 +4,14 @@
       <ArrowLeft class="cursor-pointer mx-3" @click="$router.go(-1)" />
     </div>
 <!--grid grid-cols-9 grid-flow-row w-full h-full-->
-    <div class="flex space-x-10 overflow-x-auto pr-10 xl:justify-between xl:w-full">
-      <SelectSimple :loading="woobaStore.loading" :options="bags" placeholder="Bagagem" />
+    <div class="flex overflow-x-auto xl:justify-between xl:w-full">
+      <SelectSimple :loading="woobaStore.loading" :options="bags" placeholder="Bagagem">
+        <template #iconResponsive>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+          </svg>
+        </template>
+      </SelectSimple>
       <SelectSimple :loading="woobaStore.loading" placeholder="Compania">
         <FilterCompanies
           :companies="woobaStore.companies" :values="selectCompanies"
@@ -129,8 +135,8 @@ const bags = computed(() => {
     return [{ name: "Apenas com babagem", value: "1" }];
   }
   return [
-    { name: "Apenas com babagem", value: "1" },
-    { name: "Apenas sim babagem", value: "2" }
+    { name: "Com babagem", value: "1" },
+    { name: "Sim babagem", value: "2" }
   ];
 });
 
