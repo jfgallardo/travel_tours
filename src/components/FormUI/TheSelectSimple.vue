@@ -1,42 +1,21 @@
 <template>
-  <div ref="fullContainer">
+  <div ref="fullContainer" class="w-full">
     <div
       class="relative border border-y-0 border-r-0 border-gray-300"
     >
-       <span
-         v-if="selected"
-         class="text-gray-400 hover:text-gray-800 absolute top-2 right-1 cursor-default hidden md:block"
-         @click="clearFilter"
-       >
-          <svg
-            class="h-2.5 w-2.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 8 8"
-          >
-            <path
-              d="M1 1l6 6m0-6L1 7"
-              stroke-linecap="round"
-              stroke-width="1.5"
-            />
-          </svg>
-        </span>
       <button
         ref="button"
         :disabled="loading"
         aria-expanded="true"
         aria-haspopup="listbox"
         aria-labelledby="listbox-label"
-        class="relative bg-white py-3 flex items-center justify-center focus:outline-none text-sm xl:text-base px-4 mx-1"
+        class="relative bg-white py-3 flex items-center justify-center focus:outline-none text-sm xl:text-base px-4 mx-1 w-full"
         type="button"
         @click="toggle === false ? handleClick($event) : handleHide($event)"
       >
         <template v-if="selected" >
-        <span class="hidden md:block">
-          {{ selected.name }}
-        </span>
-        <span class="block md:hidden">
-            <slot name="iconResponsive"></slot>
+        <span>
+            <slot name="selectedSpace"></slot>
         </span>
         </template>
         <template v-else>
@@ -50,6 +29,24 @@
             </slot>
           </div>
         </template>
+        <span
+          v-if="selected"
+          class="text-gray-400 hover:text-gray-800 absolute top-2 right-3 cursor-default"
+          @click="clearFilter"
+        >
+          <svg
+            class="h-2.5 w-2.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 8 8"
+          >
+            <path
+              d="M1 1l6 6m0-6L1 7"
+              stroke-linecap="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </span>
       </button>
     </div>
     <div>
