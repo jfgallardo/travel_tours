@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative z-40">
     <div @mouseover="showB = false" @mouseout="showB = true">
       <slot></slot>
     </div>

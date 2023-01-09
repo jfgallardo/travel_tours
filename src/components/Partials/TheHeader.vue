@@ -173,7 +173,7 @@
         </div>
       </div>
 
-      <div v-if="hiddenOf" class="absolute w-full z-30">
+      <div v-if="hiddenOf" class="absolute w-full z-50">
         <div class="pt-2 pb-3 text-center px-5 bg-white">
           <div class="flex items-center justify-end">
             <svg

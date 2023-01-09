@@ -9,7 +9,7 @@
     </div>
     <div v-else>
       <template v-if="!woobaStore.returnFlights">
-        <div v-for="viagem in woobaStore.outboundFlights" :key="viagem.Key">
+        <div v-for="viagem in woobaStore.flyFilters" :key="viagem.Key">
           <IdaVoltaFlex :viagem="viagem" />
           <br />
         </div>

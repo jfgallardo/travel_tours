@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="vooDetalhes" class="grid grid-rows-3 auto-rows-max gap-3.5 2xl:gap-1 content-start">
+    <div v-if="vooDetalhes" class="grid grid-rows-2 auto-rows-max gap-3.5 2xl:gap-1 content-start">
       <div class="mt-5 2xl:mt-0.5 px-2 mb-3">
         <div class="space-y-1 text-sm font-light px-8 xl:px-2">
           <p v-if="precoAdulto" class="flex items-center justify-between">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <qrcode-vue :size="120" :value="value"></qrcode-vue>
+        <qrcode-vue :size="110" :value="value"></qrcode-vue>
       </div>
       <div>
         <button

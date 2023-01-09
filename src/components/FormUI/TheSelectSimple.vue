@@ -125,6 +125,7 @@ const selectOption = (value) => {
   selected.value = value;
   emit("selectValue", value);
   hiddenDropdown.value = false;
+  handleHide();
 };
 
 
@@ -134,7 +135,8 @@ const clickOutListener = (evt) => {
   }
 };
 const clearFilter = () => {
-  selected.value = null;
+  selected.value = '';
+  emit("selectValue", selected.value);
 };
 
 const popperInstance = computed(() => {
@@ -194,7 +196,7 @@ const handleHide = (e) => {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  z-index: 1000;
+  z-index: 30;
   min-width: 10rem;
   padding: 0.5rem 0;
   display: none;

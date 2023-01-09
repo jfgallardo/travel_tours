@@ -7,8 +7,10 @@ import {
   woobaTravelTime,
 } from '@/utils/unifyDataWooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+import { useFiltersStore } from '@/stores/filters';
 
 const searchOptionsVoo = useSearchOptionsVooStore();
+const filters = useFiltersStore();
 export const useWoobaStore = defineStore({
   id: 'wooba',
   state: () => ({
@@ -31,7 +33,29 @@ export const useWoobaStore = defineStore({
       return woobaPrice(state.outboundFlights, state.returnFlights);
     },
     offers(state) {
-      return state.outboundFlights[0].OfertasDesde;
+      return state.outboundFlights[0]?.OfertasDesde || [];
+    },
+    flyFilters(state) {
+      let flyFilters = [];
+
+      switch (filters.baggage.value) {
+        case 0:
+          flyFilters = state.outboundFlights.filter(
+            (fly) =>
+              !fly.VoosIda[0].BagagemInclusa && !fly.VoosVolta[0].BagagemInclusa
+          );
+          break;
+        case 1:
+          flyFilters = state.outboundFlights.filter(
+            (fly) =>
+              fly.VoosIda[0].BagagemInclusa || fly.VoosVolta[0].BagagemInclusa
+          );
+          break;
+        default:
+          flyFilters = state.outboundFlights;
+      }
+
+      return flyFilters;
     },
   },
   actions: {

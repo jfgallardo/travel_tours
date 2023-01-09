@@ -42,7 +42,7 @@
     </div>
   </div>
   <button
-    class="bg-blue-700 rounded-full p-2 hover:bg-blue-800 button-float"
+    class="bg-blue-700 rounded-full p-2 hover:bg-blue-800 button-float lg:hidden"
     @click="openSearch = !openSearch"
   >
     <transition name="slide-up" mode="out-in">
@@ -136,7 +136,7 @@
 </template>
 
 <script setup>
-import { ref, markRaw, onMounted } from 'vue';
+import { ref, markRaw, onMounted, onUpdated } from 'vue';
 import { RouterView } from 'vue-router';
 import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
 import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
@@ -146,6 +146,12 @@ import { useI18n } from 'vue-i18n';
 onMounted(() => {
   selectedComponent.value = markRaw(RoundTrip);
   roundtrip.value.classList.add('active');
+});
+
+onUpdated(() => {
+  if (roundtrip.value) {
+    roundtrip.value.classList.add('active');
+  }
 });
 
 let selectedComponent = ref(null);
@@ -181,8 +187,8 @@ const changeTab = (newTab, ref) => {
 
 .button-float {
   position: fixed !important;
-  bottom: 45px;
-  right: 15px;
+  bottom: 80px;
+  right: 25px;
 }
 
 .slide-up-enter-active,
