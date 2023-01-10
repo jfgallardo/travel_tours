@@ -55,6 +55,10 @@ export const useWoobaStore = defineStore({
           flyFilters = state.outboundFlights;
       }
 
+      flyFilters = flyFilters.filter((fly) =>
+        filters.flightCompanies.includes(fly.CiaMandatoria.CodigoIata)
+      );
+
       return flyFilters;
     },
   },

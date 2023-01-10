@@ -43,24 +43,41 @@
 
       <SelectSimple :loading="woobaStore.loading" placeholder="Llegada">
         <template v-if="t_llegada" #showSelected>
-          <div class="flex items-center justify-around w-full">
-            <span v-if="t_llegada.initTime">Ida - {{ t_llegada.initTime }}</span>
-            <span v-if="t_llegada.endTime"> Volta - {{ t_llegada.endTime }}</span>
-          </div>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 lg:h-6 lg:w-6">
+            <path d="M12 13.75C11.59 13.75 11.25 13.41 11.25 13V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V13C12.75 13.41 12.41 13.75 12 13.75Z" fill="#292D32"/>
+            <path d="M12 22.75C6.76 22.75 2.5 18.49 2.5 13.25C2.5 8.01 6.76 3.75 12 3.75C17.24 3.75 21.5 8.01 21.5 13.25C21.5 13.66 21.16 14 20.75 14C20.34 14 20 13.66 20 13.25C20 8.84 16.41 5.25 12 5.25C7.59 5.25 4 8.84 4 13.25C4 17.66 7.59 21.25 12 21.25C12.41 21.25 12.75 21.59 12.75 22C12.75 22.41 12.41 22.75 12 22.75Z" fill="#292D32"/>
+            <path d="M15 2.75H9C8.59 2.75 8.25 2.41 8.25 2C8.25 1.59 8.59 1.25 9 1.25H15C15.41 1.25 15.75 1.59 15.75 2C15.75 2.41 15.41 2.75 15 2.75Z" fill="#292D32"/>
+            <path d="M16.1504 22.0208C15.8004 22.0208 15.4804 21.9408 15.1904 21.7708C14.5304 21.3908 14.1504 20.6208 14.1504 19.6608V17.3508C14.1504 16.3908 14.5304 15.6208 15.1904 15.2408C15.8504 14.8608 16.7004 14.9208 17.5304 15.3908L19.5304 16.5508C20.3604 17.0308 20.8404 17.7408 20.8404 18.5008C20.8404 19.2608 20.3604 19.9708 19.5304 20.4508L17.5304 21.6108C17.0704 21.8808 16.6004 22.0208 16.1504 22.0208ZM16.1604 16.4808C16.0804 16.4808 16.0004 16.5008 15.9404 16.5308C15.7604 16.6308 15.6504 16.9408 15.6504 17.3408V19.6508C15.6504 20.0508 15.7604 20.3608 15.9404 20.4608C16.1204 20.5608 16.4404 20.5108 16.7804 20.3108L18.7804 19.1508C19.1304 18.9508 19.3404 18.7008 19.3404 18.5008C19.3404 18.3008 19.1304 18.0508 18.7804 17.8508L16.7804 16.6908C16.5504 16.5508 16.3304 16.4808 16.1604 16.4808Z" fill="#292D32"/>
+          </svg>
         </template>
         <FilterDepartureTime :times="t_llegada" @clear="t_llegada=null" @time="t_llegada=$event" />
       </SelectSimple>
 
       <SelectSimple :loading="woobaStore.loading" placeholder="Partida">
         <template v-if="t_partida" #showSelected>
-          <div class="flex items-center justify-around w-full">
-            <span v-if="t_partida.initTime">Ida - {{ t_partida.initTime }}</span>
-            <span v-if="t_partida.endTime"> Volta - {{ t_partida.endTime }}</span>
-          </div>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 lg:h-6 lg:w-6">
+            <path d="M12 22.75C6.76 22.75 2.5 18.49 2.5 13.25C2.5 8.01 6.76 3.75 12 3.75C17.24 3.75 21.5 8.01 21.5 13.25C21.5 18.49 17.24 22.75 12 22.75ZM12 5.25C7.59 5.25 4 8.84 4 13.25C4 17.66 7.59 21.25 12 21.25C16.41 21.25 20 17.66 20 13.25C20 8.84 16.41 5.25 12 5.25Z" fill="#292D32"/>
+            <path d="M12 13.75C11.59 13.75 11.25 13.41 11.25 13V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V13C12.75 13.41 12.41 13.75 12 13.75Z" fill="#292D32"/>
+            <path d="M15 2.75H9C8.59 2.75 8.25 2.41 8.25 2C8.25 1.59 8.59 1.25 9 1.25H15C15.41 1.25 15.75 1.59 15.75 2C15.75 2.41 15.41 2.75 15 2.75Z" fill="#292D32"/>
+          </svg>
+
         </template>
         <FilterDepartureTime :times="t_partida" @clear="t_partida=null" @time="t_partida=$event" />
       </SelectSimple>
-      <SelectSimple :loading="woobaStore.loading" :options="connection" placeholder="Paradas" />
+      
+      <SelectSimple :loading="woobaStore.loading" :options="connection" placeholder="Paradas" @select-value="filters.stops = $event">
+        <template v-if="filters.stops" #selectedSpace>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6">
+            <path d="M2.06999 4.59988C2.86999 1.13988 8.07999 1.13988 8.86999 4.59988C9.33999 6.62988 8.04999 8.34988 6.92999 9.41988C6.10999 10.1999 4.81999 10.1899 3.99999 9.41988C2.88999 8.34988 1.59999 6.62988 2.06999 4.59988Z" stroke="#292D32" stroke-width="1.5"/>
+            <path d="M15.07 16.5999C15.87 13.1399 21.11 13.1399 21.91 16.5999C22.38 18.6299 21.09 20.3499 19.96 21.4199C19.14 22.1999 17.84 22.1899 17.02 21.4199C15.89 20.3499 14.6 18.6299 15.07 16.5999Z" stroke="#292D32" stroke-width="1.5"/>
+            <path d="M12 5H14.68C16.53 5 17.39 7.29 16 8.51L8.01001 15.5C6.62001 16.71 7.48001 19 9.32001 19H12" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5.48622 5.5H5.49777" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.4862 17.5H18.4978" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </template>
+      </SelectSimple>
+
+
       <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
         <template v-if="price" #showSelected>
           <div class="flex items-center justify-around w-full">
