@@ -32,6 +32,7 @@
 
       <div class="w-4/12">
         <CheckInput
+          v-model="userStore.termos"
           label="Confirmo ser maior de 18 (dezoito) anos e que todos os dados informados
 acima são verídicos. Ainda confirmo que li e concordo com os Termos e
 Condições de Uso da MaxMilhas."

@@ -6,7 +6,7 @@
     >
       <div class="flex items-center justify-around border-b">
         <div class="flex items-center h-full">
-          <div class="border-r border-gray-300 h-full py-2">
+          <div class="border-r border-gray-300 h-full flex items-center">
             <RouterLink :to="{ name: 'LandingPage' }">
               <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@
               </span>
             </div>
           </div> -->
-          <div class="border-r border-gray-300 h-full">
+          <div class="border-r border-gray-300 h-full flex items-center">
             <Dropddown>
               <template #selected>
                 <button

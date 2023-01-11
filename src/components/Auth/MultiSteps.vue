@@ -24,7 +24,9 @@
       </button>
       <button
         v-if="userStore.currentStep === 3"
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-300 disabled:cursor-not-allowed"
+        :disabled="!userStore.termos"
+        @click.prevent="register"
       >
         Cadastro Agora
       </button>
@@ -100,6 +102,10 @@ const backStep = () => {
   }
   selectedComponent.value = markRaw(steps[userStore.currentStep].component);
 };
+
+const register = () => {
+  userStore.register()
+}
 </script>
 
 <style scoped></style>

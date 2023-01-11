@@ -9,7 +9,7 @@
             ref="pessoaF"
             type="button"
             class="py-3 border border-gray-400 px-12"
-            @click="change(pessoaF)"
+            @click="change(pessoaF, 'pessoaF')"
           >
             Pessoa Fisica
           </button>
@@ -17,7 +17,7 @@
             ref="pessoaJ"
             type="button"
             class="py-3 border-y border-r border-gray-400 px-12"
-            @click="change(pessoaJ)"
+            @click="change(pessoaJ, 'pessoaJ')"
           >
             Pessoa Juridica
           </button>
@@ -65,6 +65,7 @@ import DateInput from '@/components/FormUI/DateInput.vue';
 
 onMounted(() => {
   pessoaF.value.classList.add('active');
+  userStore.user.typePerson = 'pessoaF';
 });
 
 const pessoaF = ref(null);
@@ -76,8 +77,9 @@ const cleanRefs = () => {
   pessoaJ.value.classList.remove('active');
 };
 
-const change = (ref) => {
+const change = (ref, value) => {
   cleanRefs();
+  userStore.user.typePerson = value;
   ref.classList.add('active');
 };
 </script>

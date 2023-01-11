@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { axiosClientAPI, axiosLocalAPI } from "@/plugins/axios";
+import { axiosClientAPI, axiosLocalAPI } from '@/plugins/axios';
 import { useStorage } from '@vueuse/core';
 
 export const useUserStore = defineStore({
@@ -22,6 +22,7 @@ export const useUserStore = defineStore({
       email: null,
       password: null,
     },
+    termos: false,
     currentStep: 0,
     currentStepPayment: 0,
     user_logged: null,
@@ -29,20 +30,20 @@ export const useUserStore = defineStore({
     vooSelected: useStorage('vooSelected', {}),
   }),
   getters: {
-    outboundFlightOrigin(state){
-     return state.vooSelected.VoosIda[0]
+    outboundFlightOrigin(state) {
+      return state.vooSelected.VoosIda[0];
     },
-    outboundFlightDestination(state){
-      const cant_voos = state.vooSelected.VoosIda.length
-      return state.vooSelected.VoosIda[cant_voos - 1]
+    outboundFlightDestination(state) {
+      const cant_voos = state.vooSelected.VoosIda.length;
+      return state.vooSelected.VoosIda[cant_voos - 1];
     },
-    returnFlightOrigin(state){
-      return state.vooSelected.VoosVolta[0]
+    returnFlightOrigin(state) {
+      return state.vooSelected.VoosVolta[0];
     },
-    returnFlightDestination(state){
-      const cant_voos = state.vooSelected.VoosVolta.length
-      return state.vooSelected.VoosVolta[cant_voos - 1]
-    }
+    returnFlightDestination(state) {
+      const cant_voos = state.vooSelected.VoosVolta.length;
+      return state.vooSelected.VoosVolta[cant_voos - 1];
+    },
   },
   actions: {
     async login(payload) {
@@ -57,9 +58,9 @@ export const useUserStore = defineStore({
           console.error(error);
         });
     },
-    async register(payload) {
-      await axiosLocalAPI
-        .post('/v1/register', payload)
+    async register() {
+      await axiosClientAPI
+        .post('/v1/register', this.user)
         .then(({ data }) => {
           this.user_logged = data;
         })
@@ -68,7 +69,7 @@ export const useUserStore = defineStore({
         });
     },
     resetState() {
-     this.vooSelected = { }
+      this.vooSelected = {};
     },
   },
 });
