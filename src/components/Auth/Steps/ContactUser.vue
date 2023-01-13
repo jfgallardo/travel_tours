@@ -5,7 +5,7 @@
     >
       <div class="w-4/12">
         <TextInput
-          v-model="userStore.user.mainPhone"
+          v-model="auth.user.mainPhone"
           label="Telefone principal *"
           name="mainPhone"
         />
@@ -13,7 +13,7 @@
 
       <div class="w-4/12">
         <TextInput
-          v-model="userStore.user.alternativePhone"
+          v-model="auth.user.alternativePhone"
           label="Telefone alternativo"
           name="alternativePhone"
         />
@@ -24,9 +24,9 @@
 
 <script setup>
 import TextInput from '@/components/FormUI/TextInput.vue';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 
-const userStore = useUserStore();
+const auth = useAuthStore();
 </script>
 
 <style scoped></style>

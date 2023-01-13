@@ -10,7 +10,7 @@ export const axiosClientAPI = axios.create({
 });
 
 export const axiosLocalAPI = axios.create({
-  baseURL: 'http://127.0.0.1:8000',
+  baseURL: 'http://127.0.0.1:8000/api',
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -27,9 +27,9 @@ axiosClientAPI.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
+  ({response}) => {
     Toastify({
-      text: `Ops!! ${error.message}`,
+      text: `${response.data.message}`,
       duration: 4000,
       gravity: 'bottom',
       position: 'right',
@@ -42,6 +42,29 @@ axiosClientAPI.interceptors.response.use(
         y: '3em',
       },
     }).showToast();
-    return Promise.reject(error);
+    return Promise.reject(response.data);
+  }
+);
+
+axiosLocalAPI.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  ({response}) => {
+    Toastify({
+      text: `${response.data.message}`,
+      duration: 4000,
+      gravity: 'bottom',
+      position: 'right',
+      stopOnFocus: true,
+      style: {
+        background: 'linear-gradient(to right, #e40c10, #cd0b0e)',
+      },
+      offset: {
+        x: '2em',
+        y: '3em',
+      },
+    }).showToast();
+    return Promise.reject(response.data);
   }
 );

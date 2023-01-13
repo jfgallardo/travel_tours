@@ -8,7 +8,7 @@
           >Não sei meu CEP</a
         >
         <TextInput
-          v-model="userStore.user.cep"
+          v-model="auth.user.cep"
           label="CEP *"
           name="cep"
           maska="#####-###"
@@ -16,42 +16,42 @@
       </div>
       <div>
         <TextInput
-          v-model="userStore.user.bairro"
+          v-model="auth.user.bairro"
           label="Bairro *"
           name="bairro"
         />
       </div>
       <div>
         <TextInput
-          v-model="userStore.user.address"
+          v-model="auth.user.address"
           label="Endereço *"
           name="address"
         />
       </div>
       <div>
         <TextInput
-          v-model="userStore.user.estado"
+          v-model="auth.user.estado"
           label="Estado *"
           name="estado"
         />
       </div>
       <div>
         <TextInput
-          v-model="userStore.user.number"
+          v-model="auth.user.number"
           label="Número *"
           name="number"
         />
       </div>
       <div>
         <TextInput
-          v-model="userStore.user.ciudade"
+          v-model="auth.user.ciudade"
           label="Cidade *"
           name="ciudade"
         />
       </div>
       <div>
         <TextInput
-          v-model="userStore.user.complemento"
+          v-model="auth.user.complemento"
           label="Complemento *"
           name="complemento"
         />
@@ -61,11 +61,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 
-const userStore = useUserStore();
+const auth = useAuthStore();
 </script>
 
 <style scoped></style>

@@ -5,7 +5,7 @@
     >
       <div class="w-full">
         <DateInput
-            v-model="userStore.user.birthday"
+            v-model="auth.user.birthday"
             label="Data de Nacimento *"
             name="birthday"
         />
@@ -13,7 +13,7 @@
 
       <div class="w-full">
         <TextInput
-            v-model="userStore.user.birthday"
+            v-model="auth.user.birthday"
             label="Nome Completo *"
             name="birthday"
         />
@@ -29,7 +29,7 @@
 
       <div class="w-full">
         <TextInput
-            v-model="userStore.user.birthday"
+            v-model="auth.user.birthday"
             label="Codigo de Area"
             name="birthday"
         />
@@ -39,12 +39,12 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import SelectSimple from "@/components/FormUI/TheSelect.vue";
 
-const userStore = useUserStore();
+const auth = useAuthStore();
 
 
 </script>

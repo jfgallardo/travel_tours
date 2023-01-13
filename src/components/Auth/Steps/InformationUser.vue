@@ -31,7 +31,7 @@
 
       <div class="w-4/12">
         <TextInput
-          v-model="userStore.user.fullName"
+          v-model="auth.user.fullName"
           label="Nome completo *"
           name="fullName"
         />
@@ -39,7 +39,7 @@
 
       <div class="w-4/12">
         <TextInput
-          v-model="userStore.user.cpf"
+          v-model="auth.user.cpf"
           label="CPF *"
           maska="###.###.###-##"
           name="cpf"
@@ -48,7 +48,7 @@
 
       <div class="w-4/12">
         <DateInput
-          v-model="userStore.user.birthday"
+          v-model="auth.user.birthday"
           label="Data de Nascimento *"
           name="birthday"
         />
@@ -59,18 +59,19 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 
 onMounted(() => {
   pessoaF.value.classList.add('active');
-  userStore.user.typePerson = 'pessoaF';
+  auth.user.typePerson = 'pessoaF';
 });
 
 const pessoaF = ref(null);
 const pessoaJ = ref(null);
-const userStore = useUserStore();
+const auth = useAuthStore();
+
 
 const cleanRefs = () => {
   pessoaF.value.classList.remove('active');
@@ -79,7 +80,7 @@ const cleanRefs = () => {
 
 const change = (ref, value) => {
   cleanRefs();
-  userStore.user.typePerson = value;
+  auth.user.typePerson = value;
   ref.classList.add('active');
 };
 </script>
