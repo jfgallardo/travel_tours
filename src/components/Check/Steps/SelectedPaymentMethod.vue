@@ -3,17 +3,17 @@
     <div class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 pb-72 xl:w-1/3 w-1/2 ">
       <div class="w-full">
         <TextInput 
-          v-model="auth.user.fullName" 
+          v-model="auth.user.numberCard" 
           label="Numero de Cartão *" 
-          name="fullName"
+          name="number-card"
           maska="####-####-####-####" />
       </div>
 
       <div class="w-full">
         <TextInput 
-          v-model="auth.user.birthday" 
+          v-model="auth.user.support" 
           label="Suporte (Igual ao do cartão) *" 
-          name="birthday" />
+          name="support" />
       </div>
 
       <div class="w-full">
@@ -25,15 +25,17 @@
       </div>
 
       <div class="flex space-x-3.5 w-full">
-        <DateInput 
-          v-model="auth.user.birthday" 
+        <TextInput 
+          v-model="auth.user.expiration" 
           label="Data de Vencimento *" 
-          name="birthday" 
+          name="expiration"
+          maska="##/####"  
           class="w-1/2" />
         <TextInput 
-          v-model="auth.user.birthday" 
+          v-model="auth.user.cvc" 
           label="Codigo de Segurança" 
-          name="birthday" 
+          name="cvc"
+          maska="####" 
           class="w-1/2" />
       </div>
     </div>
@@ -43,7 +45,6 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth';
 import TextInput from '@/components/FormUI/TextInput.vue';
-import DateInput from '@/components/FormUI/DateInput.vue';
 
 const auth = useAuthStore();
 
