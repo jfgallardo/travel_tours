@@ -50,7 +50,7 @@
               cy="20"
           />
         </svg>
-        <span class="absolute text-xs">{{ userStore.currentStepPayment + 1 }}/5</span>
+        <span class="absolute text-xs">{{ auth.currentStepPayment + 1 }}/5</span>
       </div>
     </div>
   </div>
@@ -58,20 +58,20 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 
-const userStore = useUserStore();
+const auth = useAuthStore();
 
 const title = computed(() => {
-  if (userStore.currentStepPayment === 0) {
+  if (auth.currentStepPayment === 0) {
     return 'Com Pagar';
-  } else if (userStore.currentStepPayment === 1) {
+  } else if (auth.currentStepPayment === 1) {
     return 'Detalhes';
-  } else if (userStore.currentStepPayment === 2) {
+  } else if (auth.currentStepPayment === 2) {
     return 'Detalhes';
-  }else if (userStore.currentStepPayment === 3) {
+  }else if (auth.currentStepPayment === 3) {
     return 'Endereço de cobrança';
-  }else if (userStore.currentStepPayment === 4) {
+  }else if (auth.currentStepPayment === 4) {
     return 'Endereço de cobrança';
   }
   return 'Informações de acesso';
@@ -82,7 +82,7 @@ const circumference = computed(() => {
 });
 
 const percent = computed(() => {
-  return Math.round((userStore.currentStepPayment / 5) * 100);
+  return Math.round((auth.currentStepPayment / 5) * 100);
 });
 </script>
 

@@ -3,7 +3,7 @@
 <!-- mx-auto px-4 pt-10 pb-20 flex space-x-4   -->
     <div class="container mx-auto pt-4 md:pt-0 lg:px-4 lg:pt-10 lg:pb-20 lg:flex lg:space-x-4">
 <!-- w-1/4 h-5/6 overflow-y-auto fixed left-4 pb-10     -->
-        <div class="lg:w-1/4 lg:h-5/6 lg:overflow-y-auto lg:fixed lg:left-4 pb-10">
+        <div class="lg:w-1/3 lg:h-5/6 lg:overflow-y-auto lg:fixed lg:left-4 pb-10">
           <table class="table-fixed border-2 border-gray-200 w-full border-spacing-2 border-separate">
             <tbody>
             <tr>
@@ -247,7 +247,7 @@
           </table>
         </div>
 <!--  w-3/4 relative top-0 left-1/4 px-8    -->
-        <div class="lg:w-3/4 lg:relative lg:top-0 lg:left-1/4 lg:px-8">
+        <div class="lg:w-1/2 lg:relative lg:top-0 lg:left-1/3 lg:px-8">
           <RouterView />
         </div>
     </div>

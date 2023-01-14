@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 pb-72 xl:w-1/3 w-1/2 ">
+    <div class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 pb-72 w-1/2 md:w-auto ">
       <div class="w-full">
         <TextInput v-model="auth.user.birthday" label="Estado *" name="birthday" />
       </div>

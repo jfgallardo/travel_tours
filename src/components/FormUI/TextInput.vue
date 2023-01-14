@@ -16,6 +16,9 @@
       <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
         errorMessage
       }}</span>
+      <span v-if="textR" class="absolute right-0 top-0 bg-blue-700 text-white px-2 py-0.5 font-serif text-sm rounded-l-md opacity-80">
+        {{textR}}
+      </span>
     </div>
   </div>
 </template>
@@ -31,6 +34,7 @@ const props = defineProps({
   },
   name: {
     type: String,
+    default: ''
   },
   label: {
     type: String,
@@ -47,6 +51,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  textR: {
+    type: String,
+    default: ''
+  }
 });
 
 const nameRef = toRef(props, 'name');
