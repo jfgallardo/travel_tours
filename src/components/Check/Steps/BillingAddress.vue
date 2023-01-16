@@ -5,41 +5,41 @@
     >
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.postalCode"
             label="Codigo Postal *"
-            name="birthday"
+            name="postal-code"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.homeAddress"
             label="Morada *"
-            name="birthday"
+            name="home-address"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.homeNumber"
             label="Numero"
-            name="birthday"
+            name="home-number"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.homeComplement"
             label="Complemento"
-            name="birthday"
+            name="home-complement"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.homeDistrict"
             label="Bairro"
-            name="birthday"
+            name="home-district"
         />
       </div>
     </div>

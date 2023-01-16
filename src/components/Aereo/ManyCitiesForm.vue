@@ -1,8 +1,8 @@
 <template>
   <div class="mt-5">
     <div class="flex flex-col space-y-5">
-      <div class="flex items-center justify-between space-x-5 px-4">
-        <Dropddown :label="t('roundTripForm.labelPassageiros')" class="w-1/2">
+      <div class="flex flex-col space-y-3.5 px-4">
+        <Dropddown :label="t('roundTripForm.labelPassageiros')">
           <template #selected>
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
@@ -16,7 +16,7 @@
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
                 v-model="searchOptionsVooStore.adults"
-                subtitle="+16 anos"
+                subtitle="+12 anos"
                 :label="t('adults')"
                 @take-off="takeOff"
                 @add-up="addUp"
@@ -24,7 +24,7 @@
 
               <ManageItems
                 v-model="searchOptionsVooStore.teenagers"
-                subtitle="4-15 anos"
+                subtitle="2-11 anos"
                 :label="t('children')"
                 @take-off="takeOff"
                 @add-up="addUp"
@@ -32,7 +32,7 @@
 
               <ManageItems
                 v-model="searchOptionsVooStore.babies"
-                subtitle="1-3 anos"
+                subtitle="-2 anos"
                 :label="t('babies')"
                 @take-off="takeOff"
                 @add-up="addUp"
@@ -44,7 +44,6 @@
         </Dropddown>
 
         <Select
-          class="w-1/2"
           :label="t('roundTripForm.labelClassecabine')"
           :selected="searchOptionsVooStore.cabin"
           :options="options"
@@ -59,7 +58,7 @@
       <div class="flex flex-col space-y-2 px-4">
         <TransitionGroup name="list">
           <template v-for="(trecho, index) in multiplosTrechos" :key="index">
-            <div class="flex space-x-1 relative">
+            <div class="grid grid-cols-3 gap-2.5 relative">
               <AutoComplete
                 :label="t('roundTripForm.labelDesde')"
                 :value="trecho.origem.string"

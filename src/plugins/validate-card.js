@@ -81,7 +81,7 @@ export default function validateInfo(values) {
   }
 
   //Card Number Verification
-  if (values.cardNumber === null || !values.cardNumber.trim()) {
+  if (values.cardNumber === null || !values.cardNumber) {
     errors.message = 'Credit card number is not complete';
     errors.niceType = creditCard.card?.niceType;
   } else if (creditCard.isValid) {

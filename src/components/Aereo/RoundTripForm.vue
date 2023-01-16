@@ -102,7 +102,7 @@
             <div class="flex items-center space-x-10 px-4">
               <ManageItems
                 v-model="searchOptionsVoo.adults"
-                subtitle="+16 anos"
+                subtitle="+12 anos"
                 :label="t('adults')"
                 @take-off="takeOff"
                 @add-up="addUp"
@@ -110,7 +110,7 @@
 
               <ManageItems
                 v-model="searchOptionsVoo.teenagers"
-                subtitle="4-15 anos"
+                subtitle="2-11 anos"
                 :label="t('children')"
                 @take-off="takeOff"
                 @add-up="addUp"
@@ -118,7 +118,7 @@
 
               <ManageItems
                 v-model="searchOptionsVoo.babies"
-                subtitle="1-3 anos"
+                subtitle="-2 anos"
                 :label="t('babies')"
                 @take-off="takeOff"
                 @add-up="addUp"

@@ -2,11 +2,11 @@
   <div>
     <div class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 pb-72 w-1/2 md:w-auto ">
       <div class="w-full">
-        <TextInput v-model="auth.user.birthday" label="Estado *" name="birthday" />
+        <TextInput v-model="auth.dataBuy.homeState" label="Estado *" name="home-state" />
       </div>
 
       <div class="w-full">
-        <TextInput v-model="auth.user.birthday" label="Ciudade *" name="birthday" />
+        <TextInput v-model="auth.dataBuy.homeCity" label="Ciudade *" name="home-city" />
       </div>
 
       <div class="w-full">

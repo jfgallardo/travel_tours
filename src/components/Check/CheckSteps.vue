@@ -4,7 +4,6 @@
       <KeepAlive>
         <component
           :is="selectedComponent"
-          @credit-card="cardInvalid = $event"
         ></component>
       </KeepAlive>
     </div>
@@ -19,8 +18,8 @@
       </button>
       <button
         v-if="auth.currentStepPayment !== 4"
-        :disabled="cardInvalid"
         type="submit"
+        :disabled="!auth.card.isValidFront && auth.currentStepPayment === 1"
         class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-400 disabled:cursor-not-allowed"
         @click="nextStep"
       >
@@ -46,15 +45,13 @@ import { useForm } from 'vee-validate';
 import PaymentDetails from '@/components/Check/Steps/PaymentDetails.vue';
 import BillingAddress from '@/components/Check/Steps/BillingAddress.vue';
 import FinalStep from '@/components/Check/Steps/FinalStep.vue';
+import { simpleSchemaBuy } from "@/utils/validate";
 
 onMounted(() => {
   selectedComponent.value = markRaw(PaymentMethod);
 });
 
 const auth = useAuthStore();
-const selectedComponent = ref(null);
-const { handleSubmit } = useForm({});
-const cardInvalid = ref(false);
 
 const steps = [
   { component: PaymentMethod },
@@ -63,16 +60,32 @@ const steps = [
   { component: BillingAddress },
   { component: FinalStep },
 ];
+const selectedComponent = ref(null);
 
-const nextStep = handleSubmit(() => {
-  auth.currentStepPayment++;
+const { handleSubmit, setFieldError } = useForm({
+  validationSchema: simpleSchemaBuy
+});
+
+const nextStep = handleSubmit((values) => {
+  if (auth.currentStepPayment === 0){
+    auth.currentStepPayment++;
+  } else if(auth.currentStepPayment === 1) {
+    if (!auth.card.isValidFront) {
+    return;
+    } else if(!values.cpf) {
+      setFieldError('number-cpf', 'CPF é obrigatório');
+    } else {
+      auth.currentStepPayment++;
+    }
+  }
+
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
 });
 const backStep = () => {
   if (auth.currentStepPayment >= 1 && auth.currentStepPayment <= 5) {
-    cardInvalid.value = false;
     auth.currentStepPayment--;
   }
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
 };
+
 </script>

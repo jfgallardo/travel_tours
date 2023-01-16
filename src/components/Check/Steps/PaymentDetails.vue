@@ -5,7 +5,7 @@
     >
       <div class="w-full">
         <DateInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.birthday"
             label="Data de Nacimento *"
             name="birthday"
         />
@@ -13,9 +13,9 @@
 
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.nameBuy"
             label="Nome Completo *"
-            name="birthday"
+            name="name-buy"
         />
       </div>
 
@@ -29,9 +29,9 @@
 
       <div class="w-full">
         <TextInput
-            v-model="auth.user.birthday"
+            v-model="auth.dataBuy.codeArea"
             label="Codigo de Area"
-            name="birthday"
+            name="code-area"
         />
       </div>
     </div>

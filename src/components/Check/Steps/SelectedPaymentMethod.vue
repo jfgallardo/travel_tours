@@ -26,7 +26,7 @@
           v-model="auth.card.cpfUserCard"
           label="CPF *"
           maska="###.###.###-##"
-          name="cpf"
+          name="number-cpf"
         />
       </div>
 
@@ -35,7 +35,7 @@
           v-model="auth.card.cardExpiration"
           label="Data de Vencimento *"
           name="expiration"
-          maska="##/####"
+          maska="##/##"
           class="w-1/2"
         />
         <TextInput
@@ -54,16 +54,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import validateInfo from '@/plugins/validate-card';
-
-const emit = defineEmits(['creditCard']);
-
-onMounted(() => {
-  emit('creditCard', true);
-});
 
 const auth = useAuthStore();
 const creditCardMessage = ref();
@@ -83,6 +77,7 @@ watch(auth.card, (newValue) => {
   creditCardMessage.value = creditCard.message;
   creditCardNiceType.value = creditCard.niceType;
   creditCardVariant.value = creditCard.variant;
+  auth.card.isValidFront = creditCard.variant === "bg-green-400"
 });
 </script>
 
