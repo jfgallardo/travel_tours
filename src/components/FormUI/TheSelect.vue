@@ -18,7 +18,7 @@
             <div
               v-if="hiddenDropdown"
               v-click-outside
-              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-30 w-full"
+              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-30 w-full max-h-60 overflow-y-auto"
             >
               <ul>
                 <li
@@ -51,7 +51,12 @@ const dropdownP = ref(null);
 const props = defineProps({
   options: {
     type: Array,
-    default: () => [],
+    default: () => [
+      {
+        label: 'Thinking...',
+        value: 0,
+      },
+    ],
   },
   label: {
     type: String,
@@ -85,9 +90,11 @@ const clickOutListener = (evt) => {
 };
 
 const hide = (value) => {
-  selected.value = value;
-  emit('selectValue', value);
-  hiddenDropdown.value = false;
+  if (value) {
+    selected.value = value;
+    emit('selectValue', value);
+    hiddenDropdown.value = false;
+  }
 };
 </script>
 

@@ -6,40 +6,40 @@
       <div class="w-full">
         <TextInput
             v-model="auth.dataBuy.postalCode"
-            label="Codigo Postal *"
-            name="postal-code"
+            label="CEP *"
+            name="cep"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.dataBuy.homeAddress"
+            v-model="auth.dataBuy.address"
             label="Morada *"
-            name="home-address"
+            name="address"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.dataBuy.homeNumber"
+            v-model="auth.dataBuy.number"
             label="Numero"
-            name="home-number"
+            name="number"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.dataBuy.homeComplement"
+            v-model="auth.dataBuy.complement"
             label="Complemento"
-            name="home-complement"
+            name="complement"
         />
       </div>
 
       <div class="w-full">
         <TextInput
-            v-model="auth.dataBuy.homeDistrict"
+            v-model="auth.dataBuy.district"
             label="Bairro"
-            name="home-district"
+            name="district"
         />
       </div>
     </div>

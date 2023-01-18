@@ -48,7 +48,7 @@ import FinalStep from '@/components/Check/Steps/FinalStep.vue';
 import { simpleSchemaBuy } from "@/utils/validate";
 
 onMounted(() => {
-  selectedComponent.value = markRaw(PaymentMethod);
+  selectedComponent.value = markRaw(FinalStep);
 });
 
 const auth = useAuthStore();
@@ -62,7 +62,7 @@ const steps = [
 ];
 const selectedComponent = ref(null);
 
-const { handleSubmit, setFieldError } = useForm({
+const { handleSubmit, setFieldError, errors } = useForm({
   validationSchema: simpleSchemaBuy
 });
 
@@ -72,8 +72,33 @@ const nextStep = handleSubmit((values) => {
   } else if(auth.currentStepPayment === 1) {
     if (!auth.card.isValidFront) {
     return;
-    } else if(!values.cpf) {
+    } else if(!values['number-cpf']) {
       setFieldError('number-cpf', 'CPF é obrigatório');
+    } else {
+      auth.currentStepPayment++;
+    }
+  } else if(auth.currentStepPayment === 2){
+    if(!values.birthday) {
+      setFieldError('birthday', 'Birthday é obrigatório');
+    } else if(!values['name-buy']){
+      setFieldError('name-buy', 'Name é obrigatório');
+    } else {
+      auth.currentStepPayment++;
+    }
+  }
+  else if(auth.currentStepPayment === 3){
+    if(!values.cep) {
+      setFieldError('cep', 'CEP é obrigatório');
+    } else if(!values.address){
+      setFieldError('address', 'address é obrigatório');
+    } else {
+      auth.currentStepPayment++;
+    }
+  }else if(auth.currentStepPayment === 4){
+    if(!values.state) {
+      setFieldError('state', 'State é obrigatório');
+    } else if(!values.address){
+      setFieldError('city', 'City é obrigatório');
     } else {
       auth.currentStepPayment++;
     }
@@ -83,6 +108,7 @@ const nextStep = handleSubmit((values) => {
 });
 const backStep = () => {
   if (auth.currentStepPayment >= 1 && auth.currentStepPayment <= 5) {
+    if (Object.keys(errors.value).length > 0) return
     auth.currentStepPayment--;
   }
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
