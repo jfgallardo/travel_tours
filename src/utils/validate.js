@@ -88,4 +88,7 @@ export const simpleSchemaBuy = object({
   'number-cpf': string().matches(/^\d{3}[.]\d{3}[.]\d{3}[-]\d{2}$/, {
     message: 'Invalid CPF',
   }),
+  cep: string()
+    .matches(/^\d{5}[-]\d{3}$/, { message: 'Invalid CEP' })
+    .label('CEP'),
 });

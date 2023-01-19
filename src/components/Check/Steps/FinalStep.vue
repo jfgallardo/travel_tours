@@ -4,7 +4,6 @@
       class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 pb-72 w-1/2 md:w-auto"
     >
       <div class="w-full">
-        <!--        <TextInput v-model="auth.dataBuy.state" label="Estado *" name="state" />-->
         <TheSelect
           label="Estado *"
           :options="states"
@@ -13,7 +12,6 @@
       </div>
 
       <div class="w-full">
-        <!--        <TextInput v-model="auth.dataBuy.city" label="Ciudade *" name="city" />-->
         <TheSelect
           label="Ciudade *"
           :options="cities"
@@ -108,7 +106,7 @@ const getStates = async () => {
     .then((data) => {
       states.value = data
         .map((o) => ({
-          label: `${o.nome}/${o.sigla}`,
+          label: `${o.nome} / ${o.sigla}`,
           value: o.sigla,
         }))
         .sort((a, b) => {

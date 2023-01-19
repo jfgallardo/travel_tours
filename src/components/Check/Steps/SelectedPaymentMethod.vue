@@ -5,11 +5,11 @@
     >
       <div class="w-full">
         <TextInput
-          v-model="auth.card.numberCard"
+          v-model="auth.card.cardNumber"
           label="Numero de Cartão *"
           name="number-card"
           maska="#### #### #### ####"
-          :text-r="creditCardNiceType"
+          :text-r="auth.card.cardType"
         />
       </div>
 
@@ -61,21 +61,19 @@ import validateInfo from '@/plugins/validate-card';
 
 const auth = useAuthStore();
 const creditCardMessage = ref();
-const creditCardNiceType = ref();
 const creditCardVariant = ref();
 
 watch(auth.card, (newValue) => {
   const values = {
-    cardNumber: newValue.numberCard,
-    cardType: newValue.cardType,
+    cardNumber: newValue.cardNumber,
     cardExpiration: newValue.cardExpiration,
     cardSecurityCode: newValue.cardSecurityCode,
-    cardPostalCode: newValue.cardPostalCode,
     cardName: newValue.cardName,
   };
   let creditCard = validateInfo(values);
+  console.log(creditCard);
   creditCardMessage.value = creditCard.message;
-  creditCardNiceType.value = creditCard.niceType;
+  auth.card.cardType = creditCard.niceType;
   creditCardVariant.value = creditCard.variant;
   auth.card.isValidFront = creditCard.variant === "bg-green-400"
 });

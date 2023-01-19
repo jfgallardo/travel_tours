@@ -28,7 +28,6 @@ export const useAuthStore = defineStore({
       cardType: '',
       cardExpiration: '',
       cardSecurityCode: '',
-      cardPostalCode: '',
       cardName: '',
       cpfUserCard: '',
       isValidFront: false,

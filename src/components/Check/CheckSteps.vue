@@ -48,7 +48,7 @@ import FinalStep from '@/components/Check/Steps/FinalStep.vue';
 import { simpleSchemaBuy } from "@/utils/validate";
 
 onMounted(() => {
-  selectedComponent.value = markRaw(FinalStep);
+  selectedComponent.value = markRaw(PaymentMethod);
 });
 
 const auth = useAuthStore();
