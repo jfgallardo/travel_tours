@@ -2,18 +2,20 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
 const LayoutAuth = () => import('@/layouts/LayoutAuth.vue');
+
+const LayoutTwoViews = () => import('@/layouts/LayoutTwoViews.vue');
 const LandingPage = () => import('@/views/LandingPage.vue');
 
 const AereoHomePage = () => import('@/views/Aereo/HomePage.vue');
 const AereoLandingPage = () => import('@/views/Aereo/LandingPage.vue');
 const VoosIdaVolta = () => import('@/views/Aereo/VoosIdaVolta.vue');
 const PreCheckoutPage = () => import('@/views/Purchase/PreCheckoutPage.vue');
-const CheckoutPage = () => import('@/views/Purchase/CheckoutPage.vue')
-const CheckPage = () => import('@/views/Check/CheckPage.vue')
-const PurchaseFormPage = () => import("@/views/Purchase/PurchaseFormPage.vue")
+const CheckoutPage = () => import('@/views/Purchase/CheckoutPage.vue');
+const CheckPage = () => import('@/views/Check/CheckPage.vue');
+const PurchaseFormPage = () => import('@/views/Purchase/PurchaseFormPage.vue');
 const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
-const HotelsResults = () => import('@/views/Hotel/HotelsResults.vue')
+const HotelsResults = () => import('@/views/Hotel/HotelsResults.vue');
 
 const CruiseHomePage = () => import('@/views/Cruceros/HomePage.vue');
 const CruiseLandingPage = () => import('@/views/Cruceros/LandingPage.vue');
@@ -43,10 +45,16 @@ const scrollBehavior = (to, from, savedPosition) => {
   });
 };
 
+const twoViews = {
+  path: '/two',
+  component: LayoutTwoViews,
+};
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior,
   routes: [
+    twoViews,
     {
       path: '/signIn',
       component: LayoutAuth,
@@ -86,16 +94,16 @@ const router = createRouter({
           path: 'precheckout/:id?',
           name: 'PreCheckoutPage',
           component: PreCheckoutPage,
-          props: true
+          props: true,
         },
         {
           path: 'checkout',
           name: 'CheckoutPage',
           component: CheckoutPage,
           children: [
-            { path: '', name: 'PurchaseFormPage', component: PurchaseFormPage},
+            { path: '', name: 'PurchaseFormPage', component: PurchaseFormPage },
             { path: 'finish-payment', name: 'CheckPage', component: CheckPage },
-          ]
+          ],
         },
         {
           path: '/hotel',
@@ -103,7 +111,7 @@ const router = createRouter({
           component: HotelHomePage,
           children: [
             { path: '', name: 'HotelLandingPage', component: HotelLandingPage },
-            { path: 'search', name: 'HotelsResults', component: HotelsResults}
+            { path: 'search', name: 'HotelsResults', component: HotelsResults },
           ],
         },
         {

@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header />
-
     <router-view v-slot="{ Component }">
       <transition mode="out-in">
         <div>
