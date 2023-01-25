@@ -2,7 +2,7 @@
   <LayoutTwoViews>
     <template #aside>
       <div class="border-r border-gray-300 pt-8">
-        <div class="grid grid-cols-3 grid-rows-1 px-4">
+        <div class="grid grid-cols-3 grid-rows-1 px-8 ">
           <button
             ref="roundtrip"
             class="py-3 border border-gray-400"

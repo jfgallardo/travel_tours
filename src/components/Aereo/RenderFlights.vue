@@ -1,7 +1,8 @@
 <template>
   <div>
       <div class="border-l-0 py-5 md:px-3">
-        <div class="flex justify-center items-center space-x-8 sm:space-x-20 lg:space-x-10 2xl:justify-around">
+<!--   flex justify-center items-center space-x-8 sm:space-x-20 lg:space-x-10 2xl:justify-around     -->
+        <div class="flex items-center justify-around">
           <teleport v-if="width < 768 && !suspense" :to="`#${keyId}Picture`">
             <div class="flex items-center space-x-3 ">
               <img :src="initVoo.Icone" />
@@ -37,8 +38,8 @@
           <div>
             <div class="flex flex-col items-center space-y-2">
               <div class="text-gray-700 flex flex-col 2xl:flex-row 2xl:space-x-2.5 items-center">
-                <p class="text-gray-400">Duration: </p>
-                <p class="font-medium text-sm md:w-20">{{ Duracao }}</p>
+                <p class="text-gray-400 text-center">Duration: </p>
+                <p class="font-medium text-sm">{{ Duracao }}</p>
               </div>
               <div>
                 <img

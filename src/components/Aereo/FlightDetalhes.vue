@@ -30,7 +30,7 @@
           </p>
         </div>
       </div>
-      <div class="flex justify-center">
+      <div class="flex justify-center mb-10 -mt-4 lg:mt-0">
         <qrcode-vue :size="110" :value="value"></qrcode-vue>
       </div>
       <div>

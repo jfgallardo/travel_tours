@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
 const LayoutAuth = () => import('@/layouts/LayoutAuth.vue');
-
-const LayoutTwoViews = () => import('@/layouts/LayoutTwoViews.vue');
 const LandingPage = () => import('@/views/LandingPage.vue');
 
 const AereoHomePage = () => import('@/views/Aereo/HomePage.vue');
@@ -45,16 +43,10 @@ const scrollBehavior = (to, from, savedPosition) => {
   });
 };
 
-const twoViews = {
-  path: '/two',
-  component: LayoutTwoViews,
-};
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior,
   routes: [
-    twoViews,
     {
       path: '/signIn',
       component: LayoutAuth,
