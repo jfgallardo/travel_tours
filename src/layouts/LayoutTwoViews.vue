@@ -1,15 +1,19 @@
 <template>
   <Header />
+<!-- flex min-h-screen flex-col lg:flex-row bg-white text-gray-800 absolute w-full -->
   <div
-    class="flex min-h-screen flex-col lg:flex-row bg-white text-gray-800 absolute w-full"
+    class="lg:flex lg:flex-row lg:justify-between"
   >
-    <aside
-      class="transform bg-white transition-transform duration-150 ease-in lg:fixed lg:z-10 lg:max-w-sm xl:max-w-md"
-      :class="[
+<!--    transform bg-white transition-transform duration-150 ease-in lg:fixed lg:z-10 lg:max-w-sm xl:max-w-md
+  :class="[
         open
           ? 'translate-y-0 lg:translate-x-0'
           : 'hidden lg:flex lg:-translate-x-full',
       ]"
+-->
+    <aside
+      class="lg:basis-2/6"
+      :class="{'hidden' : !open}"
     >
       <slot name="aside"></slot>
       <button
@@ -51,11 +55,13 @@
         </svg>
       </button>
     </aside>
+<!--   flex w-full flex-col transition-all duration-150 ease-in lg:relative -->
+<!--   :class="[open ? 'mt-0 lg:ml-0 lg:inset-x-[38%] xl:inset-x-[35%] 2xl:inset-x-[30%] lg:max-w-screen-sm xl:max-w-screen-md 2xl:max-w-screen-lg' : 'lg:px-20 xl:px-1.5']"   -->
     <main
-      class="flex w-full flex-col transition-all duration-150 ease-in lg:relative"
-      :class="[open ? 'mt-0 lg:ml-0 lg:inset-x-[38%] xl:inset-x-[35%] 2xl:inset-x-[30%] lg:max-w-screen-sm xl:max-w-screen-md 2xl:max-w-screen-lg' : 'lg:px-20 xl:px-1.5']"
+      class="lg:basis-4/6 lg:max-w-screen-sm xl:max-w-screen-lg 2xl:max-w-screen-xl"
     >
-      <div class="flex flex-col bg-white p-4">
+<!--     flex flex-col bg-white p-4 -->
+      <div class="">
         <slot name="main"></slot>
       </div>
     </main>

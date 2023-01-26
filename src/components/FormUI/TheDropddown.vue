@@ -17,7 +17,7 @@
             <slot name="selected"></slot>
           </button>
           <Transition name="fade">
-            <div ref="dropdown" v-click-outside class="dropdownMenu">
+            <div ref="dropdown" v-click-outside class="dropdownMenu w-full">
               <slot name="dropdown"></slot>
               <div class="divide-x"></div>
             </div>

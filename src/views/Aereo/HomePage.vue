@@ -1,11 +1,11 @@
 <template>
   <LayoutTwoViews>
     <template #aside>
-      <div class="border-r border-gray-300 pt-8">
-        <div class="grid grid-cols-3 grid-rows-1 px-8 ">
+      <div class="lg:border-r lg:border-gray-300 pt-8">
+        <div class="grid grid-cols-3">
           <button
             ref="roundtrip"
-            class="py-3 border border-gray-400"
+            class="py-3 border border-gray-400 lg:border-l-0"
             @click="changeTab(RoundTrip, roundtrip)"
           >
             {{ t('aereoHomePage.titleRoundTrip') }}
@@ -19,7 +19,7 @@
           </button>
           <button
             ref="manycities"
-            class="py-3 border border-gray-400"
+            class="py-3 px-1.5 border border-gray-400 lg:border-r-0"
             @click="changeTab(ManyCities, manycities)"
           >
             {{ t('aereoHomePage.titleManyCities') }}

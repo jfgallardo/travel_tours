@@ -13,7 +13,7 @@
             </div>
           </template>
           <template #dropdown>
-            <div class="flex items-center space-x-10 px-4">
+            <div class="flex items-center justify-between">
               <ManageItems
                 v-model="searchOptionsVooStore.adults"
                 subtitle="+12 anos"
@@ -58,7 +58,7 @@
       <div class="flex flex-col space-y-2 px-4">
         <TransitionGroup name="list">
           <template v-for="(trecho, index) in multiplosTrechos" :key="index">
-            <div class="grid grid-cols-3 gap-2.5 relative">
+            <div class="grid gap-2.5 relative">
               <AutoComplete
                 :label="t('roundTripForm.labelDesde')"
                 :value="trecho.origem.string"
@@ -131,9 +131,9 @@
           <span>{{ t('roundTripForm.pesquisarVoos') }}</span>
           <div
             v-if="moblixStore.loading"
-            class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
+            class="absolute right-2 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
           ></div>
-          <ArrowRight v-else fill-color="white" class="absolute right-10" />
+          <ArrowRight v-else fill-color="white" class="absolute right-2" />
         </button>
       </div>
     </div>

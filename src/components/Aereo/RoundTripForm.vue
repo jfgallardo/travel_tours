@@ -99,7 +99,7 @@
             </div>
           </template>
           <template #dropdown>
-            <div class="flex items-center space-x-10 px-4">
+            <div class="flex items-center justify-between">
               <ManageItems
                 v-model="searchOptionsVoo.adults"
                 subtitle="+12 anos"

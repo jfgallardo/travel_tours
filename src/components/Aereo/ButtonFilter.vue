@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 grid-rows-1 w-full">
+    <div class="grid grid-cols-3 w-full">
       <button
         ref="cheap"
         class="py-3 border border-gray-400 relative"
