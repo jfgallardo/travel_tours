@@ -1,7 +1,7 @@
 <template>
   <LayoutTwoViews>
     <template #aside>
-      <div class="lg:border-r lg:border-gray-300 pt-8">
+      <div class="lg:border-r lg:border-gray-300">
         <div class="grid grid-cols-3">
           <button
             ref="roundtrip"

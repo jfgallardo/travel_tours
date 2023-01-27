@@ -70,11 +70,12 @@
         />
       </div>
 
-      <div class="grid pt-4 px-4">
+      <div class="flex pt-4 px-4">
         <DateInput
           v-model="searchOptionsVooStore.dateOfDeparture"
           :label="t('roundTripForm.labelIda')"
           :min-date-show="new Date()"
+          class="w-full"
         />
       </div>
 

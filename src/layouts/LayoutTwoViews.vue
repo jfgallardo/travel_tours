@@ -1,67 +1,14 @@
 <template>
   <Header />
-<!-- flex min-h-screen flex-col lg:flex-row bg-white text-gray-800 absolute w-full -->
-  <div
-    class="lg:flex lg:flex-row lg:justify-between"
-  >
-<!--    transform bg-white transition-transform duration-150 ease-in lg:fixed lg:z-10 lg:max-w-sm xl:max-w-md
-  :class="[
-        open
-          ? 'translate-y-0 lg:translate-x-0'
-          : 'hidden lg:flex lg:-translate-x-full',
-      ]"
--->
-    <aside
-      class="lg:basis-2/6"
-      :class="{'hidden' : !open}"
-    >
-      <slot name="aside"></slot>
-      <button
-        type="button"
-        class="rounded-md text-gray-300 hover:text-black absolute top-10 -right-4 z-10 hidden lg:block"
-        @click="open = !open"
-      >
-        <span class="sr-only">Close panel</span>
-        <svg
-          v-if="open"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="white"
-          viewBox="0 0 24 24"
-          stroke-width="1"
-          stroke="gray"
-          class="w-9 h-9"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-          />
-        </svg>
+  <div class="lg:grid lg:grid-cols-3">
+     <aside :class="{ hidden: !open }">
+       <div class="lg:w-96 lg:h-5/6 lg:overflow-y-auto lg:fixed lg:left-0 lg:pb-10">
+         <slot name="aside"></slot>
+       </div>
+     </aside>
 
-        <svg
-          v-else
-          xmlns="http://www.w3.org/2000/svg"
-          fill="white"
-          viewBox="0 0 24 24"
-          stroke-width="1"
-          stroke="gray"
-          class="w-9 h-9"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-          />
-        </svg>
-      </button>
-    </aside>
-<!--   flex w-full flex-col transition-all duration-150 ease-in lg:relative -->
-<!--   :class="[open ? 'mt-0 lg:ml-0 lg:inset-x-[38%] xl:inset-x-[35%] 2xl:inset-x-[30%] lg:max-w-screen-sm xl:max-w-screen-md 2xl:max-w-screen-lg' : 'lg:px-20 xl:px-1.5']"   -->
-    <main
-      class="lg:basis-4/6 lg:max-w-screen-sm xl:max-w-screen-lg 2xl:max-w-screen-xl"
-    >
-<!--     flex flex-col bg-white p-4 -->
-      <div class="">
+    <main class="lg:col-span-2 lg:pl-3.5">
+      <div>
         <slot name="main"></slot>
       </div>
     </main>
@@ -185,5 +132,9 @@ const open = ref(true);
 .slide-up-leave-to {
   opacity: 0;
   transform: translateY(-30px);
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
 }
 </style>
