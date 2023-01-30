@@ -1,13 +1,11 @@
 <template>
   <Header />
   <div class="lg:grid lg:grid-cols-3">
-     <aside :class="{ hidden: !open }">
-       <div class="lg:w-96 lg:h-5/6 lg:overflow-y-auto lg:fixed lg:left-0 lg:pb-10">
-         <slot name="aside"></slot>
-       </div>
-     </aside>
+    <aside :class="{ hidden: !open }" class="lg:border-r lg:border-gray-300 lg:h-screen lg:overflow-y-auto lg:pb-11">
+      <slot name="aside"></slot>
+    </aside>
 
-    <main class="lg:col-span-2 lg:pl-3.5">
+    <main class="lg:col-span-2 lg:h-screen lg:overflow-y-auto">
       <div>
         <slot name="main"></slot>
       </div>
@@ -134,7 +132,23 @@ const open = ref(true);
   transform: translateY(-30px);
 }
 
+/* width */
 ::-webkit-scrollbar {
-  -webkit-appearance: none;
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>

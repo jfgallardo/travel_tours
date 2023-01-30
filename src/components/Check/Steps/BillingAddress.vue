@@ -1,14 +1,31 @@
 <template>
   <div>
     <div
-      class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 pb-72 w-1/2 md:w-auto"
+      class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 w-1/2 md:w-auto"
     >
-      <div class="w-full">
+      <div class="w-full flex space-x-2.5">
         <TextInput
           v-model="auth.dataBuy.cep"
           label="CEP *"
           name="cep"
           maska="#####-###"
+          class="w-1/2"
+        />
+
+        <TextInput
+          v-model="auth.dataBuy.state"
+          label="Estado *"
+          class="w-1/2"
+          name="state"
+          disable-field
+        />
+
+        <TextInput
+          v-model="auth.dataBuy.city"
+          label="Ciudade *"
+          class="w-1/2"
+          name="city"
+          disable-field
         />
       </div>
 
@@ -63,8 +80,14 @@ const verifyCEP = async () => {
     .then((data) => {
       if (!data.cep) {
         console.log('CEP INCORRECTO');
+        auth.dataBuy.state = '';
+        auth.dataBuy.city = '';
+        auth.dataBuy.address = '';
       } else {
         console.log('Correcto', data);
+        auth.dataBuy.state = data.state;
+        auth.dataBuy.city = data.city;
+        auth.dataBuy.address = `${data.neighborhood || ''} ${data.street || ''}`
       }
     });
 };

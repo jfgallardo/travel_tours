@@ -1,6 +1,6 @@
 <template>
   <div class="pb-20">
-    <div class="py-8">
+    <div class="">
       <ButtonFilter :loading="woobaStore.loading" />
     </div>
     <div v-if="woobaStore.loading">

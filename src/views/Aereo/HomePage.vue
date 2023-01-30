@@ -1,35 +1,33 @@
 <template>
   <LayoutTwoViews>
     <template #aside>
-      <div class="lg:border-r lg:border-gray-300">
-        <div class="grid grid-cols-3">
-          <button
-            ref="roundtrip"
-            class="py-3 border border-gray-400 lg:border-l-0"
-            @click="changeTab(RoundTrip, roundtrip)"
-          >
-            {{ t('aereoHomePage.titleRoundTrip') }}
-          </button>
-          <button
-            ref="go"
-            class="py-3 border-y border-gray-400"
-            @click="changeTab(OneWay, go)"
-          >
-            {{ t('aereoHomePage.titleOneWay') }}
-          </button>
-          <button
-            ref="manycities"
-            class="py-3 px-1.5 border border-gray-400 lg:border-r-0"
-            @click="changeTab(ManyCities, manycities)"
-          >
-            {{ t('aereoHomePage.titleManyCities') }}
-          </button>
-        </div>
-        <div>
-          <transition name="fade" mode="out-in">
-            <component :is="selectedComponent"></component>
-          </transition>
-        </div>
+      <div class="flex items-center justify-around">
+        <button
+          ref="roundtrip"
+          class="py-3 w-full border border-gray-400 lg:border-l-0"
+          @click="changeTab(RoundTrip, roundtrip)"
+        >
+          {{ t('aereoHomePage.titleRoundTrip') }}
+        </button>
+        <button
+          ref="go"
+          class="py-3 w-full border-y border-gray-400"
+          @click="changeTab(OneWay, go)"
+        >
+          {{ t('aereoHomePage.titleOneWay') }}
+        </button>
+        <button
+          ref="manycities"
+          class="py-3 px-1.5 w-full border border-gray-400 lg:border-r-0"
+          @click="changeTab(ManyCities, manycities)"
+        >
+          {{ t('aereoHomePage.titleManyCities') }}
+        </button>
+      </div>
+      <div>
+        <transition name="fade" mode="out-in">
+          <component :is="selectedComponent"></component>
+        </transition>
       </div>
     </template>
 
@@ -37,7 +35,6 @@
       <RouterView />
     </template>
   </LayoutTwoViews>
-
 </template>
 
 <script setup>
@@ -47,7 +44,7 @@ import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
 import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
 import OneWay from '@/components/Aereo/OneWayForm.vue';
 import { useI18n } from 'vue-i18n';
-import LayoutTwoViews from "@/layouts/LayoutTwoViews.vue";
+import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
 
 onMounted(() => {
   selectedComponent.value = markRaw(RoundTrip);

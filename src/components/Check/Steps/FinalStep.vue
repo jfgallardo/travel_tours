@@ -4,22 +4,6 @@
       class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 pb-72 w-1/2 md:w-auto"
     >
       <div class="w-full">
-        <TheSelect
-          label="Estado *"
-          :options="states"
-          @select-value="auth.dataBuy.state = $event.value"
-        />
-      </div>
-
-      <div class="w-full">
-        <TheSelect
-          label="Ciudade *"
-          :options="cities"
-          @select-value="auth.dataBuy.city = $event.value"
-        />
-      </div>
-
-      <div class="w-full">
         <NumberParcelsToPay />
       </div>
 
@@ -46,28 +30,12 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/auth';
 //import TextInput from '@/components/FormUI/TextInput.vue';
 import NumberParcelsToPay from '@/components/Check/NumberParcelsToPay.vue';
 import TextArea from '@/components/FormUI/TextArea.vue';
 import CheckInput from '@/components/FormUI/CheckInput.vue';
-import TheSelect from '@/components/FormUI/TheSelect.vue';
-import { onMounted, ref, watch } from 'vue';
 
-onMounted(() => {
-  getStates();
-});
-
-const auth = useAuthStore();
-const states = ref([]);
-const cities = ref([
-  {
-    label: 'Thinking...',
-    value: 0,
-  },
-]);
-
-watch(
+/*watch(
   () => auth.dataBuy.state,
   async (newStates) => {
     cities.value = [
@@ -98,9 +66,9 @@ watch(
       }
     }
   }
-);
+);*/
 
-const getStates = async () => {
+/*const getStates = async () => {
   await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
     .then((response) => response.json())
     .then((data) => {
@@ -119,7 +87,7 @@ const getStates = async () => {
           return 0;
         });
     });
-};
+};*/
 </script>
 
 <style scoped></style>

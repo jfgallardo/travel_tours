@@ -1,6 +1,6 @@
 <template>
   <form>
-    <div class="border-b border-gray-700 h-[32rem]">
+    <div class="h-[32rem] px-20">
       <KeepAlive>
         <component
           :is="selectedComponent"
