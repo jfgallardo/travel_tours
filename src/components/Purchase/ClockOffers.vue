@@ -1,5 +1,5 @@
 <template>
-  <!--  <div>
+  <div v-if="small">
     <div
       class="bg-gray-200 rounded-full text-blue-700 px-2.5 text-xs font-medium h-9 md:h-8 flex items-center justify-between"
     >
@@ -11,8 +11,9 @@ class="w-6 h-6" fill="none" stroke="blue" stroke-width="1.5" viewBox="0 0 24 24"
       <h3 class="text-xs text-center">Oferta valida até</h3>
       <span class="ml-2 font-bold">17:43</span>
     </div>
-  </div>-->
+  </div>
   <div
+    v-else
     class="bg-gray-200 text-blue-700 px-2.5 text-xs font-medium h-9 md:h-12 flex items-center justify-between w-full"
   >
     <div class="flex items-center space-x-3.5">
@@ -36,6 +37,13 @@ class="w-6 h-6" fill="none" stroke="blue" stroke-width="1.5" viewBox="0 0 24 24"
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+  small: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
 
 <style scoped></style>

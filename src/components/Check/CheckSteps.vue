@@ -1,13 +1,13 @@
 <template>
   <form>
-    <div class="h-[32rem] px-20">
+    <div class="px-20">
       <KeepAlive>
         <component
           :is="selectedComponent"
         ></component>
       </KeepAlive>
     </div>
-    <div class="flex items-center justify-center space-x-6 mt-10">
+    <div class="flex items-center justify-center space-x-6 mt-16">
       <button
         v-if="auth.currentStepPayment > 0"
         type="button"

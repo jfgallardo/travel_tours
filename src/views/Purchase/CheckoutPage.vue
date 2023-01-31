@@ -2,7 +2,7 @@
   <div>
     <LayoutTwoViews>
       <template #aside>
-        <div class="flex items-center justify-center pb-9 mt-16 px-8">
+        <div class="flex items-center justify-center pb-9 px-8">
           <ClockOffers/>
         </div>
         <table

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-col items-center justify-center mx-auto space-y-6 py-20">
+    <div class="flex flex-col items-center justify-center mx-auto space-y-6">
       <h1 class="text-3xl font-semibold">Como vocé gostaria de pagar</h1>
       <RadioButtonBox v-model="auth.paymentMethod" label="Credit Card" />
       <RadioButtonBox v-model="auth.paymentMethod" label="Payment Slip" />

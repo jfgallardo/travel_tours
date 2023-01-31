@@ -5,7 +5,7 @@
       <p class="font-semibold px-3 text-center">Veja outras opçoes de voos</p>
     </div>
     <div class="flex self-center place-self-end pr-8">
-      <ClockOffers />
+      <ClockOffers small/>
     </div>
   </div>
 </template>
