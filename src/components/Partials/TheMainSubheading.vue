@@ -92,19 +92,6 @@
         </span>
       </RouterLink>
     </Badge>
-
-    <!--    <RouterLink :to="{ name: 'ContractService' }" class="flex items-center">
-      <WalletOpenTick
-          :color="$route.path === '/contract/service' ? 'blue' : '#292D32'"
-          class="mr-1 h-5 w-5"
-      />
-      <span
-          :class="{ 'text-blue-700': $route.path === '/contract/service' }"
-          class="hidden md:block"
-      >
-        Autorização de débito
-      </span>
-    </RouterLink>-->
   </div>
 </template>
 
