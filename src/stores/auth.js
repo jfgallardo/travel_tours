@@ -55,8 +55,8 @@ export const useAuthStore = defineStore({
   actions: {
     async login(payload) {
       this.loading = true;
-      await axiosLocalAPI
-        .post('/v1/login', payload)
+      await axiosClientAPI
+        .post('/api/v1/login', payload)
         .then(({ data }) => {
           this.user_logged = data;
         })
@@ -68,8 +68,8 @@ export const useAuthStore = defineStore({
       this.loading = true;
       const splitDate = this.user.birthday.split('/');
       this.user.birthday = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
-      await axiosLocalAPI
-        .post('/v1/register', this.user)
+      await axiosClientAPI
+        .post('/api/v1/register', this.user)
         .then(() => {
           Toastify({
             text: 'Usuario registrado, por favor inicie session',
