@@ -1,7 +1,6 @@
-import { defineStore, acceptHMRUpdate } from 'pinia';
-import { axiosClientAPI, axiosLocalAPI } from '@/plugins/axios';
+import { acceptHMRUpdate, defineStore } from 'pinia';
+import { axiosClientAPI } from '@/plugins/axios';
 import Toastify from 'toastify-js';
-import { useStorage } from '@vueuse/core';
 
 export const useAuthStore = defineStore({
   id: 'auth',
@@ -48,21 +47,17 @@ export const useAuthStore = defineStore({
     termos: false,
     currentStep: 0,
     currentStepPayment: 0,
-    user_logged: useStorage('user_logged', {}),
+    userLogged: null,
     loading: false,
   }),
   getters: {},
   actions: {
     async login(payload) {
-      this.loading = true;
-      await axiosClientAPI
-        .post('/api/v1/login', payload)
-        .then(({ data }) => {
-          this.user_logged = data;
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+      try {
+        return await axiosClientAPI.post('/api/v1/login', payload);
+      } catch (e) {
+        return e;
+      }
     },
     async register() {
       this.loading = true;
@@ -82,9 +77,6 @@ export const useAuthStore = defineStore({
         .finally(() => {
           this.loading = false;
         });
-    },
-    logout() {
-      this.user_logged = {};
     },
   },
 });

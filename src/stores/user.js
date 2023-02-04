@@ -8,19 +8,37 @@ export const useUserStore = defineStore({
   }),
   getters: {
     outboundFlightOrigin(state) {
-      return state.vooSelected.VoosIda[0];
+      return Object.keys(state.vooSelected).length > 0
+        ? state.vooSelected.VoosIda[0]
+        : {};
     },
     outboundFlightDestination(state) {
-      const cant_voos = state.vooSelected.VoosIda.length;
-      return state.vooSelected.VoosIda[cant_voos - 1];
+      const cant_voos =
+        Object.keys(state.vooSelected).length > 0
+          ? state.vooSelected.VoosIda.length
+          : 0;
+      return Object.keys(state.vooSelected).length > 0
+        ? state.vooSelected.VoosIda[cant_voos - 1]
+        : {};
     },
     returnFlightOrigin(state) {
-      return state.vooSelected.VoosVolta[0];
+      return Object.keys(state.vooSelected).length > 0
+        ? state.vooSelected.VoosVolta[0]
+        : {};
     },
     returnFlightDestination(state) {
-      const cant_voos = state.vooSelected.VoosVolta.length;
-      return state.vooSelected.VoosVolta[cant_voos - 1];
+      const cant_voos =
+        Object.keys(state.vooSelected).length > 0
+          ? state.vooSelected.VoosVolta.length
+          : 0;
+      return Object.keys(state.vooSelected).length > 0
+        ? state.vooSelected.VoosVolta[cant_voos - 1]
+        : {};
     },
   },
-  actions: {},
+  actions: {
+    resetState() {
+      this.vooSelected = {};
+    },
+  },
 });
