@@ -7,6 +7,7 @@
       <input
         v-model="value"
         v-maska="maska"
+        :value="modelValue"
         :type="typeField"
         :class="inputClassList"
         :placeholder="placeholder"

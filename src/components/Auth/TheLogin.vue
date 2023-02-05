@@ -136,7 +136,7 @@ const login = () => {
       $cookies.set('dataUser', data);
       authStore.userLogged = data.data;
       alertStore.showMsg({
-        message: 'Bienvenido',
+        message: `Bienvenido ${data.data.fullName}`,
         backgrColor: 'bg-blue-100',
         textColor: 'text-blue-700'
       })
@@ -154,6 +154,11 @@ const logout = () => {
     $cookies.remove('dataUser');
     authStore.userLogged = null
   }
+  alertStore.showMsg({
+    message: 'Ha cerrado exitosamente la sesión.',
+    backgrColor: 'bg-blue-100',
+    textColor: 'text-blue-700'
+  })
 };
 </script>
 

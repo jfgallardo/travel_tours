@@ -1,19 +1,19 @@
 <template>
-  <div>
+  <div class="pt-3.5">
     <h3 class="font-semibold px-5 text-lg">
       Preencha os formulários de bilhete
     </h3>
   </div>
   <div class="py-8 px-3.5">
-    <div class="flex justify-between items-center border border-gray-500 p-3.5">
+    <div class="flex justify-between items-center border border-gray-400 p-3.5">
       <h3 class="text-lg">
         Use o controle para preenccher um ticket com seus dados salvos
       </h3>
-      <CheckInput label="Usar mis dados" />
+      <button class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full" @click="useData">Usar mis dados</button>
     </div>
   </div>
   <table
-    class="table-fixed border border-l-0 border-b-0 border-gray-200 w-full px-4 mx-auto border-spacing-2 border-separate"
+    class="table-fixed border border-l-0 border-b-0 border-gray-200 w-full px-4 mx-auto border-spacing-2 border-separate pb-28"
   >
     <tbody>
       <tr>
@@ -25,7 +25,7 @@
       </tr>
       <tr>
         <td class="flex flex-col space-y-4 border-t-2 border-gray-200 p-2">
-          <template v-for="(i, index) in informationAdults" :key="index">
+          <template v-for="(i, index) in passengerStore.informationAdults" :key="index">
             <CollapseAccording class="w-full">
               <template #header> {{ t('adults') }} #{{ index + 1 }}</template>
               <template #body>
@@ -42,14 +42,14 @@
                     v-model="i.last_name"
                     label="Sobrenome Completo *"
                   />
-                  <TextInput v-model="i.cpf_number" label="CPF *" />
+                  <TextInput v-model="i.cpf_number" label="CPF *" maska="###.###.###-##"/>
                   <DateInput v-model="i.birthday" label="Date Nascimento *" />
                 </form>
               </template>
             </CollapseAccording>
           </template>
           <div v-if="searchOpions.teenagers > 0">
-            <template v-for="(i, index) in informationTeenagers" :key="index">
+            <template v-for="(i, index) in passengerStore.informationTeenagers" :key="index">
               <CollapseAccording class="w-full">
                 <template #header>
                   {{ t('children') }} #{{ index + 1 }}</template
@@ -76,7 +76,7 @@
             </template>
           </div>
           <div v-if="searchOpions.babies > 0">
-            <template v-for="(i, index) in informationBabies" :key="index">
+            <template v-for="(i, index) in passengerStore.informationBabies" :key="index">
               <CollapseAccording class="w-full">
                 <template #header> {{ t('babies') }} #{{ index + 1 }}</template>
                 <template #body>
@@ -100,7 +100,7 @@
               </CollapseAccording>
             </template>
           </div>
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-center pt-3.5">
             <RouterLink
               :to="{ name: 'CheckPage' }"
               class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2"
@@ -117,31 +117,43 @@
 <script setup>
 import CollapseAccording from '@/components/Static/CollapseAccording.vue';
 import Select from '@/components/FormUI/TheSelect.vue';
-import { onMounted, ref } from 'vue';
+import { inject, onMounted, ref } from "vue";
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import CheckInput from '@/components/FormUI/CheckInput.vue';
+import { useAlertStore } from "@/stores/alert";
+import { usePassengerStore } from "@/stores/passengerInformation";
 
 onMounted(() => {
-  getArrayData();
+  if (passengerStore.informationAdults.length === 0) getArrayData();
 });
 const { t } = useI18n();
 const searchOpions = useSearchOptionsVooStore();
+const alertStore = useAlertStore();
+const passengerStore = usePassengerStore();
 const tratamentoOptions = [{ label: 'Brasileiro(a)', value: 'Brasileiro(a)' }];
 const tratamento = ref({ label: 'Brasileiro(a)', value: 'Brasileiro(a)' });
 
-const informationAdults = ref([]);
-const informationTeenagers = ref([]);
-const informationBabies = ref([]);
+const $cookies = inject('$cookies');
+
+
+const useData = () => {
+  if (!$cookies.isKey('dataUser')){
+    alertStore.showMsg({
+      message: 'Para el uso de esta funcionalidad precisa ingresar a su cuenta',
+      backgrColor: 'bg-red-100',
+      textColor: 'text-red-700'
+    })
+  }
+}
 
 const getArrayData = () => {
   for (let i = 0; i < searchOpions.adults; i++) {
-    informationAdults.value.push({
+    passengerStore.informationAdults.push({
       treatment: '',
-      nome: '',
+      name: '',
       last_name: '',
       cpf_number: '',
       birthday: '',
@@ -150,9 +162,9 @@ const getArrayData = () => {
 
   if (searchOpions.teenagers > 0) {
     for (let i = 0; i < searchOpions.teenagers; i++) {
-      informationTeenagers.value.push({
+      passengerStore.informationTeenagers.push({
         treatment: '',
-        nome: '',
+        name: '',
         last_name: '',
         cpf_number: '',
         birthday: '',
@@ -161,9 +173,9 @@ const getArrayData = () => {
   }
   if (searchOpions.babies > 0) {
     for (let i = 0; i < searchOpions.babies; i++) {
-      informationBabies.value.push({
+      passengerStore.informationBabies.push({
         treatment: '',
-        nome: '',
+        name: '',
         last_name: '',
         cpf_number: '',
         birthday: '',

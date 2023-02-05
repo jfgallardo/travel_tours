@@ -195,5 +195,15 @@ export const useWoobaStore = defineStore({
         })
         .finally(() => {});
     },
+    /*async detalhesdeFamilia(payload) {
+      try {
+        return await axiosClientAPI.post(
+          'api/v1/wooba/family-details',
+          payload
+        );
+      } catch (e) {
+        return e;
+      }
+    },*/
   },
 });

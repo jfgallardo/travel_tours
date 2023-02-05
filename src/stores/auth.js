@@ -29,6 +29,8 @@ export const useAuthStore = defineStore({
       cardName: '',
       cpfUserCard: '',
       isValidFront: false,
+      bainderaSelected: '',
+      planDeFinanciamento: null,
     },
     dataBuy: {
       birthday: '',
