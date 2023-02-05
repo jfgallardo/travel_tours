@@ -18,16 +18,10 @@
       </svg>
     </div>
     <div>
-      <p class="font-medium text-2xl">CADASTRE-SE</p>
+      <p class="font-medium text-2xl">{{ title }}</p>
     </div>
 
     <div class="flex items-center space-x-3">
-      <!--  <p>{{title}}</p>
-      <div
-        class="flex items-center p-4 justify-center h-8 w-8 rounded-full border-2 border-r-blue-700 border-gray-300 text-sm">
-        <span>{{userStore.currentStep + 1}}/4</span>
-      </div> -->
-
       <div
         x-data="scrollProgress"
         class="inline-flex items-center justify-center overflow-hidden rounded-full"
@@ -55,7 +49,7 @@
             cy="25"
           />
         </svg>
-        <span class="absolute">{{ userStore.currentStep + 1 }}/4</span>
+        <span class="absolute">{{ authStore.currentStep + 1 }}/4</span>
       </div>
     </div>
   </div>
@@ -63,16 +57,16 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 
-const userStore = useUserStore();
+const authStore = useAuthStore();
 
 const title = computed(() => {
-  if (userStore.currentStep === 0) {
+  if (authStore.currentStep === 0) {
     return 'Dados cadastrais';
-  } else if (userStore.currentStep === 1) {
+  } else if (authStore.currentStep === 1) {
     return 'Endereço';
-  } else if (userStore.currentStep === 2) {
+  } else if (authStore.currentStep === 2) {
     return 'Contato';
   }
   return 'Informações de acesso';
@@ -83,7 +77,7 @@ const circumference = computed(() => {
 });
 
 const percent = computed(() => {
-  return Math.round((userStore.currentStep / 3) * 100);
+  return Math.round((authStore.currentStep / 3) * 100);
 });
 </script>
 

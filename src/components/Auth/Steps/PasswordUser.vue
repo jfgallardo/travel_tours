@@ -10,15 +10,16 @@
       </div>
 
       <div class="w-4/12">
-        <TextInput v-model="auth.user.password" label="Senha de acesso *" name="password" />
+        <TextInput v-model="auth.user.password" label="Senha de acesso *" name="password" type-field="password"/>
       </div>
 
       <div class="w-4/12">
-        <TextInput label="Confirme sua senha de acesso*" name="passwordConfirm" />
+        <TextInput label="Confirme sua senha de acesso*" name="passwordConfirm" type-field="password"/>
       </div>
 
       <div class="w-4/12">
-        <CheckInput v-model="auth.termos" label="Confirmo ser maior de 18 (dezoito) anos e que todos os dados informados
+        <CheckInput
+v-model="auth.termos" label="Confirmo ser maior de 18 (dezoito) anos e que todos os dados informados
 acima são verídicos. Ainda confirmo que li e concordo com os Termos e
 Condições de Uso da MaxMilhas." />
       </div>

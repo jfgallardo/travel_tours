@@ -1,10 +1,8 @@
 <template>
   <form>
-    <div class="px-20">
+    <div class="px-20 pt-5">
       <KeepAlive>
-        <component
-          :is="selectedComponent"
-        ></component>
+        <component :is="selectedComponent"></component>
       </KeepAlive>
     </div>
     <div class="flex items-center justify-center space-x-6 mt-16">
@@ -45,13 +43,15 @@ import { useForm } from 'vee-validate';
 import PaymentDetails from '@/components/Check/Steps/PaymentDetails.vue';
 import BillingAddress from '@/components/Check/Steps/BillingAddress.vue';
 import FinalStep from '@/components/Check/Steps/FinalStep.vue';
-import { simpleSchemaBuy } from "@/utils/validate";
+import { simpleSchemaBuy } from '@/utils/validate';
+import { useAlertStore } from "@/stores/alert";
 
 onMounted(() => {
   selectedComponent.value = markRaw(PaymentMethod);
 });
 
 const auth = useAuthStore();
+const alertStore = useAlertStore()
 
 const steps = [
   { component: PaymentMethod },
@@ -63,41 +63,46 @@ const steps = [
 const selectedComponent = ref(null);
 
 const { handleSubmit, setFieldError, errors } = useForm({
-  validationSchema: simpleSchemaBuy
+  validationSchema: simpleSchemaBuy,
 });
 
 const nextStep = handleSubmit((values) => {
-  if (auth.currentStepPayment === 0){
+  if (auth.currentStepPayment === 0) {
     auth.currentStepPayment++;
-  } else if(auth.currentStepPayment === 1) {
+  } else if (auth.currentStepPayment === 1) {
     if (!auth.card.isValidFront) {
-    return;
-    } else if(!values['number-cpf']) {
+      return;
+    } else if (!values['number-cpf']) {
       setFieldError('number-cpf', 'CPF é obrigatório');
+    } else if(auth.card.bainderaSelected.label !== auth.card.cardType) {
+      alertStore.showMsg({
+        message: 'Tipo de tarjea seleccionada invalida',
+        backgrColor: 'bg-red-100',
+        textColor: 'text-red-700'
+      })
     } else {
       auth.currentStepPayment++;
     }
-  } else if(auth.currentStepPayment === 2){
-    if(!values.birthday) {
+  } else if (auth.currentStepPayment === 2) {
+    if (!values.birthday) {
       setFieldError('birthday', 'Birthday é obrigatório');
-    } else if(!values['name-buy']){
+    } else if (!values['name-buy']) {
       setFieldError('name-buy', 'Name é obrigatório');
     } else {
       auth.currentStepPayment++;
     }
-  }
-  else if(auth.currentStepPayment === 3){
-    if(!values.cep) {
+  } else if (auth.currentStepPayment === 3) {
+    if (!values.cep) {
       setFieldError('cep', 'CEP é obrigatório');
-    } else if(!values.address){
+    } else if (!values.address) {
       setFieldError('address', 'address é obrigatório');
     } else {
       auth.currentStepPayment++;
     }
-  }else if(auth.currentStepPayment === 4){
-    if(!values.state) {
+  } else if (auth.currentStepPayment === 4) {
+    if (!values.state) {
       setFieldError('state', 'State é obrigatório');
-    } else if(!values.address){
+    } else if (!values.address) {
       setFieldError('city', 'City é obrigatório');
     } else {
       auth.currentStepPayment++;
@@ -108,10 +113,9 @@ const nextStep = handleSubmit((values) => {
 });
 const backStep = () => {
   if (auth.currentStepPayment >= 1 && auth.currentStepPayment <= 5) {
-    if (Object.keys(errors.value).length > 0) return
+    if (Object.keys(errors.value).length > 0) return;
     auth.currentStepPayment--;
   }
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
 };
-
 </script>

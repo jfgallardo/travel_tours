@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 import QrcodeVue from "qrcode.vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
@@ -69,6 +69,7 @@ const props = defineProps({
 const router = useRouter();
 const userStore = useUserStore();
 const { t } = useI18n();
+const $cookies = inject('$cookies');
 
 const value = ref("");
 
@@ -110,6 +111,7 @@ const precoBebe = computed(() => {
   return null;
 });
 const goToPre = () => {
+  $cookies.set('vooSelectedKey', props.vooDetalhes.Key);
   userStore.vooSelected = props.vooDetalhes;
   router.push({ name: "PreCheckoutPage" });
 };

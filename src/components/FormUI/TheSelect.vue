@@ -11,7 +11,7 @@
             @click="hiddenDropdown = !hiddenDropdown"
           >
             <span v-if="selected" class="mr-5"> {{ selected.label }} </span>
-            <span v-else class="mr-5 text-gray-500">Seleccione valor</span>
+            <span v-else class="mr-5 text-gray-500">{{ placeholder }}</span>
             <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
           </div>
           <Transition>
@@ -39,22 +39,22 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
+import { ref, watch } from 'vue';
 import ChevronDown from '@/components/Icons/ChevronDown.vue';
 
 const hiddenDropdown = ref(false);
 const selected = ref(props.selected);
 const emit = defineEmits(['selectValue']);
 const dropdownP = ref(null);
+const placeholder = ref('')
 
 const props = defineProps({
   options: {
     type: Array,
     default: () => [
       {
-        label: 'Thinking...',
-        value: 0,
+        label: 'Sem dados',
+        value: 'value_default_empty',
       },
     ],
   },
@@ -66,12 +66,26 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 });
 
+watch(
+  () => props.loading,
+  (newX) => {
+    newX ? placeholder.value = 'Loading...' : placeholder.value ='Seleccione valor'
+  },
+  { immediate: true }
+);
+
 const selectOption = (value) => {
-  selected.value = value;
-  emit('selectValue', value);
-  hiddenDropdown.value = false;
+  if (value.value !== 'value_default_empty') {
+    selected.value = value;
+    emit('selectValue', value);
+    hiddenDropdown.value = false;
+  }
 };
 
 const vClickOutside = {

@@ -7,6 +7,7 @@ import router from '@/router';
 import 'air-datepicker/air-datepicker.css';
 import 'toastify-js/src/toastify.css';
 import Maska from 'maska';
+import VueCookies from 'vue-cookies';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
@@ -16,5 +17,6 @@ app.use(createPinia());
 app.use(router);
 app.use(i18n);
 app.use(Maska);
+app.use(VueCookies);
 
 app.mount('#app');

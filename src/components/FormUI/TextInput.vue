@@ -7,7 +7,8 @@
       <input
         v-model="value"
         v-maska="maska"
-        type="text"
+        :value="modelValue"
+        :type="typeField"
         :class="inputClassList"
         :placeholder="placeholder"
         :disabled="disableField"
@@ -54,6 +55,10 @@ const props = defineProps({
   textR: {
     type: String,
     default: ''
+  },
+  typeField: {
+    type: String,
+    default: "text"
   }
 });
 

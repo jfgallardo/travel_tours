@@ -79,12 +79,10 @@ const verifyCEP = async () => {
     .then((response) => response.json())
     .then((data) => {
       if (!data.cep) {
-        console.log('CEP INCORRECTO');
         auth.dataBuy.state = '';
         auth.dataBuy.city = '';
         auth.dataBuy.address = '';
       } else {
-        console.log('Correcto', data);
         auth.dataBuy.state = data.state;
         auth.dataBuy.city = data.city;
         auth.dataBuy.address = `${data.neighborhood || ''} ${data.street || ''}`
