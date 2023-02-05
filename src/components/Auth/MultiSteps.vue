@@ -6,17 +6,28 @@
       </KeepAlive>
     </div>
     <div class="flex items-center justify-center space-x-6 mt-10">
-      <button v-if="auth.currentStep > 0" type="button" class="bg-gray-200 hover:bg-gray-300 py-2 px-10"
-        @click="backStep">
+      <button
+        v-if="auth.currentStep > 0"
+        type="button"
+        class="bg-gray-200 hover:bg-gray-300 py-2 px-10"
+        @click="backStep"
+      >
         Retornar
       </button>
-      <button v-if="auth.currentStep != 3" type="submit"
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10" @click="nextStep">
+      <button
+        v-if="auth.currentStep != 3"
+        type="submit"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
+        @click="nextStep"
+      >
         Proximo
       </button>
-      <button v-if="auth.currentStep === 3"
+      <button
+        v-if="auth.currentStep === 3"
         class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-300 disabled:cursor-not-allowed"
-        :disabled="!auth.termos" @click.prevent="register">
+        :disabled="!auth.termos"
+        @click.prevent="register"
+      >
         Cadastro Agora
       </button>
     </div>
@@ -33,7 +44,7 @@ import ContactUser from '@/components/Auth/Steps/ContactUser.vue';
 import PasswordUser from '@/components/Auth/Steps/PasswordUser.vue';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
-
+import { useAlertStore } from '@/stores/alert';
 
 onMounted(() => {
   selectedComponent.value = markRaw(InformationUser);
@@ -41,6 +52,7 @@ onMounted(() => {
 
 const auth = useAuthStore();
 const router = useRouter();
+const alertStore = useAlertStore();
 
 const steps = [
   { component: InformationUser },
@@ -96,12 +108,29 @@ const backStep = () => {
 };
 
 const register = () => {
-  auth.register().then(() => { 
-    router.push({ name: 'LandingPage' });
-   })
-}
+  auth.loading = true;
+  const splitDate = auth.user.birthday.split('/');
+  const birthday = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
+  const formData = {
+    ...auth.user,
+    birthday,
+  };
+  auth
+    .register(formData)
+    .then(({data}) => {
+      console.log(data);
+      alertStore.showMsg({
+        message: 'Registro efectuado con sucesso. Inicie session',
+        backgrColor: 'bg-blue-100',
+        textColor: 'text-blue-700',
+      });
+      auth.loading = false;
+      router.push('/');
+    })
+    .catch(() => {
+      auth.loading = false;
+    });
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

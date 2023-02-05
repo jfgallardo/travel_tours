@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="message-float">
     <div
       :class="[alertStore.backgrColor, alertStore.textColor]"
       class="py-5 px-6 text-base mb-3 text-center"
@@ -23,7 +23,14 @@ onMounted(() => {
 const alertStore = useAlertStore();
 </script>
 
-<style scoped></style>
+<style scoped>
+.message-float {
+  position: fixed !important;
+  bottom: 80px;
+  right: 25px;
+  z-index: 500;
+}
+</style>
 
 <!-- 
     bg-blue-100 INFO

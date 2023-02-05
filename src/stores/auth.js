@@ -1,6 +1,5 @@
-import { acceptHMRUpdate, defineStore } from 'pinia';
+import { defineStore } from 'pinia';
 import { axiosClientAPI } from '@/plugins/axios';
-import Toastify from 'toastify-js';
 
 export const useAuthStore = defineStore({
   id: 'auth',
@@ -59,28 +58,12 @@ export const useAuthStore = defineStore({
         return e;
       }
     },
-    async register() {
-      this.loading = true;
-      const splitDate = this.user.birthday.split('/');
-      this.user.birthday = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
-      await axiosClientAPI
-        .post('/api/v1/register', this.user)
-        .then(() => {
-          Toastify({
-            text: 'Usuario registrado, por favor inicie session',
-            duration: 3000,
-            gravity: 'bottom',
-            position: 'center',
-            stopOnFocus: true,
-          }).showToast();
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+    async register(payload) {
+      try {
+        return await axiosClientAPI.post('/api/v1/register', payload);
+      } catch (e) {
+        return e;
+      }
     },
   },
 });
-
-if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot));
-}

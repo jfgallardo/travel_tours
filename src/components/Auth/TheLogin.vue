@@ -114,12 +114,14 @@ import { RouterLink } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import Loader from '@/components/Partials/TheLoader.vue';
 import { useI18n } from 'vue-i18n';
+import { useAlertStore } from "@/stores/alert";
 const { t } = useI18n();
 
 const authStore = useAuthStore();
 const email = ref('');
 const password = ref('');
 const $cookies = inject('$cookies');
+const alertStore = useAlertStore()
 
 const login = () => {
   authStore.loading = true;
@@ -133,8 +135,14 @@ const login = () => {
     .then(({ data }) => {
       $cookies.set('dataUser', data);
       authStore.userLogged = data.data;
+      alertStore.showMsg({
+        message: 'Bienvenido',
+        backgrColor: 'bg-blue-100',
+        textColor: 'text-blue-700'
+      })
+      authStore.loading = false;
     })
-    .finally(() => {
+    .catch(() => {
       authStore.loading = false;
     });
 };
