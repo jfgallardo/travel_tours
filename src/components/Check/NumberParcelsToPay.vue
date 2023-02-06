@@ -52,7 +52,7 @@
         {{
           authStore.card.planDeFinanciamento.PrimeiraParcela +
           authStore.card.planDeFinanciamento.DemaisParcelas *
-            authStore.card.planDeFinanciamento.Parcelas
+            (authStore.card.planDeFinanciamento.Parcelas -1)
         }}</span
       >
     </div>

@@ -5,7 +5,7 @@
         <component :is="selectedComponent"></component>
       </KeepAlive>
     </div>
-    <div class="flex items-center justify-center space-x-6 mt-16">
+    <div class="flex items-center justify-center space-x-6 my-16">
       <button
         v-if="auth.currentStepPayment > 0"
         type="button"
