@@ -5,11 +5,11 @@
     </h3>
   </div>
   <div class="py-8 px-3.5">
-    <div class="flex justify-between items-center border border-gray-400 p-3.5">
+    <div class="flex flex-col lg:flex-row justify-between items-center border border-gray-400 p-3.5">
       <h3 class="text-lg">
-        Use o controle para preenccher um ticket com seus dados salvos
+        Use o controle para preencher um ticket com seus dados salvos
       </h3>
-      <button class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full" @click="useData">Usar mis dados</button>
+      <button class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full mt-2.5 lg:mt-0" @click="useData">Usar mis dados</button>
     </div>
   </div>
   <table

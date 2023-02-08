@@ -18,7 +18,7 @@
             <div
               v-if="hiddenDropdown"
               v-click-outside
-              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-30 w-full max-h-60 overflow-y-auto"
+              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-20 w-full max-h-60 overflow-y-auto"
             >
               <ul>
                 <li

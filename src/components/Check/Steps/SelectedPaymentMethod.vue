@@ -1,12 +1,12 @@
 <template>
   <div>
     <div
-      class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 w-1/2 md:w-auto"
+      class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 lg:w-1/2 md:w-auto w-full"
     >
-      <div class="flex w-full space-x-2.5">
+      <div class="flex flex-col space-y-6 lg:space-y-0 lg:flex-row w-full lg:space-x-2.5">
         <TheSelect
           label="Credit Card"
-          class="w-1/2"
+          class="lg:w-1/2 w-full"
           :loading="rateStore.loading"
           :options="planosDeFinanciamento"
           @selectValue="auth.card.bainderaSelected = $event"
@@ -17,37 +17,37 @@
           name="number-card"
           maska="#### #### #### ####"
           :text-r="auth.card.cardType"
-          class="w-1/2"
+          class="lg:w-1/2 w-full"
         />
         <TextInput
           v-model="auth.card.cardSecurityCode"
           label="Codigo de Segurança"
           name="cvc"
           maska="####"
-          class="w-1/4"
+          class="lg:w-1/4 w-full"
         />
       </div>
 
-      <div class="flex w-full space-x-2.5">
+      <div class="flex w-full space-y-6 lg:space-y-0 flex-col lg:flex-row lg:space-x-2.5">
         <TextInput
           v-model="auth.card.cardName"
           label="Nome (Igual ao do cartão) *"
           name="card-name"
-          class="w-1/2"
+          class="lg:w-1/2 w-full"
         />
         <TextInput
           v-model="auth.card.cpfUserCard"
           label="CPF *"
           maska="###.###.###-##"
           name="number-cpf"
-          class="w-1/2"
+          class="lg:w-1/2 w-full"
         />
         <TextInput
           v-model="auth.card.cardExpiration"
           label="Data de Vencimento *"
           name="expiration"
           :maska="['##/##', '##/####']"
-          class="w-1/4"
+          class="lg:w-1/4 w-full"
         />
       </div>
     </div>

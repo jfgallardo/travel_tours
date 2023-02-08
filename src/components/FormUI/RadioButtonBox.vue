@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2">
+  <div class="lg:w-1/2 w-full">
     <div
         class="p-4 flex items-center justify-between w-full hover:cursor-pointer hover:bg-blue-50"
         :class="{'text-blue-600 font-semibold border border-blue-600 outline-none ': isSelected, 'border border-zinc-400': !isSelected}"

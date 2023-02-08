@@ -4,12 +4,21 @@
       class="bg-gray-200 rounded-full text-blue-700 px-2.5 text-xs font-medium h-9 md:h-8 flex items-center justify-between"
     >
       <svg
-class="w-6 h-6" fill="none" stroke="blue" stroke-width="1.5" viewBox="0 0 24 24"
-           xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" />
+        class="w-6 h-6"
+        fill="none"
+        stroke="blue"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </svg>
       <h3 class="text-xs text-center">Oferta valida até</h3>
-      <span class="ml-2 font-bold">17:43</span>
+      <span class="ml-2 font-bold">{{ duration }}</span>
     </div>
   </div>
   <div
@@ -33,16 +42,34 @@ class="w-6 h-6" fill="none" stroke="blue" stroke-width="1.5" viewBox="0 0 24 24"
       </svg>
       <h3 class="text-xs text-center">Oferta valida até</h3>
     </div>
-    <span class="ml-2 font-bold">17:43</span>
+    <span class="ml-2 font-bold">{{duration}}</span>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import moment from 'moment';
+import { computed } from 'vue';
+import { useNow } from '@vueuse/core';
+
+const props = defineProps({
   small: {
     type: Boolean,
     default: false,
   },
+  offerUp: {
+    type: Number,
+    default: 8,
+  },
+});
+
+const now = useNow();
+const untilDayjs = moment().add(props.offerUp, 'minutes');
+
+const duration = computed(() => {
+  if (untilDayjs.isBefore(now.value)) return moment.duration(0).seconds();
+  return `${moment.duration(untilDayjs.diff(now.value)).minutes()}:${moment
+    .duration(untilDayjs.diff(now.value))
+    .seconds()}`;
 });
 </script>
 

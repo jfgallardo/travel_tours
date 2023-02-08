@@ -30,6 +30,17 @@ const alertStore = useAlertStore();
   right: 25px;
   z-index: 500;
 }
+
+@media (max-width: 640px) {
+  .message-float {
+    position: fixed !important;
+    bottom: 80px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 500;
+  }
+}
 </style>
 
 <!-- 

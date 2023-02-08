@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch">
-    <div class="flex flex-col border border-gray-300 border-l-0 xl:w-full">
+    <div class="flex flex-col border border-gray-300 xl:w-full">
       <div class="border-b border-gray-300 py-2">
         <span class="px-4 font-medium">Vuelos de Ida</span>
       </div>

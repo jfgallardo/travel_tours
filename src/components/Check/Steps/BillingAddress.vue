@@ -1,21 +1,21 @@
 <template>
   <div>
     <div
-      class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-1/2 md:w-auto"
+      class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-full lg:w-1/2 md:w-auto"
     >
-      <div class="w-full flex space-x-2.5">
+      <div class="w-full flex flex-col lg:flex-row lg:space-x-2.5 space-y-6 lg:space-y-0">
         <TextInput
           v-model="auth.dataBuy.cep"
           label="CEP *"
           name="cep"
           maska="#####-###"
-          class="w-1/2"
+          class="lg:w-1/2"
         />
 
         <TextInput
           v-model="auth.dataBuy.state"
           label="Estado *"
-          class="w-1/2"
+          class="lg:w-1/2"
           name="state"
           disable-field
         />
@@ -23,7 +23,7 @@
         <TextInput
           v-model="auth.dataBuy.city"
           label="Ciudade *"
-          class="w-1/2"
+          class="lg:w-1/2"
           name="city"
           disable-field
         />

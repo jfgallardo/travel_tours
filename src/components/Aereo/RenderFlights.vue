@@ -1,8 +1,8 @@
 <template>
   <div>
-      <div class="border-l-0 py-5 md:px-3">
+      <div class="border-l-0 border-gray-300 py-5 md:px-3">
 <!--   flex justify-center items-center space-x-8 sm:space-x-20 lg:space-x-10 2xl:justify-around     -->
-        <div class="flex items-center justify-around">
+        <div class="flex items-center justify-around ">
           <teleport v-if="width < 768 && !suspense" :to="`#${keyId}Picture`">
             <div class="flex items-center space-x-3 ">
               <img :src="initVoo.Icone" />
