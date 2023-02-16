@@ -162,7 +162,8 @@
     "aeroportosProximos": "Add nearby airports",
     "voosDirectos": "Direct flights only",
     "paraEstudantes": "For students",
-    "pesquisarVoos": "Search"
+    "pesquisarVoos": "Search",
+    "apenasComBabagem": "Only with luggage"
   },
   "manyCities": {
     "adicionarVoo": "Add another flight"
@@ -174,5 +175,81 @@
   },
   "adults": "Adult | Adults",
   "children": "Child | Children",
-  "babies": "Baby | Babies"
+  "babies": "Baby | Babies",
+  "idaVoltaFlexRender": {
+    "vuelosDeIda": "One-way flights",
+    "vuelosDeVuelta": "Return flights"
+  },
+  "voosIdaVolta": {
+    "exibirMaisResultados": "Show more results"
+  },
+  "addressUser": {
+    "noSeiMeuCep": "I do not know my CEP",
+    "cep": "CEP *",
+    "bairro": "Neighborhood *",
+    "endereo": "Address *",
+    "estado": "State *",
+    "nmero": "Number *",
+    "cidade": "City *",
+    "complemento": "Complement *"
+  },
+  "alamo": {
+    "tarifasDisponveisNosEstadosUnidosCanadAmricaLatina": "Rates available in the United States, Canada, Latin America, the Caribbean and Europe;",
+    "tarifasDisponveisNosEstadosUnidosEAmricaLatina": "Rates available in the United States and Latin America;",
+    "totensNosPrincipaisAeroportos": "Totems at the main airports: the customer can go directly to the totem, open the contract in Portuguese and proceed to the vehicle;",
+    "possuiOServioDePedgio": "It has a toll service, which can be included through self-service at the totem or directly at the counter;",
+    "todasAsTarifas": "For the USA, all rates include 1 additional driver free of charge, for Europe, Latin America and other locations, request the inclusion of other additional drivers at the rental counter, when picking up the vehicle;",
+    "todosOsCondutores": "All drivers (including additional ones) must be licensed and over 25 years old. If under 25 years old, a fee will be charged (USD 30/day).",
+    "comoMembroDaCloro": "As a member of the Clorox® Safer Today Alliance™, Alamo receives ongoing support and scientific guidance on its enhanced safety measures from experts at the Cleveland Clinic and the CDC Foundation. Customers will find a one-count Clorox® disinfectant wipe in each rental vehicle at all US and Canadian locations. Clorox disinfectant wipes are approved by the EPA to kill SARS-CoV-2, the virus that causes COVID-19, when used as directed. Each wipe includes instructions for use and is accompanied by instructions for using it on the vehicle's hard, non-porous, high-touch surfaces."
+  },
+  "querySubHeading": {
+    "bagagem": "Baggage",
+    "compania": "Company",
+    "areopuertos": "Airports",
+    "llegada": "Arrival",
+    "partida": "Departure",
+    "paradas": "Stops",
+    "precio": "Price",
+    "duracion": "Duration",
+    "duracionHrs": "Duration {duration}hrs",
+    "clase": "Class"
+  },
+  "searching": "Searching...",
+  "avis": {
+    "tarifasDisponveis": "Rates available in the United States, Latin America and Europe;",
+    "nosBalces": "At the counters, the contract is opened using a tablet, and in Florida, they have contracts in Portuguese;",
+    "possuiOServio": "It has a toll service and it must be enabled at the counter;",
+    "todasAsTarifas": "For USA, all rates include 1 additional driver free of charge. For Europe, Latin America and other locations, request the inclusion of other additional drivers at the rental desk, when picking up the vehicle;",
+    "osCondutores": "All drivers (including additional ones) must be licensed and over 25 years old. If under 25 years old, a fee will be charged (USD 30/day)."
+  },
+  "contactPage": {
+    "entreEmContato": "Contact",
+    "faleConosco": "Contact us",
+    "nome": "NAME",
+    "email": "EMAIL",
+    "assunto": "SUBJECT",
+    "enviar": "Send"
+  },
+  "detailsPage": {
+    "vueloDeIda": "One way flight",
+    "vueloDevolta": "Flight back",
+    "duraaoTotal": "TOTAL DURATION",
+    "qtdMilhas": "QTY. MILES",
+    "clase": "CLASS",
+    "aerolinea": "AIRLINE",
+    "bagagemDeMo": "{BagagemQuantidade} HAND BAGGAGE",
+    "noBagagem": "NO BAGGAGE",
+    "OfertaDesde": "1 Offer Since",
+    "tipoDeTarifa": "Fare Type",
+    "total": "Total",
+    "fechar": "Close"
+  },
+  "bestLodging": {
+    "melhoresAlojamentos": "Best accommodations",
+    "montenegrinas": "Montenegrinas",
+    "islasPartas": "Islas Partas"
+  },
+  "filterCompanies": {
+    "aPartirDe": "from"
+  }
 }

@@ -9,7 +9,7 @@
     </div>
     <div v-else>
       <template v-if="!woobaStore.returnFlights">
-        <div v-for="viagem in woobaStore.flyFilters" :key="viagem.Key">
+        <div v-for="viagem in filterStore.flyFilters" :key="viagem.Key">
           <IdaVoltaFlex :viagem="viagem" />
           <br />
         </div>
@@ -19,7 +19,7 @@
             :disabled="disableBottom"
             @click="displayResults"
           >
-            <span>Exibir mais resultados</span>
+            <span>{{ $t('voosIdaVolta.exibirMaisResultados') }}</span>
             <svg
               v-if="loadData"
               xmlns="http://www.w3.org/2000/svg"
@@ -61,23 +61,20 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { ref, computed } from "vue";
 import ButtonFilter from '@/components/Aereo/ButtonFilter.vue';
 import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
 import { useWoobaStore } from '@/stores/wooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import IdaVoltaFlex from '@/components/Aereo/IdaVoltaFlexRender.vue';
 import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
-
-onMounted(() => {
-  woobaStore.consultaOrigemDestino();
-});
+import { useFiltersStore } from "@/stores/filters";
 
 const woobaStore = useWoobaStore();
+const filterStore = useFiltersStore();
 const searchOptionsVoo = useSearchOptionsVooStore();
 
 let loadData = ref(false);
-
 const displayResults = () => {
   loadData.value = true;
   searchOptionsVoo.quantidadeDeVoos = searchOptionsVoo.quantidadeDeVoos + 10;

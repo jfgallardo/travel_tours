@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useWoobaStore } from '@/stores/wooba';
 
 const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
 const LayoutAuth = () => import('@/layouts/LayoutAuth.vue');
@@ -79,6 +80,14 @@ const router = createRouter({
               path: 'check/round-trip',
               name: 'VoosIdaVolta',
               component: VoosIdaVolta,
+              beforeEnter: (to, from) => {
+                const woobaStore = useWoobaStore();
+                if (
+                  from.name !== 'AereoLandingPage' &&
+                  woobaStore.outboundFlights.length === 0
+                )
+                  return '/aereo';
+              },
             },
           ],
         },

@@ -162,7 +162,8 @@
     "aeroportosProximos": "Adicionar aeroportos próximos",
     "voosDirectos": "Apenas voos directos",
     "paraEstudantes": "Para estudantes",
-    "pesquisarVoos": "Pesquisar"
+    "pesquisarVoos": "Pesquisar",
+    "apenasComBabagem": "Apenas com babagem"
   },
   "manyCities": {
     "adicionarVoo": "Adicionar outro voo"
@@ -174,5 +175,81 @@
   },
   "adults": "Adulto | Adultos",
   "children": "Criança | Crianças",
-  "babies": "Bebê | Bebês"
+  "babies": "Bebê | Bebês",
+  "idaVoltaFlexRender": {
+    "vuelosDeIda": "Voos só de ida",
+    "vuelosDeVuelta": "Voos de retorno"
+  },
+  "voosIdaVolta": {
+    "exibirMaisResultados": "Exibir mais resultados"
+  },
+  "addressUser": {
+    "noSeiMeuCep": "Não sei meu CEP",
+    "cep": "CEP *",
+    "bairro": "Bairro *",
+    "endereo": "Endereço *",
+    "estado": "Estado *",
+    "nmero": "Número *",
+    "cidade": "Cidade *",
+    "complemento": "Complemento *"
+  },
+  "alamo": {
+    "tarifasDisponveisNosEstadosUnidosCanadAmricaLatina": "Tarifas disponíveis nos Estados Unidos, Canadá, América Latina, Caribe e Europa;",
+    "tarifasDisponveisNosEstadosUnidosEAmricaLatina": "Tarifas disponíveis nos Estados Unidos e América Latina;",
+    "totensNosPrincipaisAeroportos": "Totens nos principais aeroportos: o cliente pode seguir diretamente até o totem, abrir o contrato em português e seguir para o veículo;",
+    "possuiOServioDePedgio": "Possui o serviço de pedágio, pode ser incluso através do autoatendimento no totem ou diretamente no balcão;",
+    "todasAsTarifas": "Para EUA, todas as tarifas contemplam 1 motorista adicional grátis, para Europa, América Latina e demais localidades, solicite a inclusão outros condutores adicionais no balcão da locadora, no momento da retirada do veículo;",
+    "todosOsCondutores": "Todos os condutores (inclusive os adicionais) devem ser habilitados e maiores de 25 anos. Se menor de 25 anos haverá cobrança de taxa (USD 30/dia).",
+    "comoMembroDaCloro": "Como membro da Clorox® Safer Today Alliance™, a Álamo recebe apoio contínuo e orientação científica sobre suas medidas de segurança aprimoradas de especialistas da Cleveland Clinic e da CDC Foundation. Os clientes encontrarão um lenço desinfetante Clorox® de uma contagem em cada veículo alugado em todos os locais nos EUA e Canadá. Os lenços desinfetantes Clorox são aprovados pela EPA para matar o SARS-CoV-2, o vírus que causa o COVID-19, quando usado conforme as instruções. Cada lenço inclui instruções de uso e é acompanhado por instruções para usá-lo nas superfícies duras e não porosas de alto toque do veículo."
+  },
+  "querySubHeading": {
+    "bagagem": "Bagagem",
+    "compania": "Compania",
+    "areopuertos": "Areopuertos",
+    "llegada": "Llegada",
+    "partida": "Partida",
+    "paradas": "Paradas",
+    "precio": "Precio",
+    "duracion": "Duracion",
+    "duracionHrs": "Duracion {duration}hrs",
+    "clase": "Clase"
+  },
+  "searching": "Procurando...",
+  "avis": {
+    "tarifasDisponveis": "Tarifas disponíveis nos Estados Unidos, América Latina e Europa;",
+    "nosBalces": "Nos balcões o contrato é aberto através de um tablet, e, na Flórida, possuem contratos em português;",
+    "possuiOServio": "Possui o serviço de pedágio e o mesmo deve ser habilitado no balcão;",
+    "todasAsTarifas": "Para EUA, todas as tarifas contemplam 1 motorista adicional grátis. Para Europa, América Latina e demais localidades, solicite a inclusão outros condutores adicionais no balcão da locadora, no momento da retirada do veículo;",
+    "osCondutores": "Todos os condutores (inclusive os adicionais) devem ser habilitados e maiores de 25 anos. Se menor de 25 anos haverá cobrança de taxa (USD 30/dia)."
+  },
+  "contactPage": {
+    "entreEmContato": "Entre em contato",
+    "faleConosco": "Fale conosco",
+    "nome": "NOME",
+    "email": "EMAIL",
+    "assunto": "ASSUNTO",
+    "enviar": "Enviar"
+  },
+  "detailsPage": {
+    "vueloDeIda": "One way flight",
+    "vueloDevolta": "Vuelo de Volta",
+    "duraaoTotal": "DURAÇAO TOTAL",
+    "qtdMilhas": "QTD. MILHAS",
+    "clase": "CLASE",
+    "aerolinea": "AEROLINEA",
+    "bagagemDeMo": "{BagagemQuantidade} BAGAGEM DE MÃO",
+    "noBagagem": "NO BAGAGEM",
+    "OfertaDesde": "1 Oferta Desde",
+    "tipoDeTarifa": "Tipo de Tarifa",
+    "total": "Total",
+    "fechar": "Fechar"
+  },
+  "bestLodging": {
+    "melhoresAlojamentos": "Melhores alojamentos",
+    "montenegrinas": "Montenegrinas",
+    "islasPartas": "Islas Partas"
+  },
+  "filterCompanies": {
+    "aPartirDe": "a partir de"
+  }
 }

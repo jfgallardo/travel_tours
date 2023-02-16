@@ -6,11 +6,7 @@ import {
   woobaPrice,
   woobaTravelTime,
 } from '@/utils/unifyDataWooba';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
-import { useFiltersStore } from '@/stores/filters';
 
-const searchOptionsVoo = useSearchOptionsVooStore();
-const filters = useFiltersStore();
 export const useWoobaStore = defineStore({
   id: 'wooba',
   state: () => ({
@@ -26,110 +22,21 @@ export const useWoobaStore = defineStore({
     companies: [],
   }),
   getters: {
-    travelTime(state) {
-      return woobaTravelTime(state.outboundFlights, state.returnFlights);
-    },
-    priceGeral(state) {
-      return woobaPrice(state.outboundFlights, state.returnFlights);
-    },
-    offers(state) {
-      return state.outboundFlights[0]?.OfertasDesde || [];
-    },
-    flyFilters(state) {
-      let flyFilters = [];
-
-      switch (filters.baggage.value) {
-        case 0:
-          flyFilters = state.outboundFlights.filter(
-            (fly) =>
-              !fly.VoosIda[0].BagagemInclusa && !fly.VoosVolta[0].BagagemInclusa
-          );
-          break;
-        case 1:
-          flyFilters = state.outboundFlights.filter(
-            (fly) =>
-              fly.VoosIda[0].BagagemInclusa || fly.VoosVolta[0].BagagemInclusa
-          );
-          break;
-        default:
-          flyFilters = state.outboundFlights;
-      }
-
-      flyFilters = flyFilters.filter((fly) =>
-        filters.flightCompanies.includes(fly.CiaMandatoria.CodigoIata)
-      );
-
-      return flyFilters;
-    },
+    travelTime: (state) =>
+      woobaTravelTime(state.outboundFlights, state.returnFlights),
+    priceGeral: (state) =>
+      woobaPrice(state.outboundFlights, state.returnFlights),
+    offers: (state) => state.outboundFlights[0]?.OfertasDesde || [],
   },
   actions: {
-    async consultaOrigemDestino() {
-      const body = {
-        DataIda: `/Date(${new Date(
-          searchOptionsVoo.getDateIdaFormatter
-        ).getTime()})/`,
-        DataVolta: `/Date(${new Date(
-          searchOptionsVoo.getDateVoltaFormatter
-        ).getTime()})/`,
-        Destino: searchOptionsVoo.destiny.iata,
-        Flex: true,
-        Origem: searchOptionsVoo.origin.iata,
-        QuantidadeAdultos: searchOptionsVoo.adults,
-        QuantidadeBebes: searchOptionsVoo.babies,
-        QuantidadeCriancas: searchOptionsVoo.teenagers,
-        Recomendacao: true,
-        ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
-        QuantidadeDeVoos: 15,
-        ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
-      };
-      if (searchOptionsVoo.cabin.value) {
-        body.Cabine = searchOptionsVoo.cabin.value;
+    async consultaOrigemDestino(payload) {
+      try {
+        return await axiosClientAPI.post('api/v1/wooba/query', payload);
+      } catch (e) {
+        return e;
       }
-      this.loading = true;
-      await axiosClientAPI
-        .post('api/v1/wooba/query', body)
-        .then(({ data }) => {
-          let {
-            Exception,
-            ViagensTrecho1,
-            ViagensTrecho2,
-            OfertasDesde,
-            AirportsIataTrecho1,
-            AirportsIataTrecho2,
-            Cia,
-          } = data.data;
-
-          this.exception = Exception;
-          this.companies = Cia;
-          this.airportsFilter = AirportsIataTrecho1.concat(AirportsIataTrecho2);
-
-          if (!ViagensTrecho2) {
-            this.outboundFlights = woobaData(
-              ViagensTrecho1,
-              OfertasDesde.trechoOneOferta
-            );
-            this.returnFlights = null;
-          } else {
-            this.outboundFlights = woobaDataMultiple(
-              ViagensTrecho1,
-              OfertasDesde.trechoOneOferta
-            );
-            this.returnFlights = woobaDataMultiple(
-              ViagensTrecho2,
-              OfertasDesde.trechoTwoOferta
-            );
-          }
-        })
-        .finally(() => {
-          this.loading = false;
-        });
     },
-    async clear() {
-      this.outboundFlights = [];
-      this.returnFlights = [];
-      this.loading = false;
-    },
-    async displayMoreResults() {
+    /* async displayMoreResults() {
       const body = {
         DataIda: `/Date(${new Date(
           searchOptionsVoo.getDateIdaFormatter
@@ -194,16 +101,6 @@ export const useWoobaStore = defineStore({
           }
         })
         .finally(() => {});
-    },
-    /*async detalhesdeFamilia(payload) {
-      try {
-        return await axiosClientAPI.post(
-          'api/v1/wooba/family-details',
-          payload
-        );
-      } catch (e) {
-        return e;
-      }
     },*/
   },
 });

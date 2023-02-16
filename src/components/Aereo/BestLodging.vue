@@ -1,7 +1,7 @@
 <template>
   <div class="py-5">
     <div class="container mx-auto px-4">
-      <p class="font-medium pb-2">Melhores alojamentos</p>
+      <p class="font-medium pb-2">{{ $t('bestLodging.melhoresAlojamentos') }}</p>
       <div class="flex items-center justify-evenly space-x-4">
         <div class="hidden md:block">
           <div class="border-b border-black pb-2">
@@ -9,7 +9,7 @@
           </div>
           <div>
             <div>
-              <p class="font-light">Montenegrinas</p>
+              <p class="font-light">{{ $t('bestLodging.montenegrinas') }}</p>
             </div>
           </div>
         </div>
@@ -19,7 +19,7 @@
           </div>
           <div>
             <div>
-              <p class="font-light">Islas Partas</p>
+              <p class="font-light">{{ $t('bestLodging.islasPartas') }}</p>
             </div>
           </div>
         </div>
