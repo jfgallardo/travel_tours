@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 lg:w-1/2 md:w-auto"
+      class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 md:w-auto"
     >
       <div class="w-full">
         <NumberParcelsToPay />

@@ -26,7 +26,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"/>
         </svg>
-        <span class="animate-pulse text-sm">Searching...</span>
+        <span class="animate-pulse text-sm">{{ $t('searching') }}</span>
       </div>
 
       <button
@@ -89,14 +89,18 @@
 </template>
 
 <script setup>
-import {computed, onBeforeUpdate, ref} from 'vue';
+import { computed, onBeforeUpdate, onMounted, ref } from "vue";
 import {axiosClientAPI} from '@/plugins/axios';
+
+onMounted(() => {
+  keyword.value = props.value;
+})
 
 onBeforeUpdate(() => {
   optionsList.value = [];
 });
 
-defineProps({
+const props = defineProps({
   placeholder: {
     type: String,
     default: '',

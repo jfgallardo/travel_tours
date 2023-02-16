@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-        class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-full lg:w-1/2 md:w-auto"
+        class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-full md:w-auto"
     >
       <div class="w-full">
         <DateInput

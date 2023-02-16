@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container lg:max-w-screen-sm xl:max-w-screen-md 2xl:max-w-screen-lg mx-auto px-4 pb-20">
+    <div class="container lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl mx-auto px-4 pb-20">
       <div>
         <div class="font-medium text-xl">
           <slot name="title"></slot>

@@ -251,5 +251,8 @@
   },
   "filterCompanies": {
     "aPartirDe": "a partir de"
+  },
+  "carCategories": {
+    "companhiasInternacionais": "COMPANHIAS INTERNACIONAIS"
   }
 }

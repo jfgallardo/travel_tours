@@ -7,7 +7,7 @@
           @click="filter(fast)"
       >
         <div class="flex flex-col items-center font-medium">
-          <p class="text-xl">Recomendado</p>
+          <p class="text-xl">{{ $t('buttonFilter.recomendado') }}</p>
           <div
               v-if="loading"
               class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"
@@ -42,7 +42,7 @@
         @click="filter(cheap)"
       >
         <div class="flex flex-col items-center font-medium">
-          <p class="text-xl">Menor Precio</p>
+          <p class="text-xl">{{ $t('buttonFilter.menorPrecio') }}</p>
           <div
             v-if="loading"
             class="animate-spin h-6 w-6 border-0 border-t-2 border-gray-400 rounded-full mt-3"

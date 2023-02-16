@@ -5,11 +5,11 @@
         <a
           href="#"
           class="absolute -top-5 right-0 text-sm text-blue-600 hover:text-blue-700 underline underline-offset-1"
-          >Não sei meu CEP</a
+          >{{ $t('addressUser.noSeiMeuCep') }}</a
         >
         <TextInput
           v-model="auth.user.cep"
-          label="CEP *"
+          :label="$t('addressUser.cep')"
           name="cep"
           maska="#####-###"
         />
@@ -17,42 +17,42 @@
       <div>
         <TextInput
           v-model="auth.user.bairro"
-          label="Bairro *"
+          :label="$t('addressUser.bairro')"
           name="bairro"
         />
       </div>
       <div>
         <TextInput
           v-model="auth.user.address"
-          label="Endereço *"
+          :label="$t('addressUser.endereo')"
           name="address"
         />
       </div>
       <div>
         <TextInput
           v-model="auth.user.estado"
-          label="Estado *"
+          :label="$t('addressUser.estado')"
           name="estado"
         />
       </div>
       <div>
         <TextInput
           v-model="auth.user.number"
-          label="Número *"
+          :label="$t('addressUser.nmero')"
           name="number"
         />
       </div>
       <div>
         <TextInput
           v-model="auth.user.ciudade"
-          label="Cidade *"
+          :label="$t('addressUser.cidade')"
           name="ciudade"
         />
       </div>
       <div>
         <TextInput
           v-model="auth.user.complemento"
-          label="Complemento *"
+          :label="$t('addressUser.complemento')"
           name="complemento"
         />
       </div>

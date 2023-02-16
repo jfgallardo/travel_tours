@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch">
-    <div class="flex flex-col border border-gray-300 xl:w-full">
+    <div class="flex flex-col border border-gray-300 border-l-0 xl:w-full">
       <div class="border-b border-gray-300 py-2">
-        <span class="px-4 font-medium">Vuelos de Ida</span>
+        <span class="px-4 font-medium">{{ $t('idaVoltaFlexRender.vuelosDeIda') }}</span>
       </div>
       <div
         v-if="width < 768 && !suspense"
@@ -14,12 +14,12 @@
       <div>
         <RenderFlights
           :key-id="keyIdIda"
-          :flights="viagem.VoosIda"
+          :flights="viagem['VoosIda']"
           @select-voo="vooDetalhesOutboundFlights"
         />
       </div>
       <div class="border-y border-gray-300 py-2">
-        <span class="px-4 font-medium">Vuelos de Vuelta</span>
+        <span class="px-4 font-medium">{{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}</span>
       </div>
       <div
         v-if="width < 768 && !suspense"
@@ -30,7 +30,7 @@
       </div>
       <div>
         <RenderFlights
-          :flights="viagem.VoosVolta"
+          :flights="viagem['VoosVolta']"
           :key-id="keyIdVolta"
           @select-voo="vooDetalhesReturnFlights"
         />
@@ -75,7 +75,7 @@ const suspense = ref(true);
 const keyIdIda = computed(() => {
   let stringAleatoria = '';
   let caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  for (var i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     stringAleatoria += caracteres.charAt(
       Math.floor(Math.random() * caracteres.length)
     );
@@ -86,7 +86,7 @@ const keyIdIda = computed(() => {
 const keyIdVolta = computed(() => {
   let stringAleatoria = '';
   let caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  for (var i = 0; i < 12; i++) {
+  for (let i = 0; i < 12; i++) {
     stringAleatoria += caracteres.charAt(
       Math.floor(Math.random() * caracteres.length)
     );

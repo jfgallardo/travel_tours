@@ -51,7 +51,7 @@
       <div class="flex items-center justify-center space-x-3">
         <div class="w-32 border"></div>
         <h1 class="text-blue-700 text-3xl font-light">
-          COMPANHIAS INTERNACIONAIS
+          {{ $t('carCategories.companhiasInternacionais') }}
         </h1>
         <div class="w-32 border"></div>
       </div>

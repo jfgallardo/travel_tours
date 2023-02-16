@@ -41,17 +41,11 @@ import CommunityTravelerPhotos from '@/components/Landing/LandingCommunityTravel
 import CommunityFeedback from '@/components/Landing/LandingCommunityFeedback.vue';
 import Instagram from '@/components/Landing/LandingInstagram.vue';
 import Greeting from '@/components/Landing/LandinGreeting.vue';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
-import { useSearchOptionsHotelStore } from "@/stores/searchOptionsHotel";
 import { useUserStore } from "@/stores/user";
 
-const searchOptionsVooStore = useSearchOptionsVooStore();
-const searchOptionsHotelStore = useSearchOptionsHotelStore();
 const userStore = useUserStore();
 
 onMounted(() => {
-  searchOptionsVooStore.resetState();
-  searchOptionsHotelStore.resetState();
   userStore.resetState();
 });
 </script>

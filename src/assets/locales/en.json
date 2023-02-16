@@ -251,5 +251,12 @@
   },
   "filterCompanies": {
     "aPartirDe": "from"
+  },
+  "carCategories": {
+    "companhiasInternacionais": "COMPANHIAS INTERNACIONAIS"
+  },
+  "buttonFilter": {
+    "recomendado": "Recomendado",
+    "menorPrecio": "Menor Precio"
   }
 }

@@ -24,7 +24,7 @@
               <div
                 v-if="loading"
                 class="animate-spin h-4 w-4 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
-              <img v-else class="h-4 w-4" src="@/assets/ico/filter-search.svg" alt="search">
+              <img v-else class="h-4 w-4" src="@/assets/ico/filter-search.svg">
               <span class="text-gray-500">{{ placeholder }}</span>
             </slot>
           </div>

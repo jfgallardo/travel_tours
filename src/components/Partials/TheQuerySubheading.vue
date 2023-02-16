@@ -81,7 +81,7 @@
       <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
         <template v-if="price" #showSelected>
           <div class="flex items-center justify-around w-full">
-            <span> {{ minPriceFormatter }} - {{ maxPriceFormatter }} </span>
+            <span> {{ maxPriceFormatter }} </span>
           </div>
         </template>
         <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="price = $event"/>

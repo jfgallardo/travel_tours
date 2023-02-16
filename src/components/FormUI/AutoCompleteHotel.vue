@@ -26,7 +26,7 @@
               stroke-linecap="round"
               stroke-linejoin="round"/>
         </svg>
-        <span class="animate-pulse text-sm">Searching...</span>
+        <span class="animate-pulse text-sm">{{$t('searching')}}</span>
       </div>
 
       <button

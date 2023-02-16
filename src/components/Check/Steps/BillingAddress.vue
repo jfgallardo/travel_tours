@@ -1,12 +1,12 @@
 <template>
   <div>
     <div
-      class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-full lg:w-1/2 md:w-auto"
+      class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-full md:w-auto"
     >
       <div class="w-full flex flex-col lg:flex-row lg:space-x-2.5 space-y-6 lg:space-y-0">
         <TextInput
           v-model="auth.dataBuy.cep"
-          label="CEP *"
+          :label="$t('addressUser.cep')"
           name="cep"
           maska="#####-###"
           class="lg:w-1/2"
@@ -14,7 +14,7 @@
 
         <TextInput
           v-model="auth.dataBuy.state"
-          label="Estado *"
+          :label="$t('addressUser.estado')"
           class="lg:w-1/2"
           name="state"
           disable-field
@@ -22,7 +22,7 @@
 
         <TextInput
           v-model="auth.dataBuy.city"
-          label="Ciudade *"
+          :label="$t('addressUser.cidade')"
           class="lg:w-1/2"
           name="city"
           disable-field
@@ -32,19 +32,19 @@
       <div class="w-full">
         <TextInput
           v-model="auth.dataBuy.address"
-          label="Morada *"
+          :label="$t('addressUser.endereo')"
           name="address"
         />
       </div>
 
       <div class="w-full">
-        <TextInput v-model="auth.dataBuy.number" label="Numero" name="number" />
+        <TextInput v-model="auth.dataBuy.number" :label="$t('addressUser.nmero')" name="number" />
       </div>
 
       <div class="w-full">
         <TextInput
           v-model="auth.dataBuy.complement"
-          label="Complemento"
+          :label="$t('addressUser.complemento')"
           name="complement"
         />
       </div>
@@ -52,7 +52,7 @@
       <div class="w-full">
         <TextInput
           v-model="auth.dataBuy.district"
-          label="Bairro"
+          :label="$t('addressUser.bairro')"
           name="district"
         />
       </div>
