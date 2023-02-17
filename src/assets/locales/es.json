@@ -180,7 +180,8 @@
     "vuelosDeVuelta": "Vuelos de Vuelta"
   },
   "voosIdaVolta": {
-    "exibirMaisResultados": "Mostrar más resultados"
+    "exibirMaisResultados": "Mostrar más resultados",
+    "pesquisar": "No podemos encontrar ningún resultado, por favor busca de nuevo."
   },
   "addressUser": {
     "noSeiMeuCep": "No conozco mi CEP",

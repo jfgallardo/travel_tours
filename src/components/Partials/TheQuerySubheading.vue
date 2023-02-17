@@ -3,9 +3,9 @@
     <div>
       <ArrowLeft class="cursor-pointer mx-3" @click="$router.go(-1)" />
     </div>
-<!--grid grid-cols-9 grid-flow-row w-full h-full-->
+    <!--grid grid-cols-9 grid-flow-row w-full h-full-->
     <div class="flex overflow-x-auto xl:justify-between xl:w-full">
-      <SelectSimple :loading="woobaStore.loading" :options="bags" placeholder="Bagagem" @select-value="filters.baggage = $event">
+      <SelectSimple :loading="woobaStore.loading" :options="bags" :placeholder="$t('querySubHeading.bagagem')" @select-value="filters.baggage = $event">
         <template v-if="filters.baggage.value === 0" #selectedSpace>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6">
             <path d="M12 19C14.2091 19 16 17.2091 16 15C16 12.7909 14.2091 11 12 11C9.79086 11 8 12.7909 8 15C8 17.2091 9.79086 19 12 19Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -16,21 +16,21 @@
           </svg>
         </template>
         <template v-else #selectedSpace>
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6">
-          <path d="M12 19C14.2091 19 16 17.2091 16 15C16 12.7909 14.2091 11 12 11C9.79086 11 8 12.7909 8 15C8 17.2091 9.79086 19 12 19Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M10.44 15L11.09 15.65C11.28 15.84 11.59 15.85 11.78 15.66L13.56 14.02" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M9 22H15C19.02 22 19.74 20.39 19.95 18.43L20.7 12.43C20.97 9.99 20.27 8 16 8H8C3.73 8 3.03 9.99 3.3 12.43L4.05 18.43C4.26 20.39 4.98 22 9 22Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M7.5 7.67001V6.70001C7.5 4.45001 9.31 2.24001 11.56 2.03001C14.24 1.77001 16.5 3.88001 16.5 6.51001V7.89001" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6">
+            <path d="M12 19C14.2091 19 16 17.2091 16 15C16 12.7909 14.2091 11 12 11C9.79086 11 8 12.7909 8 15C8 17.2091 9.79086 19 12 19Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.44 15L11.09 15.65C11.28 15.84 11.59 15.85 11.78 15.66L13.56 14.02" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 22H15C19.02 22 19.74 20.39 19.95 18.43L20.7 12.43C20.97 9.99 20.27 8 16 8H8C3.73 8 3.03 9.99 3.3 12.43L4.05 18.43C4.26 20.39 4.98 22 9 22Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7.5 7.67001V6.70001C7.5 4.45001 9.31 2.24001 11.56 2.03001C14.24 1.77001 16.5 3.88001 16.5 6.51001V7.89001" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </template>
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" placeholder="Compania">
+      <SelectSimple :loading="woobaStore.loading" :placeholder="$t('querySubHeading.compania')">
         <FilterCompanies
           v-model="filters.flightCompanies" :companies="woobaStore.companies" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" placeholder="Areopuertos">
+      <SelectSimple :loading="woobaStore.loading" :placeholder="$t('querySubHeading.areopuertos')">
         <template v-if="filters.airports.length > 0" #showSelected>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 lg:h-6 lg:w-6">
             <path d="M9.02999 21.69L11.36 19.73C11.71 19.43 12.29 19.43 12.64 19.73L14.97 21.69C15.51 21.96 16.17 21.69 16.37 21.11L16.81 19.78C16.92 19.46 16.81 18.99 16.57 18.75L14.3 16.47C14.13 16.31 14 15.99 14 15.76V12.91C14 12.49 14.31 12.29 14.7 12.45L19.61 14.57C20.38 14.9 21.01 14.49 21.01 13.65V12.36C21.01 11.69 20.51 10.92 19.89 10.66L14.3 8.25001C14.14 8.18001 14 7.97001 14 7.79001V4.79001C14 3.85001 13.31 2.74001 12.47 2.31001C12.17 2.16001 11.82 2.16001 11.52 2.31001C10.68 2.74001 9.98999 3.86001 9.98999 4.80001V7.80001C9.98999 7.98001 9.84999 8.19001 9.68999 8.26001L4.10999 10.67C3.48999 10.92 2.98999 11.69 2.98999 12.36V13.65C2.98999 14.49 3.61999 14.9 4.38999 14.57L9.29999 12.45C9.67999 12.28 9.99999 12.49 9.99999 12.91V15.76C9.99999 15.99 9.86999 16.31 9.70999 16.47L7.43999 18.75C7.19999 18.99 7.08999 19.45 7.19999 19.78L7.63999 21.11C7.81999 21.69 8.47999 21.97 9.02999 21.69Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -41,7 +41,7 @@
           :airports="woobaStore.airportsFilter"/>
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" placeholder="Llegada">
+      <SelectSimple :loading="woobaStore.loading" :placeholder="$t('querySubHeading.llegada')">
         <template v-if="t_llegada" #showSelected>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 lg:h-6 lg:w-6">
             <path d="M12 13.75C11.59 13.75 11.25 13.41 11.25 13V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V13C12.75 13.41 12.41 13.75 12 13.75Z" fill="#292D32"/>
@@ -53,7 +53,7 @@
         <FilterDepartureTime :times="t_llegada" @clear="t_llegada=null" @time="t_llegada=$event" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" placeholder="Partida">
+      <SelectSimple :loading="woobaStore.loading" :placeholder="$t('querySubHeading.partida')">
         <template v-if="t_partida" #showSelected>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 lg:h-6 lg:w-6">
             <path d="M12 22.75C6.76 22.75 2.5 18.49 2.5 13.25C2.5 8.01 6.76 3.75 12 3.75C17.24 3.75 21.5 8.01 21.5 13.25C21.5 18.49 17.24 22.75 12 22.75ZM12 5.25C7.59 5.25 4 8.84 4 13.25C4 17.66 7.59 21.25 12 21.25C16.41 21.25 20 17.66 20 13.25C20 8.84 16.41 5.25 12 5.25Z" fill="#292D32"/>
@@ -64,8 +64,8 @@
         </template>
         <FilterDepartureTime :times="t_partida" @clear="t_partida=null" @time="t_partida=$event" />
       </SelectSimple>
-      
-      <SelectSimple :loading="woobaStore.loading" :options="connection" placeholder="Paradas" @select-value="filters.stops = $event">
+
+      <SelectSimple :loading="woobaStore.loading" :options="connection" :placeholder="$t('querySubHeading.paradas')" @select-value="filters.stops = $event">
         <template v-if="filters.stops" #selectedSpace>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6">
             <path d="M2.06999 4.59988C2.86999 1.13988 8.07999 1.13988 8.86999 4.59988C9.33999 6.62988 8.04999 8.34988 6.92999 9.41988C6.10999 10.1999 4.81999 10.1899 3.99999 9.41988C2.88999 8.34988 1.59999 6.62988 2.06999 4.59988Z" stroke="#292D32" stroke-width="1.5"/>
@@ -78,7 +78,7 @@
       </SelectSimple>
 
 
-      <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Precio">
+      <SelectSimple :loading="woobaStore.loading" :options="classes" :placeholder="$t('querySubHeading.precio')">
         <template v-if="price" #showSelected>
           <div class="flex items-center justify-around w-full">
             <span> {{ maxPriceFormatter }} </span>
@@ -87,10 +87,10 @@
         <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="price = $event"/>
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" placeholder="Duracion">
+      <SelectSimple :loading="woobaStore.loading" :placeholder="$t('querySubHeading.duracion')">
         <template v-if="duration" #showSelected>
           <div class="flex items-center justify-around w-full">
-            <span>Duracion {{ duration }}hrs </span>
+            <span>{{ $t('querySubHeading.duracionHrs', {duration: duration}) }} </span>
           </div>
         </template>
         <FilterDuration
@@ -99,7 +99,7 @@
           :min="woobaStore.travelTime.lessTime" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" :options="classes" placeholder="Clase" />
+      <SelectSimple :loading="woobaStore.loading" :options="classes" :placeholder="$t('querySubHeading.clase')" />
 
 
 
@@ -148,9 +148,11 @@ const maxPriceFormatter = computed(() => {
 watch(
   () => woobaStore.companies,
   (state) => {
-    filters.flightCompanies = state.map((o) => {
-      return o.CodigoIata;
-    });
+    if (state) {
+      filters.flightCompanies = state.map((o) => {
+        return o.CodigoIata;
+      });
+    }
   },
   { deep: true }
 );
