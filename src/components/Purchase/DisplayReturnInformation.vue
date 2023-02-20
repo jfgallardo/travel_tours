@@ -105,7 +105,7 @@
       </div>
       <div class="border border-t-0 border-l-0 lg:border-l border-slate-300 border-r-0">
         <div class="flex items-center justify-center h-full p-5">
-          <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 px-28 lg:px-10" :to="{path: 'checkout'}">Comprar agora</RouterLink>
+          <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 px-28 lg:px-10 font-bold" :to="{path: 'checkout'}">Comprar agora</RouterLink>
         </div>
       </div>
     </div>

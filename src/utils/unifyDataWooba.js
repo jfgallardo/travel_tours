@@ -15,6 +15,7 @@ export const woobaData = (flights, ofertasDesde) => {
         NumeroParadas: flight.NumeroParadas,
         OfertasDesde: removeDuplicates(ofertasDesde, 'company') || null,
         CiaMandatoria: flight.CiaMandatoria,
+        AirportsIata: airportsByFlight(flight),
       };
     });
   }
@@ -134,4 +135,23 @@ function removeDuplicates(originalArray, prop) {
     newArray.push(lookupObject[i]);
   }
   return newArray;
+}
+
+function airportsByFlight(flight) {
+  const vI = voosIda(flight.Voos);
+  const vV = voosVolta(flight.Voos);
+  let flights = [];
+  vI.forEach((item) => {
+    if (!flights.includes(item.Destino.CodigoIata))
+      flights.push(item.Destino.CodigoIata);
+    if (!flights.includes(item.Origem.CodigoIata))
+      flights.push(item.Origem.CodigoIata);
+  });
+  vV.forEach((item) => {
+    if (!flights.includes(item.Destino.CodigoIata))
+      flights.push(item.Destino.CodigoIata);
+    if (!flights.includes(item.Origem.CodigoIata))
+      flights.push(item.Origem.CodigoIata);
+  });
+  return flights;
 }

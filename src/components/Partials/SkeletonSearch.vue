@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex items-stretch space-x-12 pt-4">
-      <div class="flex flex-col w-full border border-l-0 border-gray-300">
+    <div class="flex items-stretch space-x-12 pt-4 px-8">
+      <div class="flex flex-col w-full border border-gray-300">
         <div class="border-b py-2">
           <span class="px-4 font-medium">Vuelos de Ida</span>
         </div>

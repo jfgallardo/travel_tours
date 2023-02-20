@@ -3,6 +3,7 @@
     <div v-if="vooDetalhes" class="grid grid-rows-2 auto-rows-max gap-3.5 2xl:gap-1 content-start">
       <div class="mt-5 2xl:mt-0.5 px-2 mb-3">
         <div class="space-y-1 text-sm font-light px-8 xl:px-2">
+          <br/>
           <p v-if="precoAdulto" class="flex items-center justify-between">
             <span class="mx-5">{{ t("adults") }}</span> <span>{{ precoAdulto }}</span>
           </p>
@@ -35,7 +36,7 @@
       </div>
       <div>
         <button
-          class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0"
+          class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0 font-bold"
           @click="goToPre"
         >
           Comprar

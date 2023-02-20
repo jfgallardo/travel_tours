@@ -65,7 +65,7 @@
         <FilterDepartureTime :times="t_partida" @clear="t_partida=null" @time="t_partida=$event" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" :options="connection" :placeholder="$t('querySubHeading.paradas')" @select-value="filters.stops = $event">
+      <SimpleStackedCheck :loading="woobaStore.loading" :options="connection" :placeholder="$t('querySubHeading.paradas')" @select-value="filters.stops = $event">
         <template v-if="filters.stops" #selectedSpace>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 xl:h-6 xl:w-6">
             <path d="M2.06999 4.59988C2.86999 1.13988 8.07999 1.13988 8.86999 4.59988C9.33999 6.62988 8.04999 8.34988 6.92999 9.41988C6.10999 10.1999 4.81999 10.1899 3.99999 9.41988C2.88999 8.34988 1.59999 6.62988 2.06999 4.59988Z" stroke="#292D32" stroke-width="1.5"/>
@@ -75,7 +75,7 @@
             <path d="M18.4862 17.5H18.4978" stroke="#292D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </template>
-      </SelectSimple>
+      </SimpleStackedCheck>
 
 
       <SelectSimple :loading="woobaStore.loading" :options="classes" :placeholder="$t('querySubHeading.precio')">
@@ -120,6 +120,7 @@ import FilterAirport from "@/components/Filters/FilterAirport.vue";
 import FilterCompanies from "@/components/Filters/FilterCompanies.vue";
 import { useCurrencyFormatter } from "@/composables/currencyFormatter";
 import { useFiltersStore } from "@/stores/filters";
+import SimpleStackedCheck from "@/components/FormUI/SimpleStackedCheck.vue";
 
 const searchOptionsVoo = useSearchOptionsVooStore();
 const woobaStore = useWoobaStore();
@@ -132,12 +133,12 @@ const price = ref('')
 const duration = ref("");
 
 
-const minPriceFormatter = computed(() => {
+/*const minPriceFormatter = computed(() => {
   return useCurrencyFormatter({
     currency: "BRL",
     value: woobaStore.priceGeral.minPrice
   });
-})
+})*/
 const maxPriceFormatter = computed(() => {
   return useCurrencyFormatter({
     currency: "BRL",
@@ -177,9 +178,9 @@ const bags = computed(() => {
 
 const connection = computed(() => {
   return [
-    { name: "Directo", value: "D" },
-    { name: "1 Parada", value: "O" },
-    { name: "2 o más Paradas", value: "M" }
+    { name: "Directo", value: 0 },
+    { name: "1 Parada", value: 1 },
+    { name: "2 o más Paradas", value: 2 }
   ];
 });
 

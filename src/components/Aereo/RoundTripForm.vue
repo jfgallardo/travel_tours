@@ -282,7 +282,6 @@ const consultar = () => {
     QuantidadeCriancas: searchOptionsVoo.teenagers,
     Recomendacao: true,
     ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
-    QuantidadeDeVoos: 15,
     ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
     ...(searchOptionsVoo.cabin.value
       ? { Cabine: searchOptionsVoo.cabin.value }

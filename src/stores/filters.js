@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useWoobaStore } from '@/stores/wooba';
+import { arrayAinB } from '@/utils/filterItems';
 
 const woobaStore = useWoobaStore();
 
@@ -41,9 +42,10 @@ export const useFiltersStore = defineStore('filters', {
           state.flightCompanies.includes(fly.CiaMandatoria.CodigoIata)
         );
 
-        return flyFilters;
+        flyFilters = flyFilters.filter((fly) =>
+          arrayAinB(state.airports, fly.AirportsIata)
+        );
       }
-
       return flyFilters;
     },
   },

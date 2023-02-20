@@ -5,12 +5,15 @@
     <SkeletonSearch />
   </div>
   <template v-else>
-    <div v-if="showData">
+    <div v-if="showData" class="pb-24">
+      <div class="px-8 pt-6 font-semibold">{{filterStore.flyFilters.length}} Resultados </div>
+      <TransitionGroup name="list" tag="ul">
       <div v-for="viagem in filterStore.flyFilters" :key="viagem.Key">
         <IdaVoltaFlex :viagem="viagem" />
-        <br />
       </div>
-      <div class="flex justify-center">
+      </TransitionGroup>
+
+<!--      <div class="flex justify-center pb-24">
         <button
           class="flex items-center space-x-2 bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 disabled:bg-blue-400 disabled:opacity-50"
           :disabled="disableBottom"
@@ -48,7 +51,7 @@
             />
           </svg>
         </button>
-      </div>
+      </div>-->
     </div>
     <div v-else>
       <div class="grid px-4 pt-28 bg-white place-content-center">
@@ -65,21 +68,22 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import ButtonFilter from '@/components/Aereo/ButtonFilter.vue';
 import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
 import { useWoobaStore } from '@/stores/wooba';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import IdaVoltaFlex from '@/components/Aereo/IdaVoltaFlexRender.vue';
 //import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
 import { useFiltersStore } from '@/stores/filters';
 
 const woobaStore = useWoobaStore();
 const filterStore = useFiltersStore();
-const searchOptionsVoo = useSearchOptionsVooStore();
 
-let loadData = ref(false);
-const displayResults = () => {
+const showData = computed(() => {
+  return filterStore.flyFilters.length > 0;
+});
+
+/*const displayResults = () => {
   loadData.value = true;
   searchOptionsVoo.quantidadeDeVoos = searchOptionsVoo.quantidadeDeVoos + 10;
   woobaStore.displayMoreResults().then(() => {
@@ -89,11 +93,19 @@ const displayResults = () => {
 
 const disableBottom = computed(() => {
   return 50 === woobaStore.outboundFlights.length;
-});
+});*/
 
-const showData = computed(() => {
-  return filterStore.flyFilters.length > 0;
-});
+
 </script>
 
-<style scoped></style>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>

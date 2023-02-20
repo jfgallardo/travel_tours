@@ -5,12 +5,12 @@
         <div class="flex items-center justify-around ">
           <teleport v-if="width < 768 && !suspense" :to="`#${keyId}Picture`">
             <div class="flex items-center space-x-3 ">
-              <img :src="initVoo.Icone" />
+              <img :src="initVoo.Icone" class="w-8 h-8"/>
               <p class="text-sm text-center">{{ FlightCodeString }}</p>
             </div>
           </teleport>
           <div v-else class="flex flex-col items-center space-y-3 w-32">
-            <img :src="initVoo.Icone" />
+            <img :src="initVoo.Icone" class="h-7"/>
             <p class="text-sm text-center">{{ FlightCodeString }}</p>
           </div>
 
