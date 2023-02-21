@@ -18,24 +18,26 @@ export const useFiltersStore = defineStore('filters', {
   }),
   getters: {
     flyFilters: (state) => {
-      let flyFilters = [];
+      let flyFilters = woobaStore.outboundFlights;
       if (woobaStore.outboundFlights.length > 0) {
-        switch (state.baggage.value) {
-          case 0:
-            flyFilters = woobaStore.outboundFlights.filter(
-              (fly) =>
-                !fly.VoosIda[0].BagagemInclusa &&
-                !fly.VoosVolta[0].BagagemInclusa
-            );
-            break;
-          case 1:
-            flyFilters = woobaStore.outboundFlights.filter(
-              (fly) =>
-                fly.VoosIda[0].BagagemInclusa || fly.VoosVolta[0].BagagemInclusa
-            );
-            break;
-          default:
-            flyFilters = woobaStore.outboundFlights;
+        if (state.baggage.value === 1) {
+          flyFilters = flyFilters.filter((fly) => fly.Baggage);
+        } else if (state.baggage.value === 0) {
+          flyFilters = flyFilters.filter((fly) => !fly.Baggage);
+        }
+
+        if (state.stops.value === 0) {
+          flyFilters = woobaStore.outboundFlights.filter(
+            (fly) => fly.NumeroParadas - 1 === 0
+          );
+        } else if (state.stops.value === 1) {
+          flyFilters = woobaStore.outboundFlights.filter(
+            (fly) => fly.NumeroParadas - 1 === 1
+          );
+        } else if (state.stops.value === 2) {
+          flyFilters = woobaStore.outboundFlights.filter(
+            (fly) => fly.NumeroParadas - 1 >= 2
+          );
         }
 
         flyFilters = flyFilters.filter((fly) =>
@@ -45,6 +47,20 @@ export const useFiltersStore = defineStore('filters', {
         flyFilters = flyFilters.filter((fly) =>
           arrayAinB(state.airports, fly.AirportsIata)
         );
+
+        flyFilters = flyFilters.filter(
+          (fly) => +fly.Preco.TotalGeral >= +state.priceRange
+        );
+
+        flyFilters = flyFilters.filter(
+          (fly) => +fly.TempoTotal.split(':')[0] >= +state.hoursTravel
+        );
+
+        if (state.travelClass.name) {
+          flyFilters = flyFilters.filter((fly) =>
+            fly.Cabine.includes(state.travelClass.name)
+          );
+        }
       }
       return flyFilters;
     },

@@ -79,27 +79,33 @@
 
 
       <SelectSimple :loading="woobaStore.loading" :options="classes" :placeholder="$t('querySubHeading.precio')">
-        <template v-if="price" #showSelected>
+        <template v-if="filters.priceRange" #showSelected>
           <div class="flex items-center justify-around w-full">
             <span> {{ maxPriceFormatter }} </span>
           </div>
         </template>
-        <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="price = $event"/>
+        <FilterPrice :min-price="woobaStore.priceGeral.minPrice" :max-price="woobaStore.priceGeral.maxPrice" @price="filters.priceRange = $event"/>
       </SelectSimple>
 
       <SelectSimple :loading="woobaStore.loading" :placeholder="$t('querySubHeading.duracion')">
-        <template v-if="duration" #showSelected>
+        <template v-if="filters.hoursTravel" #showSelected>
           <div class="flex items-center justify-around w-full">
-            <span>{{ $t('querySubHeading.duracionHrs', {duration: duration}) }} </span>
+            <span>{{ $t('querySubHeading.duracionHrs', {duration: filters.hoursTravel}) }} </span>
           </div>
         </template>
         <FilterDuration
-          v-model="duration"
+          v-model="filters.hoursTravel"
           :max="woobaStore.travelTime.longerTime"
           :min="woobaStore.travelTime.lessTime" />
       </SelectSimple>
 
-      <SelectSimple :loading="woobaStore.loading" :options="classes" :placeholder="$t('querySubHeading.clase')" />
+      <SelectSimple :loading="woobaStore.loading" :options="classes" :placeholder="$t('querySubHeading.clase')"  @select-value="filters.travelClass = $event">
+        <template v-if="filters.travelClass.name !== ''" #selectedSpace>
+          <div class="flex items-center justify-around w-full">
+            <span class="text-sm"> {{filters.travelClass.name}}</span>
+          </div>
+        </template>
+      </SelectSimple>
 
 
 
@@ -128,10 +134,6 @@ const filters = useFiltersStore();
 
 const t_llegada = ref(null);
 const t_partida = ref(null);
-//FILTERS
-const price = ref('')
-const duration = ref("");
-
 
 /*const minPriceFormatter = computed(() => {
   return useCurrencyFormatter({
@@ -142,7 +144,7 @@ const duration = ref("");
 const maxPriceFormatter = computed(() => {
   return useCurrencyFormatter({
     currency: "BRL",
-    value: price.value
+    value: filters.priceRange
   });
 })
 

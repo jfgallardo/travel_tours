@@ -16,6 +16,8 @@ export const woobaData = (flights, ofertasDesde) => {
         OfertasDesde: removeDuplicates(ofertasDesde, 'company') || null,
         CiaMandatoria: flight.CiaMandatoria,
         AirportsIata: airportsByFlight(flight),
+        Baggage: isFlightWithBaggage(flight),
+        Cabine: typeCabine(flight),
       };
     });
   }
@@ -126,9 +128,12 @@ function timeFlights(initial, end) {
 function removeDuplicates(originalArray, prop) {
   let newArray = [];
   let lookupObject = {};
+  let originalArraySort = originalArray.sort(function (a, b) {
+    return a.offers > b.offers ? -1 : a.offers < b.offers ? 1 : 0;
+  });
 
-  for (let i in originalArray) {
-    lookupObject[originalArray[i][prop]] = originalArray[i];
+  for (let i in originalArraySort) {
+    lookupObject[originalArraySort[i][prop]] = originalArraySort[i];
   }
 
   for (let i in lookupObject) {
@@ -154,4 +159,28 @@ function airportsByFlight(flight) {
       flights.push(item.Origem.CodigoIata);
   });
   return flights;
+}
+
+function isFlightWithBaggage(flight) {
+  flight.Voos.forEach((o) => {
+    if (o.BagagemInclusa) return true;
+  });
+  return false;
+}
+
+function typeCabine(flight) {
+  const vI = voosIda(flight.Voos);
+  const vV = voosVolta(flight.Voos);
+  let cabin = [];
+
+  vI.forEach((item) => {
+    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
+    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
+  });
+  vV.forEach((item) => {
+    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
+    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
+  });
+
+  return cabin;
 }
