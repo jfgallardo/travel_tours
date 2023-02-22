@@ -243,7 +243,6 @@ const consultar = () => {
     DataIda: `/Date(${new Date(
       searchOptionsVooStore.getDateIdaFormatter
     ).getTime()})/`,
-    DataVolta: '0001-01-01',
     Destino: searchOptionsVooStore.destiny.iata,
     Flex: true,
     Origem: searchOptionsVooStore.origin.iata,

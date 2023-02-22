@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col xl:flex-row 2xl:items-stretch px-8 py-2">
-    <div class="flex flex-col border border-gray-300 xl:w-full">
+  <div class="flex flex-col xl:flex-row 2xl:items-stretch px-6 py-2">
+    <div class="flex flex-col justify-around border border-gray-300 xl:w-full">
       <div class="border-b border-gray-300 py-2">
         <span class="px-4 font-medium">{{ $t('idaVoltaFlexRender.vuelosDeIda') }}</span>
       </div>
@@ -18,23 +18,26 @@
           @select-voo="vooDetalhesOutboundFlights"
         />
       </div>
-      <div class="border-y border-gray-300 py-2">
-        <span class="px-4 font-medium">{{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}</span>
-      </div>
-      <div
-        v-if="width < 768 && !suspense"
-        class="border-b border-t-0 py-2 flex items-center justify-evenly"
-      >
-        <div :id="`${keyIdVolta}Picture`"></div>
-        <div :id="keyIdVolta"></div>
-      </div>
-      <div>
-        <RenderFlights
-          :flights="viagem['VoosVolta']"
-          :key-id="keyIdVolta"
-          @select-voo="vooDetalhesReturnFlights"
-        />
-      </div>
+
+      <template v-if="viagem['VoosVolta'].length > 0">
+        <div class="border-y border-gray-300 py-2">
+          <span class="px-4 font-medium">{{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}</span>
+        </div>
+        <div
+          v-if="width < 768 && !suspense"
+          class="border-b border-t-0 py-2 flex items-center justify-evenly"
+        >
+          <div :id="`${keyIdVolta}Picture`"></div>
+          <div :id="keyIdVolta"></div>
+        </div>
+        <div>
+          <RenderFlights
+            :flights="viagem['VoosVolta']"
+            :key-id="keyIdVolta"
+            @select-voo="vooDetalhesReturnFlights"
+          />
+        </div>
+      </template>
     </div>
 
     <div

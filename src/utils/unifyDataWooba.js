@@ -69,9 +69,10 @@ export const woobaTravelTime = (flightsA, flightsB) => {
       arrayVoos.push(
         timeFlights(o.VoosIda[0], o.VoosIda[o.VoosIda.length - 1])
       );
-      arrayVoos.push(
-        timeFlights(o.VoosVolta[0], o.VoosVolta[o.VoosVolta.length - 1])
-      );
+      if (o.VoosVolta.length > 0)
+        arrayVoos.push(
+          timeFlights(o.VoosVolta[0], o.VoosVolta[o.VoosVolta.length - 1])
+        );
     });
     return {
       lessTime: Math.min(...arrayVoos),
