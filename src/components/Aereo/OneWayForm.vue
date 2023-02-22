@@ -152,7 +152,7 @@
   </div>
 </template>
 <script setup>
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useMoblixStore } from '@/stores/moblix';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
@@ -161,15 +161,20 @@ import Check from '@/components/FormUI/CheckInput.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
-import Toastify from 'toastify-js';
 import { useI18n } from 'vue-i18n';
 import CabineComponent from "@/components/FormUI/CabineComponent.vue";
+import { inject } from "vue";
+import { useAlertStore } from "@/stores/alert";
+import { useWoobaStore } from "@/stores/wooba";
+import { woobaData, woobaDataMultiple } from "@/utils/unifyDataWooba";
 
 const moblixStore = useMoblixStore();
 const searchOptionsVooStore = useSearchOptionsVooStore();
 const router = useRouter();
-const route = useRoute();
 const { t } = useI18n();
+const $cookies = inject('$cookies');
+const alertStore = useAlertStore();
+const woobaStore = useWoobaStore();
 
 const addUp = (e) => {
   if (e === t('adults') && searchOptionsVooStore.adults < 8) {
@@ -202,75 +207,98 @@ const changeDestinations = () => {
   searchOptionsVooStore.destiny.iata = temporaryIata;
 };
 
-const formatterDateS = (date) => {
-  let dateParts = date.split('/');
-  return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+const saveCookiesSearch = () => {
+  const dataSearch = {
+    dateOfDeparture: searchOptionsVooStore.dateOfDeparture,
+    origin: searchOptionsVooStore.origin,
+    destiny: searchOptionsVooStore.destiny,
+    cabin: searchOptionsVooStore.cabin,
+    adults: searchOptionsVooStore.adults,
+    teenagers: searchOptionsVooStore.teenagers,
+    babies: searchOptionsVooStore.babies,
+    onlyBaggage: searchOptionsVooStore.onlyBaggage,
+    apenasVoosDiretos: searchOptionsVooStore.apenasVoosDiretos,
+  };
+  $cookies.set('dataSearch', dataSearch);
 };
 
 const consultar = () => {
-  let payload = {
-    Origem: searchOptionsVooStore.origin.iata,
-    Destino: searchOptionsVooStore.destiny.iata,
-    Ida: formatterDateS(searchOptionsVooStore.dateOfDeparture),
-    Volta: '0001-01-01',
-    Adultos: searchOptionsVooStore.adults,
-    Criancas: searchOptionsVooStore.teenagers,
-    Bebes: searchOptionsVooStore.babies,
-    Companhia: 1,
-    Cabine: searchOptionsVooStore.cabine,
-  };
-
-  if (!payload.Origem || !payload.Destino || !payload.Ida) {
-    Toastify({
-      text: 'Por favor, verifique, existen campos vacios o incorrectos',
-      duration: 3000,
-      gravity: 'bottom',
-      position: 'center',
-      stopOnFocus: true,
-      style: {
-        background: 'linear-gradient(to right,  #ff0000, #ff6666)',
-      },
-    }).showToast();
+  if (
+    !searchOptionsVooStore.origin.iata ||
+    !searchOptionsVooStore.destiny.iata ||
+    !searchOptionsVooStore.getDateIdaFormatter
+  ) {
+    alertStore.showMsg({
+      message: 'Por favor, verifique, existen campos vacios o incorrectos',
+      backgrColor: 'bg-red-100',
+      textColor: 'text-red-700',
+    });
     return;
   }
 
-  if (route.name === 'AereoFlightQuery') {
-    router
-      .push({
-        name: 'AereoFlightQuery',
-        params: {
-          source: payload.Origem,
-          destiny: payload.Destino,
-          departure_date: payload.Ida,
-          return_date: '0001-01-01',
-        },
-        query: {
-          adults: payload.Adultos,
-          childs: payload.Criancas,
-          bebes: payload.Bebes,
-          company: 1,
-        },
-      })
-      .then(() => {
-        moblixStore.consultaAereo(payload);
-      });
-  } else {
-    router.push({
-      name: 'AereoFlightQuery',
-      params: {
-        source: payload.Origem,
-        destiny: payload.Destino,
-        departure_date: payload.Ida,
-        return_date: '0001-01-01',
-      },
-      query: {
-        adults: payload.Adultos,
-        childs: payload.Criancas,
-        bebes: payload.Bebes,
-        company: 1,
-      },
+  saveCookiesSearch();
+  router.push({name: 'VoosIdaVolta'})
+
+  const body = {
+    DataIda: `/Date(${new Date(
+      searchOptionsVooStore.getDateIdaFormatter
+    ).getTime()})/`,
+    DataVolta: '0001-01-01',
+    Destino: searchOptionsVooStore.destiny.iata,
+    Flex: true,
+    Origem: searchOptionsVooStore.origin.iata,
+    QuantidadeAdultos: searchOptionsVooStore.adults,
+    QuantidadeBebes: searchOptionsVooStore.babies,
+    QuantidadeCriancas: searchOptionsVooStore.teenagers,
+    Recomendacao: true,
+    ApenasVoosComBagagem: searchOptionsVooStore.onlyBaggage,
+    ApenasVoosDiretos: searchOptionsVooStore.apenasVoosDiretos,
+    ...(searchOptionsVooStore.cabin.value
+      ? { Cabine: searchOptionsVooStore.cabin.value }
+      : {}),
+  };
+
+  woobaStore.loading = true;
+
+  woobaStore
+    .consultaOrigemDestino(body)
+    .then(({ data }) => {
+      let {
+        Exception,
+        ViagensTrecho1,
+        ViagensTrecho2,
+        OfertasDesde,
+        AirportsIataTrecho1,
+        AirportsIataTrecho2,
+        Cia,
+      } = data.data;
+
+      woobaStore.exception = Exception;
+      woobaStore.companies = Cia;
+      woobaStore.airportsFilter =
+        AirportsIataTrecho1.concat(AirportsIataTrecho2);
+
+      if (!ViagensTrecho2) {
+        woobaStore.outboundFlights = woobaData(
+          ViagensTrecho1,
+          OfertasDesde.trechoOneOferta
+        );
+        woobaStore.returnFlights = null;
+      } else {
+        woobaStore.outboundFlights = woobaDataMultiple(
+          ViagensTrecho1,
+          OfertasDesde.trechoOneOferta
+        );
+        woobaStore.returnFlights = woobaDataMultiple(
+          ViagensTrecho2,
+          OfertasDesde.trechoTwoOferta
+        );
+      }
+      woobaStore.loading = false;
+    })
+    .catch(() => {
+      woobaStore.loading = false;
     });
-  }
 };
 </script>
 <style scoped></style>

@@ -244,7 +244,6 @@ const saveCookiesSearch = () => {
     teenagers: searchOptionsVoo.teenagers,
     babies: searchOptionsVoo.babies,
     onlyBaggage: searchOptionsVoo.onlyBaggage,
-    quantidadeDeVoos: 10,
     apenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
   };
   $cookies.set('dataSearch', dataSearch);

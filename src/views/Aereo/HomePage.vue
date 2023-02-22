@@ -1,29 +1,7 @@
 <template>
   <LayoutTwoViews>
     <template #aside>
-      <div class="flex items-center justify-around pt-6 px-4">
-        <button
-          ref="roundtrip"
-          class="py-3 w-full border border-gray-400"
-          @click="changeTab(RoundTrip, roundtrip)"
-        >
-          {{ t('aereoHomePage.titleRoundTrip') }}
-        </button>
-        <button
-          ref="go"
-          class="py-3 w-full border-y border-gray-400"
-          @click="changeTab(OneWay, go)"
-        >
-          {{ t('aereoHomePage.titleOneWay') }}
-        </button>
-        <button
-          ref="manycities"
-          class="py-3 px-1.5 w-full border border-gray-400"
-          @click="changeTab(ManyCities, manycities)"
-        >
-          {{ t('aereoHomePage.titleManyCities') }}
-        </button>
-      </div>
+      <ButtonTravel @selected-button="changeTab"/>
       <div>
         <transition name="fade" mode="out-in">
           <component :is="selectedComponent"></component>
@@ -38,48 +16,32 @@
 </template>
 
 <script setup>
-import { ref, markRaw, onMounted, onUpdated, inject } from 'vue';
+import { ref, markRaw, onMounted, inject } from 'vue';
 import { RouterView } from 'vue-router';
 import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
 import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
 import OneWay from '@/components/Aereo/OneWayForm.vue';
-import { useI18n } from 'vue-i18n';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+import ButtonTravel from "@/components/Partials/ButtonTravel.vue";
 
 const storeSearch = useSearchOptionsVooStore();
 const $cookies = inject('$cookies');
 
 onMounted(() => {
-  selectedComponent.value = markRaw(RoundTrip);
-  roundtrip.value.classList.add('active');
   storeSearch.$reset();
   if ($cookies.isKey('dataSearch')) setData();
 });
 
-onUpdated(() => {
-  if (roundtrip.value) {
-    roundtrip.value.classList.add('active');
-  }
-});
-
 let selectedComponent = ref(null);
+const selectComponent = ref({
+  RoundTrip: RoundTrip,
+  ManyCities: ManyCities,
+  OneWay: OneWay
+})
 
-const roundtrip = ref(null);
-const go = ref(null);
-const manycities = ref(null);
-const { t } = useI18n();
-
-const cleanRefs = () => {
-  roundtrip.value.classList.remove('active');
-  go.value.classList.remove('active');
-  manycities.value.classList.remove('active');
-};
-
-const changeTab = (newTab, ref) => {
-  cleanRefs();
-  ref.classList.add('active');
-  selectedComponent.value = markRaw(newTab);
+const changeTab = (e) => {
+  selectedComponent.value = markRaw(selectComponent.value[e]);
 };
 
 const setData = () => {
@@ -99,11 +61,6 @@ const setData = () => {
 </script>
 
 <style scoped>
-.active {
-  background-color: black;
-  color: white;
-}
-
 ::-webkit-scrollbar {
   display: none;
 }
