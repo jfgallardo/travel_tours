@@ -113,6 +113,7 @@
           </tbody>
         </table>
         <table
+          v-if="user.vooSelected.VoosVolta.length > 0"
           class="table-fixed border border-t-0 border-gray-200 w-full border-spacing-2 border-separate"
         >
           <tbody>
