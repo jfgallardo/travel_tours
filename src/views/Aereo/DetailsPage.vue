@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="flex flex-col lg:grid lg:grid-cols-2 lg:grid-flow-row">
+    <div class="flex flex-col lg:grid lg:grid-cols-5 lg:grid-flow-row">
       <div
-        class="flex items-center lg:col-span-2 justify-between border border-slate-300 p-3"
+        class="flex items-center lg:col-span-5 justify-between border border-slate-300 p-3"
       >
         <div
           class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 items-center lg:space-x-5"
@@ -29,14 +29,14 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 lg:row-span-5">
+      <div class="border border-t-0 border-slate-300 lg:row-span-5 lg:col-span-3">
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in flights" :key="item.Numero">
             <PlaneLine v-bind="item" />
           </template>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
         <div class="flex items-center justify-between space-x-3.5">
           <div>
             <span>{{ initVoo.Origem.CodigoIata }}&nbsp;&nbsp;</span>
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
         <div class="flex items-center justify-between">
           <span>DURAÇAO TOTAL</span>
           <span class="font-bold">{{ duration }}</span>
@@ -66,19 +66,19 @@
           <span class="font-bold">7.000</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
         <div class="flex items-center justify-between">
           <span>CLASE</span>
           <span class="font-bold">{{ initVoo.Cabine }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
         <div class="flex items-center justify-between">
           <span>AEROLINEA</span>
           <span class="font-bold">{{ ciaMandatoria.Descricao }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6">
+      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
         <div
           v-if="initVoo.BagagemInclusa"
           class="flex items-center justify-between"
@@ -117,7 +117,7 @@
         </div>
       </div>
     </div>
-    <div class="lg:grid lg:grid-cols-5 lg:justify-items-start">
+    <div class="lg:grid lg:grid-cols-5 lg:grid-flow-row">
       <div
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:px-2 lg:py-8"
       >
@@ -162,13 +162,13 @@
       </div>
 
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:place-self-center"
+        class="py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:place-self-center"
       >
         <div
           class="flex items-center justify-center lg:flex-col lg:justify-center lg:pt-8 lg:pr-4"
         >
           <button
-            class="bg-blue-700 hover:bg-blue-800 text-white py-4 px-36 lg:px-14 font-semibold"
+            class="bg-blue-700 hover:bg-blue-800 text-white py-4 px-36 lg:px-14 font-bold"
             @click="$emit('closeDetails')"
           >
             Fechar

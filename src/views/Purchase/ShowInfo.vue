@@ -2,7 +2,7 @@
   <div>
     <DisplayOutboundInformation :voo-selected="userStore.vooSelected"/>
     <br>
-    <DisplayReturnInformation :voo-selected="userStore.vooSelected" />
+    <DisplayReturnInformation v-if="userStore.vooSelected.VoosVolta.length > 0" :voo-selected="userStore.vooSelected"/>
   </div>
 </template>
 

@@ -87,27 +87,30 @@
         </div>
       </div>
 
-      <div class="border border-t-0 lg:border-l-0 lg:border-r-0 border-slate-300">
-        <div class="grid grid-cols-3 grid-rows-1 h-full">
-          <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-            <span class="text-3xl lg:text-xl">Tarifa</span>
-            <span>{{tarifa}}</span>
-          </div>
-          <div class="border-r border-slate-300 flex flex-col items-center justify-center">
-            <span class="text-2xl lg:text-xl text-center">Taxas e encargos</span>
-            <span>{{ valorTotalTaxas }}</span>
-          </div>
-          <div class="flex flex-col items-center justify-center">
-            <span class="text-3xl lg:text-xl">Total</span>
-            <span>{{ valorTotal }}</span>
+      <template v-if="vooSelected.VoosVolta.length > 0">
+        <div class="border border-t-0 lg:border-l-0 lg:border-r-0 border-slate-300">
+          <div class="grid grid-cols-3 grid-rows-1 h-full">
+            <div class="border-r border-slate-300 flex flex-col items-center justify-center">
+              <span class="text-3xl lg:text-xl">Tarifa</span>
+              <span>{{tarifa}}</span>
+            </div>
+            <div class="border-r border-slate-300 flex flex-col items-center justify-center">
+              <span class="text-2xl lg:text-xl text-center">Taxas e encargos</span>
+              <span>{{ valorTotalTaxas }}</span>
+            </div>
+            <div class="flex flex-col items-center justify-center">
+              <span class="text-3xl lg:text-xl">Total</span>
+              <span>{{ valorTotal }}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="border border-t-0 border-l-0 lg:border-l border-slate-300 border-r-0">
-        <div class="flex items-center justify-center h-full p-5">
-          <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 px-28 lg:px-10 font-bold" :to="{path: 'checkout'}">Comprar agora</RouterLink>
+        <div class="border border-t-0 border-l-0 lg:border-l border-slate-300 border-r-0">
+          <div class="flex items-center justify-center h-full p-5">
+            <RouterLink class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 px-28 lg:px-10 font-bold" :to="{path: 'checkout'}">Comprar agora</RouterLink>
+          </div>
         </div>
-      </div>
+      </template>
+
     </div>
   </div>
 </template>
