@@ -13,6 +13,30 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
     onlyBaggage: false,
     quantidadeDeVoos: 10,
     apenasVoosDiretos: false,
+    multiplosTrechos: [
+      {
+        departureDate: '',
+        destino: {
+          string: '',
+          iata: '',
+        },
+        origem: {
+          string: '',
+          iata: '',
+        },
+      },
+      {
+        departureDate: '',
+        destino: {
+          string: '',
+          iata: '',
+        },
+        origem: {
+          string: '',
+          iata: '',
+        },
+      },
+    ],
   }),
   getters: {
     getDateIdaFormatter: (state) => {

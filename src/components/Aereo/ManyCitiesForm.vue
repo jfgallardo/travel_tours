@@ -7,13 +7,22 @@
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{ t('adults', searchOptionsVooStore.adults) }}</span>
-              <span>{{ t('children', searchOptionsVooStore.teenagers) }}</span>
-              <span>{{ t('babies', searchOptionsVooStore.babies) }}</span>
+              <span
+                >{{ searchOptionsVooStore.adults }}
+                {{ t('adults', searchOptionsVooStore.adults) }}</span
+              >
+              <span
+                >{{ searchOptionsVooStore.teenagers }}
+                {{ t('children', searchOptionsVooStore.teenagers) }}</span
+              >
+              <span
+                >{{ searchOptionsVooStore.babies }}
+                {{ t('babies', searchOptionsVooStore.babies) }}</span
+              >
             </div>
           </template>
           <template #dropdown>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between px-4">
               <ManageItems
                 v-model="searchOptionsVooStore.adults"
                 subtitle="+12 anos"
@@ -43,21 +52,15 @@
           </template>
         </Dropddown>
 
-        <Select
-          :label="t('roundTripForm.labelClassecabine')"
-          :selected="searchOptionsVooStore.cabin"
-          :options="options"
-          @select-value="
-            (e) => {
-              searchOptionsVooStore.cabin = e;
-            }
-          "
-        />
+        <CabineComponent />
       </div>
 
       <div class="flex flex-col space-y-2 px-4">
         <TransitionGroup name="list">
-          <template v-for="(trecho, index) in multiplosTrechos" :key="index">
+          <template
+            v-for="(trecho, index) in searchOptionsVooStore.multiplosTrechos"
+            :key="index"
+          >
             <div class="grid gap-2.5 relative">
               <AutoComplete
                 :label="t('roundTripForm.labelDesde')"
@@ -125,12 +128,12 @@
         </button>
         <button
           class="bg-blue-700 hover:bg-blue-800 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait"
-          :disabled="moblixStore.loading"
+          :disabled="woobaStore.loading"
           @click="consultar()"
         >
           <span>{{ t('roundTripForm.pesquisarVoos') }}</span>
           <div
-            v-if="moblixStore.loading"
+            v-if="woobaStore.loading"
             class="absolute right-2 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
           ></div>
           <ArrowRight v-else fill-color="white" class="absolute right-2" />
@@ -141,53 +144,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { inject } from 'vue';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
-import Select from '@/components/FormUI/TheSelect.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
+import CabineComponent from '@/components/FormUI/CabineComponent.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
-import { useMoblixStore } from '@/stores/moblix';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
-import Toastify from 'toastify-js';
 import { useI18n } from 'vue-i18n';
+import { useAlertStore } from '@/stores/alert';
+import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
+import { useRouter } from 'vue-router';
+import { useWoobaStore } from '@/stores/wooba';
+import { useFormatterDateWooba } from "@/composables/formatter";
 
-const moblixStore = useMoblixStore();
 const searchOptionsVooStore = useSearchOptionsVooStore();
 const { t } = useI18n();
-
-const multiplosTrechos = ref([
-  {
-    departureDate: '',
-    destino: {
-      string: '',
-      iata: '',
-    },
-    origem: {
-      string: '',
-      iata: '',
-    },
-  },
-  {
-    departureDate: '',
-    destino: {
-      string: '',
-      iata: '',
-    },
-    origem: {
-      string: '',
-      iata: '',
-    },
-  },
-]);
-
-const options = [
-  { label: 'Econômica', value: 0 },
-  { label: 'Executiva', value: 2 },
-  { label: 'Primeira Classe', value: 1 },
-  { label: 'Todas', value: -1 },
-];
+const $cookies = inject('$cookies');
+const alertStore = useAlertStore();
+const router = useRouter();
+const woobaStore = useWoobaStore();
 
 const addUp = (e) => {
   if (e === t('adults') && searchOptionsVooStore.adults < 8) {
@@ -209,9 +186,20 @@ const takeOff = (e) => {
   }
 };
 
+const saveCookiesSearch = () => {
+  const dataSearch = {
+    cabin: searchOptionsVooStore.cabin,
+    adults: searchOptionsVooStore.adults,
+    teenagers: searchOptionsVooStore.teenagers,
+    babies: searchOptionsVooStore.babies,
+    multiplosTrechos: searchOptionsVooStore.multiplosTrechos,
+  };
+  $cookies.set('dataSearch', dataSearch);
+};
+
 const addV = () => {
-  if (multiplosTrechos.value.length < 5) {
-    multiplosTrechos.value.push({
+  if (searchOptionsVooStore.multiplosTrechos.length < 5) {
+    searchOptionsVooStore.multiplosTrechos.push({
       close: true,
       departureDate: '',
       destino: {
@@ -224,22 +212,135 @@ const addV = () => {
       },
     });
   } else {
-    Toastify({
-      text: 'Você só pode adicionar até cinco (5) voos',
-      duration: 3000,
-      gravity: 'bottom',
-      position: 'center',
-      stopOnFocus: true,
-      style: {
-        background: 'linear-gradient(to right,  #0564fc, #5b92eb)',
-      },
-      onClick: function () {},
-    }).showToast();
+    alertStore.showMsg({
+      message: 'Você só pode adicionar até cinco (5) voos',
+      backgrColor: 'bg-red-100',
+      textColor: 'text-red-700',
+    });
   }
 };
 
 const deleteField = (i) => {
-  multiplosTrechos.value.splice(i, 1);
+  searchOptionsVooStore.multiplosTrechos.splice(i, 1);
+};
+
+const consultar = () => {
+  const t1 = searchOptionsVooStore.multiplosTrechos[0];
+  const t2 = searchOptionsVooStore.multiplosTrechos[1];
+
+  if (
+    !t1.departureDate ||
+    !t1.destino.string ||
+    !t1.destino.iata ||
+    !t1.origem.string ||
+    !t1.origem.iata ||
+    !t2.departureDate ||
+    !t2.destino.string ||
+    !t2.destino.iata ||
+    !t2.origem.string ||
+    !t2.origem.iata
+  ) {
+    alertStore.showMsg({
+      message: 'Por favor, verifique, existen campos vacios o incorrectos',
+      backgrColor: 'bg-red-100',
+      textColor: 'text-red-700',
+    });
+    return;
+  }
+
+  saveCookiesSearch();
+
+  const body = {
+    "BuscarVoosComBagagem": searchOptionsVooStore.onlyBaggage,
+    ...(searchOptionsVooStore.cabin.value
+      ? { Cabine: searchOptionsVooStore.cabin.value }
+      : {}),
+    "DataIda": `/Date(${new Date(
+      useFormatterDateWooba(t1.departureDate)
+    ).getTime()})/`,
+    "Destino": t1.destino.iata,
+    "Flex": true,
+    "MultiplosTrechos":searchOptionsVooStore.multiplosTrechos.map((o) => {
+      return {
+        "Data": `/Date(${new Date(
+          useFormatterDateWooba(o.departureDate)
+        ).getTime()})/`,
+        "Destino": o.destino.iata,
+        "Origem": o.origem.iata
+      }
+    } ),
+    "Origem": t1.origem.iata,
+    "QuantidadeAdultos": searchOptionsVooStore.adults,
+    "QuantidadeBebes": searchOptionsVooStore.babies,
+    "QuantidadeCriancas": searchOptionsVooStore.teenagers,
+    "QuantidadeDeVoos": 100,
+    "Recomendacao": true,
+  };
+  console.log(body);
+  //router.push({name: 'VoosIdaVolta'})
+
+  /* const body = {
+    DataIda: `/Date(${new Date(
+      searchOptionsVoo.getDateIdaFormatter
+    ).getTime()})/`,
+    DataVolta: `/Date(${new Date(
+      searchOptionsVoo.getDateVoltaFormatter
+    ).getTime()})/`,
+    Destino: searchOptionsVoo.destiny.iata,
+    Flex: true,
+    Origem: searchOptionsVoo.origin.iata,
+    QuantidadeAdultos: searchOptionsVoo.adults,
+    QuantidadeBebes: searchOptionsVoo.babies,
+    QuantidadeCriancas: searchOptionsVoo.teenagers,
+    Recomendacao: true,
+    ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
+    ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
+    ...(searchOptionsVoo.cabin.value
+      ? { Cabine: searchOptionsVoo.cabin.value }
+      : {}),
+  };
+
+  woobaStore.loading = true;
+
+  woobaStore
+    .consultaOrigemDestino(body)
+    .then(({ data }) => {
+      let {
+        Exception,
+        ViagensTrecho1,
+        ViagensTrecho2,
+        OfertasDesde,
+        AirportsIataTrecho1,
+        AirportsIataTrecho2,
+        Cia,
+      } = data.data;
+
+      woobaStore.exception = Exception;
+      woobaStore.companies = Cia;
+      woobaStore.airportsFilter =
+        AirportsIataTrecho1.concat(AirportsIataTrecho2);
+
+      if (!ViagensTrecho2) {
+        woobaStore.outboundFlights = woobaData(
+          ViagensTrecho1,
+          OfertasDesde.trechoOneOferta
+        );
+        woobaStore.returnFlights = null;
+      } else {
+        woobaStore.outboundFlights = woobaDataMultiple(
+          ViagensTrecho1,
+          OfertasDesde.trechoOneOferta
+        );
+        woobaStore.returnFlights = woobaDataMultiple(
+          ViagensTrecho2,
+          OfertasDesde.trechoTwoOferta
+        );
+      }
+      woobaStore.loading = false;
+    })
+    .catch(() => {
+      woobaStore.loading = false;
+    });*/
 };
 </script>
 

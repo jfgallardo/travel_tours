@@ -46,10 +46,10 @@ const changeTab = (e) => {
 
 const setData = () => {
   const search = $cookies.get('dataSearch');
-  storeSearch.dateOfDeparture = search.dateOfDeparture;
-  storeSearch.dateOfReturn = search.dateOfReturn;
-  storeSearch.origin = search.origin;
-  storeSearch.destiny = search.destiny;
+  storeSearch.dateOfDeparture = search.dateOfDeparture || '';
+  storeSearch.dateOfReturn = search.dateOfReturn || '';
+  storeSearch.origin = search.origin || {label: '', iata: ''};
+  storeSearch.destiny = search.destiny || {label: '', iata: ''};
   storeSearch.cabin = search.cabin;
   storeSearch.adults = search.adults;
   storeSearch.teenagers = search.teenagers;
@@ -57,6 +57,7 @@ const setData = () => {
   storeSearch.onlyBaggage = search.onlyBaggage;
   storeSearch.quantidadeDeVoos = search.quantidadeDeVoos;
   storeSearch.apenasVoosDiretos = search.apenasVoosDiretos;
+  storeSearch.multiplosTrechos = search.multiplosTrechos || [];
 };
 </script>
 
