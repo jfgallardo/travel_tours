@@ -62,17 +62,41 @@ export const woobaDataMultiple = (flights, ofertasDesde) => {
   return null;
 };
 
+export const woobaDataVoosMultiple = (flights, ofertasDesde) => {
+  if (flights) {
+    return flights.map(function (flight) {
+      return {
+        Origem: flight.Origem.CodigoIata,
+        Destino: flight.Destino.CodigoIata,
+        TempoTotal: flight.TempoDeDuracao,
+        Preco: flight.Preco,
+        Voos: flight.Voos,
+        Id: flight.Id,
+        Key: flight.IdentificacaoDaViagem,
+        NumeroParadas: flight.NumeroParadas,
+        OfertasDesde: removeDuplicates(ofertasDesde, 'company') || null,
+        CiaMandatoria: flight.CiaMandatoria,
+        AirportsIata: airportsByFlight(flight),
+      };
+    });
+  }
+  return null;
+};
+
 export const woobaTravelTime = (flightsA, flightsB) => {
   if (flightsB === null) {
     let arrayVoos = [];
     flightsA.map((o) => {
-      arrayVoos.push(
-        timeFlights(o.VoosIda[0], o.VoosIda[o.VoosIda.length - 1])
-      );
-      if (o.VoosVolta.length > 0)
+      if (o.VoosIda?.length > 0)
+        arrayVoos.push(
+          timeFlights(o.VoosIda[0], o.VoosIda[o.VoosIda.length - 1])
+        );
+      if (o.VoosVolta?.length > 0)
         arrayVoos.push(
           timeFlights(o.VoosVolta[0], o.VoosVolta[o.VoosVolta.length - 1])
         );
+      if (o.Voos)
+        arrayVoos.push(timeFlights(o.Voos[0], o.Voos[o.Voos.length - 1]));
     });
     return {
       lessTime: Math.min(...arrayVoos),
@@ -144,16 +168,22 @@ function removeDuplicates(originalArray, prop) {
 }
 
 function airportsByFlight(flight) {
-  const vI = voosIda(flight.Voos);
-  const vV = voosVolta(flight.Voos);
+  //const vI = voosIda(flight.Voos);
+  //const vV = voosVolta(flight.Voos);
   let flights = [];
-  vI.forEach((item) => {
+  /* vI.forEach((item) => {
     if (!flights.includes(item.Destino.CodigoIata))
       flights.push(item.Destino.CodigoIata);
     if (!flights.includes(item.Origem.CodigoIata))
       flights.push(item.Origem.CodigoIata);
   });
   vV.forEach((item) => {
+    if (!flights.includes(item.Destino.CodigoIata))
+      flights.push(item.Destino.CodigoIata);
+    if (!flights.includes(item.Origem.CodigoIata))
+      flights.push(item.Origem.CodigoIata);
+  });*/
+  flight.Voos.forEach((item) => {
     if (!flights.includes(item.Destino.CodigoIata))
       flights.push(item.Destino.CodigoIata);
     if (!flights.includes(item.Origem.CodigoIata))

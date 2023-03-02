@@ -21,7 +21,13 @@
               />
             </div>
             <p class="p-1 font-semibold text-sm">
-              {{ initVoo.Segmento === 'I' ? 'Vuelo de Ida' : 'Vuelo de Volta' }}
+              {{
+                initVoo.Segmento === 'I'
+                  ? 'Vuelo de Ida'
+                  : initVoo.Segmento === 'V'
+                  ? 'Vuelo de Volta'
+                  : 'Viajes por Trechos'
+              }}
             </p>
           </div>
           <div class="p-2 bg-gray-200 rounded-full text-xs font-medium h-8">
@@ -29,14 +35,18 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 lg:row-span-5 lg:col-span-3">
+      <div
+        class="border border-t-0 border-slate-300 lg:row-span-5 lg:col-span-3"
+      >
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in flights" :key="item.Numero">
             <PlaneLine v-bind="item" />
           </template>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
+      <div
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+      >
         <div class="flex items-center justify-between space-x-3.5">
           <div>
             <span>{{ initVoo.Origem.CodigoIata }}&nbsp;&nbsp;</span>
@@ -51,7 +61,9 @@
           </div>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
+      <div
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+      >
         <div class="flex items-center justify-between">
           <span>DURAÇAO TOTAL</span>
           <span class="font-bold">{{ duration }}</span>
@@ -66,19 +78,25 @@
           <span class="font-bold">7.000</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
+      <div
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+      >
         <div class="flex items-center justify-between">
           <span>CLASE</span>
           <span class="font-bold">{{ initVoo.Cabine }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
+      <div
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+      >
         <div class="flex items-center justify-between">
           <span>AEROLINEA</span>
           <span class="font-bold">{{ ciaMandatoria.Descricao }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2">
+      <div
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+      >
         <div
           v-if="initVoo.BagagemInclusa"
           class="flex items-center justify-between"
@@ -192,7 +210,6 @@ onMounted(() => {
   if (id) {
     value.value = `${window.location.protocol}//${window.location.host}/precheckout/${id}`;
   }
-  //familyDetails();
 });
 
 defineEmits(['closeDetails']);
@@ -277,8 +294,13 @@ const paradas = computed(() => {
 const dateVoo = computed(() => {
   return initVoo.value.Segmento === 'I'
     ? formatDate(searchOptions.getDateIdaFormatter)
-    : formatDate(searchOptions.getDateVoltaFormatter);
+    : initVoo.value.Segmento === 'V'
+    ? formatDate(searchOptions.getDateVoltaFormatter)
+    : dateVooArray();
 });
+const dateVooArray = () => {
+  return flights.flatMap((o) => formatDate(o.DataSaida)).join('; ')
+}
 const duration = computed(() => {
   const x = moment(initVoo.value.DataSaida);
   const y = moment(endVoo.value.DataChegada);
@@ -286,22 +308,6 @@ const duration = computed(() => {
     .duration(y.diff(x))
     .get('minutes')}min`;
 });
-/*const familyDetails = () => {
-  const body = {
-    Companhia: ciaMandatoria.CodigoIata,
-    FamiliaCodigo: initVoo.value.BaseTarifaria[0].Familia,
-    Flex: true,
-    Rota: initVoo.value.Segmento,
-  };
-  woobaStore
-    .detalhesdeFamilia(body)
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};*/
 const filterDayPeriod = (date) => {
   const dateLocal = new Date(moment(date));
   const hours = dateLocal.getHours();

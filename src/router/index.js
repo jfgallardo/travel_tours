@@ -8,6 +8,7 @@ const LandingPage = () => import('@/views/LandingPage.vue');
 const AereoHomePage = () => import('@/views/Aereo/HomePage.vue');
 const AereoLandingPage = () => import('@/views/Aereo/LandingPage.vue');
 const VoosIdaVolta = () => import('@/views/Aereo/VoosIdaVolta.vue');
+const VoosMultiple = () => import('@/views/Aereo/VoosMultiple.vue');
 const PreCheckoutPage = () => import('@/views/Purchase/PreCheckoutPage.vue');
 const CheckoutPage = () => import('@/views/Purchase/CheckoutPage.vue');
 const CheckPage = () => import('@/views/Check/CheckPage.vue');
@@ -80,6 +81,19 @@ const router = createRouter({
               path: 'check/round-trip',
               name: 'VoosIdaVolta',
               component: VoosIdaVolta,
+              beforeEnter: (to, from) => {
+                const woobaStore = useWoobaStore();
+                if (
+                  from.name !== 'AereoLandingPage' &&
+                  woobaStore.outboundFlights.length === 0
+                )
+                  return '/aereo';
+              },
+            },
+            {
+              path: 'check/multiple',
+              name: 'VoosMultiple',
+              component: VoosMultiple,
               beforeEnter: (to, from) => {
                 const woobaStore = useWoobaStore();
                 if (

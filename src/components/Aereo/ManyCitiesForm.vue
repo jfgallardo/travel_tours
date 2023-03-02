@@ -154,10 +154,10 @@ import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useI18n } from 'vue-i18n';
 import { useAlertStore } from '@/stores/alert';
-import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
+import { woobaDataVoosMultiple } from '@/utils/unifyDataWooba';
 import { useRouter } from 'vue-router';
 import { useWoobaStore } from '@/stores/wooba';
-import { useFormatterDateWooba } from "@/composables/formatter";
+import { useFormatterDateWooba } from '@/composables/formatter';
 
 const searchOptionsVooStore = useSearchOptionsVooStore();
 const { t } = useI18n();
@@ -249,98 +249,62 @@ const consultar = () => {
   }
 
   saveCookiesSearch();
+  router.push({ name: 'VoosMultiple' });
 
   const body = {
-    "BuscarVoosComBagagem": searchOptionsVooStore.onlyBaggage,
+    ApenasVoosComBagagem: searchOptionsVooStore.onlyBaggage,
+    ApenasVoosDiretos: false,
+    BuscarVoosComBagagem: true,
+    BuscarVoosSemBagagem: true,
     ...(searchOptionsVooStore.cabin.value
       ? { Cabine: searchOptionsVooStore.cabin.value }
       : {}),
-    "DataIda": `/Date(${new Date(
-      useFormatterDateWooba(t1.departureDate)
-    ).getTime()})/`,
-    "Destino": t1.destino.iata,
-    "Flex": true,
-    "MultiplosTrechos":searchOptionsVooStore.multiplosTrechos.map((o) => {
+    Flex: true,
+    MultiplosTrechos: searchOptionsVooStore.multiplosTrechos.map((o) => {
       return {
-        "Data": `/Date(${new Date(
+        Data: `/Date(${new Date(
           useFormatterDateWooba(o.departureDate)
         ).getTime()})/`,
-        "Destino": o.destino.iata,
-        "Origem": o.origem.iata
-      }
-    } ),
-    "Origem": t1.origem.iata,
-    "QuantidadeAdultos": searchOptionsVooStore.adults,
-    "QuantidadeBebes": searchOptionsVooStore.babies,
-    "QuantidadeCriancas": searchOptionsVooStore.teenagers,
-    "QuantidadeDeVoos": 100,
-    "Recomendacao": true,
-  };
-  console.log(body);
-  //router.push({name: 'VoosIdaVolta'})
-
-  /* const body = {
-    DataIda: `/Date(${new Date(
-      searchOptionsVoo.getDateIdaFormatter
-    ).getTime()})/`,
-    DataVolta: `/Date(${new Date(
-      searchOptionsVoo.getDateVoltaFormatter
-    ).getTime()})/`,
-    Destino: searchOptionsVoo.destiny.iata,
-    Flex: true,
-    Origem: searchOptionsVoo.origin.iata,
-    QuantidadeAdultos: searchOptionsVoo.adults,
-    QuantidadeBebes: searchOptionsVoo.babies,
-    QuantidadeCriancas: searchOptionsVoo.teenagers,
+        Destino: o.destino.iata,
+        Origem: o.origem.iata,
+      };
+    }),
+    QuantidadeAdultos: searchOptionsVooStore.adults,
+    QuantidadeBebes: searchOptionsVooStore.babies,
+    QuantidadeCriancas: searchOptionsVooStore.teenagers,
+    QuantidadeDeVoos: 100,
     Recomendacao: true,
-    ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
-    ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
-    ...(searchOptionsVoo.cabin.value
-      ? { Cabine: searchOptionsVoo.cabin.value }
-      : {}),
+    Sistema: 0,
   };
 
   woobaStore.loading = true;
 
   woobaStore
-    .consultaOrigemDestino(body)
+    .consultaMultiploTrecho(body)
     .then(({ data }) => {
       let {
         Exception,
         ViagensTrecho1,
-        ViagensTrecho2,
         OfertasDesde,
         AirportsIataTrecho1,
         AirportsIataTrecho2,
         Cia,
       } = data.data;
-
       woobaStore.exception = Exception;
       woobaStore.companies = Cia;
       woobaStore.airportsFilter =
         AirportsIataTrecho1.concat(AirportsIataTrecho2);
 
-      if (!ViagensTrecho2) {
-        woobaStore.outboundFlights = woobaData(
-          ViagensTrecho1,
-          OfertasDesde.trechoOneOferta
-        );
-        woobaStore.returnFlights = null;
-      } else {
-        woobaStore.outboundFlights = woobaDataMultiple(
-          ViagensTrecho1,
-          OfertasDesde.trechoOneOferta
-        );
-        woobaStore.returnFlights = woobaDataMultiple(
-          ViagensTrecho2,
-          OfertasDesde.trechoTwoOferta
-        );
-      }
+      woobaStore.outboundFlights = woobaDataVoosMultiple(
+        ViagensTrecho1,
+        OfertasDesde.trechoOneOferta
+      );
+      woobaStore.returnFlights = null;
       woobaStore.loading = false;
     })
     .catch(() => {
       woobaStore.loading = false;
-    });*/
+    });
 };
 </script>
 

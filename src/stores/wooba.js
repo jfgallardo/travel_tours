@@ -36,6 +36,16 @@ export const useWoobaStore = defineStore({
         return e;
       }
     },
+    async consultaMultiploTrecho(payload) {
+      try {
+        return await axiosClientAPI.post(
+          'api/v1/wooba/multiplos-trechos',
+          payload
+        );
+      } catch (e) {
+        return e;
+      }
+    },
     /* async displayMoreResults() {
       const body = {
         DataIda: `/Date(${new Date(

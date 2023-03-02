@@ -7,6 +7,8 @@ export const axiosClientAPI = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
   },
 });
 
@@ -31,7 +33,7 @@ axiosClientAPI.interceptors.response.use(
   ({ response }) => {
     const alertStore = useAlertStore();
     alertStore.showMsg({
-      message: `${response.data.message}`,
+      message: response.data?.message ? `${response.data.message}` : '',
       backgrColor: 'bg-red-100',
       textColor: 'text-red-700',
     });
