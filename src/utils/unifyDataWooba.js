@@ -77,6 +77,7 @@ export const woobaDataVoosMultiple = (flights, ofertasDesde) => {
         OfertasDesde: removeDuplicates(ofertasDesde, 'company') || null,
         CiaMandatoria: flight.CiaMandatoria,
         AirportsIata: airportsByFlight(flight),
+        Cabine: typeCabine(flight),
       };
     });
   }
@@ -193,25 +194,18 @@ function airportsByFlight(flight) {
 }
 
 function isFlightWithBaggage(flight) {
-  flight.Voos.forEach((o) => {
+  /*flight.Voos.forEach((o) => {
     if (o.BagagemInclusa) return true;
   });
-  return false;
+  return false;*/
+  return flight.Voos.some((o) => o.BagagemInclusa === true);
 }
 
 function typeCabine(flight) {
-  const vI = voosIda(flight.Voos);
-  const vV = voosVolta(flight.Voos);
+  const voos = flight.Voos;
   let cabin = [];
-
-  vI.forEach((item) => {
-    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
+  voos.forEach((item) => {
     if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
   });
-  vV.forEach((item) => {
-    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
-    if (!cabin.includes(item.Cabine)) cabin.push(item.Cabine);
-  });
-
   return cabin;
 }

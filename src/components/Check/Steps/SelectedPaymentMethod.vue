@@ -107,15 +107,15 @@ const tarifar = () => {
   rateStore
     .tarifar(body)
     .then(({ data }) => {
-      const planos = data.data.PlanosDeFinanciamento;
+      const planos = data.data.Data.PlanosDeFinanciamento;
       planosDeFinanciamento.value = planos.map((o) => {
-        const bandeira = o.Bandeira;
-        return {
-          label: rateStore.bandeiras[bandeira]
-            ? rateStore.bandeiras[bandeira]
-            : 'Otra',
-          value: o.Bandeira,
-        };
+        if (o.Bandeira) {
+          const bandeira = o.Bandeira;
+          return {
+            label: rateStore.bandeiras[bandeira],
+            value: o.Bandeira,
+          };
+        }
       });
       rateStore.loading = false;
     })

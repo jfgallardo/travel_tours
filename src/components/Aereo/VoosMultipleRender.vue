@@ -2,7 +2,7 @@
   <div class="flex flex-col xl:flex-row 2xl:items-stretch px-6 py-2">
     <div class="flex flex-col justify-around border border-gray-300 xl:w-full">
       <div class="border-b border-gray-300 py-2 text-center">
-        <span class="px-4 font-semibold"> {{ trechosArray }}</span>
+        <span class="px-4 font-semibold"> Vuelos de Ida</span>
       </div>
       <div
         v-if="width < 768 && !suspense"
@@ -64,10 +64,10 @@ const keyIdIda = computed(() => {
   }
   return stringAleatoria;
 });
-
+/*
 const trechosArray = computed(() => {
   return props.viagem.Voos.map((o) => o.Origem.Descricao).join(' ----- ');
-});
+});*/
 
 const vooDetalhesFlights = (fligth) => {
   vooDetalhes.value = fligth;

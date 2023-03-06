@@ -113,7 +113,7 @@
           </tbody>
         </table>
         <table
-          v-if="user.vooSelected.VoosVolta.length > 0"
+          v-if="user.vooSelected.VoosVolta && user.vooSelected.VoosVolta.length > 0"
           class="table-fixed border border-t-0 border-gray-200 w-full border-spacing-2 border-separate"
         >
           <tbody>
@@ -418,10 +418,12 @@ const duration = (dataSaida, dataLlegada) => {
 };
 
 const ParadaIda = computed(() => {
-  return getStops(user.vooSelected.VoosIda);
+  if (user.vooSelected.VoosIda) return getStops(user.vooSelected.VoosIda);
+  return getStops(user.vooSelected.Voos)
 });
 const ParadaVolta = computed(() => {
-  return getStops(user.vooSelected.VoosVolta);
+  if (user.vooSelected.VoosVolta) return getStops(user.vooSelected.VoosVolta);
+  return ''
 });
 const getStops = (v) => {
   let stops = [];

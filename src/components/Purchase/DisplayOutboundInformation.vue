@@ -12,9 +12,10 @@
                 alt="IconPlane"
               />
             </div>
-            <p class="p-1 font-semibold text-sm">Vuelo de Ida</p>
+            <p class="p-1 font-semibold text-sm"> {{vooSelected.Voos ? 'Vuelos de Ida' : 'Vuelo de Ida'}}</p>
           </div>
           <div
+            v-if="!vooSelected.Voos"
             class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
           >
             {{ dateIda }}
@@ -23,7 +24,7 @@
       </div>
       <div class="border border-t-0 border-x-0 border-slate-300 lg:row-span-5">
         <div class="flex flex-col space-y-4 items-center py-2">
-          <template v-for="item in vooSelected.VoosIda" :key="item.Numero">
+          <template v-for="item in voos" :key="item.Numero">
             <PlaneLine v-bind="item" />
           </template>
         </div>
@@ -114,7 +115,7 @@
           <span>NO BAGAGEM</span>
         </div>
       </div>
-      <template v-if="vooSelected.VoosVolta.length === 0">
+      <template v-if="vooSelected.VoosVolta && vooSelected.VoosVolta.length === 0">
         <div
           class="border border-t-0 lg:border-l-0 lg:border-r-0 border-slate-300"
         >
@@ -172,12 +173,27 @@ const props = defineProps({
 
 const searchOptions = useSearchOptionsVooStore();
 
+const voos = computed(() => {
+  if (props.vooSelected.VoosIda) return props.vooSelected.VoosIda
+  return props.vooSelected.Voos
+})
+
 const initialFlight = computed(() => {
-  return props.vooSelected.VoosIda[0];
+  if (props.vooSelected.VoosIda) {
+    return props.vooSelected.VoosIda[0];
+  } else {
+    return props.vooSelected.Voos[0];
+  }
 });
 const endFlight = computed(() => {
-  const long = props.vooSelected.VoosIda.length;
-  return props.vooSelected.VoosIda[long - 1];
+  const long = props.vooSelected.VoosIda
+    ? props.vooSelected.VoosIda.length
+    : props.vooSelected.Voos.length;
+  if (props.vooSelected.VoosIda) {
+    return props.vooSelected.VoosIda[long - 1];
+  } else {
+    return props.vooSelected.Voos[long - 1];
+  }
 });
 const dayPeriodIda = computed(() => {
   return filterDayPeriod(initialFlight.value.DataSaida);
@@ -195,13 +211,24 @@ const dateIda = computed(() => {
   return useDateFormatter(searchOptions.getDateIdaFormatter);
 });
 const paradas = computed(() => {
-  let escalas = props.vooSelected.VoosIda.length - 1;
+  let escalas = props.vooSelected.VoosIda
+    ? props.vooSelected.VoosIda.length - 1
+    : props.vooSelected.Voos.length - 1;
 
-  props.vooSelected.VoosIda.map((item) => {
-    if (item.Escalas) {
-      escalas += item.Escalas.length;
-    }
-  });
+  if (props.vooSelected.VoosIda) {
+    props.vooSelected.VoosIda.map((item) => {
+      if (item.Escalas) {
+        escalas += item.Escalas.length;
+      }
+    });
+  } else {
+    props.vooSelected.Voos.map((item) => {
+      if (item.Escalas) {
+        escalas += item.Escalas.length;
+      }
+    });
+  }
+
   return `${escalas} ${escalas > 1 ? 'Paradas' : 'Parada'}`;
 });
 const duration = computed(() => {

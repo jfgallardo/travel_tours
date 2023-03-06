@@ -42,7 +42,7 @@
       </svg>
       <h3 class="text-xs text-center">Oferta valida até</h3>
     </div>
-    <span class="ml-2 font-bold">{{duration}}</span>
+    <span class="ml-2 font-bold">{{ duration }}</span>
   </div>
 </template>
 
@@ -66,10 +66,12 @@ const now = useNow();
 const untilDayjs = moment().add(props.offerUp, 'minutes');
 
 const duration = computed(() => {
-  if (untilDayjs.isBefore(now.value)) return moment.duration(0).seconds();
-  return `${moment.duration(untilDayjs.diff(now.value)).minutes()}:${moment
-    .duration(untilDayjs.diff(now.value))
-    .seconds()}`;
+  if (untilDayjs.isBefore(now.value)) return '00:00';
+  return '0' + moment.duration(untilDayjs.diff(now.value)).minutes() + ':' + (
+    moment.duration(untilDayjs.diff(now.value)).seconds() < 10
+      ? `0${moment.duration(untilDayjs.diff(now.value)).seconds()}`
+      : `${moment.duration(untilDayjs.diff(now.value)).seconds()}`
+  );
 });
 </script>
 

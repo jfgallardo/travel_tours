@@ -1,7 +1,7 @@
 <template>
   <LayoutTwoViews>
     <template #aside>
-      <ButtonTravel @selected-button="changeTab"/>
+      <ButtonTravel @selected-button="changeTab" />
       <div>
         <transition name="fade" mode="out-in">
           <component :is="selectedComponent"></component>
@@ -23,7 +23,7 @@ import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
 import OneWay from '@/components/Aereo/OneWayForm.vue';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
-import ButtonTravel from "@/components/Partials/ButtonTravel.vue";
+import ButtonTravel from '@/components/Partials/ButtonTravel.vue';
 
 const storeSearch = useSearchOptionsVooStore();
 const $cookies = inject('$cookies');
@@ -37,8 +37,8 @@ let selectedComponent = ref(null);
 const selectComponent = ref({
   RoundTrip: RoundTrip,
   ManyCities: ManyCities,
-  OneWay: OneWay
-})
+  OneWay: OneWay,
+});
 
 const changeTab = (e) => {
   selectedComponent.value = markRaw(selectComponent.value[e]);
@@ -48,8 +48,8 @@ const setData = () => {
   const search = $cookies.get('dataSearch');
   storeSearch.dateOfDeparture = search.dateOfDeparture || '';
   storeSearch.dateOfReturn = search.dateOfReturn || '';
-  storeSearch.origin = search.origin || {label: '', iata: ''};
-  storeSearch.destiny = search.destiny || {label: '', iata: ''};
+  storeSearch.origin = search.origin || { label: '', iata: '' };
+  storeSearch.destiny = search.destiny || { label: '', iata: '' };
   storeSearch.cabin = search.cabin;
   storeSearch.adults = search.adults;
   storeSearch.teenagers = search.teenagers;
@@ -57,7 +57,30 @@ const setData = () => {
   storeSearch.onlyBaggage = search.onlyBaggage;
   storeSearch.quantidadeDeVoos = search.quantidadeDeVoos;
   storeSearch.apenasVoosDiretos = search.apenasVoosDiretos;
-  storeSearch.multiplosTrechos = search.multiplosTrechos || [];
+  storeSearch.multiplosTrechos = search.multiplosTrechos || [
+    {
+      departureDate: '',
+      destino: {
+        string: '',
+        iata: '',
+      },
+      origem: {
+        string: '',
+        iata: '',
+      },
+    },
+    {
+      departureDate: '',
+      destino: {
+        string: '',
+        iata: '',
+      },
+      origem: {
+        string: '',
+        iata: '',
+      },
+    },
+  ];
 };
 </script>
 

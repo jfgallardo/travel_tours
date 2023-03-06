@@ -45,7 +45,7 @@
         </div>
       </div>
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-center items-center"
       >
         <div class="flex items-center justify-between space-x-3.5">
           <div>
@@ -62,44 +62,35 @@
         </div>
       </div>
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
-        <div class="flex items-center justify-between">
-          <span>DURAÇAO TOTAL</span>
-          <span class="font-bold">{{ duration }}</span>
-        </div>
+        <span>DURAÇAO TOTAL</span>
+        <span class="font-bold">{{ duration }}</span>
       </div>
       <div
         v-if="false"
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 flex justify-around items-center"
       >
-        <div class="flex items-center h-full space-x-3.5 pl-14">
-          <span>QTD. MILHAS</span>
-          <span class="font-bold">7.000</span>
-        </div>
+        <span>QTD. MILHAS</span>
+        <span class="font-bold">7.000</span>
       </div>
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
-        <div class="flex items-center justify-between">
-          <span>CLASE</span>
-          <span class="font-bold">{{ initVoo.Cabine }}</span>
-        </div>
+        <span>CLASE</span>
+        <span class="font-bold">{{ initVoo.Cabine }}</span>
       </div>
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
-        <div class="flex items-center justify-between">
-          <span>AEROLINEA</span>
-          <span class="font-bold">{{ ciaMandatoria.Descricao }}</span>
-        </div>
+        <span>AEROLINEA</span>
+        <span class="font-bold">{{ ciaMandatoria.Descricao }}</span>
       </div>
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
-        <div
+        <template
           v-if="initVoo.BagagemInclusa"
-          class="flex items-center justify-between"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -114,8 +105,8 @@
             />
           </svg>
           <span> {{ initVoo.BagagemQuantidade }} BAGAGEM DE MÃO </span>
-        </div>
-        <div v-else class="flex items-center justify-between">
+        </template>
+        <template v-else>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -132,7 +123,7 @@
           </svg>
 
           <span>NO BAGAGEM</span>
-        </div>
+        </template>
       </div>
     </div>
     <div class="lg:grid lg:grid-cols-5 lg:grid-flow-row">
@@ -299,8 +290,8 @@ const dateVoo = computed(() => {
     : dateVooArray();
 });
 const dateVooArray = () => {
-  return flights.flatMap((o) => formatDate(o.DataSaida)).join('; ')
-}
+  return flights.flatMap((o) => formatDate(o.DataSaida)).join('; ');
+};
 const duration = computed(() => {
   const x = moment(initVoo.value.DataSaida);
   const y = moment(endVoo.value.DataChegada);
