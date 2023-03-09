@@ -274,7 +274,7 @@ const consultar = () => {
       searchOptionsVoo.getDateVoltaFormatter
     ).getTime()})/`,
     Destino: searchOptionsVoo.destiny.iata,
-    Flex: true,
+    Flex: false,
     Origem: searchOptionsVoo.origin.iata,
     QuantidadeAdultos: searchOptionsVoo.adults,
     QuantidadeBebes: searchOptionsVoo.babies,
@@ -285,6 +285,7 @@ const consultar = () => {
     ...(searchOptionsVoo.cabin.value
       ? { Cabine: searchOptionsVoo.cabin.value }
       : {}),
+    QuantidadeDeVoos: 20
   };
 
   woobaStore.loading = true;

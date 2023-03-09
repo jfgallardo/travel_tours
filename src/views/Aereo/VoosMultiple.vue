@@ -1,8 +1,8 @@
 <template>
   <ButtonFilter :loading="woobaStore.loading" />
   <div v-if="woobaStore.loading">
-    <SkeletonSearch />
-    <SkeletonSearch />
+    <SkeletonSearch :show="false"/>
+    <SkeletonSearch :show="false"/>
   </div>
   <template v-else>
     <div v-if="showData" class="pb-24">

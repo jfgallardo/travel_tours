@@ -20,6 +20,7 @@
             </div>
           </div>
         </div>
+      <template v-if="$cookies.get('dataSearch').dateOfReturn">
         <div class="border-y py-2">
           <span class="px-4 font-medium">Vuelos de Vuelta</span>
         </div>
@@ -38,6 +39,7 @@
             </div>
           </div>
         </div>
+      </template>
       </div>
 
       <div class="w-1/5 border border-gray-300 shrink-0 relative">
@@ -77,5 +79,5 @@
     </div>
   </div>
 </template>
-<script setup></script>
-<style scoped></style>
+<script setup>
+</script>

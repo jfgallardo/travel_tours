@@ -130,13 +130,21 @@ const props = defineProps({
   },
   ValorTotalComTaxa: {
     type: [Number, String]
+  },
+  Preco: {
+    type: Object
+  },
+  Id: {
+    type: [Number, String]
   }
 });
 
 provide("flights", props.Voos);
+//provide("valorTotalComTaxa", props.ValorTotalComTaxa);
 provide("ofertasDesde", props.OfertasDesde);
 provide("ciaMandatoria", props.CiaMandatoria);
-provide("valorTotalComTaxa", props.ValorTotalComTaxa);
+provide('preco', props.Preco);
+provide('id', props.Id);
 
 const initVoo = computed(() => {
   return props.Voos[0];
