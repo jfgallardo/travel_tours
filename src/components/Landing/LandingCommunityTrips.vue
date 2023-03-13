@@ -1,95 +1,86 @@
 <template>
-  <div class="bg-gray-200">
-    <Carousel>
-      <template #title> Próximos viajes de la comunidad </template>
-      <CarouselSlider
-        v-for="slide in sliders"
-        :key="slide.city"
-        :slide="slide"
-        :black="true"
-      >
-        <template #image>
-          <img :src="slide.src" class="w-full h-64 object-cover" />
-        </template>
-        <template #footer>
-          <div class="mt-2 flex">
-            <img
-              v-for="avatar in slide.avatars"
-              :key="avatar"
-              :src="avatar"
-              class="rounded-full h-7 w-7 object-cover ring-1 ring-white -ml-1"
-            />
-            <div
-              class="border h-7 w-7 pt-1 ring-1 ring-white rounded-full text-xs text-white bg-gray-300 -ml-1"
-            >
-              +24
-            </div>
+  <div class="pb-20 bg-gray-200">
+    <CarouselComponent
+      :images="sliders"
+      label="Próximos viajes de la comunidad"
+    >
+      <template #footer="slotProps">
+        <div class="mt-2 flex ml-2.5">
+          <img
+            v-for="avatar in slotProps.avatars"
+            :key="avatar"
+            :src="avatar"
+            class="rounded-full h-7 w-7 object-cover ring-1 ring-white -ml-1"
+          />
+          <div
+            class="border h-7 w-7 pt-1 ring-1 ring-white rounded-full text-xs text-white bg-gray-300 -ml-1"
+          >
+            +24
           </div>
-        </template>
-        <template #footer-right>
-          <div class="text-sm">{{ slide.date }}</div>
-        </template>
-      </CarouselSlider>
-    </Carousel>
+        </div>
+      </template>
+      <template #footer-right="slotProps">
+        <div class="text-sm">{{ slotProps.date }}</div>
+      </template>
+    </CarouselComponent>
   </div>
 </template>
 
 <script setup>
-import Carousel from '@/components/Partials/TheCarousel.vue';
-import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
 import Avatar1 from '@/assets/img/avatar1.jpg';
 import Avatar2 from '@/assets/img/avatar2.jpg';
 import Avatar3 from '@/assets/img/avatar3.jpg';
 import Varadero from '@/assets/img/varadero.jpg';
 import Tokio from '@/assets/img/tokio.jpg';
 import Copa from '@/assets/img/copa.jpg';
+import CarouselComponent from "@/components/Partials/CarouselComponent.vue";
 
 const sliders = [
   {
     city: 'California',
-    src: Varadero,
+    url: Varadero,
     avatars: [Avatar1, Avatar2, Avatar3],
     date: 'Septiembre 22',
     total: 23,
   },
   {
     city: 'Punta Cana',
-    src: Tokio,
+    url: Tokio,
     avatars: [Avatar2, Avatar1, Avatar3],
     date: 'Octubre 15',
     total: 10,
   },
   {
     city: 'Bahamas',
-    src: Copa,
+    url: Copa,
     avatars: [Avatar1, Avatar3, Avatar2],
     date: 'Noviembre 22',
     total: 12,
   },
   {
     city: 'Cuba',
-    src: Tokio,
+    url: Tokio,
     avatars: [Avatar1, Avatar3, Avatar2],
     date: 'Enero 12',
     total: 12,
   },
   {
     city: 'Asia',
-    src: Varadero,
+    url: Varadero,
     avatars: [Avatar1, Avatar3, Avatar2],
     date: 'Diciembre 22',
     total: 12,
   },
   {
     city: 'Cuba',
-    src: Tokio,
+    url: Tokio,
     avatars: [Avatar1, Avatar3, Avatar2],
     date: 'Enero 12',
     total: 12,
   },
   {
     city: 'Asia',
-    src: Varadero,
+    url: Varadero,
     avatars: [Avatar1, Avatar3, Avatar2],
     date: 'Diciembre 22',
     total: 12,

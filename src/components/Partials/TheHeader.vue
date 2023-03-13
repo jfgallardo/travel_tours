@@ -33,7 +33,7 @@
               </svg>
             </RouterLink>
           </div>
-          <div>
+          <div class="border-r border-gray-300 h-full flex items-center">
             <a href="https://www.mrtecnologiaeservicos.com/" target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +56,7 @@
               </svg>
             </a>
           </div>
-          <div>
+          <div class="border-r border-gray-300 h-full flex items-center">
             <RouterLink :to="{ name: 'LandingPage' }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

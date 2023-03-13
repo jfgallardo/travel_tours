@@ -6,7 +6,9 @@
       }}</span>
       <input
         v-model="value"
-        v-maska="maska"
+        v-maska
+        :data-maska="maska"
+        :data-maska-tokens="tokens"
         :value="modelValue"
         :type="typeField"
         :class="inputClassList"
@@ -42,6 +44,9 @@ const props = defineProps({
     default: '',
   },
   maska: {
+    type: [String, Object],
+  },
+  tokens: {
     type: [String, Object],
   },
   placeholder: {

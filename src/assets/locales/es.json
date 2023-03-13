@@ -254,5 +254,12 @@
   },
   "carCategories": {
     "companhiasInternacionais": "COMPANHIAS INTERNACIONAIS"
+  },
+  "passport": {
+    "noPasaporte": "Número de pasaporte *",
+    "dataDeValidade": "Fecha de validez *",
+    "dateOfIssue": "Fecha de emisión *",
+    "countryOfIssue": "País de residencia *",
+    "countryOfResidence": "País de residencia *"
   }
 }

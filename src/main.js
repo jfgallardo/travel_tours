@@ -6,17 +6,17 @@ import '@/plugins/vee-validate';
 import router from '@/router';
 import 'air-datepicker/air-datepicker.css';
 import 'toastify-js/src/toastify.css';
-import Maska from 'maska';
+import { vMaska } from 'maska';
 import VueCookies from 'vue-cookies';
 import { createPinia } from 'pinia';
 import { createApp } from 'vue';
 
 const app = createApp(App);
 app.directive('debounce', vue3Debounce({ lock: true }));
+app.directive('maska', vMaska);
 app.use(createPinia());
 app.use(router);
 app.use(i18n);
-app.use(Maska);
 app.use(VueCookies);
 
 app.mount('#app');

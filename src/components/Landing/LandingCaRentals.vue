@@ -1,32 +1,28 @@
 <template>
-  <div>
-    <Carousel>
-      <template #title> Destinos populares para aluguel de carros </template>
-      <CarouselSlider v-for="slide in sliders" :key="slide.city" :slide="slide">
-        <template #image>
-          <img :src="slide.url" class="w-full h-96 object-cover" />
-        </template>
-        <template #footer>
+  <div class="pb-20">
+    <CarouselComponent
+      :images="sliders"
+      label="Destinos populares para aluguel de carros"
+    >
+      <template #footer="slotProps">
+        <div class="ml-2.5">
           <span class="text-xs text-gray-600"
-            >{{ slide.place }} lugares de colecao</span
+            >{{ slotProps.place }} lugares de colecao</span
           ><br />
-          <span class="text-sm font-semibold">De ${{ slide.price }}/dia</span>
-        </template>
-        <template #footer-right>
-          <ArrowRight class="h-5 w-5 hover:cursor-pointer mr-2" />
-        </template>
-      </CarouselSlider>
-    </Carousel>
+          <span class="text-sm font-semibold"
+            >De ${{ slotProps.price }}/dia</span
+          >
+        </div>
+      </template>
+    </CarouselComponent>
   </div>
 </template>
 
 <script setup>
-import Carousel from '@/components/Partials/TheCarousel.vue';
-import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
-import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Londres from '@/assets/img/londres.jpg';
 import Madrid from '@/assets/img/madrid.jpg';
 import Miami from '@/assets/img/miami.jpg';
+import CarouselComponent from '@/components/Partials/CarouselComponent.vue';
 
 const sliders = [
   { url: Londres, city: 'Londres', place: 75, price: 44.99 },

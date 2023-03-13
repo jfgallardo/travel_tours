@@ -5,11 +5,18 @@
     </h3>
   </div>
   <div class="py-8 px-3.5">
-    <div class="flex flex-col lg:flex-row justify-between items-center border border-gray-400 p-3.5">
+    <div
+      class="flex flex-col lg:flex-row justify-between items-center border border-gray-400 p-3.5"
+    >
       <h3 class="text-lg">
         Use o controle para preencher um ticket com seus dados salvos
       </h3>
-      <button class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full mt-2.5 lg:mt-0" @click="useData">Usar mis dados</button>
+      <button
+        class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full mt-2.5 lg:mt-0"
+        @click="useData"
+      >
+        Usar mis dados
+      </button>
     </div>
   </div>
   <table
@@ -25,31 +32,52 @@
       </tr>
       <tr>
         <td class="flex flex-col space-y-4 border-t-2 border-gray-200 p-2">
-          <template v-for="(i, index) in passengerStore.informationAdults" :key="index">
+          <template
+            v-for="(i, index) in passengerStore.informationAdults"
+            :key="index"
+          >
             <CollapseAccording class="w-full">
               <template #header> {{ t('adults') }} #{{ index + 1 }}</template>
               <template #body>
                 <form
                   class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-4 w-full"
                 >
-                  <Select
-                    :options="tratamentoOptions"
-                    label="Tratamento"
-                    :selected="tratamento"
-                  />
                   <TextInput v-model="i.name" label="Primeiro Nome *" />
                   <TextInput
                     v-model="i.last_name"
                     label="Sobrenome Completo *"
                   />
-                  <TextInput v-model="i.cpf_number" label="CPF *" maska="###.###.###-##"/>
+                  <TextInput v-model="i.email" label="Email *" name="email" />
+                  <TextInput
+                    v-model="i.cpf_number"
+                    label="CPF *"
+                    maska="###.###.###-##"
+                  />
                   <DateInput v-model="i.birthday" label="Date Nascimento *" />
+                  <TextInput
+                    v-model="i.mainPhone"
+                    label="Telefone principal *"
+                    name="mainPhone"
+                    :maska="['(##) #####-####']"
+                  />
+                  <passport-component
+                    v-model:passport="i.passportNumber"
+                    v-model:validate-date="i.validateDate"
+                    v-model:date-issue="i.dateIssue"
+                    @update:country-of-issue="i.countryIssue = $event.value"
+                    @update:country-of-residence="
+                      i.countryResidence = $event.value
+                    "
+                  />
                 </form>
               </template>
             </CollapseAccording>
           </template>
           <div v-if="searchOpions.teenagers > 0">
-            <template v-for="(i, index) in passengerStore.informationTeenagers" :key="index">
+            <template
+              v-for="(i, index) in passengerStore.informationTeenagers"
+              :key="index"
+            >
               <CollapseAccording class="w-full">
                 <template #header>
                   {{ t('children') }} #{{ index + 1 }}</template
@@ -58,44 +86,69 @@
                   <form
                     class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-4 w-full"
                   >
-                    <Select
-                      :options="tratamentoOptions"
-                      label="Tratamento"
-                      :selected="tratamento"
-                    />
                     <TextInput v-model="i.name" label="Primeiro Nome *" />
                     <TextInput
                       v-model="i.last_name"
                       label="Sobrenome Completo *"
                     />
+                    <TextInput v-model="i.email" label="Email *" name="email" />
                     <TextInput v-model="i.cpf_number" label="CPF *" />
                     <DateInput v-model="i.birthday" label="Date Nascimento *" />
+                    <TextInput
+                      v-model="i.mainPhone"
+                      label="Telefone principal *"
+                      name="mainPhone"
+                      :maska="['(##) #####-####']"
+                    />
+                    <passport-component
+                      v-model:passport="i.passportNumber"
+                      v-model:validate-date="i.validateDate"
+                      v-model:date-issue="i.dateIssue"
+                      @update:country-of-issue="i.countryIssue = $event.value"
+                      @update:country-of-residence="
+                        i.countryResidence = $event.value
+                      "
+                    />
                   </form>
                 </template>
               </CollapseAccording>
             </template>
           </div>
           <div v-if="searchOpions.babies > 0">
-            <template v-for="(i, index) in passengerStore.informationBabies" :key="index">
+            <template
+              v-for="(i, index) in passengerStore.informationBabies"
+              :key="index"
+            >
               <CollapseAccording class="w-full">
                 <template #header> {{ t('babies') }} #{{ index + 1 }}</template>
                 <template #body>
                   <form
                     class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-4 w-full"
                   >
-                    <Select
-                      :options="tratamentoOptions"
-                      label="Tratamento"
-                      :selected="tratamento"
-                    />
                     <TextInput v-model="i.name" label="Primeiro Nome *" />
                     <TextInput
                       v-model="i.last_name"
                       label="Sobrenome Completo *"
                     />
+                    <TextInput v-model="i.email" label="Email *" name="email" />
                     <TextInput v-model="i.cpf_number" label="CPF *" />
                     <DateInput v-model="i.birthday" label="Date Nascimento *" />
+                    <TextInput
+                      v-model="i.mainPhone"
+                      label="Telefone principal *"
+                      name="mainPhone"
+                      :maska="['(##) #####-####']"
+                    />
                   </form>
+                  <passport-component
+                    v-model:passport="i.passportNumber"
+                    v-model:validate-date="i.validateDate"
+                    v-model:date-issue="i.dateIssue"
+                    @update:country-of-issue="i.countryIssue = $event.value"
+                    @update:country-of-residence="
+                      i.countryResidence = $event.value
+                    "
+                  />
                 </template>
               </CollapseAccording>
             </template>
@@ -116,15 +169,15 @@
 
 <script setup>
 import CollapseAccording from '@/components/Static/CollapseAccording.vue';
-import Select from '@/components/FormUI/TheSelect.vue';
-import { inject, onMounted, ref } from "vue";
+import { inject, onMounted } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
-import { useAlertStore } from "@/stores/alert";
-import { usePassengerStore } from "@/stores/passengerInformation";
+import { useAlertStore } from '@/stores/alert';
+import { usePassengerStore } from '@/stores/passengerInformation';
+import PassportComponent from '@/components/FormUI/PassportComponent.vue';
 
 onMounted(() => {
   if (passengerStore.informationAdults.length === 0) getArrayData();
@@ -133,52 +186,67 @@ const { t } = useI18n();
 const searchOpions = useSearchOptionsVooStore();
 const alertStore = useAlertStore();
 const passengerStore = usePassengerStore();
-const tratamentoOptions = [{ label: 'Brasileiro(a)', value: 'Brasileiro(a)' }];
-const tratamento = ref({ label: 'Brasileiro(a)', value: 'Brasileiro(a)' });
 
 const $cookies = inject('$cookies');
 
-
 const useData = () => {
-  if (!$cookies.isKey('dataUser')){
+  if (!$cookies.isKey('dataUser')) {
     alertStore.showMsg({
       message: 'Para el uso de esta funcionalidad precisa ingresar a su cuenta',
       backgrColor: 'bg-red-100',
-      textColor: 'text-red-700'
-    })
+      textColor: 'text-red-700',
+    });
   }
-}
+};
 
 const getArrayData = () => {
   for (let i = 0; i < searchOpions.adults; i++) {
     passengerStore.informationAdults.push({
-      treatment: '',
+      email: '',
       name: '',
       last_name: '',
       cpf_number: '',
       birthday: '',
+      mainPhone: '',
+      passportNumber: '',
+      validateDate: '',
+      dateIssue: '',
+      countryIssue: '',
+      countryResidence: '',
     });
   }
 
   if (searchOpions.teenagers > 0) {
     for (let i = 0; i < searchOpions.teenagers; i++) {
       passengerStore.informationTeenagers.push({
-        treatment: '',
+        email: '',
         name: '',
         last_name: '',
         cpf_number: '',
         birthday: '',
+        mainPhone: '',
+        passportNumber: '',
+        validateDate: '',
+        dateIssue: '',
+        countryIssue: '',
+        countryResidence: '',
       });
     }
   }
   if (searchOpions.babies > 0) {
     for (let i = 0; i < searchOpions.babies; i++) {
       passengerStore.informationBabies.push({
-        treatment: '',
+        email: '',
         name: '',
         last_name: '',
         cpf_number: '',
         birthday: '',
+        mainPhone: '',
+        passportNumber: '',
+        validateDate: '',
+        dateIssue: '',
+        countryIssue: '',
+        countryResidence: '',
       });
     }
   }

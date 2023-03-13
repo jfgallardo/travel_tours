@@ -5,12 +5,12 @@
         Una comunidad con miles de intercambio de ideas
       </div>
       <div
-        class="grid grid-cols-1 grid-rows-5 justify-items-center md:grid-cols-2 md:grid-rows-3 lg:grid-cols-3 lg:grid-rows-2"
+        class="grid grid-cols-1 grid-flow-row justify-items-center md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
       >
         <div
           v-for="feed in feedbacks"
           :key="feed.name"
-          class="w-80 text-sm mb-16 bg-white md:bg-transparent p-4"
+          class="w-80 h-56 text-sm mb-16 bg-white p-4"
         >
           <div class="flex items-center space-x-5">
             <div>
@@ -43,11 +43,13 @@
         </div>
       </div>
       <div class="text-center">
-        <button
+        <a
           class="bg-blue-700 hover:bg-blue-800 text-white text-sm px-4 py-2"
+          href="https://www.instagram.com/mrtravelcommunity/"
+          target="_blank"
         >
           Visite nuestra comunidad
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -98,6 +100,14 @@ let feedbacks = [
     feedback:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
     labels: ['Playas', 'Caribe', 'Taxi'],
+  },
+  {
+    avatar: Avatar2,
+    name: 'Ana Paula',
+    date: 'Septiem 12',
+    feedback:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita voluptate odit repudiandae quo obcaecati animi.',
+    labels: ['Playas', 'Airbnb', 'Taxi'],
   },
 ];
 </script>

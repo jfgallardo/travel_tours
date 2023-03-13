@@ -274,7 +274,7 @@ const consultar = () => {
       searchOptionsVoo.getDateVoltaFormatter
     ).getTime()})/`,
     Destino: searchOptionsVoo.destiny.iata,
-    Flex: false,
+    Flex: true,
     Origem: searchOptionsVoo.origin.iata,
     QuantidadeAdultos: searchOptionsVoo.adults,
     QuantidadeBebes: searchOptionsVoo.babies,

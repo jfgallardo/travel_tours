@@ -259,5 +259,12 @@
   "buttonFilter": {
     "recomendado": "Recomendado",
     "menorPrecio": "Menor Precio"
+  },
+  "passport": {
+    "noPasaporte": "Passport number *",
+    "dataDeValidade": "Date of Expiry *",
+    "dateOfIssue": "Date of issue *",
+    "countryOfIssue": "Country of Issue *",
+    "countryOfResidence": "Country of residence *"
   }
 }
