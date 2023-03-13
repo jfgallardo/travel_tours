@@ -1,6 +1,6 @@
 <template>
   <div class="slider">
-    <div ref="sliderContainer" class="slider-container">
+    <div ref="sliderContainer" class="slider-container overflow-x-hidden">
       <div class="slider-track">
         <div
           v-for="(image, index) in imagesToShow"
@@ -73,6 +73,7 @@
 import { computed, ref, watch } from 'vue';
 import ArrowRight from "@/components/Icons/ArrowRight.vue";
 
+
 const props = defineProps({
   images: {
     type: Array,
@@ -84,20 +85,35 @@ const props = defineProps({
   },
 });
 
-const itemsToShow = 4;
+const width = computed(() => {
+  return screen.width
+})
+
+const itemsToShow = computed(() => {
+  switch (true) {
+    case width.value <= 576 :
+      return 1;
+    case width.value > 576 && width.value <= 1024:
+      return 2
+    case width.value > 1024 && width.value <= 1536:
+      return 3
+    default:
+    return 4
+  }
+});
 const currentSlide = ref(0);
 const sliderContainer = ref(null);
 
 watch(currentSlide, (newValue) => {
   if (newValue < 0) {
-    currentSlide.value = props.images.length - itemsToShow;
-  } else if (newValue >= props.images.length - itemsToShow + 1) {
+    currentSlide.value = props.images.length - itemsToShow.value;
+  } else if (newValue >= props.images.length - itemsToShow.value + 1) {
     currentSlide.value = 0;
   }
 });
 
 const imagesToShow = computed(() => {
-  const endSlide = currentSlide.value + itemsToShow;
+  const endSlide = currentSlide.value + itemsToShow.value;
   return props.images.slice(currentSlide.value, endSlide);
 });
 
@@ -176,14 +192,14 @@ const prevSlide = () => {
 }
 
 img{
-  width: 28rem;
-  height: 30rem;
+  width: 30rem;
+  height: 32rem;
 }
 
 @media only screen and (max-width: 576px) {
-  .slider-nav {
-    padding-right: 1rem;
+  img{
+    width: 26rem;
+    height: 28rem;
   }
-
 }
 </style>

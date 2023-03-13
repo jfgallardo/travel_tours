@@ -2,9 +2,9 @@
   <div>
     <div class="lg:container lg:mx-auto lg:px-40 lg:py-20">
       <div
-        class="pb-8 bg-blue-700 lg:h-96 flex flex-col justify-center px-14 space-y-3 pt-16 text-left"
+        class="pb-8 bg-blue-700 lg:h-96 flex flex-col justify-center px-14 space-y-3 pt-16 text-center md:text-left"
       >
-        <div class="text-white font-bold text-6xl md:text-8xl">
+        <div class="text-white font-bold text-5xl md:text-8xl">
           <p v-html="t('miles.title')"></p>
         </div>
         <div class="text-white font-light text-lg">

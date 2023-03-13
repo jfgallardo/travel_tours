@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-20">
+  <div class="py-20">
     <CarouselComponent
       :images="sliders"
       label="Aproveite nossos pacotes"
