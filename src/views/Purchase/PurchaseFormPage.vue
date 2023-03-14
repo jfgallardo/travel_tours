@@ -73,7 +73,7 @@
               </template>
             </CollapseAccording>
           </template>
-          <div v-if="searchOpions.teenagers > 0">
+          <div v-if="userStore.countCrianca > 0">
             <template
               v-for="(i, index) in passengerStore.informationTeenagers"
               :key="index"
@@ -114,7 +114,7 @@
               </CollapseAccording>
             </template>
           </div>
-          <div v-if="searchOpions.babies > 0">
+          <div v-if="userStore.countBebe > 0">
             <template
               v-for="(i, index) in passengerStore.informationBabies"
               :key="index"
@@ -139,27 +139,35 @@
                       name="mainPhone"
                       :maska="['(##) #####-####']"
                     />
+                    <passport-component
+                      v-model:passport="i.passportNumber"
+                      v-model:validate-date="i.validateDate"
+                      v-model:date-issue="i.dateIssue"
+                      @update:country-of-issue="i.countryIssue = $event.value"
+                      @update:country-of-residence="
+                        i.countryResidence = $event.value
+                      "
+                    />
                   </form>
-                  <passport-component
-                    v-model:passport="i.passportNumber"
-                    v-model:validate-date="i.validateDate"
-                    v-model:date-issue="i.dateIssue"
-                    @update:country-of-issue="i.countryIssue = $event.value"
-                    @update:country-of-residence="
-                      i.countryResidence = $event.value
-                    "
-                  />
                 </template>
               </CollapseAccording>
             </template>
           </div>
           <div class="flex items-center justify-center pt-3.5">
             <RouterLink
+              v-if="!disable"
               :to="{ name: 'CheckPage' }"
               class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2"
             >
-              Finalizar Compra</RouterLink
+              Finalizar Compra
+            </RouterLink>
+            <button
+              v-else
+              :disabled="disable"
+              class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2 disabled:bg-blue-400 disabled:cursor-not-allowed"
             >
+              Finalizar Compra
+            </button>
           </div>
         </td>
       </tr>
@@ -169,23 +177,23 @@
 
 <script setup>
 import CollapseAccording from '@/components/Static/CollapseAccording.vue';
-import { inject, onMounted } from 'vue';
+import { computed, inject, onMounted } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { useAlertStore } from '@/stores/alert';
 import { usePassengerStore } from '@/stores/passengerInformation';
 import PassportComponent from '@/components/FormUI/PassportComponent.vue';
+import { useUserStore } from '@/stores/user';
 
 onMounted(() => {
   if (passengerStore.informationAdults.length === 0) getArrayData();
 });
 const { t } = useI18n();
-const searchOpions = useSearchOptionsVooStore();
 const alertStore = useAlertStore();
 const passengerStore = usePassengerStore();
+const userStore = useUserStore();
 
 const $cookies = inject('$cookies');
 
@@ -200,7 +208,7 @@ const useData = () => {
 };
 
 const getArrayData = () => {
-  for (let i = 0; i < searchOpions.adults; i++) {
+  for (let i = 0; i < userStore.countAdulto; i++) {
     passengerStore.informationAdults.push({
       email: '',
       name: '',
@@ -216,8 +224,8 @@ const getArrayData = () => {
     });
   }
 
-  if (searchOpions.teenagers > 0) {
-    for (let i = 0; i < searchOpions.teenagers; i++) {
+  if (userStore.countCrianca > 0) {
+    for (let i = 0; i < userStore.countCrianca; i++) {
       passengerStore.informationTeenagers.push({
         email: '',
         name: '',
@@ -233,8 +241,8 @@ const getArrayData = () => {
       });
     }
   }
-  if (searchOpions.babies > 0) {
-    for (let i = 0; i < searchOpions.babies; i++) {
+  if (userStore.countBebe > 0) {
+    for (let i = 0; i < userStore.countBebe; i++) {
       passengerStore.informationBabies.push({
         email: '',
         name: '',
@@ -251,6 +259,62 @@ const getArrayData = () => {
     }
   }
 };
+
+const checkInformationAdults = computed(() => {
+  let check = false;
+  passengerStore.informationAdults.map((o) => {
+    if (
+      !o.email ||
+      !o.name ||
+      !o.last_name ||
+      !o.cpf_number ||
+      !o.birthday ||
+      !o.mainPhone
+    )
+      check = true;
+  });
+  return check;
+});
+
+const checkInformationTeenagers = computed(() => {
+  let check = false;
+  passengerStore.informationTeenagers.map((o) => {
+    if (
+      !o.email ||
+      !o.name ||
+      !o.last_name ||
+      !o.cpf_number ||
+      !o.birthday ||
+      !o.mainPhone
+    )
+      check = true;
+  });
+  return check;
+});
+
+const checkInformationBabies = computed(() => {
+  let check = false;
+  passengerStore.informationBabies.map((o) => {
+    if (
+      !o.email ||
+      !o.name ||
+      !o.last_name ||
+      !o.cpf_number ||
+      !o.birthday ||
+      !o.mainPhone
+    )
+      check = true;
+  });
+  return check;
+});
+
+const disable = computed(() => {
+  return (
+    checkInformationBabies.value ||
+    checkInformationTeenagers.value ||
+    checkInformationAdults.value
+  );
+});
 </script>
 
 <style scoped></style>

@@ -17,7 +17,7 @@
           <div
             class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
           >
-            {{ dateVolta }}
+            {{ userStore.dateVooVolta }}
           </div>
         </div>
       </div>
@@ -162,8 +162,10 @@ import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import { RouterLink } from 'vue-router';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { useDateFormatter } from '@/composables/dateFormatter';
+import { useUserStore } from "@/stores/user";
 
 const searchOptions = useSearchOptionsVooStore();
+const userStore = useUserStore()
 
 const props = defineProps({
   vooSelected: {
@@ -191,9 +193,7 @@ const horaSaida = computed(() => {
 const horaChegada = computed(() => {
   return filterHours(endFlight.value.DataChegada);
 });
-const dateVolta = computed(() => {
-  return useDateFormatter(searchOptions.getDateVoltaFormatter);
-});
+
 const paradas = computed(() => {
   let escalas = props.vooSelected.VoosVolta.length - 1;
 

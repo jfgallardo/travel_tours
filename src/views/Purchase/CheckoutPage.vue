@@ -21,7 +21,7 @@
                 </div>
                 <div>
                   <h3 class="font-semibold lg:text-center">
-                    {{ user.outboundFlightDestination.Destino.Descricao }}
+                    {{ user.outboundFlightOrigin.Origem.Descricao }}
                   </h3>
                 </div>
               </td>
@@ -78,7 +78,7 @@
                   <h3>Fees</h3>
                   <h4 class="font-semibold">6.17</h4>
                 </div>
-                <div class="flex items-center space-x-2">
+                <div v-if="user.vooSelected.Baggage" class="flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -92,8 +92,8 @@
                     />
                   </svg>
                   <span> BAGAGEM </span>
-                </div>
-                <div class="flex items-center space-x-2">
+                </div >
+                <div v-else class="flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -106,7 +106,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <span> BAGAGEM </span>
+                  <span>NÃO BAGAGEM </span>
                 </div>
               </td>
             </tr>
@@ -129,7 +129,7 @@
                 </div>
                 <div>
                   <h3 class="font-semibold">
-                    {{ user.returnFlightDestination.Destino.Descricao }}
+                    {{ user.returnFlightOrigin.Origem.Descricao }}
                   </h3>
                 </div>
               </td>
@@ -184,7 +184,7 @@
                   <h3>Fees</h3>
                   <h4 class="font-semibold">6.17</h4>
                 </div>
-                <div class="flex items-center space-x-2">
+                <div v-if="user.vooSelected.Baggage" class="flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -198,8 +198,8 @@
                     />
                   </svg>
                   <span> BAGAGEM </span>
-                </div>
-                <div class="flex items-center space-x-2">
+                </div >
+                <div v-else class="flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -212,7 +212,7 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <span> BAGAGEM </span>
+                  <span>NÃO BAGAGEM </span>
                 </div>
               </td>
             </tr>
@@ -228,18 +228,18 @@
                   <h3 class="font-bold">Passantes</h3>
                 </div>
                 <div class="flex items-center justify-between">
-                  <h3>{{ t('adults', searchOptionsVoo.adults) }}</h3>
-                  <h3 class="font-semibold">{{ searchOptionsVoo.adults }}</h3>
+                  <h3>{{ t('adults', user.countAdulto) }}</h3>
+                  <h3 class="font-semibold">{{ user.countAdulto }}</h3>
                 </div>
                 <div class="flex items-center justify-between">
-                  <h3>{{ t('children', searchOptionsVoo.teenagers) }}</h3>
+                  <h3>{{ t('children', user.countCrianca) }}</h3>
                   <h3 class="font-semibold">
-                    {{ searchOptionsVoo.teenagers }}
+                    {{ user.countCrianca }}
                   </h3>
                 </div>
                 <div class="flex items-center justify-between">
-                  <h3>{{ t('babies', searchOptionsVoo.babies) }}</h3>
-                  <h3 class="font-semibold">{{ searchOptionsVoo.babies }}</h3>
+                  <h3>{{ t('babies', user.countBebe) }}</h3>
+                  <h3 class="font-semibold">{{ user.countBebe }}</h3>
                 </div>
               </td>
             </tr>
@@ -310,7 +310,6 @@ import { computed } from 'vue';
 import moment from 'moment/min/moment-with-locales';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { useI18n } from 'vue-i18n';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { RouterView } from 'vue-router';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
@@ -320,7 +319,6 @@ momentDurationFormatSetup(moment);
 const { locale, t } = useI18n();
 
 const user = useUserStore();
-const searchOptionsVoo = useSearchOptionsVooStore();
 
 const ValorTaxas = computed(() => {
   return useCurrencyFormatter({

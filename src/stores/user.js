@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import { useStorage } from '@vueuse/core';
+import moment from 'moment/min/moment-with-locales';
+import i18n from '@/plugins/i18n';
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -56,6 +58,39 @@ export const useUserStore = defineStore({
           : {};
       }
       return {};
+    },
+    dateVooIda() {
+      if (i18n.global.locale.value === 'br') {
+        moment.locale('pt-br');
+      } else {
+        moment.locale(i18n.global.locale.value);
+      }
+      return moment(this.outboundFlightOrigin.DataSaida).format(
+        'dddd D MMM YYYY'
+      );
+    },
+    dateVooVolta() {
+      if (i18n.global.locale.value === 'br') {
+        moment.locale('pt-br');
+      } else {
+        moment.locale(i18n.global.locale.value);
+      }
+      return moment(this.returnFlightOrigin.DataSaida).format(
+        'dddd D MMM YYYY'
+      );
+    },
+    countAdulto() {
+      return this.vooSelected.Preco.PrecoAdulto.Quantidade;
+    },
+    countCrianca() {
+      if (this.vooSelected.Preco.PrecoCrianca)
+        return this.vooSelected.Preco.PrecoCrianca.Quantidade;
+      return 0;
+    },
+    countBebe() {
+      if (this.vooSelected.Preco.PrecoBebe)
+        return this.vooSelected.Preco.PrecoBebe.Quantidade;
+      return 0;
     },
   },
   actions: {

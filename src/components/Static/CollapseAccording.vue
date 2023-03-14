@@ -5,7 +5,7 @@
       @click="reportsOpen = !reportsOpen"
     >
       <div
-        class="w-10 border-r px-2 transform transition duration-300 ease-in-out"
+        class="w-10 border-r px-2 transform transition duration-300 ease-in-out -z-10"
         :class="{ 'rotate-90': reportsOpen, ' -translate-y-0.0': !reportsOpen }"
       >
         <svg

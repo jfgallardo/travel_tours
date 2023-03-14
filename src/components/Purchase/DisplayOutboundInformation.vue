@@ -18,7 +18,7 @@
             v-if="!vooSelected.Voos"
             class="p-2 bg-gray-200 rounded-full px-2 text-xs font-medium h-8"
           >
-            {{ dateIda }}
+            {{ userStore.dateVooIda }}
           </div>
         </div>
       </div>
@@ -163,6 +163,7 @@ import { computed } from 'vue';
 import moment from 'moment/min/moment-with-locales';
 import { useDateFormatter } from '@/composables/dateFormatter';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
+import { useUserStore } from "@/stores/user";
 
 const props = defineProps({
   vooSelected: {
@@ -172,6 +173,7 @@ const props = defineProps({
 });
 
 const searchOptions = useSearchOptionsVooStore();
+const userStore = useUserStore();
 
 const voos = computed(() => {
   if (props.vooSelected.VoosIda) return props.vooSelected.VoosIda
@@ -207,9 +209,7 @@ const horaSaida = computed(() => {
 const horaChegada = computed(() => {
   return filterHours(endFlight.value.DataChegada);
 });
-const dateIda = computed(() => {
-  return useDateFormatter(searchOptions.getDateIdaFormatter);
-});
+
 const paradas = computed(() => {
   let escalas = props.vooSelected.VoosIda
     ? props.vooSelected.VoosIda.length - 1
