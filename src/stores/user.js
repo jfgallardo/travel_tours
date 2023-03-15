@@ -59,38 +59,53 @@ export const useUserStore = defineStore({
       }
       return {};
     },
-    dateVooIda() {
-      if (i18n.global.locale.value === 'br') {
-        moment.locale('pt-br');
-      } else {
-        moment.locale(i18n.global.locale.value);
+    dateVooIda(state) {
+      if (Object.keys(state.vooSelected).length > 0) {
+        if (i18n.global.locale.value === 'br') {
+          moment.locale('pt-br');
+        } else {
+          moment.locale(i18n.global.locale.value);
+        }
+        return moment(this.outboundFlightOrigin.DataSaida).format(
+          'dddd D MMM YYYY'
+        );
       }
-      return moment(this.outboundFlightOrigin.DataSaida).format(
-        'dddd D MMM YYYY'
-      );
+      return {};
     },
-    dateVooVolta() {
-      if (i18n.global.locale.value === 'br') {
-        moment.locale('pt-br');
-      } else {
-        moment.locale(i18n.global.locale.value);
+    dateVooVolta(state) {
+      if (Object.keys(state.vooSelected).length > 0) {
+        if (i18n.global.locale.value === 'br') {
+          moment.locale('pt-br');
+        } else {
+          moment.locale(i18n.global.locale.value);
+        }
+        return moment(this.returnFlightOrigin.DataSaida).format(
+          'dddd D MMM YYYY'
+        );
       }
-      return moment(this.returnFlightOrigin.DataSaida).format(
-        'dddd D MMM YYYY'
-      );
+      return {};
     },
-    countAdulto() {
-      return this.vooSelected.Preco.PrecoAdulto.Quantidade;
+    countAdulto(state) {
+      if (Object.keys(state.vooSelected).length > 0) {
+        return this.vooSelected.Preco.PrecoAdulto.Quantidade;
+      }
+      return {};
     },
-    countCrianca() {
-      if (this.vooSelected.Preco.PrecoCrianca)
-        return this.vooSelected.Preco.PrecoCrianca.Quantidade;
-      return 0;
+    countCrianca(state) {
+      if (Object.keys(state.vooSelected).length > 0) {
+        if (this.vooSelected.Preco.PrecoCrianca)
+          return this.vooSelected.Preco.PrecoCrianca.Quantidade;
+        return 0;
+      }
+      return {};
     },
-    countBebe() {
-      if (this.vooSelected.Preco.PrecoBebe)
-        return this.vooSelected.Preco.PrecoBebe.Quantidade;
-      return 0;
+    countBebe(state) {
+      if (Object.keys(state.vooSelected).length > 0) {
+        if (this.vooSelected.Preco.PrecoBebe)
+          return this.vooSelected.Preco.PrecoBebe.Quantidade;
+        return 0;
+      }
+      return {};
     },
   },
   actions: {

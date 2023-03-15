@@ -25,7 +25,7 @@
       <button
         v-if="auth.currentStep === 3"
         class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-300 disabled:cursor-not-allowed"
-        :disabled="!auth.termos"
+        :disabled="disabledRegister"
         @click.prevent="register"
       >
         Cadastro Agora
@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, markRaw, onMounted } from 'vue';
+import { ref, markRaw, onMounted, computed } from 'vue';
 import { simpleSchemaInformationUser } from '@/utils/validate';
 import { useForm } from 'vee-validate';
 import InformationUser from '@/components/Auth/Steps/InformationUser.vue';
@@ -78,8 +78,6 @@ const nextStep = handleSubmit((values) => {
       setFieldError('address', 'Required Field');
     } else if (!values.estado) {
       setFieldError('estado', 'Required Field');
-    } else if (!values.number) {
-      setFieldError('number', 'Required Field');
     } else if (!values.ciudade) {
       setFieldError('ciudade', 'Required Field');
     } else if (!values.complemento) {
@@ -93,8 +91,6 @@ const nextStep = handleSubmit((values) => {
     } else {
       auth.currentStep++;
     }
-  } else {
-    auth.currentStep++;
   }
 
   selectedComponent.value = markRaw(steps[auth.currentStep].component);
@@ -117,20 +113,32 @@ const register = () => {
   };
   auth
     .register(formData)
-    .then(({data}) => {
-      console.log(data);
+    .then(() => {
       alertStore.showMsg({
         message: 'Registro efectuado con sucesso. Inicie session',
         backgrColor: 'bg-blue-100',
         textColor: 'text-blue-700',
       });
       auth.loading = false;
+      auth.currentStep = 0;
       router.push('/');
     })
     .catch(() => {
       auth.loading = false;
     });
 };
+
+const disabledRegister = computed(() => {
+  return (
+    !auth.termos ||
+    !auth.user.email ||
+    !auth.user.password ||
+    !auth.emailLocal ||
+    !auth.passwordLocal ||
+    (auth.user.password !== auth.passwordLocal) ||
+    (auth.user.email !== auth.emailLocal)
+  );
+});
 </script>
 
 <style scoped></style>

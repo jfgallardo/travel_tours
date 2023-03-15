@@ -82,6 +82,14 @@ export const simpleSchemaInformationUser = object({
   cep: string()
     .matches(/^\d{5}[-]\d{3}$/, { message: 'Invalid CEP' })
     .label('CEP'),
+  email: string()
+    .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, {
+      message: 'Invalid Email',
+    })
+    .label('Email'),
+  emailConfirm: string().matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, {
+    message: 'Invalid Email Confirmation',
+  }),
 });
 
 export const simpleSchemaBuy = object({

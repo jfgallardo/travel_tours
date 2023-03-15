@@ -24,12 +24,18 @@ import OneWay from '@/components/Aereo/OneWayForm.vue';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import ButtonTravel from '@/components/Partials/ButtonTravel.vue';
+import { useUserStore } from "@/stores/user";
+import { usePassengerStore } from "@/stores/passengerInformation";
 
 const storeSearch = useSearchOptionsVooStore();
+const userStore = useUserStore();
+const passengerStore = usePassengerStore();
 const $cookies = inject('$cookies');
 
 onMounted(() => {
   storeSearch.$reset();
+  passengerStore.$reset();
+  userStore.resetState();
   if ($cookies.isKey('dataSearch')) setData();
 });
 
