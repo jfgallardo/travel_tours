@@ -1,23 +1,28 @@
 <template>
   <form>
-    <div class="mt-36 border-b border-gray-700 h-[32rem]">
+    <div class="mt-24 border-b border-gray-700 h-[32rem]">
       <KeepAlive>
-        <component :is="selectedComponent"></component>
+        <component
+          :is="selectedComponent"
+          @is-valid="isValid = $event"
+        ></component>
       </KeepAlive>
     </div>
-    <div class="flex items-center justify-center space-x-6 mt-10">
+    <div class="flex items-center justify-center space-x-6 mt-10 pb-12">
       <button
         v-if="auth.currentStep > 0"
         type="button"
         class="bg-gray-200 hover:bg-gray-300 py-2 px-10"
+        :disabled="!isValid"
         @click="backStep"
       >
         Retornar
       </button>
       <button
         v-if="auth.currentStep != 3"
-        type="submit"
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
+        type="button"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-300 disabled:cursor-not-allowed"
+        :disabled="disabledButtons"
         @click="nextStep"
       >
         Proximo
@@ -36,8 +41,6 @@
 
 <script setup>
 import { ref, markRaw, onMounted, computed } from 'vue';
-import { simpleSchemaInformationUser } from '@/utils/validate';
-import { useForm } from 'vee-validate';
 import InformationUser from '@/components/Auth/Steps/InformationUser.vue';
 import AddressUser from '@/components/Auth/Steps/AddressUser.vue';
 import ContactUser from '@/components/Auth/Steps/ContactUser.vue';
@@ -53,6 +56,7 @@ onMounted(() => {
 const auth = useAuthStore();
 const router = useRouter();
 const alertStore = useAlertStore();
+const isValid = ref(false);
 
 const steps = [
   { component: InformationUser },
@@ -62,42 +66,15 @@ const steps = [
 ];
 let selectedComponent = ref(null);
 
-const { handleSubmit, setFieldError } = useForm({
-  validationSchema: simpleSchemaInformationUser,
-});
-
-const nextStep = handleSubmit((values) => {
-  if (auth.currentStep === 0) {
+const nextStep = () => {
+  if (auth.currentStep <= 4) {
     auth.currentStep++;
-  } else if (auth.currentStep === 1) {
-    if (!values.cep) {
-      setFieldError('cep', 'Required Field');
-    } else if (!values.bairro) {
-      setFieldError('bairro', 'Required Field');
-    } else if (!values.address) {
-      setFieldError('address', 'Required Field');
-    } else if (!values.estado) {
-      setFieldError('estado', 'Required Field');
-    } else if (!values.ciudade) {
-      setFieldError('ciudade', 'Required Field');
-    } else if (!values.complemento) {
-      setFieldError('complemento', 'Required Field');
-    } else {
-      auth.currentStep++;
-    }
-  } else if (auth.currentStep === 2) {
-    if (!values.mainPhone) {
-      setFieldError('mainPhone', 'Required Field');
-    } else {
-      auth.currentStep++;
-    }
   }
-
   selectedComponent.value = markRaw(steps[auth.currentStep].component);
-});
+};
 
 const backStep = () => {
-  if (auth.currentStep >= 1 && auth.currentStep <= 3) {
+  if (auth.currentStep >= 1) {
     auth.currentStep--;
   }
   selectedComponent.value = markRaw(steps[auth.currentStep].component);
@@ -135,9 +112,31 @@ const disabledRegister = computed(() => {
     !auth.user.password ||
     !auth.emailLocal ||
     !auth.passwordLocal ||
-    (auth.user.password !== auth.passwordLocal) ||
-    (auth.user.email !== auth.emailLocal)
+    auth.user.password !== auth.passwordLocal ||
+    auth.user.email !== auth.emailLocal ||
+    !isValid.value
   );
+});
+
+const disabledButtons = computed(() => {
+  if (auth.currentStep === 0) {
+    return !auth.user.fullName || !auth.user.cpf || !auth.user.birthday || !isValid.value;
+  } else if (auth.currentStep === 1) {
+    return (
+      !auth.user.cep ||
+      !auth.user.bairro ||
+      !auth.user.address ||
+      !auth.user.estado ||
+      !auth.user.ciudade ||
+      !isValid.value
+    );
+  } else if (auth.currentStep === 2) {
+    return (
+      !auth.user.mainPhone ||
+      !isValid.value
+    );
+  }
+  return false
 });
 </script>
 

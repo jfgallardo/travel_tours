@@ -7,11 +7,12 @@
   <template v-else>
     <div v-if="showData" class="pb-24">
       <div class="px-8 pt-6 font-semibold">{{filterStore.flyFilters.length}} Resultados </div>
-      <TransitionGroup name="list" tag="ul">
+<!--      <TransitionGroup name="list" tag="ul">
         <div v-for="viagem in filterStore.flyFilters" :key="viagem.Key">
           <VoosMultipleRender :viagem="viagem" />
         </div>
-      </TransitionGroup>
+      </TransitionGroup>-->
+      <LazyList :objetos="filterStore.flyFilters" :cantidad-visible="20" current-tab="VoosMultipleRender"/>
     </div>
     <div v-else>
       <div class="grid px-4 pt-28 bg-white place-content-center">
@@ -34,6 +35,7 @@ import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
 import { useWoobaStore } from '@/stores/wooba';
 import VoosMultipleRender from "@/components/Aereo/VoosMultipleRender.vue";
 import { useFiltersStore } from '@/stores/filters';
+import LazyList from "@/components/Partials/LazyList.vue";
 
 const woobaStore = useWoobaStore();
 const filterStore = useFiltersStore();

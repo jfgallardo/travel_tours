@@ -30,19 +30,23 @@
       </div>
 
       <div class="w-4/12">
-        <TextInput
+        <InputGeneric
           v-model="auth.user.fullName"
           label="Nome completo *"
           name="fullName"
+          :validations="validations.required"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
 
       <div class="w-4/12">
-        <TextInput
+        <InputGeneric
           v-model="auth.user.cpf"
           label="CPF *"
           maska="###.###.###-##"
           name="cpf"
+          :validations="validations.cpf"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
 
@@ -58,15 +62,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from "vue";
 import { useAuthStore } from '@/stores/auth';
-import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
+import InputGeneric from "@/components/FormUI/InputGeneric.vue";
+import { requiredValidation, cpfValidation } from "@/utils/validations";
+
 
 onMounted(() => {
   pessoaF.value.classList.add('active');
   auth.user.typePerson = 'pessoaF';
 });
+
+defineEmits(['isValid'])
 
 const pessoaF = ref(null);
 const pessoaJ = ref(null);
@@ -83,6 +91,18 @@ const change = (ref, value) => {
   auth.user.typePerson = value;
   ref.classList.add('active');
 };
+
+const validations = computed(() => {
+  return {
+    required: {
+      isRequired: requiredValidation,
+    },
+    cpf: {
+      isRequired: cpfValidation.requiredValidation,
+      isCPF: cpfValidation.isCPF
+    }
+  };
+});
 </script>
 
 <style scoped>

@@ -285,7 +285,6 @@ const consultar = () => {
     ...(searchOptionsVoo.cabin.value
       ? { Cabine: searchOptionsVoo.cabin.value }
       : {}),
-    QuantidadeDeVoos: 20
   };
 
   woobaStore.loading = true;

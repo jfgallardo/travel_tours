@@ -189,9 +189,9 @@
     "bairro": "Vecindario *",
     "endereo": "Dirección *",
     "estado": "Estado *",
-    "nmero": "Número *",
+    "nmero": "Número",
     "cidade": "Ciudad *",
-    "complemento": "Complemento *"
+    "complemento": "Complemento"
   },
   "alamo": {
     "tarifasDisponveisNosEstadosUnidosCanadAmricaLatina": "Tarifas disponibles en Estados Unidos, Canadá, Latinoamérica, el Caribe y Europa;",

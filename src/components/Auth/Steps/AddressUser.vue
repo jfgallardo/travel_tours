@@ -7,53 +7,65 @@
           class="absolute -top-5 right-0 text-sm text-blue-600 hover:text-blue-700 underline underline-offset-1"
           >{{ $t('addressUser.noSeiMeuCep') }}</a
         >
-        <TextInput
+        <InputGeneric
           v-model="auth.user.cep"
           :label="$t('addressUser.cep')"
           name="cep"
           maska="#####-###"
+          :validations="validations.cep"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
       <div>
-        <TextInput
+        <InputGeneric
           v-model="auth.user.bairro"
           :label="$t('addressUser.bairro')"
           name="bairro"
+          :validations="validations.required"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
       <div>
-        <TextInput
+        <InputGeneric
           v-model="auth.user.address"
           :label="$t('addressUser.endereo')"
           name="address"
+          :validations="validations.required"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
       <div>
-        <TextInput
+        <InputGeneric
           v-model="auth.user.estado"
           :label="$t('addressUser.estado')"
           name="estado"
+          :validations="validations.required"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
       <div>
-        <TextInput
+        <InputGeneric
           v-model="auth.user.number"
           :label="$t('addressUser.nmero')"
           name="number"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
       <div>
-        <TextInput
+        <InputGeneric
           v-model="auth.user.ciudade"
           :label="$t('addressUser.cidade')"
           name="ciudade"
+          :validations="validations.required"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
       <div>
-        <TextInput
+        <InputGeneric
           v-model="auth.user.complemento"
           :label="$t('addressUser.complemento')"
           name="complemento"
+          @is-valid="$emit('isValid', $event)"
         />
       </div>
     </div>
@@ -61,9 +73,12 @@
 </template>
 
 <script setup>
-import TextInput from '@/components/FormUI/TextInput.vue';
 import { useAuthStore } from '@/stores/auth';
-import { watch } from "vue";
+import { computed, watch } from 'vue';
+import { cepValidation, requiredValidation } from '@/utils/validations';
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+
+defineEmits(['isValid'])
 
 const auth = useAuthStore();
 
@@ -85,10 +100,22 @@ const verifyCEP = async () => {
       } else {
         auth.user.estado = data.state;
         auth.user.ciudade = data.city;
-        auth.user.address = `${data.neighborhood || ''} ${data.street || ''}`
+        auth.user.address = `${data.neighborhood || ''} ${data.street || ''}`;
       }
     });
 };
+
+const validations = computed(() => {
+  return {
+    required: {
+      isRequired: requiredValidation,
+    },
+    cep: {
+      isRequired: cepValidation.requiredValidation,
+      isCEP: cepValidation.isCEP,
+    },
+  };
+});
 </script>
 
 <style scoped></style>

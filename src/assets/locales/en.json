@@ -190,9 +190,9 @@
     "bairro": "Neighborhood *",
     "endereo": "Address *",
     "estado": "State *",
-    "nmero": "Number *",
+    "nmero": "Number",
     "cidade": "City *",
-    "complemento": "Complement *"
+    "complemento": "Complement"
   },
   "alamo": {
     "tarifasDisponveisNosEstadosUnidosCanadAmricaLatina": "Rates available in the United States, Canada, Latin America, the Caribbean and Europe;",
