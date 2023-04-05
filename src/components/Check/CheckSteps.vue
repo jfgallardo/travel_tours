@@ -50,7 +50,7 @@ import { useAlertStore } from '@/stores/alert';
 import { useGeneralInformation } from '@/stores/generalInformation';
 import { useReserveStore } from '@/stores/reservar';
 import { useUserStore } from '@/stores/user';
-import { usePassengerStore } from '@/stores/purchase.user';
+import { usePurchaseStore } from '@/stores/purchase.user';
 import { useDateToJson } from '@/composables/dateToJson';
 
 onMounted(() => {
@@ -62,7 +62,7 @@ const alertStore = useAlertStore();
 const informationStore = useGeneralInformation();
 const reserverStore = useReserveStore();
 const userStore = useUserStore();
-const passangerStore = usePassengerStore();
+const purchaseStore = usePurchaseStore();
 
 const steps = [
   { component: PaymentMethod },
@@ -150,9 +150,9 @@ const reservar = () => {
 
 const passageiros = () => {
   let passengerList = [];
-  passangerStore.informationAdults.forEach((item, index) => {
-    const hasBaby = !!passangerStore.informationBabies?.[index];
-    const baby = passangerStore.informationBabies?.[index];
+  purchaseStore.informationAdults.forEach((item, index) => {
+    const hasBaby = !!purchaseStore.informationBabies?.[index];
+    const baby = purchaseStore.informationBabies?.[index];
     const pass = {
       CPF: item.cpf_number,
       Passaporte: {
