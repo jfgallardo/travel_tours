@@ -120,7 +120,12 @@ const disabledRegister = computed(() => {
 
 const disabledButtons = computed(() => {
   if (auth.currentStep === 0) {
-    return !auth.user.fullName || !auth.user.cpf || !auth.user.birthday || !isValid.value;
+    return (
+      !auth.user.fullName ||
+      !auth.user.cpf ||
+      !auth.user.birthday ||
+      !isValid.value
+    );
   } else if (auth.currentStep === 1) {
     return (
       !auth.user.cep ||
@@ -131,12 +136,9 @@ const disabledButtons = computed(() => {
       !isValid.value
     );
   } else if (auth.currentStep === 2) {
-    return (
-      !auth.user.mainPhone ||
-      !isValid.value
-    );
+    return !auth.user.mainPhone || !isValid.value;
   }
-  return false
+  return false;
 });
 </script>
 

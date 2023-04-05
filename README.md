@@ -33,4 +33,5 @@ npm run build
 ```sh
 npm run lint
 ```
+
 [![Qodana](https://github.com/jfgallardo/frontend/actions/workflows/code_quality.yml/badge.svg)](https://github.com/jfgallardo/frontend/actions/workflows/code_quality.yml)

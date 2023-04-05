@@ -1,111 +1,111 @@
 <template>
   <div>
-      <div class="border-l-0 border-gray-300 py-5 md:px-3">
-<!--   flex justify-center items-center space-x-8 sm:space-x-20 lg:space-x-10 2xl:justify-around     -->
-        <div class="flex items-center justify-around ">
-          <teleport v-if="width < 768 && !suspense" :to="`#${keyId}Picture`">
-            <div class="flex items-center space-x-3 ">
-              <img :src="initVoo.Icone" class="w-8 h-8"/>
-              <p class="text-sm text-center">{{ FlightCodeString }}</p>
-            </div>
-          </teleport>
-          <div v-else class="flex flex-col items-center space-y-3 w-32">
-            <img :src="initVoo.Icone" class="h-7"/>
+    <div class="border-l-0 border-gray-300 py-5 md:px-3">
+      <!--   flex justify-center items-center space-x-8 sm:space-x-20 lg:space-x-10 2xl:justify-around     -->
+      <div class="flex items-center justify-around">
+        <teleport v-if="width < 768 && !suspense" :to="`#${keyId}Picture`">
+          <div class="flex items-center space-x-3">
+            <img :src="initVoo.Icone" class="w-8 h-8" />
             <p class="text-sm text-center">{{ FlightCodeString }}</p>
           </div>
+        </teleport>
+        <div v-else class="flex flex-col items-center space-y-3 w-32">
+          <img :src="initVoo.Icone" class="h-7" />
+          <p class="text-sm text-center">{{ FlightCodeString }}</p>
+        </div>
 
-          <div>
-            <div class="flex flex-col space-y-2">
-              <p class="text-gray-700 font-medium">{{ filterWeekday }}</p>
-              <div class="flex items-center relative">
-                <p class="text-lg sm:text-xl">
-                  <span class="font-semibold">{{ filterHours }}</span>
-                  <span class="text-gray-400 font-medium ml-1">{{
-                    filterDayPeriod
-                  }}</span>
-                </p>
-                <div
-                  class="ml-2 rounded-full ring-2 ring-blue-700 h-1 w-1"
-                ></div>
-              </div>
-
-              <p class="text-gray-900 font-medium cursor-default">
-                <span>{{ initVoo.Origem.CodigoIata }}</span>
+        <div>
+          <div class="flex flex-col space-y-2">
+            <p class="text-gray-700 font-medium">{{ filterWeekday }}</p>
+            <div class="flex items-center relative">
+              <p class="text-lg sm:text-xl">
+                <span class="font-semibold">{{ filterHours }}</span>
+                <span class="text-gray-400 font-medium ml-1">{{
+                  filterDayPeriod
+                }}</span>
               </p>
+              <div class="ml-2 rounded-full ring-2 ring-blue-700 h-1 w-1"></div>
             </div>
-          </div>
 
-          <div>
-            <div class="flex flex-col items-center space-y-2">
-              <div class="text-gray-700 flex flex-col 2xl:flex-row 2xl:space-x-2.5 items-center">
-                <p class="text-gray-400 text-center">Duration: </p>
-                <p class="font-medium text-sm">{{ Duracao }}</p>
-              </div>
-              <div>
-                <img
-                  v-if="initVoo.Segmento === 'I'"
-                  class="h-8 w-8"
-                  src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
-                />
-                <img
-                  v-else
-                  class="h-8 w-8"
-                  src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
-                />
-              </div>
-              <p class="text-gray-400 cursor-default">
-                {{ Conexao ? Parada : 'Direto' }}
-              </p>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex flex-col space-y-2">
-              <p class="text-gray-900 font-medium">
-                {{ filterWeekdayChegada }}
-              </p>
-              <div class="flex items-center">
-                <div class="mr-2 -ml-4 rounded-full bg-blue-700 h-2 w-2"></div>
-                <p class="text-lg sm:text-xl">
-                  <span class="font-semibold">{{ filterHoursChegada }}</span>
-                  <span class="text-gray-400 font-medium ml-1">{{
-                    filterDayPeriodChegada
-                  }}</span>
-                </p>
-              </div>
-              <p class="text-gray-700 font-medium cursor-default">
-                {{ endVoo.Destino.CodigoIata }}
-              </p>
-            </div>
-          </div>
-
-          <teleport v-if="width < 768 && !suspense" :to="`#${keyId}`">
-            <button
-              class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
-              @click="detalhes = true"
-            >
-              Detalhes
-            </button>
-          </teleport>
-          <div  v-else>
-            <button
-              class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
-              @click="detalhes = true"
-            >
-              Detalhes
-            </button>
+            <p class="text-gray-900 font-medium cursor-default">
+              <span>{{ initVoo.Origem.CodigoIata }}</span>
+            </p>
           </div>
         </div>
 
-        <Modal v-if="detalhes" @close="detalhes = false">
-          <template #body>
-            <DetailsPage @closeDetails="detalhes = false" />
-          </template>
-          <template #header>
-            <span>Detalhes</span>
-          </template>
-        </Modal>
+        <div>
+          <div class="flex flex-col items-center space-y-2">
+            <div
+              class="text-gray-700 flex flex-col 2xl:flex-row 2xl:space-x-2.5 items-center"
+            >
+              <p class="text-gray-400 text-center">Duration:</p>
+              <p class="font-medium text-sm">{{ Duracao }}</p>
+            </div>
+            <div>
+              <img
+                v-if="initVoo.Segmento === 'I'"
+                class="h-8 w-8"
+                src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
+              />
+              <img
+                v-else
+                class="h-8 w-8"
+                src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
+              />
+            </div>
+            <p class="text-gray-400 cursor-default">
+              {{ Conexao ? Parada : 'Direto' }}
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex flex-col space-y-2">
+            <p class="text-gray-900 font-medium">
+              {{ filterWeekdayChegada }}
+            </p>
+            <div class="flex items-center">
+              <div class="mr-2 -ml-4 rounded-full bg-blue-700 h-2 w-2"></div>
+              <p class="text-lg sm:text-xl">
+                <span class="font-semibold">{{ filterHoursChegada }}</span>
+                <span class="text-gray-400 font-medium ml-1">{{
+                  filterDayPeriodChegada
+                }}</span>
+              </p>
+            </div>
+            <p class="text-gray-700 font-medium cursor-default">
+              {{ endVoo.Destino.CodigoIata }}
+            </p>
+          </div>
+        </div>
+
+        <teleport v-if="width < 768 && !suspense" :to="`#${keyId}`">
+          <button
+            class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
+            @click="detalhes = true"
+          >
+            Detalhes
+          </button>
+        </teleport>
+        <div v-else>
+          <button
+            class="text-blue-700 hover:text-blue-800 font-semibold text-sm"
+            @click="detalhes = true"
+          >
+            Detalhes
+          </button>
+        </div>
       </div>
+
+      <Modal v-if="detalhes" @close="detalhes = false">
+        <template #body>
+          <DetailsPage @closeDetails="detalhes = false" />
+        </template>
+        <template #header>
+          <span>Detalhes</span>
+        </template>
+      </Modal>
+    </div>
   </div>
 </template>
 
@@ -118,15 +118,13 @@ import moment from 'moment';
 import { useWindowSize } from '@vueuse/core';
 
 const { locale } = useI18n();
-const { width } = useWindowSize()
+const { width } = useWindowSize();
 const detalhes = ref(false);
-const suspense = ref(true)
-
+const suspense = ref(true);
 
 onMounted(() => {
-  suspense.value = false
-})
-
+  suspense.value = false;
+});
 
 const props = defineProps({
   flights: {
@@ -135,7 +133,7 @@ const props = defineProps({
   },
   keyId: {
     type: String,
-  }
+  },
 });
 
 provide('flights', props.flights);
@@ -200,9 +198,11 @@ const Conexao = computed(() => {
 });
 
 const Duracao = computed(() => {
-  const x = moment(initVoo.value.DataSaida)
-  const y = moment(endVoo.value.DataChegada)
-  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment.duration(y.diff(x)).get('minutes')}min`
+  const x = moment(initVoo.value.DataSaida);
+  const y = moment(endVoo.value.DataChegada);
+  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment
+    .duration(y.diff(x))
+    .get('minutes')}min`;
 });
 
 const Parada = computed(() => {

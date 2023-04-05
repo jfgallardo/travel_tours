@@ -32,6 +32,8 @@ const PrivacyPage = () => import('@/views/Static/PrivacyPage.vue');
 const MainQuestionsPage = () => import('@/views/Static/MainQuestionsPage.vue');
 const CarCategoriesPage = () => import('@/views/Static/CarCategoriesPage.vue');
 
+const SettingsHomePage = () => import('@/views/Settings/HomePage.vue');
+
 const scrollBehavior = (to, from, savedPosition) => {
   if (to.name === from.name) {
     to.meta?.scrollPos && (to.meta.scrollPos.top = 0);
@@ -213,6 +215,11 @@ const router = createRouter({
           },
         },
       ],
+    },
+    {
+      path: '/settings',
+      name: 'SettingsHome',
+      component: SettingsHomePage,
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ],

@@ -1,7 +1,10 @@
 <template>
   <Header />
   <div class="lg:grid lg:grid-cols-3">
-    <aside :class="{ hidden: !open }" class="lg:border-r lg:border-gray-300 lg:h-screen lg:overflow-y-auto lg:pb-11">
+    <aside
+      :class="{ hidden: !open }"
+      class="lg:border-r lg:border-gray-300 lg:h-screen lg:overflow-y-auto lg:pb-11"
+    >
       <slot name="aside"></slot>
     </aside>
 

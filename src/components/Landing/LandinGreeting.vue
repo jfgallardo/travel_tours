@@ -31,7 +31,9 @@
           <h2 class="px-8 text-center text-2xl font-medium pb-2">
             MR TRAVEL & TOURS
           </h2>
-          <div class="flex flex-col items-center md:grid md:grid-cols-2 gap-4 text-sm md:place-items-center">
+          <div
+            class="flex flex-col items-center md:grid md:grid-cols-2 gap-4 text-sm md:place-items-center"
+          >
             <div>
               <p class="font-light text-center md:text-left">
                 <b>CNPJ:</b> 30.876.256/0001-28

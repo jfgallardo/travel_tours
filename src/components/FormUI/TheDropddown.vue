@@ -1,29 +1,25 @@
 <template>
-  <div>
-    <div>
-      <div ref="fullContainer">
-        <div class="relative">
-          <span
-            v-if="label"
-            class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm"
-            >{{ label }}</span
-          >
-          <button
-            ref="button"
-            aria-expanded="false"
-            class="w-full"
-            @click="toggle === false ? handleClick() : handleHide()"
-          >
-            <slot name="selected"></slot>
-          </button>
-          <Transition name="fade">
-            <div ref="dropdown" v-click-outside class="dropdownMenu w-full">
-              <slot name="dropdown"></slot>
-              <div class="divide-x"></div>
-            </div>
-          </Transition>
+  <div ref="fullContainer">
+    <div class="relative">
+      <span
+        v-if="label"
+        class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm"
+        >{{ label }}</span
+      >
+      <button
+        ref="button"
+        aria-expanded="false"
+        class="w-full"
+        @click="toggle === false ? handleClick() : handleHide()"
+      >
+        <slot name="selected"></slot>
+      </button>
+      <Transition name="fade">
+        <div ref="dropdown" v-click-outside class="dropdownMenu w-full">
+          <slot name="dropdown"></slot>
+          <div class="divide-x"></div>
         </div>
-      </div>
+      </Transition>
     </div>
   </div>
 </template>

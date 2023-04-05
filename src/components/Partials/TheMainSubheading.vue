@@ -25,7 +25,7 @@
     </RouterLink>
 
     <Badge>
-<!--      :to="{ path: '/hotel' }"-->
+      <!--      :to="{ path: '/hotel' }"-->
       <RouterLink
         to="#"
         class="flex flex-col items-center"

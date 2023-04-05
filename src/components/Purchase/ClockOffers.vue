@@ -67,10 +67,13 @@ const untilDayjs = moment().add(props.offerUp, 'minutes');
 
 const duration = computed(() => {
   if (untilDayjs.isBefore(now.value)) return '00:00';
-  return '0' + moment.duration(untilDayjs.diff(now.value)).minutes() + ':' + (
-    moment.duration(untilDayjs.diff(now.value)).seconds() < 10
+  return (
+    '0' +
+    moment.duration(untilDayjs.diff(now.value)).minutes() +
+    ':' +
+    (moment.duration(untilDayjs.diff(now.value)).seconds() < 10
       ? `0${moment.duration(untilDayjs.diff(now.value)).seconds()}`
-      : `${moment.duration(untilDayjs.diff(now.value)).seconds()}`
+      : `${moment.duration(untilDayjs.diff(now.value)).seconds()}`)
   );
 });
 </script>

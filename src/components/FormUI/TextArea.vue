@@ -1,18 +1,18 @@
 <template>
   <div>
-  <textarea :class="inputClassList" rows="3" :placeholder="placeholder"/>
+    <textarea :class="inputClassList" rows="3" :placeholder="placeholder" />
   </div>
 </template>
 
 <script setup>
-import {computed} from "vue";
+import { computed } from 'vue';
 
 defineProps({
   placeholder: {
     type: String,
-    default: ''
-  }
-})
+    default: '',
+  },
+});
 
 const inputClassList = computed(() => {
   return [
@@ -38,6 +38,4 @@ const getPaddingClass = computed(() => {
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

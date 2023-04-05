@@ -184,7 +184,7 @@ import { useI18n } from 'vue-i18n';
 import CabineComponent from '@/components/FormUI/CabineComponent.vue';
 import { useAlertStore } from '@/stores/alert';
 import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const woobaStore = useWoobaStore();
 const searchOptionsVoo = useSearchOptionsVooStore();
@@ -198,7 +198,11 @@ const addUp = (e) => {
     searchOptionsVoo.adults++;
   } else if (e === t('children') && searchOptionsVoo.teenagers < 8) {
     searchOptionsVoo.teenagers++;
-  } else if (e === t('babies') && searchOptionsVoo.babies < 8) {
+  } else if (
+    e === t('babies') &&
+    searchOptionsVoo.babies < 8 &&
+    searchOptionsVoo.babies < searchOptionsVoo.adults
+  ) {
     searchOptionsVoo.babies++;
   }
 };
@@ -206,6 +210,8 @@ const addUp = (e) => {
 const takeOff = (e) => {
   if (e === t('adults') && searchOptionsVoo.adults > 1) {
     searchOptionsVoo.adults--;
+    if (searchOptionsVoo.babies > searchOptionsVoo.adults)
+      searchOptionsVoo.babies = 0;
   } else if (e === t('children') && searchOptionsVoo.teenagers > 0) {
     searchOptionsVoo.teenagers--;
   } else if (e === t('babies') && searchOptionsVoo.babies > 0) {
@@ -264,7 +270,7 @@ const consultar = () => {
   }
 
   saveCookiesSearch();
-  router.push({name: 'VoosIdaVolta'})
+  router.push({ name: 'VoosIdaVolta' });
 
   const body = {
     DataIda: `/Date(${new Date(

@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
-import { axiosClientAPI } from '@/plugins/axios';
+import axiosClientAPI from '@/plugins/axios';
 import { woobaDataRedis } from '@/utils/unifyDataWooba';
 import { useUserStore } from '@/stores/user';
 

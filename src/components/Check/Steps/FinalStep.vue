@@ -30,64 +30,9 @@
 </template>
 
 <script setup>
-//import TextInput from '@/components/FormUI/TextInput.vue';
 import NumberParcelsToPay from '@/components/Check/NumberParcelsToPay.vue';
 import TextArea from '@/components/FormUI/TextArea.vue';
 import CheckInput from '@/components/FormUI/CheckInput.vue';
-
-/*watch(
-  () => auth.dataBuy.state,
-  async (newStates) => {
-    cities.value = [
-      {
-        label: 'Thinking...',
-        value: 0,
-      },
-    ]
-    if (newStates.length > 0) {
-      try {
-        await fetch(
-          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${newStates}/distritos`
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            cities.value = data.map((o) => ({
-              label: o.nome,
-              value: o.nome,
-            }));
-          });
-      } catch (error) {
-        cities.value = [
-          {
-            label: 'Error! Could not reach the API',
-            value: 0,
-          },
-        ];
-      }
-    }
-  }
-);*/
-
-/*const getStates = async () => {
-  await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
-    .then((response) => response.json())
-    .then((data) => {
-      states.value = data
-        .map((o) => ({
-          label: `${o.nome} / ${o.sigla}`,
-          value: o.sigla,
-        }))
-        .sort((a, b) => {
-          if (a.label > b.label) {
-            return 1;
-          }
-          if (a.label < b.label) {
-            return -1;
-          }
-          return 0;
-        });
-    });
-};*/
 </script>
 
 <style scoped></style>

@@ -8,18 +8,16 @@
           class="slider-item"
         >
           <div class="relative border-b pb-3">
-            <div class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-6xl">
+            <div
+              class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-6xl"
+            >
               {{ image.city }}
             </div>
-            <img
-              :src="image.url"
-              :alt="image.city"
-              class="object-cover"
-            />
+            <img :src="image.url" :alt="image.city" class="object-cover" />
           </div>
 
           <div class="flex items-end justify-between mb-2">
-           <slot name="footer" v-bind="image"></slot>
+            <slot name="footer" v-bind="image"></slot>
             <slot name="footer-right" v-bind="image">
               <ArrowRight class="h-5 w-5 hover:cursor-pointer mr-2" />
             </slot>
@@ -71,8 +69,7 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue';
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
-
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
 
 const props = defineProps({
   images: {
@@ -86,19 +83,19 @@ const props = defineProps({
 });
 
 const width = computed(() => {
-  return screen.width
-})
+  return screen.width;
+});
 
 const itemsToShow = computed(() => {
   switch (true) {
-    case width.value <= 576 :
+    case width.value <= 576:
       return 1;
     case width.value > 576 && width.value <= 1024:
-      return 2
+      return 2;
     case width.value > 1024 && width.value <= 1536:
-      return 3
+      return 3;
     default:
-    return 4
+      return 4;
   }
 });
 const currentSlide = ref(0);
@@ -191,13 +188,13 @@ const prevSlide = () => {
   cursor: default;
 }
 
-img{
+img {
   width: 30rem;
   height: 32rem;
 }
 
 @media only screen and (max-width: 576px) {
-  img{
+  img {
     width: 26rem;
     height: 28rem;
   }

@@ -1,52 +1,54 @@
 <template>
-  <div>
-    <div>
-      <div ref="dropdownP">
-        <div class="relative">
-          <span class="absolute top-0 pl-3 mt-1 text-gray-400 text-sm">{{
-            label
-          }}</span>
-          <div
-            class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
-            @click="hiddenDropdown = !hiddenDropdown"
-          >
-            <span v-if="selected" class="mr-5"> {{ selected.label }} </span>
-            <span v-else class="mr-5 text-gray-500">{{ placeholder }}</span>
-            <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
-          </div>
-          <Transition>
-            <div
-              v-if="hiddenDropdown"
-              v-click-outside
-              class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-20 w-full max-h-60 overflow-y-auto"
-            >
-              <ul>
-                <li
-                  v-for="op in options"
-                  :key="op.value"
-                  class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
-                  @click="selectOption(op)"
-                >
-                  {{ op.label }}
-                </li>
-              </ul>
-            </div>
-          </Transition>
-        </div>
+  <div ref="container">
+    <div class="relative">
+      <span class="absolute top-0 pl-3 mt-1 text-gray-400 text-sm">{{
+        label
+      }}</span>
+      <div
+        ref="innerContainer"
+        class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
+        @click="hiddenDropdown === false ? handleClick() : handleHide()"
+      >
+        <span v-if="selected" class="mr-5"> {{ selected.label }} </span>
+        <span v-else class="mr-5 text-gray-500">{{ placeholder }}</span>
+        <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
       </div>
+      <Transition>
+        <div
+          ref="dropdown"
+          v-click-outside
+          role="listbox"
+          tabindex="-1"
+          class="bg-white border border-gray-300 py-1 mt-1 shadow-md rounded-md absolute z-10 w-full max-h-60 overflow-y-auto dropdownMenu"
+        >
+          <ul>
+            <li
+              v-for="op in options"
+              :key="op.value"
+              class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
+              @click="selectOption(op)"
+            >
+              {{ op.label }}
+            </li>
+          </ul>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import ChevronDown from '@/components/Icons/ChevronDown.vue';
+import { createPopper } from '@popperjs/core';
 
 const hiddenDropdown = ref(false);
 const selected = ref(props.selected);
 const emit = defineEmits(['selectValue']);
-const dropdownP = ref(null);
-const placeholder = ref('')
+const container = ref(null);
+const placeholder = ref('');
+const dropdown = ref(null);
+const innerContainer = ref(null);
 
 const props = defineProps({
   options: {
@@ -75,7 +77,9 @@ const props = defineProps({
 watch(
   () => props.loading,
   (newX) => {
-    newX ? placeholder.value = 'Loading...' : placeholder.value ='Seleccione valor'
+    newX
+      ? (placeholder.value = 'Loading...')
+      : (placeholder.value = 'Seleccione valor');
   },
   { immediate: true }
 );
@@ -85,6 +89,7 @@ const selectOption = (value) => {
     selected.value = value;
     emit('selectValue', value);
     hiddenDropdown.value = false;
+    handleHide();
   }
 };
 
@@ -98,17 +103,45 @@ const vClickOutside = {
 };
 
 const clickOutListener = (evt) => {
-  if (!dropdownP.value.contains(evt.target)) {
-    hide(selected.value);
+  if (!container.value.contains(evt.target)) {
+    handleHide();
   }
 };
 
-const hide = (value) => {
-  if (value) {
-    selected.value = value;
-    emit('selectValue', value);
-    hiddenDropdown.value = false;
-  }
+const popperInstance = computed(() => {
+  return createPopper(innerContainer.value, dropdown.value, {
+    modifiers: [
+      {
+        name: 'preventOverflow',
+        options: {
+          padding: 4,
+        },
+      },
+      {
+        name: 'flip',
+        options: {
+          padding: 4,
+        },
+      },
+      {
+        name: 'offset',
+        options: {
+          offset: [0, 4],
+        },
+      },
+    ],
+  });
+});
+
+const handleClick = () => {
+  dropdown.value.setAttribute('data-show', '');
+  popperInstance.value.update();
+  hiddenDropdown.value = true;
+};
+
+const handleHide = () => {
+  dropdown.value.removeAttribute('data-show');
+  hiddenDropdown.value = false;
 };
 </script>
 
@@ -121,5 +154,24 @@ const hide = (value) => {
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.dropdownMenu {
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  z-index: 30;
+  min-width: 8rem;
+  padding: 0.5rem 0;
+  display: none;
+}
+
+.dropdownMenu[data-show] {
+  display: block;
 }
 </style>

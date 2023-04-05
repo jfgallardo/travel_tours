@@ -23,7 +23,7 @@
           class="text-red-500 font-semibold text-sm absolute -bottom-5 pl-1"
         >
           <span v-for="(errorMessage, index) in errorMessages" :key="index">
-          *  {{errorMessage }} &nbsp;
+            * {{ errorMessage }} &nbsp;
           </span>
         </div>
       </Transition>
@@ -111,7 +111,7 @@ const validateInput = () => {
   });
 
   valid.value = isValid;
-  emit('isValid', isValid)
+  emit('isValid', isValid);
   errorMessages.value = messages;
 };
 

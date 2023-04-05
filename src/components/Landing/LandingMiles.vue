@@ -29,8 +29,8 @@ const { t } = useI18n();
 </script>
 
 <style scoped>
-.bg-blue-700{
-  background-image: url("../../assets/img/logo1.svg");
+.bg-blue-700 {
+  background-image: url('../../assets/img/logo1.svg');
   background-repeat: no-repeat;
   background-position: right;
 }

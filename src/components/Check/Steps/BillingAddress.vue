@@ -3,9 +3,11 @@
     <div
       class="flex flex-col items-center justify-center mx-auto pt-20 space-y-6 w-full md:w-auto"
     >
-      <div class="w-full flex flex-col lg:flex-row lg:space-x-2.5 space-y-6 lg:space-y-0">
+      <div
+        class="w-full flex flex-col lg:flex-row lg:space-x-2.5 space-y-6 lg:space-y-0"
+      >
         <TextInput
-          v-model="auth.dataBuy.cep"
+          v-model="informationStore.detailsUser.cep"
           :label="$t('addressUser.cep')"
           name="cep"
           maska="#####-###"
@@ -13,7 +15,7 @@
         />
 
         <TextInput
-          v-model="auth.dataBuy.state"
+          v-model="informationStore.detailsUser.state"
           :label="$t('addressUser.estado')"
           class="lg:w-1/2"
           name="state"
@@ -21,7 +23,7 @@
         />
 
         <TextInput
-          v-model="auth.dataBuy.city"
+          v-model="informationStore.detailsUser.city"
           :label="$t('addressUser.cidade')"
           class="lg:w-1/2"
           name="city"
@@ -31,19 +33,23 @@
 
       <div class="w-full">
         <TextInput
-          v-model="auth.dataBuy.address"
+          v-model="informationStore.detailsUser.address"
           :label="$t('addressUser.endereo')"
           name="address"
         />
       </div>
 
       <div class="w-full">
-        <TextInput v-model="auth.dataBuy.number" :label="$t('addressUser.nmero')" name="number" />
+        <TextInput
+          v-model="informationStore.detailsUser.number"
+          :label="$t('addressUser.nmero')"
+          name="number"
+        />
       </div>
 
       <div class="w-full">
         <TextInput
-          v-model="auth.dataBuy.complement"
+          v-model="informationStore.detailsUser.complement"
           :label="$t('addressUser.complemento')"
           name="complement"
         />
@@ -51,7 +57,7 @@
 
       <div class="w-full">
         <TextInput
-          v-model="auth.dataBuy.district"
+          v-model="informationStore.detailsUser.district"
           :label="$t('addressUser.bairro')"
           name="district"
         />
@@ -61,31 +67,35 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/auth';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import { watch } from 'vue';
+import { useGeneralInformation } from '@/stores/generalInformation';
 
-const auth = useAuthStore();
+const informationStore = useGeneralInformation();
 
 watch(
-  () => auth.dataBuy.cep,
+  () => informationStore.detailsUser.cep,
   (cep) => {
     if (cep.length >= 9) verifyCEP();
   }
 );
 
 const verifyCEP = async () => {
-  await fetch(`https://brasilapi.com.br/api/cep/v1/${auth.dataBuy.cep}`)
+  await fetch(
+    `https://brasilapi.com.br/api/cep/v1/${informationStore.detailsUser.cep}`
+  )
     .then((response) => response.json())
     .then((data) => {
       if (!data.cep) {
-        auth.dataBuy.state = '';
-        auth.dataBuy.city = '';
-        auth.dataBuy.address = '';
+        informationStore.detailsUser.state = '';
+        informationStore.detailsUser.city = '';
+        informationStore.detailsUser.address = '';
       } else {
-        auth.dataBuy.state = data.state;
-        auth.dataBuy.city = data.city;
-        auth.dataBuy.address = `${data.neighborhood || ''} ${data.street || ''}`
+        informationStore.detailsUser.state = data.state;
+        informationStore.detailsUser.city = data.city;
+        informationStore.detailsUser.address = `${data.neighborhood || ''} ${
+          data.street || ''
+        }`;
       }
     });
 };

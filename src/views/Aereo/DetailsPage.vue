@@ -89,9 +89,7 @@
       <div
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
-        <template
-          v-if="initVoo.BagagemInclusa"
-        >
+        <template v-if="initVoo.BagagemInclusa">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

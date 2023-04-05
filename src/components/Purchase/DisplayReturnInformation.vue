@@ -162,10 +162,10 @@ import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import { RouterLink } from 'vue-router';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { useDateFormatter } from '@/composables/dateFormatter';
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from '@/stores/user';
 
 const searchOptions = useSearchOptionsVooStore();
-const userStore = useUserStore()
+const userStore = useUserStore();
 
 const props = defineProps({
   vooSelected: {

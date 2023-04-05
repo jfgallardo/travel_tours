@@ -1,6 +1,7 @@
 {
-  "name": "frontend",
-  "version": "0.0.0",
+  "name": "mr-travel",
+  "version": "2.0.0",
+  "private": "true",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -27,6 +28,7 @@
     "pathe": "^1.1.0",
     "pdfmake": "^0.2.7",
     "pinia": "^2.0.28",
+    "pinia-plugin-persistedstate": "^3.1.0",
     "qrcode.vue": "^3.3.3",
     "toastify-js": "^1.12.0",
     "vee-validate": "^4.7.3",

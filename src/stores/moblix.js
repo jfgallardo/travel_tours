@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { axiosClientAPI } from '@/plugins/axios';
+import axiosClientAPI from '@/plugins/axios';
 import unifyDataMoblix from '@/utils/unifyDataMoblix';
 import { useSearchOptionsHotelStore } from '@/stores/searchOptionsHotel';
 

@@ -30,11 +30,11 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth';
-import InputGeneric from "@/components/FormUI/InputGeneric.vue";
-import { phoneValidation, onlyPhoneValidation } from "@/utils/validations";
-import { computed } from "vue";
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+import { phoneValidation, onlyPhoneValidation } from '@/utils/validations';
+import { computed } from 'vue';
 
-defineEmits(['isValid'])
+defineEmits(['isValid']);
 
 const auth = useAuthStore();
 
@@ -42,11 +42,11 @@ const validations = computed(() => {
   return {
     phone: {
       isRequired: phoneValidation.requiredValidation,
-      isPhone: phoneValidation.isPhoneNumber
+      isPhone: phoneValidation.isPhoneNumber,
     },
     onlyPhone: {
-      isPhone: onlyPhoneValidation.isPhoneNumber
-    }
+      isPhone: onlyPhoneValidation.isPhoneNumber,
+    },
   };
 });
 </script>

@@ -4,6 +4,5 @@
   </div>
 </template>
 <script setup>
-import ShowInfo from "@/views/Purchase/ShowInfo.vue";
-
+import ShowInfo from '@/views/Purchase/ShowInfo.vue';
 </script>

@@ -19,9 +19,9 @@ const { t } = useI18n();
 defineProps({
   top: {
     type: Boolean,
-    default: true
+    default: true,
   },
-})
+});
 const showB = ref(true);
 </script>
 

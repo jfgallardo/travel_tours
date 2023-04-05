@@ -171,7 +171,11 @@ const addUp = (e) => {
     searchOptionsVooStore.adults++;
   } else if (e === t('children') && searchOptionsVooStore.teenagers < 8) {
     searchOptionsVooStore.teenagers++;
-  } else if (e === t('babies') && searchOptionsVooStore.babies < 8) {
+  } else if (
+    e === t('babies') &&
+    searchOptionsVooStore.babies < 8 &&
+    searchOptionsVooStore.babies < searchOptionsVooStore.adults
+  ) {
     searchOptionsVooStore.babies++;
   }
 };
@@ -179,6 +183,8 @@ const addUp = (e) => {
 const takeOff = (e) => {
   if (e === t('adults') && searchOptionsVooStore.adults > 1) {
     searchOptionsVooStore.adults--;
+    if (searchOptionsVooStore.babies > searchOptionsVooStore.adults)
+      searchOptionsVooStore.babies = 0;
   } else if (e === t('children') && searchOptionsVooStore.teenagers > 0) {
     searchOptionsVooStore.teenagers--;
   } else if (e === t('babies') && searchOptionsVooStore.babies > 0) {

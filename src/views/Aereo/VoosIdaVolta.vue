@@ -17,8 +17,12 @@
         <div class="px-8 pt-6 font-semibold">
           {{ filterStore.flyFilters.length }} Resultados
         </div>
-          <LazyList :objetos="filterStore.flyFilters" :cantidad-visible="20" current-tab="IdaVoltaFlex"/>
-<!--          <div v-for="viagem in filterStore.flyFilters" :key="viagem.Key">
+        <LazyList
+          :objetos="filterStore.flyFilters"
+          :cantidad-visible="20"
+          current-tab="IdaVoltaFlex"
+        />
+        <!--          <div v-for="viagem in filterStore.flyFilters" :key="viagem.Key">
             <IdaVoltaFlex :viagem="viagem" />
           </div>-->
       </template>
@@ -47,7 +51,7 @@ import { useWoobaStore } from '@/stores/wooba';
 import IdaVoltaFlex from '@/components/Aereo/IdaVoltaFlexRender.vue';
 import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
 import { useFiltersStore } from '@/stores/filters';
-import LazyList from "@/components/Partials/LazyList.vue";
+import LazyList from '@/components/Partials/LazyList.vue';
 
 const woobaStore = useWoobaStore();
 const filterStore = useFiltersStore();

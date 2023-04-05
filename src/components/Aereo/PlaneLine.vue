@@ -106,7 +106,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import moment from 'moment/min/moment-with-locales';
-import { useDateFormatter } from "@/composables/dateFormatter";
+import { useDateFormatter } from '@/composables/dateFormatter';
 
 const openEscala = ref(false);
 

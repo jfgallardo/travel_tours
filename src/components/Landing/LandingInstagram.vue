@@ -58,7 +58,8 @@
         <div class="mt-16 flex justify-center">
           <a
             class="text-white border-2 border-white px-3 py-2 rounded-full flex items-center justify-center"
-            href="https://instagram.com/mrtravelandtours?igshid=YmMyMTA2M2Y=" target="_blank"
+            href="https://instagram.com/mrtravelandtours?igshid=YmMyMTA2M2Y="
+            target="_blank"
           >
             <Instagram class="mr-1 h-6 w-6" /> Visite nosso instagram
           </a>

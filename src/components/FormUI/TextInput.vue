@@ -1,28 +1,29 @@
 <template>
-  <div>
-    <div class="relative">
-      <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
-        label
-      }}</span>
-      <input
-        v-model="value"
-        v-maska
-        :data-maska="maska"
-        :data-maska-tokens="tokens"
-        :value="modelValue"
-        :type="typeField"
-        :class="inputClassList"
-        :placeholder="placeholder"
-        :disabled="disableField"
-        @blur="$emit('onBlur', $event.target.value)"
-      />
-      <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
-        errorMessage
-      }}</span>
-      <span v-if="textR" class="absolute right-0 top-0 bg-blue-700 text-white px-2 py-0.5 font-serif text-sm rounded-l-md opacity-80">
-        {{textR}}
-      </span>
-    </div>
+  <div class="relative">
+    <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
+      label
+    }}</span>
+    <input
+      v-model="value"
+      v-maska
+      :data-maska="maska"
+      :data-maska-tokens="tokens"
+      :value="modelValue"
+      :type="typeField"
+      :class="inputClassList"
+      :placeholder="placeholder"
+      :disabled="disableField"
+      @blur="$emit('onBlur', $event.target.value)"
+    />
+    <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
+      errorMessage
+    }}</span>
+    <span
+      v-if="textR"
+      class="absolute right-0 top-0 bg-blue-700 text-white px-2 py-0.5 font-serif text-sm rounded-l-md opacity-80"
+    >
+      {{ textR }}
+    </span>
   </div>
 </template>
 
@@ -37,7 +38,7 @@ const props = defineProps({
   },
   name: {
     type: String,
-    default: ''
+    default: '',
   },
   label: {
     type: String,
@@ -59,12 +60,12 @@ const props = defineProps({
   },
   textR: {
     type: String,
-    default: ''
+    default: '',
   },
   typeField: {
     type: String,
-    default: "text"
-  }
+    default: 'text',
+  },
 });
 
 const nameRef = toRef(props, 'name');

@@ -5,10 +5,20 @@
       class="border border-gray-400 h-10 pr-6 pl-4 pt-9 pb-4 flex space-x-3.5 items-end animate-pulse"
     >
       <span class="text-sm">Cargando formas de financiamento</span>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
+        />
       </svg>
-
     </div>
     <div
       v-else
@@ -18,7 +28,7 @@
       <span class="text-sm">Selecione em quantas parcelas deseja pagar</span>
     </div>
     <div
-      v-if="authStore.card.planDeFinanciamento"
+      v-if="informationStore.card.planDeFinanciamento"
       class="border border-gray-400 border-t-0 flex flex-col h-20 justify-center px-4"
     >
       <div class="flex items-center space-x-1.5">
@@ -37,12 +47,12 @@
           />
         </svg>
         <span class="text-blue-700 font-semibold"
-          >{{ authStore.card.planDeFinanciamento.Parcelas }} de $
-          {{ authStore.card.planDeFinanciamento.PrimeiraParcela }} -
+          >{{ informationStore.card.planDeFinanciamento.Parcelas }} de $
+          {{ informationStore.card.planDeFinanciamento.PrimeiraParcela }} -
           {{
-            authStore.card.planDeFinanciamento.vlJurosCalculado === 0
+            informationStore.card.planDeFinanciamento.vlJurosCalculado === 0
               ? 'SEM JUROS'
-              : `R$ ${authStore.card.planDeFinanciamento.vlJurosCalculado}  Juros`
+              : `R$ ${informationStore.card.planDeFinanciamento.vlJurosCalculado}  Juros`
           }}</span
         >
       </div>
@@ -50,9 +60,9 @@
       <span class="ml-9"
         >Total a pagar: R$
         {{
-          authStore.card.planDeFinanciamento.PrimeiraParcela +
-          authStore.card.planDeFinanciamento.DemaisParcelas *
-            (authStore.card.planDeFinanciamento.Parcelas -1)
+          informationStore.card.planDeFinanciamento.PrimeiraParcela +
+          informationStore.card.planDeFinanciamento.DemaisParcelas *
+            (informationStore.card.planDeFinanciamento.Parcelas - 1)
         }}</span
       >
     </div>
@@ -124,44 +134,22 @@
 
 <script setup>
 import Modal from '@/components/Partials/TheModal.vue';
-import { inject, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRateStore } from '@/stores/rate';
-import { useUserStore } from '@/stores/user';
-import { useAuthStore } from '@/stores/auth';
-
-onMounted(() => {
-  tarifar();
-});
+import { useGeneralInformation } from '@/stores/generalInformation';
 
 const modal = ref(false);
-const $cookies = inject('$cookies');
 const rateStore = useRateStore();
-const userStore = useUserStore();
-const authStore = useAuthStore();
-const planosDeFinanciamento = ref(null);
-const tarifar = () => {
-  rateStore.loading = true;
-  const body = {
-    ViagemIda: userStore.vooSelected.Id.toString(),
-    IdentificacaoDaViagem: $cookies.get('vooSelectedKey'),
-    RetornarPlanoDeFinanciamento: true,
-    TarifarMelhorPreco: true,
-    TarifarMelhorFamilia: true,
-  };
-  rateStore
-    .tarifar(body)
-    .then(({ data }) => {
-      const planos = data.data.PlanosDeFinanciamento;
-      planosDeFinanciamento.value = planos.find((o) => o.Bandeira === authStore.card.bainderaSelected.value)
-      rateStore.loading = false;
-    })
-    .catch(() => {
-      rateStore.loading = false;
-    });
-};
+const informationStore = useGeneralInformation();
+const planosDeFinanciamento = computed(() => {
+  const planos = informationStore.info.PlanosDeFinanciamento ?? [];
+  return planos.find(
+    (o) => o.Bandeira === informationStore.card.bainderaSelected.value
+  );
+});
 
 const selectItem = (item) => {
-  authStore.card.planDeFinanciamento = item;
+  informationStore.card.planDeFinanciamento = item;
 };
 </script>
 

@@ -15,7 +15,7 @@
         </div>
       </template>
       <template #body>
-        <div class="font-light mt-4 text-justify">
+        <div class="font-light mt-4 text-justify px-12 py-2.5">
           <ol>
             <li>
               Tarifas disponíveis nos Estados Unidos, Canadá, América Latina,

@@ -14,12 +14,12 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref } from 'vue';
 
 onMounted(() => {
   button.value[0].classList.add('active');
   emits('selectedButton', props.options[0].component);
-})
+});
 
 const emits = defineEmits(['selectedButton']);
 
@@ -30,22 +30,22 @@ const props = defineProps({
       return [
         {
           name: 'aereoHomePage.titleRoundTrip',
-          component: 'RoundTrip'
+          component: 'RoundTrip',
         },
         {
           name: 'aereoHomePage.titleOneWay',
-          component: 'OneWay'
+          component: 'OneWay',
         },
         {
           name: 'aereoHomePage.titleManyCities',
-          component: 'ManyCities'
+          component: 'ManyCities',
         },
       ];
     },
   },
 });
 
-const button = ref(null)
+const button = ref(null);
 
 const cleanRefs = () => {
   for (let i = 0; i < button.value.length; i++) {
@@ -57,8 +57,8 @@ const changeTab = (tab) => {
   cleanRefs();
   for (let i = 0; i < button.value.length; i++) {
     if (button.value[i].name === tab.name) {
-      button.value[i].classList.add("active")
-      emits('selectedButton', tab.component)
+      button.value[i].classList.add('active');
+      emits('selectedButton', tab.component);
     }
   }
 };

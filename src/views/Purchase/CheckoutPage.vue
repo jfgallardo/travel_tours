@@ -3,7 +3,7 @@
     <LayoutTwoViews>
       <template #aside>
         <div class="flex items-center justify-center py-9 px-8">
-          <ClockOffers/>
+          <ClockOffers />
         </div>
         <table
           class="table-fixed border border-gray-200 w-full border-spacing-2 border-separate"
@@ -78,7 +78,10 @@
                   <h3>Fees</h3>
                   <h4 class="font-semibold">6.17</h4>
                 </div>
-                <div v-if="user.vooSelected.Baggage" class="flex items-center space-x-2">
+                <div
+                  v-if="user.vooSelected.Baggage"
+                  class="flex items-center space-x-2"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -92,7 +95,7 @@
                     />
                   </svg>
                   <span> BAGAGEM </span>
-                </div >
+                </div>
                 <div v-else class="flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +116,9 @@
           </tbody>
         </table>
         <table
-          v-if="user.vooSelected.VoosVolta && user.vooSelected.VoosVolta.length > 0"
+          v-if="
+            user.vooSelected.VoosVolta && user.vooSelected.VoosVolta.length > 0
+          "
           class="table-fixed border border-t-0 border-gray-200 w-full border-spacing-2 border-separate"
         >
           <tbody>
@@ -184,7 +189,10 @@
                   <h3>Fees</h3>
                   <h4 class="font-semibold">6.17</h4>
                 </div>
-                <div v-if="user.vooSelected.Baggage" class="flex items-center space-x-2">
+                <div
+                  v-if="user.vooSelected.Baggage"
+                  class="flex items-center space-x-2"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -198,7 +206,7 @@
                     />
                   </svg>
                   <span> BAGAGEM </span>
-                </div >
+                </div>
                 <div v-else class="flex items-center space-x-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -313,7 +321,7 @@ import { useI18n } from 'vue-i18n';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { RouterView } from 'vue-router';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
-import ClockOffers from "@/components/Purchase/ClockOffers.vue";
+import ClockOffers from '@/components/Purchase/ClockOffers.vue';
 
 momentDurationFormatSetup(moment);
 const { locale, t } = useI18n();
@@ -417,11 +425,11 @@ const duration = (dataSaida, dataLlegada) => {
 
 const ParadaIda = computed(() => {
   if (user.vooSelected.VoosIda) return getStops(user.vooSelected.VoosIda);
-  return getStops(user.vooSelected.Voos)
+  return getStops(user.vooSelected.Voos);
 });
 const ParadaVolta = computed(() => {
   if (user.vooSelected.VoosVolta) return getStops(user.vooSelected.VoosVolta);
-  return ''
+  return '';
 });
 const getStops = (v) => {
   let stops = [];

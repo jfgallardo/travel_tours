@@ -1,45 +1,53 @@
 <template>
   <div class="lg:w-1/2 w-full">
     <div
-        class="p-4 flex items-center justify-between w-full hover:cursor-pointer hover:bg-blue-50"
-        :class="{'text-blue-600 font-semibold border border-blue-600 outline-none ': isSelected, 'border border-zinc-400': !isSelected}"
-        tabindex="0"
-        @click="$emit('update:modelValue', label)"
-        @keydown.space="$emit('update:modelValue', label)">
+      class="p-4 flex items-center justify-between w-full hover:cursor-pointer hover:bg-blue-50"
+      :class="{
+        'text-blue-600 font-semibold border border-blue-600 outline-none ':
+          isSelected,
+        'border border-zinc-400': !isSelected,
+      }"
+      tabindex="0"
+      @click="$emit('update:modelValue', label)"
+      @keydown.space="$emit('update:modelValue', label)"
+    >
       <span class="text-lg">{{ label }}</span>
       <svg
-          v-if="isSelected" class="w-8 h-7" fill="blue" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
+        v-if="isSelected"
+        class="w-8 h-7"
+        fill="blue"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
-            clip-rule="evenodd"
-            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-            fill-rule="evenodd"/>
+          clip-rule="evenodd"
+          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+          fill-rule="evenodd"
+        />
       </svg>
-
     </div>
   </div>
 </template>
 
 <script setup>
-import {computed} from "vue";
+import { computed } from 'vue';
 
-defineEmits(['update:modelValue'])
+defineEmits(['update:modelValue']);
 
 const props = defineProps({
   label: {
     type: String,
-    default: 'Label Example'
+    default: 'Label Example',
   },
   modelValue: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 const isSelected = computed(() => {
-  return props.label === props.modelValue
-})
+  return props.label === props.modelValue;
+});
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { axiosClientAPI } from '@/plugins/axios';
+import axiosClientAPI from '@/plugins/axios';
 
 export const useRateStore = defineStore('rate', {
   state: () => ({

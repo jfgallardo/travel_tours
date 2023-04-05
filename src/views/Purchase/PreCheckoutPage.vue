@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-if="redisStore.loadingSearch" >
-      ...cargando
-    </div>
+    <div v-if="redisStore.loadingSearch">...cargando</div>
     <div v-else class="mx-auto pb-10">
       <div class="flex flex-col lg:flex-row">
         <div class="basis-4/6 flex flex-col border border-slate-300">
@@ -59,7 +57,9 @@
             </CarouselSlider>
           </Carousel>
         </div>
-        <div class="basis-4/12 border border-slate-300 border-l-0 border-b-0 border-t-0 lg:border-t lg:border-r-0 lg:border-l">
+        <div
+          class="basis-4/12 border border-slate-300 border-l-0 border-b-0 border-t-0 lg:border-t lg:border-r-0 lg:border-l"
+        >
           <GroupsBoundFor class="mt-4" more-people="12" />
           <GroupsBoundFor date="Sep 18" more-people="21" />
           <div class="flex items-center justify-around">
@@ -73,21 +73,21 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import PreCheckOut from "@/components/Purchase/PreCheckOut.vue";
-import Carousel from "@/components/Partials/TheCarousel.vue";
-import CarouselSlider from "@/components/Partials/TheCarouselSlider.vue";
-import Puntacana from "@/assets/img/viaje1.jpg";
-import Avatar1 from "@/assets/img/avatar1.jpg";
-import SanJuan from "@/assets/img/viaje2.jpg";
-import Avatar2 from "@/assets/img/avatar2.jpg";
-import Uruguay from "@/assets/img/viaje3.jpg";
-import Avatar3 from "@/assets/img/avatar3.jpg";
-import GroupsBoundFor from "@/components/Aereo/GroupsBoundFor.vue";
-import ArrowRight from "@/components/Icons/ArrowRight.vue";
-import InterestingAccommodations from "@/components/Purchase/InterestingAccommodations.vue";
-import { onMounted } from "vue";
-import { useRedisStore } from "@/stores/redis";
+import { useRoute } from 'vue-router';
+import PreCheckOut from '@/components/Purchase/PreCheckOut.vue';
+import Carousel from '@/components/Partials/TheCarousel.vue';
+import CarouselSlider from '@/components/Partials/TheCarouselSlider.vue';
+import Puntacana from '@/assets/img/viaje1.jpg';
+import Avatar1 from '@/assets/img/avatar1.jpg';
+import SanJuan from '@/assets/img/viaje2.jpg';
+import Avatar2 from '@/assets/img/avatar2.jpg';
+import Uruguay from '@/assets/img/viaje3.jpg';
+import Avatar3 from '@/assets/img/avatar3.jpg';
+import GroupsBoundFor from '@/components/Aereo/GroupsBoundFor.vue';
+import ArrowRight from '@/components/Icons/ArrowRight.vue';
+import InterestingAccommodations from '@/components/Purchase/InterestingAccommodations.vue';
+import { onMounted } from 'vue';
+import { useRedisStore } from '@/stores/redis';
 
 const redisStore = useRedisStore();
 const route = useRoute();
@@ -100,68 +100,68 @@ onMounted(async () => {
 
 const sliders = [
   {
-    city: "",
+    city: '',
     src: Puntacana,
     avatar: Avatar1,
-    travel: "Jessica Palmer",
-    place: "Puntacana"
+    travel: 'Jessica Palmer',
+    place: 'Puntacana',
   },
   {
-    city: "",
+    city: '',
     src: SanJuan,
     avatar: Avatar2,
-    travel: "Rudiguer Corinho",
-    place: "San Juan"
+    travel: 'Rudiguer Corinho',
+    place: 'San Juan',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Vivian Meldier",
-    place: "Uruguay"
+    travel: 'Vivian Meldier',
+    place: 'Uruguay',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Ernesto Meldier",
-    place: "Chile"
+    travel: 'Ernesto Meldier',
+    place: 'Chile',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Juan Placencia",
-    place: "Peru"
+    travel: 'Juan Placencia',
+    place: 'Peru',
   },
   {
-    city: "",
+    city: '',
     src: SanJuan,
     avatar: Avatar2,
-    travel: "Rudiguer Corinho",
-    place: "San Juan"
+    travel: 'Rudiguer Corinho',
+    place: 'San Juan',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Vivian Meldier",
-    place: "Uruguay"
+    travel: 'Vivian Meldier',
+    place: 'Uruguay',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Ernesto Meldier",
-    place: "Chile"
+    travel: 'Ernesto Meldier',
+    place: 'Chile',
   },
   {
-    city: "",
+    city: '',
     src: Uruguay,
     avatar: Avatar3,
-    travel: "Juan Placencia",
-    place: "Peru"
-  }
+    travel: 'Juan Placencia',
+    place: 'Peru',
+  },
 ];
 </script>
 

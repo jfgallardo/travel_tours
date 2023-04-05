@@ -7,7 +7,7 @@
     <div class="w-full flex items-center justify-evenly">
       <p class="font-medium text-xl">CHECKOUT</p>
       <div class="flex items-center space-x-3">
-        <p>{{title}}</p>
+        <p>{{ title }}</p>
         <div
           class="inline-flex items-center justify-center overflow-hidden rounded-full"
         >
@@ -25,7 +25,9 @@
               class="text-blue-700"
               stroke-width="3"
               :stroke-dasharray="circumference"
-              :stroke-dashoffset="circumference - (percent / 100) * circumference"
+              :stroke-dashoffset="
+                circumference - (percent / 100) * circumference
+              "
               stroke-linecap="round"
               stroke="currentColor"
               fill="transparent"
@@ -34,7 +36,9 @@
               cy="20"
             />
           </svg>
-          <span class="absolute text-xs">{{ auth.currentStepPayment + 1 }}/5</span>
+          <span class="absolute text-xs"
+            >{{ auth.currentStepPayment + 1 }}/5</span
+          >
         </div>
       </div>
     </div>
@@ -44,7 +48,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import ArrowLeft from "@/components/Icons/ArrowLeft.vue";
+import ArrowLeft from '@/components/Icons/ArrowLeft.vue';
 
 const auth = useAuthStore();
 
@@ -55,9 +59,9 @@ const title = computed(() => {
     return 'Detalhes';
   } else if (auth.currentStepPayment === 2) {
     return 'Detalhes';
-  }else if (auth.currentStepPayment === 3) {
+  } else if (auth.currentStepPayment === 3) {
     return 'Endereço de cobrança';
-  }else if (auth.currentStepPayment === 4) {
+  } else if (auth.currentStepPayment === 4) {
     return 'Endereço de cobrança';
   }
   return 'Informações de acesso';

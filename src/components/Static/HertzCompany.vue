@@ -15,7 +15,7 @@
         </div>
       </template>
       <template #body>
-        <div class="font-light mt-4 text-justify">
+        <div class="font-light mt-4 text-justify px-12 py-2.5">
           <ol>
             <li>Possui contrato em português na Flórida;</li>
             <li>

@@ -33,7 +33,7 @@
       <tr>
         <td class="flex flex-col space-y-4 border-t-2 border-gray-200 p-2">
           <template
-            v-for="(i, index) in passengerStore.informationAdults"
+            v-for="(i, index) in purchaseStore.informationAdults"
             :key="index"
           >
             <CollapseAccording class="w-full">
@@ -75,7 +75,7 @@
           </template>
           <div v-if="userStore.countCrianca > 0">
             <template
-              v-for="(i, index) in passengerStore.informationTeenagers"
+              v-for="(i, index) in purchaseStore.informationTeenagers"
               :key="index"
             >
               <CollapseAccording class="w-full">
@@ -116,7 +116,7 @@
           </div>
           <div v-if="userStore.countBebe > 0">
             <template
-              v-for="(i, index) in passengerStore.informationBabies"
+              v-for="(i, index) in purchaseStore.informationBabies"
               :key="index"
             >
               <CollapseAccording class="w-full">
@@ -173,27 +173,37 @@
       </tr>
     </tbody>
   </table>
+  <ModalSaveData
+    v-if="saveDataModal"
+    :options="pass"
+    @close="saveDataModal = false"
+  ></ModalSaveData>
 </template>
 
 <script setup>
 import CollapseAccording from '@/components/Static/CollapseAccording.vue';
-import { computed, inject, onMounted } from 'vue';
+import { computed, inject, onMounted, ref } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import { useI18n } from 'vue-i18n';
 import { RouterLink } from 'vue-router';
 import { useAlertStore } from '@/stores/alert';
-import { usePassengerStore } from '@/stores/passengerInformation';
+import { usePurchaseStore } from '@/stores/purchase.user';
 import PassportComponent from '@/components/FormUI/PassportComponent.vue';
 import { useUserStore } from '@/stores/user';
+import ModalSaveData from '@/components/SaveData/ModalSaveData.vue';
+import { usePassengerUserStore } from '@/stores/passenger';
 
 onMounted(() => {
-  if (passengerStore.informationAdults.length === 0) getArrayData();
+  if (purchaseStore.informationAdults.length === 0) getArrayData();
 });
 const { t } = useI18n();
 const alertStore = useAlertStore();
-const passengerStore = usePassengerStore();
+const purchaseStore = usePurchaseStore();
 const userStore = useUserStore();
+const saveDataModal = ref(false);
+const passengerStore = usePassengerUserStore();
+const pass = ref(null);
 
 const $cookies = inject('$cookies');
 
@@ -204,12 +214,41 @@ const useData = () => {
       backgrColor: 'bg-red-100',
       textColor: 'text-red-700',
     });
+  } else {
+    passengerStore
+      .fetchPassengers()
+      .then(({ data }) => {
+        if (data.data) {
+          passengerStore.passengers = data.data;
+          pass.value = data.data.map((o) => {
+            return {
+              label: o.name,
+              value: o.id,
+            };
+          });
+          saveDataModal.value = true;
+        } else {
+          alertStore.showMsg({
+            message: 'No existen usuarios registrados en su cuenta',
+            backgrColor: 'bg-red-100',
+            textColor: 'text-red-700',
+          });
+        }
+      })
+      .catch(({ response }) => {
+        alertStore.showMsg({
+          message: response.data.message,
+          backgrColor: 'bg-red-100',
+          textColor: 'text-red-700',
+        });
+      });
+    saveDataModal.value = true;
   }
 };
 
 const getArrayData = () => {
   for (let i = 0; i < userStore.countAdulto; i++) {
-    passengerStore.informationAdults.push({
+    purchaseStore.informationAdults.push({
       email: '',
       name: '',
       last_name: '',
@@ -226,7 +265,7 @@ const getArrayData = () => {
 
   if (userStore.countCrianca > 0) {
     for (let i = 0; i < userStore.countCrianca; i++) {
-      passengerStore.informationTeenagers.push({
+      purchaseStore.informationTeenagers.push({
         email: '',
         name: '',
         last_name: '',
@@ -243,7 +282,7 @@ const getArrayData = () => {
   }
   if (userStore.countBebe > 0) {
     for (let i = 0; i < userStore.countBebe; i++) {
-      passengerStore.informationBabies.push({
+      purchaseStore.informationBabies.push({
         email: '',
         name: '',
         last_name: '',
@@ -262,7 +301,7 @@ const getArrayData = () => {
 
 const checkInformationAdults = computed(() => {
   let check = false;
-  passengerStore.informationAdults.map((o) => {
+  purchaseStore.informationAdults.map((o) => {
     if (
       !o.email ||
       !o.name ||
@@ -278,7 +317,7 @@ const checkInformationAdults = computed(() => {
 
 const checkInformationTeenagers = computed(() => {
   let check = false;
-  passengerStore.informationTeenagers.map((o) => {
+  purchaseStore.informationTeenagers?.map((o) => {
     if (
       !o.email ||
       !o.name ||
@@ -294,7 +333,7 @@ const checkInformationTeenagers = computed(() => {
 
 const checkInformationBabies = computed(() => {
   let check = false;
-  passengerStore.informationBabies.map((o) => {
+  purchaseStore.informationBabies?.map((o) => {
     if (
       !o.email ||
       !o.name ||

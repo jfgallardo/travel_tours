@@ -1,0 +1,160 @@
+<template>
+  <TheModal>
+    <template #header>
+      <div>
+        <h3 class="font-semibold text-lg mr-20">
+          Cadastrar pasajero de uso frecuente
+        </h3>
+      </div>
+    </template>
+    <template #body>
+      <div class="p-3.5 pb-8 grid grid-cols-1 md:grid-cols-3 gap-x-2.5 gap-y-6">
+        <InputGeneric
+          v-model="passenger.name"
+          label="Primeiro Nome *"
+          name="name"
+          :validations="validations.required"
+          @is-valid="formIsValid = $event"
+        />
+        <InputGeneric
+          v-model="passenger.last_name"
+          label="Sobrenome Completo *"
+          name="last_name"
+          :validations="validations.required"
+          @is-valid="formIsValid = $event"
+        />
+        <InputGeneric
+          v-model="passenger.email"
+          label="Email *"
+          name="email"
+          :validations="validations.required"
+          @is-valid="formIsValid = $event"
+        />
+
+        <InputGeneric
+          v-model="passenger.cpf_number"
+          label="CPF *"
+          name="cpf"
+          maska="###.###.###-##"
+          :validations="validations.required"
+          @is-valid="formIsValid = $event"
+        />
+        <DateInput
+          v-model="passenger.birthday"
+          label="Date Nascimento *"
+          name="birthday"
+        />
+        <InputGeneric
+          v-model="passenger.mainPhone"
+          label="Telefone principal *"
+          name="mainPhone"
+          :validations="validations.required"
+          :maska="['(##) #####-####']"
+          @is-valid="formIsValid = $event"
+        />
+
+        <passport-component
+          v-model:passport="passenger.passportNumber"
+          v-model:validate-date="passenger.validateDate"
+          v-model:date-issue="passenger.dateIssue"
+          @update:country-of-issue="passenger.countryIssue = $event.value"
+          @update:country-of-residence="
+            passenger.countryResidence = $event.value
+          "
+        />
+      </div>
+    </template>
+    <template #footer>
+      <button
+        class="bg-blue-600 text-white font-semibold text-lg py-2.5 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed"
+        :disabled="isDisabled"
+        @click="addPassenger"
+      >
+        Cadastrar
+      </button>
+    </template>
+  </TheModal>
+</template>
+
+<script setup>
+import TheModal from '@/components/Partials/TheModal.vue';
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+import { computed, ref } from 'vue';
+import { requiredValidation } from '@/utils/validations';
+import PassportComponent from '@/components/FormUI/PassportComponent.vue';
+import DateInput from '@/components/FormUI/DateInput.vue';
+import { useAuthStore } from '@/stores/auth';
+import { usePassengerUserStore } from '@/stores/passenger';
+import { useAlertStore } from '@/stores/alert';
+import { useFormatterDate } from '@/composables/formatter';
+
+const passenger = ref({});
+const formIsValid = ref(false);
+const authStore = useAuthStore();
+const passengerStore = usePassengerUserStore();
+const alertStore = useAlertStore();
+
+const emit = defineEmits(['correctRegister']);
+
+const validations = computed(() => {
+  return {
+    required: {
+      isRequired: requiredValidation,
+    },
+  };
+});
+
+const isDisabled = computed(() => {
+  return (
+    !formIsValid.value ||
+    !passenger.value.name ||
+    !passenger.value.last_name ||
+    !passenger.value.cpf_number ||
+    !passenger.value.birthday ||
+    !passenger.value.mainPhone ||
+    !passenger.value.email ||
+    !passenger.value.passportNumber ||
+    !passenger.value.validateDate ||
+    !passenger.value.dateIssue ||
+    !passenger.value.countryIssue ||
+    !passenger.value.countryResidence
+  );
+});
+
+const addPassenger = () => {
+  const body = {
+    user_id: authStore.userLogged.id,
+    name: passenger.value.name,
+    last_name: passenger.value.last_name,
+    email: passenger.value.email,
+    date_birth: useFormatterDate(passenger.value.birthday),
+    id_cpf: passenger.value.cpf_number,
+    phone: passenger.value.mainPhone,
+    number_passport: passenger.value.passportNumber,
+    pass_validity: useFormatterDate(passenger.value.validateDate),
+    pass_issue: useFormatterDate(passenger.value.dateIssue),
+    contry_issue: passenger.value.countryIssue,
+    contry_residence: passenger.value.countryResidence,
+  };
+
+  passengerStore
+    .addPassenger(body)
+    .then(() => {
+      alertStore.showMsg({
+        message: 'Pasajero de uso frecuente creado correctamente',
+        backgrColor: 'bg-blue-100',
+        textColor: 'text-blue-700',
+      });
+      emit('correctRegister');
+    })
+    .catch(({ response }) => {
+      alertStore.showMsg({
+        message: response.data.message,
+        backgrColor: 'bg-red-100',
+        textColor: 'text-red-700',
+      });
+    });
+};
+</script>
+
+<style scoped></style>

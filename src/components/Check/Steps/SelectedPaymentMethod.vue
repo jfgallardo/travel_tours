@@ -3,24 +3,27 @@
     <div
       class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 md:w-auto w-full"
     >
-      <div class="flex flex-col space-y-6 lg:space-y-0 lg:flex-row w-full lg:space-x-2.5">
+      <div
+        class="flex flex-col space-y-6 lg:space-y-0 lg:flex-row w-full lg:space-x-2.5"
+      >
         <TheSelect
           label="Credit Card"
           class="lg:w-1/3 w-full"
           :loading="rateStore.loading"
           :options="planosDeFinanciamento"
-          @selectValue="auth.card.bainderaSelected = $event"
+          :selected="informationStore.card.bainderaSelected"
+          @selectValue="informationStore.card.bainderaSelected = $event"
         />
         <TextInput
-          v-model="auth.card.cardNumber"
+          v-model="informationStore.card.cardNumber"
           label="Numero de Cartão *"
           name="number-card"
           maska="#### #### #### ####"
-          :text-r="auth.card.cardType"
+          :text-r="informationStore.card.cardType"
           class="lg:w-1/3 w-full"
         />
         <TextInput
-          v-model="auth.card.cardSecurityCode"
+          v-model="informationStore.card.cardSecurityCode"
           label="Codigo de Segurança *"
           name="cvc"
           maska="####"
@@ -28,22 +31,24 @@
         />
       </div>
 
-      <div class="flex w-full space-y-6 lg:space-y-0 flex-col lg:flex-row lg:space-x-2.5">
+      <div
+        class="flex w-full space-y-6 lg:space-y-0 flex-col lg:flex-row lg:space-x-2.5"
+      >
         <TextInput
-          v-model="auth.card.cardName"
+          v-model="informationStore.card.cardName"
           label="Nome (Igual ao do cartão) *"
           name="card-name"
           class="lg:w-1/3 w-full"
         />
         <TextInput
-          v-model="auth.card.cpfUserCard"
+          v-model="informationStore.card.cpfUserCard"
           label="CPF *"
           maska="###.###.###-##"
           name="number-cpf"
           class="lg:w-1/3 w-full"
         />
         <TextInput
-          v-model="auth.card.cardExpiration"
+          v-model="informationStore.card.cardExpiration"
           label="Data de Vencimento *"
           name="expiration"
           :maska="['##/##', '##/####']"
@@ -62,18 +67,18 @@
 
 <script setup>
 import { inject, onMounted, ref, watch } from 'vue';
-import { useAuthStore } from '@/stores/auth';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import validateInfo from '@/plugins/validate-card';
 import TheSelect from '@/components/FormUI/TheSelect.vue';
 import { useRateStore } from '@/stores/rate';
 import { useUserStore } from '@/stores/user';
+import { useGeneralInformation } from '@/stores/generalInformation';
 
-const auth = useAuthStore();
 const creditCardMessage = ref();
 const creditCardVariant = ref();
 const userStore = useUserStore();
 const rateStore = useRateStore();
+const informationStore = useGeneralInformation();
 const $cookies = inject('$cookies');
 const planosDeFinanciamento = ref([]);
 
@@ -81,19 +86,23 @@ onMounted(() => {
   tarifar();
 });
 
-watch(auth.card, (newValue) => {
-  const values = {
-    cardNumber: newValue.cardNumber,
-    cardExpiration: newValue.cardExpiration,
-    cardSecurityCode: newValue.cardSecurityCode,
-    cardName: newValue.cardName,
-  };
-  let creditCard = validateInfo(values);
-  creditCardMessage.value = creditCard.message;
-  auth.card.cardType = creditCard.niceType;
-  creditCardVariant.value = creditCard.variant;
-  auth.card.isValidFront = creditCard.variant === 'bg-green-400'
-});
+watch(
+  informationStore.card,
+  (newValue) => {
+    const values = {
+      cardNumber: newValue.cardNumber,
+      cardExpiration: newValue.cardExpiration,
+      cardSecurityCode: newValue.cardSecurityCode,
+      cardName: newValue.cardName,
+    };
+    let creditCard = validateInfo(values);
+    creditCardMessage.value = creditCard.message;
+    informationStore.card.cardType = creditCard.niceType;
+    creditCardVariant.value = creditCard.variant;
+    informationStore.card.isValidFront = creditCard.variant === 'bg-green-400';
+  },
+  { immediate: true }
+);
 
 const tarifar = () => {
   rateStore.loading = true;
@@ -117,6 +126,7 @@ const tarifar = () => {
           };
         }
       });
+      informationStore.info = data.data.Data;
       rateStore.loading = false;
     })
     .catch(() => {

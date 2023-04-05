@@ -28,7 +28,7 @@
 
 <script setup>
 import IdaVoltaFlex from '@/components/Aereo/IdaVoltaFlexRender.vue';
-import VoosMultipleRender from "@/components/Aereo/VoosMultipleRender.vue";
+import VoosMultipleRender from '@/components/Aereo/VoosMultipleRender.vue';
 import { onMounted, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -42,15 +42,15 @@ const props = defineProps({
   },
   currentTab: {
     type: String,
-    default: 'IdaVoltaFlex'
-  }
+    default: 'IdaVoltaFlex',
+  },
 });
 
 const objetosVisibles = ref([]);
 const scrollContainer = ref(null);
 const tabs = {
   IdaVoltaFlex,
-  VoosMultipleRender
+  VoosMultipleRender,
 };
 
 onMounted(() => {

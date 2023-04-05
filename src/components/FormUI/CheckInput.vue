@@ -20,7 +20,6 @@
 </template>
 
 <script setup>
-
 defineEmits(['update:modelValue', 'inputText']);
 defineProps({
   label: {

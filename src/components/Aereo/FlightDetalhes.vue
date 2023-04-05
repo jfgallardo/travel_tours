@@ -1,17 +1,23 @@
 <template>
   <div>
-    <div v-if="vooDetalhes" class="grid grid-rows-2 auto-rows-max gap-3.5 2xl:gap-1 content-start">
+    <div
+      v-if="vooDetalhes"
+      class="grid grid-rows-2 auto-rows-max gap-3.5 2xl:gap-1 content-start"
+    >
       <div class="mt-5 2xl:mt-0.5 px-2 mb-3">
         <div class="space-y-1 text-sm font-light px-8 xl:px-2">
-          <br/>
+          <br />
           <p v-if="precoAdulto" class="flex items-center justify-between">
-            <span class="mx-5">{{ t("adults") }}</span> <span>{{ precoAdulto }}</span>
+            <span class="mx-5">{{ t('adults') }}</span>
+            <span>{{ precoAdulto }}</span>
           </p>
           <p v-if="precoCrianca" class="flex items-center justify-between">
-            <span class="mx-5">{{ t("children") }}</span> <span>{{ precoCrianca }}</span>
+            <span class="mx-5">{{ t('children') }}</span>
+            <span>{{ precoCrianca }}</span>
           </p>
           <p v-if="precoBebe" class="flex items-center justify-between">
-            <span class="mx-5">{{ t("babies") }}</span> <span>{{ precoBebe }}</span>
+            <span class="mx-5">{{ t('babies') }}</span>
+            <span>{{ precoBebe }}</span>
           </p>
           <p
             v-if="false"
@@ -27,7 +33,10 @@
           <p
             class="flex items-center justify-between border-b border-dashed pb-2 border-gray-300"
           >
-            <span class="mx-5">Valor Total</span> <span class="text-xl xl:text-sm font-semibold">{{ ValorTotal }}</span>
+            <span class="mx-5">Valor Total</span>
+            <span class="text-xl xl:text-sm font-semibold">{{
+              ValorTotal
+            }}</span>
           </p>
         </div>
       </div>
@@ -47,12 +56,12 @@
 </template>
 
 <script setup>
-import { computed, inject, onMounted, ref } from "vue";
-import QrcodeVue from "qrcode.vue";
-import { useRouter } from "vue-router";
-import { useUserStore } from "@/stores/user";
-import { useI18n } from "vue-i18n";
-import { useCurrencyFormatter } from "@/composables/currencyFormatter";
+import { computed, inject, onMounted, ref } from 'vue';
+import QrcodeVue from 'qrcode.vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+import { useI18n } from 'vue-i18n';
+import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 
 onMounted(() => {
   if (props.vooDetalhes) {
@@ -63,41 +72,39 @@ onMounted(() => {
 const props = defineProps({
   vooDetalhes: {
     type: Object,
-    default: () => {
-    }
-  }
+    default: () => {},
+  },
 });
 const router = useRouter();
 const userStore = useUserStore();
 const { t } = useI18n();
 const $cookies = inject('$cookies');
 
-const value = ref("");
+const value = ref('');
 
 const ValorTaxas = computed(() => {
   return useCurrencyFormatter({
-    currency: "BRL",
-    value: props.vooDetalhes.Preco.Taxa
+    currency: 'BRL',
+    value: props.vooDetalhes.Preco.Taxa,
   });
 });
 const ValorTotal = computed(() => {
   return useCurrencyFormatter({
-    currency: "BRL",
-    value: props.vooDetalhes.Preco.Total
+    currency: 'BRL',
+    value: props.vooDetalhes.Preco.Total,
   });
 });
 const precoAdulto = computed(() => {
   return useCurrencyFormatter({
-    currency: "BRL",
-    value: props.vooDetalhes.Preco.PrecoAdulto.ValorTarifa
+    currency: 'BRL',
+    value: props.vooDetalhes.Preco.PrecoAdulto.ValorTarifa,
   });
-
 });
 const precoCrianca = computed(() => {
   if (props.vooDetalhes.Preco.PrecoCrianca) {
     return useCurrencyFormatter({
-      currency: "BRL",
-      value: props.vooDetalhes.Preco.PrecoCrianca.ValorTarifa
+      currency: 'BRL',
+      value: props.vooDetalhes.Preco.PrecoCrianca.ValorTarifa,
     });
   }
   return null;
@@ -105,8 +112,8 @@ const precoCrianca = computed(() => {
 const precoBebe = computed(() => {
   if (props.vooDetalhes.Preco.PrecoBebe) {
     return useCurrencyFormatter({
-      currency: "BRL",
-      value: props.vooDetalhes.Preco.PrecoBebe.ValorTarifa
+      currency: 'BRL',
+      value: props.vooDetalhes.Preco.PrecoBebe.ValorTarifa,
     });
   }
   return null;
@@ -114,9 +121,8 @@ const precoBebe = computed(() => {
 const goToPre = () => {
   $cookies.set('vooSelectedKey', props.vooDetalhes.Key);
   userStore.vooSelected = props.vooDetalhes;
-  router.push({ name: "PreCheckoutPage" });
+  router.push({ name: 'PreCheckoutPage' });
 };
-
 </script>
 
 <style scoped></style>

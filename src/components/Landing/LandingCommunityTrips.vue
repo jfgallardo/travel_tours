@@ -33,7 +33,7 @@ import Avatar3 from '@/assets/img/avatar3.jpg';
 import Varadero from '@/assets/img/varadero.jpg';
 import Tokio from '@/assets/img/tokio.jpg';
 import Copa from '@/assets/img/copa.jpg';
-import CarouselComponent from "@/components/Partials/CarouselComponent.vue";
+import CarouselComponent from '@/components/Partials/CarouselComponent.vue';
 
 const sliders = [
   {

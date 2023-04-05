@@ -6,18 +6,18 @@
       :selected="searchOptionsVoo.cabin"
       :options="options"
       @select-value="
-            (e) => {
-              searchOptionsVoo.cabin = e;
-            }
-          "
+        (e) => {
+          searchOptionsVoo.cabin = e;
+        }
+      "
     />
   </div>
 </template>
 
 <script setup>
-import Select from "@/components/FormUI/TheSelect.vue";
-import { useI18n } from "vue-i18n";
-import { useSearchOptionsVooStore } from "@/stores/searchOptionsVoo";
+import Select from '@/components/FormUI/TheSelect.vue';
+import { useI18n } from 'vue-i18n';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 
 const { t } = useI18n();
 const searchOptionsVoo = useSearchOptionsVooStore();
@@ -28,10 +28,8 @@ const options = [
   { label: 'Executiva', value: 'C' },
   { label: 'Primeira Classe', value: 'F' },
   { label: 'Econômica + Premium', value: 'P' },
-  {label: 'Todas', value: null}
+  { label: 'Todas', value: null },
 ];
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -44,7 +44,6 @@
         </div>
       </button>
 
-
       <button
         ref="fast"
         class="py-3 border-y border-gray-400 relative"
@@ -80,7 +79,6 @@
           </svg>
         </div>
       </button>
-
 
       <button
         ref="premium"

@@ -67,8 +67,8 @@
         >
           <span>Buscar Hoteis</span>
           <div
-              v-if="moblix.loading"
-              class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
+            v-if="moblix.loading"
+            class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
           ></div>
           <ArrowRight v-else fill-color="white" class="absolute right-10" />
         </button>
@@ -77,16 +77,15 @@
   </div>
 </template>
 <script setup>
-import {computed} from 'vue';
+import { computed } from 'vue';
 import AutoCompleteHotel from '@/components/FormUI/AutoCompleteHotel.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
-import {useSearchOptionsHotelStore} from "@/stores/searchOptionsHotel";
-import {useMoblixStore} from "@/stores/moblix";
+import { useSearchOptionsHotelStore } from '@/stores/searchOptionsHotel';
+import { useMoblixStore } from '@/stores/moblix';
 import { useRoute, useRouter } from 'vue-router';
-
 
 const searchOptionsHotel = useSearchOptionsHotelStore();
 const moblix = useMoblixStore();
@@ -101,12 +100,12 @@ const addGuest = () => {
 };
 
 const takeRoom = () => {
-  if (searchOptionsHotel.rooms > 1){
+  if (searchOptionsHotel.rooms > 1) {
     searchOptionsHotel.rooms--;
   }
 };
 const takeGuest = () => {
-  if (searchOptionsHotel.numberOfGuests > 1){
+  if (searchOptionsHotel.numberOfGuests > 1) {
     searchOptionsHotel.numberOfGuests--;
   }
 };

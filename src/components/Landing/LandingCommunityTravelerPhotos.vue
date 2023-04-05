@@ -30,7 +30,7 @@ import Uruguay from '@/assets/img/viaje3.jpg';
 import Avatar1 from '@/assets/img/avatar1.jpg';
 import Avatar2 from '@/assets/img/avatar2.jpg';
 import Avatar3 from '@/assets/img/avatar3.jpg';
-import CarouselComponent from "@/components/Partials/CarouselComponent.vue";
+import CarouselComponent from '@/components/Partials/CarouselComponent.vue';
 
 const sliders = [
   {

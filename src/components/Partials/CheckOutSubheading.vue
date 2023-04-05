@@ -5,7 +5,9 @@
     </div>
 
     <div class="w-full flex justify-center">
-        <p class="font-semibold">Agora falta pouco! Preencha seus dados e garanta sua compra</p>
+      <p class="font-semibold">
+        Agora falta pouco! Preencha seus dados e garanta sua compra
+      </p>
     </div>
   </div>
 </template>

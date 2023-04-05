@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const usePassengerStore = defineStore('passenger', {
+export const usePurchaseStore = defineStore('purchase', {
   state: () => ({
     informationAdults: [],
     informationTeenagers: [],
@@ -8,4 +8,5 @@ export const usePassengerStore = defineStore('passenger', {
   }),
   getters: {},
   actions: {},
+  persist: true,
 });

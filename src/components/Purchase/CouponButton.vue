@@ -1,27 +1,39 @@
 <template>
   <div>
     <div class="relative">
-      <span class="text-gray-800 font-bold text-sm">{{
-          label
-        }}</span>
+      <span class="text-gray-800 font-bold text-sm">{{ label }}</span>
       <input
-          v-model="value"
-          v-maska="maska"
-          name="coupon"
-          type="text"
-          :class="inputClassList"
-          :placeholder="placeholder"
-          :disabled="disableField"
-          @blur="coupon = $event.target.value"
+        v-model="value"
+        v-maska="maska"
+        name="coupon"
+        type="text"
+        :class="inputClassList"
+        :placeholder="placeholder"
+        :disabled="disableField"
+        @blur="coupon = $event.target.value"
       />
-      <button class="text-white bg-blue-700 hover:bg-blue-800 absolute right-0 h-10 w-10 pl-3" @click="setCoupon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+      <button
+        class="text-white bg-blue-700 hover:bg-blue-800 absolute right-0 h-10 w-10 pl-3"
+        @click="setCoupon"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 12.75l6 6 9-13.5"
+          />
         </svg>
       </button>
       <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
-          errors.coupon
-        }}</span>
+        errors.coupon
+      }}</span>
     </div>
   </div>
 </template>
@@ -29,7 +41,7 @@
 <script setup>
 import { useField, useForm } from 'vee-validate';
 import { computed } from 'vue';
-import Toastify from "toastify-js";
+import Toastify from 'toastify-js';
 
 defineProps({
   label: {
@@ -59,12 +71,12 @@ const simpleSchema = {
   },
 };
 
-const { errors, handleSubmit  } = useForm({
+const { errors, handleSubmit } = useForm({
   validationSchema: simpleSchema,
 });
 
 const { value } = useField('coupon');
-const setCoupon = handleSubmit( values => {
+const setCoupon = handleSubmit((values) => {
   Toastify({
     text: `Cupom ${values.coupon} aplicado`,
     duration: 3000,
@@ -76,7 +88,7 @@ const setCoupon = handleSubmit( values => {
     },
     onClick: function () {},
   }).showToast();
-})
+});
 
 const inputClassList = computed(() => {
   return [

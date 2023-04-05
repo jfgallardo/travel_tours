@@ -8,7 +8,10 @@
     />
   </div>
   <div>
-    <DateInput v-model="validateDateLocal" :label="$t('passport.dataDeValidade')" />
+    <DateInput
+      v-model="validateDateLocal"
+      :label="$t('passport.dataDeValidade')"
+    />
   </div>
   <div>
     <DateInput v-model="dateIssueLocal" :label="$t('passport.dateOfIssue')" />
@@ -30,16 +33,22 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
-import DateInput from "@/components/FormUI/DateInput.vue";
-import Select from "@/components/FormUI/TheSelect.vue";
+import DateInput from '@/components/FormUI/DateInput.vue';
+import Select from '@/components/FormUI/TheSelect.vue';
 
-const emit = defineEmits(['update:passport', 'update:validateDate', 'update:dateIssue', 'update:countryOfIssue', 'update:countryOfResidence']);
+const emit = defineEmits([
+  'update:passport',
+  'update:validateDate',
+  'update:dateIssue',
+  'update:countryOfIssue',
+  'update:countryOfResidence',
+]);
 
 onMounted(() => {
-  getCountries()
-})
+  getCountries();
+});
 
 const props = defineProps({
   passport: {
@@ -48,12 +57,12 @@ const props = defineProps({
   },
   validateDate: {
     type: String,
-    default: ''
+    default: '',
   },
   dateIssue: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 const passportLocal = computed({
@@ -72,7 +81,7 @@ const validateDateLocal = computed({
   set(value) {
     emit('update:validateDate', value);
   },
-})
+});
 
 const dateIssueLocal = computed({
   get() {
@@ -81,10 +90,9 @@ const dateIssueLocal = computed({
   set(value) {
     emit('update:dateIssue', value);
   },
-})
+});
 
-const tratamentoOptions = [{ label: 'Brasileiro(a)', value: 'Brasileiro(a)' }]
-const countries = ref([])
+const countries = ref([]);
 
 const getCountries = async () => {
   await fetch('https://servicodados.ibge.gov.br/api/v1/paises/')
@@ -93,9 +101,9 @@ const getCountries = async () => {
       countries.value = data.map((o) => {
         return {
           label: o.nome.abreviado,
-          value: o.nome.abreviado
-        }
-      })
+          value: o.id['ISO-3166-1-ALPHA-3'],
+        };
+      });
     });
 };
 </script>

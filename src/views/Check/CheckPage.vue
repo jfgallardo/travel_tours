@@ -1,13 +1,11 @@
 <template>
-<div>
-  <CheckSteps />
-</div>
+  <div>
+    <CheckSteps />
+  </div>
 </template>
 
 <script setup>
-import CheckSteps from "@/components/Check/CheckSteps.vue";
+import CheckSteps from '@/components/Check/CheckSteps.vue';
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

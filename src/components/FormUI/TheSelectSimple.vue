@@ -1,8 +1,6 @@
 <template>
   <div ref="fullContainer" class="w-full">
-    <div
-      class="relative border border-y-0 border-r-0 border-gray-300"
-    >
+    <div class="relative border border-y-0 border-r-0 border-gray-300">
       <button
         ref="button"
         :disabled="loading"
@@ -11,20 +9,25 @@
         aria-labelledby="listbox-label"
         class="relative bg-white py-3 flex items-center justify-center focus:outline-none text-sm xl:text-base px-4 mx-1 w-full"
         type="button"
-        @click="toggle === false ? handleClick($event) : handleHide($event)"
+        @click="toggle === false ? handleClick() : handleHide()"
       >
-        <template v-if="selected" >
-        <span>
+        <template v-if="selected">
+          <span>
             <slot name="selectedSpace"></slot>
-        </span>
+          </span>
         </template>
         <template v-else>
           <div class="flex items-center justify-center space-x-1.5">
             <slot name="showSelected">
               <div
                 v-if="loading"
-                class="animate-spin h-4 w-4 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"></div>
-              <img v-else class="h-4 w-4" src="@/assets/ico/filter-search.svg">
+                class="animate-spin h-4 w-4 border-0 border-t-2 rounded-full border-gray-500 mr-1.5"
+              ></div>
+              <img
+                v-else
+                class="h-4 w-4"
+                src="@/assets/ico/filter-search.svg"
+              />
               <span class="text-gray-500">{{ placeholder }}</span>
             </slot>
           </div>
@@ -71,9 +74,9 @@
               @click="selectOption(op)"
             >
               <div class="flex items-center">
-              <span class="font-normal ml-3 block">
-                {{ op.name }}
-              </span>
+                <span class="font-normal ml-3 block">
+                  {{ op.name }}
+                </span>
               </div>
             </li>
           </slot>
@@ -84,12 +87,12 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
-import { createPopper } from "@popperjs/core";
+import { computed, ref } from 'vue';
+import { createPopper } from '@popperjs/core';
 
 const hiddenDropdown = ref(false);
 const selected = ref(null);
-const emit = defineEmits(["selectValue"]);
+const emit = defineEmits(['selectValue']);
 
 const button = ref(null);
 const dropdown = ref(null);
@@ -99,44 +102,42 @@ const toggle = ref(false);
 defineProps({
   options: {
     type: Array,
-    default: () => []
+    default: () => [],
   },
   placeholder: {
     type: String,
-    default: ""
+    default: '',
   },
   loading: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const vClickOutside = {
   mounted: () => {
-    document.addEventListener("click", clickOutListener);
+    document.addEventListener('click', clickOutListener);
   },
   unmounted: () => {
-    document.removeEventListener("click", clickOutListener);
-  }
+    document.removeEventListener('click', clickOutListener);
+  },
 };
-
 
 const selectOption = (value) => {
   selected.value = value;
-  emit("selectValue", value);
+  emit('selectValue', value);
   hiddenDropdown.value = false;
   handleHide();
 };
 
-
 const clickOutListener = (evt) => {
   if (!fullContainer.value.contains(evt.target)) {
-    handleHide(evt);
+    handleHide();
   }
 };
 const clearFilter = () => {
   selected.value = '';
-  emit("selectValue", selected.value);
+  emit('selectValue', selected.value);
 };
 
 const popperInstance = computed(() => {
@@ -164,13 +165,13 @@ const popperInstance = computed(() => {
   });
 });
 
-const handleClick = (e) => {
+const handleClick = () => {
   dropdown.value.setAttribute('data-show', '');
   popperInstance.value.update();
   toggle.value = true;
 };
 
-const handleHide = (e) => {
+const handleHide = () => {
   dropdown.value.removeAttribute('data-show');
   toggle.value = false;
 };

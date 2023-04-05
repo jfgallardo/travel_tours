@@ -78,7 +78,7 @@ import { computed, watch } from 'vue';
 import { cepValidation, requiredValidation } from '@/utils/validations';
 import InputGeneric from '@/components/FormUI/InputGeneric.vue';
 
-defineEmits(['isValid'])
+defineEmits(['isValid']);
 
 const auth = useAuthStore();
 

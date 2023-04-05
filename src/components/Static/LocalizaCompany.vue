@@ -15,7 +15,7 @@
         </div>
       </template>
       <template #body>
-        <div class="font-light mt-4 text-justify">
+        <div class="font-light mt-4 text-justify px-12 py-2.5">
           <ol>
             <li>Diárias a partir de R$ 152,22 reais;</li>
             <li>

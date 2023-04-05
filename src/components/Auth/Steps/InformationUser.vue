@@ -62,24 +62,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import DateInput from '@/components/FormUI/DateInput.vue';
-import InputGeneric from "@/components/FormUI/InputGeneric.vue";
-import { requiredValidation, cpfValidation } from "@/utils/validations";
-
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+import { requiredValidation, cpfValidation } from '@/utils/validations';
 
 onMounted(() => {
   pessoaF.value.classList.add('active');
   auth.user.typePerson = 'pessoaF';
 });
 
-defineEmits(['isValid'])
+defineEmits(['isValid']);
 
 const pessoaF = ref(null);
 const pessoaJ = ref(null);
 const auth = useAuthStore();
-
 
 const cleanRefs = () => {
   pessoaF.value.classList.remove('active');
@@ -99,8 +97,8 @@ const validations = computed(() => {
     },
     cpf: {
       isRequired: cpfValidation.requiredValidation,
-      isCPF: cpfValidation.isCPF
-    }
+      isCPF: cpfValidation.isCPF,
+    },
   };
 });
 </script>

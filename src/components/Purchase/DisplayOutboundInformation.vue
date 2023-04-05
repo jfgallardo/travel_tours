@@ -12,7 +12,9 @@
                 alt="IconPlane"
               />
             </div>
-            <p class="p-1 font-semibold text-sm"> {{vooSelected.Voos ? 'Vuelos de Ida' : 'Vuelo de Ida'}}</p>
+            <p class="p-1 font-semibold text-sm">
+              {{ vooSelected.Voos ? 'Vuelos de Ida' : 'Vuelo de Ida' }}
+            </p>
           </div>
           <div
             v-if="!vooSelected.Voos"
@@ -115,7 +117,9 @@
           <span>NO BAGAGEM</span>
         </div>
       </div>
-      <template v-if="vooSelected.VoosVolta && vooSelected.VoosVolta.length === 0">
+      <template
+        v-if="vooSelected.VoosVolta && vooSelected.VoosVolta.length === 0"
+      >
         <div
           class="border border-t-0 lg:border-l-0 lg:border-r-0 border-slate-300"
         >
@@ -163,7 +167,7 @@ import { computed } from 'vue';
 import moment from 'moment/min/moment-with-locales';
 import { useDateFormatter } from '@/composables/dateFormatter';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from '@/stores/user';
 
 const props = defineProps({
   vooSelected: {
@@ -176,9 +180,9 @@ const searchOptions = useSearchOptionsVooStore();
 const userStore = useUserStore();
 
 const voos = computed(() => {
-  if (props.vooSelected.VoosIda) return props.vooSelected.VoosIda
-  return props.vooSelected.Voos
-})
+  if (props.vooSelected.VoosIda) return props.vooSelected.VoosIda;
+  return props.vooSelected.Voos;
+});
 
 const initialFlight = computed(() => {
   if (props.vooSelected.VoosIda) {

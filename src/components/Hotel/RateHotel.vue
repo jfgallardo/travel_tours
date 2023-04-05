@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue";
+import { computed } from 'vue';
 
 const props = defineProps({
   rate: {
@@ -49,8 +49,8 @@ const props = defineProps({
   },
   typeRate: {
     type: [Number, String],
-    default: 5
-  }
+    default: 5,
+  },
 });
 
 const calculateRate = computed(() => {
@@ -58,7 +58,7 @@ const calculateRate = computed(() => {
     return Math.trunc((props.rate * 5) / 10);
   }
   return props.rate;
-})
+});
 </script>
 
 <style scoped></style>

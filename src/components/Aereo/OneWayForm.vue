@@ -89,9 +89,18 @@
             <div
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
-              <span>{{searchOptionsVooStore.adults}} {{ t('adults', searchOptionsVooStore.adults) }}</span>
-              <span>{{searchOptionsVooStore.teenagers}} {{ t('children', searchOptionsVooStore.teenagers) }}</span>
-              <span>{{searchOptionsVooStore.babies}} {{ t('babies', searchOptionsVooStore.babies) }}</span>
+              <span
+                >{{ searchOptionsVooStore.adults }}
+                {{ t('adults', searchOptionsVooStore.adults) }}</span
+              >
+              <span
+                >{{ searchOptionsVooStore.teenagers }}
+                {{ t('children', searchOptionsVooStore.teenagers) }}</span
+              >
+              <span
+                >{{ searchOptionsVooStore.babies }}
+                {{ t('babies', searchOptionsVooStore.babies) }}</span
+              >
             </div>
           </template>
           <template #dropdown>
@@ -127,7 +136,7 @@
       </div>
 
       <div class="px-4">
-        <Check :label="t('roundTripForm.voosDirectos')"  class="pt-4" />
+        <Check :label="t('roundTripForm.voosDirectos')" class="pt-4" />
         <Check
           v-model="searchOptionsVooStore.onlyBaggage"
           :label="t('roundTripForm.apenasComBabagem')"
@@ -162,11 +171,11 @@ import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import { useI18n } from 'vue-i18n';
-import CabineComponent from "@/components/FormUI/CabineComponent.vue";
-import { inject } from "vue";
-import { useAlertStore } from "@/stores/alert";
-import { useWoobaStore } from "@/stores/wooba";
-import { woobaData, woobaDataMultiple } from "@/utils/unifyDataWooba";
+import CabineComponent from '@/components/FormUI/CabineComponent.vue';
+import { inject } from 'vue';
+import { useAlertStore } from '@/stores/alert';
+import { useWoobaStore } from '@/stores/wooba';
+import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
 
 const moblixStore = useMoblixStore();
 const searchOptionsVooStore = useSearchOptionsVooStore();
@@ -181,7 +190,11 @@ const addUp = (e) => {
     searchOptionsVooStore.adults++;
   } else if (e === t('children') && searchOptionsVooStore.teenagers < 8) {
     searchOptionsVooStore.teenagers++;
-  } else if (e === t('babies') && searchOptionsVooStore.babies < 8) {
+  } else if (
+    e === t('babies') &&
+    searchOptionsVooStore.babies < 8 &&
+    searchOptionsVooStore.babies < searchOptionsVooStore.adults
+  ) {
     searchOptionsVooStore.babies++;
   }
 };
@@ -189,6 +202,8 @@ const addUp = (e) => {
 const takeOff = (e) => {
   if (e === t('adults') && searchOptionsVooStore.adults > 1) {
     searchOptionsVooStore.adults--;
+    if (searchOptionsVooStore.babies > searchOptionsVooStore.adults)
+      searchOptionsVooStore.babies = 0;
   } else if (e === t('children') && searchOptionsVooStore.teenagers > 0) {
     searchOptionsVooStore.teenagers--;
   } else if (e === t('babies') && searchOptionsVooStore.babies > 0) {
@@ -237,7 +252,7 @@ const consultar = () => {
   }
 
   saveCookiesSearch();
-  router.push({name: 'VoosIdaVolta'})
+  router.push({ name: 'VoosIdaVolta' });
 
   const body = {
     DataIda: `/Date(${new Date(
