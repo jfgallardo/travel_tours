@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '@/stores/auth';
+import Cookies from 'js-cookie';
 
 const axiosClientAPI = axios.create({
   baseURL: 'https://api.mrtravelandtours.com',
@@ -11,8 +11,8 @@ const axiosClientAPI = axios.create({
   },
 });
 axiosClientAPI.interceptors.request.use((config) => {
-  const authStore = useAuthStore();
-  config.headers.Authorization = `Bearer ${authStore.userLogged?.access_token}`;
+  const token = Cookies.get('token');
+  config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 

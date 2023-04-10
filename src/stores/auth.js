@@ -56,18 +56,17 @@ export const useAuthStore = defineStore({
   getters: {},
   actions: {
     async login(payload) {
-      try {
-        return await axiosClientAPI.post('/api/v1/login', payload);
-      } catch (e) {
-        return e;
-      }
+      return await axiosClientAPI.post('/api/v1/login', payload);
     },
     async register(payload) {
-      try {
-        return await axiosClientAPI.post('/api/v1/register', payload);
-      } catch (e) {
-        return e;
-      }
+      return await axiosClientAPI.post('/api/v1/register', payload);
+    },
+    async verifyEmail(payload) {
+      return await axiosClientAPI.post('/api/v1/verify-email', payload);
+    },
+    async forgotPassword(payload) {
+      return await axiosClientAPI.post('/api/v1/forgot-password', payload);
     },
   },
+  persist: true,
 });

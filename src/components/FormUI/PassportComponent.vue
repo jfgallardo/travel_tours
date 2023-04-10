@@ -8,18 +8,13 @@
     />
   </div>
   <div>
-    <DateInput
-      v-model="validateDateLocal"
-      :label="$t('passport.dataDeValidade')"
-    />
-  </div>
-  <div>
     <DateInput v-model="dateIssueLocal" :label="$t('passport.dateOfIssue')" />
   </div>
   <div>
     <Select
       :options="countries"
       :label="$t('passport.countryOfIssue')"
+      :selected="sCountryOfIssue"
       @select-value="$emit('update:countryOfIssue', $event)"
     />
   </div>
@@ -27,6 +22,7 @@
     <Select
       :options="countries"
       :label="$t('passport.countryOfResidence')"
+      :selected="sCountryOfResidence"
       @select-value="$emit('update:countryOfResidence', $event)"
     />
   </div>
@@ -50,6 +46,9 @@ onMounted(() => {
   getCountries();
 });
 
+const sCountryOfResidence = ref(props.countryOfResidence);
+const sCountryOfIssue = ref(props.countryOfIssue);
+
 const props = defineProps({
   passport: {
     type: String,
@@ -62,6 +61,14 @@ const props = defineProps({
   dateIssue: {
     type: String,
     default: '',
+  },
+  countryOfIssue: {
+    type: Object,
+    default: () => {},
+  },
+  countryOfResidence: {
+    type: Object,
+    default: () => {},
   },
 });
 

@@ -46,15 +46,58 @@ export const requiredValidation = (value) => {
 
 export const cpfValidation = {
   requiredValidation,
-  isCPF: (value) => {
-    const cpfRegex = /^\d{3}[.]\d{3}[.]\d{3}-\d{2}$/;
-    const validationValid = cpfRegex.test(value);
-    const validationMessage = validationValid ? '' : 'CPF inválido';
+  isCPF: (cpf) => {
+    let multiplic1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+    let multiplic2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
 
-    return {
-      valid: validationValid,
-      message: validationMessage,
-    };
+    cpf = cpf.trim();
+    cpf = cpf.replaceAll('.', '');
+    cpf = cpf.replace('-', '');
+    if (cpf.length < 11) {
+      const validationValid = false;
+      const validationMessage = validationValid ? '' : 'Longitud incorrecta';
+      return {
+        valid: validationValid,
+        message: validationMessage,
+      };
+    } else {
+      let tempCpf = cpf.substring(0, 9);
+      let sum = 0;
+      let arrChars = tempCpf.split('');
+      for (let i = 0; i < 9; i++) {
+        sum += parseInt(arrChars[i]) * multiplic1[i];
+      }
+      let remainder = sum % 11;
+      if (remainder < 2) {
+        remainder = 0;
+      } else {
+        remainder = 11 - remainder;
+      }
+      let digit = remainder.toString();
+      tempCpf = tempCpf + digit;
+      sum = 0;
+      arrChars = tempCpf.split('');
+      for (let i = 0; i < 10; i++) {
+        sum += parseInt(arrChars[i]) * multiplic2[i];
+      }
+      remainder = sum % 11;
+      if (remainder < 2) {
+        remainder = 0;
+      } else {
+        remainder = 11 - remainder;
+      }
+      digit = digit + remainder.toString();
+      const regXP = new RegExp(digit + '$', 'i');
+      if (cpf.length > 11) cpf = cpf.slice(0, 11);
+      const validationValid = regXP.test(cpf);
+      const validationMessage = validationValid
+        ? ''
+        : 'Valor introducido incorrecto';
+      return {
+        valid: validationValid,
+        message: validationMessage,
+      };
+    }
   },
 };
 

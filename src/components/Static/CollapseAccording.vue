@@ -43,9 +43,12 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
-
-const reportsOpen = ref(false);
+defineProps({
+  reportsOpen: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <style scoped>

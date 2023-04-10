@@ -3,12 +3,12 @@
   <div class="lg:grid lg:grid-cols-3">
     <aside
       :class="{ hidden: !open }"
-      class="lg:border-r lg:border-gray-300 lg:h-screen lg:overflow-y-auto lg:pb-11"
+      class="lg:border-r lg:border-gray-300 lg:h-screen lg:overflow-y-auto pb-44"
     >
       <slot name="aside"></slot>
     </aside>
 
-    <main class="lg:col-span-2 lg:h-screen lg:overflow-y-auto">
+    <main class="lg:col-span-2 lg:h-screen lg:overflow-y-auto pb-44">
       <div>
         <slot name="main"></slot>
       </div>

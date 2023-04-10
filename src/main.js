@@ -11,11 +11,15 @@ import VueCookies from 'vue-cookies';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { createApp } from 'vue';
+import { cpfDirective } from '@/directives/input-mask';
 
 const app = createApp(App);
 const pinia = createPinia();
+
 app.directive('debounce', vue3Debounce({ lock: true }));
 app.directive('maska', vMaska);
+app.directive('cpf-mask', cpfDirective);
+
 app.use(pinia);
 pinia.use(piniaPluginPersistedstate);
 app.use(router);

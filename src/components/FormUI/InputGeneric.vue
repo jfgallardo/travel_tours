@@ -6,9 +6,6 @@
       }}</span>
       <input
         v-model="value"
-        v-maska
-        :data-maska="maska"
-        :data-maska-tokens="tokens"
         :value="modelValue"
         :type="typeField"
         :class="inputClassList"
@@ -22,9 +19,7 @@
           v-if="!valid"
           class="text-red-500 font-semibold text-sm absolute -bottom-5 pl-1"
         >
-          <span v-for="(errorMessage, index) in errorMessages" :key="index">
-            * {{ errorMessage }} &nbsp;
-          </span>
+          <span> * {{ errorMessages[0] }} &nbsp; </span>
         </div>
       </Transition>
 
@@ -56,9 +51,11 @@ const props = defineProps({
   },
   maska: {
     type: [String, Object],
+    default: '',
   },
   tokens: {
     type: [String, Object],
+    default: '',
   },
   placeholder: {
     type: String,
@@ -82,7 +79,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:modelValue', 'isValid']);
+const emit = defineEmits(['update:modelValue', 'isValid', 'onBlur']);
 const valid = ref(true);
 const errorMessages = ref([]);
 

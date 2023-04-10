@@ -143,29 +143,64 @@
         class="border border-t-0 border-l-0 lg:border-l border-slate-300 border-r-0"
       >
         <div class="flex items-center justify-center h-full p-5">
-          <RouterLink
+          <!--          <RouterLink
             class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 px-28 lg:px-10 font-bold"
             :to="{ path: 'checkout' }"
             >Comprar agora</RouterLink
+          >-->
+          <button
+            class="bg-blue-700 hover:bg-blue-800 text-white text-center py-3 px-28 lg:px-10 font-bold"
+            @click="verifyAccountUser"
           >
+            Comprar agora
+          </button>
         </div>
       </div>
     </div>
   </div>
+  <Modal v-if="modal" @close="modal = false">
+    <template #header>
+      <div class="flex items-center space-x-2.5 pr-32">
+        <ExclamationTriangleIcon class="h-6 w-6 text-yellow-500" />
+        <span>Warning</span>
+      </div>
+    </template>
+    <template #body>
+      <div class="w-96 p-4">
+        <p class="text-justify">
+          Por cuestiones de seguridad necesita hacer login con una cuenta
+          registrada para hacer compras en el sitio. Por favor haga login o
+          registre una cuenta.
+        </p>
+      </div>
+    </template>
+    <template #footer>
+      <div>
+        <button
+          class="float-right text-white font-medium bg-blue-700 hover:bg-blue-800 p-2"
+          @click="modal = false"
+        >
+          Aceptar
+        </button>
+      </div>
+    </template>
+  </Modal>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import moment from 'moment/min/moment-with-locales';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import PlaneLine from '@/components/Aereo/PlaneLine.vue';
-import { RouterLink } from 'vue-router';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
-import { useDateFormatter } from '@/composables/dateFormatter';
 import { useUserStore } from '@/stores/user';
+import Modal from '@/components/Partials/TheModal.vue';
+import { ExclamationTriangleIcon } from '@heroicons/vue/24/solid';
+import Cookies from 'js-cookie';
+import { useRouter } from 'vue-router';
 
-const searchOptions = useSearchOptionsVooStore();
 const userStore = useUserStore();
+const modal = ref(false);
+const router = useRouter();
 
 const props = defineProps({
   vooSelected: {
@@ -241,6 +276,15 @@ const filterDayPeriod = (date) => {
   const dateLocal = new Date(moment(date));
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
+};
+
+const verifyAccountUser = () => {
+  const token = Cookies.get('token');
+  if (!token) {
+    modal.value = true;
+  } else {
+    router.push({ path: 'checkout' });
+  }
 };
 </script>
 

@@ -36,22 +36,22 @@
             v-for="(i, index) in purchaseStore.informationAdults"
             :key="index"
           >
-            <CollapseAccording class="w-full">
+            <CollapseAccording class="w-full" reports-open>
               <template #header> {{ t('adults') }} #{{ index + 1 }}</template>
               <template #body>
                 <form
-                  class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-4 w-full"
+                  class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-6 w-full"
                 >
                   <TextInput v-model="i.name" label="Primeiro Nome *" />
                   <TextInput
                     v-model="i.last_name"
                     label="Sobrenome Completo *"
                   />
-                  <TextInput v-model="i.email" label="Email *" name="email" />
-                  <TextInput
-                    v-model="i.cpf_number"
-                    label="CPF *"
-                    maska="###.###.###-##"
+                  <InputGeneric
+                    v-model="i.email"
+                    label="Email *"
+                    name="email"
+                    :validations="validations.email"
                   />
                   <DateInput v-model="i.birthday" label="Date Nascimento *" />
                   <TextInput
@@ -60,14 +60,30 @@
                     name="mainPhone"
                     :maska="['(##) #####-####']"
                   />
+                  <Select
+                    :selected="i.documentSelected"
+                    label="Documentos aceptados *"
+                    :options="acceptedDocuments"
+                    @select-value="i.documentSelected = $event"
+                  />
+
+                  <InputGeneric
+                    v-if="i.documentSelected?.value === 'C'"
+                    v-model="i.cpf_number"
+                    v-cpf-mask
+                    label="CPF *"
+                    name="cpf"
+                    :validations="validations.cpf"
+                  />
                   <passport-component
+                    v-if="i.documentSelected?.value === 'P'"
                     v-model:passport="i.passportNumber"
                     v-model:validate-date="i.validateDate"
                     v-model:date-issue="i.dateIssue"
-                    @update:country-of-issue="i.countryIssue = $event.value"
-                    @update:country-of-residence="
-                      i.countryResidence = $event.value
-                    "
+                    :country-of-issue="i.countryIssue"
+                    :country-of-residence="i.countryResidence"
+                    @update:country-of-issue="i.countryIssue = $event"
+                    @update:country-of-residence="i.countryResidence = $event"
                   />
                 </form>
               </template>
@@ -78,21 +94,25 @@
               v-for="(i, index) in purchaseStore.informationTeenagers"
               :key="index"
             >
-              <CollapseAccording class="w-full">
+              <CollapseAccording class="w-full" reports-open>
                 <template #header>
                   {{ t('children') }} #{{ index + 1 }}</template
                 >
                 <template #body>
                   <form
-                    class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-4 w-full"
+                    class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-6 w-full"
                   >
                     <TextInput v-model="i.name" label="Primeiro Nome *" />
                     <TextInput
                       v-model="i.last_name"
                       label="Sobrenome Completo *"
                     />
-                    <TextInput v-model="i.email" label="Email *" name="email" />
-                    <TextInput v-model="i.cpf_number" label="CPF *" />
+                    <InputGeneric
+                      v-model="i.email"
+                      label="Email *"
+                      name="email"
+                      :validations="validations.email"
+                    />
                     <DateInput v-model="i.birthday" label="Date Nascimento *" />
                     <TextInput
                       v-model="i.mainPhone"
@@ -100,14 +120,30 @@
                       name="mainPhone"
                       :maska="['(##) #####-####']"
                     />
+                    <Select
+                      :selected="i.documentSelected"
+                      label="Documentos aceptados *"
+                      :options="acceptedDocuments"
+                      @select-value="i.documentSelected = $event"
+                    />
+
+                    <InputGeneric
+                      v-if="i.documentSelected?.value === 'C'"
+                      v-model="i.cpf_number"
+                      v-cpf-mask
+                      label="CPF *"
+                      name="cpf"
+                      :validations="validations.cpf"
+                    />
                     <passport-component
+                      v-if="i.documentSelected?.value === 'P'"
                       v-model:passport="i.passportNumber"
                       v-model:validate-date="i.validateDate"
                       v-model:date-issue="i.dateIssue"
-                      @update:country-of-issue="i.countryIssue = $event.value"
-                      @update:country-of-residence="
-                        i.countryResidence = $event.value
-                      "
+                      :country-of-issue="i.countryIssue"
+                      :country-of-residence="i.countryResidence"
+                      @update:country-of-issue="i.countryIssue = $event"
+                      @update:country-of-residence="i.countryResidence = $event"
                     />
                   </form>
                 </template>
@@ -119,19 +155,23 @@
               v-for="(i, index) in purchaseStore.informationBabies"
               :key="index"
             >
-              <CollapseAccording class="w-full">
+              <CollapseAccording class="w-full" reports-open>
                 <template #header> {{ t('babies') }} #{{ index + 1 }}</template>
                 <template #body>
                   <form
-                    class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-4 w-full"
+                    class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-6 w-full"
                   >
                     <TextInput v-model="i.name" label="Primeiro Nome *" />
                     <TextInput
                       v-model="i.last_name"
                       label="Sobrenome Completo *"
                     />
-                    <TextInput v-model="i.email" label="Email *" name="email" />
-                    <TextInput v-model="i.cpf_number" label="CPF *" />
+                    <InputGeneric
+                      v-model="i.email"
+                      label="Email *"
+                      name="email"
+                      :validations="validations.email"
+                    />
                     <DateInput v-model="i.birthday" label="Date Nascimento *" />
                     <TextInput
                       v-model="i.mainPhone"
@@ -139,14 +179,30 @@
                       name="mainPhone"
                       :maska="['(##) #####-####']"
                     />
+                    <Select
+                      :selected="i.documentSelected"
+                      label="Documentos aceptados *"
+                      :options="acceptedDocuments"
+                      @select-value="i.documentSelected = $event"
+                    />
+
+                    <InputGeneric
+                      v-if="i.documentSelected?.value === 'C'"
+                      v-model="i.cpf_number"
+                      v-cpf-mask
+                      label="CPF *"
+                      name="cpf"
+                      :validations="validations.cpf"
+                    />
                     <passport-component
+                      v-if="i.documentSelected?.value === 'P'"
                       v-model:passport="i.passportNumber"
                       v-model:validate-date="i.validateDate"
                       v-model:date-issue="i.dateIssue"
-                      @update:country-of-issue="i.countryIssue = $event.value"
-                      @update:country-of-residence="
-                        i.countryResidence = $event.value
-                      "
+                      :country-of-issue="i.countryIssue"
+                      :country-of-residence="i.countryResidence"
+                      @update:country-of-issue="i.countryIssue = $event"
+                      @update:country-of-residence="i.countryResidence = $event"
                     />
                   </form>
                 </template>
@@ -193,6 +249,13 @@ import PassportComponent from '@/components/FormUI/PassportComponent.vue';
 import { useUserStore } from '@/stores/user';
 import ModalSaveData from '@/components/SaveData/ModalSaveData.vue';
 import { usePassengerUserStore } from '@/stores/passenger';
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+import {
+  cpfValidation,
+  requiredValidation,
+  emailValidation,
+} from '@/utils/validations';
+import Select from '@/components/FormUI/TheSelect.vue';
 
 onMounted(() => {
   if (purchaseStore.informationAdults.length === 0) getArrayData();
@@ -207,12 +270,34 @@ const pass = ref(null);
 
 const $cookies = inject('$cookies');
 
+const acceptedDocuments = computed(() => {
+  return [
+    { label: 'Passport', value: 'P' },
+    { label: 'CPF', value: 'C' },
+  ];
+});
+
+const validations = computed(() => {
+  return {
+    required: {
+      isRequired: requiredValidation,
+    },
+    cpf: {
+      isRequired: cpfValidation.requiredValidation,
+      isCPF: cpfValidation.isCPF,
+    },
+    email: {
+      isRequired: requiredValidation,
+      isEmail: emailValidation,
+    },
+  };
+});
 const useData = () => {
   if (!$cookies.isKey('dataUser')) {
     alertStore.showMsg({
       message: 'Para el uso de esta funcionalidad precisa ingresar a su cuenta',
-      backgrColor: 'bg-red-100',
-      textColor: 'text-red-700',
+      backgrColor: 'red',
+      textColor: 'red',
     });
   } else {
     passengerStore
@@ -256,10 +341,10 @@ const getArrayData = () => {
       birthday: '',
       mainPhone: '',
       passportNumber: '',
-      validateDate: '',
       dateIssue: '',
       countryIssue: '',
       countryResidence: '',
+      documentSelected: null,
     });
   }
 
@@ -273,10 +358,10 @@ const getArrayData = () => {
         birthday: '',
         mainPhone: '',
         passportNumber: '',
-        validateDate: '',
         dateIssue: '',
         countryIssue: '',
         countryResidence: '',
+        documentSelected: null,
       });
     }
   }
@@ -290,10 +375,10 @@ const getArrayData = () => {
         birthday: '',
         mainPhone: '',
         passportNumber: '',
-        validateDate: '',
         dateIssue: '',
         countryIssue: '',
         countryResidence: '',
+        documentSelected: null,
       });
     }
   }
@@ -302,11 +387,18 @@ const getArrayData = () => {
 const checkInformationAdults = computed(() => {
   let check = false;
   purchaseStore.informationAdults.map((o) => {
+    const flag =
+      o.documentSelected === 'C'
+        ? !o.cpf_number
+        : !o.passportNumber ||
+          !o.dateIssue ||
+          !o.countryIssue ||
+          !o.countryResidence;
     if (
       !o.email ||
       !o.name ||
       !o.last_name ||
-      !o.cpf_number ||
+      flag ||
       !o.birthday ||
       !o.mainPhone
     )
@@ -318,11 +410,18 @@ const checkInformationAdults = computed(() => {
 const checkInformationTeenagers = computed(() => {
   let check = false;
   purchaseStore.informationTeenagers?.map((o) => {
+    const flag =
+      o.documentSelected === 'C'
+        ? !o.cpf_number
+        : !o.passportNumber ||
+          !o.dateIssue ||
+          !o.countryIssue ||
+          !o.countryResidence;
     if (
       !o.email ||
       !o.name ||
       !o.last_name ||
-      !o.cpf_number ||
+      flag ||
       !o.birthday ||
       !o.mainPhone
     )
@@ -334,11 +433,18 @@ const checkInformationTeenagers = computed(() => {
 const checkInformationBabies = computed(() => {
   let check = false;
   purchaseStore.informationBabies?.map((o) => {
+    const flag =
+      o.documentSelected === 'C'
+        ? !o.cpf_number
+        : !o.passportNumber ||
+          !o.dateIssue ||
+          !o.countryIssue ||
+          !o.countryResidence;
     if (
       !o.email ||
       !o.name ||
       !o.last_name ||
-      !o.cpf_number ||
+      flag ||
       !o.birthday ||
       !o.mainPhone
     )

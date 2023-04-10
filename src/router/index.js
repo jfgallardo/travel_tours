@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useWoobaStore } from '@/stores/wooba';
+import Guard from '@/services/middleware';
 
 const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
 const LayoutAuth = () => import('@/layouts/LayoutAuth.vue');
@@ -24,6 +25,8 @@ const ContractService = () => import('@/views/ContractService.vue');
 const NotFound = () => import('@/views/NotFound.vue');
 
 const RegisterPage = () => import('@/views/Auth/RegisterPage.vue');
+const VerifyEmailPage = () => import('@/views/Auth/VerifyEmailPage.vue');
+const ForgotPassword = () => import('@/views/Auth/ForgotPassword.vue');
 
 const ContactPage = () => import('@/views/Static/ContactPage.vue');
 const TermsPage = () => import('@/views/Static/TermsPage.vue');
@@ -52,10 +55,27 @@ const router = createRouter({
   scrollBehavior,
   routes: [
     {
-      path: '/signIn',
+      path: '/register',
       component: LayoutAuth,
       children: [
-        { path: 'register', name: 'RegisterPage', component: RegisterPage },
+        {
+          path: '',
+          name: 'RegisterPage',
+          component: RegisterPage,
+          beforeEnter: Guard.redirectIfAuth,
+        },
+        {
+          path: 'verify-email',
+          name: 'VerifyEmail',
+          component: VerifyEmailPage,
+          beforeEnter: Guard.redirectIfNotToken,
+        },
+        {
+          path: 'forgot-password',
+          name: 'ForgotPassword',
+          component: ForgotPassword,
+          beforeEnter: Guard.redirectIfAuth,
+        },
       ],
     },
     {
@@ -83,27 +103,13 @@ const router = createRouter({
               path: 'check/round-trip',
               name: 'VoosIdaVolta',
               component: VoosIdaVolta,
-              beforeEnter: (to, from) => {
-                const woobaStore = useWoobaStore();
-                if (
-                  from.name !== 'AereoLandingPage' &&
-                  woobaStore.outboundFlights.length === 0
-                )
-                  return '/aereo';
-              },
+              beforeEnter: Guard.redirectIfNotOutboundFlights,
             },
             {
               path: 'check/multiple',
               name: 'VoosMultiple',
               component: VoosMultiple,
-              beforeEnter: (to, from) => {
-                const woobaStore = useWoobaStore();
-                if (
-                  from.name !== 'AereoLandingPage' &&
-                  woobaStore.outboundFlights.length === 0
-                )
-                  return '/aereo';
-              },
+              beforeEnter: Guard.redirectIfNotOutboundFlights,
             },
           ],
         },
@@ -117,6 +123,7 @@ const router = createRouter({
           path: 'checkout',
           name: 'CheckoutPage',
           component: CheckoutPage,
+          beforeEnter: Guard.redirectIfNotAuth,
           children: [
             { path: '', name: 'PurchaseFormPage', component: PurchaseFormPage },
             { path: 'finish-payment', name: 'CheckPage', component: CheckPage },
@@ -220,6 +227,7 @@ const router = createRouter({
       path: '/settings',
       name: 'SettingsHome',
       component: SettingsHomePage,
+      beforeEnter: Guard.redirectIfNotAuth,
     },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
   ],

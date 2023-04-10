@@ -111,10 +111,10 @@
 
             <div class="flex items-center justify-between">
               <div class="text-sm">
-                <a
-                  href="#"
+                <RouterLink
+                  :to="{ name: 'ForgotPassword' }"
                   class="font-medium text-blue-600 hover:text-blue-500"
-                  >{{ t('auth.forgot') }}</a
+                  >{{ t('auth.forgot') }}</RouterLink
                 >
               </div>
             </div>
@@ -151,18 +151,19 @@
 </template>
 
 <script setup>
-import { inject, ref } from 'vue';
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import Loader from '@/components/Partials/TheLoader.vue';
 import { useI18n } from 'vue-i18n';
 import { useAlertStore } from '@/stores/alert';
+import Cookies from 'js-cookie';
+
 const { t } = useI18n();
 
 const authStore = useAuthStore();
 const email = ref('');
 const password = ref('');
-const $cookies = inject('$cookies');
 const alertStore = useAlertStore();
 
 const login = () => {
@@ -175,17 +176,23 @@ const login = () => {
   authStore
     .login(formData)
     .then(({ data }) => {
-      $cookies.set('dataUser', data);
+      Cookies.set('token', data.access_token);
       authStore.userLogged = data.data;
       authStore.userLogged.access_token = data.access_token;
       alertStore.showMsg({
         message: `Bienvenido ${data.data.fullName}`,
-        backgrColor: 'bg-blue-100',
-        textColor: 'text-blue-700',
+        backgrColor: 'blue',
+        textColor: 'blue',
       });
       authStore.loading = false;
     })
-    .catch(() => {
+    .catch((e) => {
+      const errorCode = e?.response?.data?.message || 'ServerError';
+      alertStore.showMsg({
+        message: errorCode,
+        backgrColor: 'red',
+        textColor: 'red',
+      });
       authStore.loading = false;
     });
 };
@@ -193,14 +200,14 @@ const login = () => {
 const logout = () => {
   email.value = '';
   password.value = '';
-  if ($cookies.isKey('dataUser')) {
-    $cookies.remove('dataUser');
-    authStore.userLogged = null;
+  if (Cookies.get('token')) {
+    Cookies.remove('token');
+    authStore.$reset();
   }
   alertStore.showMsg({
     message: 'Ha cerrado exitosamente la sesión.',
-    backgrColor: 'bg-blue-100',
-    textColor: 'text-blue-700',
+    backgrColor: 'blue',
+    textColor: 'blue',
   });
 };
 </script>

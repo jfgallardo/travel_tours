@@ -18,8 +18,8 @@
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-x"
-              width="20"
-              height="20"
+              width="15"
+              height="15"
               viewBox="0 0 24 24"
               stroke-width="2.5"
               stroke="currentColor"
@@ -88,6 +88,8 @@ const close = () => {
   position: relative;
   border-bottom: 1px solid #eeeeee;
   color: #072da7;
+  display: flex;
+  align-content: center;
   justify-content: space-between;
 }
 

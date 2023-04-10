@@ -42,8 +42,8 @@
       <div class="w-4/12">
         <InputGeneric
           v-model="auth.user.cpf"
+          v-cpf-mask
           label="CPF *"
-          maska="###.###.###-##"
           name="cpf"
           :validations="validations.cpf"
           @is-valid="$emit('isValid', $event)"
