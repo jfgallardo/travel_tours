@@ -9,6 +9,7 @@
         >
           <div class="relative border-b pb-3">
             <div
+              v-if="labelImage"
               class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-6xl"
             >
               {{ image.city }}
@@ -27,7 +28,7 @@
     </div>
     <div class="slider-nav">
       <p class="font-semibold text-sm md:text-2xl">
-        {{ label }}
+        {{ $t(label) }}
       </p>
       <div class="flex">
         <button class="slider-prev" @click="prevSlide">
@@ -68,7 +69,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 
 const props = defineProps({
@@ -80,10 +81,19 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  labelImage: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-const width = computed(() => {
-  return screen.width;
+const width = ref(0);
+
+onMounted(() => {
+  const parentElement = document.getElementsByClassName('slider')[0];
+  if (parentElement) {
+    width.value = parentElement.offsetWidth;
+  }
 });
 
 const itemsToShow = computed(() => {

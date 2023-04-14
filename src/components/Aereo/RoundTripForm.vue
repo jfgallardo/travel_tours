@@ -4,15 +4,15 @@
       <div class="px-4">
         <AutoComplete
           :label="t('roundTripForm.labelDesde')"
-          :value="searchOptionsVoo.origin.label"
+          :value="optionsVoo.origin.label"
           @input="
             (e) => {
-              searchOptionsVoo.origin.label = e;
+              optionsVoo.origin.label = e;
             }
           "
           @select="
             (s) => {
-              searchOptionsVoo.origin.iata = s;
+              optionsVoo.origin.iata = s;
             }
           "
         />
@@ -56,15 +56,15 @@
       <div class="px-4">
         <AutoComplete
           :label="t('roundTripForm.labelPara')"
-          :value="searchOptionsVoo.destiny.label"
+          :value="optionsVoo.destiny.label"
           @input="
             (e) => {
-              searchOptionsVoo.destiny.label = e;
+              optionsVoo.destiny.label = e;
             }
           "
           @select="
             (s) => {
-              searchOptionsVoo.destiny.iata = s;
+              optionsVoo.destiny.iata = s;
             }
           "
         />
@@ -72,13 +72,13 @@
 
       <div class="flex pt-4 px-4">
         <DateInput
-          v-model="searchOptionsVoo.dateOfDeparture"
+          v-model="optionsVoo.dateOfDeparture"
           :label="t('roundTripForm.labelIda')"
           :min-date-show="new Date()"
           class="w-full"
         />
         <DateInput
-          v-model="searchOptionsVoo.dateOfReturn"
+          v-model="optionsVoo.dateOfReturn"
           :label="t('roundTripForm.labelVolta')"
           :min-date-show="notBeforeDate"
           class="w-full"
@@ -96,23 +96,23 @@
               class="flex justify-evenly pt-6 pb-2 pl-8 pr-4 border-gray-400 focus:border-blue-400 bg-white border focus:outline-none text-sm"
             >
               <span
-                >{{ searchOptionsVoo.adults }}
-                {{ t('adults', searchOptionsVoo.adults) }}</span
+                >{{ optionsVoo.adults }}
+                {{ t('adults', optionsVoo.adults) }}</span
               >
               <span
-                >{{ searchOptionsVoo.teenagers }}
-                {{ t('children', searchOptionsVoo.teenagers) }}</span
+                >{{ optionsVoo.teenagers }}
+                {{ t('children', optionsVoo.teenagers) }}</span
               >
               <span
-                >{{ searchOptionsVoo.babies }}
-                {{ t('babies', searchOptionsVoo.babies) }}</span
+                >{{ optionsVoo.babies }}
+                {{ t('babies', optionsVoo.babies) }}</span
               >
             </div>
           </template>
           <template #dropdown>
             <div class="flex items-center justify-between px-4">
               <ManageItems
-                v-model="searchOptionsVoo.adults"
+                v-model="optionsVoo.adults"
                 subtitle="+12 anos"
                 :label="t('adults')"
                 @take-off="takeOff"
@@ -120,7 +120,7 @@
               />
 
               <ManageItems
-                v-model="searchOptionsVoo.teenagers"
+                v-model="optionsVoo.teenagers"
                 subtitle="2-11 anos"
                 :label="t('children')"
                 @take-off="takeOff"
@@ -128,7 +128,7 @@
               />
 
               <ManageItems
-                v-model="searchOptionsVoo.babies"
+                v-model="optionsVoo.babies"
                 subtitle="-2 anos"
                 :label="t('babies')"
                 @take-off="takeOff"
@@ -143,12 +143,12 @@
 
       <div class="px-5">
         <Check
-          v-model="searchOptionsVoo.apenasVoosDiretos"
+          v-model="optionsVoo.apenasVoosDiretos"
           :label="t('roundTripForm.voosDirectos')"
           class="pt-4"
         />
         <Check
-          v-model="searchOptionsVoo.onlyBaggage"
+          v-model="optionsVoo.onlyBaggage"
           :label="t('roundTripForm.apenasComBabagem')"
         />
       </div>
@@ -156,12 +156,12 @@
       <div class="">
         <button
           class="bg-blue-700 hover:bg-blue-800 relative w-full py-3 text-white flex items-center justify-center disabled:bg-blue-400 disabled:cursor-wait"
-          :disabled="woobaStore.loading"
+          :disabled="vooStore.loading"
           @click="consultar()"
         >
           <span>{{ t('roundTripForm.pesquisarVoos') }}</span>
           <div
-            v-if="woobaStore.loading"
+            v-if="vooStore.loading"
             class="absolute right-10 animate-spin h-6 w-6 border-0 border-t-2 border-white rounded-full"
           ></div>
           <ArrowRight v-else fill-color="white" class="absolute right-10" />
@@ -171,95 +171,77 @@
   </div>
 </template>
 <script setup>
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import Check from '@/components/FormUI/CheckInput.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
-import { useWoobaStore } from '@/stores/wooba';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useI18n } from 'vue-i18n';
 import CabineComponent from '@/components/FormUI/CabineComponent.vue';
 import { useAlertStore } from '@/stores/alert';
 import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
 import { useRouter } from 'vue-router';
+import { useVooStore } from '@/stores/voo';
 
-const woobaStore = useWoobaStore();
-const searchOptionsVoo = useSearchOptionsVooStore();
+const optionsVoo = useSearchOptionsVooStore();
 const alertStore = useAlertStore();
 const { t } = useI18n();
-const $cookies = inject('$cookies');
 const router = useRouter();
+const vooStore = useVooStore();
 
 const addUp = (e) => {
-  if (e === t('adults') && searchOptionsVoo.adults < 8) {
-    searchOptionsVoo.adults++;
-  } else if (e === t('children') && searchOptionsVoo.teenagers < 8) {
-    searchOptionsVoo.teenagers++;
+  if (e === t('adults') && optionsVoo.adults < 8) {
+    optionsVoo.adults++;
+  } else if (e === t('children') && optionsVoo.teenagers < 8) {
+    optionsVoo.teenagers++;
   } else if (
     e === t('babies') &&
-    searchOptionsVoo.babies < 8 &&
-    searchOptionsVoo.babies < searchOptionsVoo.adults
+    optionsVoo.babies < 8 &&
+    optionsVoo.babies < optionsVoo.adults
   ) {
-    searchOptionsVoo.babies++;
+    optionsVoo.babies++;
   }
 };
 
 const takeOff = (e) => {
-  if (e === t('adults') && searchOptionsVoo.adults > 1) {
-    searchOptionsVoo.adults--;
-    if (searchOptionsVoo.babies > searchOptionsVoo.adults)
-      searchOptionsVoo.babies = 0;
-  } else if (e === t('children') && searchOptionsVoo.teenagers > 0) {
-    searchOptionsVoo.teenagers--;
-  } else if (e === t('babies') && searchOptionsVoo.babies > 0) {
-    searchOptionsVoo.babies--;
+  if (e === t('adults') && optionsVoo.adults > 1) {
+    optionsVoo.adults--;
+    if (optionsVoo.babies > optionsVoo.adults) optionsVoo.babies = 0;
+  } else if (e === t('children') && optionsVoo.teenagers > 0) {
+    optionsVoo.teenagers--;
+  } else if (e === t('babies') && optionsVoo.babies > 0) {
+    optionsVoo.babies--;
   }
 };
 
 const changeDestinations = () => {
-  let temporaryString = searchOptionsVoo.origin.label;
-  let temporaryIata = searchOptionsVoo.origin.iata;
+  let temporaryString = optionsVoo.origin.label;
+  let temporaryIata = optionsVoo.origin.iata;
 
-  searchOptionsVoo.origin.label = searchOptionsVoo.destiny.label;
-  searchOptionsVoo.origin.iata = searchOptionsVoo.destiny.iata;
+  optionsVoo.origin.label = optionsVoo.destiny.label;
+  optionsVoo.origin.iata = optionsVoo.destiny.iata;
 
-  searchOptionsVoo.destiny.label = temporaryString;
-  searchOptionsVoo.destiny.iata = temporaryIata;
+  optionsVoo.destiny.label = temporaryString;
+  optionsVoo.destiny.iata = temporaryIata;
 };
 
 const notBeforeDate = computed(() => {
-  if (searchOptionsVoo.dateOfDeparture) {
-    let dateParts = searchOptionsVoo.dateOfDeparture.split('/');
+  if (optionsVoo.dateOfDeparture) {
+    let dateParts = optionsVoo.dateOfDeparture.split('/');
     return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
   } else {
     return new Date();
   }
 });
-
-const saveCookiesSearch = () => {
-  const dataSearch = {
-    dateOfDeparture: searchOptionsVoo.dateOfDeparture,
-    dateOfReturn: searchOptionsVoo.dateOfReturn,
-    origin: searchOptionsVoo.origin,
-    destiny: searchOptionsVoo.destiny,
-    cabin: searchOptionsVoo.cabin,
-    adults: searchOptionsVoo.adults,
-    teenagers: searchOptionsVoo.teenagers,
-    babies: searchOptionsVoo.babies,
-    onlyBaggage: searchOptionsVoo.onlyBaggage,
-    apenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
-  };
-  $cookies.set('dataSearch', dataSearch);
-};
 const consultar = () => {
   if (
-    !searchOptionsVoo.origin.iata ||
-    !searchOptionsVoo.destiny.iata ||
-    !searchOptionsVoo.getDateIdaFormatter ||
-    !searchOptionsVoo.getDateVoltaFormatter
+    !optionsVoo.origin.iata ||
+    !optionsVoo.destiny.iata ||
+    !optionsVoo.getDateIdaFormatter ||
+    !optionsVoo.getDateVoltaFormatter
   ) {
     alertStore.showMsg({
       message: 'Por favor, verifique, existen campos vacios o incorrectos',
@@ -269,33 +251,45 @@ const consultar = () => {
     return;
   }
 
-  saveCookiesSearch();
   router.push({ name: 'VoosIdaVolta' });
 
-  const body = {
+  /* const body = {
     DataIda: `/Date(${new Date(
-      searchOptionsVoo.getDateIdaFormatter
+      optionsVoo.getDateIdaFormatter
     ).getTime()})/`,
     DataVolta: `/Date(${new Date(
-      searchOptionsVoo.getDateVoltaFormatter
+      optionsVoo.getDateVoltaFormatter
     ).getTime()})/`,
-    Destino: searchOptionsVoo.destiny.iata,
+    Destino: optionsVoo.destiny.iata,
     Flex: true,
-    Origem: searchOptionsVoo.origin.iata,
-    QuantidadeAdultos: searchOptionsVoo.adults,
-    QuantidadeBebes: searchOptionsVoo.babies,
-    QuantidadeCriancas: searchOptionsVoo.teenagers,
+    Origem: optionsVoo.origin.iata,
+    QuantidadeAdultos: optionsVoo.adults,
+    QuantidadeBebes: optionsVoo.babies,
+    QuantidadeCriancas: optionsVoo.teenagers,
     Recomendacao: true,
-    ApenasVoosComBagagem: searchOptionsVoo.onlyBaggage,
-    ApenasVoosDiretos: searchOptionsVoo.apenasVoosDiretos,
-    ...(searchOptionsVoo.cabin.value
-      ? { Cabine: searchOptionsVoo.cabin.value }
+    ApenasVoosComBagagem: optionsVoo.onlyBaggage,
+    ApenasVoosDiretos: optionsVoo.apenasVoosDiretos,
+    ...(optionsVoo.cabin.value
+      ? { Cabine: optionsVoo.cabin.value }
       : {}),
+  };*/
+  const payload = {
+    Origem: optionsVoo.origin.iata,
+    Destino: optionsVoo.destiny.iata,
+    Ida: optionsVoo.getDateIdaFormatter,
+    Volta: optionsVoo.getDateVoltaFormatter,
+    Adultos: optionsVoo.adults,
+    Criancas: optionsVoo.teenagers,
+    Bebes: optionsVoo.babies,
+    Companhia: [2],
+    Cabine: optionsVoo.cabin.value,
   };
 
-  woobaStore.loading = true;
+  vooStore.loading = true;
 
-  woobaStore
+  vooStore.checkFlightsRoundTrip(payload, 'ValorTotal');
+
+  /*woobaStore
     .consultaOrigemDestino(body)
     .then(({ data }) => {
       let {
@@ -333,7 +327,7 @@ const consultar = () => {
     })
     .catch(() => {
       woobaStore.loading = false;
-    });
+    });*/
 };
 </script>
 <style scoped></style>

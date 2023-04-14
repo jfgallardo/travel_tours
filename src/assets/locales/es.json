@@ -1,265 +1,266 @@
 {
-  "i18T": {
-    "portugues": "Portugués",
-    "ingles": "Ingles",
-    "espanol": "Español"
+  "Vuelos en destaque": "Vuelos en destaque",
+  "addressUser": {
+    "bairro": "Vecindario *",
+    "cep": "CEP *",
+    "cidade": "Ciudad *",
+    "complemento": "Complemento",
+    "endereo": "Dirección *",
+    "estado": "Estado *",
+    "nmero": "Número",
+    "noSeiMeuCep": "No conozco mi CEP"
   },
-  "hero": {
-    "subtitle": "Una escapada a cualquier lugar"
+  "adults": "Adulto | Adultos",
+  "aereoHomePage": {
+    "titleManyCities": "Múltiples destinos",
+    "titleOneWay": "Sólo ida",
+    "titleRoundTrip": "@:roundTripForm.titleIdavolta"
   },
-  "header": {
-    "ofertas": "Ofertas",
-    "duvidas": "Dudas",
-    "intercambio": "Intercambio",
-    "conecte-se": "Acceso",
-    "aereo": "Vuelos",
-    "onibus": "Autobús",
-    "seguro": "Seguro de Viaje",
-    "cruseiros": "Cruceros",
-    "contato": "Contacto"
-  },
-  "banner": {
-    "privacidade": "Política de Privacidad",
-    "termos": "Términos y Condiciones",
-    "viageiros": "Comunidad de Viajeros",
-    "duvidas": "Preguntas más Frecuentes",
-    "quem-somos": "Quienes Somos",
-    "title": "Las mejores playas <br/> para este verano",
-    "button": "Explorar playas"
-  },
-  "explorer-voos": {
-    "title": "Cubrimos vuelos en todo el mundo",
-    "voos-disponíveis": "vuelo disponible para hoy | vuelos disponibles para hoy",
-    "button": "Explorar todo"
-  },
-  "hero-hotéis": {
-    "title": "De hoteles a casas vacacionales",
-    "subtitle": "Todas las variedades para encontrar tu rincón favorito",
-    "button": "Explorar alojamiento"
-  },
-  "explorer-cruzeiros": {
-    "title": "Disfruta de tus vacaciones en el mar",
-    "cruzeiros-disponíveis": "crucero disponible para hoy | cruceros disponibles para hoy",
-    "button": "Explora Cruceros"
-  },
-  "hero-taxi": {
-    "title": "Vamos en Taxi Ejecutivo",
-    "subtitle": "Servicio de traslado VIP de bajo costo",
-    "button": "Presupuesto ahora",
-    "wtsapp": "Quiero%20cotizar%20un%20taxi%20ejecutivo"
-  },
-  "seguro-viagem": {
-    "title": " Seguro de<br>Viaje",
-    "subtitle": "Descubre tu seguro de viaje. Somos responsables con cada uno de nuestros clientes",
-    "button": "Explora más",
-    "wtsapp": "Quiero%20cotizar%20un%20seguro"
-  },
-  "banner-ingresos": {
-    "title": "Sea parte de nuestro equipo de afiliados",
-    "button": "Presione ahora",
-    "wtsapp": "Puedo%20saber%20cómo%20ganar%20ingresos%20con%20ustedes?"
-  },
-  "components": {
-    "badge-text": "Muy Pronto"
+  "alamo": {
+    "comoMembroDaCloro": "Como membro da Clorox® Safer Today Alliance™, a Álamo recebe apoio contínuo e orientação científica sobre suas medidas de segurança aprimoradas de especialistas da Cleveland Clinic e da CDC Foundation. Os clientes encontrarão um lenço desinfetante Clorox® de uma contagem em cada veículo alugado em todos os locais nos EUA e Canadá. Os lenços desinfetantes Clorox são aprovados pela EPA para matar o SARS-CoV-2, o vírus que causa o COVID-19, quando usado conforme as instruções. Cada lenço inclui instruções de uso e é acompanhado por instruções para usá-lo nas superfícies duras e não porosas de alto toque do veículo.",
+    "possuiOServioDePedgio": "Possui o serviço de pedágio, pode ser incluso através do autoatendimento no totem ou diretamente no balcão;",
+    "tarifasDisponveisNosEstadosUnidosCanadAmricaLatina": "Tarifas disponibles en Estados Unidos, Canadá, Latinoamérica, el Caribe y Europa;",
+    "tarifasDisponveisNosEstadosUnidosEAmricaLatina": "Tarifas disponibles en Estados Unidos y Latinoamérica;",
+    "todasAsTarifas": "Para EUA, todas as tarifas contemplam 1 motorista adicional grátis, para Europa, América Latina e demais localidades, solicite a inclusão outros condutores adicionais no balcão da locadora, no momento da retirada do veículo;",
+    "todosOsCondutores": "Todos os condutores (inclusive os adicionais) devem ser habilitados e maiores de 25 anos. Se menor de 25 anos haverá cobrança de taxa (USD 30/dia).",
+    "totensNosPrincipaisAeroportos": "Totens nos principais aeroportos: o cliente pode seguir diretamente até o totem, abrir o contrato em português e seguir para o veículo;"
   },
   "auth": {
     "button-login": "Accese",
-    "title": "Ingrese a su cuenta",
-    "subtitle": "O registre su cuenta",
+    "email": "Correo electrónico",
     "forgot": "Olvidaste tu contraseña?",
     "placeholder-pwd": "Contraseña",
-    "email": "Correo electrónico"
+    "subtitle": "O registre su cuenta",
+    "title": "Ingrese a su cuenta"
   },
-  "miles": {
-    "title": "Únete a la <br /> comunidad",
-    "subtitle": "Únete a miles de viajeros y planifique su viaje con nosotros ahora",
-    "button": "Inicia sesión ahora"
+  "avis": {
+    "nosBalces": "Nos balcões o contrato é aberto através de um tablet, e, na Flórida, possuem contratos em português;",
+    "osCondutores": "Todos os condutores (inclusive os adicionais) devem ser habilitados e maiores de 25 anos. Se menor de 25 anos haverá cobrança de taxa (USD 30/dia).",
+    "possuiOServio": "Possui o serviço de pedágio e o mesmo deve ser habilitado no balcão;",
+    "tarifasDisponveis": "Tarifas disponíveis nos Estados Unidos, América Latina e Europa;",
+    "todasAsTarifas": "Para EUA, todas as tarifas contemplam 1 motorista adicional grátis. Para Europa, América Latina e demais localidades, solicite a inclusão outros condutores adicionais no balcão da locadora, no momento da retirada do veículo;"
+  },
+  "babies": "Bebé | Bebés",
+  "banner": {
+    "button": "Explorar playas",
+    "duvidas": "Preguntas más Frecuentes",
+    "privacidade": "Política de Privacidad",
+    "quem-somos": "Quienes Somos",
+    "termos": "Términos y Condiciones",
+    "title": "Las mejores playas <br/> para este verano",
+    "viageiros": "Comunidad de Viajeros"
+  },
+  "banner-ingresos": {
+    "button": "Presione ahora",
+    "title": "Sea parte de nuestro equipo de afiliados",
+    "wtsapp": "Puedo%20saber%20cómo%20ganar%20ingresos%20con%20ustedes?"
+  },
+  "bestLodging": {
+    "islasPartas": "Islas Partas",
+    "melhoresAlojamentos": "Melhores alojamentos",
+    "montenegrinas": "Montenegrinas"
+  },
+  "carCategories": {
+    "companhiasInternacionais": "COMPANHIAS INTERNACIONAIS"
+  },
+  "children": "Adolescente | Adolescentes",
+  "components": {
+    "badge-text": "Muy Pronto"
+  },
+  "contactPage": {
+    "assunto": "ASSUNTO",
+    "email": "EMAIL",
+    "entreEmContato": "Entre em contato",
+    "enviar": "Enviar",
+    "faleConosco": "Fale conosco",
+    "nome": "NOME"
+  },
+  "detailsPage": {
+    "OfertaDesde": "1 Oferta Desde",
+    "aerolinea": "AEROLINEA",
+    "bagagemDeMo": "{BagagemQuantidade} BAGAGEM DE MÃO",
+    "clase": "CLASE",
+    "duraaoTotal": "DURAÇAO TOTAL",
+    "fechar": "Fechar",
+    "noBagagem": "NO BAGAGEM",
+    "qtdMilhas": "QTD. MILHAS",
+    "tipoDeTarifa": "Tipo de Tarifa",
+    "total": "Total",
+    "vueloDeIda": "One way flight",
+    "vueloDevolta": "Vuelo de Volta"
+  },
+  "explorer-cruzeiros": {
+    "button": "Explora Cruceros",
+    "cruzeiros-disponíveis": "crucero disponible para hoy | cruceros disponibles para hoy",
+    "title": "Disfruta de tus vacaciones en el mar"
+  },
+  "explorer-voos": {
+    "button": "Explorar todo",
+    "title": "Cubrimos vuelos en todo el mundo",
+    "voos-disponíveis": "vuelo disponible para hoy | vuelos disponibles para hoy"
+  },
+  "filterCompanies": {
+    "aPartirDe": "a partir de"
   },
   "greeting": {
     "title": "Nuestro objetivo es mantenerlo feliz y satisfecho."
   },
-  "terms": {
-    "title": "Términos de Uso",
-    "whatIsIt": "Los presentes Términos y Condiciones Generales se aplican al uso de los servicios ofrecidos por MR TRAVEL & TOURS, empresa debidamente registrada en el CNPJ/MF bajo el N° 30876256000128, a través del sitio web https://mrtravelandtours.com/ persona jurídica, en adelante denominado como Usuario, que pretenda utilizar los servicios de MR TRAVEL & TOURS deberá aceptar los Términos y Condiciones Generales y las demás políticas y principios que lo rigen.<b> LA ACEPTACIÓN DE ESTOS TÉRMINOS Y CONDICIONES GENERALES ES ABSOLUTAMENTE ESENCIAL PARA EL USO DE LOS SITIOS Y SERVICIOS PROPORCIONADOS POR MR TRAVEL & TOURS.</b>",
-    "subtitleMoblix": "Sobre",
-    "textMoblix": "OTA-MOBLIX es una plataforma licenciada para agencias de viajes. La empresa MOBLIX no es responsable por la venta de productos y prestación de servicios por parte de agencias acreditadas, y no es responsable por cualquier daño causado por la no prestación de servicios/entrega de productos. En caso de dudas sobre el uso de este portal, el usuario deberá contactar directamente con Base.Entities.Parceiro. El Usuario que al permanecer en el sistema demuestra que está de acuerdo con los cambios realizados.",
-    "object": "<b>01) Objeto</b> <br/><br/> El servicio objeto de los presentes Términos y Condiciones Generales consiste en: <br/><br/> <b> I </b> - Emisión de billetes por millas aéreas /puntos de programas de fidelización de terceros, a adquirir por el usuario a través del sitio web https://mrtravelandtours.com/ MR TRAVEL & TOURS por lo tanto permite a los usuarios comprar boletos aéreos emitidos a través de millas, como proveedor de estas millas.",
-    "capacidade": "<b>02) Posibilidad de registro</b> <br/><br/> Los servicios de MR TRAVEL & TOURS solo están disponibles para personas con capacidad legal para contratarlos. Los menores de edad o los usuarios que se encuentren inhabilitados por no respetar los términos y prácticas establecidos en estos Términos y Condiciones Generales y demás documentos relacionados no podrán utilizar nuestros servicios.<br/><br/> Tampoco está permitido que una misma persona realice más de un registro en nuestro sitio web. Si se detectan registros duplicados, ambos quedarán definitivamente inhabilitados.<br/><br/> Las Personas Jurídicas podrán registrarse a través de sus representantes legales, y en el momento del registro, informar sus datos, además de la información solicitada en el formulario sobre la empresa",
-    "registration": "<b>03) Registro </b><br/><br/> El registro del usuario potencial se confirmará solo después de completar todos los campos obligatorios presentados en el formulario.<br/><br/> La información inscritos en el registro deben ser exactos, precisos y auténticos, siendo el usuario responsable y capaz de responder civil y penalmente de la veracidad de estos datos. El usuario también se compromete a mantener esta información actualizada siempre que sea necesario.<br/><br/> Nos reservamos el derecho de utilizar todos los medios posibles para identificar a nuestros usuarios, así como para solicitar datos y documentos adicionales que consideremos relevantes para verificación de los datos informados. Si se identifican datos no veraces o si el usuario se niega a proporcionar los documentos requeridos, MR TRAVEL & TOURS podrá bloquear el registro para el uso de nuestros servicios, suspender temporalmente o cancelar definitivamente el registro, sin perjuicio de otras medidas que estime necesarias. <br/><br/> En caso de aplicación de cualquiera de las sanciones mencionadas anteriormente, los servicios ofrecidos al usuario serán inmediatamente cancelados, no teniendo derecho a ningún tipo de indemnización o reembolso.<br/><br/> El usuario acceder a su cuenta a través de correo electrónico (login) y contraseña previamente registrada por él y se compromete a no comunicar estos datos a terceros, siendo enteramente responsable del uso que de ellos se haga.<br/><br/> El usuario se compromete a notificar inmediatamente a MR TRAVEL & TOURS, a través de nuestros canales de atención, cualquier uso no autorizado de su cuenta. El usuario será el único responsable de las operaciones que se realicen en su cuenta, ya que el acceso a la misma sólo será posible mediante la introducción de la contraseña, cuyo conocimiento es exclusivo del usuario.<br/><br/> En ningún caso se realizará la cesión , venta, alquiler u otra forma de transferencia de cuenta a terceros.<br/><br/> El inicio de sesión que el usuario determina para ser utilizado en MR TRAVEL & TOURS no puede tener ninguna semejanza con el nombre MR TRAVEL TECNOLOGIA Y SERVICIOS LTDA. Nos reservamos el derecho de rechazar cualquier solicitud de registro y cancelar un registro previamente aceptado, siempre que esté en desacuerdo con las políticas y reglas de este término.",
-    "modification": "<b>04) Modificaciones a los Términos y Condiciones Generales de Uso del Sitio</b><br/><br/>Estos términos pueden cambiar en cualquier momento, con miras a su perfeccionamiento y mejora de los servicios prestados por MR TRAVEL & TOURS. Los nuevos Términos y Condiciones entrarán en vigencia 15 (quince) días después de su publicación en el sitio web. Dentro de los 7 (siete) días siguientes a la publicación de las modificaciones, el usuario deberá comunicar por correo electrónico si no está de acuerdo con los términos modificados. En este caso, la relación contractual dejará de existir, siempre que no existan cuentas o deudas pendientes. Si no hay manifestación dentro del plazo estipulado, se define que el usuario ha aceptado los nuevos Términos y Condiciones y el contrato permanecerá vigente entre las partes.<br/><br/>Los nuevos cambios no tendrán efecto en relación a las transacciones y anuncios ya iniciados antes de que se publiquen. En estos casos, los Términos y Condiciones Generales de Uso del Sitio serán válidos con la redacción anterior.",
-    "privacy": "<b>05) Privacidad de la información</b><br/><br/>La información facilitada por el usuario se almacena en soportes de alta seguridad. Garantizamos tomar todas las medidas posibles para mantener el secreto absoluto de los datos personales de nuestros clientes, sin embargo, no seremos responsables por los daños que resulten de la violación de estas medidas por parte de terceros que puedan utilizar las redes públicas o Internet para subvertir los sistemas de seguridad. y acceder a la información de los usuarios.<br/><br/>El usuario autoriza expresamente que su información y datos personales sean compartidos por MR TRAVEL & TOURS con las demás empresas que forman parte del grupo económico.<br/> <br/>En caso de dudas sobre la protección de datos personales o para obtener más información sobre los datos personales y sobre los supuestos en los que pueda vulnerarse la confidencialidad a que se refiere esta cláusula, consulte la página de Política de Privacidad.",
-    "obligations": "<b>06) Obligaciones</b><br/><br/><b>6.1 - Obligaciones del Usuario</b><br/><br/>El usuario declara ser consciente de que la aerolínea (s) comprados con MR TRAVEL & TOURS fueron emitidos con el uso de millas/puntos de aerolíneas de programas de lealtad de terceros, y que, como resultado de esta forma de emisión, el disfrute del boleto no tendrá el poder para acumular puntos en los programas de fidelización titularidad del usuario.<br/><br/>El usuario se obliga a realizar el pago total del pedido por medios lícitos, para que la transacción se lleve a cabo. El incumplimiento de las obligaciones mencionadas en este párrafo implica la cancelación del pedido o la suspensión o bloqueo del registro del usuario.<br/><br/>Los boletos electrónicos comprados están sujetos a reglas específicas de cancelación y reembolso determinadas por MR TRAVEL & TOURS.<br/><br/>Las ofertas objeto de este acuerdo sólo serán válidas si se realizan a través del sistema de MR TRAVEL & TOURS.",
-    "obligationsMR": "<b>6.2 - Obligaciones de MR TRAVEL & TOURS</b><br/><br/>MR TRAVEL & TOURS se compromete a prestar siempre sus servicios de manera transparente, proporcionando equipos de profesionales competentes y experimentados. y cumplir con los términos y condiciones establecidos en este instrumento.<br/><br/>La no ejecución del servicio pactado como consecuencia de un hecho no imputable a MR TRAVEL & TOURS y cuyos efectos no serían posible evitar o prevenir (caso fortuito o fuerza mayor), MR TRAVEL & TOURS no será responsable por los daños causados   al usuario.<br/><br/>Una vez solicitado el boleto aéreo, MR TRAVEL & TOURS , Inc no garantiza la reserva del boleto, la disponibilidad, el precio en millas ofrecido y la emisión del boleto. Garantizamos el vuelo del usuario sólo después de la confirmación de la solicitud de emisión del billete y consecuente finalización total de la orden de compra.<br/><br/>En el caso específico de pago realizado con boleta de pago a plazos, incluso con el billete ya emitido y posesión del cliente, el vuelo del usuario sólo quedará garantizado después del pago de todas las cuotas restantes.",
-    "violation": "<b>07) Violación en el sistema o en la base de datos</b><br/><br/>Está prohibido el uso de dispositivos, software u otros recursos que puedan interferir con las actividades y operaciones de MR TRAVEL & TOURS, así como en ofertas, descripciones, cuentas o sus bases de datos. Cualquier intrusión, tentativa de violación o actividad que viole o contravenga las leyes de propiedad intelectual y/o las prohibiciones estipuladas en estos Términos y Condiciones Generales, hará responsable al responsable de las acciones legales que correspondan, así como de las sanciones aquí previstas, siendo también se hace responsable de la indemnización de los daños causados.",
-    "sanctions": "<b>08) Sanciones</b><br/><br/>MR TRAVEL & TOURS podrá, sin perjuicio de otras medidas, advertir, suspender o cancelar, temporal o definitivamente, el registro de un usuario o iniciar acciones legales y/o suspender la prestación de sus servicios si: a) el usuario no cumple con alguna disposición de estos Términos y Condiciones Generales y demás políticas de MR TRAVEL & TOURS; b) si incumple sus deberes de usuario; c) si practica actos dolosos o dolosos; d) si la identidad del usuario no puede ser verificada o cualquier información proporcionada por el usuario es incorrecta.",
-    "responsibilities": "<b>09) Responsabilidades</b><br/><br/>MR TRAVEL & TOURS es responsable de los daños causados   a sus usuarios, como consecuencia de defectos o errores relacionados exclusivamente con la prestación de su servicio de alojamiento. y colocación de ofertas en el sitio web https://mrtravelandtours.com/ siempre que de ella se hayan producido dichos defectos o errores. No obstante, se aclara que MR TRAVEL & TOURS no se hace responsable por defectos o errores técnicos y/u operativos derivados del sistema del usuario o de terceros.",
-    "failure": "<b>10) Fallas del sistema</b><br/><br/>No nos hacemos responsables de cualquier daño, perjuicio o pérdida que sufra el usuario debido a fallas en internet, en el sistema o en el servidor utilizado por el usuario, como consecuencia de la conducta de un tercero, caso fortuito o fuerza mayor. MR TRAVEL & TOURS tampoco será responsable de cualquier virus que pueda afectar al equipo del usuario como consecuencia del acceso, uso o navegación por Internet o como consecuencia de la transmisión de datos.",
-    "intellectualProperty": "<b>11) Propiedad intelectual y enlaces</b><br/><br/>El uso comercial de la expresión 'MR TRAVEL & TOURS' como marca, nombre comercial o nombre de dominio, así como los contenidos de las pantallas relacionadas con los servicios de MR TRAVEL & TOURS, así como los programas, bases de datos, redes, archivos que le permiten acceder y utilizar su cuenta, son propiedad de MR TRAVEL & TOURS y están protegidos por normas internacionales leyes y tratados derechos de autor, marcas, patentes, modelos y diseños industriales. Se prohíbe el mal uso y la reproducción total o parcial de dichos contenidos, salvo autorización expresa de MR TRAVEL & TOURS.<br/><br/>El sitio web de MR TRAVEL & TOURS puede contener enlaces a otros sitios web (incluyendo líneas aéreas y agencias de viajes), lo que no significa que estos sitios web sean propiedad u operados por MR TRAVEL & TOURS. MR TRAVEL & TOURS no será responsable por los contenidos, prácticas y servicios ofrecidos en el mismo. La presencia de enlaces a otros sitios web no implica una relación de sociedad, supervisión, complicidad o solidaridad de MR TRAVEL & TOURS con estos sitios web y sus contenidos.",
-    "indemnity": "<b>12) Indemnización</b><br/><br/>Corresponde al usuario indemnizar a MR TRAVEL & TOURS, sus subsidiarias, sociedades controladas o controladoras, directores, administradores, colaboradores, representantes y empleados por cualquier reclamación promovida por otros usuarios o terceros derivada de sus actividades en el sitio web o por su incumplimiento de los Términos y Condiciones Generales de Uso y demás políticas de MR TRAVEL & TOURS, o por la violación de cualquier ley o derechos de terceros, incluidos los honorarios de abogados.",
-    "legislation": "<b>13) Legislación aplicable y lugar elegido</b><br/><br/>Todo lo dispuesto en estas Condiciones Generales de Uso del Sitio se rige por las leyes vigentes en la República Federativa de Brasil. Para todos los asuntos relativos a la interpretación, cumplimiento o cualquier otra cuestión relacionada con estos Términos y Condiciones Generales de Uso del Sitio, las partes acuerdan someterse a la jurisdicción del Distrito de Belo Horizonte - Minas Gerais, con excepción de las reclamaciones presentadas. por los usuarios que se ajusten a la figura jurídica de consumidores, quienes podrán presentar dichas reclamaciones ante el foro de su domicilio.",
-    "generalProvisions": "<b>Disposiciones generales:</b><br/><br/>Sin perjuicio de las disposiciones contenidas en este Término, las demás reglas relativas a los boletos aéreos convencionales se aplicarán al boleto adquirido por el usuario con el uso de millas /puntos de programas de lealtad, incluyendo, pero no limitado a: disposiciones de la Ley no. 8.078/90 (Código de Defensa del Consumidor), normas de la Agencia Nacional de Aviación Civil – ANAC y reglamento interno de cada línea aérea.<br/><br/>Este Término, una vez firmado por las partes, constituye el acuerdo completo, definitivo, irrevocable e irreversible acuerdo entre ellos, en sustitución de todos los entendimientos, compromisos, mensaje a través de correo electrónico o fax, cartas o correspondencia anterior y en relación con el objeto de este contrato."
+  "header": {
+    "aereo": "Vuelos",
+    "conecte-se": "Acceso",
+    "contato": "Contacto",
+    "cruseiros": "Cruceros",
+    "duvidas": "Dudas",
+    "intercambio": "Intercambio",
+    "ofertas": "Ofertas",
+    "onibus": "Autobús",
+    "seguro": "Seguro de Viaje"
   },
-  "whoWeAre": {
-    "title": "¡MR TRAVEL & TOURS es una empresa totalmente dedicada a hacer que su experiencia de viaje sea lo más simple y divertida posible!",
-    "subtitle": "Más que un sitio de turismo, creamos soluciones. Cada año, miles de personas desperdician sus millas, las cuales terminan vencidas por no haber sido utilizadas. Permitimos que su viaje se haga realidad, emitiendo boletos a través de millas. Si buscas los mejores precios en boletos aéreos, paquetes y más, tenemos opciones promocionales imperdibles. Esté atento a nuestras oportunidades. Entonces, ya sabes: pensaste en viajar, por placer o por trabajo, pensaste en MR TRAVEL & TOURS. Disfruta tu viaje, comienza aquí &#128512;"
+  "hero": {
+    "subtitle": "Una escapada a cualquier lugar"
+  },
+  "hero-hotéis": {
+    "button": "Explorar alojamiento",
+    "subtitle": "Todas las variedades para encontrar tu rincón favorito",
+    "title": "De hoteles a casas vacacionales"
+  },
+  "hero-taxi": {
+    "button": "Presupuesto ahora",
+    "subtitle": "Servicio de traslado VIP de bajo costo",
+    "title": "Vamos en Taxi Ejecutivo",
+    "wtsapp": "Quiero%20cotizar%20un%20taxi%20ejecutivo"
+  },
+  "i18T": {
+    "espanol": "Español",
+    "ingles": "Ingles",
+    "portugues": "Portugués"
+  },
+  "idaVoltaFlexRender": {
+    "vuelosDeIda": "Vuelos de Ida",
+    "vuelosDeVuelta": "Vuelos de Vuelta"
+  },
+  "landingCarCategories": {
+    "subtitle": "Aprende todo sobre las categorías de autos",
+    "title": "Atendemos empresas<br/> nacionales e internacionales"
+  },
+  "mainQuestions": {
+    "accumulateMilesBody": "Cada vez que paga una factura de tarjeta de crédito, gana puntos. Estos puntos pueden ser canjeados por productos, utilizados para descuentos en anualidades de tarjetas o convertidos en millas para los programas LatamPass de Latam, Smiles de GOL o TudoAzul de AZUL.",
+    "accumulateMilesHeader": "¿Cómo puedo acumular millas?",
+    "airTicketPurchaseBody": "<b>Selección de vuelos.</b><br/><br/>Nuestro sitio web le mostrará los mejores precios de vuelos. Simplemente selecciona los que prefieras y se mostrará el valor total de los billetes, impuestos incluidos.<br/><br/><b>Emisión del billete.</b><br/><br/>Introduce tu pedido y la emisión de sus boletos, el precio del vuelo puede ser modificado por la aerolínea sin previo aviso. Si esto sucede, su boleto es cancelado y el monto reembolsado. Si ha elegido pagar con tarjeta de crédito, el límite de su tarjeta se desbloqueará en unos días. Si ha elegido pagar mediante transferencia bancaria, el importe también se reembolsará mediante transferencia bancaria.",
+    "airTicketPurchaseHeader": "Compra de boleto aereo",
+    "cancellationsBody": "<b>Importante: para cancelaciones o cualquier cambio en su boleto, contáctenos. ¿Conjunto? No es posible realizar ningún cambio directamente con la aerolínea. &#128512;.</b><br/><br/><b>Qué boletos se pueden cancelar y/o reprogramar?</b><br/><br/>Puede solicitar cancelación y reprogramación (que está sujeto a una multa) y volver a ordenar su pedido o contactarnos para solicitar la mejor opción para su situación.<br/><br/><b>¿Cuáles son las tarifas de cancelación de boletos?</b><br/><br/>Cada aerolínea tiene diferentes condiciones y tarifas en caso de cancelación de boletos, las cuales se pueden ubicar fácilmente en el sitio web de la compañía donde compró sus boletos.",
+    "cancellationsHeader": "Cambios de reserva, cancelaciones y reembolsos",
+    "registerOnSiteBody": "Hasta cierto punto no. Nuestro sistema te permite realizar encuestas sin necesidad de estar registrado. No obstante, te recomendamos que te registres en nuestra web, porque además de ser gratuito, también es más fácil visualizar y organizar tus futuras compras.",
+    "registerOnSiteHeader": "¿Es obligatorio registrarse en el sitio para comprar boletos y productos?",
+    "sellMyMilesBody": "Contáctanos a través de nuestro sistema, ¡te haremos una oferta por tus millas!",
+    "sellMyMilesHeader": "¿Cómo vendo mis millas?"
+  },
+  "manyCities": {
+    "adicionarVoo": "Adicionar otro vuelo"
+  },
+  "miles": {
+    "button": "Inicia sesión ahora",
+    "subtitle": "Únete a miles de viajeros y planifique su viaje con nosotros ahora",
+    "title": "Únete a la <br /> comunidad"
+  },
+  "pageCarCategories": {
+    "international": "Internacional",
+    "national": "Nacional",
+    "title1": "LAS MEJORES TARIFAS DEL MERCADO!",
+    "title2": "COMPANHIAS NACIONAIS"
+  },
+  "passport": {
+    "countryOfIssue": "País de residencia *",
+    "countryOfResidence": "País de residencia *",
+    "dataDeValidade": "Fecha de validez *",
+    "dateOfIssue": "Fecha de emisión *",
+    "noPasaporte": "Número de pasaporte *"
   },
   "privacy": {
     "privacyPolicy": "1 - Política de privacidad",
     "useCookies": "2 - Uso de Cookies"
   },
   "privacyCookies": {
-    "title": "Uso de Cookies",
     "subtitle": "Cookies necesarias",
+    "textSubtitle": "Algunas cookies son necesarias para proporcionar la funcionalidad básica. El sitio web no funcionará correctamente sin estas cookies y están habilitadas de manera predeterminada y no se pueden deshabilitar.<br/><br/>MR TRAVEL & TOURS utiliza cookies, que rastrean y almacenan información, usadas para mejorar su experiencia en nuestra aplicación. MR TRAVEL & TOURS utiliza cookies necesarias, de funcionalidad, de rendimiento y publicitarias.<br/><br/>Al acceder a nuestro sitio web y dar su consentimiento para el uso de cookies, usted acepta el uso de cookies en su dispositivo, como se explicó anteriormente. .<br/><br/>Puede cambiar los permisos o bloquear las Cookies. Es decir, puede configurar su navegador para rechazar Cookies o recibir una notificación cuando reciba una Cookie (puede aceptar o rechazar).<br/><br/>Si ya ha aceptado, puede revocar su consentimiento en cualquier momento: administre las cookies en la herramienta de administración de cookies, que está presente en nuestro sitio web, y/o administre directamente en su navegador.<br/><br/>No es posible rechazar y/o bloquear las cookies requeridas. Estas son esenciales para que el sitio web funcione.<br/><br/>Además, le recordamos que si rechaza y/o bloquea algunas Cookies, es posible que ciertos servicios de MR TRAVEL & TOURS no funcionen correctamente.<br / ><br/>¡Puedes tener la información completa sobre el Uso de Cookies en nuestra Política de Cookies! La Política de Cookies completa del sitio web institucional de MR TRAVEL & TOURS está disponible en este enlace. Así como la Política de Cookies de la aplicación MR TRAVEL & TOURS está disponible en este enlace.<br/><br/>¿Cómo puedo administrar las cookies en mi navegador? En los enlaces a continuación, encontrará detalles sobre cómo administrar las cookies para los navegadores más populares:<br/><br/>Si usa <b><a href='https://support.microsoft.com/en-us/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d' target='_blank'>Internet Explorer.</a></b><br/><br/>Si use <b><a href='https://support.mozilla.org/pt-BR/kb/gerencie-configuracoes-de-armazenamento-local-de-s' target='_blank'>Firefox.</a > </b><br/><br/>Si utiliza <b><a href='https://support.apple.com/en-us/guide/safari/sfri11471/mac' target='_blank '>Safari.</a></b><br/><br/>Si usa <b><a href='https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&oco=1&hl=en-BR' target='_blank'>Google Chrome.</a></b><br/><br/>Si usa <b><a href='https://support.microsoft.com/en-us/microsoft-edge/excluir-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' target='_blank'>Microsoft Edge.</a></b><br/><br/>Si utiliza <b><a href='https://help.opera.com/en/latest/web-preferences/#cookies' target='_blank'>Opera.</a></b>",
     "textTitle": "Las cookies utilizadas en el sitio web están categorizadas y puede leer sobre cada categoría y permitir o denegar parte o todo. Cuando se desactivan las categorías previamente permitidas, todas las cookies asignadas a esa categoría se eliminarán de su navegador. Además, puede ver una lista de cookies asignadas a cada categoría e información detallada en la declaración de cookies.",
-    "textSubtitle": "Algunas cookies son necesarias para proporcionar la funcionalidad básica. El sitio web no funcionará correctamente sin estas cookies y están habilitadas de manera predeterminada y no se pueden deshabilitar.<br/><br/>MR TRAVEL & TOURS utiliza cookies, que rastrean y almacenan información, usadas para mejorar su experiencia en nuestra aplicación. MR TRAVEL & TOURS utiliza cookies necesarias, de funcionalidad, de rendimiento y publicitarias.<br/><br/>Al acceder a nuestro sitio web y dar su consentimiento para el uso de cookies, usted acepta el uso de cookies en su dispositivo, como se explicó anteriormente. .<br/><br/>Puede cambiar los permisos o bloquear las Cookies. Es decir, puede configurar su navegador para rechazar Cookies o recibir una notificación cuando reciba una Cookie (puede aceptar o rechazar).<br/><br/>Si ya ha aceptado, puede revocar su consentimiento en cualquier momento: administre las cookies en la herramienta de administración de cookies, que está presente en nuestro sitio web, y/o administre directamente en su navegador.<br/><br/>No es posible rechazar y/o bloquear las cookies requeridas. Estas son esenciales para que el sitio web funcione.<br/><br/>Además, le recordamos que si rechaza y/o bloquea algunas Cookies, es posible que ciertos servicios de MR TRAVEL & TOURS no funcionen correctamente.<br / ><br/>¡Puedes tener la información completa sobre el Uso de Cookies en nuestra Política de Cookies! La Política de Cookies completa del sitio web institucional de MR TRAVEL & TOURS está disponible en este enlace. Así como la Política de Cookies de la aplicación MR TRAVEL & TOURS está disponible en este enlace.<br/><br/>¿Cómo puedo administrar las cookies en mi navegador? En los enlaces a continuación, encontrará detalles sobre cómo administrar las cookies para los navegadores más populares:<br/><br/>Si usa <b><a href='https://support.microsoft.com/en-us/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d' target='_blank'>Internet Explorer.</a></b><br/><br/>Si use <b><a href='https://support.mozilla.org/pt-BR/kb/gerencie-configuracoes-de-armazenamento-local-de-s' target='_blank'>Firefox.</a > </b><br/><br/>Si utiliza <b><a href='https://support.apple.com/en-us/guide/safari/sfri11471/mac' target='_blank '>Safari.</a></b><br/><br/>Si usa <b><a href='https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&oco=1&hl=en-BR' target='_blank'>Google Chrome.</a></b><br/><br/>Si usa <b><a href='https://support.microsoft.com/en-us/microsoft-edge/excluir-cookies-no-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09' target='_blank'>Microsoft Edge.</a></b><br/><br/>Si utiliza <b><a href='https://help.opera.com/en/latest/web-preferences/#cookies' target='_blank'>Opera.</a></b>"
+    "title": "Uso de Cookies"
   },
   "privacyPolicy": {
-    "title": "Política de privacidad",
-    "texTitle": "MR es una empresa de viajes que busca construir un gran viaje con usted.<br/><br/>Valoramos a nuestros usuarios ('usted') y respetaremos su privacidad. Es por eso que tenemos el procesamiento de datos como parte de nuestra misión de brindar un servicio aún mejor. Por lo tanto, nuestro objetivo es informarle sobre las prácticas relacionadas con la privacidad y la protección de datos.<br/><br/>Si lee y tiene alguna pregunta sobre nuestra política, comuníquese con nosotros identificados en el punto 11 a continuación.<br/><br/>Usted acepta nuestras políticas cuando visita, usa y/o se registra en nuestro sitio web, expresando su consentimiento a las prácticas que se detallan a continuación. La política comprende las prácticas de privacidad del sitio web que operan de conformidad con la ley brasileña.",
-    "personalData": "<b>1) Datos personales y autorización para registrarse para anuncios</b><br/><br/>Cuando brindamos un servicio y realizamos una venta, es necesario que recopilemos algunos Datos personales. También tenemos algunos productos y experiencias que implican el registro.<br/><br/>La información personal recopilada puede incluir su nombre, dirección de correo electrónico, número de teléfono y/o móvil, dirección, fecha de nacimiento y/u otros datos sujetos a un uso futuro. A través de estos datos personales, por ejemplo (correo electrónico), podrán tener lugar comunicaciones electrónicas entre nuestra empresa y el usuario del sitio web, con la única finalidad de difundir comunicaciones y ofertas de nuestros productos/servicios. En cualquier momento, el usuario podrá optar por dejar de recibir tales comunicaciones a través de un enlace específico en el mensaje de estos correos electrónicos que recibirá.",
-    "dataCollect": "<b>2) Recopilación de datos</b><br/><br/>Los datos pueden recopilarse directamente de usted, a través de formularios físicos o electrónicos que complete, a través de contratos firmados con nosotros, o a través del uso e interacción en nuestro sitio web. .<br/><br/>Recopilamos estos datos cuando se comunica activamente con nosotros a través de nuestros canales de atención al cliente, por teléfono o correo electrónico, a través de cookies o tecnologías similares relacionadas con nuestras plataformas.< br/><br/>Podemos recopilar datos a través de nuestro sitio web, como otros que utilizan la misma mecánica (acceso estático), automáticamente recopilamos información legal (proporcionada por ley) sobre usted y su computadora, como: su dirección IP (Protocolo de Internet), su ISP (Proveedor de Internet) ), el navegador que utilizó cuando visitó nuestro sitio web (como Internet Explorer, Firefox, Chrome, Safari), la hora de su visita y las páginas que visitó dentro de nuestro sitio web. Esta información recopilada tiene como objetivo mejorar la experiencia del usuario con nuestros servicios.",
-    "objective": "<b>3) Finalidad del uso de estos Datos</b><br/><br/>– Realizar reservas de hoteles, boletos de avión, paquetes turísticos, venta de experiencias (espectáculos, teatros, restaurantes, entre otros), participación en eventos, alquiler de vehículos, road tickets;<br/><br/>– Registrar al cliente en una de nuestras plataformas para que podamos enviar cotizaciones de servicios de viaje u ofertas/promociones;<br/><br/>– Formalizar la contrato de intermediación de la relación del cliente con los proveedores necesarios para la prestación del servicio. Por ejemplo: Hoteles, líneas aéreas, empresas de alquiler de vehículos y equipos, operadores turísticos, parques, casas de cambio de divisas, asistencia para la emisión de visas y/o documentación de viaje, entre otros que sean necesarios para atender la solicitud del cliente;<br /><br/ >– Enviar comunicación a los clientes con detalles e información esencial sobre el avance de los pedidos, procesos obligatorios para la realización de los viajes, cotizaciones, así como otra información importante para la ejecución del servicio contratado;<br/><br/> – Cumplir solicitudes posteriores al viaje como: cambios, devoluciones, compras de equipaje y servicios adicionales como asientos, cobro de multas, entre otros;<br/><br/>– Analizar el perfil del cliente para orientar mejor anuncios, promociones y ofertas futuras ;<br/><br/>– Responder quejas y consultas.",
-    "weShare": "<b>4) Con quién compartimos sus Datos</b><br/><br/>MR actúa como intermediario con numerosos proveedores, vinculados o no al sector Turístico, para que puedan prestar los servicios solicitados, compartiendo los datos personales (esenciales y solo necesarios para la efectividad del servicio), con proveedores/terceros y otros socios, tales como:<br/><br/>– Hoteles, Aerolíneas; Operadores turísticos; Empresas de alquiler de autos, empresas de turismo vial, parques de diversiones, entre otras;<br/><br/>– Empresas de software que nos brindan servicios y otras empresas de sistemas de tecnología de la información que nos asisten en la prestación de servicios, manejo de información solicitada por los clientes, informes de gestión, consolidación de datos estadísticos.<br/><br/>- Órganos y entidades gubernamentales para practicar actos en investigaciones, juicios, sospechas de fraude, procesos que involucren amenazas, peligros o cualquier otro requerimiento contemplado por esta Agencia.",
-    "internationalTransfer": "<b>5) Transferencia Internacional de Datos</b><br/><br/>Si el servicio solicitado por el cliente involucra proveedores o prestadores de servicios ubicados fuera de Brasil, también será necesario transferir Datos al exterior, esta es una condición para viabilizar la prestación del servicio. MR tomará medidas para garantizar la protección de estos datos de acuerdo con la legislación vigente.",
-    "timeWeKeepData": "<b>6) Cuánto tiempo conservamos sus datos</b><br/><br/>Los datos personales se conservarán durante el tiempo necesario para cumplir con la finalidad para la que fueron recopilados. También podemos conservar los datos durante cualquier período para el ejercicio regular de los derechos en procedimientos judiciales, incluso después de la finalización del servicio contratado o después de la finalización del período de contrato actual.<br/><br/>Por lo tanto, podemos almacenar datos personales siempre que exista un vínculo con el cliente o la empresa, podemos conservar los datos para cumplir con las obligaciones legales o durante el tiempo que sea necesario para proteger y acomodar nuestros intereses legítimos.",
-    "rightsPersonalData": "<b>7) Cuáles son sus derechos como Titular de los Datos Personales</b><br/><br/>Los datos personales son propiedad del titular de los datos y están protegidos por la ley, que garantiza los siguientes derechos:< br/ ><br/>– Confirmación de la existencia de tratamiento y acceso: le permite verificar si MR trata sus datos y solicitar una copia de sus datos de los que disponemos<br/><br/>– Rectificación de datos incompletos, inexactos o desactualizado<br/><br/>– Anonimización; para que ya no puedan ser relacionados contigo<br/><br/>– Bloqueo: suspende temporalmente la posibilidad de que tratemos tus datos<br/><br/>– Supresión de datos innecesarios, excesivos o tratados en no cumplimiento de lo dispuesto en la Ley: sus datos serán suprimidos y sin posibilidad de revocación, con excepción de los casos previstos en la Ley.<br/><br/>– Portabilidad: podremos facilitarle a usted o a los terceros indicados , sus Datos Personales, de forma estructurada para que puedan ser accedidos y utilizados.<br/><br/>– Información sobre el intercambio: derecho a la información sobre las entidades con las que compartimos sus Datos. Consulte el punto 4 de este documento y, en caso de dudas, estaremos disponibles para su aclaración.<br/><br/>– Información sobre el no consentimiento: le permite tener una información clara sobre la posibilidad de no prestar el consentimiento. Que debe ser libre e informado, es decir, siempre será libre de negar el consentimiento.<br/><br/>– Retiro del Consentimiento: tiene derecho a retirar su consentimiento para que ya no podamos tratar su información personal. datos Hacemos hincapié, no obstante, en que esta revocación no afectará a la licitud de ninguna operación con tus datos que se haya realizado con anterioridad.<br/><br/>– Oposición: una vez que hayas incumplido la ley, puedes oponerte a la tratamiento de datos. , conscientes de que como responsables del tratamiento podemos demostrar que tenemos motivos legítimos para el tratamiento, como la prevención del fraude.",
-    "dataProtection": "<b>8) Cómo protege MR sus Datos Personales</b><br/><br/>Nuestro compromiso es cuidar sus Datos Personales y utilizarlos únicamente para los fines descritos en este documento. Para que podamos garantizar la privacidad y la protección de sus datos, aplicamos rutinas de seguridad y gobierno compatibles con nuestro mercado, incluido el uso de sistemas de seguridad de la información y técnicas de encriptación. Además de un programa de privacidad, políticas y procedimientos internos, capacitación del personal en seguridad de la información, corrupción, prevención de acciones fraudulentas y protección de datos. También adoptamos procedimientos de monitoreo, supervisión y mitigación de riesgos.<br/><br/>Elegimos cuidadosamente a nuestros proveedores, los evaluamos y buscamos contratos que protejan sus datos y ayuden a minimizar los riesgos para los interesados.< br/><br />Trabajamos para proteger su privacidad, pero lamentablemente la seguridad total no depende solo de nuestras acciones e iniciativas. La entrada indebida o el uso no autorizado por parte de otros que utilizan su acceso, la falla del hardware o software que no está bajo nuestro control y otros problemas pueden poner en peligro la seguridad de sus datos. Por ello, puedes colaborar adoptando buenas prácticas de seguridad en relación con tus datos y contraseñas de acceso. Si sospecha o es informado de algo que ponga en peligro la seguridad de su información, acceso, contraseñas y datos personales, contáctenos a través del canal informado en el punto 11 de esta Política.",
+    "contact": "<b>11) Contacto</b><br/><br/> Dirija sus dudas y solicitudes a: ola{'@'}mrtravelandtours.com – Rua Hélio Batelão 439 A, CEP: 60766-055, Planalto Ayrton Senna –Fortaleza/CE.",
     "cookiesWebBeacons": "<b>9) Uso del sitio web – Cookies y Web Beacons</b><br/><br/>¿Qué son las “cookies”?<br/><br/>Son archivos de texto que se descargan y almacenan automáticamente en su ordenador, al navegar por una página o portal de Internet. Las cookies se utilizan estratégicamente para conocer los intereses de los visitantes de nuestro sitio web para comprender mejor sus necesidades e intereses, para entregar información asertiva sobre el tema o tema investigado. En cualquier caso, le informamos que cualquier usuario tiene la posibilidad de deshabilitar la función de cookies, en las opciones de su navegador (navegadores como Internet Explorer, Firefox, Chrome, Safari), o realizando modificaciones en las herramientas de los programas antivirus que pueden usar.< br/><br/>¿Qué son los “web beacons”?<br/><br/>Son pequeñas imágenes gráficas que pueden incluirse en nuestros sitios web, servicios, aplicaciones, mensajes y herramientas, que normalmente Función para identificar a los usuarios y su comportamiento. Es una técnica utilizada en páginas web y correo electrónico para, normalmente de forma invisible, comprobar si un usuario ha accedido a un contenido.",
+    "dataCollect": "<b>2) Recopilación de datos</b><br/><br/>Los datos pueden recopilarse directamente de usted, a través de formularios físicos o electrónicos que complete, a través de contratos firmados con nosotros, o a través del uso e interacción en nuestro sitio web. .<br/><br/>Recopilamos estos datos cuando se comunica activamente con nosotros a través de nuestros canales de atención al cliente, por teléfono o correo electrónico, a través de cookies o tecnologías similares relacionadas con nuestras plataformas.< br/><br/>Podemos recopilar datos a través de nuestro sitio web, como otros que utilizan la misma mecánica (acceso estático), automáticamente recopilamos información legal (proporcionada por ley) sobre usted y su computadora, como: su dirección IP (Protocolo de Internet), su ISP (Proveedor de Internet) ), el navegador que utilizó cuando visitó nuestro sitio web (como Internet Explorer, Firefox, Chrome, Safari), la hora de su visita y las páginas que visitó dentro de nuestro sitio web. Esta información recopilada tiene como objetivo mejorar la experiencia del usuario con nuestros servicios.",
+    "dataProtection": "<b>8) Cómo protege MR sus Datos Personales</b><br/><br/>Nuestro compromiso es cuidar sus Datos Personales y utilizarlos únicamente para los fines descritos en este documento. Para que podamos garantizar la privacidad y la protección de sus datos, aplicamos rutinas de seguridad y gobierno compatibles con nuestro mercado, incluido el uso de sistemas de seguridad de la información y técnicas de encriptación. Además de un programa de privacidad, políticas y procedimientos internos, capacitación del personal en seguridad de la información, corrupción, prevención de acciones fraudulentas y protección de datos. También adoptamos procedimientos de monitoreo, supervisión y mitigación de riesgos.<br/><br/>Elegimos cuidadosamente a nuestros proveedores, los evaluamos y buscamos contratos que protejan sus datos y ayuden a minimizar los riesgos para los interesados.< br/><br />Trabajamos para proteger su privacidad, pero lamentablemente la seguridad total no depende solo de nuestras acciones e iniciativas. La entrada indebida o el uso no autorizado por parte de otros que utilizan su acceso, la falla del hardware o software que no está bajo nuestro control y otros problemas pueden poner en peligro la seguridad de sus datos. Por ello, puedes colaborar adoptando buenas prácticas de seguridad en relación con tus datos y contraseñas de acceso. Si sospecha o es informado de algo que ponga en peligro la seguridad de su información, acceso, contraseñas y datos personales, contáctenos a través del canal informado en el punto 11 de esta Política.",
+    "internationalTransfer": "<b>5) Transferencia Internacional de Datos</b><br/><br/>Si el servicio solicitado por el cliente involucra proveedores o prestadores de servicios ubicados fuera de Brasil, también será necesario transferir Datos al exterior, esta es una condición para viabilizar la prestación del servicio. MR tomará medidas para garantizar la protección de estos datos de acuerdo con la legislación vigente.",
+    "objective": "<b>3) Finalidad del uso de estos Datos</b><br/><br/>– Realizar reservas de hoteles, boletos de avión, paquetes turísticos, venta de experiencias (espectáculos, teatros, restaurantes, entre otros), participación en eventos, alquiler de vehículos, road tickets;<br/><br/>– Registrar al cliente en una de nuestras plataformas para que podamos enviar cotizaciones de servicios de viaje u ofertas/promociones;<br/><br/>– Formalizar la contrato de intermediación de la relación del cliente con los proveedores necesarios para la prestación del servicio. Por ejemplo: Hoteles, líneas aéreas, empresas de alquiler de vehículos y equipos, operadores turísticos, parques, casas de cambio de divisas, asistencia para la emisión de visas y/o documentación de viaje, entre otros que sean necesarios para atender la solicitud del cliente;<br /><br/ >– Enviar comunicación a los clientes con detalles e información esencial sobre el avance de los pedidos, procesos obligatorios para la realización de los viajes, cotizaciones, así como otra información importante para la ejecución del servicio contratado;<br/><br/> – Cumplir solicitudes posteriores al viaje como: cambios, devoluciones, compras de equipaje y servicios adicionales como asientos, cobro de multas, entre otros;<br/><br/>– Analizar el perfil del cliente para orientar mejor anuncios, promociones y ofertas futuras ;<br/><br/>– Responder quejas y consultas.",
+    "personalData": "<b>1) Datos personales y autorización para registrarse para anuncios</b><br/><br/>Cuando brindamos un servicio y realizamos una venta, es necesario que recopilemos algunos Datos personales. También tenemos algunos productos y experiencias que implican el registro.<br/><br/>La información personal recopilada puede incluir su nombre, dirección de correo electrónico, número de teléfono y/o móvil, dirección, fecha de nacimiento y/u otros datos sujetos a un uso futuro. A través de estos datos personales, por ejemplo (correo electrónico), podrán tener lugar comunicaciones electrónicas entre nuestra empresa y el usuario del sitio web, con la única finalidad de difundir comunicaciones y ofertas de nuestros productos/servicios. En cualquier momento, el usuario podrá optar por dejar de recibir tales comunicaciones a través de un enlace específico en el mensaje de estos correos electrónicos que recibirá.",
     "policyValidity": "<b>10) Vigencia de la Política de Privacidad</b><br/><br/>Nuestra política de privacidad no se aplica a sitios web de terceros, es decir, en caso de redirección a otro sitio web, el usuario debe leer, conoce y consiente su política de privacidad. No somos responsables de la política de privacidad ni del contenido presente en otros sitios/portales, incluso si son socios comerciales de nuestra empresa.<br/><br/>Siempre buscamos mejorar nuestros servicios, por lo que esta Política de Privacidad puede ser actualizada para reflejar las mejoras implementadas. En vista de ello, le recomendamos que visite periódicamente este documento para reciclar los cambios realizados.",
-    "contact": "<b>11) Contacto</b><br/><br/> Dirija sus dudas y solicitudes a: ola{'@'}mrtravelandtours.com – Rua Hélio Batelão 439 A, CEP: 60766-055, Planalto Ayrton Senna –Fortaleza/CE."
+    "rightsPersonalData": "<b>7) Cuáles son sus derechos como Titular de los Datos Personales</b><br/><br/>Los datos personales son propiedad del titular de los datos y están protegidos por la ley, que garantiza los siguientes derechos:< br/ ><br/>– Confirmación de la existencia de tratamiento y acceso: le permite verificar si MR trata sus datos y solicitar una copia de sus datos de los que disponemos<br/><br/>– Rectificación de datos incompletos, inexactos o desactualizado<br/><br/>– Anonimización; para que ya no puedan ser relacionados contigo<br/><br/>– Bloqueo: suspende temporalmente la posibilidad de que tratemos tus datos<br/><br/>– Supresión de datos innecesarios, excesivos o tratados en no cumplimiento de lo dispuesto en la Ley: sus datos serán suprimidos y sin posibilidad de revocación, con excepción de los casos previstos en la Ley.<br/><br/>– Portabilidad: podremos facilitarle a usted o a los terceros indicados , sus Datos Personales, de forma estructurada para que puedan ser accedidos y utilizados.<br/><br/>– Información sobre el intercambio: derecho a la información sobre las entidades con las que compartimos sus Datos. Consulte el punto 4 de este documento y, en caso de dudas, estaremos disponibles para su aclaración.<br/><br/>– Información sobre el no consentimiento: le permite tener una información clara sobre la posibilidad de no prestar el consentimiento. Que debe ser libre e informado, es decir, siempre será libre de negar el consentimiento.<br/><br/>– Retiro del Consentimiento: tiene derecho a retirar su consentimiento para que ya no podamos tratar su información personal. datos Hacemos hincapié, no obstante, en que esta revocación no afectará a la licitud de ninguna operación con tus datos que se haya realizado con anterioridad.<br/><br/>– Oposición: una vez que hayas incumplido la ley, puedes oponerte a la tratamiento de datos. , conscientes de que como responsables del tratamiento podemos demostrar que tenemos motivos legítimos para el tratamiento, como la prevención del fraude.",
+    "texTitle": "MR es una empresa de viajes que busca construir un gran viaje con usted.<br/><br/>Valoramos a nuestros usuarios ('usted') y respetaremos su privacidad. Es por eso que tenemos el procesamiento de datos como parte de nuestra misión de brindar un servicio aún mejor. Por lo tanto, nuestro objetivo es informarle sobre las prácticas relacionadas con la privacidad y la protección de datos.<br/><br/>Si lee y tiene alguna pregunta sobre nuestra política, comuníquese con nosotros identificados en el punto 11 a continuación.<br/><br/>Usted acepta nuestras políticas cuando visita, usa y/o se registra en nuestro sitio web, expresando su consentimiento a las prácticas que se detallan a continuación. La política comprende las prácticas de privacidad del sitio web que operan de conformidad con la ley brasileña.",
+    "timeWeKeepData": "<b>6) Cuánto tiempo conservamos sus datos</b><br/><br/>Los datos personales se conservarán durante el tiempo necesario para cumplir con la finalidad para la que fueron recopilados. También podemos conservar los datos durante cualquier período para el ejercicio regular de los derechos en procedimientos judiciales, incluso después de la finalización del servicio contratado o después de la finalización del período de contrato actual.<br/><br/>Por lo tanto, podemos almacenar datos personales siempre que exista un vínculo con el cliente o la empresa, podemos conservar los datos para cumplir con las obligaciones legales o durante el tiempo que sea necesario para proteger y acomodar nuestros intereses legítimos.",
+    "title": "Política de privacidad",
+    "weShare": "<b>4) Con quién compartimos sus Datos</b><br/><br/>MR actúa como intermediario con numerosos proveedores, vinculados o no al sector Turístico, para que puedan prestar los servicios solicitados, compartiendo los datos personales (esenciales y solo necesarios para la efectividad del servicio), con proveedores/terceros y otros socios, tales como:<br/><br/>– Hoteles, Aerolíneas; Operadores turísticos; Empresas de alquiler de autos, empresas de turismo vial, parques de diversiones, entre otras;<br/><br/>– Empresas de software que nos brindan servicios y otras empresas de sistemas de tecnología de la información que nos asisten en la prestación de servicios, manejo de información solicitada por los clientes, informes de gestión, consolidación de datos estadísticos.<br/><br/>- Órganos y entidades gubernamentales para practicar actos en investigaciones, juicios, sospechas de fraude, procesos que involucren amenazas, peligros o cualquier otro requerimiento contemplado por esta Agencia."
   },
-  "mainQuestions": {
-    "airTicketPurchaseHeader": "Compra de boleto aereo",
-    "airTicketPurchaseBody": "<b>Selección de vuelos.</b><br/><br/>Nuestro sitio web le mostrará los mejores precios de vuelos. Simplemente selecciona los que prefieras y se mostrará el valor total de los billetes, impuestos incluidos.<br/><br/><b>Emisión del billete.</b><br/><br/>Introduce tu pedido y la emisión de sus boletos, el precio del vuelo puede ser modificado por la aerolínea sin previo aviso. Si esto sucede, su boleto es cancelado y el monto reembolsado. Si ha elegido pagar con tarjeta de crédito, el límite de su tarjeta se desbloqueará en unos días. Si ha elegido pagar mediante transferencia bancaria, el importe también se reembolsará mediante transferencia bancaria.",
-    "cancellationsHeader": "Cambios de reserva, cancelaciones y reembolsos",
-    "cancellationsBody": "<b>Importante: para cancelaciones o cualquier cambio en su boleto, contáctenos. ¿Conjunto? No es posible realizar ningún cambio directamente con la aerolínea. &#128512;.</b><br/><br/><b>Qué boletos se pueden cancelar y/o reprogramar?</b><br/><br/>Puede solicitar cancelación y reprogramación (que está sujeto a una multa) y volver a ordenar su pedido o contactarnos para solicitar la mejor opción para su situación.<br/><br/><b>¿Cuáles son las tarifas de cancelación de boletos?</b><br/><br/>Cada aerolínea tiene diferentes condiciones y tarifas en caso de cancelación de boletos, las cuales se pueden ubicar fácilmente en el sitio web de la compañía donde compró sus boletos.",
-    "accumulateMilesHeader": "¿Cómo puedo acumular millas?",
-    "accumulateMilesBody": "Cada vez que paga una factura de tarjeta de crédito, gana puntos. Estos puntos pueden ser canjeados por productos, utilizados para descuentos en anualidades de tarjetas o convertidos en millas para los programas LatamPass de Latam, Smiles de GOL o TudoAzul de AZUL.",
-    "sellMyMilesHeader": "¿Cómo vendo mis millas?",
-    "sellMyMilesBody": "Contáctanos a través de nuestro sistema, ¡te haremos una oferta por tus millas!",
-    "registerOnSiteHeader": "¿Es obligatorio registrarse en el sitio para comprar boletos y productos?",
-    "registerOnSiteBody": "Hasta cierto punto no. Nuestro sistema te permite realizar encuestas sin necesidad de estar registrado. No obstante, te recomendamos que te registres en nuestra web, porque además de ser gratuito, también es más fácil visualizar y organizar tus futuras compras."
-  },
-  "landingCarCategories": {
-    "title": "Atendemos empresas<br/> nacionales e internacionales",
-    "subtitle": "Aprende todo sobre las categorías de autos"
-  },
-  "pageCarCategories": {
-    "title1": "LAS MEJORES TARIFAS DEL MERCADO!",
-    "title2": "COMPANHIAS NACIONAIS",
-    "national": "Nacional",
-    "international": "Internacional"
+  "querySubHeading": {
+    "areopuertos": "Areopuertos",
+    "bagagem": "Bagagem",
+    "clase": "Clase",
+    "compania": "Compania",
+    "duracion": "Duracion",
+    "duracionHrs": "Duracion {duration}hrs",
+    "llegada": "Llegada",
+    "paradas": "Paradas",
+    "partida": "Partida",
+    "precio": "Precio"
   },
   "roundTripForm": {
-    "titleIdavolta": "Ida y vuelta",
-    "labelDesde": "Desde",
-    "labelPara": "A",
-    "labelIda": "Salida",
-    "labelVolta": "Regreso",
-    "labelClassecabine": "Cabina",
-    "labelPassageiros": "Viajeros",
     "aeroportosProximos": "Añade aeropuertos cercanos",
-    "voosDirectos": "Solo vuelos directos",
+    "apenasComBabagem": "Sólo con equipaje",
+    "labelClassecabine": "Cabina",
+    "labelDesde": "Desde",
+    "labelIda": "Salida",
+    "labelPara": "A",
+    "labelPassageiros": "Viajeros",
+    "labelVolta": "Regreso",
     "paraEstudantes": "Para estudiantes",
     "pesquisarVoos": "Buscar",
-    "apenasComBabagem": "Sólo con equipaje"
+    "titleIdavolta": "Ida y vuelta",
+    "voosDirectos": "Solo vuelos directos"
   },
-  "manyCities": {
-    "adicionarVoo": "Adicionar otro vuelo"
+  "searching": "Buscando...",
+  "seguro-viagem": {
+    "button": "Explora más",
+    "subtitle": "Descubre tu seguro de viaje. Somos responsables con cada uno de nuestros clientes",
+    "title": " Seguro de<br>Viaje",
+    "wtsapp": "Quiero%20cotizar%20un%20seguro"
   },
-  "aereoHomePage": {
-    "titleRoundTrip": "@:roundTripForm.titleIdavolta",
-    "titleOneWay": "Sólo ida",
-    "titleManyCities": "Múltiples destinos"
-  },
-  "adults": "Adulto | Adultos",
-  "children": "Adolescente | Adolescentes",
-  "babies": "Bebé | Bebés",
-  "idaVoltaFlexRender": {
-    "vuelosDeIda": "Vuelos de Ida",
-    "vuelosDeVuelta": "Vuelos de Vuelta"
+  "terms": {
+    "capacidade": "<b>02) Posibilidad de registro</b> <br/><br/> Los servicios de MR TRAVEL & TOURS solo están disponibles para personas con capacidad legal para contratarlos. Los menores de edad o los usuarios que se encuentren inhabilitados por no respetar los términos y prácticas establecidos en estos Términos y Condiciones Generales y demás documentos relacionados no podrán utilizar nuestros servicios.<br/><br/> Tampoco está permitido que una misma persona realice más de un registro en nuestro sitio web. Si se detectan registros duplicados, ambos quedarán definitivamente inhabilitados.<br/><br/> Las Personas Jurídicas podrán registrarse a través de sus representantes legales, y en el momento del registro, informar sus datos, además de la información solicitada en el formulario sobre la empresa",
+    "failure": "<b>10) Fallas del sistema</b><br/><br/>No nos hacemos responsables de cualquier daño, perjuicio o pérdida que sufra el usuario debido a fallas en internet, en el sistema o en el servidor utilizado por el usuario, como consecuencia de la conducta de un tercero, caso fortuito o fuerza mayor. MR TRAVEL & TOURS tampoco será responsable de cualquier virus que pueda afectar al equipo del usuario como consecuencia del acceso, uso o navegación por Internet o como consecuencia de la transmisión de datos.",
+    "generalProvisions": "<b>Disposiciones generales:</b><br/><br/>Sin perjuicio de las disposiciones contenidas en este Término, las demás reglas relativas a los boletos aéreos convencionales se aplicarán al boleto adquirido por el usuario con el uso de millas /puntos de programas de lealtad, incluyendo, pero no limitado a: disposiciones de la Ley no. 8.078/90 (Código de Defensa del Consumidor), normas de la Agencia Nacional de Aviación Civil – ANAC y reglamento interno de cada línea aérea.<br/><br/>Este Término, una vez firmado por las partes, constituye el acuerdo completo, definitivo, irrevocable e irreversible acuerdo entre ellos, en sustitución de todos los entendimientos, compromisos, mensaje a través de correo electrónico o fax, cartas o correspondencia anterior y en relación con el objeto de este contrato.",
+    "indemnity": "<b>12) Indemnización</b><br/><br/>Corresponde al usuario indemnizar a MR TRAVEL & TOURS, sus subsidiarias, sociedades controladas o controladoras, directores, administradores, colaboradores, representantes y empleados por cualquier reclamación promovida por otros usuarios o terceros derivada de sus actividades en el sitio web o por su incumplimiento de los Términos y Condiciones Generales de Uso y demás políticas de MR TRAVEL & TOURS, o por la violación de cualquier ley o derechos de terceros, incluidos los honorarios de abogados.",
+    "intellectualProperty": "<b>11) Propiedad intelectual y enlaces</b><br/><br/>El uso comercial de la expresión 'MR TRAVEL & TOURS' como marca, nombre comercial o nombre de dominio, así como los contenidos de las pantallas relacionadas con los servicios de MR TRAVEL & TOURS, así como los programas, bases de datos, redes, archivos que le permiten acceder y utilizar su cuenta, son propiedad de MR TRAVEL & TOURS y están protegidos por normas internacionales leyes y tratados derechos de autor, marcas, patentes, modelos y diseños industriales. Se prohíbe el mal uso y la reproducción total o parcial de dichos contenidos, salvo autorización expresa de MR TRAVEL & TOURS.<br/><br/>El sitio web de MR TRAVEL & TOURS puede contener enlaces a otros sitios web (incluyendo líneas aéreas y agencias de viajes), lo que no significa que estos sitios web sean propiedad u operados por MR TRAVEL & TOURS. MR TRAVEL & TOURS no será responsable por los contenidos, prácticas y servicios ofrecidos en el mismo. La presencia de enlaces a otros sitios web no implica una relación de sociedad, supervisión, complicidad o solidaridad de MR TRAVEL & TOURS con estos sitios web y sus contenidos.",
+    "legislation": "<b>13) Legislación aplicable y lugar elegido</b><br/><br/>Todo lo dispuesto en estas Condiciones Generales de Uso del Sitio se rige por las leyes vigentes en la República Federativa de Brasil. Para todos los asuntos relativos a la interpretación, cumplimiento o cualquier otra cuestión relacionada con estos Términos y Condiciones Generales de Uso del Sitio, las partes acuerdan someterse a la jurisdicción del Distrito de Belo Horizonte - Minas Gerais, con excepción de las reclamaciones presentadas. por los usuarios que se ajusten a la figura jurídica de consumidores, quienes podrán presentar dichas reclamaciones ante el foro de su domicilio.",
+    "modification": "<b>04) Modificaciones a los Términos y Condiciones Generales de Uso del Sitio</b><br/><br/>Estos términos pueden cambiar en cualquier momento, con miras a su perfeccionamiento y mejora de los servicios prestados por MR TRAVEL & TOURS. Los nuevos Términos y Condiciones entrarán en vigencia 15 (quince) días después de su publicación en el sitio web. Dentro de los 7 (siete) días siguientes a la publicación de las modificaciones, el usuario deberá comunicar por correo electrónico si no está de acuerdo con los términos modificados. En este caso, la relación contractual dejará de existir, siempre que no existan cuentas o deudas pendientes. Si no hay manifestación dentro del plazo estipulado, se define que el usuario ha aceptado los nuevos Términos y Condiciones y el contrato permanecerá vigente entre las partes.<br/><br/>Los nuevos cambios no tendrán efecto en relación a las transacciones y anuncios ya iniciados antes de que se publiquen. En estos casos, los Términos y Condiciones Generales de Uso del Sitio serán válidos con la redacción anterior.",
+    "object": "<b>01) Objeto</b> <br/><br/> El servicio objeto de los presentes Términos y Condiciones Generales consiste en: <br/><br/> <b> I </b> - Emisión de billetes por millas aéreas /puntos de programas de fidelización de terceros, a adquirir por el usuario a través del sitio web https://mrtravelandtours.com/ MR TRAVEL & TOURS por lo tanto permite a los usuarios comprar boletos aéreos emitidos a través de millas, como proveedor de estas millas.",
+    "obligations": "<b>06) Obligaciones</b><br/><br/><b>6.1 - Obligaciones del Usuario</b><br/><br/>El usuario declara ser consciente de que la aerolínea (s) comprados con MR TRAVEL & TOURS fueron emitidos con el uso de millas/puntos de aerolíneas de programas de lealtad de terceros, y que, como resultado de esta forma de emisión, el disfrute del boleto no tendrá el poder para acumular puntos en los programas de fidelización titularidad del usuario.<br/><br/>El usuario se obliga a realizar el pago total del pedido por medios lícitos, para que la transacción se lleve a cabo. El incumplimiento de las obligaciones mencionadas en este párrafo implica la cancelación del pedido o la suspensión o bloqueo del registro del usuario.<br/><br/>Los boletos electrónicos comprados están sujetos a reglas específicas de cancelación y reembolso determinadas por MR TRAVEL & TOURS.<br/><br/>Las ofertas objeto de este acuerdo sólo serán válidas si se realizan a través del sistema de MR TRAVEL & TOURS.",
+    "obligationsMR": "<b>6.2 - Obligaciones de MR TRAVEL & TOURS</b><br/><br/>MR TRAVEL & TOURS se compromete a prestar siempre sus servicios de manera transparente, proporcionando equipos de profesionales competentes y experimentados. y cumplir con los términos y condiciones establecidos en este instrumento.<br/><br/>La no ejecución del servicio pactado como consecuencia de un hecho no imputable a MR TRAVEL & TOURS y cuyos efectos no serían posible evitar o prevenir (caso fortuito o fuerza mayor), MR TRAVEL & TOURS no será responsable por los daños causados   al usuario.<br/><br/>Una vez solicitado el boleto aéreo, MR TRAVEL & TOURS , Inc no garantiza la reserva del boleto, la disponibilidad, el precio en millas ofrecido y la emisión del boleto. Garantizamos el vuelo del usuario sólo después de la confirmación de la solicitud de emisión del billete y consecuente finalización total de la orden de compra.<br/><br/>En el caso específico de pago realizado con boleta de pago a plazos, incluso con el billete ya emitido y posesión del cliente, el vuelo del usuario sólo quedará garantizado después del pago de todas las cuotas restantes.",
+    "privacy": "<b>05) Privacidad de la información</b><br/><br/>La información facilitada por el usuario se almacena en soportes de alta seguridad. Garantizamos tomar todas las medidas posibles para mantener el secreto absoluto de los datos personales de nuestros clientes, sin embargo, no seremos responsables por los daños que resulten de la violación de estas medidas por parte de terceros que puedan utilizar las redes públicas o Internet para subvertir los sistemas de seguridad. y acceder a la información de los usuarios.<br/><br/>El usuario autoriza expresamente que su información y datos personales sean compartidos por MR TRAVEL & TOURS con las demás empresas que forman parte del grupo económico.<br/> <br/>En caso de dudas sobre la protección de datos personales o para obtener más información sobre los datos personales y sobre los supuestos en los que pueda vulnerarse la confidencialidad a que se refiere esta cláusula, consulte la página de Política de Privacidad.",
+    "registration": "<b>03) Registro </b><br/><br/> El registro del usuario potencial se confirmará solo después de completar todos los campos obligatorios presentados en el formulario.<br/><br/> La información inscritos en el registro deben ser exactos, precisos y auténticos, siendo el usuario responsable y capaz de responder civil y penalmente de la veracidad de estos datos. El usuario también se compromete a mantener esta información actualizada siempre que sea necesario.<br/><br/> Nos reservamos el derecho de utilizar todos los medios posibles para identificar a nuestros usuarios, así como para solicitar datos y documentos adicionales que consideremos relevantes para verificación de los datos informados. Si se identifican datos no veraces o si el usuario se niega a proporcionar los documentos requeridos, MR TRAVEL & TOURS podrá bloquear el registro para el uso de nuestros servicios, suspender temporalmente o cancelar definitivamente el registro, sin perjuicio de otras medidas que estime necesarias. <br/><br/> En caso de aplicación de cualquiera de las sanciones mencionadas anteriormente, los servicios ofrecidos al usuario serán inmediatamente cancelados, no teniendo derecho a ningún tipo de indemnización o reembolso.<br/><br/> El usuario acceder a su cuenta a través de correo electrónico (login) y contraseña previamente registrada por él y se compromete a no comunicar estos datos a terceros, siendo enteramente responsable del uso que de ellos se haga.<br/><br/> El usuario se compromete a notificar inmediatamente a MR TRAVEL & TOURS, a través de nuestros canales de atención, cualquier uso no autorizado de su cuenta. El usuario será el único responsable de las operaciones que se realicen en su cuenta, ya que el acceso a la misma sólo será posible mediante la introducción de la contraseña, cuyo conocimiento es exclusivo del usuario.<br/><br/> En ningún caso se realizará la cesión , venta, alquiler u otra forma de transferencia de cuenta a terceros.<br/><br/> El inicio de sesión que el usuario determina para ser utilizado en MR TRAVEL & TOURS no puede tener ninguna semejanza con el nombre MR TRAVEL TECNOLOGIA Y SERVICIOS LTDA. Nos reservamos el derecho de rechazar cualquier solicitud de registro y cancelar un registro previamente aceptado, siempre que esté en desacuerdo con las políticas y reglas de este término.",
+    "responsibilities": "<b>09) Responsabilidades</b><br/><br/>MR TRAVEL & TOURS es responsable de los daños causados   a sus usuarios, como consecuencia de defectos o errores relacionados exclusivamente con la prestación de su servicio de alojamiento. y colocación de ofertas en el sitio web https://mrtravelandtours.com/ siempre que de ella se hayan producido dichos defectos o errores. No obstante, se aclara que MR TRAVEL & TOURS no se hace responsable por defectos o errores técnicos y/u operativos derivados del sistema del usuario o de terceros.",
+    "sanctions": "<b>08) Sanciones</b><br/><br/>MR TRAVEL & TOURS podrá, sin perjuicio de otras medidas, advertir, suspender o cancelar, temporal o definitivamente, el registro de un usuario o iniciar acciones legales y/o suspender la prestación de sus servicios si: a) el usuario no cumple con alguna disposición de estos Términos y Condiciones Generales y demás políticas de MR TRAVEL & TOURS; b) si incumple sus deberes de usuario; c) si practica actos dolosos o dolosos; d) si la identidad del usuario no puede ser verificada o cualquier información proporcionada por el usuario es incorrecta.",
+    "subtitleMoblix": "Sobre",
+    "textMoblix": "OTA-MOBLIX es una plataforma licenciada para agencias de viajes. La empresa MOBLIX no es responsable por la venta de productos y prestación de servicios por parte de agencias acreditadas, y no es responsable por cualquier daño causado por la no prestación de servicios/entrega de productos. En caso de dudas sobre el uso de este portal, el usuario deberá contactar directamente con Base.Entities.Parceiro. El Usuario que al permanecer en el sistema demuestra que está de acuerdo con los cambios realizados.",
+    "title": "Términos de Uso",
+    "violation": "<b>07) Violación en el sistema o en la base de datos</b><br/><br/>Está prohibido el uso de dispositivos, software u otros recursos que puedan interferir con las actividades y operaciones de MR TRAVEL & TOURS, así como en ofertas, descripciones, cuentas o sus bases de datos. Cualquier intrusión, tentativa de violación o actividad que viole o contravenga las leyes de propiedad intelectual y/o las prohibiciones estipuladas en estos Términos y Condiciones Generales, hará responsable al responsable de las acciones legales que correspondan, así como de las sanciones aquí previstas, siendo también se hace responsable de la indemnización de los daños causados.",
+    "whatIsIt": "Los presentes Términos y Condiciones Generales se aplican al uso de los servicios ofrecidos por MR TRAVEL & TOURS, empresa debidamente registrada en el CNPJ/MF bajo el N° 30876256000128, a través del sitio web https://mrtravelandtours.com/ persona jurídica, en adelante denominado como Usuario, que pretenda utilizar los servicios de MR TRAVEL & TOURS deberá aceptar los Términos y Condiciones Generales y las demás políticas y principios que lo rigen.<b> LA ACEPTACIÓN DE ESTOS TÉRMINOS Y CONDICIONES GENERALES ES ABSOLUTAMENTE ESENCIAL PARA EL USO DE LOS SITIOS Y SERVICIOS PROPORCIONADOS POR MR TRAVEL & TOURS.</b>"
   },
   "voosIdaVolta": {
     "exibirMaisResultados": "Mostrar más resultados",
     "pesquisar": "No podemos encontrar ningún resultado, por favor busca de nuevo."
   },
-  "addressUser": {
-    "noSeiMeuCep": "No conozco mi CEP",
-    "cep": "CEP *",
-    "bairro": "Vecindario *",
-    "endereo": "Dirección *",
-    "estado": "Estado *",
-    "nmero": "Número",
-    "cidade": "Ciudad *",
-    "complemento": "Complemento"
-  },
-  "alamo": {
-    "tarifasDisponveisNosEstadosUnidosCanadAmricaLatina": "Tarifas disponibles en Estados Unidos, Canadá, Latinoamérica, el Caribe y Europa;",
-    "tarifasDisponveisNosEstadosUnidosEAmricaLatina": "Tarifas disponibles en Estados Unidos y Latinoamérica;",
-    "totensNosPrincipaisAeroportos": "Totens nos principais aeroportos: o cliente pode seguir diretamente até o totem, abrir o contrato em português e seguir para o veículo;",
-    "possuiOServioDePedgio": "Possui o serviço de pedágio, pode ser incluso através do autoatendimento no totem ou diretamente no balcão;",
-    "todasAsTarifas": "Para EUA, todas as tarifas contemplam 1 motorista adicional grátis, para Europa, América Latina e demais localidades, solicite a inclusão outros condutores adicionais no balcão da locadora, no momento da retirada do veículo;",
-    "todosOsCondutores": "Todos os condutores (inclusive os adicionais) devem ser habilitados e maiores de 25 anos. Se menor de 25 anos haverá cobrança de taxa (USD 30/dia).",
-    "comoMembroDaCloro": "Como membro da Clorox® Safer Today Alliance™, a Álamo recebe apoio contínuo e orientação científica sobre suas medidas de segurança aprimoradas de especialistas da Cleveland Clinic e da CDC Foundation. Os clientes encontrarão um lenço desinfetante Clorox® de uma contagem em cada veículo alugado em todos os locais nos EUA e Canadá. Os lenços desinfetantes Clorox são aprovados pela EPA para matar o SARS-CoV-2, o vírus que causa o COVID-19, quando usado conforme as instruções. Cada lenço inclui instruções de uso e é acompanhado por instruções para usá-lo nas superfícies duras e não porosas de alto toque do veículo."
-  },
-  "querySubHeading": {
-    "bagagem": "Bagagem",
-    "compania": "Compania",
-    "areopuertos": "Areopuertos",
-    "llegada": "Llegada",
-    "partida": "Partida",
-    "paradas": "Paradas",
-    "precio": "Precio",
-    "duracion": "Duracion",
-    "duracionHrs": "Duracion {duration}hrs",
-    "clase": "Clase"
-  },
-  "searching": "Buscando...",
-  "avis": {
-    "tarifasDisponveis": "Tarifas disponíveis nos Estados Unidos, América Latina e Europa;",
-    "nosBalces": "Nos balcões o contrato é aberto através de um tablet, e, na Flórida, possuem contratos em português;",
-    "possuiOServio": "Possui o serviço de pedágio e o mesmo deve ser habilitado no balcão;",
-    "todasAsTarifas": "Para EUA, todas as tarifas contemplam 1 motorista adicional grátis. Para Europa, América Latina e demais localidades, solicite a inclusão outros condutores adicionais no balcão da locadora, no momento da retirada do veículo;",
-    "osCondutores": "Todos os condutores (inclusive os adicionais) devem ser habilitados e maiores de 25 anos. Se menor de 25 anos haverá cobrança de taxa (USD 30/dia)."
-  },
-  "contactPage": {
-    "entreEmContato": "Entre em contato",
-    "faleConosco": "Fale conosco",
-    "nome": "NOME",
-    "email": "EMAIL",
-    "assunto": "ASSUNTO",
-    "enviar": "Enviar"
-  },
-  "detailsPage": {
-    "vueloDeIda": "One way flight",
-    "vueloDevolta": "Vuelo de Volta",
-    "duraaoTotal": "DURAÇAO TOTAL",
-    "qtdMilhas": "QTD. MILHAS",
-    "clase": "CLASE",
-    "aerolinea": "AEROLINEA",
-    "bagagemDeMo": "{BagagemQuantidade} BAGAGEM DE MÃO",
-    "noBagagem": "NO BAGAGEM",
-    "OfertaDesde": "1 Oferta Desde",
-    "tipoDeTarifa": "Tipo de Tarifa",
-    "total": "Total",
-    "fechar": "Fechar"
-  },
-  "bestLodging": {
-    "melhoresAlojamentos": "Melhores alojamentos",
-    "montenegrinas": "Montenegrinas",
-    "islasPartas": "Islas Partas"
-  },
-  "filterCompanies": {
-    "aPartirDe": "a partir de"
-  },
-  "carCategories": {
-    "companhiasInternacionais": "COMPANHIAS INTERNACIONAIS"
-  },
-  "passport": {
-    "noPasaporte": "Número de pasaporte *",
-    "dataDeValidade": "Fecha de validez *",
-    "dateOfIssue": "Fecha de emisión *",
-    "countryOfIssue": "País de residencia *",
-    "countryOfResidence": "País de residencia *"
+  "whoWeAre": {
+    "subtitle": "Más que un sitio de turismo, creamos soluciones. Cada año, miles de personas desperdician sus millas, las cuales terminan vencidas por no haber sido utilizadas. Permitimos que su viaje se haga realidad, emitiendo boletos a través de millas. Si buscas los mejores precios en boletos aéreos, paquetes y más, tenemos opciones promocionales imperdibles. Esté atento a nuestras oportunidades. Entonces, ya sabes: pensaste en viajar, por placer o por trabajo, pensaste en MR TRAVEL & TOURS. Disfruta tu viaje, comienza aquí &#128512;",
+    "title": "¡MR TRAVEL & TOURS es una empresa totalmente dedicada a hacer que su experiencia de viaje sea lo más simple y divertida posible!"
   }
 }

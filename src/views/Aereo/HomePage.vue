@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { ref, markRaw, onMounted, inject } from 'vue';
+import { ref, markRaw, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
 import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
@@ -32,14 +32,12 @@ const storeSearch = useSearchOptionsVooStore();
 const userStore = useUserStore();
 const informationGeral = useGeneralInformation();
 const purchaseStore = usePurchaseStore();
-const $cookies = inject('$cookies');
 
 onMounted(() => {
   storeSearch.$reset();
   userStore.resetState();
   informationGeral.$reset();
   purchaseStore.$reset();
-  if ($cookies.isKey('dataSearch')) setData();
 });
 
 let selectedComponent = ref(null);
@@ -51,45 +49,6 @@ const selectComponent = ref({
 
 const changeTab = (e) => {
   selectedComponent.value = markRaw(selectComponent.value[e]);
-};
-
-const setData = () => {
-  const search = $cookies.get('dataSearch');
-  storeSearch.dateOfDeparture = search.dateOfDeparture || '';
-  storeSearch.dateOfReturn = search.dateOfReturn || '';
-  storeSearch.origin = search.origin || { label: '', iata: '' };
-  storeSearch.destiny = search.destiny || { label: '', iata: '' };
-  storeSearch.cabin = search.cabin;
-  storeSearch.adults = search.adults;
-  storeSearch.teenagers = search.teenagers;
-  storeSearch.babies = search.babies;
-  storeSearch.onlyBaggage = search.onlyBaggage;
-  storeSearch.quantidadeDeVoos = search.quantidadeDeVoos;
-  storeSearch.apenasVoosDiretos = search.apenasVoosDiretos;
-  storeSearch.multiplosTrechos = search.multiplosTrechos || [
-    {
-      departureDate: '',
-      destino: {
-        string: '',
-        iata: '',
-      },
-      origem: {
-        string: '',
-        iata: '',
-      },
-    },
-    {
-      departureDate: '',
-      destino: {
-        string: '',
-        iata: '',
-      },
-      origem: {
-        string: '',
-        iata: '',
-      },
-    },
-  ];
 };
 </script>
 

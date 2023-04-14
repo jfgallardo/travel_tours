@@ -1,6 +1,6 @@
 <template>
-  <ButtonFilter :loading="woobaStore.loading" />
-  <div v-if="woobaStore.loading">
+  <ButtonFilter :loading="vooStore.loading" />
+  <div v-if="vooStore.loading">
     <SkeletonSearch />
     <SkeletonSearch />
   </div>
@@ -52,9 +52,11 @@ import IdaVoltaFlex from '@/components/Aereo/IdaVoltaFlexRender.vue';
 import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
 import { useFiltersStore } from '@/stores/filters';
 import LazyList from '@/components/Partials/LazyList.vue';
+import { useVooStore } from '@/stores/voo';
 
 const woobaStore = useWoobaStore();
 const filterStore = useFiltersStore();
+const vooStore = useVooStore();
 
 const showData = computed(() => {
   return filterStore.flyFilters.length > 0;

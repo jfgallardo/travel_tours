@@ -55,4 +55,5 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
     },
   },
   actions: {},
+  persist: true,
 });

@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <template v-if="$cookies.get('dataSearch').dateOfReturn">
+        <template v-if="searchStore.dateOfReturn">
           <div class="border-y py-2">
             <span class="px-4 font-medium">Vuelos de Vuelta</span>
           </div>
@@ -79,4 +79,8 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+
+const searchStore = useSearchOptionsVooStore();
+</script>
