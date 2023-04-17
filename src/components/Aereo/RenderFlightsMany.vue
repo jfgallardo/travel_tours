@@ -1,21 +1,36 @@
 <template>
-  <div class="w-full">
+  <div class="w-full border-l">
     <div class="flex items-center">
-      <div class="w-full border-l py-5">
+      <div class="w-full py-5">
         <div class="flex flex-row items-center justify-between px-10">
-          <div class="flex flex-col items-center space-y-3 w-32">
-            <img :src="initVoo.Icone" alt="Icone" />
-            <p class="text-sm text-center">{{ FlightCodeString }}</p>
+          <div class="flex flex-col items-center space-y-3">
+            <img
+              v-if="initial_flight.Icone"
+              :src="initial_flight.Icone"
+              alt="Icone"
+            />
+            <PhotoIcon v-else class="h-10 w-10" />
+            <div class="space-x-1 space-y-2 text-sm">
+              <p
+                v-for="(item, index) in flight_numbers"
+                :key="index"
+                class="text-center rounded-full bg-blue-100 px-1.5 py-0.5 text-blue-700 grow"
+              >
+                {{ item }}
+              </p>
+            </div>
           </div>
 
           <div>
             <div class="flex flex-col space-y-2">
-              <p class="text-gray-700 font-medium">{{ filterWeekday }}</p>
+              <p class="text-gray-700 font-medium">
+                {{ filter_weekday_initial }}
+              </p>
               <div class="flex items-center relative">
                 <p class="text-2xl">
-                  <span class="font-semibold">{{ filterHours }}</span>
+                  <span class="font-semibold">{{ filter_hours_initial }}</span>
                   <span class="text-gray-400 font-medium ml-1">{{
-                    filterDayPeriod
+                    filter_day_period_initial
                   }}</span>
                 </p>
                 <div
@@ -24,7 +39,7 @@
               </div>
 
               <p class="text-gray-900 font-medium cursor-default">
-                <span>{{ initVoo.Origem.CodigoIata }}</span>
+                <span>{{ initial_flight.Origem }}</span>
               </p>
             </div>
           </div>
@@ -33,22 +48,21 @@
             <div class="flex flex-col items-center space-y-2">
               <p class="text-gray-700">
                 <span class="text-gray-400">Duration: </span>
-                <span class="font-medium text-sm">{{ Duracao }}</span>
+                <span class="font-medium text-sm">{{ duration }}</span>
               </p>
               <div>
-                <img
-                  v-if="initVoo.Segmento === 'I'"
+                <!--                <img
+                  v-if="initial_flight.Segmento === 'I'"
                   class="h-8 w-8"
                   src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
-                />
+                />-->
                 <img
-                  v-else
                   class="h-8 w-8"
                   src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
                 />
               </div>
               <p class="text-gray-400 cursor-default">
-                {{ Parada }}
+                {{ stops }}
               </p>
             </div>
           </div>
@@ -56,19 +70,19 @@
           <div>
             <div class="flex flex-col space-y-2">
               <p class="text-gray-900 font-medium">
-                {{ filterWeekdayChegada }}
+                {{ filter_weekday_final }}
               </p>
               <div class="flex items-center">
                 <div class="mr-2 -ml-4 rounded-full bg-blue-700 h-2 w-2"></div>
                 <p class="text-2xl">
-                  <span class="font-semibold">{{ filterHoursChegada }}</span>
+                  <span class="font-semibold">{{ filter_hours_final }}</span>
                   <span class="text-gray-400 font-medium ml-1">{{
-                    filterDayPeriodChegada
+                    filter_day_period_final
                   }}</span>
                 </p>
               </div>
               <p class="text-gray-700 font-medium cursor-default">
-                {{ endVoo.Destino.CodigoIata }}
+                {{ final_flight.Destino }}
               </p>
             </div>
           </div>
@@ -82,10 +96,9 @@
             </button>
           </div>
         </div>
-
         <Modal v-if="detalhes" @close="detalhes = false">
           <template #body>
-            <DetailsPage @closeDetails="detalhes = false" />
+            <DetailsPage @close-details="detalhes = false" />
           </template>
           <template #header>
             <span>Detalhes</span>
@@ -101,6 +114,7 @@ import { computed, provide, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Modal from '@/components/Partials/TheModal.vue';
 import DetailsPage from '@/views/Aereo/DetailsPage.vue';
+import { PhotoIcon } from '@heroicons/vue/24/solid';
 import moment from 'moment';
 
 const { locale } = useI18n();
@@ -111,7 +125,7 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  Destino: {
+  Id: {
     type: String,
     default: '',
   },
@@ -119,110 +133,100 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  CiaMandatoria: {
-    type: Object,
-    default: () => {},
-  },
-  OfertasDesde: {
-    type: Array,
-    default: () => [],
-  },
-  ValorTotalComTaxa: {
-    type: [Number, String],
-  },
-  Preco: {
-    type: Object,
-  },
-  Id: {
-    type: [Number, String],
-  },
 });
 
-provide('flights', props.Voos);
-//provide("valorTotalComTaxa", props.ValorTotalComTaxa);
-provide('ofertasDesde', props.OfertasDesde);
-provide('ciaMandatoria', props.CiaMandatoria);
-provide('preco', props.Preco);
-provide('id', props.Id);
-
-const initVoo = computed(() => {
+const initial_flight = computed(() => {
   return props.Voos[0];
 });
 
-const endVoo = computed(() => {
-  const longitud = props.Voos.length;
-  return props.Voos[longitud - 1];
+const final_flight = computed(() => {
+  const l = props.Voos.length;
+  return l > 0 ? props.Voos[l - 1] : [];
 });
 
-const filterHours = computed(() => {
-  const dateLocal = new Date(moment(initVoo.value.DataSaida));
+const filter_weekday_initial = computed(() => {
+  const dateLocal = new Date(initial_flight.value.Saida);
+  const options = { weekday: 'long' };
+  return dateLocal.toLocaleDateString(locale.value, options);
+});
+
+const filter_weekday_final = computed(() => {
+  const dateLocal = new Date(final_flight.value.Chegada);
+  const options = { weekday: 'long' };
+
+  return dateLocal.toLocaleDateString(locale.value, options);
+});
+
+const filter_day_period_initial = computed(() => {
+  const dateLocal = new Date(initial_flight.value.Saida);
+  const hours = dateLocal.getHours();
+  return hours >= 12 ? 'PM' : 'AM';
+});
+
+const filter_day_period_final = computed(() => {
+  const dateLocal = new Date(final_flight.value.Chegada);
+  const hours = dateLocal.getHours();
+  return hours >= 12 ? 'PM' : 'AM';
+});
+
+const filter_hours_initial = computed(() => {
+  const dateLocal = new Date(initial_flight.value.Saida);
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   });
 });
 
-const filterWeekday = computed(() => {
-  const dateLocal = new Date(moment(initVoo.value.DataSaida));
-  const options = { weekday: 'long' };
-
-  return dateLocal.toLocaleDateString(locale.value, options);
-});
-
-const filterDayPeriod = computed(() => {
-  const dateLocal = new Date(moment(initVoo.value.DataSaida));
-  const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
-});
-
-const filterHoursChegada = computed(() => {
-  const dateLocal = new Date(moment(endVoo.value.DataChegada));
+const filter_hours_final = computed(() => {
+  const dateLocal = new Date(final_flight.value.Chegada);
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   });
 });
 
-const filterWeekdayChegada = computed(() => {
-  const dateLocal = new Date(moment(endVoo.value.DataChegada));
-  const options = { weekday: 'long' };
-
-  return dateLocal.toLocaleDateString(locale.value, options);
-});
-
-const filterDayPeriodChegada = computed(() => {
-  const dateLocal = new Date(moment(endVoo.value.DataChegada));
-  const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
-});
-
-const FlightCodeString = computed(() => {
-  return initVoo.value.CiaMandatoria.Descricao;
-});
-
-const Duracao = computed(() => {
+const duration = computed(() => {
   let minutes_flag = 0;
-  let hours_flag = 0;
   props.Voos.forEach((element) => {
-    hours_flag += parseInt(element.Duracao.split(':')[0]);
-    minutes_flag += parseInt(element.Duracao.split(':')[1]);
+    minutes_flag += parseInt(element.Duracao);
   });
 
   let hours = Math.floor(minutes_flag / 60);
   let minutes = minutes_flag % 60;
 
-  return `${hours_flag + hours}h : ${minutes}min`;
+  return `${hours}h : ${minutes}min`;
 });
 
-const Parada = computed(() => {
+const stops = computed(() => {
   let paradas = [];
   props.Voos.forEach((element) => {
-    if (element.Origem.CodigoIata !== props.Origem) {
-      paradas.push(element.Origem.CodigoIata);
+    if (element.Origem !== props.Origem) {
+      paradas.push(element.Origem);
     }
   });
   return paradas.length > 0 ? `Parada: ${paradas.join(', ')}` : 'Direto';
 });
-</script>
 
-<style></style>
+const flight_numbers = computed(() => {
+  let numbers = [];
+  props.Voos.forEach((element) => {
+    numbers.push(element.Numero);
+  });
+  return numbers;
+});
+
+/*
+* {
+    "Numero": "G3-1409",
+    "Saida": "2023-04-18T06:15:00",
+    "Chegada": "2023-04-18T08:00:00",
+    "Origem": "BSB",
+    "Destino": "GRU",
+    "Duracao": 105,
+    "Tempo": "01:45",
+    "TempoEspera": null,
+    "Classe": 0,
+    "ClasseStr": "Economica"
+  }
+* */
+</script>

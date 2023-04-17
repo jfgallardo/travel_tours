@@ -22,34 +22,8 @@
           class="flex items-center justify-center cursor-pointer w-10"
           @click="changeDestinations"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-gray-700 -mr-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-gray-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
+          <ArrowDownIcon class="h-8 w-5 text-gray-700 -mr-1" />
+          <ArrowUpIcon class="h-8 w-5 text-gray-700 -mr-1" />
         </div>
       </div>
 
@@ -73,8 +47,7 @@
       <div class="flex pt-4 px-4">
         <DateInput
           v-model="searchOptionsVooStore.dateOfDeparture"
-          :label="t('roundTripForm.labelIda')"
-          :min-date-show="new Date()"
+          label="roundTripForm.labelIda"
           class="w-full"
         />
       </div>
@@ -176,6 +149,7 @@ import { inject } from 'vue';
 import { useAlertStore } from '@/stores/alert';
 import { useWoobaStore } from '@/stores/wooba';
 import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/24/solid';
 
 const moblixStore = useMoblixStore();
 const searchOptionsVooStore = useSearchOptionsVooStore();

@@ -18,6 +18,8 @@ const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
 const HotelsResults = () => import('@/views/Hotel/HotelsResults.vue');
 
+const VooHome = () => import('@/views/Voo/VooHome.vue');
+
 const CruiseHomePage = () => import('@/views/Cruceros/HomePage.vue');
 const CruiseLandingPage = () => import('@/views/Cruceros/LandingPage.vue');
 
@@ -99,6 +101,11 @@ const router = createRouter({
           component: AereoHomePage,
           children: [
             { path: '', name: 'AereoLandingPage', component: AereoLandingPage },
+            {
+              path: 'flight/availability',
+              name: 'VooHome',
+              component: VooHome,
+            },
             {
               path: 'check/round-trip',
               name: 'VoosIdaVolta',

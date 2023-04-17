@@ -41,15 +41,13 @@ export const useSearchOptionsVooStore = defineStore('searchOptionsVoo', {
   getters: {
     getDateIdaFormatter: (state) => {
       if (state?.dateOfDeparture) {
-        const splitDate = state.dateOfDeparture.split('/');
-        return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`;
+        return state.dateOfDeparture.split('T')[0];
       }
       return '';
     },
     getDateVoltaFormatter: (state) => {
       if (state?.dateOfReturn) {
-        const splitDate = state.dateOfReturn.split('/');
-        return `${splitDate[1]}/${splitDate[0]}/${splitDate[2]}`;
+        return state.dateOfReturn.split('T')[0];
       }
       return '';
     },

@@ -2,8 +2,19 @@
   <div ref="scrollContainer">
     <TransitionGroup name="list" tag="ul">
       <div v-for="(objeto, index) in objetosVisibles" :key="index">
-        <!--        <IdaVoltaFlex :viagem="objeto" />-->
-        <component :is="tabs[currentTab]" :viagem="objeto"></component>
+        <div class="flex items-center border mt-5">
+          <div v-if="currentTab === 'IdaVoltaNoFlex'" class="pl-2">
+            <input
+              ref="inputCheck"
+              type="checkbox"
+              class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0 m-2"
+              @click="selectFligth($event, objeto)"
+            />
+          </div>
+          <div class="w-full">
+            <component :is="tabs[currentTab]" :viagem="objeto"></component>
+          </div>
+        </div>
       </div>
     </TransitionGroup>
 
@@ -29,6 +40,7 @@
 <script setup>
 import IdaVoltaFlex from '@/components/Aereo/IdaVoltaFlexRender.vue';
 import VoosMultipleRender from '@/components/Aereo/VoosMultipleRender.vue';
+import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
 import { onMounted, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -51,7 +63,20 @@ const scrollContainer = ref(null);
 const tabs = {
   IdaVoltaFlex,
   VoosMultipleRender,
+  IdaVoltaNoFlex,
 };
+const inputCheck = ref([]);
+const selectVoo = ref();
+
+watch(
+  () => inputCheck.value,
+  (value) => {
+    if (value?.length > 0) {
+      inputCheck.value[0].checked = true;
+    }
+  },
+  { immediate: true, deep: true }
+);
 
 onMounted(() => {
   actualizarObjetosVisibles();
@@ -79,6 +104,16 @@ const actualizarObjetosVisibles = () => {
     props.objetos.length
   );
   objetosVisibles.value = props.objetos.slice(0, cantidadAgregada);
+};
+const selectFligth = (ev, viagem) => {
+  clearCheck(ev.target);
+  selectVoo.value = viagem;
+};
+
+const clearCheck = (ev) => {
+  inputCheck.value.forEach((element) => {
+    element.checked = element === ev;
+  });
 };
 </script>
 

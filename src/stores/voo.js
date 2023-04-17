@@ -22,8 +22,22 @@ export const useVooStore = defineStore({
     QntdCrianca: 0,
     TokenConsulta: '',
     Request: null,
+    Aeroportos: [],
   }),
-  getters: {},
+  getters: {
+    priceRange: (state) => {
+      const arrayPrice = [
+        ...(state.Ida || []).map((o) => o.Preco),
+        ...(state.Volta || []).map((o) => o.Preco),
+        ...(state.IdaVolta || []).map((o) => o.Preco),
+      ];
+
+      const minPrice = arrayPrice.length > 0 ? Math.min(...arrayPrice) : 0;
+      const maxPrice = arrayPrice.length > 0 ? Math.max(...arrayPrice) : 0;
+
+      return { minPrice, maxPrice };
+    },
+  },
   actions: {
     async checkFlightsRoundTrip(payload, filter) {
       const alertStore = useAlertStore();
@@ -48,6 +62,7 @@ export const useVooStore = defineStore({
           this.QntdCrianca = data.QntdCrianca;
           this.TokenConsulta = data.TokenConsulta;
           this.Request = data.Request;
+          this.Aeroportos = data.Aeroportos.map((o) => o.Iata);
         })
         .catch((e) => {
           const errorCode = e?.response?.data?.message || 'ServerError';

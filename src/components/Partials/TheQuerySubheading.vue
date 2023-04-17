@@ -51,7 +51,7 @@
         </template>
         <FilterAirport
           v-model="filters.airports"
-          :airports="woobaStore.airportsFilter"
+          :airports="vooStore.Aeroportos"
         />
       </SelectSimple>
 
@@ -182,8 +182,8 @@
           </div>
         </template>
         <FilterPrice
-          :min-price="woobaStore.priceGeral.minPrice"
-          :max-price="woobaStore.priceGeral.maxPrice"
+          :min-price="vooStore.priceRange.minPrice"
+          :max-price="vooStore.priceRange.maxPrice"
           @price="filters.priceRange = $event"
         />
       </SelectSimple>
@@ -278,7 +278,7 @@ watch(
 );
 
 watch(
-  () => woobaStore.airportsFilter,
+  () => vooStore.Aeroportos,
   (state) => {
     filters.airports = state;
   },

@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia';
-import { useWoobaStore } from '@/stores/wooba';
 import { arrayAinB } from '@/utils/filterItems';
-
-const woobaStore = useWoobaStore();
+import { useVooStore } from '@/stores/voo';
 
 export const useFiltersStore = defineStore('filters', {
   state: () => ({
@@ -18,10 +16,53 @@ export const useFiltersStore = defineStore('filters', {
   }),
   getters: {
     flyFilters: (state) => {
-      if (woobaStore.returnFlights && woobaStore.returnFlights.length > 0) {
-        return woobaStore.returnFlights;
+      const vooStore = useVooStore();
+
+      if (vooStore.Ida.length > 0 && vooStore.Volta.length > 0) {
+        let filterIda = vooStore.Ida;
+        let filterVolta = vooStore.Volta;
+
+        if (state.baggage.value === 1) {
+          filterIda = filterIda.filter((fly) => fly.Baggage);
+          filterVolta = filterVolta.filter((fly) => fly.Baggage);
+        } else if (state.baggage.value === 0) {
+          filterIda = filterIda.filter((fly) => !fly.Baggage);
+          filterVolta = filterVolta.filter((fly) => !fly.Baggage);
+        }
+
+        if (state.stops.value === 0) {
+          filterIda = vooStore.Ida.filter((fly) => fly.NumeroParadas === 0);
+          filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas === 0);
+        } else if (state.stops.value === 1) {
+          filterIda = vooStore.Ida.filter((fly) => fly.NumeroParadas === 1);
+          filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas === 1);
+        } else if (state.stops.value === 2) {
+          filterIda = vooStore.Ida.filter((fly) => fly.NumeroParadas >= 2);
+          filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas >= 2);
+        }
+
+        //FALTA COMPANIAS
+
+        filterIda = filterIda.filter((item) =>
+          arrayAinB(state.airports, item.AirportsIata)
+        );
+        filterVolta = filterVolta.filter((item) =>
+          arrayAinB(state.airports, item.AirportsIata)
+        );
+
+        filterIda = filterIda.filter(
+          (item) => +item.Preco >= +state.priceRange
+        );
+        filterVolta = filterVolta.filter(
+          (item) => +item.Preco >= +state.priceRange
+        );
+
+        return {
+          Ida: filterIda,
+          Volta: filterVolta,
+        };
       } else {
-        let flyFilters = woobaStore.outboundFlights;
+        /*let flyFilters = woobaStore.outboundFlights;
         if (woobaStore.outboundFlights.length > 0) {
           if (state.baggage.value === 1) {
             flyFilters = flyFilters.filter((fly) => fly.Baggage);
@@ -65,8 +106,9 @@ export const useFiltersStore = defineStore('filters', {
             );
           }
         }
-        return flyFilters;
+        return flyFilters;*/
       }
+      return {};
     },
   },
   actions: {},

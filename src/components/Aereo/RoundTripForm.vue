@@ -22,34 +22,8 @@
           class="flex items-center justify-center cursor-pointer w-10"
           @click="changeDestinations"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-gray-700 -mr-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 text-gray-700"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
+          <ArrowDownIcon class="h-8 w-5 text-gray-700 -mr-1" />
+          <ArrowUpIcon class="h-8 w-5 text-gray-700 -mr-1" />
         </div>
       </div>
 
@@ -70,17 +44,16 @@
         />
       </div>
 
-      <div class="flex pt-4 px-4">
+      <div class="pt-4 px-4 flex">
         <DateInput
           v-model="optionsVoo.dateOfDeparture"
-          :label="t('roundTripForm.labelIda')"
-          :min-date-show="new Date()"
+          label="roundTripForm.labelIda"
           class="w-full"
         />
         <DateInput
           v-model="optionsVoo.dateOfReturn"
-          :label="t('roundTripForm.labelVolta')"
-          :min-date-show="notBeforeDate"
+          label="roundTripForm.labelVolta"
+          :min-date-show="optionsVoo.dateOfDeparture"
           class="w-full"
         />
       </div>
@@ -171,13 +144,13 @@
   </div>
 </template>
 <script setup>
-import { computed } from 'vue';
 import AutoComplete from '@/components/FormUI/AutoComplete.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import Check from '@/components/FormUI/CheckInput.vue';
 import ManageItems from '@/components/FormUI/ManageItems.vue';
 import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/24/solid';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useI18n } from 'vue-i18n';
 import CabineComponent from '@/components/FormUI/CabineComponent.vue';
@@ -185,12 +158,26 @@ import { useAlertStore } from '@/stores/alert';
 import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
 import { useRouter } from 'vue-router';
 import { useVooStore } from '@/stores/voo';
+import { watch } from 'vue';
 
 const optionsVoo = useSearchOptionsVooStore();
 const alertStore = useAlertStore();
 const { t } = useI18n();
 const router = useRouter();
 const vooStore = useVooStore();
+
+watch(
+  () => optionsVoo.dateOfDeparture,
+  (value) => {
+    const a = new Date(value);
+    const b = new Date(optionsVoo.dateOfReturn);
+    if (optionsVoo.dateOfReturn) {
+      if (a.getTime() > b.getTime() || a.getTime() === b.getTime()) {
+        optionsVoo.dateOfReturn = '';
+      }
+    }
+  }
+);
 
 const addUp = (e) => {
   if (e === t('adults') && optionsVoo.adults < 8) {
@@ -205,7 +192,6 @@ const addUp = (e) => {
     optionsVoo.babies++;
   }
 };
-
 const takeOff = (e) => {
   if (e === t('adults') && optionsVoo.adults > 1) {
     optionsVoo.adults--;
@@ -216,7 +202,6 @@ const takeOff = (e) => {
     optionsVoo.babies--;
   }
 };
-
 const changeDestinations = () => {
   let temporaryString = optionsVoo.origin.label;
   let temporaryIata = optionsVoo.origin.iata;
@@ -227,15 +212,6 @@ const changeDestinations = () => {
   optionsVoo.destiny.label = temporaryString;
   optionsVoo.destiny.iata = temporaryIata;
 };
-
-const notBeforeDate = computed(() => {
-  if (optionsVoo.dateOfDeparture) {
-    let dateParts = optionsVoo.dateOfDeparture.split('/');
-    return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-  } else {
-    return new Date();
-  }
-});
 const consultar = () => {
   if (
     !optionsVoo.origin.iata ||
@@ -245,13 +221,13 @@ const consultar = () => {
   ) {
     alertStore.showMsg({
       message: 'Por favor, verifique, existen campos vacios o incorrectos',
-      backgrColor: 'bg-red-100',
-      textColor: 'text-red-700',
+      backgrColor: 'red',
+      textColor: 'red',
     });
     return;
   }
 
-  router.push({ name: 'VoosIdaVolta' });
+  router.push({ name: 'VooHome' });
 
   /* const body = {
     DataIda: `/Date(${new Date(

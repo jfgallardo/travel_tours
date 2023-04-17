@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="flex justify-center mb-10 -mt-4 lg:mt-0">
-        <qrcode-vue :size="110" :value="value"></qrcode-vue>
+        <qrcode-vue :size="90" :value="value"></qrcode-vue>
       </div>
       <div>
         <button
@@ -85,35 +85,35 @@ const value = ref('');
 const ValorTaxas = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.Preco.Taxa,
+    value: props.vooDetalhes.ValorTotalTaxas,
   });
 });
 const ValorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.Preco.Total,
+    value: props.vooDetalhes.Preco,
   });
 });
 const precoAdulto = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.Preco.PrecoAdulto.ValorTarifa,
+    value: props.vooDetalhes.ValorAdulto,
   });
 });
 const precoCrianca = computed(() => {
-  if (props.vooDetalhes.Preco.PrecoCrianca) {
+  if (props.vooDetalhes.ValorCrianca) {
     return useCurrencyFormatter({
       currency: 'BRL',
-      value: props.vooDetalhes.Preco.PrecoCrianca.ValorTarifa,
+      value: props.vooDetalhes.ValorCrianca,
     });
   }
   return null;
 });
 const precoBebe = computed(() => {
-  if (props.vooDetalhes.Preco.PrecoBebe) {
+  if (props.vooDetalhes.ValorBebe) {
     return useCurrencyFormatter({
       currency: 'BRL',
-      value: props.vooDetalhes.Preco.PrecoBebe.ValorTarifa,
+      value: props.vooDetalhes.ValorBebe,
     });
   }
   return null;

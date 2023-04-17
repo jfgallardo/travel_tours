@@ -34,7 +34,7 @@ const informationGeral = useGeneralInformation();
 const purchaseStore = usePurchaseStore();
 
 onMounted(() => {
-  storeSearch.$reset();
+  //storeSearch.$reset();
   userStore.resetState();
   informationGeral.$reset();
   purchaseStore.$reset();

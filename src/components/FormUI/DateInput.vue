@@ -1,103 +1,44 @@
 <template>
-  <div>
-    <div class="relative">
-      <div
-        class="flex absolute inset-y-0 right-0 items-center pr-3 pointer-events-none"
-      >
-        <svg
-          class="w-5 h-5 text-gray-500 dark:text-gray-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
+  <DatePicker
+    ref="calendar"
+    v-model.string="value"
+    mode="date"
+    :min-date="minDateShow"
+    :popover="false"
+    title-position="left"
+    :attributes="attributes"
+    :locale="locale"
+  >
+    <template #default="{ togglePopover, inputValue, inputEvents }">
+      <div class="w-full">
+        <div class="relative">
+          <div
+            class="flex absolute inset-y-0 right-0 items-center pr-3 pointer-events-none"
+          >
+            <CalendarIcon class="h-5 w-5" />
+          </div>
+          <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
+            $t(label)
+          }}</span>
+          <input
+            :value="inputValue"
+            type="text"
+            :class="inputClassList"
+            readonly
+            @click="togglePopover"
+            v-on="inputEvents"
+          />
+        </div>
       </div>
-      <span class="absolute top-0 pl-4 mt-1 text-gray-400 text-sm">{{
-        label
-      }}</span>
-      <input
-        ref="input"
-        :value="modelValue"
-        type="text"
-        :class="inputClassList"
-        readonly
-      />
-      <span class="text-red-500 text-sm absolute -bottom-5 left-2">{{
-        errorMessage
-      }}</span>
-    </div>
-  </div>
+    </template>
+  </DatePicker>
 </template>
-
 <script setup>
-import { computed, ref, onMounted, toRef, watch } from 'vue';
-import AirDatepicker from 'air-datepicker';
-import localeEn from 'air-datepicker/locale/en';
-import { useField } from 'vee-validate';
-import { createPopper } from '@popperjs/core';
-
-const emit = defineEmits(['update:modelValue']);
-
-onMounted(() => {
-  minDate.value = new AirDatepicker(input.value, {
-    container: '#scroll-container',
-    position({ $datepicker, $target, $pointer, done }) {
-      let popper = createPopper($target, $datepicker, {
-        placement: 'top',
-        modifiers: [
-          {
-            name: 'flip',
-            options: {
-              padding: {
-                top: 64,
-              },
-            },
-          },
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 20],
-            },
-          },
-          {
-            name: 'arrow',
-            options: {
-              element: $pointer,
-            },
-          },
-        ],
-      });
-      return function completeHide() {
-        popper.destroy();
-        done();
-      };
-    },
-    dateFormat: 'dd/MM/yyyy',
-    locale: localeEn,
-    autoClose: true,
-    navTitles: {
-      days: '<strong>yyyy</strong><i>MMMM</i>',
-    },
-    minDate: props.minDateShow || '',
-    onSelect({ date, formattedDate, datepicker }) {
-      emit('update:modelValue', formattedDate);
-    },
-  });
-});
-
-watch(
-  () => props.minDateShow,
-  (newV) => {
-    minDate.value.update({
-      minDate: newV,
-    });
-  }
-);
+import { computed, ref } from 'vue';
+import { DatePicker } from 'v-calendar';
+import 'v-calendar/style.css';
+import { CalendarIcon } from '@heroicons/vue/24/solid';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
   modelValue: {
@@ -108,18 +49,25 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  name: {
-    type: String,
-  },
   minDateShow: {
     type: [Date, String, Number],
+    default: new Date(),
   },
 });
 
-const input = ref(null);
-const nameRef = toRef(props, 'name');
-let minDate = ref(null);
-const { errorMessage, value } = useField(nameRef, undefined);
+const emit = defineEmits(['update:modelValue']);
+const calendar = ref(null);
+const attributes = ref([]);
+const { locale } = useI18n();
+
+const value = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit('update:modelValue', value);
+  },
+});
 
 const inputClassList = computed(() => {
   return [

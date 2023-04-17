@@ -29,9 +29,28 @@ export const flightTransformation = (arregloOriginal, platform) => {
       NumeroParadas: platform === 1 ? item.Voos.length - 1 : 0,
       OfertasDesde: [],
       CiaMandatoria: platform === 1 ? COMPANHIA_NOMES[item.IdCia] : 0,
-      AirportsIata: [],
-      Baggage: item.BagagensInclusas.length > 0,
+      AirportsIata: airportsIata(platform, item),
+      Baggage: item.QntdBagagem > 0,
       Cabine: platform === 1 ? CLASSES_VOO[item.Classe] : 0,
+      ValorAdulto: platform === 1 ? item.ValorAdulto : '',
+      ValorAdultoNaCia: platform === 1 ? item.ValorAdultoNaCia : '',
+      ValorAdultoStr: platform === 1 ? item.ValorAdultoStr : '',
+      ValorBebe: platform === 1 ? item.ValorBebe : '',
+      ValorCrianca: platform === 1 ? item.ValorCrianca : '',
+      ValorTotalComTaxa: platform === 1 ? item.ValorTotalComTaxa : '',
+      ValorTotalTaxas: platform === 1 ? item.ValorTotalTaxas : '',
+      ValorTxServico: platform === 1 ? item.ValorTxServico : '',
     };
   });
 };
+
+function airportsIata(platform, item) {
+  let flights = [];
+  if (platform === 1) {
+    item.Voos.forEach((item) => {
+      if (!flights.includes(item.Destino)) flights.push(item.Destino);
+      if (!flights.includes(item.Origem)) flights.push(item.Origem);
+    });
+  }
+  return flights;
+}

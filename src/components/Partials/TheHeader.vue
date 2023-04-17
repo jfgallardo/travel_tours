@@ -253,7 +253,7 @@ const hiddenOf = ref(false);
 
 const showMainSubheading = computed(() => {
   return (
-    !(route.name === 'VoosIdaVolta') &&
+    !(route.name === 'VooHome') &&
     !(route.name === 'VoosMultiple') &&
     route.name !== 'RegisterPage' &&
     !(route.name === 'PreCheckoutPage') &&
@@ -262,7 +262,7 @@ const showMainSubheading = computed(() => {
   );
 });
 const showSubHeader = computed(() => {
-  return route.name === 'VoosIdaVolta' || route.name === 'VoosMultiple';
+  return route.name === 'VooHome' || route.name === 'VoosMultiple';
 });
 const showRegisterSubH = computed(() => {
   return route.name === 'RegisterPage';
