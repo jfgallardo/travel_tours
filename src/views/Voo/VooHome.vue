@@ -15,7 +15,7 @@
           v-else-if="vooStore.Ida.length > 0 && vooStore.Volta.length > 0"
         >
           <div class="flex flex-col px-8">
-            <div>
+            <div v-if="activeDiv">
               <p class="font-medium">
                 {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
               </p>
@@ -23,10 +23,11 @@
                 :objetos="filterStore.flyFilters.Ida"
                 :cantidad-visible="5"
                 current-tab="IdaVoltaNoFlex"
+                type-flight="I"
               />
             </div>
 
-            <div>
+            <div v-else>
               <p class="font-medium">
                 {{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}
               </p>
@@ -34,6 +35,7 @@
                 :objetos="filterStore.flyFilters.Volta"
                 :cantidad-visible="5"
                 current-tab="IdaVoltaNoFlex"
+                type-flight="V"
               />
             </div>
           </div>
@@ -69,6 +71,10 @@ const filterStore = useFiltersStore();
 
 const showData = computed(() => {
   return Object.keys(filterStore.flyFilters).length > 0;
+});
+
+const activeDiv = computed(() => {
+  return true;
 });
 
 /**

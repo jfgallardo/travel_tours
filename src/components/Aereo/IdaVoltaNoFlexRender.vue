@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch">
-    <div class="flex flex-col justify-around xl:w-full">
+    <!--  border-l  -->
+    <div class="flex flex-col justify-around xl:w-full border-gray-300">
       <div
         v-if="width < 768 && !suspense"
         class="border-b border-t-0 py-2 flex items-center justify-evenly"
@@ -11,7 +12,7 @@
       <RenderFlightsMany v-bind="viagem" />
     </div>
     <div class="w-1/5 border-l border-gray-300 relative">
-      <FlightDetalhes :voo-detalhes="viagem" />
+      <FlightDetalhes :voo-detalhes="viagem" :type-flight="typeFlight" />
     </div>
   </div>
 </template>
@@ -30,6 +31,11 @@ defineProps({
   viagem: {
     type: Object,
     default: () => {},
+  },
+  typeFlight: {
+    required: true,
+    type: String,
+    default: '',
   },
 });
 

@@ -18,6 +18,7 @@
 <script setup>
 import { ref, markRaw, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
+import Cookies from 'js-cookie';
 import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
 import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
 import OneWay from '@/components/Aereo/OneWayForm.vue';
@@ -38,6 +39,8 @@ onMounted(() => {
   userStore.resetState();
   informationGeral.$reset();
   purchaseStore.$reset();
+  if (Cookies.get('I')) Cookies.remove('I');
+  if (Cookies.get('V')) Cookies.remove('V');
 });
 
 let selectedComponent = ref(null);

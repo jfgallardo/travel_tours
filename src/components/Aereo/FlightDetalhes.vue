@@ -5,7 +5,7 @@
       class="grid grid-rows-2 auto-rows-max gap-3.5 2xl:gap-1 content-start"
     >
       <div class="mt-5 2xl:mt-0.5 px-2 mb-3">
-        <div class="space-y-1 text-sm font-light px-8 xl:px-2">
+        <div class="space-y-1 text-sm font-light">
           <br />
           <p v-if="precoAdulto" class="flex items-center justify-between">
             <span class="mx-5">{{ t('adults') }}</span>
@@ -58,6 +58,7 @@
 <script setup>
 import { computed, inject, onMounted, ref } from 'vue';
 import QrcodeVue from 'qrcode.vue';
+import Cookies from 'js-cookie';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 import { useI18n } from 'vue-i18n';
@@ -73,6 +74,11 @@ const props = defineProps({
   vooDetalhes: {
     type: Object,
     default: () => {},
+  },
+  typeFlight: {
+    required: true,
+    type: String,
+    default: '',
   },
 });
 const router = useRouter();
@@ -119,9 +125,11 @@ const precoBebe = computed(() => {
   return null;
 });
 const goToPre = () => {
-  $cookies.set('vooSelectedKey', props.vooDetalhes.Key);
+  /*$cookies.set('vooSelectedKey', props.vooDetalhes.Key);
   userStore.vooSelected = props.vooDetalhes;
-  router.push({ name: 'PreCheckoutPage' });
+  router.push({ name: 'PreCheckoutPage' });*/
+  Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
+  console.log(JSON.parse(Cookies.get('I')));
 };
 </script>
 

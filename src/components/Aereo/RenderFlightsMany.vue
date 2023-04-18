@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full border-l">
+  <div class="w-full">
     <div class="flex items-center">
       <div class="w-full py-5">
         <div class="flex flex-row items-center justify-between px-10">
@@ -48,7 +48,7 @@
             <div class="flex flex-col items-center space-y-2">
               <p class="text-gray-700">
                 <span class="text-gray-400">Duration: </span>
-                <span class="font-medium text-sm">{{ duration }}</span>
+                <span class="font-medium text-sm">{{ TempoTotal }}</span>
               </p>
               <div>
                 <!--                <img
@@ -130,6 +130,10 @@ const props = defineProps({
     default: '',
   },
   Origem: {
+    type: String,
+    default: '',
+  },
+  TempoTotal: {
     type: String,
     default: '',
   },
