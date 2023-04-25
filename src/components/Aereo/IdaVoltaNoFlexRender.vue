@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch">
     <!--  border-l  -->
-    <div class="flex flex-col justify-around xl:w-full border-gray-300">
+    <div
+      class="flex flex-col justify-around xl:w-full border-gray-300 border-l"
+    >
       <div
         v-if="width < 768 && !suspense"
         class="border-b border-t-0 py-2 flex items-center justify-evenly"
@@ -9,10 +11,14 @@
         <div :id="`${keyIdIda}Picture`"></div>
         <div :id="keyIdIda"></div>
       </div>
-      <RenderFlightsMany v-bind="viagem" />
+      <RenderFlightsMany :viagem="viagem" :type-flight="typeFlight" />
     </div>
     <div class="w-1/5 border-l border-gray-300 relative">
-      <FlightDetalhes :voo-detalhes="viagem" :type-flight="typeFlight" />
+      <FlightDetalhes
+        :voo-detalhes="viagem"
+        :type-flight="typeFlight"
+        @he-selected="$emit('heSelected', $event)"
+      />
     </div>
   </div>
 </template>
@@ -26,6 +32,8 @@ import { useWindowSize } from '@vueuse/core';
 onMounted(() => {
   suspense.value = false;
 });
+
+defineEmits(['heSelected']);
 
 defineProps({
   viagem: {

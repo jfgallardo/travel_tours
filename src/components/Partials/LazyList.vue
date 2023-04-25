@@ -3,19 +3,20 @@
     <TransitionGroup name="list" tag="ul">
       <div v-for="(objeto, index) in objetosVisibles" :key="index">
         <div class="flex items-center border mt-5">
-          <!--          <div v-if="currentTab === 'IdaVoltaNoFlex'" class="px-1.5">
+                    <div v-if="currentTab === 'IdaVoltaNoFlex'" class="px-1.5">
             <input
               ref="inputCheck"
               type="checkbox"
               class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0 m-2"
               @click="selectFligth($event, objeto)"
             />
-          </div>-->
+          </div>
           <div class="w-full">
             <component
               :is="tabs[currentTab]"
               :viagem="objeto"
               :type-flight="typeFlight"
+              @he-selected="$emit('heSelected', $event)"
             ></component>
           </div>
         </div>
@@ -67,6 +68,8 @@ const props = defineProps({
   },
 });
 
+defineEmits(['heSelected']);
+
 const objetosVisibles = ref([]);
 const scrollContainer = ref(null);
 const tabs = {
@@ -74,10 +77,10 @@ const tabs = {
   VoosMultipleRender,
   IdaVoltaNoFlex,
 };
-//const inputCheck = ref([]);
-//const selectVoo = ref();
+const inputCheck = ref([]);
+const selectVoo = ref();
 
-/*watch(
+watch(
   () => inputCheck.value,
   (value) => {
     if (value?.length > 0) {
@@ -85,7 +88,7 @@ const tabs = {
     }
   },
   { immediate: true, deep: true }
-);*/
+);
 
 onMounted(() => {
   actualizarObjetosVisibles();
@@ -114,16 +117,16 @@ const actualizarObjetosVisibles = () => {
   );
   objetosVisibles.value = props.objetos.slice(0, cantidadAgregada);
 };
-/*const selectFligth = (ev, viagem) => {
+const selectFligth = (ev, viagem) => {
   clearCheck(ev.target);
   selectVoo.value = viagem;
-};*/
+};
 
-/*const clearCheck = (ev) => {
+const clearCheck = (ev) => {
   inputCheck.value.forEach((element) => {
     element.checked = element === ev;
   });
-};*/
+};
 </script>
 
 <style scoped>

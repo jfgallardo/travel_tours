@@ -15,7 +15,7 @@
           v-else-if="vooStore.Ida.length > 0 && vooStore.Volta.length > 0"
         >
           <div class="flex flex-col px-8">
-            <div v-if="activeDiv">
+            <div>
               <p class="font-medium">
                 {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
               </p>
@@ -24,10 +24,11 @@
                 :cantidad-visible="5"
                 current-tab="IdaVoltaNoFlex"
                 type-flight="I"
+                @he-selected="selectVoo"
               />
             </div>
 
-            <div v-else>
+            <div>
               <p class="font-medium">
                 {{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}
               </p>
@@ -36,8 +37,13 @@
                 :cantidad-visible="5"
                 current-tab="IdaVoltaNoFlex"
                 type-flight="V"
+                @he-selected="selectVoo"
               />
             </div>
+
+           <!-- <div v-if="steps === 2">
+              <ShowVooSelected />
+            </div>-->
           </div>
         </template>
       </template>
@@ -62,20 +68,23 @@
 import ButtonFilter from '@/components/Aereo/ButtonFilter.vue';
 import { useVooStore } from '@/stores/voo';
 import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useFiltersStore } from '@/stores/filters';
 import LazyList from '@/components/Partials/LazyList.vue';
+import ShowVooSelected from '@/components/Voo/ShowVooSelected.vue';
 
 const vooStore = useVooStore();
 const filterStore = useFiltersStore();
+const steps = ref(0);
 
 const showData = computed(() => {
   return Object.keys(filterStore.flyFilters).length > 0;
 });
 
-const activeDiv = computed(() => {
-  return true;
-});
+const selectVoo = (e) => {
+  if (e === 'I') steps.value++;
+  if (e === 'V') steps.value++;
+};
 
 /**
  * 3 posibilidades:

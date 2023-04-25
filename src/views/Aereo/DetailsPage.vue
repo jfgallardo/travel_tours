@@ -10,7 +10,7 @@
           <div class="flex items-center space-x-2">
             <div class="border border-gray-400 p-1 rounded-full h-9 w-9">
               <img
-                v-if="initVoo.Segmento === 'V'"
+                v-if="typeFlight === 'V'"
                 src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
                 alt="IconPlane"
               />
@@ -22,9 +22,9 @@
             </div>
             <p class="p-1 font-semibold text-sm">
               {{
-                initVoo.Segmento === 'I'
+                typeFlight === 'I'
                   ? 'Vuelo de Ida'
-                  : initVoo.Segmento === 'V'
+                  : typeFlight === 'V'
                   ? 'Vuelo de Volta'
                   : 'Viajes por Trechos'
               }}
@@ -40,7 +40,7 @@
       >
         <div class="flex flex-col space-y-4 items-center py-2">
           <template v-for="item in flights" :key="item.Numero">
-            <PlaneLine v-bind="item" />
+            <PlaneLine v-bind="item" :cia-mandatoria="ciaMandatoria" />
           </template>
         </div>
       </div>
@@ -84,7 +84,7 @@
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
         <span>AEROLINEA</span>
-        <span class="font-bold">{{ ciaMandatoria.Descricao }}</span>
+        <span class="font-bold">{{ ciaMandatoria }}</span>
       </div>
       <div
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
@@ -132,7 +132,7 @@
           class="flex items-center justify-between lg:flex-col lg:justify-center"
         >
           <p class="text-2xl text-center">1 Oferta Desde</p>
-          <p>{{ offersCompany }}</p>
+          <!--          <p>{{ offersCompany }}</p>-->
         </div>
       </div>
 
@@ -186,7 +186,7 @@
   </div>
 </template>
 <script setup>
-import { ref, inject, computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import QrcodeVue from 'qrcode.vue';
 import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import moment from 'moment/min/moment-with-locales';
@@ -196,31 +196,68 @@ import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 //import { useWoobaStore } from '@/stores/wooba';
 
 onMounted(() => {
-  if (id) {
-    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${id}`;
+  if (props.id) {
+    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${props.id}`;
   }
 });
 
 defineEmits(['closeDetails']);
 
+//Todo props()
+const props = defineProps({
+  flights: {
+    type: Array,
+    default: () => [],
+  },
+  ofertasDesde: {
+    type: Array,
+    default: () => [],
+  },
+  ciaMandatoria: {
+    type: String,
+    default: '',
+  },
+  preco: {
+    type: [Number, String],
+    default: '',
+  },
+  id: {
+    type: String,
+    default: '',
+  },
+  typeFlight: {
+    required: true,
+    type: String,
+    default: '',
+  },
+  platform: {
+    type: [String, Number],
+    default: '',
+  },
+  tarifas: {
+    type: Array,
+    default: () => [],
+  },
+});
+
 //Todo variables()
 const value = ref('');
-const flights = inject('flights');
-const ofertasDesde = inject('ofertasDesde');
-const ciaMandatoria = inject('ciaMandatoria');
-const preco = inject('preco');
-const id = inject('id');
+//const flights = inject('flights');
+//const ofertasDesde = inject('ofertasDesde');
+//const ciaMandatoria = inject('ciaMandatoria');
+//const preco = inject('preco');
+//const id = inject('id');
 const searchOptions = useSearchOptionsVooStore();
 const { locale } = useI18n();
 //const woobaStore = useWoobaStore();
 
 //Todo computed()
 const initVoo = computed(() => {
-  return flights[0];
+  return props.flights[0];
 });
 const endVoo = computed(() => {
-  const longitud = flights.length;
-  return flights[longitud - 1];
+  const longitud = props.flights.length;
+  return props.flights[longitud - 1];
 });
 const dayPeriodIda = computed(() => {
   return filterDayPeriod(initVoo.value.DataSaida);
@@ -235,8 +272,8 @@ const horaChegada = computed(() => {
   return filterHours(endVoo.value.DataChegada);
 });
 const offersCompany = computed(() => {
-  let companies = ofertasDesde.filter((item) => {
-    if (item.company === ciaMandatoria.CodigoIata) {
+  let companies = props.ofertasDesde.filter((item) => {
+    if (item.company === props.ciaMandatoria) {
       return item;
     }
   });
@@ -261,19 +298,21 @@ const offersCompany = computed(() => {
 const valorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: preco.Total,
+    value: props.preco.Total,
   });
 });
 
 //Todo functions()
 const tipoTarifa = computed(() => {
+  if (props.platform === 1)
+    return `${props.tarifas[0].Classe} ( ${props.tarifas[0].Tipo} )`;
   return `${initVoo.value.BaseTarifaria[0].Familia} ( ${initVoo.value.BaseTarifaria[0].Codigo} )`;
 });
 const paradas = computed(() => {
-  const cantVoo = flights.length - 1;
+  const cantVoo = props.flights.length - 1;
   let escalas = 0;
 
-  flights.map((item) => {
+  props.flights.map((item) => {
     if (item.Escalas) {
       escalas += item.Escalas.length;
     }
@@ -281,14 +320,14 @@ const paradas = computed(() => {
   return `${cantVoo + escalas} Parada(s)`;
 });
 const dateVoo = computed(() => {
-  return initVoo.value.Segmento === 'I'
+  return props.typeFlight === 'I'
     ? formatDate(searchOptions.getDateIdaFormatter)
-    : initVoo.value.Segmento === 'V'
+    : props.typeFlight === 'V'
     ? formatDate(searchOptions.getDateVoltaFormatter)
     : dateVooArray();
 });
 const dateVooArray = () => {
-  return flights.flatMap((o) => formatDate(o.DataSaida)).join('; ');
+  return props.flights.flatMap((o) => formatDate(o.DataSaida)).join('; ');
 };
 const duration = computed(() => {
   const x = moment(initVoo.value.DataSaida);

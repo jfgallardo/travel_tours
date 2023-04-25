@@ -17,6 +17,7 @@ export const flightTransformation = (arregloOriginal, platform) => {
   return arregloOriginal.map((o) => {
     const item = o[0];
     return {
+      Platform: platform,
       Origem: item.Origem,
       Destino: item.Destino,
       TempoTotal: item.TempoTotalStr,
@@ -40,6 +41,7 @@ export const flightTransformation = (arregloOriginal, platform) => {
       ValorTotalComTaxa: platform === 1 ? item.ValorTotalComTaxa : '',
       ValorTotalTaxas: platform === 1 ? item.ValorTotalTaxas : '',
       ValorTxServico: platform === 1 ? item.ValorTxServico : '',
+      Tarifas: platform === 1 ? item.Tarifas : [],
     };
   });
 };

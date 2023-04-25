@@ -2,7 +2,7 @@
   <div class="flex flex-col text-sm">
     <div class="flex items-center space-x-3">
       <img
-        v-if="Conexao"
+        v-if="TempoEspera"
         class="h-8 w-8"
         src="@/assets/ico/icons8-the-scheduling-a-flight-of-the-planned-route-48.png"
       />
@@ -17,9 +17,9 @@
         </p>
         <div>
           <ul>
-            <li>{{ Origem.Descricao }}</li>
+            <li>{{ Origem }}</li>
             <li>{{ dateStringSaida }}</li>
-            <li>{{ CiaMandatoria.Descricao }} - {{ Numero }}</li>
+            <li>{{ ciaMandatoria }} - {{ Numero }}</li>
           </ul>
         </div>
       </div>
@@ -51,14 +51,14 @@
         </p>
         <div>
           <ul>
-            <li>{{ Destino.Descricao }}</li>
+            <li>{{ Destino }}</li>
             <li>{{ dateStringChegada }}</li>
-            <li>{{ CiaMandatoria.Descricao }} - {{ Numero }}</li>
+            <li>{{ ciaMandatoria }} - {{ Numero }}</li>
           </ul>
         </div>
       </div>
     </div>
-    <div v-if="Escalas" class="mt-4">
+    <!--    <div v-if="Escalas" class="mt-4">
       <h1
         class="bg-blue-600 text-white text-center py-1 cursor-pointer"
         @click="openEscala = !openEscala"
@@ -68,7 +68,7 @@
           Escalas.length > 1 ? 'las sgtes escalas' : 'la sgte escala'
         }}</span>
       </h1>
-      <Transition>
+            <Transition>
         <div v-if="openEscala">
           <div
             v-for="item in escalasFiltered"
@@ -80,11 +80,11 @@
             </p>
             <p>
               <span class="font-medium">Fecha de Llegada: </span>
-              {{ item.DataChegada }}
+              {{ item.Chegada }}
             </p>
             <p>
               <span class="font-medium">Fecha de Salida: </span>
-              {{ item.DataSaida }}
+              {{ item.Saida }}
             </p>
             <p>
               <span class="font-medium">Duracion: </span> {{ item.Duracao }}
@@ -100,7 +100,7 @@
           </div>
         </div>
       </Transition>
-    </div>
+    </div>-->
   </div>
 </template>
 <script setup>
@@ -110,12 +110,25 @@ import { useDateFormatter } from '@/composables/dateFormatter';
 
 const openEscala = ref(false);
 
-const props = defineProps({
-  DataSaida: {
+/*
+* Chegada:"2023-04-26T01:40:00"
+Classe:0
+ClasseStr:"Economica"
+Destino:"BSB"
+Duracao:105
+Numero:"G3-9084"
+Origem:"GRU"
+Saida:"2023-04-25T23:55:00"
+Tempo:"01:45"
+TempoEspera:null
+
+*
+* const props = defineProps({
+  Saida: {
     type: String,
     default: '',
   },
-  DataChegada: {
+  Chegada: {
     type: String,
     default: '',
   },
@@ -143,28 +156,63 @@ const props = defineProps({
     default: false,
   },
 });
+* */
+
+const props = defineProps({
+  Saida: {
+    type: String,
+    default: '',
+  },
+  Chegada: {
+    type: String,
+    default: '',
+  },
+  Origem: {
+    type: Object,
+    default: () => {},
+  },
+  Destino: {
+    type: Object,
+    default: () => {},
+  },
+  Numero: {
+    type: [Number, String],
+  },
+  ciaMandatoria: {
+    type: Object,
+    default: () => {},
+  },
+  Escalas: {
+    type: Array,
+    default: () => [],
+  },
+  TempoEspera: {
+    type: [Boolean, Array],
+    default: null,
+  },
+});
 
 const dayPeriodIda = computed(() => {
-  return filterDayPeriod(props.DataSaida);
+  return filterDayPeriod(props.Saida);
 });
 
 const dayPeriodVolta = computed(() => {
-  return filterDayPeriod(props.DataChegada);
+  return filterDayPeriod(props.Chegada);
 });
 
 const horaSaida = computed(() => {
-  return filterHours(props.DataSaida);
+  return filterHours(props.Saida);
 });
 const horaChegada = computed(() => {
-  return filterHours(props.DataChegada);
+  return filterHours(props.Chegada);
 });
 
 const dateStringSaida = computed(() => {
-  return useDateFormatter(props.DataSaida);
+  return useDateFormatter(props.Saida);
 });
 
 const dateStringChegada = computed(() => {
-  return useDateFormatter(props.DataChegada);
+  return useDateFormatter(props.Chegada);
 });
 
 const escalasFiltered = computed(() => {
@@ -173,8 +221,8 @@ const escalasFiltered = computed(() => {
   return props.Escalas.map((escala) => {
     return {
       Descricao: escala.Aeroporto.Descricao,
-      DataChegada: useDateFormatter(escala.DataChegada),
-      DataSaida: useDateFormatter(escala.DataSaida),
+      Chegada: useDateFormatter(escala.Chegada),
+      Saida: useDateFormatter(escala.Saida),
       Duracao: escala.Duracao,
       HoraChegada: formatHour(escala.HoraChegada),
       HoraSaida: formatHour(escala.HoraSaida),

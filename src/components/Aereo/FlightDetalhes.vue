@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="vooDetalhes"
-      class="grid grid-rows-2 auto-rows-max gap-3.5 2xl:gap-1 content-start"
+      class="grid grid-rows-auto auto-rows-max gap-3.5 2xl:gap-1 content-start"
     >
       <div class="mt-5 2xl:mt-0.5 px-2 mb-3">
         <div class="space-y-1 text-sm font-light">
@@ -40,7 +40,16 @@
           </p>
         </div>
       </div>
-      <div class="flex justify-center mb-10 -mt-4 lg:mt-0">
+      <div v-if="vooDetalhes.Platform === 1" class="flex justify-center mb-20 -mt-4 lg:mt-0">
+        <button
+          class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0 font-bold"
+          @click="goToPre"
+        >
+          Confirmar seleçao
+        </button>
+      </div>
+      <template v-else>
+      <div class="flex justify-center mb-20 -mt-4 lg:mt-0">
         <qrcode-vue :size="90" :value="value"></qrcode-vue>
       </div>
       <div>
@@ -48,15 +57,16 @@
           class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0 font-bold"
           @click="goToPre"
         >
-          Comprar
+          Seleccionar
         </button>
       </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, inject, onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import QrcodeVue from 'qrcode.vue';
 import Cookies from 'js-cookie';
 import { useRouter } from 'vue-router';
@@ -69,6 +79,8 @@ onMounted(() => {
     value.value = `${window.location.protocol}//${window.location.host}/precheckout/${props.vooDetalhes.Id}`;
   }
 });
+
+const emit = defineEmits(['heSelected']);
 
 const props = defineProps({
   vooDetalhes: {
@@ -84,8 +96,6 @@ const props = defineProps({
 const router = useRouter();
 const userStore = useUserStore();
 const { t } = useI18n();
-const $cookies = inject('$cookies');
-
 const value = ref('');
 
 const ValorTaxas = computed(() => {
@@ -129,7 +139,7 @@ const goToPre = () => {
   userStore.vooSelected = props.vooDetalhes;
   router.push({ name: 'PreCheckoutPage' });*/
   Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
-  console.log(JSON.parse(Cookies.get('I')));
+  emit('heSelected', props.typeFlight);
 };
 </script>
 

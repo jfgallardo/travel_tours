@@ -48,7 +48,7 @@
             <div class="flex flex-col items-center space-y-2">
               <p class="text-gray-700">
                 <span class="text-gray-400">Duration: </span>
-                <span class="font-medium text-sm">{{ TempoTotal }}</span>
+                <span class="font-medium text-sm">{{ viagem.TempoTotal }}</span>
               </p>
               <div>
                 <!--                <img
@@ -98,7 +98,16 @@
         </div>
         <Modal v-if="detalhes" @close="detalhes = false">
           <template #body>
-            <DetailsPage @close-details="detalhes = false" />
+            <DetailsPage
+              :id="viagem.Key"
+              :type-flight="typeFlight"
+              :flights="viagem.Voos"
+              :cia-mandatoria="viagem.CiaMandatoria"
+              :preco="viagem.Preco"
+              :platform="viagem.Platform"
+              :tarifas="viagem.Tarifas"
+              @close-details="detalhes = false"
+            />
           </template>
           <template #header>
             <span>Detalhes</span>
@@ -110,42 +119,34 @@
 </template>
 
 <script setup>
-import { computed, provide, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Modal from '@/components/Partials/TheModal.vue';
 import DetailsPage from '@/views/Aereo/DetailsPage.vue';
 import { PhotoIcon } from '@heroicons/vue/24/solid';
-import moment from 'moment';
 
 const { locale } = useI18n();
 const detalhes = ref(false);
 
 const props = defineProps({
-  Voos: {
-    type: Array,
-    default: () => [],
+  viagem: {
+    type: Object,
+    default: () => {},
   },
-  Id: {
-    type: String,
-    default: '',
-  },
-  Origem: {
-    type: String,
-    default: '',
-  },
-  TempoTotal: {
+  typeFlight: {
+    required: true,
     type: String,
     default: '',
   },
 });
 
 const initial_flight = computed(() => {
-  return props.Voos[0];
+  return props.viagem.Voos[0];
 });
 
 const final_flight = computed(() => {
-  const l = props.Voos.length;
-  return l > 0 ? props.Voos[l - 1] : [];
+  const l = props.viagem.Voos.length;
+  return l > 0 ? props.viagem.Voos[l - 1] : [];
 });
 
 const filter_weekday_initial = computed(() => {
@@ -191,7 +192,7 @@ const filter_hours_final = computed(() => {
 
 const duration = computed(() => {
   let minutes_flag = 0;
-  props.Voos.forEach((element) => {
+  props.viagem.Voos.forEach((element) => {
     minutes_flag += parseInt(element.Duracao);
   });
 
@@ -203,8 +204,8 @@ const duration = computed(() => {
 
 const stops = computed(() => {
   let paradas = [];
-  props.Voos.forEach((element) => {
-    if (element.Origem !== props.Origem) {
+  props.viagem.Voos.forEach((element) => {
+    if (element.Origem !== props.viagem.Origem) {
       paradas.push(element.Origem);
     }
   });
@@ -213,7 +214,7 @@ const stops = computed(() => {
 
 const flight_numbers = computed(() => {
   let numbers = [];
-  props.Voos.forEach((element) => {
+  props.viagem.Voos.forEach((element) => {
     numbers.push(element.Numero);
   });
   return numbers;
