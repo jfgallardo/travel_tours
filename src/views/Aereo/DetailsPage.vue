@@ -49,7 +49,7 @@
       >
         <div class="flex items-center justify-between space-x-3.5">
           <div>
-            <span>{{ initVoo.Origem.CodigoIata }}&nbsp;&nbsp;</span>
+            <span>{{ initVoo.Origem }}&nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
           </div>
           <div>{{ paradas }}</div>
@@ -57,7 +57,7 @@
             <span class="font-bold"
               >{{ horaChegada }} {{ dayPeriodVolta }}</span
             >
-            <span>&nbsp;&nbsp;{{ endVoo.Destino.CodigoIata }}</span>
+            <span>&nbsp;&nbsp;{{ endVoo.Destino }}</span>
           </div>
         </div>
       </div>
@@ -78,7 +78,9 @@
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
         <span>CLASE</span>
-        <span class="font-bold">{{ initVoo.Cabine }}</span>
+        <span class="font-bold">{{
+          tarifas?.[0]?.Classe ?? initVoo.ClasseStr
+        }}</span>
       </div>
       <div
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
@@ -89,7 +91,49 @@
       <div
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
-        <template v-if="initVoo.BagagemInclusa">
+        <div
+          v-if="baggage.length > 0"
+          class="flex flex-col items-start space-y-1.5"
+        >
+          <template v-for="tar in baggage" :key="tar.Tipo">
+            <div v-if="tar.Quantidade > 0" class="flex items-center space-x-8">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 text-blue-700"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="font-medium"> {{ tar.TextoBagagem }} </span>
+            </div>
+          </template>
+        </div>
+        <template v-else>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+              />
+            </svg>
+
+            <span>NO BAGAGEM</span>
+          </div>
+        </template>
+        <!--        <template v-if="tarifas[0].BagagensInclusas[0].Bagagem > 0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -102,26 +146,51 @@
               clip-rule="evenodd"
             />
           </svg>
-          <span> {{ initVoo.BagagemQuantidade }} BAGAGEM DE MÃO </span>
+          <span> {{ tarifas[0].BagagensInclusas[0].Bagagem }} BAGAGEM </span>
+          <span>
+            {{ tarifas[0].BagagensInclusas[0].Quantidade }} BAGAGEM DE MÃO
+          </span>
         </template>
         <template v-else>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
+          <div
+            v-if="tarifas[0].BagagensInclusas[0].Quantidade > 0"
+            class="flex w-full items-center justify-around"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-            />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-6 h-6 text-blue-700"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span>
+              {{ tarifas[0].BagagensInclusas[0].Quantidade }} BAGAGEM DE MÃO
+            </span>
+          </div>
+          <div v-else>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+              />
+            </svg>
 
-          <span>NO BAGAGEM</span>
-        </template>
+            <span>NO BAGAGEM</span>
+          </div>
+        </template>-->
       </div>
     </div>
     <div class="lg:grid lg:grid-cols-5 lg:grid-flow-row">
@@ -238,6 +307,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  baggage: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 //Todo variables()
@@ -260,18 +333,18 @@ const endVoo = computed(() => {
   return props.flights[longitud - 1];
 });
 const dayPeriodIda = computed(() => {
-  return filterDayPeriod(initVoo.value.DataSaida);
+  return filterDayPeriod(initVoo.value.Chegada);
 });
 const dayPeriodVolta = computed(() => {
-  return filterDayPeriod(endVoo.value.DataChegada);
+  return filterDayPeriod(endVoo.value.Chegada);
 });
 const horaSaida = computed(() => {
-  return filterHours(initVoo.value.DataSaida);
+  return filterHours(initVoo.value.Saida);
 });
 const horaChegada = computed(() => {
-  return filterHours(endVoo.value.DataChegada);
+  return filterHours(endVoo.value.Chegada);
 });
-const offersCompany = computed(() => {
+/*const offersCompany = computed(() => {
   let companies = props.ofertasDesde.filter((item) => {
     if (item.company === props.ciaMandatoria) {
       return item;
@@ -294,20 +367,24 @@ const offersCompany = computed(() => {
     currency: 'BRL',
     value: offers,
   });
-});
+});*/
 const valorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.preco.Total,
+    value: props.preco,
   });
 });
 
 //Todo functions()
 const tipoTarifa = computed(() => {
-  if (props.platform === 1)
-    return `${props.tarifas[0].Classe} ( ${props.tarifas[0].Tipo} )`;
+  if (props.platform === 1) {
+    if (props.tarifas)
+      return `${props.tarifas[0].Classe} ( ${props.tarifas[0].Tipo} )`;
+    return initVoo.value.ClasseStr;
+  }
   return `${initVoo.value.BaseTarifaria[0].Familia} ( ${initVoo.value.BaseTarifaria[0].Codigo} )`;
 });
+
 const paradas = computed(() => {
   const cantVoo = props.flights.length - 1;
   let escalas = 0;
@@ -319,6 +396,7 @@ const paradas = computed(() => {
   });
   return `${cantVoo + escalas} Parada(s)`;
 });
+
 const dateVoo = computed(() => {
   return props.typeFlight === 'I'
     ? formatDate(searchOptions.getDateIdaFormatter)
@@ -327,11 +405,11 @@ const dateVoo = computed(() => {
     : dateVooArray();
 });
 const dateVooArray = () => {
-  return props.flights.flatMap((o) => formatDate(o.DataSaida)).join('; ');
+  return props.flights.flatMap((o) => formatDate(o.Chegada)).join('; ');
 };
 const duration = computed(() => {
-  const x = moment(initVoo.value.DataSaida);
-  const y = moment(endVoo.value.DataChegada);
+  const x = moment(initVoo.value.Saida);
+  const y = moment(endVoo.value.Chegada);
   return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment
     .duration(y.diff(x))
     .get('minutes')}min`;

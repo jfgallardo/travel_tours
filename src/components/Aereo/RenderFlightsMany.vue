@@ -106,6 +106,7 @@
               :preco="viagem.Preco"
               :platform="viagem.Platform"
               :tarifas="viagem.Tarifas"
+              :baggage="viagem.Baggage"
               @close-details="detalhes = false"
             />
           </template>

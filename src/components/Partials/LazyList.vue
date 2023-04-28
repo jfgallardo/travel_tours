@@ -3,7 +3,7 @@
     <TransitionGroup name="list" tag="ul">
       <div v-for="(objeto, index) in objetosVisibles" :key="index">
         <div class="flex items-center border mt-5">
-                    <div v-if="currentTab === 'IdaVoltaNoFlex'" class="px-1.5">
+          <div v-if="currentTab === 'IdaVoltaNoFlex'" class="px-1.5">
             <input
               ref="inputCheck"
               type="checkbox"

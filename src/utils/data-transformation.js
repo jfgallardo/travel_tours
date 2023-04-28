@@ -31,7 +31,7 @@ export const flightTransformation = (arregloOriginal, platform) => {
       OfertasDesde: [],
       CiaMandatoria: platform === 1 ? COMPANHIA_NOMES[item.IdCia] : 0,
       AirportsIata: airportsIata(platform, item),
-      Baggage: item.QntdBagagem > 0,
+      Baggage: item.BagagensInclusas,
       Cabine: platform === 1 ? CLASSES_VOO[item.Classe] : 0,
       ValorAdulto: platform === 1 ? item.ValorAdulto : '',
       ValorAdultoNaCia: platform === 1 ? item.ValorAdultoNaCia : '',

@@ -65,7 +65,9 @@ export const useVooStore = defineStore({
           this.Aeroportos = data.Aeroportos.map((o) => o.Iata);
         })
         .catch((e) => {
-          const errorCode = e?.response?.data?.message || 'ServerError';
+          console.log(e);
+          const errorCode =
+            e?.response?.data?.message || e?.response?.data?.error_message;
           alertStore.showMsg({
             message: errorCode,
             backgrColor: 'red',

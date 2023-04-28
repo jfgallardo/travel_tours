@@ -23,11 +23,31 @@ export const useFiltersStore = defineStore('filters', {
         let filterVolta = vooStore.Volta;
 
         if (state.baggage.value === 1) {
-          filterIda = filterIda.filter((fly) => fly.Baggage);
-          filterVolta = filterVolta.filter((fly) => fly.Baggage);
+          filterIda = filterIda.filter(
+            (fly) =>
+              fly.Baggage?.filter(
+                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
+              ).length
+          );
+          filterVolta = filterVolta.filter(
+            (fly) =>
+              fly.Baggage?.filter(
+                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
+              ).length
+          );
         } else if (state.baggage.value === 0) {
-          filterIda = filterIda.filter((fly) => !fly.Baggage);
-          filterVolta = filterVolta.filter((fly) => !fly.Baggage);
+          filterIda = filterIda.filter(
+            (fly) =>
+              !fly.Baggage?.filter(
+                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
+              ).length
+          );
+          filterVolta = filterVolta.filter(
+            (fly) =>
+              !fly.Baggage?.filter(
+                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
+              ).length
+          );
         }
 
         if (state.stops.value === 0) {

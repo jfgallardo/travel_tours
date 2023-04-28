@@ -41,7 +41,7 @@
               />
             </div>
 
-           <!-- <div v-if="steps === 2">
+            <!-- <div v-if="steps === 2">
               <ShowVooSelected />
             </div>-->
           </div>
