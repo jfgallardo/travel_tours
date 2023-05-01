@@ -5,10 +5,16 @@
       ref="button"
       :key="tab.name"
       class="py-3 w-full border border-gray-400"
+      :class="{ relative: tab.relative }"
       :name="tab.name"
       @click="changeTab(tab)"
     >
       {{ $t(tab.name) }}
+      <div
+        class="text-xs text-center bg-gray-200 opacity-80 rounded-full text-black font-bold absolute py-1 px-2 -top-3.5 -right-2 w-24"
+      >
+        <span> {{ $t('components.badge-text') }}</span>
+      </div>
     </button>
   </div>
 </template>
@@ -31,14 +37,17 @@ const props = defineProps({
         {
           name: 'aereoHomePage.titleRoundTrip',
           component: 'RoundTrip',
+          relative: false,
         },
         {
           name: 'aereoHomePage.titleOneWay',
           component: 'OneWay',
+          relative: false,
         },
         {
           name: 'aereoHomePage.titleManyCities',
           component: 'ManyCities',
+          relative: true,
         },
       ];
     },
@@ -54,11 +63,13 @@ const cleanRefs = () => {
 };
 
 const changeTab = (tab) => {
-  cleanRefs();
-  for (let i = 0; i < button.value.length; i++) {
-    if (button.value[i].name === tab.name) {
-      button.value[i].classList.add('active');
-      emits('selectedButton', tab.component);
+  if (!tab.relative) {
+    cleanRefs();
+    for (let i = 0; i < button.value.length; i++) {
+      if (button.value[i].name === tab.name) {
+        button.value[i].classList.add('active');
+        emits('selectedButton', tab.component);
+      }
     }
   }
 };

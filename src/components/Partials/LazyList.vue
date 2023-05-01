@@ -16,6 +16,7 @@
               :is="tabs[currentTab]"
               :viagem="objeto"
               :type-flight="typeFlight"
+              :key-voo-selected="keyVooSelected"
               @he-selected="$emit('heSelected', $event)"
             ></component>
           </div>
@@ -79,12 +80,18 @@ const tabs = {
 };
 const inputCheck = ref([]);
 const selectVoo = ref();
+const keyVooSelected = ref('');
 
 watch(
   () => inputCheck.value,
   (value) => {
     if (value?.length > 0) {
+      inputCheck?.value?.forEach((element) => {
+        element.checked = false;
+      });
       inputCheck.value[0].checked = true;
+      selectVoo.value = props.objetos[0];
+      keyVooSelected.value = props.objetos[0].Key;
     }
   },
   { immediate: true, deep: true }
@@ -119,6 +126,7 @@ const actualizarObjetosVisibles = () => {
 };
 const selectFligth = (ev, viagem) => {
   clearCheck(ev.target);
+  keyVooSelected.value = viagem.Key;
   selectVoo.value = viagem;
 };
 

@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch px-6 py-2">
     <div class="flex flex-col justify-around border border-gray-300 xl:w-full">
       <div
@@ -53,6 +53,29 @@
       <FlightDetalhes :voo-detalhes="viagem" />
     </div>
   </div>
+</template>-->
+
+<template>
+  <div class="flex flex-col xl:flex-row 2xl:items-stretch">
+    <!--  border-l  -->
+    <div class="flex flex-col justify-around xl:w-full border-gray-300">
+      <div
+        v-if="width < 768 && !suspense"
+        class="border-b border-t-0 py-2 flex items-center justify-evenly"
+      >
+        <div :id="`${keyIdIda}Picture`"></div>
+        <div :id="keyIdIda"></div>
+      </div>
+      <RenderFlightsMany :viagem="viagem" :type-flight="typeFlight" />
+    </div>
+    <div class="w-1/5 border-l border-gray-300 relative">
+      <FlightDetalhes
+        :voo-detalhes="viagem"
+        :type-flight="typeFlight"
+        :is-qr="true"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -60,6 +83,7 @@ import FlightDetalhes from '@/components/Aereo/FlightDetalhes.vue';
 import RenderFlights from '@/components/Aereo/RenderFlights.vue';
 import { ref, provide, computed, onMounted } from 'vue';
 import { useWindowSize } from '@vueuse/core';
+import RenderFlightsMany from '@/components/Aereo/RenderFlightsMany.vue';
 
 onMounted(() => {
   suspense.value = false;
@@ -69,6 +93,11 @@ const props = defineProps({
   viagem: {
     type: Object,
     default: () => {},
+  },
+  typeFlight: {
+    required: true,
+    type: String,
+    default: '',
   },
 });
 

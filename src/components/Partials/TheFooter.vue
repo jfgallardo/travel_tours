@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-300 py-4 text-center relative z-50">
+  <footer class="py-4 text-center relative z-50">
     <div
       class="footer-preview left-0 w-full h-11 bg-white py-3 invisible md:visible fixed bottom-0 right-0 z-30"
     >

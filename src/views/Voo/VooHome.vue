@@ -9,7 +9,17 @@
     <template v-else>
       <template v-if="showData">
         <template v-if="vooStore.Ida.length > 0 && vooStore.Volta.length === 0">
-          <div>SOLO IDA</div>
+          <div class="flex flex-col px-8">
+            <p class="font-medium">
+              {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
+            </p>
+            <LazyList
+              :objetos="filterStore.flyFilters.Ida"
+              :cantidad-visible="5"
+              current-tab="IdaVoltaFlex"
+              type-flight="I"
+            />
+          </div>
         </template>
         <template
           v-else-if="vooStore.Ida.length > 0 && vooStore.Volta.length > 0"

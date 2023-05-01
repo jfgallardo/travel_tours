@@ -18,7 +18,7 @@ export const useFiltersStore = defineStore('filters', {
     flyFilters: (state) => {
       const vooStore = useVooStore();
 
-      if (vooStore.Ida.length > 0 && vooStore.Volta.length > 0) {
+      if (vooStore.Ida.length > 0 || vooStore.Volta.length > 0) {
         let filterIda = vooStore.Ida;
         let filterVolta = vooStore.Volta;
 
@@ -81,8 +81,8 @@ export const useFiltersStore = defineStore('filters', {
           Ida: filterIda,
           Volta: filterVolta,
         };
-      } else {
-        /*let flyFilters = woobaStore.outboundFlights;
+      }
+      /*let flyFilters = woobaStore.outboundFlights;
         if (woobaStore.outboundFlights.length > 0) {
           if (state.baggage.value === 1) {
             flyFilters = flyFilters.filter((fly) => fly.Baggage);
@@ -127,7 +127,6 @@ export const useFiltersStore = defineStore('filters', {
           }
         }
         return flyFilters;*/
-      }
       return {};
     },
   },

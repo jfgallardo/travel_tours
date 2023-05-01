@@ -145,19 +145,19 @@ import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import { useI18n } from 'vue-i18n';
 import CabineComponent from '@/components/FormUI/CabineComponent.vue';
-import { inject } from 'vue';
 import { useAlertStore } from '@/stores/alert';
 import { useWoobaStore } from '@/stores/wooba';
 import { woobaData, woobaDataMultiple } from '@/utils/unifyDataWooba';
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/vue/24/solid';
+import { useVooStore } from '@/stores/voo';
 
 const moblixStore = useMoblixStore();
 const searchOptionsVooStore = useSearchOptionsVooStore();
 const router = useRouter();
 const { t } = useI18n();
-const $cookies = inject('$cookies');
 const alertStore = useAlertStore();
 const woobaStore = useWoobaStore();
+const vooStore = useVooStore();
 
 const addUp = (e) => {
   if (e === t('adults') && searchOptionsVooStore.adults < 8) {
@@ -196,21 +196,6 @@ const changeDestinations = () => {
   searchOptionsVooStore.destiny.iata = temporaryIata;
 };
 
-const saveCookiesSearch = () => {
-  const dataSearch = {
-    dateOfDeparture: searchOptionsVooStore.dateOfDeparture,
-    origin: searchOptionsVooStore.origin,
-    destiny: searchOptionsVooStore.destiny,
-    cabin: searchOptionsVooStore.cabin,
-    adults: searchOptionsVooStore.adults,
-    teenagers: searchOptionsVooStore.teenagers,
-    babies: searchOptionsVooStore.babies,
-    onlyBaggage: searchOptionsVooStore.onlyBaggage,
-    apenasVoosDiretos: searchOptionsVooStore.apenasVoosDiretos,
-  };
-  $cookies.set('dataSearch', dataSearch);
-};
-
 const consultar = () => {
   if (
     !searchOptionsVooStore.origin.iata ||
@@ -225,10 +210,9 @@ const consultar = () => {
     return;
   }
 
-  saveCookiesSearch();
-  router.push({ name: 'VoosIdaVolta' });
+  router.push({ name: 'VooHome' });
 
-  const body = {
+  /*  const body = {
     DataIda: `/Date(${new Date(
       searchOptionsVooStore.getDateIdaFormatter
     ).getTime()})/`,
@@ -244,11 +228,25 @@ const consultar = () => {
     ...(searchOptionsVooStore.cabin.value
       ? { Cabine: searchOptionsVooStore.cabin.value }
       : {}),
+  };*/
+
+  const payload = {
+    Origem: searchOptionsVooStore.origin.iata,
+    Destino: searchOptionsVooStore.destiny.iata,
+    Ida: searchOptionsVooStore.getDateIdaFormatter,
+    Volta: '0001-01-01',
+    Adultos: searchOptionsVooStore.adults,
+    Criancas: searchOptionsVooStore.teenagers,
+    Bebes: searchOptionsVooStore.babies,
+    Companhia: [2],
+    Cabine: searchOptionsVooStore.cabin.value,
   };
 
-  woobaStore.loading = true;
+  vooStore.loading = true;
 
-  woobaStore
+  vooStore.checkFlightsRoundTrip(payload, 'ValorTotal');
+
+  /* woobaStore
     .consultaOrigemDestino(body)
     .then(({ data }) => {
       let {
@@ -286,7 +284,7 @@ const consultar = () => {
     })
     .catch(() => {
       woobaStore.loading = false;
-    });
+    });*/
 };
 </script>
 <style scoped></style>

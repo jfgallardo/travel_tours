@@ -195,7 +195,7 @@
     </div>
     <div class="lg:grid lg:grid-cols-5 lg:grid-flow-row">
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:px-2 lg:py-8"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:border-b-0 h-full lg:px-2 lg:py-8"
       >
         <div
           class="flex items-center justify-between lg:flex-col lg:justify-center"
@@ -206,7 +206,7 @@
       </div>
 
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:px-2 lg:py-8"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:border-b-0 h-full lg:px-2 lg:py-8"
       >
         <div
           class="flex items-center justify-between lg:flex-col lg:justify-center"
@@ -217,7 +217,7 @@
       </div>
 
       <div
-        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:py-0 lg:px-0 lg:border-b-0 lg:border-l lg:border-l-white h-full lg:pr-2 lg:pl-0.5 lg:py-8"
+        class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:px-0 lg:border-b-0 lg:border-l lg:border-l-white h-full lg:pr-2 lg:pl-0.5 lg:py-8"
       >
         <div
           class="flex items-center justify-between lg:flex-col lg:justify-center"
@@ -227,7 +227,7 @@
         </div>
       </div>
 
-      <div
+      <!--      <div
         class="border border-y-0 border-l-0 border-slate-300 py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 lg:border-r-0 h-full lg:py-2"
       >
         <div
@@ -235,10 +235,10 @@
         >
           <qrcode-vue :size="110" :value="value"></qrcode-vue>
         </div>
-      </div>
+      </div>-->
 
       <div
-        class="py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:place-self-center"
+        class="py-4 px-6 lg:py-0 lg:px-0 lg:border-b-0 h-full lg:place-self-center flex col-span-2"
       >
         <div
           class="flex items-center justify-center lg:flex-col lg:justify-center lg:pt-8 lg:pr-4"

@@ -40,11 +40,9 @@
           </p>
         </div>
       </div>
-      <div
-        v-if="vooDetalhes.Platform === 1"
-        class="flex justify-center mb-20 -mt-4 lg:mt-0"
-      >
+      <div v-if="!isQr" class="flex justify-center mb-20 -mt-4 lg:mt-0">
         <button
+          v-if="keyVooSelected === vooDetalhes.Key"
           class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0 font-bold"
           @click="goToPre"
         >
@@ -94,6 +92,14 @@ const props = defineProps({
     required: true,
     type: String,
     default: '',
+  },
+  keyVooSelected: {
+    type: String,
+    default: '',
+  },
+  isQr: {
+    type: Boolean,
+    default: false,
   },
 });
 const router = useRouter();

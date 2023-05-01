@@ -17,6 +17,7 @@
       <FlightDetalhes
         :voo-detalhes="viagem"
         :type-flight="typeFlight"
+        :key-voo-selected="keyVooSelected"
         @he-selected="$emit('heSelected', $event)"
       />
     </div>
@@ -42,6 +43,10 @@ defineProps({
   },
   typeFlight: {
     required: true,
+    type: String,
+    default: '',
+  },
+  keyVooSelected: {
     type: String,
     default: '',
   },
