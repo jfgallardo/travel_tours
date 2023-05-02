@@ -10,11 +10,15 @@
       @click="changeTab(tab)"
     >
       {{ $t(tab.name) }}
-      <div
+      <!--      <div
         class="text-xs text-center bg-gray-200 opacity-80 rounded-full text-black font-bold absolute py-1 px-2 -top-3.5 -right-2 w-24"
       >
         <span> {{ $t('components.badge-text') }}</span>
-      </div>
+      </div>-->
+      <span
+        class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20 absolute -top-3.5 -right-2"
+        >{{ $t('components.badge-text') }}</span
+      >
     </button>
   </div>
 </template>

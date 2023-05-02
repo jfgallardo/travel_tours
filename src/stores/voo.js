@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axiosClientAPI from '@/plugins/axios';
 import { useAlertStore } from '@/stores/alert';
 import { flightTransformation } from '@/utils/data-transformation';
+import Cookies from 'js-cookie';
 
 export const useVooStore = defineStore({
   id: 'voo',

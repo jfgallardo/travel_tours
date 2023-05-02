@@ -34,7 +34,7 @@
                 :cantidad-visible="5"
                 current-tab="IdaVoltaNoFlex"
                 type-flight="I"
-                @he-selected="selectVoo"
+                @he-selected="areSelected"
               />
             </div>
 
@@ -47,8 +47,17 @@
                 :cantidad-visible="5"
                 current-tab="IdaVoltaNoFlex"
                 type-flight="V"
-                @he-selected="selectVoo"
+                @he-selected="areSelected"
               />
+            </div>
+
+            <div v-if="areSelectedButton" class="flex justify-center py-3.5">
+              <button
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 flex items-center"
+              >
+                {{ $t('Próximo') }}
+                <CheckCircleIcon class="w-5 h-5 ml-2.5" />
+              </button>
             </div>
 
             <!-- <div v-if="steps === 2">
@@ -81,19 +90,22 @@ import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
 import { computed, ref } from 'vue';
 import { useFiltersStore } from '@/stores/filters';
 import LazyList from '@/components/Partials/LazyList.vue';
-import ShowVooSelected from '@/components/Voo/ShowVooSelected.vue';
+//import ShowVooSelected from '@/components/Voo/ShowVooSelected.vue';
+import { CheckCircleIcon } from '@heroicons/vue/24/solid';
+import Cookies from 'js-cookie';
 
 const vooStore = useVooStore();
 const filterStore = useFiltersStore();
-const steps = ref(0);
+const areSelectedButton = ref(false);
 
 const showData = computed(() => {
   return Object.keys(filterStore.flyFilters).length > 0;
 });
 
-const selectVoo = (e) => {
-  if (e === 'I') steps.value++;
-  if (e === 'V') steps.value++;
+const areSelected = () => {
+  const i = Cookies.get('I') ? JSON.parse(Cookies.get('I')) : null;
+  const v = Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
+  areSelectedButton.value = !!(i && v);
 };
 
 /**

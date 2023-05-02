@@ -57,7 +57,6 @@
 
 <template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch">
-    <!--  border-l  -->
     <div class="flex flex-col justify-around xl:w-full border-gray-300">
       <div
         v-if="width < 768 && !suspense"

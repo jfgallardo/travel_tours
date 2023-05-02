@@ -44,7 +44,7 @@
         <button
           v-if="keyVooSelected === vooDetalhes.Key"
           class="bg-blue-700 hover:bg-blue-800 text-white w-full py-2 absolute bottom-0 font-bold"
-          @click="goToPre"
+          @click="confirmSelection"
         >
           Confirmar seleçao
         </button>
@@ -147,6 +147,11 @@ const goToPre = () => {
   /*$cookies.set('vooSelectedKey', props.vooDetalhes.Key);
   userStore.vooSelected = props.vooDetalhes;
   router.push({ name: 'PreCheckoutPage' });*/
+  Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
+  emit('heSelected', props.typeFlight);
+};
+
+const confirmSelection = () => {
   Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
   emit('heSelected', props.typeFlight);
 };
