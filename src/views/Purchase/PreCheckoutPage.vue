@@ -23,7 +23,7 @@
                 stroke-linejoin="round"
               />
             </svg>
-            <p class="text-white">Veja outras opções de voos</p>
+            <p class="text-white">{{ t('Veja outras opções de voos') }}</p>
           </div>
         </div>
         <div class="basis-4/12 flex flex-col mx-auto p-8">
@@ -88,9 +88,11 @@ import ArrowRight from '@/components/Icons/ArrowRight.vue';
 import InterestingAccommodations from '@/components/Purchase/InterestingAccommodations.vue';
 import { onMounted } from 'vue';
 import { useRedisStore } from '@/stores/redis';
+import { useI18n } from 'vue-i18n';
 
 const redisStore = useRedisStore();
 const route = useRoute();
+const { t } = useI18n();
 
 onMounted(async () => {
   if (route.params.id) {

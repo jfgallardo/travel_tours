@@ -1,5 +1,9 @@
 {
+  "Mais": "More",
   "Próximo": "Next",
+  "Selecione outro voo": "Select another flight",
+  "Veja outras opções de voos": "See other flight options",
+  "Voltar para começar": "Return to start",
   "Vuelos en destaque": "Featured flights",
   "addressUser": {
     "bairro": "Neighborhood *",

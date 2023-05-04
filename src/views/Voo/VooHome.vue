@@ -54,15 +54,12 @@
             <div v-if="areSelectedButton" class="flex justify-center py-3.5">
               <button
                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 flex items-center"
+                @click="goToPre"
               >
                 {{ $t('Próximo') }}
                 <CheckCircleIcon class="w-5 h-5 ml-2.5" />
               </button>
             </div>
-
-            <!-- <div v-if="steps === 2">
-              <ShowVooSelected />
-            </div>-->
           </div>
         </template>
       </template>
@@ -90,13 +87,14 @@ import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
 import { computed, ref } from 'vue';
 import { useFiltersStore } from '@/stores/filters';
 import LazyList from '@/components/Partials/LazyList.vue';
-//import ShowVooSelected from '@/components/Voo/ShowVooSelected.vue';
 import { CheckCircleIcon } from '@heroicons/vue/24/solid';
 import Cookies from 'js-cookie';
+import { useRouter } from 'vue-router';
 
 const vooStore = useVooStore();
 const filterStore = useFiltersStore();
 const areSelectedButton = ref(false);
+const router = useRouter();
 
 const showData = computed(() => {
   return Object.keys(filterStore.flyFilters).length > 0;
@@ -108,12 +106,9 @@ const areSelected = () => {
   areSelectedButton.value = !!(i && v);
 };
 
-/**
- * 3 posibilidades:
- * 1. Solo ida (p1 y 2) (Ida > 0 y Volta = 0)
- * 2. Ida y vuelta (juntos) (p2) (Luego)
- * 3. Ida y vuelta separados (p1 y p2) (Ida > 0 y Vuelta > 0)
- */
+const goToPre = () => {
+  router.push({ name: 'PreCheckoutPage' });
+};
 </script>
 
 <style scoped></style>
