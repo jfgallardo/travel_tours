@@ -144,11 +144,8 @@ const precoBebe = computed(() => {
   return null;
 });
 const goToPre = () => {
-  /*$cookies.set('vooSelectedKey', props.vooDetalhes.Key);
-  userStore.vooSelected = props.vooDetalhes;
-  router.push({ name: 'PreCheckoutPage' });*/
-  Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
-  emit('heSelected', props.typeFlight);
+    Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
+    router.push({ name: 'PreCheckoutPage' });
 };
 
 const confirmSelection = () => {

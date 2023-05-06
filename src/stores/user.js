@@ -66,7 +66,7 @@ export const useUserStore = defineStore({
         } else {
           moment.locale(i18n.global.locale.value);
         }
-        return moment(this.outboundFlightOrigin.DataSaida).format(
+        return moment(this.outboundFlightOrigin.Saida).format(
           'dddd D MMM YYYY'
         );
       }

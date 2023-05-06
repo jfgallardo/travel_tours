@@ -1,7 +1,14 @@
 <template>
   <div class="mx-auto w-full mt-3.5 md:mt-0.5">
-    <pre>{{ vooI }}</pre>
-    <pre>{{ vooV }}</pre>
+    <template v-if="vooI">
+      <DisplayOutboundInformation
+        :voo-selected="vooI"
+        :show-buy-button="vooI && !vooV"
+      />
+    </template>
+    <template v-if="vooV">
+      <DisplayReturnInformation :voo-selected="vooV" :show-buy-button="true" />
+    </template>
   </div>
 </template>
 <script setup>
