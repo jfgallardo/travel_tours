@@ -1,9 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import axiosClientAPI from '@/plugins/axios';
 import { woobaDataRedis } from '@/utils/unifyDataWooba';
-import { useUserStore } from '@/stores/user';
 
-const userStore = useUserStore();
 export const useRedisStore = defineStore({
   id: 'redis',
   state: () => ({
@@ -16,7 +14,7 @@ export const useRedisStore = defineStore({
       await axiosClientAPI
         .get(`api/v1/find-travel/${id}`)
         .then(({ data }) => {
-          userStore.vooSelected = woobaDataRedis(data);
+          console.log(data);
         })
         .finally(() => {
           this.loadingSearch = false;

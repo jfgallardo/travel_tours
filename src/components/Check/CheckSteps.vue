@@ -49,7 +49,6 @@ import { simpleSchemaBuy } from '@/utils/validate';
 import { useAlertStore } from '@/stores/alert';
 import { useGeneralInformation } from '@/stores/generalInformation';
 import { useReserveStore } from '@/stores/reservar';
-import { useUserStore } from '@/stores/user';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import { useDateToJson } from '@/composables/dateToJson';
 
@@ -61,7 +60,6 @@ const auth = useAuthStore();
 const alertStore = useAlertStore();
 const informationStore = useGeneralInformation();
 const reserverStore = useReserveStore();
-const userStore = useUserStore();
 const purchaseStore = usePurchaseStore();
 
 const steps = [
@@ -135,7 +133,7 @@ const backStep = () => {
 
 const reservar = () => {
   const body = {
-    IdentificacaoDaViagem: userStore.vooSelected.Key,
+    IdentificacaoDaViagem: 'KeyPorAveriguar',
     Passageiros: passageiros(),
     Pagamento: {
       CartaoDeCredito: creditCard(),

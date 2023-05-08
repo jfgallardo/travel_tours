@@ -67,6 +67,9 @@ export const useAuthStore = defineStore({
     async forgotPassword(payload) {
       return await axiosClientAPI.post('/api/v1/forgot-password', payload);
     },
+    async logout() {
+      return await axiosClientAPI.post('/api/v1/logout');
+    },
   },
   persist: true,
 });

@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="relative">
-      <span class="text-gray-800 font-bold text-sm">{{ label }}</span>
+      <span class="text-gray-800 font-bold text-sm">{{ t(label) }}</span>
       <input
         v-model="value"
         v-maska="maska"
         name="coupon"
         type="text"
         :class="inputClassList"
-        :placeholder="placeholder"
+        :placeholder="t(placeholder)"
         :disabled="disableField"
         @blur="coupon = $event.target.value"
       />
@@ -42,6 +42,7 @@
 import { useField, useForm } from 'vee-validate';
 import { computed } from 'vue';
 import Toastify from 'toastify-js';
+import { useI18n } from 'vue-i18n';
 
 defineProps({
   label: {
@@ -61,6 +62,8 @@ defineProps({
     default: false,
   },
 });
+
+const { t } = useI18n();
 
 const simpleSchema = {
   coupon(value) {

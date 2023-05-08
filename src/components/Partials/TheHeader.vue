@@ -105,7 +105,7 @@
             <Dropddown>
               <template #selected>
                 <button
-                  v-if="userStore.user_logged"
+                  v-if="authStore.userLogged"
                   class="flex items-center p-2"
                 >
                   <UserCircle class="mr-1 h-5 w-5" />
@@ -239,16 +239,15 @@ import Login from '@/components/Auth/TheLogin.vue';
 import RegisterSubH from '@/components/Partials/TheRegisterSubH.vue';
 import { useI18n } from 'vue-i18n';
 import { ref, computed } from 'vue';
-import { useUserStore } from '@/stores/user';
 import PreCheckOutSubheading from '@/components/Partials/PreCheckOutSubheading.vue';
 import CheckOutSubheading from '@/components/Partials/CheckOutSubheading.vue';
 import Badge from '@/components/Partials/TheBadge.vue';
 import PaymentHeader from '@/components/Partials/ThePaymentHeader.vue';
+import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute();
 const { t } = useI18n();
-const userStore = useUserStore();
-
+const authStore = useAuthStore();
 const hiddenOf = ref(false);
 
 const showMainSubheading = computed(() => {

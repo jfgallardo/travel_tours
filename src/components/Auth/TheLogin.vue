@@ -198,17 +198,27 @@ const login = () => {
 };
 
 const logout = () => {
-  email.value = '';
-  password.value = '';
-  if (Cookies.get('token')) {
-    Cookies.remove('token');
-    authStore.$reset();
-  }
-  alertStore.showMsg({
-    message: 'Ha cerrado exitosamente la sesión.',
-    backgrColor: 'blue',
-    textColor: 'blue',
-  });
+  authStore
+    .logout()
+    .then(() => {
+      email.value = '';
+      password.value = '';
+      Cookies.remove('token');
+      authStore.$reset();
+      alertStore.showMsg({
+        message: 'Ha cerrado exitosamente la sesión.',
+        backgrColor: 'blue',
+        textColor: 'blue',
+      });
+    })
+    .catch((e) => {
+      const errorCode = e?.response?.data?.message || 'ServerError';
+      alertStore.showMsg({
+        message: errorCode,
+        backgrColor: 'red',
+        textColor: 'red',
+      });
+    });
 };
 </script>
 

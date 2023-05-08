@@ -71,7 +71,6 @@ import { computed, onMounted, ref } from 'vue';
 import QrcodeVue from 'qrcode.vue';
 import Cookies from 'js-cookie';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '@/stores/user';
 import { useI18n } from 'vue-i18n';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 
@@ -103,7 +102,6 @@ const props = defineProps({
   },
 });
 const router = useRouter();
-const userStore = useUserStore();
 const { t } = useI18n();
 const value = ref('');
 
@@ -144,8 +142,8 @@ const precoBebe = computed(() => {
   return null;
 });
 const goToPre = () => {
-    Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
-    router.push({ name: 'PreCheckoutPage' });
+  Cookies.set(props.typeFlight, JSON.stringify(props.vooDetalhes));
+  router.push({ name: 'PreCheckoutPage' });
 };
 
 const confirmSelection = () => {

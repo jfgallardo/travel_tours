@@ -1,9 +1,18 @@
 {
+  "Aerolínea": "CIA aérea",
+  "Bagagem": "Bagagem",
+  "Fees": "Tarifas",
+  "Insira seu cupom": "Insira seu cupom",
   "Mais": "Mais",
   "Próximo": "Próximo",
   "Selecione outro voo": "Selecione outro voo",
+  "Taxas e encargos": "Taxas e encargos",
+  "Tem um cupom?": "Tem um cupom?",
+  "Total para todos os passageiros": "Total para todos os passageiros",
+  "Valor total": "Valor total",
   "Veja outras opções de voos": "Veja outras opções de voos",
   "Voltar para começar": "Voltar para começar",
+  "Vuelo de Ida": "Voo de ida",
   "Vuelos en destaque": "Voos em destaque",
   "addressUser": {
     "bairro": "Bairro *",

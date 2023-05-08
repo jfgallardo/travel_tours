@@ -6,6 +6,7 @@
           <ClockOffers />
         </div>
         <div class="px-4">
+          <!--     VUELO DE IDA       -->
           <table
             class="table-fixed border border-gray-200 w-full border-spacing-2 border-separate"
           >
@@ -18,11 +19,11 @@
                       src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
                       alt="Icon Voo"
                     />
-                    <h3 class="font-semibold">Vuelo de Ida</h3>
+                    <h3 class="font-semibold">{{ t('Vuelo de Ida') }}</h3>
                   </div>
                   <div>
                     <h3 class="font-semibold lg:text-center">
-                      {{ user.outboundFlightOrigin.Origem.Descricao }}
+                      {{ travels.travel_one.Origem }}
                     </h3>
                   </div>
                 </td>
@@ -32,7 +33,7 @@
                   class="flex items-center justify-between border-t-2 border-gray-200 p-2"
                 >
                   <div class="text-sm lg:flex lg:flex-col lg:items-start">
-                    <h3>{{ user.outboundFlightOrigin.Origem.CodigoIata }}</h3>
+                    <h3>{{ travels.travel_one.Origem }}</h3>
                     <h3 class="font-bold lg:text-start">
                       {{ departureTime }} {{ departureTimeDayPeriod }}
                     </h3>
@@ -46,10 +47,10 @@
                   </div>
                   <div class="text-sm lg:flex lg:flex-col lg:items-end">
                     <h3>
-                      {{ user.outboundFlightDestination.Destino.CodigoIata }}
+                      {{ travels.travel_one.Destino }}
                     </h3>
                     <h3 class="font-bold lg:text-end">
-                      {{ checkIn }} {{ checkInDayPeriod }}
+                      {{ check.checkIn }} {{ check.checkInDayPeriod }}
                     </h3>
                     <h3>{{ dateStringIdaChegada }}</h3>
                   </div>
@@ -58,15 +59,15 @@
               <tr>
                 <td class="border-t-2 border-gray-200 p-2 text-sm">
                   <div class="flex items-center justify-between">
-                    <h3>Clase</h3>
+                    <h3>{{ t('querySubHeading.clase') }}</h3>
                     <h3 class="font-semibold">
-                      {{ user.outboundFlightOrigin.Cabine }}
+                      {{ travels.travel_one.Cabine }}
                     </h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>Areolinea</h3>
+                    <h3>{{ t('Aerolínea') }}</h3>
                     <h3 class="font-semibold">
-                      {{ user.vooSelected.CiaMandatoria.Descricao }}
+                      {{ travels.travel_one.CiaMandatoria }}
                     </h3>
                   </div>
                 </td>
@@ -76,51 +77,70 @@
                   class="flex flex-col space-y-4 border-t-2 border-gray-200 p-2"
                 >
                   <div class="flex items-center justify-between">
-                    <h3>Fees</h3>
-                    <h4 class="font-semibold">6.17</h4>
+                    <h3>{{ t('Fees') }}</h3>
+                    <h4 class="font-semibold">
+                      {{ travels.travel_one.Tarifas ? 'Tem' : 0 }}
+                    </h4>
                   </div>
+
                   <div
-                    v-if="user.vooSelected.Baggage"
-                    class="flex items-center space-x-2"
+                    v-if="travels.travel_one.Baggage.length"
+                    class="flex flex-col items-start space-y-1.5"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="w-4 h-4 text-blue-700"
+                    <template
+                      v-for="tar in travels.travel_one.Baggage"
+                      :key="tar.Tipo"
                     >
-                      <path
-                        fill-rule="evenodd"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <span> BAGAGEM </span>
+                      <div
+                        v-if="tar.Quantidade > 0"
+                        class="flex items-center justify-between w-full"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          class="w-6 h-6 text-blue-700"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span class="font-medium">
+                          {{ tar.TextoBagagem }}
+                        </span>
+                      </div>
+                    </template>
                   </div>
-                  <div v-else class="flex items-center space-x-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="w-4 h-4 text-blue-700"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <span>NÃO BAGAGEM </span>
-                  </div>
+                  <template v-else>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                        />
+                      </svg>
+
+                      <span>NO BAGAGEM</span>
+                    </div>
+                  </template>
                 </td>
               </tr>
             </tbody>
           </table>
+
+          <!--     VUELO DE VUELTA       -->
           <table
-            v-if="
-              user.vooSelected.VoosVolta &&
-              user.vooSelected.VoosVolta.length > 0
-            "
+            v-if="travels.travel_two"
             class="table-fixed border border-t-0 border-gray-200 w-full border-spacing-2 border-separate"
           >
             <tbody>
@@ -132,11 +152,13 @@
                       src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
                       alt="Icon Voo"
                     />
-                    <h3 class="font-semibold">Vuelo de Volta</h3>
+                    <h3 class="font-semibold">
+                      {{ t('detailsPage.vueloDevolta') }}
+                    </h3>
                   </div>
                   <div>
                     <h3 class="font-semibold">
-                      {{ user.returnFlightOrigin.Origem.Descricao }}
+                      {{ travels.travel_two.Origem }}
                     </h3>
                   </div>
                 </td>
@@ -146,7 +168,7 @@
                   class="flex items-center justify-between border-t-2 border-gray-200 p-2"
                 >
                   <div class="text-sm lg:flex lg:flex-col lg:items-start">
-                    <h3>{{ user.returnFlightOrigin.Origem.CodigoIata }}</h3>
+                    <h3>{{ travels.travel_two.Origem }}</h3>
                     <h3 class="font-bold lg:text-start">
                       {{ departureTimeVolta }} {{ departureTimeDayPeriodVolta }}
                     </h3>
@@ -160,10 +182,11 @@
                   </div>
                   <div class="text-sm lg:flex lg:flex-col lg:items-end">
                     <h3>
-                      {{ user.returnFlightDestination.Destino.CodigoIata }}
+                      {{ travels.travel_two.Destino }}
                     </h3>
                     <h3 class="font-bold lg:text-end">
-                      {{ checkInVolta }} {{ checkInDayPeriodVolta }}
+                      {{ checkVolta.checkInVolta }}
+                      {{ checkVolta.checkInDayPeriodVolta }}
                     </h3>
                     <h3>{{ dateStringIdaChegadaVolta }}</h3>
                   </div>
@@ -172,15 +195,15 @@
               <tr>
                 <td class="border-t-2 border-gray-200 p-2 text-sm">
                   <div class="flex items-center justify-between">
-                    <h3>Clase</h3>
+                    <h3>{{ t('querySubHeading.clase') }}</h3>
                     <h3 class="font-semibold">
-                      {{ user.returnFlightOrigin.Cabine }}
+                      {{ travels.travel_two.Cabine }}
                     </h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>Areolinea</h3>
+                    <h3>{{ t('Aerolínea') }}</h3>
                     <h3 class="font-semibold">
-                      {{ user.vooSelected.CiaMandatoria.Descricao }}
+                      {{ travels.travel_two.CiaMandatoria }}
                     </h3>
                   </div>
                 </td>
@@ -190,42 +213,61 @@
                   class="flex flex-col space-y-4 border-t-2 border-gray-200 p-2"
                 >
                   <div class="flex items-center justify-between">
-                    <h3>Fees</h3>
-                    <h4 class="font-semibold">6.17</h4>
+                    <h3>{{ t('Fees') }}</h3>
+                    <h4 class="font-semibold">
+                      {{ travels.travel_two.Tarifas ? 'Tem' : 0 }}
+                    </h4>
                   </div>
                   <div
-                    v-if="user.vooSelected.Baggage"
-                    class="flex items-center space-x-2"
+                    v-if="travels.travel_two.Baggage.length"
+                    class="flex flex-col items-start space-y-1.5"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="w-4 h-4 text-blue-700"
+                    <template
+                      v-for="tar in travels.travel_two.Baggage"
+                      :key="tar.Tipo"
                     >
-                      <path
-                        fill-rule="evenodd"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <span> BAGAGEM </span>
+                      <div
+                        v-if="tar.Quantidade > 0"
+                        class="flex items-center justify-between w-full"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          class="w-6 h-6 text-blue-700"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                        <span class="font-medium">
+                          {{ tar.TextoBagagem }}
+                        </span>
+                      </div>
+                    </template>
                   </div>
-                  <div v-else class="flex items-center space-x-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="w-4 h-4 text-blue-700"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <span>NÃO BAGAGEM </span>
-                  </div>
+                  <template v-else>
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                        />
+                      </svg>
+
+                      <span>NO BAGAGEM</span>
+                    </div>
+                  </template>
                 </td>
               </tr>
             </tbody>
@@ -240,18 +282,18 @@
                     <h3 class="font-bold">Passantes</h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>{{ t('adults', user.countAdulto) }}</h3>
-                    <h3 class="font-semibold">{{ user.countAdulto }}</h3>
+                    <h3>{{ t('adults', searchStore.adults) }}</h3>
+                    <h3 class="font-semibold">{{ searchStore.adults }}</h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>{{ t('children', user.countCrianca) }}</h3>
+                    <h3>{{ t('children', searchStore.teenagers) }}</h3>
                     <h3 class="font-semibold">
-                      {{ user.countCrianca }}
+                      {{ searchStore.teenagers }}
                     </h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>{{ t('babies', user.countBebe) }}</h3>
-                    <h3 class="font-semibold">{{ user.countBebe }}</h3>
+                    <h3>{{ t('babies', searchStore.babies) }}</h3>
+                    <h3 class="font-semibold">{{ searchStore.babies }}</h3>
                   </div>
                 </td>
               </tr>
@@ -267,15 +309,15 @@
                     <h3 class="font-bold">Tus Checões</h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>Total para todos os passageiros</h3>
-                    <h3 class="font-semibold">{{ ValorTotal }}</h3>
+                    <h3>{{ t('Total para todos os passageiros') }}</h3>
+                    <h3 class="font-semibold">{{ valorTotalPassenger }}</h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>Taxas e encargos</h3>
-                    <h3 class="font-semibold">{{ ValorTaxas }}</h3>
+                    <h3>{{ t('Taxas e encargos') }}</h3>
+                    <h3 class="font-semibold">{{ valorTaxas }}</h3>
                   </div>
                   <div class="flex items-center justify-between">
-                    <h3>Bagagem</h3>
+                    <h3>{{ t('Bagagem') }}</h3>
                     <h3 class="font-semibold">{{ valorBagagem }}</h3>
                   </div>
                 </td>
@@ -300,8 +342,8 @@
               <tr>
                 <td class="flex flex-col space-y-1.5 p-2">
                   <div class="flex items-center justify-between">
-                    <h1 class="font-bold text-xl">Valor total</h1>
-                    <h1>{{ ValorTotal }}</h1>
+                    <h1 class="font-bold text-xl">{{ t('Valor total') }}</h1>
+                    <h1>{{ valorTotal }}</h1>
                   </div>
                 </td>
               </tr>
@@ -317,7 +359,6 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/stores/user';
 import CouponButton from '@/components/Purchase/CouponButton.vue';
 import { computed } from 'vue';
 import moment from 'moment/min/moment-with-locales';
@@ -327,40 +368,71 @@ import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { RouterView } from 'vue-router';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
 import ClockOffers from '@/components/Purchase/ClockOffers.vue';
+import Cookies from 'js-cookie';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 
 momentDurationFormatSetup(moment);
 const { locale, t } = useI18n();
+const searchStore = useSearchOptionsVooStore();
 
-const user = useUserStore();
+const travels = computed(() => ({
+  travel_one: JSON.parse(Cookies.get('I')),
+  travel_two: Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null,
+}));
 
-const ValorTaxas = computed(() => {
+const valorTaxas = computed(() => {
+  const { travel_one, travel_two } = travels.value;
+  const totalTaxas =
+    (+travel_one?.ValorTotalTaxas || 0) +
+    (+travel_one?.ValorTxServico || 0) +
+    (+travel_two?.ValorTotalTaxas || 0) +
+    (+travel_two?.ValorTxServico || 0);
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: user.vooSelected.Preco.Taxa,
+    value: totalTaxas,
   });
 });
-const ValorTotal = computed(() => {
+
+const valorTotalPassenger = computed(() => {
+  const { travel_one, travel_two } = travels.value;
+  const totalPassenger =
+    (+travel_one?.ValorAdulto || 0) +
+    (+travel_one?.ValorBebe || 0) +
+    (+travel_one?.ValorCrianca || 0) +
+    (+travel_two?.ValorCrianca || 0) +
+    (+travel_two?.ValorAdulto || 0) +
+    (+travel_two?.ValorBebe || 0);
+
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: user.vooSelected.Preco.Total,
+    value: totalPassenger,
   });
 });
+
+const valorTotal = computed(() => {
+  const { travel_one, travel_two } = travels.value;
+  const total =
+    (+travel_one?.ValorTotalComTaxa || 0) +
+    (+travel_two?.ValorTotalComTaxa || 0);
+  return useCurrencyFormatter({
+    currency: 'BRL',
+    value: total,
+  });
+});
+
 const valorBagagem = computed(() => {
+  const { travel_one, travel_two } = travels.value;
+  const totalBagagem =
+    (+travel_one?.ValorTxServico || 0) + (+travel_two?.ValorTxServico || 0);
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: user.vooSelected.Preco.TotalTaxaBagagem,
+    value: totalBagagem,
   });
 });
 
+//TODO INFORMACION SOBRE VUELO DE IDA
 const departureTime = computed(() => {
-  const dateLocal = new Date(moment(user.outboundFlightOrigin.DataSaida));
-  return dateLocal.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-});
-const departureTimeVolta = computed(() => {
-  const dateLocal = new Date(moment(user.returnFlightOrigin.DataSaida));
+  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].Saida));
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -368,58 +440,103 @@ const departureTimeVolta = computed(() => {
 });
 
 const departureTimeDayPeriod = computed(() => {
-  const dateLocal = new Date(moment(user.outboundFlightOrigin.DataSaida));
-  const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
-});
-const departureTimeDayPeriodVolta = computed(() => {
-  const dateLocal = new Date(moment(user.returnFlightOrigin.DataSaida));
+  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].Saida));
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
 
-const checkIn = computed(() => {
-  const dateLocal = new Date(
-    moment(user.outboundFlightDestination.DataChegada)
-  );
-  return dateLocal.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-});
-const checkInVolta = computed(() => {
-  const dateLocal = new Date(moment(user.returnFlightDestination.DataChegada));
-  return dateLocal.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+const dateStringIdaSaida = computed(() => {
+  return formatDate(travels.value.travel_one.Voos[0].Saida);
 });
 
-const checkInDayPeriod = computed(() => {
-  const dateLocal = new Date(
-    moment(user.outboundFlightDestination.DataChegada)
-  );
-  const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
-});
-const checkInDayPeriodVolta = computed(() => {
-  const dateLocal = new Date(moment(user.returnFlightDestination.DataChegada));
-  const hours = dateLocal.getHours();
-  return hours >= 12 ? 'PM' : 'AM';
+const ParadaIda = computed(() => {
+  const voosIda =
+    travels.value.travel_one?.VoosIda ?? travels.value.travel_one?.Voos;
+  return getStops(voosIda);
 });
 
 const duracaoVoosIda = computed(() => {
+  const flag = travels.value.travel_one.Voos.length;
   return duration(
-    user.outboundFlightOrigin.DataSaida,
-    user.outboundFlightDestination.DataChegada
+    travels.value.travel_one.Voos[0].Saida,
+    travels.value.travel_one.Voos[flag - 1].Chegada
   );
 });
+
+const check = computed(() => {
+  const { Voos } = travels.value.travel_one;
+  const flag = Voos.length;
+  const dateLocal = new Date(moment(Voos[flag - 1].Chegada));
+  const { hour } = dateLocal;
+  const checkIn = dateLocal.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  const checkInDayPeriod = hour >= 12 ? 'PM' : 'AM';
+
+  return { checkIn, checkInDayPeriod };
+});
+
+const dateStringIdaChegada = computed(() => {
+  const { Voos } = travels.value.travel_one;
+  const flag = Voos.length;
+  return formatDate(Voos[flag - 1].Chegada);
+});
+
+//TODO INFORMACION SOBRE VUELO DE VUELTA
+const departureTimeVolta = computed(() => {
+  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].Saida));
+  return dateLocal.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+});
+
+const departureTimeDayPeriodVolta = computed(() => {
+  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].Saida));
+  const hours = dateLocal.getHours();
+  return hours >= 12 ? 'PM' : 'AM';
+});
+
+const checkVolta = computed(() => {
+  const { Voos } = travels.value.travel_two;
+  const flag = Voos.length;
+  const dateLocal = new Date(moment(Voos[flag - 1].Chegada));
+  const { hour } = dateLocal;
+  const checkInVolta = dateLocal.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  const checkInDayPeriodVolta = hour >= 12 ? 'PM' : 'AM';
+
+  return { checkInVolta, checkInDayPeriodVolta };
+});
+
+const dateStringIdaSaidaVolta = computed(() => {
+  return formatDate(travels.value.travel_two.Voos[0].Saida);
+});
+
+const ParadaVolta = computed(() => {
+  const voosVolta =
+    travels.value.travel_two?.VoosVolta || travels.value.travel_two?.Voos;
+  return getStops(voosVolta);
+});
+
 const duracaoVoosVolta = computed(() => {
+  const flag = travels.value.travel_two.Voos.length;
   return duration(
-    user.returnFlightOrigin.DataSaida,
-    user.returnFlightDestination.DataChegada
+    travels.value.travel_two.Voos[0].Saida,
+    travels.value.travel_two.Voos[flag - 1].Chegada
   );
 });
+
+const dateStringIdaChegadaVolta = computed(() => {
+  const { Voos } = travels.value.travel_two;
+  const flag = Voos.length;
+  return formatDate(Voos[flag - 1].Chegada);
+});
+
+//TODO COMMON
 const duration = (dataSaida, dataLlegada) => {
   const x = moment(dataSaida);
   const y = moment(dataLlegada);
@@ -428,46 +545,26 @@ const duration = (dataSaida, dataLlegada) => {
     .get('minutes')}min`;
 };
 
-const ParadaIda = computed(() => {
-  if (user.vooSelected.VoosIda) return getStops(user.vooSelected.VoosIda);
-  return getStops(user.vooSelected.Voos);
-});
-const ParadaVolta = computed(() => {
-  if (user.vooSelected.VoosVolta) return getStops(user.vooSelected.VoosVolta);
-  return '';
-});
 const getStops = (v) => {
   let stops = [];
   if (Array.isArray(v)) {
     v.forEach((e) => {
-      if (e.Conexao) {
-        stops.push(e.Origem.CodigoIata);
+      if (e.TempoEspera) {
+        stops.push(e.Origem);
       }
     });
   }
   if (stops.length === 0) {
     if (Array.isArray(v)) {
       let l = v.length;
-      stops.push(v[l - 1].Origem.CodigoIata);
+      stops.push(v[l - 1]?.Origem || 0);
     } else {
-      stops.push(v.Origem.CodigoIata);
+      stops.push(v.Origem);
     }
   }
   return `Parada(s): ${stops.join(', ')}`;
 };
 
-const dateStringIdaSaida = computed(() => {
-  return formatDate(user.outboundFlightOrigin.DataSaida);
-});
-const dateStringIdaChegada = computed(() => {
-  return formatDate(user.outboundFlightDestination.DataChegada);
-});
-const dateStringIdaSaidaVolta = computed(() => {
-  return formatDate(user.returnFlightOrigin.DataSaida);
-});
-const dateStringIdaChegadaVolta = computed(() => {
-  return formatDate(user.returnFlightDestination.DataChegada);
-});
 const formatDate = (date) => {
   if (locale.value === 'br') {
     moment.locale('pt-br');
@@ -476,6 +573,7 @@ const formatDate = (date) => {
   }
   return upperC(moment(date).format('DD MMM'));
 };
+
 const upperC = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };

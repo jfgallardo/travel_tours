@@ -226,14 +226,12 @@ import { computed, ref } from 'vue';
 import moment from 'moment/min/moment-with-locales';
 import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
-import { useUserStore } from '@/stores/user';
 import Modal from '@/components/Partials/TheModal.vue';
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/solid';
 import Cookies from 'js-cookie';
 import { useRouter } from 'vue-router';
 import i18n from '@/plugins/i18n';
 
-const userStore = useUserStore();
 const modal = ref(false);
 const router = useRouter();
 

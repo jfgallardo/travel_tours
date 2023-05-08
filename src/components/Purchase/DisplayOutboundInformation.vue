@@ -231,7 +231,6 @@ import { computed, ref } from 'vue';
 import moment from 'moment/min/moment-with-locales';
 import { useDateFormatter } from '@/composables/dateFormatter';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
-import { useUserStore } from '@/stores/user';
 import i18n from '@/plugins/i18n';
 import { ExclamationTriangleIcon } from '@heroicons/vue/24/solid';
 import Modal from '@/components/Partials/TheModal.vue';
@@ -251,7 +250,6 @@ const props = defineProps({
 
 const searchOptions = useSearchOptionsVooStore();
 const modal = ref(false);
-const userStore = useUserStore();
 const router = useRouter();
 
 const voos = computed(() =>

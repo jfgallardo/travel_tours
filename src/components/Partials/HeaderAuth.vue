@@ -102,7 +102,7 @@
             <Dropddown>
               <template #selected>
                 <button
-                  v-if="userStore.user_logged"
+                  v-if="authStore.userLogged"
                   class="flex items-center p-2"
                 >
                   <UserCircle class="mr-1 h-5 w-5" />
@@ -227,11 +227,11 @@ import Dropddown from '@/components/FormUI/TheDropddown.vue';
 import Login from '@/components/Auth/TheLogin.vue';
 import { useI18n } from 'vue-i18n';
 import { ref } from 'vue';
-import { useUserStore } from '@/stores/user';
 import Badge from '@/components/Partials/TheBadge.vue';
+import { useAuthStore } from '@/stores/auth';
 
 const { t } = useI18n();
-const userStore = useUserStore();
+const authStore = useAuthStore();
 
 const hiddenOf = ref(false);
 </script>

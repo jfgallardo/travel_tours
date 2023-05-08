@@ -89,7 +89,7 @@
               </template>
             </CollapseAccording>
           </template>
-          <div v-if="userStore.countCrianca > 0">
+          <div v-if="searchStore.teenagers > 0">
             <template
               v-for="(i, index) in purchaseStore.informationTeenagers"
               :key="index"
@@ -128,7 +128,7 @@
                     />
 
                     <InputGeneric
-                      v-if="i.documentSelected?.value === 'C'"
+                      v-show="i.documentSelected?.value === 'C'"
                       v-model="i.cpf_number"
                       v-cpf-mask
                       label="CPF *"
@@ -136,7 +136,7 @@
                       :validations="validations.cpf"
                     />
                     <passport-component
-                      v-if="i.documentSelected?.value === 'P'"
+                      v-show="i.documentSelected?.value === 'P'"
                       v-model:passport="i.passportNumber"
                       v-model:validate-date="i.validateDate"
                       v-model:date-issue="i.dateIssue"
@@ -150,7 +150,7 @@
               </CollapseAccording>
             </template>
           </div>
-          <div v-if="userStore.countBebe > 0">
+          <div v-if="searchStore.babies > 0">
             <template
               v-for="(i, index) in purchaseStore.informationBabies"
               :key="index"
@@ -187,7 +187,7 @@
                     />
 
                     <InputGeneric
-                      v-if="i.documentSelected?.value === 'C'"
+                      v-show="i.documentSelected?.value === 'C'"
                       v-model="i.cpf_number"
                       v-cpf-mask
                       label="CPF *"
@@ -195,7 +195,7 @@
                       :validations="validations.cpf"
                     />
                     <passport-component
-                      v-if="i.documentSelected?.value === 'P'"
+                      v-show="i.documentSelected?.value === 'P'"
                       v-model:passport="i.passportNumber"
                       v-model:validate-date="i.validateDate"
                       v-model:date-issue="i.dateIssue"
@@ -246,7 +246,6 @@ import { RouterLink } from 'vue-router';
 import { useAlertStore } from '@/stores/alert';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import PassportComponent from '@/components/FormUI/PassportComponent.vue';
-import { useUserStore } from '@/stores/user';
 import ModalSaveData from '@/components/SaveData/ModalSaveData.vue';
 import { usePassengerUserStore } from '@/stores/passenger';
 import InputGeneric from '@/components/FormUI/InputGeneric.vue';
@@ -256,6 +255,8 @@ import {
   emailValidation,
 } from '@/utils/validations';
 import Select from '@/components/FormUI/TheSelect.vue';
+import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
+import { useAuthStore } from '@/stores/auth';
 
 onMounted(() => {
   if (purchaseStore.informationAdults.length === 0) getArrayData();
@@ -263,9 +264,10 @@ onMounted(() => {
 const { t } = useI18n();
 const alertStore = useAlertStore();
 const purchaseStore = usePurchaseStore();
-const userStore = useUserStore();
+const searchStore = useSearchOptionsVooStore();
 const saveDataModal = ref(false);
 const passengerStore = usePassengerUserStore();
+const authStore = useAuthStore();
 const pass = ref(null);
 
 const $cookies = inject('$cookies');
@@ -293,7 +295,7 @@ const validations = computed(() => {
   };
 });
 const useData = () => {
-  if (!$cookies.isKey('dataUser')) {
+  if (!authStore.userLogged) {
     alertStore.showMsg({
       message: 'Para el uso de esta funcionalidad precisa ingresar a su cuenta',
       backgrColor: 'red',
@@ -332,7 +334,7 @@ const useData = () => {
 };
 
 const getArrayData = () => {
-  for (let i = 0; i < userStore.countAdulto; i++) {
+  for (let i = 0; i < searchStore.adults; i++) {
     purchaseStore.informationAdults.push({
       email: '',
       name: '',
@@ -348,8 +350,8 @@ const getArrayData = () => {
     });
   }
 
-  if (userStore.countCrianca > 0) {
-    for (let i = 0; i < userStore.countCrianca; i++) {
+  if (searchStore.teenagers > 0) {
+    for (let i = 0; i < searchStore.teenagers; i++) {
       purchaseStore.informationTeenagers.push({
         email: '',
         name: '',
@@ -365,8 +367,8 @@ const getArrayData = () => {
       });
     }
   }
-  if (userStore.countBebe > 0) {
-    for (let i = 0; i < userStore.countBebe; i++) {
+  if (searchStore.babies > 0) {
+    for (let i = 0; i < searchStore.babies; i++) {
       purchaseStore.informationBabies.push({
         email: '',
         name: '',

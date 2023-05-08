@@ -1,9 +1,18 @@
 {
+  "Aerolínea": "Aerolínea",
+  "Bagagem": "Equipaje",
+  "Fees": "Honorarios",
+  "Insira seu cupom": "Inserta tu cupón",
   "Mais": "Más vuelos",
   "Próximo": "Próximo",
   "Selecione outro voo": "Seleccione otro vuelo",
+  "Taxas e encargos": "Tarifas y cargos",
+  "Tem um cupom?": "¿Tienes un cupón?",
+  "Total para todos os passageiros": "Total para todos los pasajeros",
+  "Valor total": "Valor total",
   "Veja outras opções de voos": "Ver otras opciones de vuelo",
   "Voltar para começar": "Retornar al inicio",
+  "Vuelo de Ida": "Vuelo de Ida",
   "Vuelos en destaque": "Vuelos en destaque",
   "addressUser": {
     "bairro": "Vecindario *",

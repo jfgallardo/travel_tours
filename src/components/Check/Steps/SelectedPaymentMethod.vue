@@ -71,12 +71,10 @@ import TextInput from '@/components/FormUI/TextInput.vue';
 import validateInfo from '@/plugins/validate-card';
 import TheSelect from '@/components/FormUI/TheSelect.vue';
 import { useRateStore } from '@/stores/rate';
-import { useUserStore } from '@/stores/user';
 import { useGeneralInformation } from '@/stores/generalInformation';
 
 const creditCardMessage = ref();
 const creditCardVariant = ref();
-const userStore = useUserStore();
 const rateStore = useRateStore();
 const informationStore = useGeneralInformation();
 const $cookies = inject('$cookies');
@@ -107,7 +105,7 @@ watch(
 const tarifar = () => {
   rateStore.loading = true;
   const body = {
-    ViagemIda: userStore.vooSelected.Id.toString(),
+    ViagemIda: 'KEY POR AVERIGUAR',
     IdentificacaoDaViagem: $cookies.get('vooSelectedKey'),
     RetornarPlanoDeFinanciamento: true,
     TarifarMelhorPreco: true,

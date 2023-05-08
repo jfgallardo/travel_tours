@@ -41,13 +41,6 @@ import CommunityTravelerPhotos from '@/components/Landing/LandingCommunityTravel
 import CommunityFeedback from '@/components/Landing/LandingCommunityFeedback.vue';
 import Instagram from '@/components/Landing/LandingInstagram.vue';
 import Greeting from '@/components/Landing/LandinGreeting.vue';
-import { useUserStore } from '@/stores/user';
-
-const userStore = useUserStore();
-
-onMounted(() => {
-  userStore.resetState();
-});
 </script>
 
 <style scoped></style>

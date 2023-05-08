@@ -16,4 +16,19 @@ axiosClientAPI.interceptors.request.use((config) => {
   return config;
 });
 
-export default axiosClientAPI;
+const axiosClientLocalAPI = axios.create({
+  baseURL: 'http://localhost:8000',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  },
+});
+axiosClientLocalAPI.interceptors.request.use((config) => {
+  const token = Cookies.get('token');
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+export default axiosClientLocalAPI;
