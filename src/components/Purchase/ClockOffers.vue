@@ -1,7 +1,7 @@
 <template>
   <div v-if="small">
     <div
-      class="bg-gray-200 rounded-full text-blue-700 px-2.5 text-xs font-medium h-9 md:h-8 flex items-center justify-between"
+      class="pr-4 bg-gray-200 rounded-full text-blue-700 px-2.5 text-xs font-medium h-9 md:h-8 flex items-center justify-between"
     >
       <svg
         class="w-6 h-6"
@@ -23,7 +23,7 @@
   </div>
   <div
     v-else
-    class="bg-gray-200 text-blue-700 px-2.5 text-xs font-medium h-9 md:h-12 flex items-center justify-between w-full"
+    class="pr-4 bg-gray-200 text-blue-700 px-2.5 text-xs font-medium h-9 md:h-12 flex items-center justify-between w-full"
   >
     <div class="flex items-center space-x-3.5">
       <svg

@@ -19,24 +19,25 @@
             <span class="mx-5">{{ t('babies') }}</span>
             <span>{{ precoBebe }}</span>
           </p>
-          <p
-            v-if="false"
-            class="flex items-center justify-between border-y py-2 border-gray-300 text-red-500"
-          >
-            <span class="mx-5">Descuento (-30%)</span>
-            <span>-$484</span>
-          </p>
           <p class="flex items-center justify-between">
             <span class="mx-5">Taxas y encargos</span>
             <span>{{ ValorTaxas }}</span>
           </p>
+          <p class="flex items-center justify-between pb-2">
+            <span class="mx-5">SubTotal</span>
+            <span>{{ SubTotal }}</span>
+          </p>
           <p
-            class="flex items-center justify-between border-b border-dashed pb-2 border-gray-300"
+            class="flex items-center justify-between border-y py-2 border-gray-300 text-red-700"
           >
-            <span class="mx-5">Valor Total</span>
-            <span class="text-xl xl:text-sm font-semibold">{{
-              ValorTotal
-            }}</span>
+            <span class="mx-5">Descuento (-30%)</span>
+            <span>-$484</span>
+          </p>
+          <p
+            class="flex items-center justify-between px-0 py-4 border-b border-dashed border-gray-300"
+          >
+            <span class="mx-5">Total</span>
+            <span class="text-black font-bold text-2xl">{{ ValorTotal }}</span>
           </p>
         </div>
       </div>
@@ -114,7 +115,14 @@ const ValorTaxas = computed(() => {
 const ValorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.Preco,
+    value: props.vooDetalhes.ValorTotalComTaxa,
+  });
+});
+
+const SubTotal = computed(() => {
+  return useCurrencyFormatter({
+    currency: 'BRL',
+    value: props.vooDetalhes.Preco - props.vooDetalhes.ValorTotalTaxas,
   });
 });
 const precoAdulto = computed(() => {

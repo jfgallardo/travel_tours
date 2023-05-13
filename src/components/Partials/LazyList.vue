@@ -44,11 +44,11 @@
     </div>
     <div v-else>
       <button
-        class="flex items-center text-blue-600 text-sm font-medium mb-5 hover:cursor-pointer px-2.5 py-1.5 float-right hover:text-blue-800"
+        class="flex items-center text-black text-sm font-medium mb-5 px-2.5 py-1.5 float-right"
         @click="selectDifferentOption"
       >
         {{ t('Selecione outro voo') }}
-        <ArrowPathIcon class="h-4 w-4 ml-1.5" />
+        <MagnifyingGlassIcon class="h-4 w-4 ml-1.5 text-black" />
       </button>
       <div class="border my-3.5">
         <RenderFlightsMany
@@ -68,7 +68,7 @@ import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
 import Cookies from 'js-cookie';
 import { onMounted, ref, watch } from 'vue';
 import RenderFlightsMany from '@/components/Aereo/RenderFlightsMany.vue';
-import { ArrowPathIcon } from '@heroicons/vue/24/solid';
+import { ArrowPathIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({

@@ -112,7 +112,10 @@
           class="flex flex-col items-start space-y-1.5"
         >
           <template v-for="tar in vooSelected.Baggage" :key="tar.Tipo">
-            <div v-if="tar.Quantidade > 0" class="flex items-center space-x-8">
+            <div
+              v-if="tar.Quantidade > 0"
+              class="flex items-center w-full justify-between"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

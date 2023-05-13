@@ -13,7 +13,7 @@
       </div>
       <RenderFlightsMany :viagem="viagem" :type-flight="typeFlight" />
     </div>
-    <div class="w-1/5 border-l border-gray-300 relative">
+    <div class="w-2/5 border-l border-gray-300 relative">
       <FlightDetalhes
         :voo-detalhes="viagem"
         :type-flight="typeFlight"

@@ -19,7 +19,7 @@
           <ul>
             <li>{{ Origem }}</li>
             <li>{{ dateStringSaida }}</li>
-            <li>{{ ciaMandatoria }} - {{ Numero }}</li>
+            <li>{{ Numero }}</li>
           </ul>
         </div>
       </div>
@@ -53,7 +53,7 @@
           <ul>
             <li>{{ Destino }}</li>
             <li>{{ dateStringChegada }}</li>
-            <li>{{ ciaMandatoria }} - {{ Numero }}</li>
+            <li>{{ Numero }}</li>
           </ul>
         </div>
       </div>
@@ -178,7 +178,7 @@ const props = defineProps({
   Numero: {
     type: [Number, String],
   },
-  ciaMandatoria: {
+  CiaMandatoria: {
     type: Object,
     default: () => {},
   },
