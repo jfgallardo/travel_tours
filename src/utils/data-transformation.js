@@ -14,8 +14,7 @@ export const flightTransformation = (arregloOriginal, platform) => {
     1: 'PrimeiraClasse',
     2: 'Executiva',
   };
-  return arregloOriginal.map((o) => {
-    const item = o[0];
+  return arregloOriginal.map((item) => {
     return {
       Platform: platform,
       Origem: item.Origem,

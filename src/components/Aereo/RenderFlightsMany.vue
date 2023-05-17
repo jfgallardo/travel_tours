@@ -4,21 +4,9 @@
       <div class="w-full py-5">
         <div class="flex flex-row items-center justify-between px-10">
           <div class="flex flex-col items-center space-y-3">
-            <img
-              v-if="initial_flight.Icone"
-              :src="initial_flight.Icone"
-              alt="Icone"
-            />
-            <PhotoIcon v-else class="h-10 w-10" />
-            <div class="space-x-1 space-y-2 text-sm">
-              <p
-                v-for="(item, index) in flight_numbers"
-                :key="index"
-                class="text-center rounded-full bg-blue-100 px-1.5 py-0.5 text-blue-700 grow"
-              >
-                {{ item }}
-              </p>
-            </div>
+            <span class="text-xl">
+              {{ viagem.CiaMandatoria }}
+            </span>
           </div>
 
           <div>

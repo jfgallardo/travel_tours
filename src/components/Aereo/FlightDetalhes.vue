@@ -4,33 +4,33 @@
       v-if="vooDetalhes"
       class="grid grid-rows-auto auto-rows-max gap-3.5 2xl:gap-1 content-start"
     >
-      <div class="mt-5 2xl:mt-0.5 px-2 mb-3">
+      <div class="mt-5 2xl:mt-0.5 px-5 mb-3">
         <div class="space-y-1 text-sm font-light">
           <br />
           <p v-if="precoAdulto" class="flex items-center justify-between">
-            <span class="mx-5">{{ t('adults') }}</span>
+            <span>{{ t('adults') }}</span>
             <span>{{ precoAdulto }}</span>
           </p>
           <p v-if="precoCrianca" class="flex items-center justify-between">
-            <span class="mx-5">{{ t('children') }}</span>
+            <span>{{ t('children') }}</span>
             <span>{{ precoCrianca }}</span>
           </p>
           <p v-if="precoBebe" class="flex items-center justify-between">
-            <span class="mx-5">{{ t('babies') }}</span>
+            <span>{{ t('babies') }}</span>
             <span>{{ precoBebe }}</span>
           </p>
           <p class="flex items-center justify-between">
-            <span class="mx-5">Taxas y encargos</span>
+            <span>Taxas y encargos</span>
             <span>{{ ValorTaxas }}</span>
           </p>
           <p class="flex items-center justify-between pb-2">
-            <span class="mx-5">SubTotal</span>
+            <span>SubTotal</span>
             <span>{{ SubTotal }}</span>
           </p>
           <p
             class="flex items-center justify-between border-y py-2 border-gray-300 text-red-700"
           >
-            <span class="mx-5">Descuento (-30%)</span>
+            <span>Descuento (-30%)</span>
             <span>-$484</span>
           </p>
           <p

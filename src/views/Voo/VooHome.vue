@@ -10,9 +10,6 @@
       <template v-if="showData">
         <template v-if="vooStore.Ida.length > 0 && vooStore.Volta.length === 0">
           <div class="flex flex-col px-8">
-            <p class="font-medium">
-              {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
-            </p>
             <LazyList
               :objetos="filterStore.flyFilters.Ida"
               :cantidad-visible="5"
@@ -24,11 +21,11 @@
         <template
           v-else-if="vooStore.Ida.length > 0 && vooStore.Volta.length > 0"
         >
-          <div class="flex flex-col px-8">
-            <div>
-              <p class="font-medium">
-                {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
-              </p>
+          <div :class="containerClasses">
+            <div
+              class="flex flex-col justify-between px-8"
+              :class="{ 'w-full': areSelectedButton }"
+            >
               <LazyList
                 :objetos="filterStore.flyFilters.Ida"
                 :cantidad-visible="5"
@@ -36,12 +33,7 @@
                 type-flight="I"
                 @he-selected="areSelected"
               />
-            </div>
 
-            <div>
-              <p class="font-medium">
-                {{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}
-              </p>
               <LazyList
                 :objetos="filterStore.flyFilters.Volta"
                 :cantidad-visible="5"
@@ -50,15 +42,11 @@
                 @he-selected="areSelected"
               />
             </div>
-
-            <div v-if="areSelectedButton" class="flex justify-center py-3.5">
-              <button
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 flex items-center"
-                @click="goToPre"
-              >
-                {{ $t('Próximo') }}
-                <CheckCircleIcon class="w-5 h-5 ml-2.5" />
-              </button>
+            <div
+              v-if="areSelectedButton"
+              class="w-2/5 border border-gray-300 relative"
+            >
+              <FlightDetalhesManual />
             </div>
           </div>
         </template>
@@ -87,14 +75,12 @@ import SkeletonSearch from '@/components/Partials/SkeletonSearch.vue';
 import { computed, ref } from 'vue';
 import { useFiltersStore } from '@/stores/filters';
 import LazyList from '@/components/Partials/LazyList.vue';
-import { CheckCircleIcon } from '@heroicons/vue/24/solid';
 import Cookies from 'js-cookie';
-import { useRouter } from 'vue-router';
+import FlightDetalhesManual from '@/components/Aereo/FlightDetalhesManual.vue';
 
 const vooStore = useVooStore();
 const filterStore = useFiltersStore();
 const areSelectedButton = ref(false);
-const router = useRouter();
 
 const showData = computed(() => {
   return Object.keys(filterStore.flyFilters).length > 0;
@@ -106,9 +92,16 @@ const areSelected = () => {
   areSelectedButton.value = !!(i && v);
 };
 
-const goToPre = () => {
-  router.push({ name: 'PreCheckoutPage' });
-};
+const containerClasses = computed(() => {
+  return {
+    'flex flex-col xl:flex-row 2xl:items-stretch space-x-3 w-full h-full mx-auto px-4':
+      isRowLayout.value,
+  };
+});
+
+const isRowLayout = computed(() => {
+  return areSelectedButton.value;
+});
 </script>
 
 <style scoped></style>

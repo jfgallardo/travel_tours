@@ -309,14 +309,17 @@ const tarifa = computed(() => {
 const valorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooSelected.ValorTotalComTaxa,
+    value: vooOne.value.ValorTotalComTaxa + vooTwo.value.ValorTotalComTaxa,
   });
 });
 
 const valorTotalTaxas = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooSelected.ValorTotalTaxas + props.vooSelected.ValorTxServico,
+    value:
+      vooOne.value.ValorTotalTaxas +
+      vooOne.value.ValorTxServico +
+      (vooTwo.value.ValorTotalTaxas + vooTwo.value.ValorTxServico),
   });
 });
 
@@ -347,6 +350,14 @@ const dateVooVolta = computed(() => {
     i18n.global.locale.value === 'br' ? 'pt-br' : i18n.global.locale.value
   );
   return moment(initialFlight.value.Saida).format('dddd D MMM YYYY');
+});
+
+const vooOne = computed(() => {
+  return Cookies.get('I') ? JSON.parse(Cookies.get('I')) : null;
+});
+
+const vooTwo = computed(() => {
+  return Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
 });
 </script>
 

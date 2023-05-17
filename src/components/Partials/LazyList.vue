@@ -1,64 +1,81 @@
 <template>
-  <Transition name="voo">
-    <div v-if="!seeSelectedOption" ref="scrollContainer">
-      <TransitionGroup name="list" tag="ul">
-        <div v-for="(objeto, index) in objetosVisibles" :key="index">
-          <div class="flex items-center border mt-5">
-            <div v-if="currentTab === 'IdaVoltaNoFlex'" class="px-1.5">
-              <input
-                ref="inputCheck"
-                type="checkbox"
-                class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0 m-2"
-                @click="selectFligth($event, objeto)"
-              />
-            </div>
-            <div class="w-full">
-              <component
-                :is="tabs[currentTab]"
-                :viagem="objeto"
-                :type-flight="typeFlight"
-                :key-voo-selected="keyVooSelected"
-                @he-selected="selectionConfirmed"
-              ></component>
-            </div>
+  <div v-if="!seeSelectedOption" ref="scrollContainer">
+    <TransitionGroup name="list" tag="ul">
+      <p class="font-medium p-2.5">
+        {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
+      </p>
+      <div v-for="(objeto, index) in objetosVisibles" :key="index">
+        <div
+          :class="{
+            'flex mb-3.5 border-0 mt-0': currentTab === 'IdaVoltaNoFlex',
+          }"
+          class="border mt-3.5"
+        >
+          <div
+            v-if="currentTab === 'IdaVoltaNoFlex'"
+            class="border border-r-0 border-gray-300 flex items-center"
+          >
+            <input
+              ref="inputCheck"
+              type="checkbox"
+              class="text-zinc-800 cursor-pointer rounded-full w-5 h-5 focus:ring-0 m-2"
+              @click="selectFligth($event, objeto)"
+            />
           </div>
+          <component
+            :is="tabs[currentTab]"
+            :viagem="objeto"
+            :type-flight="typeFlight"
+            :key-voo-selected="keyVooSelected"
+            @he-selected="selectionConfirmed"
+          ></component>
         </div>
-      </TransitionGroup>
-
-      <div class="mx-auto text-center">
-        <button
-          v-if="objetos.length === objetosVisibles.length"
-          class="text-center bg-blue-700 text-white px-10 py-2 mt-3.5"
-          @click="onTop"
-        >
-          {{ t('Voltar para começar') }}
-        </button>
-        <button
-          v-else
-          class="text-center bg-blue-700 text-white px-10 py-2 mt-3.5"
-          @click="actualizarObjetosVisibles"
-        >
-          {{ t('Mais') }}
-        </button>
       </div>
-    </div>
-    <div v-else>
+    </TransitionGroup>
+
+    <div class="mx-auto text-center">
       <button
-        class="flex items-center text-black text-sm font-medium mb-5 px-2.5 py-1.5 float-right"
+        v-if="objetos.length === objetosVisibles.length"
+        class="text-center bg-blue-700 text-white px-10 py-2 mt-3.5"
+        @click="onTop"
+      >
+        {{ t('Voltar para começar') }}
+      </button>
+      <button
+        v-else
+        class="text-center bg-blue-700 text-white px-10 py-2 mt-3.5"
+        @click="actualizarObjetosVisibles"
+      >
+        {{ t('Mais') }}
+      </button>
+    </div>
+  </div>
+  <div v-else>
+    <div
+      class="flex items-center justify-between border border-b-0 border-gray-300 p-2.5"
+    >
+      <p v-if="typeFlight === 'I'" class="font-medium">
+        {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
+      </p>
+      <p v-else class="font-medium">
+        {{ $t('idaVoltaFlexRender.vuelosDeVuelta') }}
+      </p>
+      <button
+        class="flex items-center text-black text-sm font-medium px-2.5"
         @click="selectDifferentOption"
       >
         {{ t('Selecione outro voo') }}
-        <MagnifyingGlassIcon class="h-4 w-4 ml-1.5 text-black" />
+        <MagnifyingGlassIcon class="h-5 w-5 ml-1.5 text-black" />
       </button>
-      <div class="border my-3.5">
-        <RenderFlightsMany
-          v-if="selectedOption"
-          :viagem="selectedOption"
-          :type-flight="typeFlight"
-        />
-      </div>
     </div>
-  </Transition>
+    <div class="flex flex-col justify-around xl:w-full border border-gray-300">
+      <RenderFlightsMany
+        v-if="selectedOption"
+        :viagem="selectedOption"
+        :type-flight="typeFlight"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -68,7 +85,7 @@ import IdaVoltaNoFlex from '@/components/Aereo/IdaVoltaNoFlexRender.vue';
 import Cookies from 'js-cookie';
 import { onMounted, ref, watch } from 'vue';
 import RenderFlightsMany from '@/components/Aereo/RenderFlightsMany.vue';
-import { ArrowPathIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
@@ -174,24 +191,4 @@ const selectDifferentOption = () => {
 };
 </script>
 
-<style scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.voo-enter-active,
-.voo-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.voo-enter-from,
-.voo-leave-to {
-  opacity: 0;
-}
-</style>
+<style scoped></style>

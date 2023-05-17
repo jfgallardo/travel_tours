@@ -73,42 +73,6 @@
         </div>
       </div>
       <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
-        <!--        <div
-          v-if="initialFlight.BagagemInclusa"
-          class="flex items-center justify-between h-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-4 h-4 text-blue-700"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <span> {{ initialFlight.BagagemQuantidade }} BAGAGEM DE MÃO </span>
-        </div>
-        <div v-else class="flex items-center justify-between h-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-            />
-          </svg>
-
-          <span>NO BAGAGEM</span>
-        </div>-->
         <div
           v-if="vooSelected.Baggage.length"
           class="flex flex-col items-start space-y-1.5"
@@ -155,9 +119,7 @@
           </div>
         </template>
       </div>
-      <template
-        v-if="vooSelected.VoosVolta && vooSelected.VoosVolta.length === 0"
-      >
+      <template v-if="vooOne && !vooTwo">
         <div class="border-t-0 lg:border-l-0 lg:border-r-0 border-slate-300">
           <div class="grid grid-cols-3 grid-rows-1 h-full">
             <div
@@ -354,6 +316,14 @@ const verifyAccountUser = () => {
     router.push({ path: 'checkout' });
   }
 };
+
+const vooOne = computed(() => {
+  return Cookies.get('I') ? JSON.parse(Cookies.get('I')) : null;
+});
+
+const vooTwo = computed(() => {
+  return Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
+});
 </script>
 
 <style scoped></style>

@@ -1,60 +1,3 @@
-<!--<template>
-  <div class="flex flex-col xl:flex-row 2xl:items-stretch px-6 py-2">
-    <div class="flex flex-col justify-around border border-gray-300 xl:w-full">
-      <div
-        class="border-b border-gray-300 py-2"
-        :class="{ 'self-center': !isVooIda }"
-      >
-        <span class="px-4 font-medium">{{
-          $t('idaVoltaFlexRender.vuelosDeIda')
-        }}</span>
-      </div>
-      <div
-        v-if="width < 768 && !suspense"
-        class="border-b border-t-0 py-2 flex items-center justify-evenly"
-      >
-        <div :id="`${keyIdIda}Picture`"></div>
-        <div :id="keyIdIda"></div>
-      </div>
-      <div>
-        <RenderFlights
-          :key-id="keyIdIda"
-          :flights="viagem['VoosIda']"
-          @select-voo="vooDetalhesOutboundFlights"
-        />
-      </div>
-
-      <template v-if="isVooIda">
-        <div class="border-y border-gray-300 py-2">
-          <span class="px-4 font-medium">{{
-            $t('idaVoltaFlexRender.vuelosDeVuelta')
-          }}</span>
-        </div>
-        <div
-          v-if="width < 768 && !suspense"
-          class="border-b border-t-0 py-2 flex items-center justify-evenly"
-        >
-          <div :id="`${keyIdVolta}Picture`"></div>
-          <div :id="keyIdVolta"></div>
-        </div>
-        <div>
-          <RenderFlights
-            :flights="viagem['VoosVolta']"
-            :key-id="keyIdVolta"
-            @select-voo="vooDetalhesReturnFlights"
-          />
-        </div>
-      </template>
-    </div>
-
-    <div
-      class="border border-t-0 xl:border-t xl:border-l-0 xl:border-b-0 border-gray-300 relative"
-    >
-      <FlightDetalhes :voo-detalhes="viagem" />
-    </div>
-  </div>
-</template>-->
-
 <template>
   <div class="flex flex-col xl:flex-row 2xl:items-stretch">
     <div class="flex flex-col justify-around xl:w-full border-gray-300">
@@ -67,7 +10,7 @@
       </div>
       <RenderFlightsMany :viagem="viagem" :type-flight="typeFlight" />
     </div>
-    <div class="w-1/5 border-l border-gray-300 relative">
+    <div class="w-2/5 border-l border-gray-300 relative">
       <FlightDetalhes
         :voo-detalhes="viagem"
         :type-flight="typeFlight"
