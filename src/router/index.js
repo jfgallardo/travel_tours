@@ -121,7 +121,7 @@ const router = createRouter({
           ],
         },
         {
-          path: 'precheckout/:id?',
+          path: 'precheckout/:voo_one?/:voo_two?',
           name: 'PreCheckoutPage',
           component: PreCheckoutPage,
           props: true,

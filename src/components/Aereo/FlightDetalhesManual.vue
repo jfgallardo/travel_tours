@@ -64,7 +64,7 @@ import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 
 onMounted(() => {
   if (vooOne.value && vooTwo.value) {
-    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${vooOne.value.Id}/${vooTwo.value.Id}`;
+    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${vooOne.value.Key}/${vooTwo.value.Key}`;
   }
 });
 

@@ -18,14 +18,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
 import RenderFlightsMany from '@/components/Aereo/RenderFlightsMany.vue';
 import FlightDetalhes from '@/components/Aereo/FlightDetalhes.vue';
-import { useWindowSize } from '@vueuse/core';
-
-onMounted(() => {
-  suspense.value = false;
-});
 
 defineEmits(['heSelected']);
 
@@ -43,20 +37,6 @@ defineProps({
     type: String,
     default: '',
   },
-});
-
-const { width } = useWindowSize();
-const suspense = ref(true);
-
-const keyIdIda = computed(() => {
-  let stringAleatoria = '';
-  let caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  for (let i = 0; i < 10; i++) {
-    stringAleatoria += caracteres.charAt(
-      Math.floor(Math.random() * caracteres.length)
-    );
-  }
-  return stringAleatoria;
 });
 </script>
 

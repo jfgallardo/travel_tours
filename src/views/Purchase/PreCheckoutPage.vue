@@ -95,8 +95,11 @@ const route = useRoute();
 const { t } = useI18n();
 
 onMounted(async () => {
-  if (route.params.id) {
-    await redisStore.findVooSelected(route.params.id);
+  if (route.params) {
+    if (route.params.voo_one)
+      await redisStore.findVooOneSelected(route.params.voo_one);
+    if (route.params.voo_two)
+      await redisStore.findVooTwoSelected(route.params.voo_two);
   }
 });
 

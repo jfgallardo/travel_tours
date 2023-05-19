@@ -14,6 +14,39 @@ export const flightTransformation = (arregloOriginal, platform) => {
     1: 'PrimeiraClasse',
     2: 'Executiva',
   };
+
+  if (!Array.isArray(arregloOriginal)) {
+    return {
+      Platform: platform,
+      Origem: arregloOriginal.Origem,
+      Destino: arregloOriginal.Destino,
+      TempoTotal: arregloOriginal.TempoTotalStr,
+      Preco: arregloOriginal.ValorTotal,
+      VoosIda: [],
+      VoosVolta: [],
+      Voos: platform === 1 ? arregloOriginal.Voos : [],
+      Key: arregloOriginal.Token,
+      Id: arregloOriginal.FlightCode,
+      NumeroParadas: platform === 1 ? arregloOriginal.Voos.length - 1 : 0,
+      OfertasDesde: [],
+      CiaMandatoria:
+        platform === 1 ? COMPANHIA_NOMES[arregloOriginal.IdCia] : 0,
+      AirportsIata: null,
+      Baggage: arregloOriginal.BagagensInclusas,
+      Cabine: platform === 1 ? CLASSES_VOO[arregloOriginal.Classe] : 0,
+      ValorAdulto: platform === 1 ? arregloOriginal.ValorAdulto : '',
+      ValorAdultoNaCia: platform === 1 ? arregloOriginal.ValorAdultoNaCia : '',
+      ValorAdultoStr: platform === 1 ? arregloOriginal.ValorAdultoStr : '',
+      ValorBebe: platform === 1 ? arregloOriginal.ValorBebe : '',
+      ValorCrianca: platform === 1 ? arregloOriginal.ValorCrianca : '',
+      ValorTotalComTaxa:
+        platform === 1 ? arregloOriginal.ValorTotalComTaxa : '',
+      ValorTotalTaxas: platform === 1 ? arregloOriginal.ValorTotalTaxas : '',
+      ValorTxServico: platform === 1 ? arregloOriginal.ValorTxServico : '',
+      Tarifas: platform === 1 ? arregloOriginal.Tarifas : [],
+    };
+  }
+
   return arregloOriginal.map((item) => {
     return {
       Platform: platform,

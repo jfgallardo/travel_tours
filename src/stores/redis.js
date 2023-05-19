@@ -1,6 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia';
 import axiosClientAPI from '@/plugins/axios';
-import { woobaDataRedis } from '@/utils/unifyDataWooba';
+import Cookies from 'js-cookie';
+import { flightTransformation } from '@/utils/data-transformation';
 
 export const useRedisStore = defineStore({
   id: 'redis',
@@ -9,12 +10,25 @@ export const useRedisStore = defineStore({
   }),
   getters: {},
   actions: {
-    async findVooSelected(id) {
+    async findVooOneSelected(id) {
       this.loadingSearch = true;
       await axiosClientAPI
         .get(`api/v1/find-travel/${id}`)
         .then(({ data }) => {
-          console.log(data);
+          const voo_one = flightTransformation(data, data.Platform);
+          Cookies.set('I', JSON.stringify(voo_one));
+        })
+        .finally(() => {
+          this.loadingSearch = false;
+        });
+    },
+    async findVooTwoSelected(id) {
+      this.loadingSearch = true;
+      await axiosClientAPI
+        .get(`api/v1/find-travel/${id}`)
+        .then(({ data }) => {
+          const voo_two = flightTransformation(data, data.Platform);
+          Cookies.set('V', JSON.stringify(voo_two));
         })
         .finally(() => {
           this.loadingSearch = false;

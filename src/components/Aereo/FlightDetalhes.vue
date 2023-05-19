@@ -77,7 +77,7 @@ import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 
 onMounted(() => {
   if (props.vooDetalhes) {
-    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${props.vooDetalhes.Id}`;
+    value.value = `${window.location.protocol}//${window.location.host}/precheckout/${props.vooDetalhes.Key}`;
   }
 });
 
