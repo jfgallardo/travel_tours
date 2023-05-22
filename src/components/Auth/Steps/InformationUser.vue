@@ -53,6 +53,7 @@
       <div class="w-4/12">
         <DateInput
           v-model="auth.user.birthday"
+          :min-date-show="null"
           label="Data de Nascimento *"
           name="birthday"
         />

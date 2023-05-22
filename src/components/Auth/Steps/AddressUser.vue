@@ -3,15 +3,16 @@
     <div class="grid grid-cols-2 gap-10 py-20 px-60 container mx-auto">
       <div class="relative">
         <a
-          href="#"
+          href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+          target="_blank"
           class="absolute -top-5 right-0 text-sm text-blue-600 hover:text-blue-700 underline underline-offset-1"
           >{{ $t('addressUser.noSeiMeuCep') }}</a
         >
         <InputGeneric
           v-model="auth.user.cep"
+          v-cep-mask
           :label="$t('addressUser.cep')"
           name="cep"
-          maska="#####-###"
           :validations="validations.cep"
           @is-valid="$emit('isValid', $event)"
         />
@@ -85,7 +86,7 @@ const auth = useAuthStore();
 watch(
   () => auth.user.cep,
   (cep) => {
-    if (cep.length >= 9) verifyCEP();
+    if (cep.length === 9) verifyCEP();
   }
 );
 
@@ -94,13 +95,16 @@ const verifyCEP = async () => {
     .then((response) => response.json())
     .then((data) => {
       if (!data.cep) {
-        auth.user.estado = '';
-        auth.user.ciudade = '';
-        auth.user.address = '';
+        auth.user.estado = null;
+        auth.user.ciudade = null;
+        auth.user.address = null;
       } else {
         auth.user.estado = data.state;
         auth.user.ciudade = data.city;
-        auth.user.address = `${data.neighborhood || ''} ${data.street || ''}`;
+        auth.user.address =
+          data.neighborhood || data.street
+            ? `${data.neighborhood || ''} ${data.street || ''}`
+            : null;
       }
     });
 };

@@ -10,7 +10,11 @@ import VueCookies from 'vue-cookies';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { createApp } from 'vue';
-import { cpfDirective } from '@/directives/input-mask';
+import {
+  cpfDirective,
+  cepDirective,
+  phoneDirective,
+} from '@/directives/input-mask';
 import { setupCalendar } from 'v-calendar';
 
 const app = createApp(App);
@@ -19,6 +23,8 @@ const pinia = createPinia();
 app.directive('debounce', vue3Debounce({ lock: true }));
 app.directive('maska', vMaska);
 app.directive('cpf-mask', cpfDirective);
+app.directive('cep-mask', cepDirective);
+app.directive('phone-mask', phoneDirective);
 
 app.use(pinia);
 pinia.use(piniaPluginPersistedstate);

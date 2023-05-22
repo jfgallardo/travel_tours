@@ -152,7 +152,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 import Loader from '@/components/Partials/TheLoader.vue';
 import { useI18n } from 'vue-i18n';
@@ -165,6 +165,7 @@ const authStore = useAuthStore();
 const email = ref('');
 const password = ref('');
 const alertStore = useAlertStore();
+const router = useRouter();
 
 const login = () => {
   authStore.loading = true;
@@ -210,6 +211,7 @@ const logout = () => {
         backgrColor: 'blue',
         textColor: 'blue',
       });
+     router.push('/');
     })
     .catch((e) => {
       const errorCode = e?.response?.data?.message || 'ServerError';

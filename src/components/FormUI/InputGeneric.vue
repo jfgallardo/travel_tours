@@ -14,15 +14,20 @@
         @input="validateInput"
         @blur="$emit('onBlur', $event.target.value)"
       />
-      <Transition>
+      <TransitionGroup>
         <div
           v-if="!valid"
           class="text-red-500 font-semibold text-sm absolute -bottom-5 pl-1"
         >
           <span> * {{ errorMessages[0] }} &nbsp; </span>
         </div>
-      </Transition>
-
+        <div
+          v-if="error && valid"
+          class="text-red-500 font-semibold text-sm absolute -bottom-5 pl-1"
+        >
+          <span> * {{ error }} &nbsp; </span>
+        </div>
+      </TransitionGroup>
       <span
         v-if="textR"
         class="absolute right-0 top-0 bg-blue-700 text-white px-2 py-0.5 font-serif text-sm rounded-l-md opacity-80"
@@ -49,10 +54,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  maska: {
-    type: [String, Object],
-    default: '',
-  },
   tokens: {
     type: [String, Object],
     default: '',
@@ -75,7 +76,11 @@ const props = defineProps({
   },
   validations: {
     type: Object,
-    required: true,
+    default: () => ({}),
+  },
+  error: {
+    type: String,
+    default: '',
   },
 });
 

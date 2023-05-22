@@ -50,9 +50,8 @@ export const cpfValidation = {
     let multiplic1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
     let multiplic2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
 
-    cpf = cpf.trim();
-    cpf = cpf.replaceAll('.', '');
-    cpf = cpf.replace('-', '');
+    cpf = cpf.trim().replaceAll('.', '').replace('-', '');
+
     if (cpf.length < 11) {
       const validationValid = false;
       const validationMessage = validationValid ? '' : 'Longitud incorrecta';
@@ -103,9 +102,13 @@ export const cpfValidation = {
 
 export const cepValidation = {
   requiredValidation,
-  isCEP: (value) => {
-    const cepRegex = /^\d{5}-\d{3}$/;
-    const validationValid = cepRegex.test(value);
+  isCEP: (cep) => {
+    const cepRegex = /^\d{8}$/;
+    cep = cep.trim().replaceAll('.', '').replace('-', '');
+
+    if (cep.length > 8) cep = cep.slice(0, 8);
+
+    const validationValid = cepRegex.test(cep);
     const validationMessage = validationValid ? '' : 'CEP inválido';
 
     return {
@@ -118,26 +121,10 @@ export const cepValidation = {
 export const phoneValidation = {
   requiredValidation,
   isPhoneNumber: (value) => {
-    const phoneRegex = /^[(]\d{2}[)]\s\d{5}-\d{4}$/;
-    const validationValid = phoneRegex.test(value);
-    const validationMessage = validationValid ? '' : 'Phone Number inválido';
+    const phoneRegex = /^\d{11}$/;
+    value = value.trim().replace('-', '').replace('(', '').replace(')', '');
+    if (value.length > 11) value = value.slice(0, 11);
 
-    return {
-      valid: validationValid,
-      message: validationMessage,
-    };
-  },
-};
-
-export const onlyPhoneValidation = {
-  isPhoneNumber: (value) => {
-    if (!value.trim()) {
-      return {
-        valid: true,
-        message: '',
-      };
-    }
-    const phoneRegex = /^[(]\d{2}[)]\s\d{5}-\d{4}$/;
     const validationValid = phoneRegex.test(value);
     const validationMessage = validationValid ? '' : 'Phone Number inválido';
 

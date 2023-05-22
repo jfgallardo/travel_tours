@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="redisStore.loadingSearch">...cargando</div>
+    <div v-if="redisStore.loadingSearch">
+      <Loader />
+    </div>
     <div v-else class="mx-auto pb-10">
       <div class="flex flex-col lg:flex-row">
         <div class="basis-4/6 flex flex-col border border-slate-300">

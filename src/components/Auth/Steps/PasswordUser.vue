@@ -15,6 +15,7 @@
       <div class="w-4/12">
         <InputGeneric
           v-model="auth.emailLocal"
+          :error="differentEmails"
           label="Confirme seu e-mail *"
           name="emailConfirm"
           :validations="validations.email"
@@ -35,6 +36,7 @@
         <InputGeneric
           v-model="auth.passwordLocal"
           label="Confirme sua senha de acesso *"
+          :error="differentPassword"
           name="passwordConfirm"
           type-field="password"
           :validations="validations.password"
@@ -59,6 +61,22 @@ import { useAuthStore } from '@/stores/auth';
 import { computed } from 'vue';
 import { emailValidation, passwordValidation } from '@/utils/validations';
 import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+
+const differentEmails = computed(() => {
+  if (auth.user.email && auth.emailLocal && auth.user.email !== auth.emailLocal)
+    return 'Emails no coinciden, por favor verifique';
+  return '';
+});
+
+const differentPassword = computed(() => {
+  if (
+    auth.user.password &&
+    auth.passwordLocal &&
+    auth.user.password !== auth.passwordLocal
+  )
+    return 'Passwords no coinciden, por favor verifique';
+  return '';
+});
 
 const auth = useAuthStore();
 const validations = computed(() => {

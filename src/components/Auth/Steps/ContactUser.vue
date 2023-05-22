@@ -6,6 +6,7 @@
       <div class="w-4/12">
         <InputGeneric
           v-model="auth.user.mainPhone"
+          v-phone-mask
           label="Telefone principal *"
           name="mainPhone"
           :validations="validations.phone"
@@ -17,9 +18,9 @@
       <div class="w-4/12">
         <InputGeneric
           v-model="auth.user.alternativePhone"
+          v-phone-mask
           label="Telefone alternativo"
           name="alternativePhone"
-          maska="(##) #####-####"
           :validations="validations.onlyPhone"
           @is-valid="$emit('isValid', $event)"
         />
@@ -31,7 +32,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth';
 import InputGeneric from '@/components/FormUI/InputGeneric.vue';
-import { phoneValidation, onlyPhoneValidation } from '@/utils/validations';
+import { phoneValidation } from '@/utils/validations';
 import { computed } from 'vue';
 
 defineEmits(['isValid']);
@@ -45,7 +46,7 @@ const validations = computed(() => {
       isPhone: phoneValidation.isPhoneNumber,
     },
     onlyPhone: {
-      isPhone: onlyPhoneValidation.isPhoneNumber,
+      isPhone: phoneValidation.isPhoneNumber,
     },
   };
 });
