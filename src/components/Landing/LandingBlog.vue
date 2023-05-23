@@ -124,7 +124,7 @@
 
 @media only screen and (max-width: 768px) {
   .font-blog {
-    font-size: 12rem;
+    font-size: 11rem;
     z-index: -1;
   }
 }

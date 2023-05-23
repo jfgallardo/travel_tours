@@ -4,9 +4,9 @@
       :class="[showRegisterSubH ? 'grid-rows-3' : 'grid-rows-2']"
       class="fixed top-0 right-0 left-0 z-50 bg-white border-b border-gray-300 grid grid-cols-1"
     >
-      <div class="flex items-center justify-around border-b">
+      <div class="flex items-center justify-between border-b">
         <div class="flex items-center h-full">
-          <div class="border-r border-gray-300 h-full flex items-center">
+          <div class="md:border-r md:border-gray-300 h-full flex items-center">
             <RouterLink :to="{ name: 'LandingPage' }">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@
               </svg>
             </RouterLink>
           </div>
-          <div class="border-r border-gray-300 h-full flex items-center">
+          <div class="md:border-r md:border-gray-300 h-full flex items-center">
             <a href="https://www.mrtecnologiaeservicos.com/" target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@
           </RouterLink>
         </div>
 
-        <div class="flex items-center justify-center pr-2 h-full">
+        <div class="flex items-center justify-center md:pr-2">
           <!-- <div class="border-r border-gray-300 h-full">
             <div class="flex items-center p-2">
               <Transaction class="mr-1 h-5 w-5" />
@@ -101,8 +101,7 @@
               </span>
             </div>
           </div> -->
-          <div class="border-r border-gray-300 h-full flex items-center">
-            <Dropddown>
+            <Dropddown class="border-r border-gray-300">
               <template #selected>
                 <button
                   v-if="authStore.userLogged"
@@ -113,7 +112,6 @@
                 </button>
                 <button v-else class="flex items-center p-2">
                   <UserCircle class="mr-1 h-5 w-5" />
-                  <!-- <span class="hidden md:block"> -->
                   <span>
                     {{ t('header.conecte-se') }}
                   </span>
@@ -123,10 +121,7 @@
                 <Login />
               </template>
             </Dropddown>
-          </div>
-          <div>
             <Dropdowni18 />
-          </div>
         </div>
 
         <div class="md:hidden">

@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
 import Hero from '@/components/Landing/LandingHero.vue';
 import Banner from '@/components/Landing/LandingBanner.vue';
 import ExplorerVoo from '@/components/Landing/LandingExplorerVoo.vue';

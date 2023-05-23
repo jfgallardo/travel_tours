@@ -10,14 +10,14 @@
           <div class="relative border-b pb-3">
             <div
               v-if="labelImage"
-              class="absolute bottom-5 text-white pb-1 pl-2 font-bold text-6xl"
+              class="absolute bottom-5 text-white pb-1 pl-2 font-bold md:text-6xl text-4xl"
             >
               {{ image.city }}
             </div>
             <img :src="image.url" :alt="image.city" class="object-cover" />
           </div>
 
-          <div class="flex items-end justify-between mb-2">
+          <div class="flex items-end space-x-32 md:justify-between mb-2">
             <slot name="footer" v-bind="image"></slot>
             <slot name="footer-right" v-bind="image">
               <ArrowRight class="h-5 w-5 hover:cursor-pointer mr-2" />

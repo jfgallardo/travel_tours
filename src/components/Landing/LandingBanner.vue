@@ -2,7 +2,7 @@
   <div class="banner">
     <div class="h-full flex items-center justify-between relative">
       <div
-        class="absolute bottom-5 text-left md:flex md:items-end md:justify-around md:w-full"
+        class="absolute bottom-5 text-left md:flex md:items-end md:justify-around md:w-full pl-2.5"
       >
         <p
           class="font-bold text-7xl md:text-9xl text-white pb-5"
