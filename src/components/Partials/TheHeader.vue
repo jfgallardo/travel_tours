@@ -101,27 +101,24 @@
               </span>
             </div>
           </div> -->
-            <Dropddown class="border-r border-gray-300">
-              <template #selected>
-                <button
-                  v-if="authStore.userLogged"
-                  class="flex items-center p-2"
-                >
-                  <UserCircle class="mr-1 h-5 w-5" />
-                  <span>Welcome</span>
-                </button>
-                <button v-else class="flex items-center p-2">
-                  <UserCircle class="mr-1 h-5 w-5" />
-                  <span>
-                    {{ t('header.conecte-se') }}
-                  </span>
-                </button>
-              </template>
-              <template #dropdown>
-                <Login />
-              </template>
-            </Dropddown>
-            <Dropdowni18 />
+          <Dropddown class="border-r border-gray-300">
+            <template #selected>
+              <button v-if="authStore.userLogged" class="flex items-center p-2">
+                <UserCircle class="mr-1 h-5 w-5" />
+                <span>Welcome</span>
+              </button>
+              <button v-else class="flex items-center p-2">
+                <UserCircle class="mr-1 h-5 w-5" />
+                <span>
+                  {{ t('header.conecte-se') }}
+                </span>
+              </button>
+            </template>
+            <template #dropdown>
+              <Login />
+            </template>
+          </Dropddown>
+          <Dropdowni18 />
         </div>
 
         <div class="md:hidden">

@@ -84,7 +84,10 @@
                   </div>
 
                   <div
-                    v-if="travels.travel_one.Baggage.length"
+                    v-if="
+                      travels.travel_one.Baggage &&
+                      travels.travel_one.Baggage.length
+                    "
                     class="flex flex-col items-start space-y-1.5"
                   >
                     <template
@@ -219,7 +222,10 @@
                     </h4>
                   </div>
                   <div
-                    v-if="travels.travel_two.Baggage.length"
+                    v-if="
+                      travels.travel_two.Baggage &&
+                      travels.travel_two.Baggage.length
+                    "
                     class="flex flex-col items-start space-y-1.5"
                   >
                     <template

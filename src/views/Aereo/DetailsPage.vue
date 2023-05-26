@@ -92,7 +92,7 @@
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
         <div
-          v-if="baggage.length > 0"
+          v-if="baggage && baggage.length > 0"
           class="flex flex-col items-start space-y-1.5"
         >
           <template v-for="tar in baggage" :key="tar.Tipo">
@@ -114,7 +114,7 @@
           </template>
         </div>
         <template v-else>
-          <div>
+          <div class="flex items-center space-x-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -290,6 +290,7 @@ const props = defineProps({
     type: [Number, String],
     default: '',
   },
+
   id: {
     type: String,
     default: '',

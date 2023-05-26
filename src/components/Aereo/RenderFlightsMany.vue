@@ -91,7 +91,7 @@
               :type-flight="typeFlight"
               :flights="viagem.Voos"
               :cia-mandatoria="viagem.CiaMandatoria"
-              :preco="viagem.Preco"
+              :preco="precoTotal"
               :platform="viagem.Platform"
               :tarifas="viagem.Tarifas"
               :baggage="viagem.Baggage"
@@ -127,6 +127,14 @@ const props = defineProps({
     type: String,
     default: '',
   },
+});
+
+const precoTotal = computed(() => {
+  if (props.viagem.Preco > 0) {
+    return props.viagem.Preco;
+  } else {
+    return props.viagem.ValorTotalComTaxa;
+  }
 });
 
 const initial_flight = computed(() => {

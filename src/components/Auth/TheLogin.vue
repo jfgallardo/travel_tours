@@ -211,7 +211,7 @@ const logout = () => {
         backgrColor: 'blue',
         textColor: 'blue',
       });
-     router.push('/');
+      router.push('/');
     })
     .catch((e) => {
       const errorCode = e?.response?.data?.message || 'ServerError';

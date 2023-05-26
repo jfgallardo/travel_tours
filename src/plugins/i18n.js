@@ -5,6 +5,6 @@ const i18n = createI18n({
   locale: 'br',
   fallbackLocale: 'br',
   silentFallbackWarn: true,
-  messages
+  messages,
 });
 export default i18n;

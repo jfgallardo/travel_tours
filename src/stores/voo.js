@@ -62,10 +62,9 @@ export const useVooStore = defineStore({
           this.QntdCrianca = data.QntdCrianca;
           this.TokenConsulta = data.TokenConsulta;
           this.Request = data.Request;
-          this.Aeroportos = data.Aeroportos.map((o) => o.Iata);
+          this.Aeroportos = data.Aeroportos;
         })
         .catch((e) => {
-          console.log(e);
           const errorCode =
             e?.response?.data?.message || e?.response?.data?.error_message;
           alertStore.showMsg({

@@ -74,7 +74,7 @@
       </div>
       <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
         <div
-          v-if="vooSelected.Baggage.length"
+          v-if="vooSelected.Baggage && vooSelected.Baggage.length"
           class="flex flex-col items-start space-y-1.5"
         >
           <template v-for="tar in vooSelected.Baggage" :key="tar.Tipo">

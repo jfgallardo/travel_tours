@@ -31,7 +31,7 @@
       <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
         <div class="flex items-center justify-between space-x-3.5 h-full">
           <div class="lg:flex lg:flex-col lg:items-center lg:text-center">
-            <span>{{ vooSelected.Destino }} &nbsp;&nbsp;</span>
+            <span>{{ vooSelected.Origem }} &nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
           </div>
           <div>{{ paradas }}</div>
@@ -39,7 +39,7 @@
             <span class="font-bold"
               >{{ horaChegada }} {{ dayPeriodVolta }} &nbsp;&nbsp;</span
             >
-            <span>{{ vooSelected.Origem }}</span>
+            <span>{{ vooSelected.Destino }}</span>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@
           <span>NO BAGAGEM</span>
         </div>-->
         <div
-          v-if="vooSelected.Baggage.length"
+          v-if="vooSelected.Baggage && vooSelected.Baggage.length"
           class="flex flex-col items-start space-y-1.5"
         >
           <template v-for="tar in vooSelected.Baggage" :key="tar.Tipo">

@@ -2,7 +2,11 @@
   <div v-if="!seeSelectedOption" ref="scrollContainer">
     <TransitionGroup name="list" tag="ul">
       <p class="font-medium p-2.5">
-        {{ $t('idaVoltaFlexRender.vuelosDeIda') }}
+        {{
+          typeFlight === 'I'
+            ? $t('idaVoltaFlexRender.vuelosDeIda')
+            : $t('idaVoltaFlexRender.vuelosDeVuelta')
+        }}
       </p>
       <div v-for="(objeto, index) in objetosVisibles" :key="index">
         <div
@@ -43,7 +47,7 @@
       </button>
       <button
         v-else
-        class="text-center bg-blue-700 text-white px-10 py-2 mt-3.5"
+        class="text-center bg-blue-700 text-white px-10 py-2 my-3.5"
         @click="actualizarObjetosVisibles"
       >
         {{ t('Mais') }}
