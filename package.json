@@ -13,7 +13,7 @@
     "@intlify/unplugin-vue-i18n": "^0.5.0",
     "@popperjs/core": "^2.11.6",
     "@tailwindcss/forms": "^0.5.2",
-    "@vee-validate/i18n": "^4.7.3",
+    "@vee-validate/i18n": "^4.9.2",
     "@vee-validate/rules": "^4.7.3",
     "@vueuse/components": "^9.9.0",
     "@vueuse/core": "^9.9.0",
