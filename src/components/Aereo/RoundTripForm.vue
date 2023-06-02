@@ -263,7 +263,7 @@ const consultar = () => {
 
   vooStore.loading = true;
 
-  vooStore.checkFlightsRoundTrip(payload, 'ValorTotal');
+  vooStore.checkFlightsRoundTrip(payload);
 
   /*woobaStore
     .consultaOrigemDestino(body)

@@ -31,4 +31,4 @@ axiosClientLocalAPI.interceptors.request.use((config) => {
   return config;
 });
 
-export default axiosClientAPI;
+export default axiosClientLocalAPI;

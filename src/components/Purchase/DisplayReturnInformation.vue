@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-col lg:grid lg:grid-cols-2 lg:grid-flow-row">
       <div
-        class="flex items-center lg:col-span-2 justify-between border border-x-0 border-slate-300 p-3"
+        class="flex items-center lg:col-span-2 justify-between border border-x-0 border-t-0 border-slate-300 p-3"
       >
         <div class="flex items-center justify-around w-full">
           <div class="flex items-center space-x-3.5">
@@ -133,7 +133,7 @@
           </template>
         </div>
         <template v-else>
-          <div>
+          <div class="flex w-full justify-between">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

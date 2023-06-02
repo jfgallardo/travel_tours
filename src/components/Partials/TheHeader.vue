@@ -214,6 +214,7 @@
       <QuerySubHeader v-if="showSubHeader" />
       <RegisterSubH v-if="showRegisterSubH" />
       <PaymentHeader v-if="showPaymentHeader" />
+      <RecordHeader v-if="showRecordHeader" />
       <PreCheckOutSubheading v-if="showPreCheckOutSubheading" />
       <CheckOutSubheading v-if="showCheckOutSubheading" />
     </nav>
@@ -235,6 +236,7 @@ import PreCheckOutSubheading from '@/components/Partials/PreCheckOutSubheading.v
 import CheckOutSubheading from '@/components/Partials/CheckOutSubheading.vue';
 import Badge from '@/components/Partials/TheBadge.vue';
 import PaymentHeader from '@/components/Partials/ThePaymentHeader.vue';
+import RecordHeader from '@/components/Partials/TheRecordHeader.vue';
 import { useAuthStore } from '@/stores/auth';
 
 const route = useRoute();
@@ -249,7 +251,8 @@ const showMainSubheading = computed(() => {
     route.name !== 'RegisterPage' &&
     !(route.name === 'PreCheckoutPage') &&
     !(route.path === '/checkout') &&
-    !(route.name === 'CheckPage')
+    !(route.name === 'CheckPage') &&
+    !(route.name === 'RecordPage')
   );
 });
 const showSubHeader = computed(() => {
@@ -266,6 +269,10 @@ const showCheckOutSubheading = computed(() => {
 });
 const showPaymentHeader = computed(() => {
   return route.name === 'CheckPage';
+});
+
+const showRecordHeader = computed(() => {
+  return route.name === 'RecordPage';
 });
 </script>
 

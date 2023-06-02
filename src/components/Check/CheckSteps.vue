@@ -15,22 +15,19 @@
         Retornar
       </button>
       <button
-        v-if="auth.currentStepPayment !== 4"
-        type="submit"
-        :disabled="
-          !informationStore.card.isValidFront && auth.currentStepPayment === 1
-        "
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-400 disabled:cursor-not-allowed"
-        @click="nextStep"
-      >
-        Proximo
-      </button>
-      <button
         v-if="auth.currentStepPayment === 4"
         class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
         @click.prevent="reservar"
       >
         Verifica Agora
+      </button>
+      <button
+        v-else
+        type="button"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-400 disabled:cursor-not-allowed"
+        @click="nextStep"
+      >
+        Proximo
       </button>
     </div>
   </form>
@@ -39,7 +36,7 @@
 <script setup>
 import PaymentMethod from '@/components/Check/Steps/PaymentMethod.vue';
 import SelectedPaymentMethod from '@/components/Check/Steps/SelectedPaymentMethod.vue';
-import { markRaw, onMounted, ref } from 'vue';
+import { computed, markRaw, onMounted, ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
 import { useForm } from 'vee-validate';
 import PaymentDetails from '@/components/Check/Steps/PaymentDetails.vue';
@@ -51,8 +48,10 @@ import { useGeneralInformation } from '@/stores/generalInformation';
 import { useReserveStore } from '@/stores/reservar';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import { useDateToJson } from '@/composables/dateToJson';
+import Cookies from 'js-cookie';
 
 onMounted(() => {
+  auth.currentStepPayment = 0;
   selectedComponent.value = markRaw(PaymentMethod);
 });
 
@@ -75,7 +74,7 @@ const { handleSubmit, setFieldError, errors } = useForm({
   validationSchema: simpleSchemaBuy,
 });
 
-const nextStep = handleSubmit((values) => {
+/*const nextStep = handleSubmit((values) => {
   if (auth.currentStepPayment === 0) {
     auth.currentStepPayment++;
   } else if (auth.currentStepPayment === 1) {
@@ -129,6 +128,17 @@ const backStep = () => {
     auth.currentStepPayment--;
   }
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
+};*/
+
+const nextStep = () => {
+  auth.currentStepPayment++;
+
+  selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
+};
+
+const backStep = () => {
+  auth.currentStepPayment--;
+  selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
 };
 
 const reservar = () => {
@@ -171,7 +181,6 @@ const passageiros = () => {
     };
     passengerList.push(pass);
   });
-  console.log('passengerList', passengerList);
   return passengerList;
 };
 

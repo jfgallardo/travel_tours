@@ -238,13 +238,13 @@ const consultar = () => {
     Adultos: searchOptionsVooStore.adults,
     Criancas: searchOptionsVooStore.teenagers,
     Bebes: searchOptionsVooStore.babies,
-    Companhia: [2],
+    Companhia: [1300],
     Cabine: searchOptionsVooStore.cabin.value,
   };
 
   vooStore.loading = true;
 
-  vooStore.checkFlightsRoundTrip(payload, 'ValorTotal');
+  vooStore.checkFlightsRoundTrip(payload);
 
   /* woobaStore
     .consultaOrigemDestino(body)

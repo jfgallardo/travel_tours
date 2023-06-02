@@ -12,5 +12,13 @@ export const useReserveStore = defineStore('reserve', {
         return e;
       }
     },
+
+    async record(payload) {
+      try {
+        return await axiosClientAPI.post('api/v1/moblix/gravar', payload)
+      } catch (e) {
+        return e;
+      }
+    }
   },
 });

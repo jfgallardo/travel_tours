@@ -39,13 +39,11 @@ export const useVooStore = defineStore({
     },
   },
   actions: {
-    async checkFlightsRoundTrip(payload, filter) {
+    async checkFlightsRoundTrip(payload) {
       const alertStore = useAlertStore();
       this.loading = true;
       return await axiosClientAPI
-        .post('api/v1/voo/round-trip', payload, {
-          params: { filter },
-        })
+        .post('api/v1/voo/round-trip', payload)
         .then(({ data }) => {
           this.Companhia = data.Companhia;
           this.CompanhiaVolta = data.CompanhiaVolta;

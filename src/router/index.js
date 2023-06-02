@@ -13,6 +13,8 @@ const VoosMultiple = () => import('@/views/Aereo/VoosMultiple.vue');
 const PreCheckoutPage = () => import('@/views/Purchase/PreCheckoutPage.vue');
 const CheckoutPage = () => import('@/views/Purchase/CheckoutPage.vue');
 const CheckPage = () => import('@/views/Check/CheckPage.vue');
+const RecordPage = () => import("@/views/Check/RecordPage.vue");
+
 const PurchaseFormPage = () => import('@/views/Purchase/PurchaseFormPage.vue');
 const HotelHomePage = () => import('@/views/Hotel/HomePage.vue');
 const HotelLandingPage = () => import('@/views/Hotel/LandingPage.vue');
@@ -134,6 +136,7 @@ const router = createRouter({
           children: [
             { path: '', name: 'PurchaseFormPage', component: PurchaseFormPage },
             { path: 'finish-payment', name: 'CheckPage', component: CheckPage },
+            { path: 'finish-payment/record', name: 'RecordPage', component: RecordPage },
           ],
         },
         {

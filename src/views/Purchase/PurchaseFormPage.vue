@@ -12,7 +12,8 @@
         Use o controle para preencher um ticket com seus dados salvos
       </h3>
       <button
-        class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full mt-2.5 lg:mt-0"
+        disabled
+        class="bg-blue-700 hover:bg-blue-800 text-white p-2 hover:cursor-pointer text-sm rounded-full mt-2.5 lg:mt-0 disabled:bg-blue-400"
         @click="useData"
       >
         Usar mis dados
@@ -53,7 +54,11 @@
                     name="email"
                     :validations="validations.email"
                   />
-                  <DateInput v-model="i.birthday" label="Date Nascimento *" />
+                  <DateInput
+                    v-model="i.birthday"
+                    label="Date Nascimento *"
+                    :min-date-show="null"
+                  />
                   <TextInput
                     v-model="i.mainPhone"
                     label="Telefone principal *"
@@ -113,7 +118,11 @@
                       name="email"
                       :validations="validations.email"
                     />
-                    <DateInput v-model="i.birthday" label="Date Nascimento *" />
+                    <DateInput
+                      v-model="i.birthday"
+                      label="Date Nascimento *"
+                      :min-date-show="null"
+                    />
                     <TextInput
                       v-model="i.mainPhone"
                       label="Telefone principal *"
@@ -172,7 +181,11 @@
                       name="email"
                       :validations="validations.email"
                     />
-                    <DateInput v-model="i.birthday" label="Date Nascimento *" />
+                    <DateInput
+                      v-model="i.birthday"
+                      label="Date Nascimento *"
+                      :min-date-show="null"
+                    />
                     <TextInput
                       v-model="i.mainPhone"
                       label="Telefone principal *"
@@ -212,7 +225,7 @@
           <div class="flex items-center justify-center pt-3.5">
             <RouterLink
               v-if="!disable"
-              :to="{ name: 'CheckPage' }"
+              :to="{ name: `${platform === 1 ? 'RecordPage' : 'CheckPage'}` }"
               class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2"
             >
               Finalizar Compra
@@ -238,7 +251,7 @@
 
 <script setup>
 import CollapseAccording from '@/components/Static/CollapseAccording.vue';
-import { computed, inject, onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import { useI18n } from 'vue-i18n';
@@ -257,10 +270,12 @@ import {
 import Select from '@/components/FormUI/TheSelect.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useAuthStore } from '@/stores/auth';
+import Cookies from 'js-cookie';
 
 onMounted(() => {
   if (purchaseStore.informationAdults.length === 0) getArrayData();
 });
+
 const { t } = useI18n();
 const alertStore = useAlertStore();
 const purchaseStore = usePurchaseStore();
@@ -270,7 +285,11 @@ const passengerStore = usePassengerUserStore();
 const authStore = useAuthStore();
 const pass = ref(null);
 
-const $cookies = inject('$cookies');
+const platform = computed(() => {
+  const travel_one = JSON.parse(Cookies.get('I'));
+  //const travel_two = Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
+  return travel_one.Platform;
+});
 
 const acceptedDocuments = computed(() => {
   return [
@@ -390,7 +409,7 @@ const checkInformationAdults = computed(() => {
   let check = false;
   purchaseStore.informationAdults.map((o) => {
     const flag =
-      o.documentSelected === 'C'
+      o.documentSelected?.value === 'C'
         ? !o.cpf_number
         : !o.passportNumber ||
           !o.dateIssue ||
@@ -413,7 +432,7 @@ const checkInformationTeenagers = computed(() => {
   let check = false;
   purchaseStore.informationTeenagers?.map((o) => {
     const flag =
-      o.documentSelected === 'C'
+      o.documentSelected.value === 'C'
         ? !o.cpf_number
         : !o.passportNumber ||
           !o.dateIssue ||
@@ -436,7 +455,7 @@ const checkInformationBabies = computed(() => {
   let check = false;
   purchaseStore.informationBabies?.map((o) => {
     const flag =
-      o.documentSelected === 'C'
+      o.documentSelected.value === 'C'
         ? !o.cpf_number
         : !o.passportNumber ||
           !o.dateIssue ||
