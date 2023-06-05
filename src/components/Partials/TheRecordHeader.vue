@@ -12,7 +12,6 @@
 
 <script setup>
 import ArrowLeft from '@/components/Icons/ArrowLeft.vue';
-
 </script>
 
 <style scoped></style>

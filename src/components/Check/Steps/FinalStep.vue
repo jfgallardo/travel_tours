@@ -3,7 +3,10 @@
     <div
       class="flex flex-col items-center justify-center pt-6 mx-auto space-y-6 md:w-auto"
     >
-      <div class="w-full">
+      <div v-if="platform === 1">
+        <p>Plataforma 1, seleccionar parcelas</p>
+      </div>
+      <div v-else class="w-full">
         <NumberParcelsToPay />
       </div>
 
@@ -33,6 +36,13 @@
 import NumberParcelsToPay from '@/components/Check/NumberParcelsToPay.vue';
 import TextArea from '@/components/FormUI/TextArea.vue';
 import CheckInput from '@/components/FormUI/CheckInput.vue';
+import { computed } from 'vue';
+import Cookies from 'js-cookie';
+
+const platform = computed(() => {
+  const travel_one = JSON.parse(Cookies.get('I'));
+  return travel_one.Platform;
+});
 </script>
 
 <style scoped></style>

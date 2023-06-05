@@ -3,8 +3,28 @@ import { RouterView } from 'vue-router';
 import Message from '@/components/Partials/TheMessage.vue';
 import { useAlertStore } from '@/stores/alert';
 import Footer from '@/components/Partials/TheFooter.vue';
+import { onMounted } from 'vue';
+import Cookies from 'js-cookie';
+import { useAuthStore } from '@/stores/auth';
 
 const alertStore = useAlertStore();
+const authStore = useAuthStore();
+
+onMounted(() => {
+  checkLogin();
+});
+
+const checkLogin = () => {
+  const token = Cookies.get('token');
+  if (!token) {
+    authStore.$reset();
+    alertStore.showMsg({
+      message: 'Token expirado. Sesión cerrada.',
+      backgrColor: 'blue',
+      textColor: 'blue',
+    });
+  }
+};
 </script>
 
 <template>

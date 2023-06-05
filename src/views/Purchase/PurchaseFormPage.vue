@@ -59,11 +59,13 @@
                     label="Date Nascimento *"
                     :min-date-show="null"
                   />
-                  <TextInput
+                  <InputGeneric
                     v-model="i.mainPhone"
+                    v-phone-mask
                     label="Telefone principal *"
                     name="mainPhone"
-                    :maska="['(##) #####-####']"
+                    :validations="validations.phone"
+                    @is-valid="formIsValid = $event"
                   />
                   <Select
                     :selected="i.documentSelected"
@@ -79,6 +81,7 @@
                     label="CPF *"
                     name="cpf"
                     :validations="validations.cpf"
+                    @is-valid="formIsValid = $event"
                   />
                   <passport-component
                     v-if="i.documentSelected?.value === 'P'"
@@ -143,6 +146,7 @@
                       label="CPF *"
                       name="cpf"
                       :validations="validations.cpf"
+                      @is-valid="formIsValid = $event"
                     />
                     <passport-component
                       v-show="i.documentSelected?.value === 'P'"
@@ -206,6 +210,7 @@
                       label="CPF *"
                       name="cpf"
                       :validations="validations.cpf"
+                      @is-valid="formIsValid = $event"
                     />
                     <passport-component
                       v-show="i.documentSelected?.value === 'P'"
@@ -224,19 +229,12 @@
           </div>
           <div class="flex items-center justify-center pt-3.5">
             <RouterLink
-              v-if="!disable"
-              :to="{ name: `${platform === 1 ? 'RecordPage' : 'CheckPage'}` }"
+              :to="{ name: 'CheckPage' }"
               class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2"
+              :class="{ 'disable-link': disable }"
             >
               Finalizar Compra
             </RouterLink>
-            <button
-              v-else
-              :disabled="disable"
-              class="bg-blue-700 hover:bg-blue-800 text-white px-12 py-2 disabled:bg-blue-400 disabled:cursor-not-allowed"
-            >
-              Finalizar Compra
-            </button>
           </div>
         </td>
       </tr>
@@ -266,6 +264,7 @@ import {
   cpfValidation,
   requiredValidation,
   emailValidation,
+  phoneValidation,
 } from '@/utils/validations';
 import Select from '@/components/FormUI/TheSelect.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
@@ -284,6 +283,7 @@ const saveDataModal = ref(false);
 const passengerStore = usePassengerUserStore();
 const authStore = useAuthStore();
 const pass = ref(null);
+const formIsValid = ref(true);
 
 const platform = computed(() => {
   const travel_one = JSON.parse(Cookies.get('I'));
@@ -311,8 +311,13 @@ const validations = computed(() => {
       isRequired: requiredValidation,
       isEmail: emailValidation,
     },
+    phone: {
+      isRequired: phoneValidation.requiredValidation,
+      isPhone: phoneValidation.isPhoneNumber,
+    },
   };
 });
+
 const useData = () => {
   if (!authStore.userLogged) {
     alertStore.showMsg({
@@ -410,7 +415,7 @@ const checkInformationAdults = computed(() => {
   purchaseStore.informationAdults.map((o) => {
     const flag =
       o.documentSelected?.value === 'C'
-        ? !o.cpf_number
+        ? !o.cpf_number || !formIsValid.value
         : !o.passportNumber ||
           !o.dateIssue ||
           !o.countryIssue ||
@@ -433,7 +438,7 @@ const checkInformationTeenagers = computed(() => {
   purchaseStore.informationTeenagers?.map((o) => {
     const flag =
       o.documentSelected.value === 'C'
-        ? !o.cpf_number
+        ? !o.cpf_number || !formIsValid.value
         : !o.passportNumber ||
           !o.dateIssue ||
           !o.countryIssue ||
@@ -456,7 +461,7 @@ const checkInformationBabies = computed(() => {
   purchaseStore.informationBabies?.map((o) => {
     const flag =
       o.documentSelected.value === 'C'
-        ? !o.cpf_number
+        ? !o.cpf_number || !formIsValid.value
         : !o.passportNumber ||
           !o.dateIssue ||
           !o.countryIssue ||
@@ -483,4 +488,9 @@ const disable = computed(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.disable-link {
+  pointer-events: none;
+  opacity: 50%;
+}
+</style>

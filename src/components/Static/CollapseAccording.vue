@@ -35,7 +35,7 @@
     <Transition>
       <div
         v-show="reportsOpen"
-        class="flex p-5 md:p-2 w-full transform transition duration-300 ease-in-out border-b pb-10"
+        class="flex p-5 md:p-2 md:pb-8 w-full transform transition duration-300 ease-in-out border-b pb-10"
       >
         <slot name="body"></slot>
       </div>

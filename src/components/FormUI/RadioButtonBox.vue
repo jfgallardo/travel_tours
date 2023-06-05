@@ -8,8 +8,8 @@
         'border border-zinc-400': !isSelected,
       }"
       tabindex="0"
-      @click="$emit('update:modelValue', label)"
-      @keydown.space="$emit('update:modelValue', label)"
+      @click="$emit('update:modelValue', idd ? idd : label)"
+      @keydown.space="$emit('update:modelValue', idd ? idd : label)"
     >
       <span class="text-lg">{{ label }}</span>
       <svg
@@ -43,9 +43,14 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  idd: {
+    type: [String, Number],
+    default: '',
+  },
 });
 
 const isSelected = computed(() => {
+  if (props.idd) return props.idd === props.modelValue;
   return props.label === props.modelValue;
 });
 </script>

@@ -22,8 +22,8 @@ export const useFiltersStore = defineStore('filters', {
         let filterIda = vooStore.Ida;
         let filterVolta = vooStore.Volta;
 
-        filterIda = filterIda.filter(item => item.ValorAdulto > 0)
-        filterVolta = filterVolta.filter(item => item.ValorAdulto > 0)
+        filterIda = filterIda.filter((item) => item.ValorAdulto > 0);
+        filterVolta = filterVolta.filter((item) => item.ValorAdulto > 0);
 
         if (state.baggage.value === 1) {
           filterIda = filterIda.filter(

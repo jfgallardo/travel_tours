@@ -7,6 +7,7 @@
       <RadioButtonBox
         v-model="informationStore.paymentMethod"
         label="Credit Card"
+        :idd="1"
       />
       <RadioButtonBox
         v-model="informationStore.paymentMethod"

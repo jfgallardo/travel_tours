@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <div
       class="flex flex-col items-center justify-center mx-auto py-20 space-y-6 md:w-auto w-full"
     >
@@ -12,7 +12,7 @@
           :loading="rateStore.loading"
           :options="planosDeFinanciamento"
           :selected="informationStore.card.bainderaSelected"
-          @selectValue="informationStore.card.bainderaSelected = $event"
+          @select-value="informationStore.card.bainderaSelected = $event"
         />
         <TextInput
           v-model="informationStore.card.cardNumber"
@@ -40,12 +40,14 @@
           name="card-name"
           class="lg:w-1/3 w-full"
         />
-        <TextInput
+        <InputGeneric
           v-model="informationStore.card.cpfUserCard"
+          v-cpf-mask
           label="CPF *"
-          maska="###.###.###-##"
           name="number-cpf"
           class="lg:w-1/3 w-full"
+          :validations="validations.cpf"
+          @is-valid="informationStore.card.isValidCpf = $event"
         />
         <TextInput
           v-model="informationStore.card.cardExpiration"
@@ -57,7 +59,7 @@
       </div>
     </div>
     <div
-      class="px-3 py-2.5 text-white font-bold w-fit mx-auto"
+      class="px-3 py-2.5 text-white font-bold w-full absolute top-0 opacity-90"
       :class="creditCardVariant"
     >
       {{ creditCardMessage }}
@@ -66,12 +68,20 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref, watch } from 'vue';
+import { computed, inject, onMounted, ref, watch } from 'vue';
 import TextInput from '@/components/FormUI/TextInput.vue';
 import validateInfo from '@/plugins/validate-card';
 import TheSelect from '@/components/FormUI/TheSelect.vue';
 import { useRateStore } from '@/stores/rate';
 import { useGeneralInformation } from '@/stores/generalInformation';
+import Cookies from 'js-cookie';
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+import {
+  cpfValidation,
+  emailValidation,
+  phoneValidation,
+  requiredValidation,
+} from '@/utils/validations';
 
 const creditCardMessage = ref();
 const creditCardVariant = ref();
@@ -81,7 +91,15 @@ const $cookies = inject('$cookies');
 const planosDeFinanciamento = ref([]);
 
 onMounted(() => {
-  tarifar();
+  if (platform.value === 1) {
+    planosDeFinanciamento.value = [
+      { label: 'Visa', value: 1 },
+      { label: 'Mastercard', value: 3 },
+      { label: 'Elo', value: 7 },
+    ];
+  } else {
+    tarifar();
+  }
 });
 
 watch(
@@ -97,10 +115,24 @@ watch(
     creditCardMessage.value = creditCard.message;
     informationStore.card.cardType = creditCard.niceType;
     creditCardVariant.value = creditCard.variant;
-    informationStore.card.isValidFront = creditCard.variant === 'bg-green-400';
+
+    if (creditCard.niceType !== informationStore.card.bainderaSelected.label) {
+      creditCardMessage.value =
+        'Seleccion de tarjeta y tarjeta digitada no coinciden';
+      creditCardVariant.value = 'bg-red-400';
+      informationStore.card.isValidFront = false;
+    }
+    informationStore.card.isValidFront =
+      creditCard.variant === 'bg-green-400' &&
+      creditCard.niceType === informationStore.card.bainderaSelected.label;
   },
   { immediate: true }
 );
+
+const platform = computed(() => {
+  const travel_one = JSON.parse(Cookies.get('I'));
+  return travel_one.Platform;
+});
 
 const tarifar = () => {
   rateStore.loading = true;
@@ -131,6 +163,15 @@ const tarifar = () => {
       rateStore.loading = false;
     });
 };
+
+const validations = computed(() => {
+  return {
+    cpf: {
+      isRequired: cpfValidation.requiredValidation,
+      isCPF: cpfValidation.isCPF,
+    },
+  };
+});
 </script>
 
 <style scoped></style>

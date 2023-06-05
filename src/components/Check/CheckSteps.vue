@@ -15,19 +15,10 @@
         Retornar
       </button>
       <button
-        v-if="auth.currentStepPayment === 4"
         class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
-        @click.prevent="reservar"
+        @click.prevent="auth.currentStepPayment === 4 ? reservar() : nextStep()"
       >
-        Verifica Agora
-      </button>
-      <button
-        v-else
-        type="button"
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-400 disabled:cursor-not-allowed"
-        @click="nextStep"
-      >
-        Proximo
+        {{ auth.currentStepPayment === 4 ? 'Verifica Agora' : 'Proximo' }}
       </button>
     </div>
   </form>
@@ -38,17 +29,13 @@ import PaymentMethod from '@/components/Check/Steps/PaymentMethod.vue';
 import SelectedPaymentMethod from '@/components/Check/Steps/SelectedPaymentMethod.vue';
 import { computed, markRaw, onMounted, ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { useForm } from 'vee-validate';
 import PaymentDetails from '@/components/Check/Steps/PaymentDetails.vue';
 import BillingAddress from '@/components/Check/Steps/BillingAddress.vue';
 import FinalStep from '@/components/Check/Steps/FinalStep.vue';
-import { simpleSchemaBuy } from '@/utils/validate';
-import { useAlertStore } from '@/stores/alert';
 import { useGeneralInformation } from '@/stores/generalInformation';
 import { useReserveStore } from '@/stores/reservar';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import { useDateToJson } from '@/composables/dateToJson';
-import Cookies from 'js-cookie';
 
 onMounted(() => {
   auth.currentStepPayment = 0;
@@ -56,7 +43,6 @@ onMounted(() => {
 });
 
 const auth = useAuthStore();
-const alertStore = useAlertStore();
 const informationStore = useGeneralInformation();
 const reserverStore = useReserveStore();
 const purchaseStore = usePurchaseStore();
@@ -70,68 +56,20 @@ const steps = [
 ];
 const selectedComponent = ref(null);
 
-const { handleSubmit, setFieldError, errors } = useForm({
-  validationSchema: simpleSchemaBuy,
-});
-
-/*const nextStep = handleSubmit((values) => {
-  if (auth.currentStepPayment === 0) {
-    auth.currentStepPayment++;
-  } else if (auth.currentStepPayment === 1) {
-    if (!informationStore.card.isValidFront) {
-      return;
-    } else if (!values['number-cpf']) {
-      setFieldError('number-cpf', 'CPF é obrigatório');
-    } else if (
-      informationStore.card.bainderaSelected.label !==
-      informationStore.card.cardType
-    ) {
-      alertStore.showMsg({
-        message: 'Tipo de tarjea seleccionada invalida',
-        backgrColor: 'bg-red-100',
-        textColor: 'text-red-700',
-      });
-    } else {
-      auth.currentStepPayment++;
-    }
-  } else if (auth.currentStepPayment === 2) {
-    if (!values.birthday) {
-      setFieldError('birthday', 'Birthday é obrigatório');
-    } else if (!values['name-buy']) {
-      setFieldError('name-buy', 'Name é obrigatório');
-    } else {
-      auth.currentStepPayment++;
-    }
-  } else if (auth.currentStepPayment === 3) {
-    if (!values.cep) {
-      setFieldError('cep', 'CEP é obrigatório');
-    } else if (!values.address) {
-      setFieldError('address', 'address é obrigatório');
-    } else {
-      auth.currentStepPayment++;
-    }
-  } else if (auth.currentStepPayment === 4) {
-    if (!values.state) {
-      setFieldError('state', 'State é obrigatório');
-    } else if (!values.address) {
-      setFieldError('city', 'City é obrigatório');
-    } else {
-      auth.currentStepPayment++;
-    }
-  }
-
-  selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
-});
-const backStep = () => {
-  if (auth.currentStepPayment >= 1 && auth.currentStepPayment <= 5) {
-    if (Object.keys(errors.value).length > 0) return;
-    auth.currentStepPayment--;
-  }
-  selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
-};*/
-
 const nextStep = () => {
-  auth.currentStepPayment++;
+  if (auth.currentStepPayment === 0) {
+    if (informationStore.paymentMethod === 1) {
+      auth.currentStepPayment++;
+    } else {
+      return;
+    }
+  } else if (auth.currentStepPayment === 1) {
+    if (isValidStepOne.value) auth.currentStepPayment++;
+  } else if (auth.currentStepPayment === 2) {
+    if (isValidStepTwo.value) auth.currentStepPayment++;
+  } else if (auth.currentStepPayment === 3) {
+    if (isValidStepThree.value) auth.currentStepPayment++;
+  }
 
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
 };
@@ -211,4 +149,28 @@ const passportBabie = (baby) => {
     Validade: useDateToJson(baby?.validateDate),
   };
 };
+
+const isValidStepOne = computed(() => {
+  return (
+    informationStore.card.isValidFront &&
+    informationStore.card.cpfUserCard &&
+    informationStore.card.isValidCpf
+  );
+});
+
+const isValidStepTwo = computed(() => {
+  return (
+    informationStore.detailsUser.birthday &&
+    informationStore.detailsUser.nameBuy &&
+    informationStore.detailsUser.sexo
+  );
+});
+
+const isValidStepThree = computed(() => {
+  return (
+    informationStore.detailsUser.cep &&
+    informationStore.detailsUser.address &&
+    informationStore.detailsUser.district
+  );
+});
 </script>

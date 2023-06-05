@@ -214,6 +214,18 @@ const logout = () => {
       router.push('/');
     })
     .catch((e) => {
+      if (e?.response?.data?.message === 'Token has expired') {
+        email.value = '';
+        password.value = '';
+        Cookies.remove('token');
+        authStore.$reset();
+        alertStore.showMsg({
+          message: 'Token expirado. Sesión cerrada.',
+          backgrColor: 'blue',
+          textColor: 'blue',
+        });
+        router.push('/');
+      }
       const errorCode = e?.response?.data?.message || 'ServerError';
       alertStore.showMsg({
         message: errorCode,

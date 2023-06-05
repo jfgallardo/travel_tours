@@ -1,21 +1,22 @@
 <template>
-  <div v-if="loading">
-
-  </div>
+  platform
+  <div v-if="loading"></div>
   <div v-else>
-    <p>Datos salvos correctamente. Por favor pongase en contacto con MRTravel</p>
+    <p>
+      Datos salvos correctamente. Por favor pongase en contacto con MRTravel
+    </p>
   </div>
 </template>
 
 <script setup>
 import { useReserveStore } from '@/stores/reservar';
 import { usePurchaseStore } from '@/stores/purchase.user';
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref } from 'vue';
 import Cookies from 'js-cookie';
 
 onMounted(() => {
   record();
-})
+});
 
 const reserverStore = useReserveStore();
 const purchaseStore = usePurchaseStore();
@@ -35,7 +36,7 @@ const record = async () => {
   if (purchaseStore.informationAdults.length) await recordAdultData();
   if (purchaseStore.informationTeenagers.length) await recordChildData();
   if (purchaseStore.informationBabies.length) await recordBabyData();
-  loading.value = false
+  loading.value = false;
 };
 
 const recordAdultData = () => {
@@ -61,7 +62,7 @@ const recordAdultData = () => {
       },
       Viagem: [oneWayTrip(), returnTrip()],
     };
-    reserverStore.record(body)
+    reserverStore.record(body);
   });
 };
 
@@ -88,7 +89,7 @@ const recordChildData = () => {
       },
       Viagem: [oneWayTrip(), returnTrip()],
     };
-    reserverStore.record(body)
+    reserverStore.record(body);
   });
 };
 
@@ -115,7 +116,7 @@ const recordBabyData = () => {
       },
       Viagem: [oneWayTrip(), returnTrip()],
     };
-    reserverStore.record(body)
+    reserverStore.record(body);
   });
 };
 
@@ -123,7 +124,7 @@ const oneWayTrip = () => {
   return {
     Ida: 1,
     IdCia: 1300,
-    Trecho: voos.value.travel_one.Voos.map(item => item)
+    Trecho: voos.value.travel_one.Voos.map((item) => item),
   };
 };
 
@@ -131,7 +132,7 @@ const returnTrip = () => {
   return {
     Ida: 2,
     IdCia: 1300,
-    Trecho: voos.value.travel_two.Voos.map(item => item),
+    Trecho: voos.value.travel_two.Voos.map((item) => item),
   };
 };
 </script>
