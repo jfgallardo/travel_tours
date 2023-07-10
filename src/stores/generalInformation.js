@@ -28,8 +28,10 @@ export const useGeneralInformation = defineStore('generalInformation', {
       city: '',
       sexo: '',
       idd: '',
+      parcelas: ''
     },
-    paymentMethod: 'Credit Card',
+    paymentMethod: 4,
+    acceptConditions: false
   }),
   getters: {
     doubleCount: (state) => state.count * 2,

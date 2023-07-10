@@ -18,39 +18,19 @@ export const useFiltersStore = defineStore('filters', {
     flyFilters: (state) => {
       const vooStore = useVooStore();
 
-      if (vooStore.Ida.length > 0 || vooStore.Volta.length > 0) {
+      if (vooStore.Ida.length || vooStore.Volta.length) {
         let filterIda = vooStore.Ida;
         let filterVolta = vooStore.Volta;
 
-        filterIda = filterIda.filter((item) => item.ValorAdulto > 0);
-        filterVolta = filterVolta.filter((item) => item.ValorAdulto > 0);
+        // filterIda = filterIda.filter((item) => item.ValorAdulto > 0);
+        //filterVolta = filterVolta.filter((item) => item.ValorAdulto > 0);
 
         if (state.baggage.value === 1) {
-          filterIda = filterIda.filter(
-            (fly) =>
-              fly.Baggage?.filter(
-                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
-              ).length
-          );
-          filterVolta = filterVolta.filter(
-            (fly) =>
-              fly.Baggage?.filter(
-                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
-              ).length
-          );
+          filterIda = filterIda.filter((fly) => fly.Baggage !== null);
+          filterVolta = filterVolta.filter((fly) => fly.Baggage !== null);
         } else if (state.baggage.value === 0) {
-          filterIda = filterIda.filter(
-            (fly) =>
-              !fly.Baggage?.filter(
-                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
-              ).length
-          );
-          filterVolta = filterVolta.filter(
-            (fly) =>
-              !fly.Baggage?.filter(
-                (o) => !o.TextoBagagem.includes('mão') && o.Quantidade > 0
-              ).length
-          );
+          filterIda = filterIda.filter((fly) => fly.Baggage === null);
+          filterVolta = filterVolta.filter((fly) => fly.Baggage === null);
         }
 
         if (state.stops.value === 0) {
@@ -64,21 +44,32 @@ export const useFiltersStore = defineStore('filters', {
           filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas >= 2);
         }
 
+        if (state.airports.length){
+          filterIda = filterIda.filter((item) => {
+            const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(iata => iata.length === 3);
+            const uniqueIataList = [...new Set(iataList)];
+            if (arrayAinB(state.airports, uniqueIataList)) return true;
+          });
+
+          filterVolta = filterVolta.filter((item) => {
+            const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(iata => iata.length === 3);
+            const uniqueIataList = [...new Set(iataList)];
+            if (arrayAinB(state.airports, uniqueIataList)) return true;
+          });
+        }
+
+        /*
+
         //FALTA COMPANIAS
 
-        filterIda = filterIda.filter((item) =>
-          arrayAinB(state.airports, item.AirportsIata)
-        );
-        filterVolta = filterVolta.filter((item) =>
-          arrayAinB(state.airports, item.AirportsIata)
-        );
+
 
         filterIda = filterIda.filter(
           (item) => +item.Preco >= +state.priceRange
         );
         filterVolta = filterVolta.filter(
           (item) => +item.Preco >= +state.priceRange
-        );
+        );*/
 
         return {
           Ida: filterIda,

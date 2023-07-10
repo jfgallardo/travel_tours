@@ -73,15 +73,18 @@ const { t } = useI18n();
 const value = ref('');
 
 const ValorTaxas = computed(() => {
+  const price_one = vooOne.value.FareGroup.priceWithTax - vooOne.value.FareGroup.priceWithoutTax;
+  const price_two = vooTwo.value.FareGroup.priceWithTax - vooTwo.value.FareGroup.priceWithoutTax;
+
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: vooOne.value.ValorTotalTaxas + vooTwo.value.ValorTotalTaxas,
+    value: price_one + price_two,
   });
 });
 const ValorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: vooOne.value.ValorTotalComTaxa + vooTwo.value.ValorTotalComTaxa,
+    value: vooOne.value.FareGroup.priceWithTax + vooTwo.value.FareGroup.priceWithTax,
   });
 });
 
@@ -89,22 +92,24 @@ const SubTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
     value:
-      vooOne.value.Preco -
-      vooOne.value.ValorTotalTaxas +
-      (vooTwo.value.Preco - vooTwo.value.ValorTotalTaxas),
+      vooOne.value.FareGroup.priceWithoutTax + vooTwo.value.FareGroup.priceWithoutTax,
   });
 });
 const precoAdulto = computed(() => {
+  const fares_one = vooOne.value.FareGroup.fares.find(o => o.passengersType === 'ADT' )
+  const fares_two = vooTwo.value.FareGroup.fares.find(o => o.passengersType === 'ADT' )
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: vooOne.value.ValorAdulto + vooTwo.value.ValorAdulto,
+    value: fares_one.priceWithTax + fares_two.priceWithTax,
   });
 });
 const precoCrianca = computed(() => {
-  if (vooOne.value.ValorCrianca && vooTwo.value.ValorCrianca) {
+  const fares_one = vooOne.value.FareGroup.fares.find(o => o.passengersType === 'CHD' )
+  const fares_two = vooTwo.value.FareGroup.fares.find(o => o.passengersType === 'CHD' )
+  if (fares_one || fares_two) {
     return useCurrencyFormatter({
       currency: 'BRL',
-      value: vooOne.value.ValorCrianca + vooTwo.value.ValorCrianca,
+      value: fares_one.priceWithTax + fares_two.priceWithTax,
     });
   }
   return null;

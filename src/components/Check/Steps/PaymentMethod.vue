@@ -16,10 +16,12 @@
       <RadioButtonBox
         v-model="informationStore.paymentMethod"
         label="Transfer"
+        :idd="4"
       />
       <RadioButtonBox
         v-model="informationStore.paymentMethod"
         label="At the Agency"
+        :idd="5"
       />
     </div>
   </div>

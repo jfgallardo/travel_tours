@@ -67,6 +67,16 @@
                     :validations="validations.phone"
                     @is-valid="formIsValid = $event"
                   />
+                  <SelectSimple
+                    name="sexo"
+                    label="Sexo *"
+                    :options="[
+                      { label: 'Masculino', value: 'M' },
+                      { label: 'Femenino', value: 'F' },
+                    ]"
+                    :selected="i.sexo"
+                    @select-value="i.sexo = $event.value"
+                  />
                   <Select
                     :selected="i.documentSelected"
                     label="Documentos aceptados *"
@@ -132,6 +142,16 @@
                       name="mainPhone"
                       :maska="['(##) #####-####']"
                     />
+                    <SelectSimple
+                      name="sexo"
+                      label="Sexo *"
+                      :options="[
+                      { label: 'Masculino', value: 'M' },
+                      { label: 'Femenino', value: 'F' },
+                    ]"
+                      :selected="i.sexo"
+                      @select-value="i.sexo = $event.value"
+                    />
                     <Select
                       :selected="i.documentSelected"
                       label="Documentos aceptados *"
@@ -195,6 +215,16 @@
                       label="Telefone principal *"
                       name="mainPhone"
                       :maska="['(##) #####-####']"
+                    />
+                    <SelectSimple
+                      name="sexo"
+                      label="Sexo *"
+                      :options="[
+                      { label: 'Masculino', value: 'M' },
+                      { label: 'Femenino', value: 'F' },
+                    ]"
+                      :selected="i.sexo"
+                      @select-value="i.sexo = $event.value"
                     />
                     <Select
                       :selected="i.documentSelected"
@@ -270,6 +300,7 @@ import Select from '@/components/FormUI/TheSelect.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useAuthStore } from '@/stores/auth';
 import Cookies from 'js-cookie';
+import SelectSimple from '@/components/FormUI/TheSelect.vue';
 
 onMounted(() => {
   if (purchaseStore.informationAdults.length === 0) getArrayData();
@@ -437,7 +468,7 @@ const checkInformationTeenagers = computed(() => {
   let check = false;
   purchaseStore.informationTeenagers?.map((o) => {
     const flag =
-      o.documentSelected.value === 'C'
+      o.documentSelected?.value === 'C'
         ? !o.cpf_number || !formIsValid.value
         : !o.passportNumber ||
           !o.dateIssue ||

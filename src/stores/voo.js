@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axiosClientAPI from '@/plugins/axios';
 import { useAlertStore } from '@/stores/alert';
-import { flightTransformation } from '@/utils/data-transformation';
+import { transform } from "@/utils/clean-data";
 
 export const useVooStore = defineStore({
   id: 'voo',
@@ -23,6 +23,9 @@ export const useVooStore = defineStore({
     TokenConsulta: '',
     Request: null,
     Aeroportos: [],
+
+    totalItems: 0,
+    meta: []
   }),
   getters: {
     priceRange: (state) => {
@@ -45,22 +48,28 @@ export const useVooStore = defineStore({
       return await axiosClientAPI
         .post('api/v1/voo/round-trip', payload)
         .then(({ data }) => {
-          this.Companhia = data.Companhia;
-          this.CompanhiaVolta = data.CompanhiaVolta;
-          this.Ida = flightTransformation(data.Ida, data.Platform);
-          this.IdaVolta = data.IdaVolta;
-          this.Volta = flightTransformation(data.Volta, data.Platform);
-          this.IsStarAlliance = data.IsStarAlliance;
+          if (data.flights.length) {
+            this.totalItems = data.totalItems;
+            this.Platform = data.Platform;
+            this.Companhia = data.Companhia;
+            this.CompanhiaVolta = data.CompanhiaVolta;
+            this.Ida = transform(data.flights, 'ida', payload.Origem, payload.Destino);
+            this.IdaVolta = data.IdaVolta;
+            this.Volta = transform(data.flights, 'vuelta',  payload.Origem, payload.Destino);
+            this.meta = data.meta
+          }
+
+         /* this.IsStarAlliance = data.IsStarAlliance;
           this.Multas = data.Multas;
           this.MultiplesTrechos = data.MultiplesTrechos;
           this.Pagante = data.Pagante;
-          this.Platform = data.Platform;
+
           this.QntdAdulto = data.QntdAdulto;
           this.QntdBebe = data.QntdBebe;
           this.QntdCrianca = data.QntdCrianca;
           this.TokenConsulta = data.TokenConsulta;
           this.Request = data.Request;
-          this.Aeroportos = data.Aeroportos;
+          this.Aeroportos = data.Aeroportos;*/
         })
         .catch((e) => {
           const errorCode =

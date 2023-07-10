@@ -38,15 +38,16 @@
     </TransitionGroup>
 
     <div class="mx-auto text-center">
+      <span v-if="!objetos.length" class="text-sm font-semibold">Filtros no arrojaron resultados</span>
       <button
-        v-if="objetos.length === objetosVisibles.length"
+        v-if="objetos.length && objetos.length === objetosVisibles.length"
         class="text-center bg-blue-700 text-white px-10 py-2 mt-3.5"
         @click="onTop"
       >
         {{ t('Voltar para começar') }}
       </button>
       <button
-        v-else
+        v-if="objetos.length && !(objetos.length === objetosVisibles.length)"
         class="text-center bg-blue-700 text-white px-10 py-2 my-3.5"
         @click="actualizarObjetosVisibles"
       >

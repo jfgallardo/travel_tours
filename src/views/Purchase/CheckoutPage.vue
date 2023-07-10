@@ -6,7 +6,6 @@
           <ClockOffers />
         </div>
         <div class="px-4">
-          <!--     VUELO DE IDA       -->
           <table
             class="table-fixed border border-gray-200 w-full border-spacing-2 border-separate"
           >
@@ -61,7 +60,7 @@
                   <div class="flex items-center justify-between">
                     <h3>{{ t('querySubHeading.clase') }}</h3>
                     <h3 class="font-semibold">
-                      {{ travels.travel_one.Cabine }}
+                      {{ travels.travel_one.Voos[0].seatClass.description }}
                     </h3>
                   </div>
                   <div class="flex items-center justify-between">
@@ -79,23 +78,19 @@
                   <div class="flex items-center justify-between">
                     <h3>{{ t('Fees') }}</h3>
                     <h4 class="font-semibold">
-                      {{ travels.travel_one.Tarifas ? 'Tem' : 0 }}
+                      {{ tarifasOne }}
                     </h4>
                   </div>
 
                   <div
                     v-if="
                       travels.travel_one.Baggage &&
-                      travels.travel_one.Baggage.length
+                      travels.travel_one.Baggage.isIncluded
                     "
                     class="flex flex-col items-start space-y-1.5"
                   >
-                    <template
-                      v-for="tar in travels.travel_one.Baggage"
-                      :key="tar.Tipo"
-                    >
+
                       <div
-                        v-if="tar.Quantidade > 0"
                         class="flex items-center justify-between w-full"
                       >
                         <svg
@@ -111,10 +106,9 @@
                           />
                         </svg>
                         <span class="font-medium">
-                          {{ tar.TextoBagagem }}
+                          {{ travels.travel_one.Baggage.texto }}
                         </span>
                       </div>
-                    </template>
                   </div>
                   <template v-else>
                     <div class="flex justify-between">
@@ -141,7 +135,6 @@
             </tbody>
           </table>
 
-          <!--     VUELO DE VUELTA       -->
           <table
             v-if="travels.travel_two"
             class="table-fixed border border-t-0 border-gray-200 w-full border-spacing-2 border-separate"
@@ -200,7 +193,7 @@
                   <div class="flex items-center justify-between">
                     <h3>{{ t('querySubHeading.clase') }}</h3>
                     <h3 class="font-semibold">
-                      {{ travels.travel_two.Cabine }}
+                      {{ travels.travel_two.Voos[0].seatClass.description }}
                     </h3>
                   </div>
                   <div class="flex items-center justify-between">
@@ -218,22 +211,17 @@
                   <div class="flex items-center justify-between">
                     <h3>{{ t('Fees') }}</h3>
                     <h4 class="font-semibold">
-                      {{ travels.travel_two.Tarifas ? 'Tem' : 0 }}
+                      {{ tarifasTwo }}
                     </h4>
                   </div>
                   <div
                     v-if="
                       travels.travel_two.Baggage &&
-                      travels.travel_two.Baggage.length
+                      travels.travel_two.Baggage.isIncluded
                     "
                     class="flex flex-col items-start space-y-1.5"
                   >
-                    <template
-                      v-for="tar in travels.travel_two.Baggage"
-                      :key="tar.Tipo"
-                    >
                       <div
-                        v-if="tar.Quantidade > 0"
                         class="flex items-center justify-between w-full"
                       >
                         <svg
@@ -249,13 +237,12 @@
                           />
                         </svg>
                         <span class="font-medium">
-                          {{ tar.TextoBagagem }}
+                          {{ travels.travel_two.Baggage.texto }}
                         </span>
                       </div>
-                    </template>
                   </div>
                   <template v-else>
-                    <div>
+                    <div class="flex w-full h-full items-center justify-between">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -388,57 +375,47 @@ const travels = computed(() => ({
 
 const valorTaxas = computed(() => {
   const { travel_one, travel_two } = travels.value;
-  const totalTaxas =
-    (+travel_one?.ValorTotalTaxas || 0) +
-    (+travel_one?.ValorTxServico || 0) +
-    (+travel_two?.ValorTotalTaxas || 0) +
-    (+travel_two?.ValorTxServico || 0);
+  const priceWithTaxOne = travel_one.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithTax, 0);
+  const priceWithTaxTwo = travel_two.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithTax, 0);
+
+  const priceWithoutTaxOne = travel_one.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
+  const priceWithoutTaxTwo = travel_two.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
+
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: totalTaxas,
+    value: (priceWithTaxOne - priceWithoutTaxOne) + (priceWithTaxTwo - priceWithoutTaxTwo),
   });
 });
 
 const valorTotalPassenger = computed(() => {
   const { travel_one, travel_two } = travels.value;
-  const totalPassenger =
-    (+travel_one?.ValorAdulto || 0) +
-    (+travel_one?.ValorBebe || 0) +
-    (+travel_one?.ValorCrianca || 0) +
-    (+travel_two?.ValorCrianca || 0) +
-    (+travel_two?.ValorAdulto || 0) +
-    (+travel_two?.ValorBebe || 0);
+  const totalPassengerOne = travel_one.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
+  const totalPassengerTwo = travel_two.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
 
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: totalPassenger,
+    value: totalPassengerOne + totalPassengerTwo,
   });
 });
 
 const valorTotal = computed(() => {
   const { travel_one, travel_two } = travels.value;
-  const total =
-    (+travel_one?.ValorTotalComTaxa || 0) +
-    (+travel_two?.ValorTotalComTaxa || 0);
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: total,
+    value: travel_one.Preco + travel_two.Preco,
   });
 });
 
 const valorBagagem = computed(() => {
-  const { travel_one, travel_two } = travels.value;
-  const totalBagagem =
-    (+travel_one?.ValorTxServico || 0) + (+travel_two?.ValorTxServico || 0);
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: totalBagagem,
+    value: 0,
   });
 });
 
 //TODO INFORMACION SOBRE VUELO DE IDA
 const departureTime = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].Saida));
+  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].departureDate));
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -446,34 +423,34 @@ const departureTime = computed(() => {
 });
 
 const departureTimeDayPeriod = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].Saida));
+  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].departureDate));
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
 
 const dateStringIdaSaida = computed(() => {
-  return formatDate(travels.value.travel_one.Voos[0].Saida);
+  return formatDate(travels.value.travel_one.Voos[0].departureDate);
 });
 
 const ParadaIda = computed(() => {
-  const voosIda =
-    travels.value.travel_one?.VoosIda ?? travels.value.travel_one?.Voos;
-  return getStops(voosIda);
+  return `Parada(s): ${travels.value.travel_one?.NumeroParadas}` ;
 });
 
 const duracaoVoosIda = computed(() => {
-  const flag = travels.value.travel_one.Voos.length;
-  return duration(
-    travels.value.travel_one.Voos[0].Saida,
-    travels.value.travel_one.Voos[flag - 1].Chegada
-  );
+  const hours = Math.floor(travels.value.travel_one.TempoTotal / 60);
+  const remainingMinutes = travels.value.travel_one.TempoTotal % 60;
+
+  const hoursString = hours.toString().padStart(2, '0');
+  const minutesString = remainingMinutes.toString().padStart(2, '0');
+
+  return `${hoursString}h:${minutesString}min`;
 });
 
 const check = computed(() => {
   const { Voos } = travels.value.travel_one;
   const flag = Voos.length;
-  const dateLocal = new Date(moment(Voos[flag - 1].Chegada));
-  const { hour } = dateLocal;
+  const dateLocal = new Date(moment(Voos[flag - 1].arrivalDate));
+  const hour = dateLocal.getHours();
   const checkIn = dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -486,12 +463,22 @@ const check = computed(() => {
 const dateStringIdaChegada = computed(() => {
   const { Voos } = travels.value.travel_one;
   const flag = Voos.length;
-  return formatDate(Voos[flag - 1].Chegada);
+  return formatDate(Voos[flag - 1].arrivalDate);
 });
+
+const tarifasOne = computed(() => {
+  if (travels.value.travel_one && travels.value.travel_one.FareGroup) {
+    return useCurrencyFormatter({
+      currency: 'BRL',
+      value: travels.value.travel_one.FareGroup.priceWithoutTax
+    });
+  }
+  return '';
+})
 
 //TODO INFORMACION SOBRE VUELO DE VUELTA
 const departureTimeVolta = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].Saida));
+  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].departureDate));
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -499,7 +486,7 @@ const departureTimeVolta = computed(() => {
 });
 
 const departureTimeDayPeriodVolta = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].Saida));
+  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].departureDate));
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
@@ -507,8 +494,8 @@ const departureTimeDayPeriodVolta = computed(() => {
 const checkVolta = computed(() => {
   const { Voos } = travels.value.travel_two;
   const flag = Voos.length;
-  const dateLocal = new Date(moment(Voos[flag - 1].Chegada));
-  const { hour } = dateLocal;
+  const dateLocal = new Date(moment(Voos[flag - 1].arrivalDate));
+  const hour = dateLocal.getHours();
   const checkInVolta = dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -519,28 +506,38 @@ const checkVolta = computed(() => {
 });
 
 const dateStringIdaSaidaVolta = computed(() => {
-  return formatDate(travels.value.travel_two.Voos[0].Saida);
+  return formatDate(travels.value.travel_two.Voos[0].departureDate);
 });
 
 const ParadaVolta = computed(() => {
-  const voosVolta =
-    travels.value.travel_two?.VoosVolta || travels.value.travel_two?.Voos;
-  return getStops(voosVolta);
+  return `Parada(s): ${travels.value.travel_two?.NumeroParadas}` ;
 });
 
 const duracaoVoosVolta = computed(() => {
-  const flag = travels.value.travel_two.Voos.length;
-  return duration(
-    travels.value.travel_two.Voos[0].Saida,
-    travels.value.travel_two.Voos[flag - 1].Chegada
-  );
+  const hours = Math.floor(travels.value.travel_two.TempoTotal / 60);
+  const remainingMinutes = travels.value.travel_two.TempoTotal % 60;
+
+  const hoursString = hours.toString().padStart(2, '0');
+  const minutesString = remainingMinutes.toString().padStart(2, '0');
+
+  return `${hoursString}h:${minutesString}min`;
 });
 
 const dateStringIdaChegadaVolta = computed(() => {
   const { Voos } = travels.value.travel_two;
   const flag = Voos.length;
-  return formatDate(Voos[flag - 1].Chegada);
+  return formatDate(Voos[flag - 1].arrivalDate);
 });
+
+const tarifasTwo = computed(() => {
+  if (travels.value.travel_two && travels.value.travel_two.FareGroup) {
+    return useCurrencyFormatter({
+      currency: 'BRL',
+      value: travels.value.travel_two.FareGroup.priceWithoutTax
+    });
+  }
+  return '';
+})
 
 //TODO COMMON
 const duration = (dataSaida, dataLlegada) => {

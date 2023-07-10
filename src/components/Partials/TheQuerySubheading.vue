@@ -51,7 +51,7 @@
         </template>
         <FilterAirport
           v-model="filters.airports"
-          :airports="vooStore.Aeroportos"
+          :airports="showAeroportos"
         />
       </SelectSimple>
 
@@ -325,6 +325,15 @@ const classes = [
     value: 'P',
   },
 ];
+
+const showAeroportos = computed(() => {
+  return vooStore.meta?.airports?.map((item) => {
+    return {
+      name: item.name,
+      value: item.iata
+    }
+  })
+})
 </script>
 
 <style scoped>

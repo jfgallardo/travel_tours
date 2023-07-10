@@ -36,6 +36,9 @@ import { useGeneralInformation } from '@/stores/generalInformation';
 import { useReserveStore } from '@/stores/reservar';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import { useDateToJson } from '@/composables/dateToJson';
+import Cookies from 'js-cookie';
+import { useAlertStore } from '@/stores/alert';
+import { useRouter } from 'vue-router';
 
 onMounted(() => {
   auth.currentStepPayment = 0;
@@ -46,6 +49,8 @@ const auth = useAuthStore();
 const informationStore = useGeneralInformation();
 const reserverStore = useReserveStore();
 const purchaseStore = usePurchaseStore();
+const alertStore = useAlertStore();
+const router = useRouter();
 
 const steps = [
   { component: PaymentMethod },
@@ -56,10 +61,22 @@ const steps = [
 ];
 const selectedComponent = ref(null);
 
+const voos = computed(() => {
+  const travel_one = JSON.parse(Cookies.get('I'));
+  const travel_two = Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
+  return {
+    travel_one,
+    travel_two,
+  };
+});
+
 const nextStep = () => {
   if (auth.currentStepPayment === 0) {
-    if (informationStore.paymentMethod === 1) {
-      auth.currentStepPayment++;
+    if (
+      informationStore.paymentMethod === 4 ||
+      informationStore.paymentMethod === 5
+    ) {
+      auth.currentStepPayment +=2;
     } else {
       return;
     }
@@ -80,42 +97,76 @@ const backStep = () => {
 };
 
 const reservar = () => {
-  const body = {
-    IdentificacaoDaViagem: 'KeyPorAveriguar',
-    Passageiros: passageiros(),
-    Pagamento: {
-      CartaoDeCredito: creditCard(),
-    },
-  };
-
-  reserverStore
-    .bookFlight(body)
-    .then(() => {})
-    .catch(() => {});
+  if (
+    informationStore.detailsUser.parcelas &&
+    informationStore.acceptConditions
+  ) {
+    const body = {
+      Email: auth.userLogged?.email,
+      Passageiros: passageiros(),
+      Ida: { Token: voos.value.travel_one.RateToken },
+      pagante: {
+        name: informationStore.detailsUser.nameBuy,
+        address: {
+          street: informationStore.detailsUser.district,
+          number: informationStore.detailsUser.number,
+          zipcode: informationStore.detailsUser.cep,
+          neighborhood: informationStore.detailsUser.address,
+          city: informationStore.detailsUser.city,
+          state: informationStore.detailsUser.state,
+          country: 'Brasil',
+        },
+        phones: [
+          {
+            DDD: String(informationStore.detailsUser.codeArea),
+            DDI: '55',
+            number: String(informationStore.detailsUser.phone),
+          },
+        ],
+        Nascimento: informationStore.detailsUser.birthday,
+      },
+      TokenConsultaIda: voos.value.travel_one.TokenConsultaMBX,
+      IdMeioPagamento: informationStore.paymentMethod,
+      ValorParcelaPS: +informationStore.detailsUser.parcelas.value,
+    };
+    reserverStore
+      .record(body)
+      .then(() => {
+        alertStore.showMsg({
+          message: 'Datos guardados correctamente. De ser su primera compra recibirá un email.',
+          backgrColor: 'blue',
+          textColor: 'blue',
+        });
+        router.push('/aereo');
+      })
+      .catch(() => {
+        alertStore.showMsg({
+          message: 'Intente de nuevo, por favor.',
+          backgrColor: 'red',
+          textColor: 'red',
+        });
+      });
+  }
 };
 
 const passageiros = () => {
   let passengerList = [];
-  purchaseStore.informationAdults.forEach((item, index) => {
-    const hasBaby = !!purchaseStore.informationBabies?.[index];
-    const baby = purchaseStore.informationBabies?.[index];
+  purchaseStore.informationAdults.forEach((item) => {
     const pass = {
-      CPF: item.cpf_number,
-      Passaporte: {
-        Nacionalidade: item.countryResidence,
-        Numero: item.passportNumber,
-        PaisEmissor: item.countryIssue,
-        Validade: useDateToJson(item.validateDate),
-      },
+      CPF: item.cpf_number || '',
+      PaisResidencia: item.countryResidence || '',
+      EmissaoDocumento: item.validateDate || '',
+      PaisEmissor: item.countryIssue || '',
+      NumeroDocumento: item.passportNumber || '',
+      TipoDocumento: item.documentSelected.label,
       Email: item.email,
+      DDI: '55',
+      DDD: String(item.mainPhone.match(/\((\d+)\)/)[1]),
+      Telefone: String(item.mainPhone.replace(/\(\d+\)/, '')),
       Nascimento: item.birthday,
       Nome: item.name,
       Sobrenome: item.last_name,
-      PossuiBebe: hasBaby,
-      ...(hasBaby ? { InfPassaporte: passportBabie(baby) } : {}),
-      ...(hasBaby ? { InfantilNascimento: baby?.birthday } : {}),
-      ...(hasBaby ? { InfantilNome: baby?.name } : {}),
-      ...(hasBaby ? { InfantilSobrenome: baby?.last_name } : {}),
+      Sexo: item.sexo,
     };
     passengerList.push(pass);
   });
@@ -161,8 +212,7 @@ const isValidStepOne = computed(() => {
 const isValidStepTwo = computed(() => {
   return (
     informationStore.detailsUser.birthday &&
-    informationStore.detailsUser.nameBuy &&
-    informationStore.detailsUser.sexo
+    informationStore.detailsUser.nameBuy
   );
 });
 

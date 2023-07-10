@@ -1,15 +1,15 @@
 <template>
   <div class="px-4 mx-auto">
-    <div class="grid grid-cols-2 grid-flow-row gap-2.5">
+    <div class="flex flex-col justify-center space-y-1.5">
       <div v-for="airport in airports" :key="airport">
         <label class="flex items-center">
           <input
             v-model="value"
-            :value="airport"
+            :value="airport.value"
             class="h-4 w-4 text-zinc-800 cursor-pointer focus:ring-0 mr-2"
             type="checkbox"
           />
-          <span>{{ airport }}</span>
+          <span>{{ airport.name }} ({{airport.value}})</span>
         </label>
       </div>
     </div>

@@ -39,7 +39,7 @@
         class="border border-t-0 border-slate-300 lg:row-span-5 lg:col-span-3"
       >
         <div class="flex flex-col space-y-4 items-center py-2">
-          <template v-for="item in flights" :key="item.Numero">
+          <template v-for="item in flights" :key="item.flightNumber">
             <PlaneLine v-bind="item" :cia-mandatoria="ciaMandatoria" />
           </template>
         </div>
@@ -49,7 +49,7 @@
       >
         <div class="flex items-center justify-between space-x-3.5">
           <div>
-            <span>{{ initVoo.Origem }}&nbsp;&nbsp;</span>
+            <span>{{ initVoo.departure }}&nbsp;&nbsp;</span>
             <span class="font-bold">{{ horaSaida }} {{ dayPeriodIda }}</span>
           </div>
           <div>{{ paradas }}</div>
@@ -57,7 +57,7 @@
             <span class="font-bold"
               >{{ horaChegada }} {{ dayPeriodVolta }}</span
             >
-            <span>&nbsp;&nbsp;{{ endVoo.Destino }}</span>
+            <span>&nbsp;&nbsp;{{ endVoo.arrival }}</span>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
         <span>DURAÇAO TOTAL</span>
-        <span class="font-bold">{{ duration }}</span>
+        <span class="font-bold">{{ timeTotal }}</span>
       </div>
       <div
         v-if="false"
@@ -79,7 +79,7 @@
       >
         <span>CLASE</span>
         <span class="font-bold">{{
-          tarifas?.[0]?.Classe ?? initVoo.ClasseStr
+          initVoo.seatClass.description
         }}</span>
       </div>
       <div
@@ -92,11 +92,10 @@
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
         <div
-          v-if="baggage && baggage.length > 0"
+          v-if="baggage && baggage.isIncluded"
           class="flex flex-col items-start space-y-1.5"
         >
-          <template v-for="tar in baggage" :key="tar.Tipo">
-            <div v-if="tar.Quantidade > 0" class="flex items-center space-x-8">
+            <div class="flex items-center space-x-8">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -109,9 +108,8 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              <span class="font-medium"> {{ tar.TextoBagagem }} </span>
+              <span class="font-medium"> {{ baggage.texto}} </span>
             </div>
-          </template>
         </div>
         <template v-else>
           <div class="flex items-center space-x-8">
@@ -201,7 +199,7 @@
           class="flex items-center justify-between lg:flex-col lg:justify-center"
         >
           <p class="text-2xl text-center">1 Oferta Desde</p>
-          <!--          <p>{{ offersCompany }}</p>-->
+          {{ofertaDesde}}
         </div>
       </div>
 
@@ -211,7 +209,7 @@
         <div
           class="flex items-center justify-between lg:flex-col lg:justify-center"
         >
-          <span class="text-2xl">Tipo de Tarifa</span>
+          <span class="text-2xl">Preço com imposto</span>
           <span>{{ tipoTarifa }}</span>
         </div>
       </div>
@@ -256,13 +254,11 @@
 </template>
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import QrcodeVue from 'qrcode.vue';
 import PlaneLine from '@/components/Aereo/PlaneLine.vue';
 import moment from 'moment/min/moment-with-locales';
 import { useI18n } from 'vue-i18n';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
-//import { useWoobaStore } from '@/stores/wooba';
 
 onMounted(() => {
   if (props.id) {
@@ -312,18 +308,17 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  timeTotal: {
+    type: String,
+    default: ''
+  }
 });
 
 //Todo variables()
 const value = ref('');
-//const flights = inject('flights');
-//const ofertasDesde = inject('ofertasDesde');
-//const ciaMandatoria = inject('ciaMandatoria');
-//const preco = inject('preco');
-//const id = inject('id');
+
 const searchOptions = useSearchOptionsVooStore();
 const { locale } = useI18n();
-//const woobaStore = useWoobaStore();
 
 //Todo computed()
 const initVoo = computed(() => {
@@ -334,41 +329,18 @@ const endVoo = computed(() => {
   return props.flights[longitud - 1];
 });
 const dayPeriodIda = computed(() => {
-  return filterDayPeriod(initVoo.value.Chegada);
+  return filterDayPeriod(initVoo.value.departureDate);
 });
 const dayPeriodVolta = computed(() => {
-  return filterDayPeriod(endVoo.value.Chegada);
+  return filterDayPeriod(endVoo.value.arrivalDate);
 });
 const horaSaida = computed(() => {
-  return filterHours(initVoo.value.Saida);
+  return filterHours(initVoo.value.departureDate);
 });
 const horaChegada = computed(() => {
-  return filterHours(endVoo.value.Chegada);
+  return filterHours(endVoo.value.arrivalDate);
 });
-/*const offersCompany = computed(() => {
-  let companies = props.ofertasDesde.filter((item) => {
-    if (item.company === props.ciaMandatoria) {
-      return item;
-    }
-  });
-  let offers = companies[0].offers;
-  if (companies.length === 1) {
-    return useCurrencyFormatter({
-      currency: 'BRL',
-      value: offers,
-    });
-  } else {
-    companies.forEach((e) => {
-      if (e.offers < offers) {
-        offers = e.offers;
-      }
-    });
-  }
-  return useCurrencyFormatter({
-    currency: 'BRL',
-    value: offers,
-  });
-});*/
+
 const valorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
@@ -376,14 +348,22 @@ const valorTotal = computed(() => {
   });
 });
 
+const ofertaDesde = computed(() => {
+  return useCurrencyFormatter({
+    currency: 'BRL',
+    value: props.tarifas.priceInCompany,
+  });
+})
+
 //Todo functions()
 const tipoTarifa = computed(() => {
   if (props.platform === 1) {
-    if (props.tarifas)
-      return `${props.tarifas[0].Classe} ( ${props.tarifas[0].Tipo} )`;
-    return initVoo.value.ClasseStr;
+    return useCurrencyFormatter({
+      currency: 'BRL',
+      value: props.tarifas.priceWithoutTax,
+    });
   }
-  return `${initVoo.value.BaseTarifaria[0].Familia} ( ${initVoo.value.BaseTarifaria[0].Codigo} )`;
+  return '';
 });
 
 const paradas = computed(() => {
@@ -391,8 +371,8 @@ const paradas = computed(() => {
   let escalas = 0;
 
   props.flights.map((item) => {
-    if (item.Escalas) {
-      escalas += item.Escalas.length;
+    if (item.numberOfStops) {
+      escalas += item.numberOfStops;
     }
   });
   return `${cantVoo + escalas} Parada(s)`;
@@ -408,13 +388,7 @@ const dateVoo = computed(() => {
 const dateVooArray = () => {
   return props.flights.flatMap((o) => formatDate(o.Chegada)).join('; ');
 };
-const duration = computed(() => {
-  const x = moment(initVoo.value.Saida);
-  const y = moment(endVoo.value.Chegada);
-  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment
-    .duration(y.diff(x))
-    .get('minutes')}min`;
-});
+
 const filterDayPeriod = (date) => {
   const dateLocal = new Date(moment(date));
   const hours = dateLocal.getHours();

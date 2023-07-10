@@ -107,35 +107,38 @@ const { t } = useI18n();
 const value = ref('');
 
 const ValorTaxas = computed(() => {
+  const price = props.vooDetalhes.FareGroup.priceWithTax - props.vooDetalhes.FareGroup.priceWithoutTax;
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.ValorTotalTaxas,
+    value: price,
   });
 });
 const ValorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.ValorTotalComTaxa,
+    value: props.vooDetalhes.FareGroup.priceWithTax,
   });
 });
 
 const SubTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.Preco - props.vooDetalhes.ValorTotalTaxas,
+    value: props.vooDetalhes.FareGroup.priceWithoutTax,
   });
 });
 const precoAdulto = computed(() => {
+  const fares = props.vooDetalhes.FareGroup.fares.find(o => o.passengersType === 'ADT' )
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.vooDetalhes.ValorAdulto,
+    value: fares.priceWithTax,
   });
 });
 const precoCrianca = computed(() => {
-  if (props.vooDetalhes.ValorCrianca) {
+  const fares = props.vooDetalhes.FareGroup.fares.find(o => o.passengersType === 'CHD' )
+  if (fares) {
     return useCurrencyFormatter({
       currency: 'BRL',
-      value: props.vooDetalhes.ValorCrianca,
+      value: fares.priceWithTax,
     });
   }
   return null;

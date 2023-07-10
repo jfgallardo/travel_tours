@@ -23,7 +23,7 @@
       </div>
       <div class="border border-t-0 border-x-0 border-slate-300 lg:row-span-5">
         <div class="flex flex-col space-y-4 items-center py-2">
-          <template v-for="item in voos" :key="item.Numero">
+          <template v-for="item in voos" :key="item.flightNumber">
             <PlaneLine v-bind="item" />
           </template>
         </div>
@@ -61,7 +61,7 @@
       <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
         <div class="flex items-center justify-between h-full">
           <span>CLASE</span>
-          <span class="font-bold">{{ initialFlight.ClasseStr }}</span>
+          <span class="font-bold">{{ initialFlight.seatClass.description }}</span>
         </div>
       </div>
       <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
@@ -70,50 +70,12 @@
           <span class="font-bold">{{ vooSelected.CiaMandatoria }}</span>
         </div>
       </div>
-      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0">
-        <!--        <div
-          v-if="initialFlight.BagagemInclusa"
-          class="flex items-center justify-between h-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="w-4 h-4 text-blue-700"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <span> {{ initialFlight.BagagemQuantidade }} BAGAGEM DE MÃO </span>
-        </div>
-        <div v-else class="flex items-center justify-between h-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-            />
-          </svg>
-
-          <span>NO BAGAGEM</span>
-        </div>-->
+      <div class="border border-t-0 border-slate-300 py-2 px-6 border-r-0 flex items-center w-full">
         <div
-          v-if="vooSelected.Baggage && vooSelected.Baggage.length"
-          class="flex flex-col items-start space-y-1.5"
+          v-if="vooSelected.Baggage && vooSelected.Baggage.isIncluded"
+          class="w-full"
         >
-          <template v-for="tar in vooSelected.Baggage" :key="tar.Tipo">
             <div
-              v-if="tar.Quantidade > 0"
               class="flex items-center w-full justify-between"
             >
               <svg
@@ -128,12 +90,11 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              <span class="font-medium"> {{ tar.TextoBagagem }} </span>
+              <span class="font-medium"> {{ vooSelected.Baggage.texto }} </span>
             </div>
-          </template>
         </div>
         <template v-else>
-          <div class="flex w-full justify-between">
+          <div class="flex w-full h-full items-center justify-between">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -267,16 +228,16 @@ const endFlight = computed(() => {
   );
 });
 const dayPeriodIda = computed(() => {
-  return filterDayPeriod(initialFlight.value.Saida);
+  return filterDayPeriod(initialFlight.value.departureDate);
 });
 const dayPeriodVolta = computed(() => {
-  return filterDayPeriod(endFlight.value.Chegada);
+  return filterDayPeriod(endFlight.value.arrivalDate);
 });
 const horaSaida = computed(() => {
-  return filterHours(initialFlight.value.Saida);
+  return filterHours(initialFlight.value.departureDate);
 });
 const horaChegada = computed(() => {
-  return filterHours(endFlight.value.Chegada);
+  return filterHours(endFlight.value.arrivalDate);
 });
 
 const paradas = computed(() => {
@@ -292,16 +253,21 @@ const paradas = computed(() => {
 });
 
 const duration = computed(() => {
-  const x = moment(initialFlight.value.Saida);
-  const y = moment(endFlight.value.Chegada);
-  return `${Math.trunc(moment.duration(y.diff(x)).as('hours'))} hrs ${moment
-    .duration(y.diff(x))
-    .get('minutes')}min`;
+  const hours = Math.floor(props.vooSelected.TempoTotal / 60);
+  const remainingMinutes = props.vooSelected.TempoTotal % 60;
+
+  const hoursString = hours.toString().padStart(2, '0');
+  const minutesString = remainingMinutes.toString().padStart(2, '0');
+
+  return `${hoursString}h:${minutesString}min`;
 });
 
 const tarifa = computed(() => {
-  if (props.vooSelected && props.vooSelected.Tarifas) {
-    return props.vooSelected.Tarifas[0]?.Tipo || '';
+  if (props.vooSelected && props.vooSelected.FareGroup) {
+    return useCurrencyFormatter({
+      currency: 'BRL',
+      value: props.vooSelected.FareGroup.priceWithoutTax
+    });
   }
   return '';
 });
@@ -309,17 +275,14 @@ const tarifa = computed(() => {
 const valorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: vooOne.value.ValorTotalComTaxa + vooTwo.value.ValorTotalComTaxa,
+    value: props.vooSelected.FareGroup.priceWithTax,
   });
 });
 
 const valorTotalTaxas = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value:
-      vooOne.value.ValorTotalTaxas +
-      vooOne.value.ValorTxServico +
-      (vooTwo.value.ValorTotalTaxas + vooTwo.value.ValorTxServico),
+    value: props.vooSelected.FareGroup.priceWithTax - props.vooSelected.FareGroup.priceWithoutTax,
   });
 });
 
@@ -349,15 +312,7 @@ const dateVooVolta = computed(() => {
   moment.locale(
     i18n.global.locale.value === 'br' ? 'pt-br' : i18n.global.locale.value
   );
-  return moment(initialFlight.value.Saida).format('dddd D MMM YYYY');
-});
-
-const vooOne = computed(() => {
-  return Cookies.get('I') ? JSON.parse(Cookies.get('I')) : null;
-});
-
-const vooTwo = computed(() => {
-  return Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
+  return moment(initialFlight.value.departureDate).format('dddd D MMM YYYY');
 });
 </script>
 

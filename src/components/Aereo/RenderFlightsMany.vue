@@ -36,14 +36,9 @@
             <div class="flex flex-col items-center space-y-2">
               <p class="text-gray-700">
                 <span class="text-gray-400">Duration: </span>
-                <span class="font-medium text-sm">{{ viagem.TempoTotal }}</span>
+                <span class="font-medium text-sm">{{ timeTotal }}</span>
               </p>
               <div>
-                <!--                <img
-                  v-if="initial_flight.Segmento === 'I'"
-                  class="h-8 w-8"
-                  src="@/assets/ico/icons8-destination-covered-through-air-travel-of-planned-route-location-48.png"
-                />-->
                 <img
                   class="h-8 w-8"
                   src="@/assets/ico/icons8-flight-arrival-time-delayed-due-to-bad-weather-48.png"
@@ -93,8 +88,9 @@
               :cia-mandatoria="viagem.CiaMandatoria"
               :preco="precoTotal"
               :platform="viagem.Platform"
-              :tarifas="viagem.Tarifas"
+              :tarifas="viagem.FareGroup"
               :baggage="viagem.Baggage"
+              :time-total="timeTotal"
               @close-details="detalhes = false"
             />
           </template>
@@ -112,7 +108,6 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Modal from '@/components/Partials/TheModal.vue';
 import DetailsPage from '@/views/Aereo/DetailsPage.vue';
-import { PhotoIcon } from '@heroicons/vue/24/solid';
 
 const { locale } = useI18n();
 const detalhes = ref(false);
@@ -130,11 +125,7 @@ const props = defineProps({
 });
 
 const precoTotal = computed(() => {
-  if (props.viagem.Preco > 0) {
-    return props.viagem.Preco;
-  } else {
-    return props.viagem.ValorTotalComTaxa;
-  }
+  return props.viagem.FareGroup.priceWithTax
 });
 
 const initial_flight = computed(() => {
@@ -147,32 +138,32 @@ const final_flight = computed(() => {
 });
 
 const filter_weekday_initial = computed(() => {
-  const dateLocal = new Date(initial_flight.value.Saida);
+  const dateLocal = new Date(initial_flight.value.departureDate);
   const options = { weekday: 'long' };
   return dateLocal.toLocaleDateString(locale.value, options);
 });
 
 const filter_weekday_final = computed(() => {
-  const dateLocal = new Date(final_flight.value.Chegada);
+  const dateLocal = new Date(final_flight.value.arrivalDate);
   const options = { weekday: 'long' };
 
   return dateLocal.toLocaleDateString(locale.value, options);
 });
 
 const filter_day_period_initial = computed(() => {
-  const dateLocal = new Date(initial_flight.value.Saida);
+  const dateLocal = new Date(initial_flight.value.departureDate);
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
 
 const filter_day_period_final = computed(() => {
-  const dateLocal = new Date(final_flight.value.Chegada);
+  const dateLocal = new Date(final_flight.value.arrivalDate);
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
 
 const filter_hours_initial = computed(() => {
-  const dateLocal = new Date(initial_flight.value.Saida);
+  const dateLocal = new Date(initial_flight.value.departureDate);
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -180,55 +171,30 @@ const filter_hours_initial = computed(() => {
 });
 
 const filter_hours_final = computed(() => {
-  const dateLocal = new Date(final_flight.value.Chegada);
+  const dateLocal = new Date(final_flight.value.arrivalDate);
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
   });
 });
 
-const duration = computed(() => {
-  let minutes_flag = 0;
-  props.viagem.Voos.forEach((element) => {
-    minutes_flag += parseInt(element.Duracao);
-  });
-
-  let hours = Math.floor(minutes_flag / 60);
-  let minutes = minutes_flag % 60;
-
-  return `${hours}h : ${minutes}min`;
-});
-
 const stops = computed(() => {
   let paradas = [];
   props.viagem.Voos.forEach((element) => {
-    if (element.Origem !== props.viagem.Origem) {
-      paradas.push(element.Origem);
+    if (element.departure !== props.viagem.Origem) {
+      paradas.push(element.departure);
     }
   });
   return paradas.length > 0 ? `Parada: ${paradas.join(', ')}` : 'Direto';
 });
 
-const flight_numbers = computed(() => {
-  let numbers = [];
-  props.viagem.Voos.forEach((element) => {
-    numbers.push(element.Numero);
-  });
-  return numbers;
-});
+const timeTotal = computed(() => {
+  const hours = Math.floor(props.viagem.TempoTotal / 60);
+  const remainingMinutes = props.viagem.TempoTotal % 60;
 
-/*
-* {
-    "Numero": "G3-1409",
-    "Saida": "2023-04-18T06:15:00",
-    "Chegada": "2023-04-18T08:00:00",
-    "Origem": "BSB",
-    "Destino": "GRU",
-    "Duracao": 105,
-    "Tempo": "01:45",
-    "TempoEspera": null,
-    "Classe": 0,
-    "ClasseStr": "Economica"
-  }
-* */
+  const hoursString = hours.toString().padStart(2, '0');
+  const minutesString = remainingMinutes.toString().padStart(2, '0');
+
+  return `${hoursString}h:${minutesString}min`;
+});
 </script>
