@@ -238,7 +238,7 @@ const consultar = () => {
     Adultos: searchOptionsVooStore.adults,
     Criancas: searchOptionsVooStore.teenagers,
     Bebes: searchOptionsVooStore.babies,
-    Companhia: [1300],
+    Companhia: -1,
     Cabine: searchOptionsVooStore.cabin.value,
   };
 
