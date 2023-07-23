@@ -23,8 +23,8 @@
         >
           <div :class="containerClasses">
             <div
-              class="flex flex-col justify-between px-8"
-              :class="{ 'w-full': areSelectedButton }"
+              class="flex flex-col justify-between"
+              :class="areSelectedButton ? 'w-full px-4' : 'px-8'"
             >
               <LazyList
                 :objetos="filterStore.flyFilters.Ida"
@@ -94,8 +94,9 @@ const areSelected = () => {
 
 const containerClasses = computed(() => {
   return {
-    'flex flex-col xl:flex-row 2xl:items-stretch space-x-3 w-full h-full mx-auto px-4':
+    'flex flex-col xl:flex-row 2xl:items-stretch space-x-3 w-full h-full mx-auto':
       isRowLayout.value,
+    'pr-8 pl-4': isRowLayout.value,
   };
 });
 

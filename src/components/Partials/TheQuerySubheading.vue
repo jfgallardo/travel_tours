@@ -49,10 +49,7 @@
             />
           </svg>
         </template>
-        <FilterAirport
-          v-model="filters.airports"
-          :airports="showAeroportos"
-        />
+        <FilterAirport v-model="filters.airports" :airports="showAeroportos" />
       </SelectSimple>
 
       <SelectSimple
@@ -330,10 +327,10 @@ const showAeroportos = computed(() => {
   return vooStore.meta?.airports?.map((item) => {
     return {
       name: item.name,
-      value: item.iata
-    }
-  })
-})
+      value: item.iata,
+    };
+  });
+});
 </script>
 
 <style scoped>

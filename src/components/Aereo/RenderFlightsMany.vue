@@ -125,7 +125,7 @@ const props = defineProps({
 });
 
 const precoTotal = computed(() => {
-  return props.viagem.FareGroup.priceWithTax
+  return props.viagem.FareGroup.priceWithTax;
 });
 
 const initial_flight = computed(() => {

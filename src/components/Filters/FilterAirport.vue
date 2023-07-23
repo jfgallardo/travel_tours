@@ -9,7 +9,7 @@
             class="h-4 w-4 text-zinc-800 cursor-pointer focus:ring-0 mr-2"
             type="checkbox"
           />
-          <span>{{ airport.name }} ({{airport.value}})</span>
+          <span>{{ airport.name }} ({{ airport.value }})</span>
         </label>
       </div>
     </div>

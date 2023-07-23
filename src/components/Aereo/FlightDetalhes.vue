@@ -107,7 +107,9 @@ const { t } = useI18n();
 const value = ref('');
 
 const ValorTaxas = computed(() => {
-  const price = props.vooDetalhes.FareGroup.priceWithTax - props.vooDetalhes.FareGroup.priceWithoutTax;
+  const price =
+    props.vooDetalhes.FareGroup.priceWithTax -
+    props.vooDetalhes.FareGroup.priceWithoutTax;
   return useCurrencyFormatter({
     currency: 'BRL',
     value: price,
@@ -127,14 +129,18 @@ const SubTotal = computed(() => {
   });
 });
 const precoAdulto = computed(() => {
-  const fares = props.vooDetalhes.FareGroup.fares.find(o => o.passengersType === 'ADT' )
+  const fares = props.vooDetalhes.FareGroup.fares.find(
+    (o) => o.passengersType === 'ADT'
+  );
   return useCurrencyFormatter({
     currency: 'BRL',
     value: fares.priceWithTax,
   });
 });
 const precoCrianca = computed(() => {
-  const fares = props.vooDetalhes.FareGroup.fares.find(o => o.passengersType === 'CHD' )
+  const fares = props.vooDetalhes.FareGroup.fares.find(
+    (o) => o.passengersType === 'CHD'
+  );
   if (fares) {
     return useCurrencyFormatter({
       currency: 'BRL',

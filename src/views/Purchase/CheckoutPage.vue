@@ -89,26 +89,23 @@
                     "
                     class="flex flex-col items-start space-y-1.5"
                   >
-
-                      <div
-                        class="flex items-center justify-between w-full"
+                    <div class="flex items-center justify-between w-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="w-6 h-6 text-blue-700"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          class="w-6 h-6 text-blue-700"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                        <span class="font-medium">
-                          {{ travels.travel_one.Baggage.texto }}
-                        </span>
-                      </div>
+                        <path
+                          fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span class="font-medium">
+                        {{ travels.travel_one.Baggage.texto }}
+                      </span>
+                    </div>
                   </div>
                   <template v-else>
                     <div class="flex justify-between">
@@ -221,28 +218,28 @@
                     "
                     class="flex flex-col items-start space-y-1.5"
                   >
-                      <div
-                        class="flex items-center justify-between w-full"
+                    <div class="flex items-center justify-between w-full">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="w-6 h-6 text-blue-700"
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          class="w-6 h-6 text-blue-700"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
-                        <span class="font-medium">
-                          {{ travels.travel_two.Baggage.texto }}
-                        </span>
-                      </div>
+                        <path
+                          fill-rule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span class="font-medium">
+                        {{ travels.travel_two.Baggage.texto }}
+                      </span>
+                    </div>
                   </div>
                   <template v-else>
-                    <div class="flex w-full h-full items-center justify-between">
+                    <div
+                      class="flex w-full h-full items-center justify-between"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -375,22 +372,43 @@ const travels = computed(() => ({
 
 const valorTaxas = computed(() => {
   const { travel_one, travel_two } = travels.value;
-  const priceWithTaxOne = travel_one.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithTax, 0);
-  const priceWithTaxTwo = travel_two.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithTax, 0);
+  const priceWithTaxOne = travel_one.FareGroup.fares.reduce(
+    (accumulator, item) => accumulator + item.priceWithTax,
+    0
+  );
+  const priceWithTaxTwo = travel_two.FareGroup.fares.reduce(
+    (accumulator, item) => accumulator + item.priceWithTax,
+    0
+  );
 
-  const priceWithoutTaxOne = travel_one.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
-  const priceWithoutTaxTwo = travel_two.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
+  const priceWithoutTaxOne = travel_one.FareGroup.fares.reduce(
+    (accumulator, item) => accumulator + item.priceWithoutTax,
+    0
+  );
+  const priceWithoutTaxTwo = travel_two.FareGroup.fares.reduce(
+    (accumulator, item) => accumulator + item.priceWithoutTax,
+    0
+  );
 
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: (priceWithTaxOne - priceWithoutTaxOne) + (priceWithTaxTwo - priceWithoutTaxTwo),
+    value:
+      priceWithTaxOne -
+      priceWithoutTaxOne +
+      (priceWithTaxTwo - priceWithoutTaxTwo),
   });
 });
 
 const valorTotalPassenger = computed(() => {
   const { travel_one, travel_two } = travels.value;
-  const totalPassengerOne = travel_one.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
-  const totalPassengerTwo = travel_two.FareGroup.fares.reduce((accumulator, item) => accumulator + item.priceWithoutTax, 0);
+  const totalPassengerOne = travel_one.FareGroup.fares.reduce(
+    (accumulator, item) => accumulator + item.priceWithoutTax,
+    0
+  );
+  const totalPassengerTwo = travel_two.FareGroup.fares.reduce(
+    (accumulator, item) => accumulator + item.priceWithoutTax,
+    0
+  );
 
   return useCurrencyFormatter({
     currency: 'BRL',
@@ -415,7 +433,9 @@ const valorBagagem = computed(() => {
 
 //TODO INFORMACION SOBRE VUELO DE IDA
 const departureTime = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].departureDate));
+  const dateLocal = new Date(
+    moment(travels.value.travel_one.Voos[0].departureDate)
+  );
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -423,7 +443,9 @@ const departureTime = computed(() => {
 });
 
 const departureTimeDayPeriod = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_one.Voos[0].departureDate));
+  const dateLocal = new Date(
+    moment(travels.value.travel_one.Voos[0].departureDate)
+  );
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
@@ -433,7 +455,7 @@ const dateStringIdaSaida = computed(() => {
 });
 
 const ParadaIda = computed(() => {
-  return `Parada(s): ${travels.value.travel_one?.NumeroParadas}` ;
+  return `Parada(s): ${travels.value.travel_one?.NumeroParadas}`;
 });
 
 const duracaoVoosIda = computed(() => {
@@ -470,15 +492,17 @@ const tarifasOne = computed(() => {
   if (travels.value.travel_one && travels.value.travel_one.FareGroup) {
     return useCurrencyFormatter({
       currency: 'BRL',
-      value: travels.value.travel_one.FareGroup.priceWithoutTax
+      value: travels.value.travel_one.FareGroup.priceWithoutTax,
     });
   }
   return '';
-})
+});
 
 //TODO INFORMACION SOBRE VUELO DE VUELTA
 const departureTimeVolta = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].departureDate));
+  const dateLocal = new Date(
+    moment(travels.value.travel_two.Voos[0].departureDate)
+  );
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
@@ -486,7 +510,9 @@ const departureTimeVolta = computed(() => {
 });
 
 const departureTimeDayPeriodVolta = computed(() => {
-  const dateLocal = new Date(moment(travels.value.travel_two.Voos[0].departureDate));
+  const dateLocal = new Date(
+    moment(travels.value.travel_two.Voos[0].departureDate)
+  );
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 });
@@ -510,7 +536,7 @@ const dateStringIdaSaidaVolta = computed(() => {
 });
 
 const ParadaVolta = computed(() => {
-  return `Parada(s): ${travels.value.travel_two?.NumeroParadas}` ;
+  return `Parada(s): ${travels.value.travel_two?.NumeroParadas}`;
 });
 
 const duracaoVoosVolta = computed(() => {
@@ -533,11 +559,11 @@ const tarifasTwo = computed(() => {
   if (travels.value.travel_two && travels.value.travel_two.FareGroup) {
     return useCurrencyFormatter({
       currency: 'BRL',
-      value: travels.value.travel_two.FareGroup.priceWithoutTax
+      value: travels.value.travel_two.FareGroup.priceWithoutTax,
     });
   }
   return '';
-})
+});
 
 //TODO COMMON
 const duration = (dataSaida, dataLlegada) => {

@@ -73,8 +73,12 @@ const { t } = useI18n();
 const value = ref('');
 
 const ValorTaxas = computed(() => {
-  const price_one = vooOne.value.FareGroup.priceWithTax - vooOne.value.FareGroup.priceWithoutTax;
-  const price_two = vooTwo.value.FareGroup.priceWithTax - vooTwo.value.FareGroup.priceWithoutTax;
+  const price_one =
+    vooOne.value.FareGroup.priceWithTax -
+    vooOne.value.FareGroup.priceWithoutTax;
+  const price_two =
+    vooTwo.value.FareGroup.priceWithTax -
+    vooTwo.value.FareGroup.priceWithoutTax;
 
   return useCurrencyFormatter({
     currency: 'BRL',
@@ -84,7 +88,8 @@ const ValorTaxas = computed(() => {
 const ValorTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: vooOne.value.FareGroup.priceWithTax + vooTwo.value.FareGroup.priceWithTax,
+    value:
+      vooOne.value.FareGroup.priceWithTax + vooTwo.value.FareGroup.priceWithTax,
   });
 });
 
@@ -92,20 +97,29 @@ const SubTotal = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
     value:
-      vooOne.value.FareGroup.priceWithoutTax + vooTwo.value.FareGroup.priceWithoutTax,
+      vooOne.value.FareGroup.priceWithoutTax +
+      vooTwo.value.FareGroup.priceWithoutTax,
   });
 });
 const precoAdulto = computed(() => {
-  const fares_one = vooOne.value.FareGroup.fares.find(o => o.passengersType === 'ADT' )
-  const fares_two = vooTwo.value.FareGroup.fares.find(o => o.passengersType === 'ADT' )
+  const fares_one = vooOne.value.FareGroup.fares.find(
+    (o) => o.passengersType === 'ADT'
+  );
+  const fares_two = vooTwo.value.FareGroup.fares.find(
+    (o) => o.passengersType === 'ADT'
+  );
   return useCurrencyFormatter({
     currency: 'BRL',
     value: fares_one.priceWithTax + fares_two.priceWithTax,
   });
 });
 const precoCrianca = computed(() => {
-  const fares_one = vooOne.value.FareGroup.fares.find(o => o.passengersType === 'CHD' )
-  const fares_two = vooTwo.value.FareGroup.fares.find(o => o.passengersType === 'CHD' )
+  const fares_one = vooOne.value.FareGroup.fares.find(
+    (o) => o.passengersType === 'CHD'
+  );
+  const fares_two = vooTwo.value.FareGroup.fares.find(
+    (o) => o.passengersType === 'CHD'
+  );
   if (fares_one || fares_two) {
     return useCurrencyFormatter({
       currency: 'BRL',

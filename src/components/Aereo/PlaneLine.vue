@@ -78,7 +78,7 @@ const props = defineProps({
   },
   flightNumber: {
     type: [Number, String],
-    default: ''
+    default: '',
   },
 });
 
@@ -105,7 +105,6 @@ const dateStringChegada = computed(() => {
   return useDateFormatter(props.arrivalDate);
 });
 
-
 const filterHours = (date) => {
   const dateLocal = new Date(moment(date));
   return dateLocal.toLocaleTimeString([], {
@@ -119,7 +118,6 @@ const filterDayPeriod = (date) => {
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';
 };
-
 </script>
 <style scoped>
 .v-enter-active,

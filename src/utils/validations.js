@@ -23,15 +23,59 @@ export const passwordValidation = {
     };
   },
   maxLength: (value) => {
-    const validationValid = value.length <= 20;
+    const validationValid = value.length <= 30;
     const validationMessage = validationValid
       ? ''
-      : 'La contraseña no debe tener más de 20 caracteres';
+      : 'La contraseña no debe tener más de 30 caracteres';
     return {
       valid: validationValid,
       message: validationMessage,
     };
   },
+  hasUpperCase: (value) => {
+    const hasUpperCase = /(?=.*[A-Z])/;
+    const validationValid = hasUpperCase.test(value);
+
+    const validationMessage = validationValid
+        ? ''
+        : 'Debe tener al menos una letra mayúscula.';
+
+    return {
+      valid: validationValid,
+      message: validationMessage,
+    };
+
+
+  },
+  hasLowerCase: (value) => {
+    const hasLowerCase = /(?=.*[a-z])/;
+    const validationValid = hasLowerCase.test(value);
+
+    const validationMessage = validationValid
+        ? ''
+        : 'Debe tener al menos una letra minúscula.';
+
+    return {
+      valid: validationValid,
+      message: validationMessage,
+    };
+
+  },
+  hasDigit: (value) => {
+    const hasDigit = /(?=.*\d)/;
+    const validationValid = hasDigit.test(value);
+
+    const validationMessage = validationValid
+        ? ''
+        : 'Debe tener al menos un dígito numérico.';
+
+    return {
+      valid: validationValid,
+      message: validationMessage,
+    };
+
+  }
+
 };
 
 export const requiredValidation = (value) => {

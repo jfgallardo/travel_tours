@@ -78,9 +78,7 @@
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
       >
         <span>CLASE</span>
-        <span class="font-bold">{{
-          initVoo.seatClass.description
-        }}</span>
+        <span class="font-bold">{{ initVoo.seatClass.description }}</span>
       </div>
       <div
         class="border border-t-0 border-l-0 border-slate-300 py-2 px-6 lg:col-span-2 flex justify-around items-center"
@@ -95,21 +93,21 @@
           v-if="baggage && baggage.isIncluded"
           class="flex flex-col items-start space-y-1.5"
         >
-            <div class="flex items-center space-x-8">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 text-blue-700"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <span class="font-medium"> {{ baggage.texto}} </span>
-            </div>
+          <div class="flex items-center space-x-8">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-6 h-6 text-blue-700"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span class="font-medium"> {{ baggage.texto }} </span>
+          </div>
         </div>
         <template v-else>
           <div class="flex items-center space-x-8">
@@ -199,7 +197,7 @@
           class="flex items-center justify-between lg:flex-col lg:justify-center"
         >
           <p class="text-2xl text-center">1 Oferta Desde</p>
-          {{ofertaDesde}}
+          {{ ofertaDesde }}
         </div>
       </div>
 
@@ -310,8 +308,8 @@ const props = defineProps({
   },
   timeTotal: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 //Todo variables()
@@ -353,7 +351,7 @@ const ofertaDesde = computed(() => {
     currency: 'BRL',
     value: props.tarifas.priceInCompany,
   });
-})
+});
 
 //Todo functions()
 const tipoTarifa = computed(() => {

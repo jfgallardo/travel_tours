@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axiosClientAPI from '@/plugins/axios';
 import { useAlertStore } from '@/stores/alert';
-import { transform } from "@/utils/clean-data";
+import { transform } from '@/utils/clean-data';
 
 export const useVooStore = defineStore({
   id: 'voo',
@@ -25,7 +25,7 @@ export const useVooStore = defineStore({
     Aeroportos: [],
 
     totalItems: 0,
-    meta: []
+    meta: [],
   }),
   getters: {
     priceRange: (state) => {
@@ -53,13 +53,23 @@ export const useVooStore = defineStore({
             this.Platform = data.Platform;
             this.Companhia = data.Companhia;
             this.CompanhiaVolta = data.CompanhiaVolta;
-            this.Ida = transform(data.flights, 'ida', payload.Origem, payload.Destino);
+            this.Ida = transform(
+              data.flights,
+              'ida',
+              payload.Origem,
+              payload.Destino
+            );
             this.IdaVolta = data.IdaVolta;
-            this.Volta = transform(data.flights, 'vuelta',  payload.Origem, payload.Destino);
-            this.meta = data.meta
+            this.Volta = transform(
+              data.flights,
+              'vuelta',
+              payload.Origem,
+              payload.Destino
+            );
+            this.meta = data.meta;
           }
 
-         /* this.IsStarAlliance = data.IsStarAlliance;
+          /* this.IsStarAlliance = data.IsStarAlliance;
           this.Multas = data.Multas;
           this.MultiplesTrechos = data.MultiplesTrechos;
           this.Pagante = data.Pagante;

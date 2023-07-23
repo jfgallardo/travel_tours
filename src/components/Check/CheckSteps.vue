@@ -76,7 +76,7 @@ const nextStep = () => {
       informationStore.paymentMethod === 4 ||
       informationStore.paymentMethod === 5
     ) {
-      auth.currentStepPayment +=2;
+      auth.currentStepPayment += 2;
     } else {
       return;
     }
@@ -133,7 +133,8 @@ const reservar = () => {
       .record(body)
       .then(() => {
         alertStore.showMsg({
-          message: 'Datos guardados correctamente. De ser su primera compra recibirá un email.',
+          message:
+            'Datos guardados correctamente. De ser su primera compra recibirá un email.',
           backgrColor: 'blue',
           textColor: 'blue',
         });

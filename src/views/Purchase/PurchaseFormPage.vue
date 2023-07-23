@@ -146,9 +146,9 @@
                       name="sexo"
                       label="Sexo *"
                       :options="[
-                      { label: 'Masculino', value: 'M' },
-                      { label: 'Femenino', value: 'F' },
-                    ]"
+                        { label: 'Masculino', value: 'M' },
+                        { label: 'Femenino', value: 'F' },
+                      ]"
                       :selected="i.sexo"
                       @select-value="i.sexo = $event.value"
                     />
@@ -220,9 +220,9 @@
                       name="sexo"
                       label="Sexo *"
                       :options="[
-                      { label: 'Masculino', value: 'M' },
-                      { label: 'Femenino', value: 'F' },
-                    ]"
+                        { label: 'Masculino', value: 'M' },
+                        { label: 'Femenino', value: 'F' },
+                      ]"
                       :selected="i.sexo"
                       @select-value="i.sexo = $event.value"
                     />

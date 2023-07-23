@@ -108,7 +108,13 @@ const register = () => {
         router.push('/');
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      const {response} = error
+      alertStore.showMsg({
+        message: response.data.message,
+        backgrColor: 'red',
+        textColor: 'red',
+      });
       auth.loading = false;
     });
 };

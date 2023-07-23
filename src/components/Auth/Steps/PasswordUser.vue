@@ -48,7 +48,7 @@
           v-model="auth.termos"
           label="Confirmo ser maior de 18 (dezoito) anos e que todos os dados informados
 acima são verídicos. Ainda confirmo que li e concordo com os Termos e
-Condições de Uso da MaxMilhas."
+Condições de Uso da MR Travels & Tours."
         />
       </div>
     </div>
@@ -87,6 +87,9 @@ const validations = computed(() => {
     password: {
       minLength: passwordValidation.minLength,
       maxLength: passwordValidation.maxLength,
+      hasUpperCase: passwordValidation.hasUpperCase,
+      hasLowerCase: passwordValidation.hasLowerCase,
+      hasDigit: passwordValidation.hasDigit
     },
   };
 });

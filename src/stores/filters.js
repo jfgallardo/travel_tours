@@ -44,15 +44,19 @@ export const useFiltersStore = defineStore('filters', {
           filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas >= 2);
         }
 
-        if (state.airports.length){
+        if (state.airports.length) {
           filterIda = filterIda.filter((item) => {
-            const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(iata => iata.length === 3);
+            const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(
+              (iata) => iata.length === 3
+            );
             const uniqueIataList = [...new Set(iataList)];
             if (arrayAinB(state.airports, uniqueIataList)) return true;
           });
 
           filterVolta = filterVolta.filter((item) => {
-            const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(iata => iata.length === 3);
+            const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(
+              (iata) => iata.length === 3
+            );
             const uniqueIataList = [...new Set(iataList)];
             if (arrayAinB(state.airports, uniqueIataList)) return true;
           });
