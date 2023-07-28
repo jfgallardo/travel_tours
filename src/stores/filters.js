@@ -25,6 +25,7 @@ export const useFiltersStore = defineStore('filters', {
         // filterIda = filterIda.filter((item) => item.ValorAdulto > 0);
         //filterVolta = filterVolta.filter((item) => item.ValorAdulto > 0);
 
+        //TODO FILTRO DE EQUIPAJE
         if (state.baggage.value === 1) {
           filterIda = filterIda.filter((fly) => fly.Baggage !== null);
           filterVolta = filterVolta.filter((fly) => fly.Baggage !== null);
@@ -33,6 +34,7 @@ export const useFiltersStore = defineStore('filters', {
           filterVolta = filterVolta.filter((fly) => fly.Baggage === null);
         }
 
+        //TODO FILTRO DE PARADAS
         if (state.stops.value === 0) {
           filterIda = vooStore.Ida.filter((fly) => fly.NumeroParadas === 0);
           filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas === 0);
@@ -44,6 +46,7 @@ export const useFiltersStore = defineStore('filters', {
           filterVolta = vooStore.Volta.filter((fly) => fly.NumeroParadas >= 2);
         }
 
+        //TODO FILTRO DE AREOPUERTOS
         if (state.airports.length) {
           filterIda = filterIda.filter((item) => {
             const iataList = item.ConfiguracoesRotas.split(/[_-]/).filter(
@@ -61,6 +64,26 @@ export const useFiltersStore = defineStore('filters', {
             if (arrayAinB(state.airports, uniqueIataList)) return true;
           });
         }
+
+        //TODO FILTRO DE COMPAÑIAS
+        if (state.flightCompanies.length){
+
+          filterIda = filterIda.filter((item) => {
+            const lowercaseCiaMandatoria = item.CiaMandatoria.toLowerCase();
+            const lowercaseFlightCompanies = state.flightCompanies.map(company => company.toLowerCase());
+
+            return lowercaseFlightCompanies.includes(lowercaseCiaMandatoria);
+          })
+
+
+          filterVolta = filterVolta.filter((item) => {
+            const lowercaseCiaMandatoria = item.CiaMandatoria.toLowerCase();
+            const lowercaseFlightCompanies = state.flightCompanies.map(company => company.toLowerCase());
+
+            return lowercaseFlightCompanies.includes(lowercaseCiaMandatoria);
+          })
+        }
+
 
         /*
 

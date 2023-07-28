@@ -1,26 +1,16 @@
 <template>
   <div class="px-4 mx-auto">
     <div class="grid grid-col-1 grid-flow-row gap-1.5">
-      <div v-for="company in companies" :key="company.CodigoIata">
+      <div v-for="company in companies" :key="company">
         <label class="flex items-center justify-start">
           <input
             v-model="value"
-            :value="company.CodigoIata"
+            :value="company.value"
             class="h-4 w-4 text-zinc-800 cursor-pointer focus:ring-0 mr-2"
             type="checkbox"
           />
           <div class="flex flex-col">
-            <span>{{ company.Descricao }}</span>
-            <template v-for="offer in woobaStore.offers" :key="offer.company">
-              <span
-                v-if="company.CodigoIata === offer.company"
-                class="font-light text-sm text-gray-500"
-                >a partir de
-                {{
-                  useCurrencyFormatter({ currency: 'BRL', value: offer.offers })
-                }}</span
-              >
-            </template>
+            <span>{{ company.name }}</span>
           </div>
         </label>
       </div>
@@ -30,8 +20,6 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useWoobaStore } from '@/stores/wooba';
-import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 
 const props = defineProps({
   companies: {
@@ -45,8 +33,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
-
-const woobaStore = useWoobaStore();
 
 const value = computed({
   get() {

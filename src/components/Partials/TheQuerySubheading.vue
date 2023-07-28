@@ -25,7 +25,7 @@
       >
         <FilterCompanies
           v-model="filters.flightCompanies"
-          :companies="woobaStore.companies"
+          :companies="showCompanies"
         />
       </SelectSimple>
 
@@ -262,26 +262,6 @@ const maxPriceFormatter = computed(() => {
   });
 });
 
-watch(
-  () => woobaStore.companies,
-  (state) => {
-    if (state) {
-      filters.flightCompanies = state.map((o) => {
-        return o.CodigoIata;
-      });
-    }
-  },
-  { deep: true }
-);
-
-watch(
-  () => vooStore.Aeroportos,
-  (state) => {
-    filters.airports = state;
-  },
-  { deep: true }
-);
-
 const bags = computed(() => {
   if (searchOptionsVoo.onlyBaggage) {
     return [{ name: 'Apenas com babagem', value: 1 }];
@@ -331,6 +311,19 @@ const showAeroportos = computed(() => {
     };
   });
 });
+
+const showCompanies = computed(() => {
+  const companiesOne = vooStore.meta?.WayFilter?.Airlines
+  const companiesTwo = vooStore.meta?.ReturnFilter?.Airlines
+  const arrayC = companiesOne ? [...new Set( [...companiesOne, ...companiesTwo] )] : [];
+  return arrayC.map((o) => {
+    return {
+      name: o,
+      value: o
+    }
+  })
+
+})
 </script>
 
 <style scoped>

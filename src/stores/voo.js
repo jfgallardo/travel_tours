@@ -22,7 +22,6 @@ export const useVooStore = defineStore({
     QntdCrianca: 0,
     TokenConsulta: '',
     Request: null,
-    Aeroportos: [],
 
     totalItems: 0,
     meta: [],
@@ -51,8 +50,6 @@ export const useVooStore = defineStore({
           if (data.flights.length) {
             this.totalItems = data.totalItems;
             this.Platform = data.Platform;
-            this.Companhia = data.Companhia;
-            this.CompanhiaVolta = data.CompanhiaVolta;
             this.Ida = transform(
               data.flights,
               'ida',
