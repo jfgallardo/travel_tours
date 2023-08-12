@@ -15,7 +15,8 @@
         Retornar
       </button>
       <button
-        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10"
+        class="bg-blue-700 hover:bg-blue-800 text-white py-2 px-10 disabled:bg-blue-400"
+        :disabled="disabledButton"
         @click.prevent="auth.currentStepPayment === 4 ? reservar() : nextStep()"
       >
         {{ auth.currentStepPayment === 4 ? 'Verifica Agora' : 'Proximo' }}
@@ -39,6 +40,7 @@ import { useDateToJson } from '@/composables/dateToJson';
 import Cookies from 'js-cookie';
 import { useAlertStore } from '@/stores/alert';
 import { useRouter } from 'vue-router';
+import { usePayPixStore } from '@/stores/payPix';
 
 onMounted(() => {
   auth.currentStepPayment = 0;
@@ -50,7 +52,21 @@ const informationStore = useGeneralInformation();
 const reserverStore = useReserveStore();
 const purchaseStore = usePurchaseStore();
 const alertStore = useAlertStore();
+const pixStore = usePayPixStore();
 const router = useRouter();
+
+const disabledButton = computed(() => {
+  if (auth.currentStepPayment === 0) return false;
+  if (auth.currentStepPayment === 1) return !isValidStepOne.value;
+  if (auth.currentStepPayment === 2) return !isValidStepTwo.value;
+  if (auth.currentStepPayment === 3) return !isValidStepThree.value;
+  if (auth.currentStepPayment === 4) {
+    return !(
+      informationStore.detailsUser.parcelas && informationStore.acceptConditions
+    );
+  }
+  return true;
+});
 
 const steps = [
   { component: PaymentMethod },
@@ -74,7 +90,8 @@ const nextStep = () => {
   if (auth.currentStepPayment === 0) {
     if (
       informationStore.paymentMethod === 4 ||
-      informationStore.paymentMethod === 5
+      informationStore.paymentMethod === 5 ||
+      informationStore.paymentMethod === 8
     ) {
       auth.currentStepPayment += 2;
     } else {
@@ -92,7 +109,16 @@ const nextStep = () => {
 };
 
 const backStep = () => {
-  auth.currentStepPayment--;
+  if (
+    auth.currentStepPayment === 2 &&
+    (informationStore.paymentMethod === 4 ||
+      informationStore.paymentMethod === 5 ||
+      informationStore.paymentMethod === 8)
+  ) {
+    auth.currentStepPayment -= 2;
+  } else {
+    auth.currentStepPayment--;
+  }
   selectedComponent.value = markRaw(steps[auth.currentStepPayment].component);
 };
 
@@ -132,15 +158,39 @@ const reservar = () => {
     reserverStore
       .record(body)
       .then(() => {
+        let message = '';
+        let redirect = '/aereo';
+        if (informationStore.paymentMethod === 8) {
+          message =
+            'Datos guardados correctamente. Sera redireccionado para realizar el pago mediante pix';
+        }
+
         alertStore.showMsg({
-          message:
-            'Datos guardados correctamente. De ser su primera compra recibirá un email.',
+          message: message,
           backgrColor: 'blue',
           textColor: 'blue',
         });
-        router.push('/aereo');
+
+        const dataPix = {
+          name: informationStore.detailsUser.nameBuy,
+          cpfCnpj: informationStore.detailsUser.cpf,
+          email: auth.userLogged.email,
+          phone:
+            informationStore.detailsUser.idd +
+            informationStore.detailsUser.codeArea +
+            informationStore.detailsUser.phone,
+          value: informationStore.detailsUser.parcelas.value,
+        };
+
+        pixStore.paymentPix(dataPix).then(({ data }) => {
+          let enlace = document.createElement('a');
+          enlace.href = data.invoiceUrl;
+          enlace.target = '_blank';
+          enlace.click();
+          router.push(redirect);
+        });
       })
-      .catch(() => {
+      .catch((e) => {
         alertStore.showMsg({
           message: 'Intente de nuevo, por favor.',
           backgrColor: 'red',
@@ -213,7 +263,9 @@ const isValidStepOne = computed(() => {
 const isValidStepTwo = computed(() => {
   return (
     informationStore.detailsUser.birthday &&
-    informationStore.detailsUser.nameBuy
+    informationStore.detailsUser.nameBuy &&
+    informationStore.detailsUser.cpf &&
+    informationStore.detailsUser.validCpf
   );
 });
 

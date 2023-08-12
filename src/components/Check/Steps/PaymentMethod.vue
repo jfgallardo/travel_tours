@@ -23,6 +23,11 @@
         label="At the Agency"
         :idd="5"
       />
+      <RadioButtonBox
+        v-model="informationStore.paymentMethod"
+        label="Pix"
+        :idd="8"
+      />
     </div>
   </div>
 </template>

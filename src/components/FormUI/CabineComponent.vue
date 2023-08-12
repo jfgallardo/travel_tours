@@ -23,11 +23,11 @@ const { t } = useI18n();
 const searchOptionsVoo = useSearchOptionsVooStore();
 
 const options = [
-  { label: 'Econômica', value: 'Y' },
-  { label: 'Econômica Premium', value: 'W' },
-  { label: 'Executiva', value: 'C' },
-  { label: 'Primeira Classe', value: 'F' },
-  { label: 'Econômica + Premium', value: 'P' },
+  { label: 'Econômica', value: 0 },
+  //  { label: 'Econômica Premium', value: 'W' },
+  { label: 'Executiva', value: 2 },
+  { label: 'Primeira Classe', value: 1 },
+  // { label: 'Econômica + Premium', value: 'P' },
   { label: 'Todas', value: null },
 ];
 </script>

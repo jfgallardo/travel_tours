@@ -22,7 +22,6 @@ export const useVooStore = defineStore({
     QntdCrianca: 0,
     TokenConsulta: '',
     Request: null,
-
     totalItems: 0,
     meta: [],
   }),
@@ -38,6 +37,24 @@ export const useVooStore = defineStore({
       const maxPrice = arrayPrice.length > 0 ? Math.max(...arrayPrice) : 0;
 
       return { minPrice, maxPrice };
+    },
+    classesIda: (state) => {
+      return [
+        ...new Set(
+          state.Ida?.flatMap((item) =>
+            item.Voos.flatMap((o) => o.seatClass.description)
+          )
+        ),
+      ];
+    },
+    classesVolta: (state) => {
+      return [
+        ...new Set(
+          state.Volta?.flatMap((item) =>
+            item.Voos.flatMap((o) => o.seatClass.description)
+          )
+        ),
+      ];
     },
   },
   actions: {
@@ -64,19 +81,9 @@ export const useVooStore = defineStore({
               payload.Destino
             );
             this.meta = data.meta;
+          } else {
+            this.$reset();
           }
-
-          /* this.IsStarAlliance = data.IsStarAlliance;
-          this.Multas = data.Multas;
-          this.MultiplesTrechos = data.MultiplesTrechos;
-          this.Pagante = data.Pagante;
-
-          this.QntdAdulto = data.QntdAdulto;
-          this.QntdBebe = data.QntdBebe;
-          this.QntdCrianca = data.QntdCrianca;
-          this.TokenConsulta = data.TokenConsulta;
-          this.Request = data.Request;
-          this.Aeroportos = data.Aeroportos;*/
         })
         .catch((e) => {
           const errorCode =
@@ -90,6 +97,26 @@ export const useVooStore = defineStore({
         .finally(() => {
           this.loading = false;
         });
+    },
+    $reset() {
+      this.loading = false;
+      this.Companhia = '';
+      this.CompanhiaVolta = '';
+      this.Ida = [];
+      this.IdaVolta = [];
+      this.Volta = [];
+      this.IsStarAlliance = false;
+      this.Multas = null;
+      this.MultiplesTrechos = [];
+      this.Pagante = false;
+      this.Platform = 0;
+      this.QntdAdulto = 1;
+      this.QntdBebe = 0;
+      this.QntdCrianca = 0;
+      this.TokenConsulta = '';
+      this.Request = null;
+      this.totalItems = 0;
+      this.meta = [];
     },
   },
 });

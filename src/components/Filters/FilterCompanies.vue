@@ -5,12 +5,12 @@
         <label class="flex items-center justify-start">
           <input
             v-model="value"
-            :value="company.value"
+            :value="company"
             class="h-4 w-4 text-zinc-800 cursor-pointer focus:ring-0 mr-2"
             type="checkbox"
           />
           <div class="flex flex-col">
-            <span>{{ company.name }}</span>
+            <span>{{ company }}</span>
           </div>
         </label>
       </div>

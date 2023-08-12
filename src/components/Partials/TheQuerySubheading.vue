@@ -54,9 +54,50 @@
 
       <SelectSimple
         :loading="vooStore.loading"
+        :placeholder="$t('querySubHeading.partida')"
+      >
+        <template
+          v-if="filters.arrival_partida || filters.departure_partida"
+          #showSelected
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 lg:h-6 lg:w-6"
+          >
+            <path
+              d="M12 22.75C6.76 22.75 2.5 18.49 2.5 13.25C2.5 8.01 6.76 3.75 12 3.75C17.24 3.75 21.5 8.01 21.5 13.25C21.5 18.49 17.24 22.75 12 22.75ZM12 5.25C7.59 5.25 4 8.84 4 13.25C4 17.66 7.59 21.25 12 21.25C16.41 21.25 20 17.66 20 13.25C20 8.84 16.41 5.25 12 5.25Z"
+              fill="#292D32"
+            />
+            <path
+              d="M12 13.75C11.59 13.75 11.25 13.41 11.25 13V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V13C12.75 13.41 12.41 13.75 12 13.75Z"
+              fill="#292D32"
+            />
+            <path
+              d="M15 2.75H9C8.59 2.75 8.25 2.41 8.25 2C8.25 1.59 8.59 1.25 9 1.25H15C15.41 1.25 15.75 1.59 15.75 2C15.75 2.41 15.41 2.75 15 2.75Z"
+              fill="#292D32"
+            />
+          </svg>
+        </template>
+        <FilterDepartureTime
+          :arrival-date="arrivalDate_partida"
+          :departure-date="departureDate_partida"
+          name-arrival-date="a"
+          name-departure-date="b"
+          @select-arrival="filters.arrival_partida = $event"
+          @select-departure="filters.departure_partida = $event"
+        />
+      </SelectSimple>
+
+      <SelectSimple
+        :loading="vooStore.loading"
         :placeholder="$t('querySubHeading.llegada')"
       >
-        <template v-if="t_llegada" #showSelected>
+        <template
+          v-if="filters.arrival_llegada || filters.departure_llegada"
+          #showSelected
+        >
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -82,41 +123,12 @@
           </svg>
         </template>
         <FilterDepartureTime
-          :times="t_llegada"
-          @clear="t_llegada = null"
-          @time="t_llegada = $event"
-        />
-      </SelectSimple>
-
-      <SelectSimple
-        :loading="vooStore.loading"
-        :placeholder="$t('querySubHeading.partida')"
-      >
-        <template v-if="t_partida" #showSelected>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 lg:h-6 lg:w-6"
-          >
-            <path
-              d="M12 22.75C6.76 22.75 2.5 18.49 2.5 13.25C2.5 8.01 6.76 3.75 12 3.75C17.24 3.75 21.5 8.01 21.5 13.25C21.5 18.49 17.24 22.75 12 22.75ZM12 5.25C7.59 5.25 4 8.84 4 13.25C4 17.66 7.59 21.25 12 21.25C16.41 21.25 20 17.66 20 13.25C20 8.84 16.41 5.25 12 5.25Z"
-              fill="#292D32"
-            />
-            <path
-              d="M12 13.75C11.59 13.75 11.25 13.41 11.25 13V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V13C12.75 13.41 12.41 13.75 12 13.75Z"
-              fill="#292D32"
-            />
-            <path
-              d="M15 2.75H9C8.59 2.75 8.25 2.41 8.25 2C8.25 1.59 8.59 1.25 9 1.25H15C15.41 1.25 15.75 1.59 15.75 2C15.75 2.41 15.41 2.75 15 2.75Z"
-              fill="#292D32"
-            />
-          </svg>
-        </template>
-        <FilterDepartureTime
-          :times="t_partida"
-          @clear="t_partida = null"
-          @time="t_partida = $event"
+          :arrival-date="arrivalDate_llegada"
+          :departure-date="departureDate_llegada"
+          name-arrival-date="c"
+          name-departure-date="d"
+          @select-arrival="filters.arrival_llegada = $event"
+          @select-departure="filters.departure_llegada = $event"
         />
       </SelectSimple>
 
@@ -209,13 +221,13 @@
 
       <SelectSimple
         :loading="vooStore.loading"
-        :options="classes"
+        :options="showClasses"
         :placeholder="$t('querySubHeading.clase')"
         @select-value="filters.travelClass = $event"
       >
-        <template v-if="filters.travelClass.name !== ''" #selectedSpace>
+        <template v-if="filters.travelClass !== ''" #selectedSpace>
           <div class="flex items-center justify-around w-full">
-            <span class="text-sm"> {{ filters.travelClass.name }}</span>
+            <span class="text-sm"> {{ filters.travelClass }}</span>
           </div>
         </template>
       </SelectSimple>
@@ -224,7 +236,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import ArrowLeft from '@/components/Icons/ArrowLeft.vue';
 import SelectSimple from '@/components/FormUI/TheSelectSimple.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
@@ -238,16 +250,12 @@ import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { useFiltersStore } from '@/stores/filters';
 import SimpleStackedCheck from '@/components/FormUI/SimpleStackedCheck.vue';
 import { useVooStore } from '@/stores/voo';
-import { BriefcaseIcon } from '@heroicons/vue/24/outline';
-import { NoSymbolIcon } from '@heroicons/vue/24/outline';
+import { BriefcaseIcon, NoSymbolIcon } from '@heroicons/vue/24/outline';
 
 const searchOptionsVoo = useSearchOptionsVooStore();
 const woobaStore = useWoobaStore();
 const filters = useFiltersStore();
 const vooStore = useVooStore();
-
-const t_llegada = ref(null);
-const t_partida = ref(null);
 
 /*const minPriceFormatter = computed(() => {
   return useCurrencyFormatter({
@@ -303,6 +311,10 @@ const classes = [
   },
 ];
 
+const showClasses = computed(() => {
+  return [...new Set([...vooStore.classesIda, ...vooStore.classesVolta])];
+});
+
 const showAeroportos = computed(() => {
   return vooStore.meta?.airports?.map((item) => {
     return {
@@ -313,17 +325,26 @@ const showAeroportos = computed(() => {
 });
 
 const showCompanies = computed(() => {
-  const companiesOne = vooStore.meta?.WayFilter?.Airlines
-  const companiesTwo = vooStore.meta?.ReturnFilter?.Airlines
-  const arrayC = companiesOne ? [...new Set( [...companiesOne, ...companiesTwo] )] : [];
-  return arrayC.map((o) => {
-    return {
-      name: o,
-      value: o
-    }
-  })
+  const companiesOne = vooStore.meta?.WayFilter?.Airlines;
+  const companiesTwo = vooStore.meta?.ReturnFilter?.Airlines;
+  return companiesOne ? [...new Set([...companiesOne, ...companiesTwo])] : [];
+});
 
-})
+const arrivalDate_partida = computed(() => {
+  return vooStore.meta?.WayFilter?.ArrivalDate;
+});
+
+const departureDate_partida = computed(() => {
+  return vooStore.meta?.WayFilter?.DepartureDate;
+});
+
+const arrivalDate_llegada = computed(() => {
+  return vooStore.meta?.ReturnFilter?.ArrivalDate;
+});
+
+const departureDate_llegada = computed(() => {
+  return vooStore.meta?.ReturnFilter?.DepartureDate;
+});
 </script>
 
 <style scoped>

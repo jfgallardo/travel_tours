@@ -9,7 +9,10 @@
         class="flex pt-6 pb-2 pl-5 pr-4 border-gray-400 focus:border-blue-400 w-full bg-white border text-left cursor-default focus:outline-none sm:text-sm"
         @click="hiddenDropdown === false ? handleClick() : handleHide()"
       >
-        <span v-if="selected" class="mr-5"> {{ selected.label }} </span>
+        <div v-if="selected" class="mr-5">
+          <span v-if="selected.label"> {{ selected.label }} </span>
+          <span v-else>{{ selected }} </span>
+        </div>
         <span v-else class="mr-5 text-gray-500">{{ placeholder }}</span>
         <ChevronDown class="absolute right-0 pr-2 ml-2 cursor-pointer" />
       </div>
@@ -24,11 +27,12 @@
           <ul>
             <li
               v-for="op in options"
-              :key="op.value"
+              :key="op.value || op"
               class="hover:bg-blue-400 hover:cursor-pointer hover:text-white text-sm text-gray-500 px-3 py-1"
               @click="selectOption(op)"
             >
-              {{ op.label }}
+              <span v-if="op.label">{{ op.label }}</span>
+              <span v-else>{{ op }}</span>
             </li>
           </ul>
         </div>

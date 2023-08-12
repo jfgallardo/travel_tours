@@ -1,14 +1,14 @@
 <template>
   <div v-if="!seeSelectedOption" ref="scrollContainer">
+    <p class="font-medium p-2.5">
+      {{
+        typeFlight === 'I'
+          ? $t('idaVoltaFlexRender.vuelosDeIda')
+          : $t('idaVoltaFlexRender.vuelosDeVuelta')
+      }}
+    </p>
     <TransitionGroup name="list" tag="ul">
-      <p class="font-medium p-2.5">
-        {{
-          typeFlight === 'I'
-            ? $t('idaVoltaFlexRender.vuelosDeIda')
-            : $t('idaVoltaFlexRender.vuelosDeVuelta')
-        }}
-      </p>
-      <div v-for="(objeto, index) in objetosVisibles" :key="index">
+      <template v-for="objeto in objetosVisibles" :key="objeto.Id">
         <div
           :class="{
             'flex mb-3.5 border-0 mt-0': currentTab === 'IdaVoltaNoFlex',
@@ -34,7 +34,7 @@
             @he-selected="selectionConfirmed"
           ></component>
         </div>
-      </div>
+      </template>
     </TransitionGroup>
 
     <div class="mx-auto text-center">
@@ -172,6 +172,14 @@ const actualizarObjetosVisibles = () => {
     props.objetos.length
   );
   objetosVisibles.value = props.objetos.slice(0, cantidadAgregada);
+  if (inputCheck?.value.length) {
+    inputCheck?.value?.forEach((element) => {
+      element.checked = false;
+    });
+    inputCheck.value[0].checked = true;
+    selectVoo.value = props.objetos[0];
+    keyVooSelected.value = props.objetos[0].Key;
+  }
 };
 const selectFligth = (ev, viagem) => {
   clearCheck(ev.target);

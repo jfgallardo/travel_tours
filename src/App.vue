@@ -18,11 +18,6 @@ const checkLogin = () => {
   const token = Cookies.get('token');
   if (!token) {
     authStore.$reset();
-    alertStore.showMsg({
-      message: 'Token expirado. Sesión cerrada.',
-      backgrColor: 'blue',
-      textColor: 'blue',
-    });
   }
 };
 </script>

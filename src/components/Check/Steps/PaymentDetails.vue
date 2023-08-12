@@ -38,6 +38,22 @@
         :maska="['(##) #####-####']"
       />
     </div>
+    <div
+      v-if="
+        informationStore.paymentMethod === 4 ||
+        informationStore.paymentMethod === 5 ||
+        informationStore.paymentMethod === 8
+      "
+    >
+      <InputGeneric
+        v-model="informationStore.detailsUser.cpf"
+        v-cpf-mask
+        label="CPF *"
+        name="cpf"
+        :validations="validations.cpf"
+        @is-valid="informationStore.detailsUser.validCpf = $event"
+      />
+    </div>
   </div>
 </template>
 
@@ -46,8 +62,20 @@ import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import SelectSimple from '@/components/FormUI/TheSelect.vue';
 import { useGeneralInformation } from '@/stores/generalInformation';
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
+import { computed } from 'vue';
+import { cpfValidation } from '@/utils/validations';
 
 const informationStore = useGeneralInformation();
+
+const validations = computed(() => {
+  return {
+    cpf: {
+      isRequired: cpfValidation.requiredValidation,
+      isCPF: cpfValidation.isCPF,
+    },
+  };
+});
 </script>
 
 <style scoped></style>

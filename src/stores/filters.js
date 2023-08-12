@@ -11,8 +11,12 @@ export const useFiltersStore = defineStore('filters', {
     airports: [],
     flightCompanies: [],
     baggage: '',
-    arrivalSchedule: '',
-    departureTime: '',
+
+    arrival_partida: '',
+    departure_partida: '',
+
+    arrival_llegada: '',
+    departure_llegada: '',
   }),
   getters: {
     flyFilters: (state) => {
@@ -66,30 +70,77 @@ export const useFiltersStore = defineStore('filters', {
         }
 
         //TODO FILTRO DE COMPAÑIAS
-        if (state.flightCompanies.length){
-
+        if (state.flightCompanies.length) {
           filterIda = filterIda.filter((item) => {
             const lowercaseCiaMandatoria = item.CiaMandatoria.toLowerCase();
-            const lowercaseFlightCompanies = state.flightCompanies.map(company => company.toLowerCase());
+            const lowercaseFlightCompanies = state.flightCompanies.map(
+              (company) => company.toLowerCase()
+            );
 
             return lowercaseFlightCompanies.includes(lowercaseCiaMandatoria);
-          })
-
+          });
 
           filterVolta = filterVolta.filter((item) => {
             const lowercaseCiaMandatoria = item.CiaMandatoria.toLowerCase();
-            const lowercaseFlightCompanies = state.flightCompanies.map(company => company.toLowerCase());
+            const lowercaseFlightCompanies = state.flightCompanies.map(
+              (company) => company.toLowerCase()
+            );
 
             return lowercaseFlightCompanies.includes(lowercaseCiaMandatoria);
-          })
+          });
         }
 
+        //TODO FILTRO DE CLASSES
+
+        if (state.travelClass) {
+          filterIda = filterIda.filter((item) => {
+            const classes = [
+              ...new Set(item.Voos.flatMap((o) => o.seatClass.description)),
+            ];
+
+            return classes.includes(state.travelClass);
+          });
+
+          filterVolta = filterVolta.filter((item) => {
+            const classes = [
+              ...new Set(item.Voos.flatMap((o) => o.seatClass.description)),
+            ];
+
+            return classes.includes(state.travelClass);
+          });
+        }
+
+        //TODO FILTRO DE HORARIOS
+
+        if (state.arrival_partida) {
+          filterIda = filterIda.filter((item) => {
+            const arrayHours = item.Voos.flatMap((o) => o.arrivalDate);
+            return arrayHours.includes(state.arrival_partida);
+          });
+        }
+
+        if (state.departure_partida) {
+          filterIda = filterIda.filter((item) => {
+            const arrayHours = item.Voos.flatMap((o) => o.departureDate);
+            return arrayHours.includes(state.departure_partida);
+          });
+        }
+
+        if (state.arrival_llegada) {
+          filterVolta = filterVolta.filter((item) => {
+            const arrayHours = item.Voos.flatMap((o) => o.arrivalDate);
+            return arrayHours.includes(state.arrival_llegada);
+          });
+        }
+
+        if (state.departure_llegada) {
+          filterVolta = filterVolta.filter((item) => {
+            const arrayHours = item.Voos.flatMap((o) => o.departureDate);
+            return arrayHours.includes(state.departure_llegada);
+          });
+        }
 
         /*
-
-        //FALTA COMPANIAS
-
-
 
         filterIda = filterIda.filter(
           (item) => +item.Preco >= +state.priceRange

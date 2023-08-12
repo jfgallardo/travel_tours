@@ -89,7 +89,7 @@ const validations = computed(() => {
       maxLength: passwordValidation.maxLength,
       hasUpperCase: passwordValidation.hasUpperCase,
       hasLowerCase: passwordValidation.hasLowerCase,
-      hasDigit: passwordValidation.hasDigit
+      hasDigit: passwordValidation.hasDigit,
     },
   };
 });

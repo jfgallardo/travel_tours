@@ -37,45 +37,40 @@ export const passwordValidation = {
     const validationValid = hasUpperCase.test(value);
 
     const validationMessage = validationValid
-        ? ''
-        : 'Debe tener al menos una letra mayúscula.';
+      ? ''
+      : 'Debe tener al menos una letra mayúscula.';
 
     return {
       valid: validationValid,
       message: validationMessage,
     };
-
-
   },
   hasLowerCase: (value) => {
     const hasLowerCase = /(?=.*[a-z])/;
     const validationValid = hasLowerCase.test(value);
 
     const validationMessage = validationValid
-        ? ''
-        : 'Debe tener al menos una letra minúscula.';
+      ? ''
+      : 'Debe tener al menos una letra minúscula.';
 
     return {
       valid: validationValid,
       message: validationMessage,
     };
-
   },
   hasDigit: (value) => {
     const hasDigit = /(?=.*\d)/;
     const validationValid = hasDigit.test(value);
 
     const validationMessage = validationValid
-        ? ''
-        : 'Debe tener al menos un dígito numérico.';
+      ? ''
+      : 'Debe tener al menos un dígito numérico.';
 
     return {
       valid: validationValid,
       message: validationMessage,
     };
-
-  }
-
+  },
 };
 
 export const requiredValidation = (value) => {

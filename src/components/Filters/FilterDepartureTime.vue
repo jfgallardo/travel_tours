@@ -1,88 +1,122 @@
 <template>
-  <div class="p-4 flex flex-col space-y-3.5">
-    <div>
-      <h2 class="pl-2 text-lg font-semibold">
-        Ida <span class="font-light text-xs text-gray-500">a partir de</span>
-      </h2>
-      <div>
-        <input
-          id="ida-time"
-          v-model="time.initTime"
-          :class="inputClassList"
-          type="time"
-          @input="$emit('time', time)"
-        />
-      </div>
+  <div class="flex items-start p-4 space-x-3.5">
+    <div class="flex flex-col space-y-3.5">
+      <span class="text-xs font-extrabold">Llegada a partir de: </span>
+      <RadioInput
+        v-for="option in arrivalString"
+        :id="option.value"
+        :key="option.value"
+        v-model="itemSelectedArrival"
+        :selected-value="itemSelectedArrival"
+        :value="option.value"
+        :name="nameArrivalDate"
+        :label="option.label"
+      />
     </div>
-    <div>
-      <h2 class="pl-2 text-lg font-semibold">
-        Volta <span class="font-light text-xs text-gray-500">a partir de</span>
-      </h2>
-      <div>
-        <input
-          id="volta-time"
-          v-model="time.endTime"
-          :class="inputClassList"
-          type="time"
-          @input="$emit('time', time)"
-        />
-      </div>
+
+    <div class="flex flex-col space-y-3.5">
+      <span class="text-xs font-extrabold">Salida a partir de: </span>
+      <RadioInput
+        v-for="option in departureString"
+        :id="option.value"
+        :key="option.value"
+        v-model="itemSelectedDeparture"
+        :selected-value="itemSelectedDeparture"
+        :value="option.value"
+        :name="nameDepartureDate"
+        :label="option.label"
+      />
     </div>
-    <div>
-      <button class="float-right bg-none font-semibold" @click="clear">
-        Limpiar
-      </button>
-    </div>
+  </div>
+
+  <div>
+    <button
+      class="float-right bg-none font-semibold px-3.5 py-2.5"
+      @click="clear"
+    >
+      Limpiar
+    </button>
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
+import RadioInput from '@/components/FormUI/RadioInput.vue';
 
-const emits = defineEmits(['time', 'clear']);
+const emit = defineEmits(['selectArrival', 'selectDeparture']);
+
 const props = defineProps({
-  times: {
-    type: Object,
-    default: null,
+  arrivalDate: {
+    type: Array,
+    default: () => [],
+  },
+  departureDate: {
+    type: Array,
+    default: () => [],
+  },
+  nameArrivalDate: {
+    type: String,
+    default: '',
+  },
+  nameDepartureDate: {
+    type: String,
+    default: '',
   },
 });
 
-onMounted(() => {
-  if (props.times) {
-    time.value.initTime = props.times.initTime;
-    time.value.endTime = props.times.endTime;
-  }
+const itemSelectedArrival = ref('');
+const itemSelectedDeparture = ref('');
+
+const arrivalString = computed(() => {
+  return props.arrivalDate.map((item) => {
+    const fecha = new Date(item);
+    const horas = fecha.getHours();
+    const minutos = fecha.getMinutes();
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    const horas12 = horas % 12 || 12;
+    const horaAmPm = `${horas12}:${minutos < 10 ? '0' : ''}${minutos} ${ampm}`;
+    return {
+      label: horaAmPm,
+      value: item,
+    };
+  });
 });
 
-const time = ref({
-  initTime: '',
-  endTime: '',
+const departureString = computed(() => {
+  return props.departureDate.map((item) => {
+    const fecha = new Date(item);
+    const horas = fecha.getHours();
+    const minutos = fecha.getMinutes();
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    const horas12 = horas % 12 || 12;
+    const horaAmPm = `${horas12}:${minutos < 10 ? '0' : ''}${minutos} ${ampm}`;
+    return {
+      label: horaAmPm,
+      value: item,
+    };
+  });
 });
 
 const clear = () => {
-  time.value.initTime = '';
-  time.value.endTime = '';
-  emits('clear');
+  itemSelectedArrival.value = '';
+  itemSelectedDeparture.value = '';
 };
 
-const inputClassList = computed(() => {
-  return [
-    'appearance-none w-full transition duration-150 ease-in-out',
-    getTextSizeClass.value,
-    getTextColorClass.value,
-    getBorderColorClass.value,
-  ];
-});
+watch(
+  () => itemSelectedArrival.value,
+  (value) => {
+    emit('selectArrival', value);
+  },
+  { immediate: true }
+);
 
-const getTextSizeClass = computed(() => {
-  return 'text-sm leading-5';
-});
-const getTextColorClass = computed(() => {
-  return 'text-gray-800 placeholder-gray-400';
-});
-const getBorderColorClass = computed(() => {
-  return 'focus:outline-none border border-gray-400 focus:border-blue-400';
-});
+watch(
+  () => itemSelectedDeparture.value,
+  (value) => {
+    emit('selectDeparture', value);
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped></style>

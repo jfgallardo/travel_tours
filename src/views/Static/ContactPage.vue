@@ -154,11 +154,13 @@
 import { ref, computed } from 'vue';
 import emailjs from '@emailjs/browser';
 import { useI18n } from 'vue-i18n';
+import { useAlertStore } from '@/stores/alert';
 
 const { t } = useI18n();
 const formContact = ref(null);
 const inputFieldReset = ref(null);
 const loading = ref(false);
+const alertStore = useAlertStore();
 
 const sendEmail = () => {
   loading.value = true;
@@ -174,8 +176,12 @@ const sendEmail = () => {
         loading.value = false;
         inputFieldReset.value = ' ';
       },
-      (error) => {
-        console.log('FAILED...', error.text);
+      () => {
+        alertStore.showMsg({
+          message: 'Intente de nuevo, por favor.',
+          backgrColor: 'red',
+          textColor: 'red',
+        });
       }
     );
 };

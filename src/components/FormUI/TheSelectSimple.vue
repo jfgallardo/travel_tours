@@ -66,16 +66,19 @@
           <div id="arrow" data-popper-arrow></div>
           <slot>
             <li
-              v-for="op in options"
+              v-for="(op, index) in options"
               id="listbox-option-0"
-              :key="op.value"
+              :key="index"
               class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-200"
               role="option"
               @click="selectOption(op)"
             >
               <div class="flex items-center">
-                <span class="font-normal ml-3 block">
+                <span v-if="op.name" class="font-normal ml-3 block">
                   {{ op.name }}
+                </span>
+                <span v-else class="font-normal ml-3 block">
+                  {{ op }}
                 </span>
               </div>
             </li>

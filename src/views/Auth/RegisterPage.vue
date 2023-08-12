@@ -109,7 +109,7 @@ const register = () => {
       }
     })
     .catch((error) => {
-      const {response} = error
+      const { response } = error;
       alertStore.showMsg({
         message: response.data.message,
         backgrColor: 'red',
