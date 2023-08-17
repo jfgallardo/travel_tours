@@ -144,12 +144,12 @@ const pdfCreatorContract = (data) => {
       payment(pdfStore),
       ' ',
       {
-        text: 'A – O valor acima descrito poderá ser pago através de boleto, ou de deposito, ou transferência, ou PIX bancário, ou para umas das contas a seguir indicadas:',
+        text: 'A – O valor acima descrito poderá ser pago total ou parcialmente através de boleto, ou de deposito, ou transferência, ou de PIX, para umas das contas a seguir indicadas abaixo:',
         style: ['text', 'justify'],
       },
       ' ',
       {
-        text: 'Llave PIX CNPJ de Nubank: 30876256000128',
+        text: 'Chave PIX CNPJ de Nubank: 30876256000128',
         style: ['text', 'justify'],
       },
       ' ',
