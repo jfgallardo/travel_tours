@@ -43,10 +43,15 @@
                 <form
                   class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-6 w-full"
                 >
-                  <TextInput v-model="i.name" label="Primeiro Nome *" />
-                  <TextInput
+                  <InputGeneric
+                    v-model="i.name"
+                    label="Primeiro Nome *"
+                    name="name"
+                  />
+                  <InputGeneric
                     v-model="i.last_name"
                     label="Sobrenome Completo *"
+                    name="last_name"
                   />
                   <InputGeneric
                     v-model="i.email"
@@ -67,7 +72,7 @@
                     :validations="validations.phone"
                     @is-valid="formIsValid = $event"
                   />
-                  <SelectSimple
+                  <Select
                     name="sexo"
                     label="Sexo *"
                     :options="[
@@ -75,7 +80,7 @@
                       { label: 'Femenino', value: 'F' },
                     ]"
                     :selected="i.sexo"
-                    @select-value="i.sexo = $event.value"
+                    @select-value="i.sexo = $event"
                   />
                   <Select
                     :selected="i.documentSelected"
@@ -120,10 +125,15 @@
                   <form
                     class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-6 w-full"
                   >
-                    <TextInput v-model="i.name" label="Primeiro Nome *" />
-                    <TextInput
+                    <InputGeneric
+                      v-model="i.name"
+                      label="Primeiro Nome *"
+                      name="name"
+                    />
+                    <InputGeneric
                       v-model="i.last_name"
                       label="Sobrenome Completo *"
+                      name="last_name"
                     />
                     <InputGeneric
                       v-model="i.email"
@@ -142,7 +152,7 @@
                       name="mainPhone"
                       :maska="['(##) #####-####']"
                     />
-                    <SelectSimple
+                    <Select
                       name="sexo"
                       label="Sexo *"
                       :options="[
@@ -150,7 +160,7 @@
                         { label: 'Femenino', value: 'F' },
                       ]"
                       :selected="i.sexo"
-                      @select-value="i.sexo = $event.value"
+                      @select-value="i.sexo = $event"
                     />
                     <Select
                       :selected="i.documentSelected"
@@ -194,10 +204,15 @@
                   <form
                     class="grid grid-cols-2 grid-rows-3 xl:grid-cols-3 xl:grid-rows-2 gap-6 w-full"
                   >
-                    <TextInput v-model="i.name" label="Primeiro Nome *" />
-                    <TextInput
+                    <InputGeneric
+                      v-model="i.name"
+                      label="Primeiro Nome *"
+                      name="name"
+                    />
+                    <InputGeneric
                       v-model="i.last_name"
                       label="Sobrenome Completo *"
+                      name="last_name"
                     />
                     <InputGeneric
                       v-model="i.email"
@@ -216,7 +231,7 @@
                       name="mainPhone"
                       :maska="['(##) #####-####']"
                     />
-                    <SelectSimple
+                    <Select
                       name="sexo"
                       label="Sexo *"
                       :options="[
@@ -224,7 +239,7 @@
                         { label: 'Femenino', value: 'F' },
                       ]"
                       :selected="i.sexo"
-                      @select-value="i.sexo = $event.value"
+                      @select-value="i.sexo = $event"
                     />
                     <Select
                       :selected="i.documentSelected"
@@ -300,7 +315,6 @@ import Select from '@/components/FormUI/TheSelect.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import { useAuthStore } from '@/stores/auth';
 import Cookies from 'js-cookie';
-import SelectSimple from '@/components/FormUI/TheSelect.vue';
 
 onMounted(() => {
   if (purchaseStore.informationAdults.length === 0) getArrayData();

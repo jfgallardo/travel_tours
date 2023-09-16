@@ -236,7 +236,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import ArrowLeft from '@/components/Icons/ArrowLeft.vue';
 import SelectSimple from '@/components/FormUI/TheSelectSimple.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
@@ -326,7 +326,7 @@ const showAeroportos = computed(() => {
 
 const showCompanies = computed(() => {
   const companiesOne = vooStore.meta?.WayFilter?.Airlines;
-  const companiesTwo = vooStore.meta?.ReturnFilter?.Airlines;
+  const companiesTwo = vooStore.meta?.ReturnFilter ? vooStore.meta.ReturnFilter.Airlines : [];
   return companiesOne ? [...new Set([...companiesOne, ...companiesTwo])] : [];
 });
 

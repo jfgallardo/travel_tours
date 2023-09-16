@@ -27,7 +27,7 @@ defineProps({
     default: '48',
   },
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: '',
   },
 });

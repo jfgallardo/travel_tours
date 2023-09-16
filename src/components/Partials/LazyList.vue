@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!seeSelectedOption" ref="scrollContainer">
+  <div v-if="!seeSelectedOption">
     <p class="font-medium p-2.5">
       {{
         typeFlight === 'I'
@@ -8,7 +8,7 @@
       }}
     </p>
     <TransitionGroup name="list" tag="ul">
-      <template v-for="objeto in objetosVisibles" :key="objeto.Id">
+      <template v-for="(objeto, index) in objetosVisibles" :key="index">
         <div
           :class="{
             'flex mb-3.5 border-0 mt-0': currentTab === 'IdaVoltaNoFlex',
@@ -119,14 +119,13 @@ const emit = defineEmits(['heSelected']);
 const { t } = useI18n();
 
 const objetosVisibles = ref([]);
-const scrollContainer = ref(null);
 const tabs = {
   IdaVoltaFlex,
   VoosMultipleRender,
   IdaVoltaNoFlex,
 };
 const inputCheck = ref([]);
-const selectVoo = ref();
+const selectVoo = ref(null);
 const keyVooSelected = ref('');
 const seeSelectedOption = ref(false);
 const selectedOption = ref(null);
@@ -139,8 +138,8 @@ watch(
         element.checked = false;
       });
       inputCheck.value[0].checked = true;
-      selectVoo.value = props.objetos[0];
-      keyVooSelected.value = props.objetos[0].Key;
+      selectVoo.value = props.objetos[0] ? props.objetos[0] : null;
+      keyVooSelected.value = props.objetos[0] ? props.objetos[0].Key : null;
     }
   },
   { immediate: true, deep: true }
@@ -153,32 +152,34 @@ onMounted(() => {
 watch(
   () => props.objetos,
   () => {
-    actualizarObjetosVisibles();
+    actualizarObjetosVisibles(false);
     onTop();
   }
 );
 
 const onTop = () => {
-  scrollContainer.value.scrollIntoView({
+  window.scrollTo({
+    top: 0,
     behavior: 'smooth',
-    block: 'start',
-    inline: 'nearest',
   });
 };
 
-const actualizarObjetosVisibles = () => {
-  const cantidadAgregada = Math.min(
-    objetosVisibles.value.length + props.cantidadVisible,
-    props.objetos.length
-  );
+const actualizarObjetosVisibles = (filter = true) => {
+  const cantidadAgregada = filter
+    ? Math.min(
+        objetosVisibles.value.length + props.cantidadVisible,
+        props.objetos.length
+      )
+    : props.cantidadVisible;
+
   objetosVisibles.value = props.objetos.slice(0, cantidadAgregada);
   if (inputCheck?.value.length) {
     inputCheck?.value?.forEach((element) => {
       element.checked = false;
     });
     inputCheck.value[0].checked = true;
-    selectVoo.value = props.objetos[0];
-    keyVooSelected.value = props.objetos[0].Key;
+    selectVoo.value = props.objetos[0] ? props.objetos[0] : null;
+      keyVooSelected.value = props.objetos[0] ? props.objetos[0].Key : null;
   }
 };
 const selectFligth = (ev, viagem) => {

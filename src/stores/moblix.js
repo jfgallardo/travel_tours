@@ -65,5 +65,8 @@ export const useMoblixStore = defineStore({
           this.loading = false;
         });
     },
+    async detalhesPedido(order) {
+      return await axiosClientAPI.get(`api/v1/moblix/detalhes-pedido/${order}`)
+    }
   },
 });

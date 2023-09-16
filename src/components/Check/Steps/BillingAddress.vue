@@ -6,15 +6,15 @@
       <div
         class="w-full flex flex-col lg:flex-row lg:space-x-2.5 space-y-6 lg:space-y-0"
       >
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.cep"
+          v-cep-mask
           :label="$t('addressUser.cep')"
           name="cep"
-          maska="#####-###"
           class="lg:w-1/2"
         />
 
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.state"
           :label="$t('addressUser.estado')"
           class="lg:w-1/2"
@@ -22,7 +22,7 @@
           disable-field
         />
 
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.city"
           :label="$t('addressUser.cidade')"
           class="lg:w-1/2"
@@ -32,7 +32,7 @@
       </div>
 
       <div class="w-full">
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.address"
           :label="$t('addressUser.endereo')"
           name="address"
@@ -40,7 +40,7 @@
       </div>
 
       <div class="w-full">
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.number"
           :label="$t('addressUser.nmero')"
           name="number"
@@ -48,7 +48,7 @@
       </div>
 
       <div class="w-full">
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.complement"
           :label="$t('addressUser.complemento')"
           name="complement"
@@ -56,7 +56,7 @@
       </div>
 
       <div class="w-full">
-        <TextInput
+        <InputGeneric
           v-model="informationStore.detailsUser.district"
           :label="$t('addressUser.bairro')"
           name="district"
@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import TextInput from '@/components/FormUI/TextInput.vue';
+import InputGeneric from '@/components/FormUI/InputGeneric.vue';
 import { watch } from 'vue';
 import { useGeneralInformation } from '@/stores/generalInformation';
 

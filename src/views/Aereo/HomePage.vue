@@ -16,24 +16,21 @@
 </template>
 
 <script setup>
-import { ref, markRaw, onMounted } from 'vue';
+import { ref, markRaw, onMounted, shallowRef } from 'vue';
 import { RouterView } from 'vue-router';
 import Cookies from 'js-cookie';
 import RoundTrip from '@/components/Aereo/RoundTripForm.vue';
 import ManyCities from '@/components/Aereo/ManyCitiesForm.vue';
 import OneWay from '@/components/Aereo/OneWayForm.vue';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
-import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
 import ButtonTravel from '@/components/Partials/ButtonTravel.vue';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import { useGeneralInformation } from '@/stores/generalInformation';
 
-const storeSearch = useSearchOptionsVooStore();
 const informationGeral = useGeneralInformation();
 const purchaseStore = usePurchaseStore();
 
 onMounted(() => {
-  //storeSearch.$reset();
   informationGeral.$reset();
   purchaseStore.$reset();
   if (Cookies.get('I')) Cookies.remove('I');
@@ -41,7 +38,7 @@ onMounted(() => {
 });
 
 let selectedComponent = ref(null);
-const selectComponent = ref({
+const selectComponent = shallowRef({
   RoundTrip: RoundTrip,
   ManyCities: ManyCities,
   OneWay: OneWay,

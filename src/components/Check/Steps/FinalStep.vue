@@ -62,54 +62,54 @@ const totalP = computed(() => {
 });
 
 const optionsSelect = computed(() => {
-  if (informationStore.paymentMethod === 8) {
+  if (informationStore.paymentMethod === 8 || informationStore.paymentMethod === 3) {
     return [
       {
         label: `Valor total (${totalP.value.toFixed(3)})`,
-        value: totalP.value.toFixed(3),
+        value: 1,
       },
     ];
   }
   return [
     {
       label: `Valor total (${totalP.value.toFixed(3)})`,
-      value: totalP.value.toFixed(3),
+      value: 1,
     },
     {
       label: `2 Parcelas de (${(totalP.value / 2).toFixed(3)})`,
-      value: (totalP.value / 2).toFixed(3),
+      value: 2,
     },
     {
       label: `3 Parcelas de (${(totalP.value / 3).toFixed(3)})`,
-      value: (totalP.value / 3).toFixed(3),
+      value: 3,
     },
     {
       label: `4 Parcelas de (${(totalP.value / 4).toFixed(3)})`,
-      value: (totalP.value / 4).toFixed(3),
+      value: 4,
     },
     {
       label: `5 Parcelas de (${(totalP.value / 5).toFixed(3)})`,
-      value: (totalP.value / 5).toFixed(3),
+      value: 5,
     },
     {
       label: `6 Parcelas de (${(totalP.value / 6).toFixed(3)})`,
-      value: (totalP.value / 6).toFixed(3),
+      value: 6,
     },
     {
       label: `7 Parcelas de (${(totalP.value / 7).toFixed(3)})`,
-      value: (totalP.value / 7).toFixed(3),
+      value: 7,
     },
     {
       label: `8 Parcelas de (${(totalP.value / 8).toFixed(3)})`,
-      value: (totalP.value / 8).toFixed(3),
+      value: 8,
     },
     {
       label: `9 Parcelas de (${(totalP.value / 9).toFixed(3)})`,
-      value: (totalP.value / 9).toFixed(3),
+      value: 9,
     },
     {
       label: `10 Parcelas de R$${(totalP.value / 10).toFixed(3)}`,
-      value: (totalP.value / 10).toFixed(3),
+      value: 10,
     },
   ];
 });

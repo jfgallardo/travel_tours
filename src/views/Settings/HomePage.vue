@@ -1,5 +1,8 @@
 <template>
-  <LayoutTwoViews>
+  <div v-if="!asideSelected">
+    cargando
+  </div>
+  <LayoutTwoViews v-if="asideSelected">
     <template #aside>
       <div class="flex flex-col space-y-1">
         <a
@@ -33,23 +36,23 @@
       </div>
     </template>
     <template #main>
-      <transition name="fade" mode="out-in">
-        <component :is="asideSelected.component"></component>
-      </transition>
+      <component :is="asideSelected.component"></component>
     </template>
   </LayoutTwoViews>
+  
 </template>
 
 <script setup>
-import { markRaw, ref } from 'vue';
+import { markRaw, ref, onMounted } from 'vue';
 import LayoutTwoViews from '@/layouts/LayoutTwoViews.vue';
 import Passengers from '@/views/Settings/ModulePassenger/PassengersHome.vue';
+import Flights from '@/views/Settings/ModuleFlights/FlightHome.vue';
 
 const asideSettings = [
   {
-    label: 'General',
-    component: '',
-    icon: 'M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495',
+    label: 'Vuelos reservados',
+    component: markRaw(Flights),
+    icon: 'M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9',
   },
   {
     label: 'Pasajeros registrados',
@@ -68,7 +71,11 @@ const asideSettings = [
   },
 ];
 
-const asideSelected = ref({ label: 'General', component: '' });
+onMounted(() => {
+  asideSelected.value = asideSettings[0]
+})
+
+const asideSelected = ref(null);
 </script>
 
 <style scoped>

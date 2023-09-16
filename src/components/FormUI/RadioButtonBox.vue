@@ -40,7 +40,7 @@ const props = defineProps({
     default: 'Label Example',
   },
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: '',
   },
   idd: {

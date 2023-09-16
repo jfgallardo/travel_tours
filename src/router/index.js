@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useWoobaStore } from '@/stores/wooba';
 import Guard from '@/services/middleware';
 
 const LayoutDefault = () => import('@/layouts/LayoutDefault.vue');
@@ -40,6 +39,8 @@ const MainQuestionsPage = () => import('@/views/Static/MainQuestionsPage.vue');
 const CarCategoriesPage = () => import('@/views/Static/CarCategoriesPage.vue');
 
 const SettingsHomePage = () => import('@/views/Settings/HomePage.vue');
+
+const WaitForPage = () => import('@/components/WaitFor/WaitForComponent.vue')
 
 const scrollBehavior = (to, from, savedPosition) => {
   if (to.name === from.name) {
@@ -235,6 +236,11 @@ const router = createRouter({
             },
           },
         },
+        {
+          path: '/purchase/progress',
+          name: 'WaitForPage',
+          component: WaitForPage
+        }
       ],
     },
     {

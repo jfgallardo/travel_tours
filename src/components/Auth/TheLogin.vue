@@ -84,9 +84,8 @@
             <input type="hidden" name="remember" value="true" />
             <div class="-space-y-px rounded-md shadow-sm">
               <div>
-                <label for="email-address" class="sr-only">Email address</label>
+                <label class="sr-only">Email address</label>
                 <input
-                  id="email-address"
                   v-model="email"
                   name="email"
                   type="email"
@@ -96,9 +95,8 @@
                 />
               </div>
               <div>
-                <label for="password" class="sr-only">Password</label>
+                <label class="sr-only">Password</label>
                 <input
-                  id="password"
                   v-model="password"
                   name="password"
                   type="password"

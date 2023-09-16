@@ -46,9 +46,11 @@ const props = defineProps({
   },
   maska: {
     type: [String, Object],
+    default: '',
   },
   tokens: {
     type: [String, Object],
+    default: '',
   },
   placeholder: {
     type: String,

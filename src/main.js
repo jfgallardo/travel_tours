@@ -14,6 +14,10 @@ import {
   cpfDirective,
   cepDirective,
   phoneDirective,
+  numberCardDirective,
+  cvcDirective,
+  expirationCardDirective,
+  onlyPhoneDirective
 } from '@/directives/input-mask';
 import { setupCalendar } from 'v-calendar';
 
@@ -25,6 +29,10 @@ app.directive('maska', vMaska);
 app.directive('cpf-mask', cpfDirective);
 app.directive('cep-mask', cepDirective);
 app.directive('phone-mask', phoneDirective);
+app.directive('onlyphone-mask', onlyPhoneDirective);
+app.directive('nc-mask', numberCardDirective);
+app.directive('cvc-mask', cvcDirective);
+app.directive('expiration-mask', expirationCardDirective);
 
 app.use(pinia);
 pinia.use(piniaPluginPersistedstate);

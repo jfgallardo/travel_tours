@@ -28,6 +28,11 @@
         label="Pix"
         :idd="8"
       />
+      <RadioButtonBox
+        v-model="informationStore.paymentMethod"
+        label="Boleto"
+        :idd="3"
+      />
     </div>
   </div>
 </template>

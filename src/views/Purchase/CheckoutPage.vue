@@ -376,19 +376,19 @@ const valorTaxas = computed(() => {
     (accumulator, item) => accumulator + item.priceWithTax,
     0
   );
-  const priceWithTaxTwo = travel_two.FareGroup.fares.reduce(
+  const priceWithTaxTwo = travel_two ? travel_two.FareGroup.fares.reduce(
     (accumulator, item) => accumulator + item.priceWithTax,
     0
-  );
+  ) : 0;
 
   const priceWithoutTaxOne = travel_one.FareGroup.fares.reduce(
     (accumulator, item) => accumulator + item.priceWithoutTax,
     0
   );
-  const priceWithoutTaxTwo = travel_two.FareGroup.fares.reduce(
+  const priceWithoutTaxTwo = travel_two ? travel_two.FareGroup.fares.reduce(
     (accumulator, item) => accumulator + item.priceWithoutTax,
     0
-  );
+  ) : 0;
 
   return useCurrencyFormatter({
     currency: 'BRL',
@@ -405,10 +405,10 @@ const valorTotalPassenger = computed(() => {
     (accumulator, item) => accumulator + item.priceWithoutTax,
     0
   );
-  const totalPassengerTwo = travel_two.FareGroup.fares.reduce(
+  const totalPassengerTwo = travel_two ? travel_two.FareGroup.fares.reduce(
     (accumulator, item) => accumulator + item.priceWithoutTax,
     0
-  );
+  ) : 0;
 
   return useCurrencyFormatter({
     currency: 'BRL',
@@ -420,7 +420,7 @@ const valorTotal = computed(() => {
   const { travel_one, travel_two } = travels.value;
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: travel_one.Preco + travel_two.Preco,
+    value: travel_one.Preco +  (travel_two ? travel_two.Preco : 0),
   });
 });
 
@@ -501,7 +501,7 @@ const tarifasOne = computed(() => {
 //TODO INFORMACION SOBRE VUELO DE VUELTA
 const departureTimeVolta = computed(() => {
   const dateLocal = new Date(
-    moment(travels.value.travel_two.Voos[0].departureDate)
+    moment(travels.value.travel_two?.Voos[0]?.departureDate)
   );
   return dateLocal.toLocaleTimeString([], {
     hour: '2-digit',
@@ -511,7 +511,7 @@ const departureTimeVolta = computed(() => {
 
 const departureTimeDayPeriodVolta = computed(() => {
   const dateLocal = new Date(
-    moment(travels.value.travel_two.Voos[0].departureDate)
+    moment(travels.value.travel_two?.Voos[0]?.departureDate)
   );
   const hours = dateLocal.getHours();
   return hours >= 12 ? 'PM' : 'AM';

@@ -14,19 +14,19 @@
           :selected="informationStore.card.bainderaSelected"
           @select-value="informationStore.card.bainderaSelected = $event"
         />
-        <TextInput
+        <InputGeneric
           v-model="informationStore.card.cardNumber"
+          v-nc-mask
           label="Numero de Cartão *"
           name="number-card"
-          maska="#### #### #### ####"
           :text-r="informationStore.card.cardType"
           class="lg:w-1/3 w-full"
         />
-        <TextInput
+        <InputGeneric
           v-model="informationStore.card.cardSecurityCode"
+          v-cvc-mask
           label="Codigo de Segurança *"
           name="cvc"
-          maska="####"
           class="lg:w-1/3 w-full"
         />
       </div>
@@ -34,7 +34,7 @@
       <div
         class="flex w-full space-y-6 lg:space-y-0 flex-col lg:flex-row lg:space-x-2.5"
       >
-        <TextInput
+        <InputGeneric
           v-model="informationStore.card.cardName"
           label="Nome (Igual ao do cartão) *"
           name="card-name"
@@ -49,11 +49,11 @@
           :validations="validations.cpf"
           @is-valid="informationStore.card.isValidCpf = $event"
         />
-        <TextInput
+        <InputGeneric
           v-model="informationStore.card.cardExpiration"
+          v-expiration-mask
           label="Data de Vencimento *"
           name="expiration"
-          :maska="['##/##', '##/####']"
           class="lg:w-1/3 w-full"
         />
       </div>
@@ -69,19 +69,13 @@
 
 <script setup>
 import { computed, inject, onMounted, ref, watch } from 'vue';
-import TextInput from '@/components/FormUI/TextInput.vue';
 import validateInfo from '@/plugins/validate-card';
 import TheSelect from '@/components/FormUI/TheSelect.vue';
 import { useRateStore } from '@/stores/rate';
 import { useGeneralInformation } from '@/stores/generalInformation';
 import Cookies from 'js-cookie';
 import InputGeneric from '@/components/FormUI/InputGeneric.vue';
-import {
-  cpfValidation,
-  emailValidation,
-  phoneValidation,
-  requiredValidation,
-} from '@/utils/validations';
+import { cpfValidation } from '@/utils/validations';
 
 const creditCardMessage = ref();
 const creditCardVariant = ref();

@@ -34,13 +34,7 @@ import PaymentDetails from '@/components/Check/Steps/PaymentDetails.vue';
 import BillingAddress from '@/components/Check/Steps/BillingAddress.vue';
 import FinalStep from '@/components/Check/Steps/FinalStep.vue';
 import { useGeneralInformation } from '@/stores/generalInformation';
-import { useReserveStore } from '@/stores/reservar';
-import { usePurchaseStore } from '@/stores/purchase.user';
-import { useDateToJson } from '@/composables/dateToJson';
-import Cookies from 'js-cookie';
-import { useAlertStore } from '@/stores/alert';
 import { useRouter } from 'vue-router';
-import { usePayPixStore } from '@/stores/payPix';
 
 onMounted(() => {
   auth.currentStepPayment = 0;
@@ -49,10 +43,6 @@ onMounted(() => {
 
 const auth = useAuthStore();
 const informationStore = useGeneralInformation();
-const reserverStore = useReserveStore();
-const purchaseStore = usePurchaseStore();
-const alertStore = useAlertStore();
-const pixStore = usePayPixStore();
 const router = useRouter();
 
 const disabledButton = computed(() => {
@@ -77,28 +67,22 @@ const steps = [
 ];
 const selectedComponent = ref(null);
 
-const voos = computed(() => {
-  const travel_one = JSON.parse(Cookies.get('I'));
-  const travel_two = Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
-  return {
-    travel_one,
-    travel_two,
-  };
-});
-
 const nextStep = () => {
   if (auth.currentStepPayment === 0) {
     if (
       informationStore.paymentMethod === 4 ||
       informationStore.paymentMethod === 5 ||
+      informationStore.paymentMethod === 3 ||
       informationStore.paymentMethod === 8
     ) {
       auth.currentStepPayment += 2;
     } else {
-      return;
+      auth.currentStepPayment++;
     }
   } else if (auth.currentStepPayment === 1) {
-    if (isValidStepOne.value) auth.currentStepPayment++;
+    if (isValidStepOne.value) {
+      auth.currentStepPayment++;
+    }
   } else if (auth.currentStepPayment === 2) {
     if (isValidStepTwo.value) auth.currentStepPayment++;
   } else if (auth.currentStepPayment === 3) {
@@ -113,6 +97,7 @@ const backStep = () => {
     auth.currentStepPayment === 2 &&
     (informationStore.paymentMethod === 4 ||
       informationStore.paymentMethod === 5 ||
+      informationStore.paymentMethod === 3 ||
       informationStore.paymentMethod === 8)
   ) {
     auth.currentStepPayment -= 2;
@@ -127,129 +112,9 @@ const reservar = () => {
     informationStore.detailsUser.parcelas &&
     informationStore.acceptConditions
   ) {
-    const body = {
-      Email: auth.userLogged?.email,
-      Passageiros: passageiros(),
-      Ida: { Token: voos.value.travel_one.RateToken },
-      pagante: {
-        name: informationStore.detailsUser.nameBuy,
-        address: {
-          street: informationStore.detailsUser.district,
-          number: informationStore.detailsUser.number,
-          zipcode: informationStore.detailsUser.cep,
-          neighborhood: informationStore.detailsUser.address,
-          city: informationStore.detailsUser.city,
-          state: informationStore.detailsUser.state,
-          country: 'Brasil',
-        },
-        phones: [
-          {
-            DDD: String(informationStore.detailsUser.codeArea),
-            DDI: '55',
-            number: String(informationStore.detailsUser.phone),
-          },
-        ],
-        Nascimento: informationStore.detailsUser.birthday,
-      },
-      TokenConsultaIda: voos.value.travel_one.TokenConsultaMBX,
-      IdMeioPagamento: informationStore.paymentMethod,
-      ValorParcelaPS: +informationStore.detailsUser.parcelas.value,
-    };
-    reserverStore
-      .record(body)
-      .then(() => {
-        let message = '';
-        let redirect = '/aereo';
-        if (informationStore.paymentMethod === 8) {
-          message =
-            'Datos guardados correctamente. Sera redireccionado para realizar el pago mediante pix';
-        }
-
-        alertStore.showMsg({
-          message: message,
-          backgrColor: 'blue',
-          textColor: 'blue',
-        });
-
-        const dataPix = {
-          name: informationStore.detailsUser.nameBuy,
-          cpfCnpj: informationStore.detailsUser.cpf,
-          email: auth.userLogged.email,
-          phone:
-            informationStore.detailsUser.idd +
-            informationStore.detailsUser.codeArea +
-            informationStore.detailsUser.phone,
-          value: informationStore.detailsUser.parcelas.value,
-        };
-
-        pixStore.paymentPix(dataPix).then(({ data }) => {
-          let enlace = document.createElement('a');
-          enlace.href = data.invoiceUrl;
-          enlace.target = '_blank';
-          enlace.click();
-          router.push(redirect);
-        });
-      })
-      .catch((e) => {
-        alertStore.showMsg({
-          message: 'Intente de nuevo, por favor.',
-          backgrColor: 'red',
-          textColor: 'red',
-        });
-      });
+    router.push({ name: 'WaitForPage' });
+    
   }
-};
-
-const passageiros = () => {
-  let passengerList = [];
-  purchaseStore.informationAdults.forEach((item) => {
-    const pass = {
-      CPF: item.cpf_number || '',
-      PaisResidencia: item.countryResidence || '',
-      EmissaoDocumento: item.validateDate || '',
-      PaisEmissor: item.countryIssue || '',
-      NumeroDocumento: item.passportNumber || '',
-      TipoDocumento: item.documentSelected.label,
-      Email: item.email,
-      DDI: '55',
-      DDD: String(item.mainPhone.match(/\((\d+)\)/)[1]),
-      Telefone: String(item.mainPhone.replace(/\(\d+\)/, '')),
-      Nascimento: item.birthday,
-      Nome: item.name,
-      Sobrenome: item.last_name,
-      Sexo: item.sexo,
-    };
-    passengerList.push(pass);
-  });
-  return passengerList;
-};
-
-const creditCard = () => {
-  const financingPlan = informationStore.info.PlanosDeFinanciamento.find(
-    (o) => o.Bandeira === informationStore.card.bainderaSelected.value
-  );
-  const { card } = informationStore;
-
-  return {
-    Bandeira: financingPlan.Bandeira,
-    CodigoDeSeguranca: card.cardSecurityCode,
-    FinanciamentoId: card.planDeFinanciamento.Id,
-    Numero: card.cardNumber,
-    Parcelas: card.planDeFinanciamento.Parcelas,
-    Tipo: card.cardType,
-    TitularCPF: card.cpfUserCard,
-    TitularNome: card.cardName,
-    Validade: card.cardExpiration,
-  };
-};
-
-const passportBabie = (baby) => {
-  return {
-    Nacionalidade: baby?.countryResidence,
-    Numero: baby?.passportNumber,
-    PaisEmissor: baby?.countryIssue,
-    Validade: useDateToJson(baby?.validateDate),
-  };
 };
 
 const isValidStepOne = computed(() => {

@@ -1,115 +1,113 @@
 <template>
-  <div>
-    <div class="overflow-x-auto mx-auto p-8">
-      <button
-        class="float-right bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-2 flex items-center space-x-1.5"
-        @click="showModal = true"
+  <div class="overflow-x-auto mx-auto p-8">
+    <button
+      class="float-right bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-2 flex items-center space-x-1.5"
+      @click="showModal = true"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 4.5v15m7.5-7.5h-15"
+        />
+      </svg>
 
-        <span> Adicionar </span>
-      </button>
-      <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
-        <thead>
-          <tr>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+      <span> Adicionar </span>
+    </button>
+    <table class="min-w-full divide-y-2 divide-gray-200 text-sm">
+      <thead>
+        <tr>
+          <th
+            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+          >
+            Name
+          </th>
+          <th
+            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+          >
+            Last Name
+          </th>
+          <th
+            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+          >
+            Email
+          </th>
+          <th
+            class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
+          >
+            Pasaporte
+          </th>
+          <th class="px-4 py-2"></th>
+        </tr>
+      </thead>
+      <tbody
+        v-for="item in passengers"
+        :key="item.id"
+        class="divide-y divide-gray-200"
+      >
+        <tr>
+          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            {{ item.name }}
+          </td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+            {{ item.last_name }}
+          </td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+            {{ item.email }}
+          </td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+            {{ item.number_passport }}
+          </td>
+          <td class="whitespace-nowrap px-4 py-2">
+            <button
+              class="rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700 flex items-center space-x-1.5"
+              @click="deletePassenger(item.id)"
             >
-              Name
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Last Name
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Email
-            </th>
-            <th
-              class="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900"
-            >
-              Pasaporte
-            </th>
-            <th class="px-4 py-2"></th>
-          </tr>
-        </thead>
-        <tbody
-          v-for="item in passengers"
-          :key="item.id"
-          class="divide-y divide-gray-200"
-        >
-          <tr>
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-              {{ item.name }}
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{ item.last_name }}
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{ item.email }}
-            </td>
-            <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-              {{ item.number_passport }}
-            </td>
-            <td class="whitespace-nowrap px-4 py-2">
-              <button
-                class="rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700 flex items-center space-x-1.5"
-                @click="deletePassenger(item.id)"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 h-4"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                  />
-                </svg>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                />
+              </svg>
 
-                <span> Delete </span>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div
-        v-if="passengers.length === 0"
-        class="flex items-center justify-center text-sm mt-3.5"
-      >
-        No tiene pasajeros registrados
-      </div>
+              <span> Delete </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div
+      v-if="passengers.length === 0"
+      class="flex items-center justify-center text-sm mt-3.5"
+    >
+      No tiene pasajeros registrados
     </div>
-    <ModalAddPassenger
-      v-if="showModal"
-      @close="showModal = false"
-      @correct-register="closeModal"
-    />
-    <!--    <ModalManagerPassenger
+  </div>
+  <ModalAddPassenger
+    v-if="showModal"
+    @close="showModal = false"
+    @correct-register="closeModal"
+  />
+  <!--    <ModalManagerPassenger
       v-if="showModalManager"
       :passenger="itemForShow"
       @close="showModalManager = false"
     />-->
-  </div>
 </template>
 
 <script setup>

@@ -8,7 +8,7 @@
       />
     </div>
     <div>
-      <TextInput
+      <InputGeneric
         v-model="informationStore.detailsUser.nameBuy"
         label="Nome Completo *"
         name="name-buy"
@@ -24,27 +24,21 @@
       />
     </div>
     <div>
-      <TextInput
+      <InputGeneric
         v-model="informationStore.detailsUser.codeArea"
         label="Codigo de Area"
         name="code-area"
       />
     </div>
     <div>
-      <TextInput
+      <InputGeneric
         v-model="informationStore.detailsUser.phone"
+        v-onlyphone-mask
         label="Telefone principal"
         name="mainPhone"
-        :maska="['(##) #####-####']"
       />
     </div>
-    <div
-      v-if="
-        informationStore.paymentMethod === 4 ||
-        informationStore.paymentMethod === 5 ||
-        informationStore.paymentMethod === 8
-      "
-    >
+    <div>
       <InputGeneric
         v-model="informationStore.detailsUser.cpf"
         v-cpf-mask
@@ -58,7 +52,6 @@
 </template>
 
 <script setup>
-import TextInput from '@/components/FormUI/TextInput.vue';
 import DateInput from '@/components/FormUI/DateInput.vue';
 import SelectSimple from '@/components/FormUI/TheSelect.vue';
 import { useGeneralInformation } from '@/stores/generalInformation';

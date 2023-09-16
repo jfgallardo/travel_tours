@@ -54,10 +54,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  tokens: {
-    type: [String, Object],
-    default: '',
-  },
   placeholder: {
     type: String,
     default: '',
