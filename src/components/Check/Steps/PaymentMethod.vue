@@ -23,11 +23,11 @@
         label="At the Agency"
         :idd="5"
       />
-      <RadioButtonBox
+     <!--  <RadioButtonBox
         v-model="informationStore.paymentMethod"
         label="Pix"
         :idd="8"
-      />
+      /> -->
       <RadioButtonBox
         v-model="informationStore.paymentMethod"
         label="Boleto"

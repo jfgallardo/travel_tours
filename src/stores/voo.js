@@ -56,6 +56,18 @@ export const useVooStore = defineStore({
         ),
       ];
     },
+    hoursRange: (state) => {
+      const arrayHours = [
+        ...(state.Ida || []).map((o) => o.TempoTotal),
+        ...(state.Volta || []).map((o) => o.TempoTotal),
+        ...(state.IdaVolta || []).map((o) => o.TempoTotal),
+      ];
+
+      const minHour = arrayHours.length > 0 ? Math.min(...arrayHours) : 0;
+      const maxHour = arrayHours.length > 0 ? Math.max(...arrayHours) : 0;
+
+      return { minHour, maxHour };
+    },
   },
   actions: {
     async checkFlightsRoundTrip(payload) {

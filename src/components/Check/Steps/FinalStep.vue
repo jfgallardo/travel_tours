@@ -62,7 +62,7 @@ const totalP = computed(() => {
 });
 
 const optionsSelect = computed(() => {
-  if (informationStore.paymentMethod === 8 || informationStore.paymentMethod === 3) {
+  if (informationStore.paymentMethod === 8 || informationStore.paymentMethod === 3 || informationStore.paymentMethod === 4) {
     return [
       {
         label: `Valor total (${totalP.value.toFixed(3)})`,

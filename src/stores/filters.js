@@ -5,9 +5,15 @@ import { useVooStore } from '@/stores/voo';
 export const useFiltersStore = defineStore('filters', {
   state: () => ({
     stops: '',
-    hoursTravel: 0,
+    hoursTravel: {
+      minHour: 0,
+      maxHour: 0
+    },
     travelClass: '',
-    priceRange: 0,
+    priceRange: {
+      minPrice: 0,
+      maxPrice: 0,
+    },
     airports: [],
     flightCompanies: [],
     baggage: '',
@@ -140,65 +146,50 @@ export const useFiltersStore = defineStore('filters', {
           });
         }
 
-        /*
+        //TODO FILTRO DE RANGO DE PRECIOS
+        if (state.priceRange.minPrice) {
+          filterIda = filterIda.filter(
+            (item) => +item.Preco >= +state.priceRange.minPrice
+          );
+          filterVolta = filterVolta.filter(
+            (item) => +item.Preco >= +state.priceRange.minPrice
+          );
+        }
 
-        filterIda = filterIda.filter(
-          (item) => +item.Preco >= +state.priceRange
-        );
-        filterVolta = filterVolta.filter(
-          (item) => +item.Preco >= +state.priceRange
-        );*/
+        if (state.priceRange.maxPrice) {
+          filterIda = filterIda.filter(
+            (item) => +item.Preco <= +state.priceRange.maxPrice
+          );
+          filterVolta = filterVolta.filter(
+            (item) => +item.Preco <= +state.priceRange.maxPrice
+          );
+        }
+
+         //TODO FILTRO DE RANGO DE DURATION
+         if (state.hoursTravel.minHour) {
+          filterIda = filterIda.filter(
+            (item) => +item.TempoTotal >= +state.hoursTravel.minHour
+          );
+          filterVolta = filterVolta.filter(
+            (item) => +item.TempoTotal >= +state.hoursTravel.minHour
+          );
+        }
+
+        if (state.hoursTravel.maxHour) {
+          filterIda = filterIda.filter(
+            (item) => +item.TempoTotal <= +state.hoursTravel.maxHour
+          );
+          filterVolta = filterVolta.filter(
+            (item) => +item.TempoTotal <= +state.hoursTravel.maxHour
+          );
+        }
 
         return {
           Ida: filterIda,
           Volta: filterVolta,
         };
       }
-      /*let flyFilters = woobaStore.outboundFlights;
-        if (woobaStore.outboundFlights.length > 0) {
-          if (state.baggage.value === 1) {
-            flyFilters = flyFilters.filter((fly) => fly.Baggage);
-          } else if (state.baggage.value === 0) {
-            flyFilters = flyFilters.filter((fly) => !fly.Baggage);
-          }
-
-          if (state.stops.value === 0) {
-            flyFilters = woobaStore.outboundFlights.filter(
-              (fly) => fly.NumeroParadas - 1 === 0
-            );
-          } else if (state.stops.value === 1) {
-            flyFilters = woobaStore.outboundFlights.filter(
-              (fly) => fly.NumeroParadas - 1 === 1
-            );
-          } else if (state.stops.value === 2) {
-            flyFilters = woobaStore.outboundFlights.filter(
-              (fly) => fly.NumeroParadas - 1 >= 2
-            );
-          }
-
-          flyFilters = flyFilters.filter((fly) =>
-            state.flightCompanies.includes(fly.CiaMandatoria.CodigoIata)
-          );
-
-          flyFilters = flyFilters.filter((fly) =>
-            arrayAinB(state.airports, fly.AirportsIata)
-          );
-
-          flyFilters = flyFilters.filter(
-            (fly) => +fly.Preco.TotalGeral >= +state.priceRange
-          );
-
-          flyFilters = flyFilters.filter(
-            (fly) => +fly.TempoTotal.split(':')[0] >= +state.hoursTravel
-          );
-
-          if (state.travelClass.name) {
-            flyFilters = flyFilters.filter((fly) =>
-              fly.Cabine.includes(state.travelClass.name)
-            );
-          }
-        }
-        return flyFilters;*/
+      
       return {};
     },
   },

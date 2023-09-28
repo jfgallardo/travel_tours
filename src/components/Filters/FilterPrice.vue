@@ -1,61 +1,84 @@
 <template>
-  <div>
-    <div class="flex flex-col justify-center space-y-8 p-4 mx-auto">
-      <label class="font-semibold text-lg text-center">Range of Price</label>
-      <div class="flex">
-        <input
-          id="toSlider"
-          step="10"
-          type="range"
-          :value="priceLocal"
-          :min="minPrice"
-          :max="maxPrice"
-          @input="$emit('price', $event.target.value)"
-        />
-      </div>
-      <span class="text-center"
-        >{{ minPriceFormatter }} - {{ maxPriceFormatter }}</span
-      >
+  <div class="flex flex-col justify-center space-y-8 p-4 mx-auto">
+    <label class="mb-2 font-medium text-gray-600">Rango de precios:</label>
+    <div class="flex">
+      <input
+        v-model="minValue"
+        type="range"
+        :min="minimo"
+        :max="maximo"
+        @input="updateRange"
+      />
+
+      <input
+        v-model="maxValue"
+        type="range"
+        :min="minimo"
+        :max="maximo"
+        @input="updateRange"
+      />
     </div>
+    <span class="text-center text-sm font-medium text-gray-600"
+      >{{ minPriceFormatter }} - {{ maxPriceFormatter }}</span
+    >
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
 import { useCurrencyFormatter } from '@/composables/currencyFormatter';
-
-defineEmits(['price']);
-
-onMounted(() => {
-  priceLocal.value = props.maxPrice;
-});
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
-  minPrice: {
-    type: [Number, String],
-    default: '100',
+  maximo: {
+    type: Number,
+    required: true,
   },
-  maxPrice: {
-    type: [Number, String],
-    default: '1000',
+  minimo: {
+    type: Number,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
+    default: true,
   },
 });
 
-const priceLocal = ref('');
+const emit = defineEmits(['update:minimo', 'update:maximo']);
+
+const minValue = ref();
+const maxValue = ref();
+
+watch(
+  () => props.loading,
+  (newValue) => {
+    if (!newValue) {
+      minValue.value = props.minimo;
+      maxValue.value = props.maximo;
+    }
+  }
+);
 
 const minPriceFormatter = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.minPrice,
+    value: minValue.value,
   });
 });
 
 const maxPriceFormatter = computed(() => {
   return useCurrencyFormatter({
     currency: 'BRL',
-    value: props.maxPrice,
+    value: maxValue.value,
   });
 });
+
+const updateRange = () => {
+  if (minValue.value > maxValue.value) {
+    minValue.value = maxValue.value;
+  }
+  emit('update:minimo', minValue.value);
+  emit('update:maximo', maxValue.value);
+};
 </script>
 
 <style scoped>
@@ -71,7 +94,6 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 input[type='range']::-moz-range-thumb {
-  -webkit-appearance: none;
   pointer-events: all;
   width: 24px;
   height: 24px;
@@ -91,12 +113,19 @@ input[type='range']::-webkit-slider-thumb:active {
 }
 
 input[type='range'] {
-  -webkit-appearance: none;
   appearance: none;
   height: 2px;
   width: 80%;
   position: absolute;
-  background-color: rgba(16, 57, 208, 0.99);
+  background-color: rgba(22, 7, 237, 0.99);
   pointer-events: none;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  z-index: 1;
+}
+
+input[type='range']::-moz-range-track {
+  z-index: 1;
 }
 </style>

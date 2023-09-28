@@ -50,6 +50,7 @@ import { useRouter } from 'vue-router';
 import { usePayCardStore } from '@/stores/payCard';
 import { usePurchaseStore } from '@/stores/purchase.user';
 import { useReserveStore } from '@/stores/reservar';
+import { usePayTransferStore } from '@/stores/payTransfer';
 
 import Modal from '@/components/Partials/TheModal.vue';
 import Cookies from 'js-cookie';
@@ -62,6 +63,7 @@ const cardStore = usePayCardStore();
 const router = useRouter();
 const purchaseStore = usePurchaseStore();
 const reserverStore = useReserveStore();
+const payTransfer = usePayTransferStore();
 
 const modal = ref(false);
 const ticket = ref('');
@@ -77,6 +79,8 @@ onMounted(async () => {
     router.push('/aereo');
   } else if (informationStore.paymentMethod === 1) {
     await paymentCard();
+  } else if (informationStore.paymentMethod === 4) {
+    paymentTransfer();
   }
 });
 
@@ -89,8 +93,8 @@ const totalP = computed(() => {
   const travel_two = Cookies.get('V') ? JSON.parse(Cookies.get('V')) : null;
 
   if (travel_one && travel_two)
-    return (travel_one.Preco + travel_two.Preco).toFixed(3) * 100;
-  return travel_one.Preco.toFixed(3) * 100;
+    return (travel_one.Preco + travel_two.Preco);
+  return travel_one.Preco;
 });
 
 const voos = computed(() => {
@@ -168,7 +172,7 @@ const paymentBoleto = async () => {
     {
       id: 'r123',
       title: 'Reservas de vuelo',
-      unit_price: parseInt(totalP.value),
+      unit_price: parseInt(totalP.value.toFixed(3) * 100),
       quantity: 1,
       tangible: false,
     },
@@ -194,7 +198,7 @@ const paymentBoleto = async () => {
   };
 
   const body = {
-    amount: parseInt(totalP.value),
+    amount: parseInt(totalP.value.toFixed(3) * 100),
     payment_method: 'boleto',
     customer,
     billing,
@@ -240,7 +244,7 @@ const paymentCard = async () => {
         {
           id: 'r123',
           title: 'Reservas de vuelo',
-          unit_price: parseInt(totalP.value),
+          unit_price: parseInt(totalP.value.toFixed(3) * 100),
           quantity: 1,
           tangible: false,
         },
@@ -267,7 +271,7 @@ const paymentCard = async () => {
       };
 
       const dataCard = {
-        amount: parseInt(totalP.value),
+        amount: parseInt(totalP.value.toFixed(3) * 100),
         payment_method: 'credit_card',
         async: false,
         card_hash,
@@ -400,6 +404,15 @@ const passageiros = () => {
     passengerList.push(pass);
   });
   return passengerList;
+};
+
+const paymentTransfer = () => {
+  payTransfer.sendEmail({ value: totalP.value }).then(() => {
+    text.value = `Fue enviado al email ${auth.userLogged.email} los datos para realizar la transferencia, se procedera a salvar su reserva.`;
+  });
+  setTimeout(() => {
+    saveReservation();
+  }, 3000);
 };
 </script>
 
