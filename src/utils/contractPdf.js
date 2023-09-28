@@ -67,7 +67,7 @@ const pdfCreatorContract = (data) => {
           {text: ' CONTRATADA', style: ['bold', 'text']},
           ' compromete-se a',
           {text: ' prestar assessoria turística', style: ['bold', 'text']},
-          `, atuando como mediadora na prestação dos serviços de viagem e turismo com destino a ${data.destino_reserva}, na data de ${data.travelDate}`,
+          `, atuando como mediadora na prestação dos serviços de viagem e turismo com destino a ${data.destino_reserva}, na data de ${data.date_travel}`,
         ],
         style: ['text', 'justify'],
       },

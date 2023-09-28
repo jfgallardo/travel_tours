@@ -36,7 +36,11 @@
                 <TextInput name="name_client" label="Nome cliente" />
               </div>
               <div>
-                <DateInput label="DATA DE VIAGEM" name="travelDate" />
+                <DateInput
+                  v-model="date_travel"
+                  label="DATA DE VIAGEM"
+                  name="date_travel"
+                />
               </div>
               <div>
                 <TextInput name="destino_reserva" label="DESTINO RESERVA" />
@@ -180,6 +184,7 @@ const nationality = ref({ label: 'Brasileiro(a)', value: 'Brasileiro(a)' });
 const localidadeCl = ref('');
 const ufCl = ref('');
 const pdfStore = usePdfStore();
+const date_travel = ref('');
 
 const searchByCep = (value) => {
   if (value.length === 9) {

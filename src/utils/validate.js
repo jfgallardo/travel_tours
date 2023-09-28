@@ -23,6 +23,7 @@ export const simpleSchemaContract = object({
     .label('CEP'),
   street: string().required().label('Rua'),
   district: string().required().label('Bairro'),
+  date_travel: string().required().label('Date')
 });
 
 export const simpleSchemaReservation = object({
