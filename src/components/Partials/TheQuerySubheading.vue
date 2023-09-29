@@ -270,35 +270,19 @@ import { computed } from 'vue';
 import ArrowLeft from '@/components/Icons/ArrowLeft.vue';
 import SelectSimple from '@/components/FormUI/TheSelectSimple.vue';
 import { useSearchOptionsVooStore } from '@/stores/searchOptionsVoo';
-import { useWoobaStore } from '@/stores/wooba';
 import FilterDepartureTime from '@/components/Filters/FilterDepartureTime.vue';
 import FilterDuration from '@/components/Filters/FilterDuration.vue';
 import FilterPrice from '@/components/Filters/FilterPrice.vue';
 import FilterAirport from '@/components/Filters/FilterAirport.vue';
 import FilterCompanies from '@/components/Filters/FilterCompanies.vue';
-import { useCurrencyFormatter } from '@/composables/currencyFormatter';
 import { useFiltersStore } from '@/stores/filters';
 import SimpleStackedCheck from '@/components/FormUI/SimpleStackedCheck.vue';
 import { useVooStore } from '@/stores/voo';
 import { BriefcaseIcon, NoSymbolIcon } from '@heroicons/vue/24/outline';
 
 const searchOptionsVoo = useSearchOptionsVooStore();
-const woobaStore = useWoobaStore();
 const filters = useFiltersStore();
 const vooStore = useVooStore();
-
-/*const minPriceFormatter = computed(() => {
-  return useCurrencyFormatter({
-    currency: "BRL",
-    value: woobaStore.priceGeral.minPrice
-  });
-})*/
-const maxPriceFormatter = computed(() => {
-  return useCurrencyFormatter({
-    currency: 'BRL',
-    value: filters.priceRange,
-  });
-});
 
 const bags = computed(() => {
   if (searchOptionsVoo.onlyBaggage) {

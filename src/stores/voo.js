@@ -24,6 +24,7 @@ export const useVooStore = defineStore({
     Request: null,
     totalItems: 0,
     meta: [],
+    isOperationComplete: false,
   }),
   getters: {
     priceRange: (state) => {
@@ -72,11 +73,12 @@ export const useVooStore = defineStore({
   actions: {
     async checkFlightsRoundTrip(payload) {
       const alertStore = useAlertStore();
-      this.loading = true;
       return await axiosClientAPI
         .post('api/v1/voo/round-trip', payload)
         .then(({ data }) => {
+          this.isOperationComplete = data.completed;
           if (data.flights.length) {
+            this.loading = false;
             this.totalItems = data.totalItems;
             this.Platform = data.Platform;
             this.Ida = transform(
@@ -93,7 +95,13 @@ export const useVooStore = defineStore({
               payload.Destino
             );
             this.meta = data.meta;
-          } else {
+          }
+
+          if (!this.isOperationComplete) {
+            setTimeout(() => this.checkFlightsRoundTrip(payload), 1000);
+          }
+
+          if (this.isOperationComplete && !data.flights.length) {
             this.$reset();
           }
         })
@@ -106,9 +114,6 @@ export const useVooStore = defineStore({
             textColor: 'red',
           });
         })
-        .finally(() => {
-          this.loading = false;
-        });
     },
     $reset() {
       this.loading = false;

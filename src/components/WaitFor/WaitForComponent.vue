@@ -312,7 +312,7 @@ const paymentCard = async () => {
 
 const saveReservation = () => {
   text.value = 'Salvando datos de la reserva, aguarde por favor';
-  const ida = {
+  const body = {
     Email: auth.userLogged?.email,
     Passageiros: passageiros(),
     Ida: { Token: voos.value.travel_one.RateToken },
@@ -341,40 +341,13 @@ const saveReservation = () => {
     ValorParcelaPS: +voos.value.travel_one.Preco,
   };
 
-  let volta = null;
 
   if (voos.value.travel_two) {
-    volta = {
-      Email: auth.userLogged?.email,
-      Passageiros: passageiros(),
-      Ida: { Token: voos.value.travel_two.RateToken },
-      pagante: {
-        name: informationStore.detailsUser.nameBuy,
-        address: {
-          street: informationStore.detailsUser.district,
-          number: informationStore.detailsUser.number,
-          zipcode: informationStore.detailsUser.cep,
-          neighborhood: informationStore.detailsUser.address,
-          city: informationStore.detailsUser.city,
-          state: informationStore.detailsUser.state,
-          country: 'Brasil',
-        },
-        phones: [
-          {
-            DDD: String(informationStore.detailsUser.codeArea),
-            DDI: '55',
-            number: String(informationStore.detailsUser.phone),
-          },
-        ],
-        Nascimento: informationStore.detailsUser.birthday,
-      },
-      TokenConsultaIda: voos.value.travel_two.TokenConsultaMBX,
-      IdMeioPagamento: informationStore.paymentMethod,
-      ValorParcelaPS: +voos.value.travel_two.Preco,
-    };
+    body.Volta = { Token: voos.value.travel_two.RateToken }
+    body.TokenConsultaVolta = voos.value.travel_two.TokenConsultaMBX
   }
 
-  reserverStore.record({ ida: ida, volta: volta }).then(() => {
+  reserverStore.record(body).then(() => {
     text.value = 'Reserva realizada correctamente';
     setTimeout(() => {
       router.push('/aereo');

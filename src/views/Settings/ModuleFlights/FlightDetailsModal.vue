@@ -7,61 +7,64 @@
     <template #body>
       <div class="mx-auto px-4">
         <h2 class="pt-2 font-semibold leading-7 text-indigo-600">Detalhes</h2>
-        <template v-for="(item, index) in detalhes" :key="index">
-          <div class="flex space-x-5">
-            <template v-for="(t, i) in item.Trecho" :key="i">
-              <div>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Origen:</span> {{ t.IataOrigem }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Destino:</span>
-                  {{ t.IataDestino }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Salida:</span> {{ t.IdaStr }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Hora:</span>
-                  {{ t.Saida.split('T')[1] }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Llegada:</span> {{ t.ChegadaStr }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Hora:</span>
-                  {{ t.Chegada.split('T')[1] }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Clase:</span> {{ t.ClasseStr }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">Vuelo:</span> {{ t.NumeroVoo }}
-                </p>
-                <p class="font-light text-sm">
-                  <span class="font-semibold">CIA:</span> {{ item.Cia.Nome }}
-                </p>
-              </div>
-            </template>
-          </div>
-        </template>
+        <div class="flex space-x-5">
+          <template v-for="(item, index) in detalhes" :key="index">
+            <div class="flex items-center justify-between">
+              <template v-for="(t, i) in item.Trecho" :key="i">
+                <div>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Origen:</span>
+                    {{ t.IataOrigem }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Destino:</span>
+                    {{ t.IataDestino }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Salida:</span> {{ t.IdaStr }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Hora:</span>
+                    {{ t.Saida.split('T')[1] }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Llegada:</span>
+                    {{ t.ChegadaStr }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Hora:</span>
+                    {{ t.Chegada.split('T')[1] }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Clase:</span> {{ t.ClasseStr }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">Vuelo:</span> {{ t.NumeroVoo }}
+                  </p>
+                  <p class="font-light text-sm">
+                    <span class="font-semibold">CIA:</span> {{ item.Cia.Nome }}
+                  </p>
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
 
         <h2 class="pt-2 font-semibold leading-7 text-indigo-600">Pago</h2>
-        <template  v-for="(item, index) in detalhes" :key="index">
-            <p class="font-light text-sm">
-                Adulto: {{ item.ValorAdulto }}
-            </p>
-            <p class="font-light text-sm">
-                Criança: {{ item.ValorCrianca }}
-            </p>
-            <p class="font-light text-sm">
+        <div class="grid grid-cols-2">
+          <template v-for="(item, index) in detalhes" :key="index">
+            <div>
+              <p class="font-light text-sm">Adulto: {{ item.ValorAdulto }}</p>
+              <p class="font-light text-sm">Criança: {{ item.ValorCrianca }}</p>
+              <p class="font-light text-sm">
                 Taxa Servico: {{ item.TaxaServico }}
-            </p>
-            <p class="font-light text-sm">
+              </p>
+              <p class="font-light text-sm">
                 Taxa Embarque: {{ item.TaxaEmbarque }}
-            </p>
-            
-        </template>
+              </p>
+            </div>
+          </template>
+        </div>
 
         <h2 class="pt-2 font-semibold leading-7 text-indigo-600">Passengers</h2>
 
