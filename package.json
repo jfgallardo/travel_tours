@@ -18,7 +18,7 @@
     "@vueuse/components": "^9.9.0",
     "@vueuse/core": "^9.9.0",
     "air-datepicker": "^3.3.3",
-    "axios": "^0.27.2",
+    "axios": "^1.8.2",
     "card-validator": "^8.1.1",
     "js-cookie": "^3.0.1",
     "maska": "^1.5.2",
