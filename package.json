@@ -31,7 +31,7 @@
     "vee-validate": "^4.7.3",
     "vue": "^3.2.45",
     "vue-debounce": "^4.0.0",
-    "vue-i18n": "9",
+    "vue-i18n": "9.14.3",
     "vue-router": "^4.1.6",
     "yup": "^0.32.11"
   },
