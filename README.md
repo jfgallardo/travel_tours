@@ -1,36 +1,56 @@
-# frontend
+# ✈️🌍 Travel Tours - Landing Page 🏝️🚀
 
-This template should help get you started developing with Vue 3 in Vite.
+![Travel Tours](https://github.com/jfgallardo/travel_tours/blob/master/public/capture.png)
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## 📌 Descripción
+Travel Tours es una página web diseñada para la reserva de 🛫 vuelos y la planificación de viajes 🌎. Ofrece una interfaz moderna y amigable, permitiendo a los usuarios encontrar y gestionar sus destinos de manera rápida y sencilla.
 
-## Customize configuration
+## 🚀 Características
+- 🔎 Búsqueda de vuelos y destinos.
+- 📅 Reserva de pasajes en línea.
+- 🖥️ Diseño responsive para 📱 y 💻.
+- 📊 Integración con APIs de vuelos.
+- 🎨 UI/UX atractiva para mejor experiencia.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## 🛠️ Tecnologías utilizadas
+- **Vue.js** - ⚛️ Framework para el frontend.
+- **TailwindCSS** - 🎨 Estilos rápidos y flexibles.
+- **API de vuelos** - 🌍 Datos en tiempo real.
 
-## Project Setup
+## ⚙️ Instalación y configuración
 
-```sh
-npm install
-```
+### 📝 Requisitos previos
+- 🌍 Node.js v16+
+- 📦 npm o yarn
 
-### Compile and Hot-Reload for Development
+### 🛠️ Pasos
+1. 🖥️ Clona el repositorio:
+   ```sh
+   git clone https://github.com/jfgallardo/travel_tours.git
+   cd travel_tours
+   ```
+2. 📦 Instala las dependencias:
+   ```sh
+   npm install
+   ```
+3. 🔧 Configura las variables de entorno en `.env`:
+   ```env
+   NEXT_PUBLIC_API_URL=https://api.tours.com
+   ```
+4. ▶️ Inicia el servidor en modo desarrollo:
+   ```sh
+   npm run dev
+   ```
+5. 🌐 Accede en tu navegador a `http://localhost:3000`
 
-```sh
-npm run dev
-```
+## 🤝 Contribución
+Las 🙌 son bienvenidas. Para 👥:
+1. 🔀 Haz un fork del repo.
+2. 🎨 Crea una rama con tu 🆕: `git checkout -b feature/nueva-funcionalidad`
+3. ✅ Realiza un commit con tus ✍️: `git commit -m "Agregada nueva funcionalidad"`
+4. 📩 Envía un pull request.
 
-### Compile and Minify for Production
+## 📜 Licencia
+Este 🏗️ está bajo la 📜 MIT. Consulta el 📄 `LICENSE` para más detalles.
 
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-[![Qodana](https://github.com/jfgallardo/frontend/actions/workflows/code_quality.yml/badge.svg)](https://github.com/jfgallardo/frontend/actions/workflows/code_quality.yml)
