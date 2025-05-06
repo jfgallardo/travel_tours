@@ -24,7 +24,7 @@
     "maska": "^1.5.2",
     "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
-    "pdfmake": "^0.2.7",
+    "pdfmake": "^0.2.15",
     "pinia": "^2.0.28",
     "qrcode.vue": "^3.3.3",
     "toastify-js": "^1.12.0",
